@@ -6,3 +6,6 @@
 .settings/
 target/
 .tern-project
+pom.properties
+MANIFEST.MF
+*.log
