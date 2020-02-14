@@ -7,5 +7,8 @@
 target/
 .tern-project
 pom.properties
+*.properties
 MANIFEST.MF
 *.log
+MANIFEST
+*.manifest
