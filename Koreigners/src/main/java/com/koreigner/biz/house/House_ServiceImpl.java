@@ -7,14 +7,14 @@ import org.springframework.stereotype.Service;
 
 //@Service : @Component 상속바아 만든
 //비즈니스 로직 처리 서비스 영역에 사용
-@Service("roomService")
-public class Room_ServiceImpl implements Room_Service {
+@Service("houseService")
+public class House_ServiceImpl implements House_Service {
 	@Autowired //타입이 일치하는 객체(인스턴스) 주입
 	//private BoardDAO boardDAO;
 	//private Korea_Address_DAOSpring testDAO;
-	private Room_DAOMyBatis testDAO;
+	private House_DAOMyBatis testDAO;
 	
-	public Room_ServiceImpl() {
+	public House_ServiceImpl() {
 		System.out.println(">> Room_ServiceImpl() 실행");
 	}
 
@@ -22,28 +22,28 @@ public class Room_ServiceImpl implements Room_Service {
 	
 
 	@Override
-	public List<RoomAll_VO> getSiList(RoomAll_VO vo) {
+	public List<HouseAll_VO> getSiList(HouseAll_VO vo) {
 		// TODO Auto-generated method stub
 		return testDAO.myBatis_getSiList_vo(vo);
 	}
 
 
 	@Override
-	public List<RoomAll_VO> getDoList(RoomAll_VO vo) {
+	public List<HouseAll_VO> getDoList(HouseAll_VO vo) {
 		// TODO Auto-generated method stub
 		return testDAO.myBatis_getDoList_vo(vo);
 	}
 
 
 	@Override
-	public List<RoomAll_VO> getAllList(RoomAll_VO vo) {
+	public List<HouseAll_VO> getAllList(HouseAll_VO vo) {
 		// TODO Auto-generated method stub
 		return testDAO.myBatis_getAllList_vo(vo);
 	}
 
 
 	@Override
-	public List<RoomAll_VO> getAllList() {
+	public List<HouseAll_VO> getAllList() {
 		// TODO Auto-generated method stub
 		return testDAO.myBatis_getAllList_vo();
 	}
