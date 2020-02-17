@@ -50,7 +50,7 @@ import java.util.List;
 	BATHROOM		NUMBER(1,0)
 	PARKING			NUMBER(1,0)
  */
-public class RoomAll_VO {
+public class HouseAll_VO {
 	// common
 	int room_idx;
 	
@@ -80,11 +80,11 @@ public class RoomAll_VO {
 	int monthly_rentMin=0,monthly_rentMax=99999999;
 	
 	
-	public RoomAll_VO() {
+	public HouseAll_VO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RoomAll_VO(int room_idx, String mem_email, String subject, String do_en, String gu_gun_eup_eng, String address,
+	public HouseAll_VO(int room_idx, String mem_email, String subject, String do_en, String gu_gun_eup_eng, String address,
 			String address_detail, String room_reporting_date, String room_img_name, String room_img_ori_name,
 			int build_type, int room_type, int bulid_layers, int floor_layers, int floor_type, int stay_num_min,
 			int deposit, int monthly_rent, int management_expense, String available_date, int closet, int desk, int chair,

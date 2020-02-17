@@ -10,47 +10,47 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.koreigner.biz.house.RoomAll_VO;
-import com.koreigner.biz.house.Room_Service;
+import com.koreigner.biz.house.HouseAll_VO;
+import com.koreigner.biz.house.House_Service;
 
 @Controller
-@SessionAttributes("room") //board 라는 이름의 Model이 있으면 session에 저장
-public class Room_Controller {
+@SessionAttributes("house") //board 라는 이름의 Model이 있으면 session에 저장
+public class House_Controller {
 	@Autowired
-	private Room_Service testService;
+	private House_Service houseService;
 	
-	@RequestMapping("/getRoomSiList.do")
+	@RequestMapping("/getHouseSiList.do")
 	@ResponseBody
-	public List<RoomAll_VO> ctrl_getSiList(@ModelAttribute RoomAll_VO vo) {
+	public List<HouseAll_VO> ctrl_getSiList(@ModelAttribute HouseAll_VO vo) {
 		System.out.println("?원본");
 		for(String s : vo.getGu_gun_eup_engArr()) {
 			System.out.println("ss: "+s);
 		}
 		
 		
-		List<RoomAll_VO> testList = testService.getSiList(vo);
-		return testList;
+		List<HouseAll_VO> houseList = houseService.getSiList(vo);
+		return houseList;
 		
 	}
 	
-	@RequestMapping("/getRoomDoList.do")
+	@RequestMapping("/getHouseDoList.do")
 	@ResponseBody //response 객체의 몸체(body)에 데이터 전달
 	//public List<Room_VO> ctrl_getSiList(@RequestParam(value="siListParam[]") List<String> siList) {
-	public List<RoomAll_VO> ctrl_getDoList(RoomAll_VO vo) {
+	public List<HouseAll_VO> ctrl_getDoList(HouseAll_VO vo) {
 		System.out.println("원본");
 		System.out.println(vo);
 
 		
-		List<RoomAll_VO> testList = testService.getDoList(vo);
-		return testList;
+		List<HouseAll_VO> houseList = houseService.getDoList(vo);
+		return houseList;
 		
 		//return null;
 	}
 	
-	@RequestMapping("/getRoomAllList.do")
+	@RequestMapping("/getHouseAllList.do")
 	@ResponseBody //response 객체의 몸체(body)에 데이터 전달
 	//public List<Room_VO> ctrl_getSiList(@RequestParam(value="siListParam[]") List<String> siList) {
-	public List<RoomAll_VO> ctrl_getAllList(
+	public List<HouseAll_VO> ctrl_getAllList(
 						@RequestParam(value="option[]") List<String> opt
 					) {
 		System.out.println("gd");
@@ -58,11 +58,11 @@ public class Room_Controller {
 		//map.put("do_en", do_en);
 		
 		//List<Room_VO> testList = testService.getAllList(map);
-		List<RoomAll_VO> testList = testService.getAllList();
-		for(RoomAll_VO v : testList) {
+		List<HouseAll_VO> houseList = houseService.getAllList();
+		for(HouseAll_VO v : houseList) {
 			System.out.println(v);
 		}
-		return testList;
+		return houseList;
 		
 		//return null;
 	}
