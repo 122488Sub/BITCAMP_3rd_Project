@@ -1,0 +1,109 @@
+.OUTLINE {
+    stroke-linejoin:round;
+    stroke: #ffffff;
+    stroke-width: 2;
+}
+#CD1 {
+    fill: #f8d0d8;
+}
+#CD2 {
+    fill: #f6c4ce;
+}
+#CD3 {
+    fill: #f4b8c4;
+}
+#CD4 {
+    fill: #f3adbb;
+}
+#CD5 {
+    fill: #f1a1b1;
+}
+#CD6 {
+    fill: #ef95a7;
+}
+#CD7 {
+    fill: #ee8a9e;
+}
+#CD8 {
+    fill: #ec7e94;
+}
+#CD9 {
+    fill: #ea728a;
+}
+#CD10 {
+    fill: #e86680;
+}
+
+#CD11 {
+    fill: #e65b77;
+}
+#CD12 {
+    fill: #e54f6d;
+}
+#CD13 {
+    fill: #e34363;
+}
+#CD14 {
+    fill: #e13759;
+}
+#CD15 {
+    fill: #e02b50;
+}
+#CD16 {
+    fill: #de2046;
+}
+#CD17 {
+    fill: #dc143c;
+}
+#CD1:hover {
+	fill: lightgray;
+}
+#CD2:hover {
+	fill: lightgray;
+}
+#CD3:hover {
+	fill: lightgray;
+}
+#CD4:hover {
+	fill: lightgray;
+}
+#CD5:hover {
+	fill: lightgray;
+}
+#CD6:hover {
+	fill: lightgray;
+}
+#CD7:hover {
+	fill: lightgray;
+}
+#CD8:hover {
+	fill: lightgray;
+}
+#CD9:hover {
+	fill: lightgray;
+}
+#CD10:hover {
+	fill: lightgray;
+}
+
+#CD11:hover {
+	fill: lightgray;
+}
+#CD12:hover {
+	fill: lightgray;
+}
+#CD13:hover {
+	fill: lightgray;
+}
+#CD14:hover {
+	fill: lightgray;
+}
+#CD15:hover {
+	fill: lightgray;
+}
+#CD16:hover {
+	fill: lightgray;
+}
+#CD17:hover {
+	fill: lightgray;
+}
