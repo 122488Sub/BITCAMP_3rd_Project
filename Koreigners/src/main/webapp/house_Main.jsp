@@ -23,7 +23,7 @@
 	//페이징로딩후 자동시작 //
 	$(window).on('load',function(){
 		getAllData();
-		$(".div_option").load("roomOption.jsp"); //수정해야함
+		$(".div_option").load("houseOption.jsp"); //수정해야함
 	});
 	//여기까지 페이징로딩후 자동시작//
 	
@@ -53,7 +53,7 @@
 		//----------------------------------------
 		 $.ajax({
 				type : "get",
-			 	url : "getRoomAllList.do",  
+			 	url : "getHouseAllList.do",  
 				dataType : "json",
 				async: false,
 				data: { //보낼 데이터
@@ -99,7 +99,7 @@
 					//-------------------------------------------------
 					dispHtml += "</ul>";
 					$("#listDisp").html(dispHtml);
-					//$(".th_selectDoSi").html("← Please select an region");
+					$(".th_selectDoSi").html("");
 					$(".tbody_dosi").html("<h2>&nbsp;&nbsp;← Please select an region</h2>");
 					
 					
@@ -118,6 +118,7 @@
 		//----------------------------------------
 		//도 선택 값 파라미터 추가 
 		var do_enParam = $(".chk_do_parent").val();
+		$(".th_selectDoSi").html(do_enParam);
 		//----------------------------------------
 		 //추후 옵션 필터값 자리
 		var option=[];
@@ -128,7 +129,7 @@
 		// jQuery.ajaxSettings.traditional = true;
 		 $.ajax({
 				type : "get",
-			 	url : "getRoomDoList.do", 
+			 	url : "getHouseDoList.do", 
 				dataType : "json",
 				async: false,
 				data: { //보낼 데이터
@@ -221,7 +222,7 @@
 		// jQuery.ajaxSettings.traditional = true;
 		 $.ajax({
 				type : "get",
-			 	url : "getRoomSiList.do", 
+			 	url : "getHouseSiList.do", 
 				dataType : "json",
 				async: false,
 				data: { //보낼 데이터
