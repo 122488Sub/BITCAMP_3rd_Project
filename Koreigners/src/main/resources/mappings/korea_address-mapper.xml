@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Korea_Address_DAO">
+	<select id="getList" parameterType="korea_address"
+		resultType="korea_address">
+		SELECT DISTINCT 
+			DO_EN, GU_GUN_EUP_ENG, REPLACE(SI_GU_GUN_EUP_ENG, '(', '&lt;br/&gt;'||'(' )as SI_GU_GUN_EUP_ENG
+		FROM 
+			T_TEST 
+		WHERE 
+			DO_KOR=#{do_kor} 
+		ORDER BY 
+			SI_GU_GUN_EUP_ENG
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
