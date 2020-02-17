@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Room_DAO">
+<mapper namespace="House_DAO">
 	
-	<select id="getAllList_vo" parameterType="room_all"
-		resultType="room_all">
+	<select id="getAllList_vo" parameterType="house_all"
+		resultType="house_all">
 		SELECT 
 		    BOARD.ROOM_IDX, BOARD.MEM_EMAIL, BOARD.SUBJECT, BOARD.DO_EN, 
 		        BOARD.GU_GUN_EUP_ENG, BOARD.ADDRESS,BOARD.ADDRESS_DETAIL, BOARD.ROOM_REPORTING_DATE, 
@@ -28,8 +28,8 @@
 		    
 		    
 	</select>
-	<select id="getDoList_vo" parameterType="room_all"
-		resultType="room_all">
+	<select id="getDoList_vo" parameterType="house_all"
+		resultType="house_all">
 		SELECT
 			BOARD.ROOM_IDX, BOARD.MEM_EMAIL, BOARD.SUBJECT, BOARD.DO_EN, 
 		        BOARD.GU_GUN_EUP_ENG, BOARD.ADDRESS,BOARD.ADDRESS_DETAIL, BOARD.ROOM_REPORTING_DATE, 
@@ -53,8 +53,8 @@
 		ORDER BY 
 			BOARD.ROOM_IDX 
 	</select>
-		<select id="getSiList_vo" parameterType="room_all"
-		resultType="room_all">
+		<select id="getSiList_vo" parameterType="house_all"
+		resultType="house_all">
 		SELECT
 			BOARD.ROOM_IDX, BOARD.MEM_EMAIL, BOARD.SUBJECT, BOARD.DO_EN, 
 		        BOARD.GU_GUN_EUP_ENG, BOARD.ADDRESS,BOARD.ADDRESS_DETAIL, BOARD.ROOM_REPORTING_DATE, 
