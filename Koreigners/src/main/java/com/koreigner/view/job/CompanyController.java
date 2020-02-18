@@ -24,7 +24,13 @@ public class CompanyController {
 	
 	@RequestMapping(value="job_join.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String jobJoin_go() {
-		System.out.println("controller");
+		
+		return "WEB-INF/views/job/comp_join.jsp";
+	}
+	
+	@RequestMapping(value="join_conf.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String join_conf(CompanyVO vo) {
+		System.out.println("vo : " + vo.toString());
 		
 		return "WEB-INF/views/job/comp_join.jsp";
 	}
@@ -33,14 +39,9 @@ public class CompanyController {
 	@RequestMapping(value="getCateJson.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public List<CompanyVO> join_put(@RequestParam("cate_kor") String cate_kor) {
-		System.out.println("controller getCateJson.do");
-		System.out.println("category :" + cate_kor);
 		
 		List<CompanyVO> list = companyServiceImpl.getCateChild(cate_kor);
-		int i = 1;
-		for(CompanyVO vo : list) {
-			System.out.println(vo.getCate_child_ko());
-		}
+		
 		return list;
 	}
 	
@@ -48,8 +49,6 @@ public class CompanyController {
 	@RequestMapping(value="getSiJson.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public List<CompanyVO> getAddrSiList(@RequestParam("si_kor") String si_kor) {
-		System.out.println("controller getSiJson.do");
-		System.out.println("si_kor :" + si_kor);
 		
 		List<CompanyVO> list = companyServiceImpl.getAddrSiList(si_kor);
 		for(CompanyVO vo : list) {
@@ -58,6 +57,7 @@ public class CompanyController {
 		return list;
 	}
 
+	
 	//페이지 전환 시 jobCateMap 맵 객체 전달 > 직무 카테고리
 	@ModelAttribute("jobCateMap")
 	public Map<String, String> searchJobCateMap() {
@@ -83,10 +83,11 @@ public class CompanyController {
 		Map<String, String> addrDoMap = new HashMap<>();
 		
 		for(CompanyVO vo : list) {
-			System.out.println(vo.getDo_en());
 			addrDoMap.put(vo.getDo_kor(), vo.getDo_kor());
 		}
 			
 		return addrDoMap;
 	}
+	
+	
 }
