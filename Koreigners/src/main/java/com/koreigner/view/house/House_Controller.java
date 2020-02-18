@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -19,7 +20,14 @@ public class House_Controller {
 	@Autowired
 	private House_Service houseService;
 	
-	@RequestMapping("/getHouseSiList.do")
+	@RequestMapping(value="house_main.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String jobJoin_go() {
+		System.out.println("controller");
+		
+		return "WEB-INF/views/house/house_Main.jsp";
+	}
+	
+	@RequestMapping(value="getHouseSiList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public List<HouseAll_VO> ctrl_getSiList(@ModelAttribute HouseAll_VO vo) {
 		System.out.println("?원본");
@@ -33,7 +41,7 @@ public class House_Controller {
 		
 	}
 	
-	@RequestMapping("/getHouseDoList.do")
+	@RequestMapping(value="getHouseDoList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody //response 객체의 몸체(body)에 데이터 전달
 	//public List<Room_VO> ctrl_getSiList(@RequestParam(value="siListParam[]") List<String> siList) {
 	public List<HouseAll_VO> ctrl_getDoList(HouseAll_VO vo) {
@@ -47,7 +55,8 @@ public class House_Controller {
 		//return null;
 	}
 	
-	@RequestMapping("/getHouseAllList.do")
+
+	@RequestMapping(value="getHouseAllList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody //response 객체의 몸체(body)에 데이터 전달
 	//public List<Room_VO> ctrl_getSiList(@RequestParam(value="siListParam[]") List<String> siList) {
 	public List<HouseAll_VO> ctrl_getAllList(
