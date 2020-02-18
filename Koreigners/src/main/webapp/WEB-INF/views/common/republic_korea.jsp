@@ -1,13 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../../resources/css/republic_korea.css">
+<link rel="stylesheet" type="text/css" href="/koreigner/resources/css/republic_korea.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<%
+	String n=request.getParameter("c");
+	System.out.println("afasf: "+n);
+	
+%>
+
+
 </head>
 <style>
 	#content{
@@ -126,11 +133,15 @@
 			</tbody>
 		</table>
 		<div class='div_option'>
+	
+		
 			
 		</div>
 	</div>
 </div>
 <script >
+
+
 function getDoSiData(do_kor,do_en,idx) {
 	console.log(do_en);
 	$.ajax({

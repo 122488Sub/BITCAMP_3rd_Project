@@ -17,7 +17,7 @@
                 <ul id="menu_wrap">  
                     <li class="menu"><a href="#">Home</a></li>
                     <li class="menu"><a href="#">Job</a></li>
-                    <li class="menu"><a href="#">House</a></li>
+                    <li class="menu"><a href="house_main.do">House</a></li>
                     <li class="menu"><a href="#">Resale</a></li>
                     <li class="menu"><a href="#">Community</a></li>
                     <li class="menu"><a href="#"></a></li>

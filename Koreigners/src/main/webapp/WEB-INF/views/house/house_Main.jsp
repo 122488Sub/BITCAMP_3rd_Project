@@ -8,22 +8,37 @@
 <title>Insert title here</title>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
 </head>
 
 <body>
 <!-- 지도부분 -->
-<jsp:include page="../common/republic_korea.jsp"></jsp:include>
+<jsp:include page="../common/republic_korea.jsp">
+	<jsp:param value="2" name="c"/>
+</jsp:include>
 
 
 <div id="listDisp">
+
+
+
+</div>
+
+<div id="mapDisp">
 
 </div>
 
 <script>
 	//페이징로딩후 자동시작 //
 	$(window).on('load',function(){
+		console.log("gd");
 		getAllData();
-		$(".div_option").load("houseOption.jsp"); //수정해야함
+		$(".div_option").load("/koreigner/resources/html/houseOption.jsp"); //수정해야함
+		
+		// var loc='<%="56, Hodong-ro, Uijeongbu-si, Gyeonggi-do"%>';
+		//$("#mapDisp").load("/koreigner/resources/html/googleMap.jsp?location="
+	   //		+loc.replace(/ /gi,"%20"));
+		
 	});
 	//여기까지 페이징로딩후 자동시작//
 	
@@ -53,7 +68,7 @@
 		//----------------------------------------
 		 $.ajax({
 				type : "get",
-			 	url : "/koreigner/getHouseAllList.do",  
+			 	url : "getHouseAllList.do",  
 				dataType : "json",
 				async: false,
 				data: { //보낼 데이터
@@ -129,7 +144,7 @@
 		// jQuery.ajaxSettings.traditional = true;
 		 $.ajax({
 				type : "get",
-			 	url : "/koreigner/getHouseDoList.do", 
+			 	url : "getHouseDoList.do", 
 				dataType : "json",
 				async: false,
 				data: { //보낼 데이터
@@ -222,7 +237,7 @@
 		// jQuery.ajaxSettings.traditional = true;
 		 $.ajax({
 				type : "get",
-			 	url : "/koreigner/getHouseSiList.do", 
+			 	url : "getHouseSiList.do", 
 				dataType : "json",
 				async: false,
 				data: { //보낼 데이터
