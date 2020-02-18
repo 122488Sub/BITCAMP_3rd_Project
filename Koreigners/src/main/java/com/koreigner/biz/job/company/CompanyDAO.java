@@ -18,6 +18,7 @@ public class CompanyDAO {
 	
 	List<CompanyVO> getCateChild(String cate_kor){
 		List<CompanyVO> list = mybatis.selectList("getCateChild", cate_kor);
+		System.out.println("list : " + list);
 		return list;
 	}
 	
@@ -31,4 +32,9 @@ public class CompanyDAO {
 		return list;
 	}
 	
+	CompanyVO getCateEn(CompanyVO vo) {
+		CompanyVO outVO = mybatis.selectOne("getCateEn", vo);
+		System.out.println(outVO.toStringCate());
+		return outVO;
+	}
 }

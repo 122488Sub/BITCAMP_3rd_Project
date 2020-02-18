@@ -4,23 +4,81 @@ import java.util.Date;
 
 public class CompanyVO {
 	private int company_idx, employee_num; 
-	private String mem_id, ceo_name, company_name, company_cate, hr_manager, 
-	               do_en, gu_gun_eup_eng, address, business_num, business_img, 
-	               business_info, domitory, meals, company_telephone, ip, manager_email;  
+	private String mem_id, ceo_name, company_name, hr_manager, business_num, business_img, 
+	               business_info, domitory, meals, company_telephone, ip, manager_email,addr_dt_kor, addr_dt_en;  
 	private Date regdate;
+	
 	
 	
 	//카테고리 변수
 	private int cate_idx;
-	private String cate_kor, cate_prnt,  cate_child, cate_child_ko;
+	private String cate_child_en, cate_child_ko, cate_prnt_en, cate_prnt_ko;
 	
-	//지역 변수
-	private String do_kor, gu_gun_eup_kor;
+	//주소 변수
+	private String do_kor, gu_gun_eup_kor, do_en, gu_gun_eup_eng, address, address_en;
 	
-	
+	//CompanyVO 실행
 	public CompanyVO() {}
-
 	
+	public String getCate_child_en() {
+		return cate_child_en;
+	}
+
+	public void setCate_child_en(String cate_child_en) {
+		this.cate_child_en = cate_child_en;
+	}
+
+	public String getCate_child_ko() {
+		return cate_child_ko;
+	}
+
+	public void setCate_child_ko(String cate_child_ko) {
+		this.cate_child_ko = cate_child_ko;
+	}
+
+	public String getCate_prnt_en() {
+		return cate_prnt_en;
+	}
+
+	public void setCate_prnt_en(String cate_prnt_en) {
+		this.cate_prnt_en = cate_prnt_en;
+	}
+
+	public String getCate_prnt_ko() {
+		return cate_prnt_ko;
+	}
+
+	public void setCate_prnt_ko(String cate_prnt_ko) {
+		this.cate_prnt_ko = cate_prnt_ko;
+	}
+
+	public String getAddress_en() {
+		return address_en;
+	}
+
+	public void setAddress_en(String address_en) {
+		this.address_en = address_en;
+	}
+
+	public String getAddr_dt_kor() {
+		return addr_dt_kor;
+	}
+
+	public void setAddr_dt_kor(String addr_dt_kor) {
+		this.addr_dt_kor = addr_dt_kor;
+	}
+
+	public String getAddr_dt_en() {
+		return addr_dt_en;
+	}
+
+
+
+	public void setAddr_dt_en(String addr_dt_en) {
+		this.addr_dt_en = addr_dt_en;
+	}
+
+
 
 	public String getDo_kor() {
 		return do_kor;
@@ -52,44 +110,6 @@ public class CompanyVO {
 	}
 
 
-	public String getCate_child_ko() {
-		return cate_child_ko;
-	}
-
-
-	public void setCate_child_ko(String cate_child_ko) {
-		this.cate_child_ko = cate_child_ko;
-	}
-
-
-	public String getCate_kor() {
-		return cate_kor;
-	}
-
-
-	public void setCate_kor(String cate_kor) {
-		this.cate_kor = cate_kor;
-	}
-
-
-	public String getCate_prnt() {
-		return cate_prnt;
-	}
-
-
-	public void setCate_prnt(String cate_prnt) {
-		this.cate_prnt = cate_prnt;
-	}
-
-
-	public String getCate_child() {
-		return cate_child;
-	}
-
-
-	public void setCate_child(String cate_child) {
-		this.cate_child = cate_child;
-	}
 
 
 	public int getCompany_idx() {
@@ -141,15 +161,6 @@ public class CompanyVO {
 		this.company_name = company_name;
 	}
 
-
-	public String getCompany_cate() {
-		return company_cate;
-	}
-
-
-	public void setCompany_cate(String company_cate) {
-		this.company_cate = company_cate;
-	}
 
 
 	public String getHr_manager() {
@@ -281,17 +292,36 @@ public class CompanyVO {
 		this.regdate = regdate;
 	}
 
-
+	
 	@Override
 	public String toString() {
 		return "CompanyVO [company_idx=" + company_idx + ", employee_num=" + employee_num + ", mem_id=" + mem_id
-				+ ", ceo_name=" + ceo_name + ", company_name=" + company_name + ", company_cate=" + company_cate
-				+ ", hr_manager=" + hr_manager + ", do_en=" + do_en + ", gu_gun_eup_eng=" + gu_gun_eup_eng
-				+ ", address=" + address + ", business_num=" + business_num + ", business_img=" + business_img
-				+ ", business_info=" + business_info + ", domitory=" + domitory + ", meals=" + meals
-				+ ", company_telephone=" + company_telephone + ", ip=" + ip + ", manager_email=" + manager_email
-				+ ", regdate=" + regdate + "]";
+				+ ", ceo_name=" + ceo_name + ", company_name=" + company_name + ", hr_manager=" + hr_manager
+				+ ", business_num=" + business_num + ", business_img=" + business_img + ", business_info="
+				+ business_info + ", domitory=" + domitory + ", meals=" + meals + ", company_telephone="
+				+ company_telephone + ", ip=" + ip + ", manager_email=" + manager_email + ", addr_dt_kor=" + addr_dt_kor
+				+ ", addr_dt_en=" + addr_dt_en + ", regdate=" + regdate + ", cate_idx=" + cate_idx + ", cate_child_en="
+				+ cate_child_en + ", cate_child_ko=" + cate_child_ko + ", cate_prnt_en=" + cate_prnt_en
+				+ ", cate_prnt_ko=" + cate_prnt_ko + ", do_kor=" + do_kor + ", gu_gun_eup_kor=" + gu_gun_eup_kor
+				+ ", do_en=" + do_en + ", gu_gun_eup_eng=" + gu_gun_eup_eng + ", address=" + address + ", address_en="
+				+ address_en + "]";
 	}
+	public String toStringAddress() {
+		return "CompanyVO [do_en=" + do_en + ", gu_gun_eup_eng=" + gu_gun_eup_eng + ", address=" + address
+				+ ", address_en=" + address_en + ", addr_dt_kor=" + addr_dt_kor + ", addr_dt_en=" + addr_dt_en
+				+ ", do_kor=" + do_kor + ", gu_gun_eup_kor=" + gu_gun_eup_kor + "]";
+	}
+
+	public String toStringCate() {
+		return "CompanyVO [cate_child_en=" + cate_child_en + ", cate_child_ko=" + cate_child_ko + ", cate_prnt_en="
+				+ cate_prnt_en + ", cate_prnt_ko=" + cate_prnt_ko + "]";
+	}
+
+
+
+	
+	
+
 
 	
 
