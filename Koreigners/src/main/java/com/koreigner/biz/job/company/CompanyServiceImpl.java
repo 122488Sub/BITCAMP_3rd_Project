@@ -27,12 +27,7 @@ public class CompanyServiceImpl implements CompanyService{
 	@Override
 	public List<CompanyVO> getAddrDoList() {
 		List<CompanyVO> list = companyDAO.getAddrDoList();
-		System.out.println("im service");
-		for(CompanyVO vo : list) {
-			//System.out.println(vo.getDo_en());
-			//addrDoMap.put(vo.getDo_en(), vo.getDo_en());
-		}
-		
+				
 		return list;
 	}
 	
