@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/republic_korea.css">
+<link rel="stylesheet" type="text/css" href="../../resources/css/republic_korea.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <style>
@@ -135,7 +135,7 @@ function getDoSiData(do_kor,do_en,idx) {
 	console.log(do_en);
 	$.ajax({
 		type : "get",
-		url : "getKoreaAddressList.do",
+		url : "/koreigner/getKoreaAddressList.do",
 		datType : "json",
 		async: false,
 		data: {do_kor: do_kor},
