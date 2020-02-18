@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardDAO">
+	<select id="getCateList" resultType="com.koreigner.biz.job.company.CompanyVO">
+		SELECT *
+		  FROM T_JOB_CATE_MST
+		 ORDER BY CATE_IDX
+	</select>
+	
+	<select id="getCateChild" parameterType="String" resultType="com.koreigner.biz.job.company.CompanyVO">
+		SELECT CATE_CHILD_KO
+		  FROM T_JOB_CATE_CHILD C,
+		       T_JOB_CATE_MST M
+	    	WHERE C.CATE_IDX = M.CATE_IDX
+		  AND CATE_KOR = #{cate_kor}
+	</select>	
+	
+	<select id="getAddrDoList" parameterType="String" resultType="com.koreigner.biz.job.company.CompanyVO">
+		SELECT DISTINCT DO_KOR
+  		  FROM T_TEST
+		 ORDER BY DO_KOR
+	</select>	
+	
+	<select id="getAddrSiList" parameterType="String" resultType="com.koreigner.biz.job.company.CompanyVO">
+		SELECT GU_GUN_EUP_KOR
+		  FROM T_TEST
+		   WHERE DO_KOR = #{do_kor}
+		 ORDER BY GU_GUN_EUP_KOR
+	</select>	
+	
+</mapper>
+
+
+
+
+
+
+
+
+
