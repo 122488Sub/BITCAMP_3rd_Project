@@ -13,10 +13,8 @@
 
 <body>
 <!-- 지도부분 -->
-<jsp:include page="../common/republic_korea.jsp">
-	<jsp:param value="2" name="c"/>
-</jsp:include>
-
+<jsp:include page="../common/republic_korea.jsp"/>
+<h1><a href="house_insert.do">insert</a></h1>
 
 <div id="listDisp">
 
@@ -34,11 +32,6 @@
 		console.log("gd");
 		getAllData();
 		$(".div_option").load("/koreigner/resources/html/houseOption.jsp"); //수정해야함
-		
-		// var loc='<%="56, Hodong-ro, Uijeongbu-si, Gyeonggi-do"%>';
-		//$("#mapDisp").load("/koreigner/resources/html/googleMap.jsp?location="
-	   //		+loc.replace(/ /gi,"%20"));
-		
 	});
 	//여기까지 페이징로딩후 자동시작//
 	
@@ -100,7 +93,10 @@
 						//모든 시군구의 반환 값 지정
 						$.each(data, function(index, obj){ //수정해야함
 							dispHtml += "<li>";
-							dispHtml += this.room_idx+ "/ ";
+							dispHtml += "<a href='house_detail.do?room_idx="+this.room_idx+"'>";
+							dispHtml += 	this.room_idx;
+							dispHtml += "</a>";
+							dispHtml += "/ ";
 							dispHtml += this.mem_email+ "/ ";
 							dispHtml += this.subject + "/ ";
 							dispHtml += this.do_en+ "/ ";
@@ -177,7 +173,10 @@
 						$.each(data, function(index, obj){
 						
 							dispHtml += "<li>";
-							dispHtml += this.room_idx+ "/ ";
+							dispHtml += "<a href='house_detail.do?room_idx="+this.room_idx+"'>";
+							dispHtml += 	this.room_idx;
+							dispHtml += "</a>";
+							dispHtml += "/ ";
 							dispHtml += this.mem_email+ "/ ";
 							dispHtml += this.subject + "/ ";
 							dispHtml += this.do_en+ "/ ";
@@ -233,7 +232,7 @@
 		option.push("TQTQTQTQ");
 		option.push("wRwRwR");
 		//----------------------------------------
-		
+	
 		// jQuery.ajaxSettings.traditional = true;
 		 $.ajax({
 				type : "get",
@@ -270,7 +269,10 @@
 						$.each(data, function(index, obj){
 						
 							dispHtml += "<li>";
-							dispHtml += this.room_idx+ "/ ";
+							dispHtml += "<a href='house_detail.do?room_idx="+this.room_idx+"'>";
+							dispHtml += 	this.room_idx;
+							dispHtml += "</a>";
+							dispHtml += "/ ";
 							dispHtml += this.mem_email+ "/ ";
 							dispHtml += this.subject + "/ ";
 							dispHtml += this.do_en+ "/ ";

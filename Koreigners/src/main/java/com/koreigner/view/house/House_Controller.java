@@ -1,15 +1,21 @@
 package com.koreigner.view.house;
 
+import java.io.File;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.koreigner.biz.house.HouseAll_VO;
 import com.koreigner.biz.house.House_Service;
@@ -21,19 +27,21 @@ public class House_Controller {
 	private House_Service houseService;
 	
 	@RequestMapping(value="house_main.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String jobJoin_go() {
-		System.out.println("controller");
+	public String houseMain_go() {
+		System.out.println("controller/houseMain_go");
 		
 		return "WEB-INF/views/house/house_Main.jsp";
 	}
+	
+	
 	
 	@RequestMapping(value="getHouseSiList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public List<HouseAll_VO> ctrl_getSiList(@ModelAttribute HouseAll_VO vo) {
 		System.out.println("?원본");
-		for(String s : vo.getGu_gun_eup_engArr()) {
-			System.out.println("ss: "+s);
-		}
+		//for(String s : vo.getGu_gun_eup_engArr()) {
+		//	System.out.println("ss: "+s);
+		//}
 		
 		
 		List<HouseAll_VO> houseList = houseService.getSiList(vo);
@@ -62,18 +70,64 @@ public class House_Controller {
 	public List<HouseAll_VO> ctrl_getAllList(
 						@RequestParam(value="option[]") List<String> opt
 					) {
-		System.out.println("gd");
+		//System.out.println("gd");
 		
 		//map.put("do_en", do_en);
 		
 		//List<Room_VO> testList = testService.getAllList(map);
 		List<HouseAll_VO> houseList = houseService.getAllList();
-		for(HouseAll_VO v : houseList) {
-			System.out.println(v);
-		}
+		//for(HouseAll_VO v : houseList) {
+		//	System.out.println(v);
+		//}
 		return houseList;
 		
 		//return null;
+	}
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	
+	@RequestMapping(value="house_insert.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String houseInsert_go() {
+		System.out.println("controller/houseInsert_go");
+		
+		return "WEB-INF/views/house/house_Insert.jsp";
+	}
+	
+	@RequestMapping(value="house_insert_process.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String houseInsert_process(HouseAll_VO vo, Model model,HttpServletRequest request) {
+		System.out.println("controller/houseInsert_process");
+		
+		String path = request.getRealPath("/resources/img");
+		String fileName="";
+		
+		File dir= new File(path);
+		if(!dir.isDirectory()) {
+			dir.mkdir();
+		}
+		//Iterator<String> files = multi.get
+		
+		return "WEB-INF/views/house/house_Insert.jsp";
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	
+	@RequestMapping(value="house_detail.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String houseDetail_go(HouseAll_VO vo, Model model) { 
+		System.out.println("controller/houseDetail_go");
+		System.out.println(vo);
+		System.out.println(">>> 글 상세 조회 처리 - getHouse()");
+		
+		HouseAll_VO house = houseService.getHouse(vo);
+		//model.addAttribute(board); //boardVO
+		model.addAttribute("house", house); //데이터 저장
+		System.out.println("> house : " + house);
+		
+		return "WEB-INF/views/house/house_Detail.jsp";
 	}
 }//end class
 
