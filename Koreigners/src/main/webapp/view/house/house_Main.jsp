@@ -6,13 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/republic_korea.css">
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
 <!-- 지도부분 -->
-<jsp:include page="republic_korea.jsp"></jsp:include>
+<jsp:include page="../common/republic_korea.jsp"></jsp:include>
 
 
 <div id="listDisp">
@@ -53,7 +53,7 @@
 		//----------------------------------------
 		 $.ajax({
 				type : "get",
-			 	url : "getHouseAllList.do",  
+			 	url : "/koreigner/getHouseAllList.do",  
 				dataType : "json",
 				async: false,
 				data: { //보낼 데이터
@@ -129,7 +129,7 @@
 		// jQuery.ajaxSettings.traditional = true;
 		 $.ajax({
 				type : "get",
-			 	url : "getHouseDoList.do", 
+			 	url : "/koreigner/getHouseDoList.do", 
 				dataType : "json",
 				async: false,
 				data: { //보낼 데이터
@@ -222,7 +222,7 @@
 		// jQuery.ajaxSettings.traditional = true;
 		 $.ajax({
 				type : "get",
-			 	url : "getHouseSiList.do", 
+			 	url : "/koreigner/getHouseSiList.do", 
 				dataType : "json",
 				async: false,
 				data: { //보낼 데이터

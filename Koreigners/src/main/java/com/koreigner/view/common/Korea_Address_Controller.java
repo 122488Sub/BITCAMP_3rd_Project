@@ -1,4 +1,4 @@
-package com.koreigner.common.address;
+package com.koreigner.view.common;
 
 import java.util.List;
 
@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import com.koreigner.common.address.Korea_Address_Service;
+import com.koreigner.common.address.Korea_Address_VO;
 
 @Controller
 @SessionAttributes("test") //board 라는 이름의 Model이 있으면 session에 저장
