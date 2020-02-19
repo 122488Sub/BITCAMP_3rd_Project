@@ -22,6 +22,7 @@
 	
 	
 </style>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 function sample6_execDaumPostcode() {
@@ -96,6 +97,35 @@ function sample6_execDaumPostcode() {
 		
 		
 </script>
+<script>
+	
+	function fileUpload(){
+		var formData = new FormData();
+		
+		$.each($("input[type='file']")[0].files, function(i, file) {
+			formData.append('file', file);
+		});
+		//formData.append('file', document.getElementById('file').files[0]);
+		alert(document.getElementById('file').files.length);
+		$.ajax({ 
+			type: "POST", 
+			enctype: 'multipart/form-data', // 필수 
+			url: 'house_MultiImgUpload.do', 
+			data: formData,// 필수 
+			processData: false, // 필수
+			contentType: false, // 필수 
+			cache: false, 
+			success: function (result) { 
+				alert(result);
+			}, error: function (e) { 
+				
+			} 
+		});
+
+			
+	}
+		
+</script>
 </head>
 <body>
 	
@@ -135,25 +165,15 @@ function sample6_execDaumPostcode() {
 		<tr>
 			<th>업로드</th>
 			<td>
-				<input type="file" name="uploadFile">
+				<input type="file" id="file" name="file" multiple>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2" class="center">
-				<input type="submit" value="새글 등록">
+				<input type="submit" value="새글 등록" onclick="fileUpload();">
 			</td>
 		</tr>
-		<tr>
-			<th>주소</th>
-			<td style="padding-bottom: 5px;">
-			
-				<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br>
-				<input type="text" id="sample6_address" name="address" style="width: 65%;" value="" placeholder="주소"><br>
-				<input type="text" id="sample6_detailAddress" name="address_detail" style="width: 65%;" value="" placeholder="상세주소">
-				<input type="text" id="sample6_address_en" name="address" style="width: 65%;" value="" placeholder="주소en"><br>
-				<input type="text" id="sample6_detailAddress_en" name="address_detail" style="width: 65%;" value="" placeholder="상세주소en">
-			</td>
-		</tr>
+		
 	</table>
 	</form>
 	<p><a href="house_main.do ">글 목록 가기</a></p>

@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.mail.Multipart;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.koreigner.biz.house.HouseAll_VO;
@@ -95,21 +97,48 @@ public class House_Controller {
 		return "WEB-INF/views/house/house_Insert.jsp";
 	}
 	
-	@RequestMapping(value="house_insert_process.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String houseInsert_process(HouseAll_VO vo, Model model,HttpServletRequest request) {
-		System.out.println("controller/houseInsert_process");
+	@RequestMapping(value="house_MultiImgUpload.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String imgUpload(HttpServletRequest request, MultipartHttpServletRequest multi) { 
+		System.out.println("controller/house_MultiImgUpload");
 		
-		String path = request.getRealPath("/resources/img");
+		String path = "C:\\Users\\sub\\Documents\\Git\\BITCAMP_3rd_Project\\Koreigners\\src\\main\\webapp\\WEB-INF\\views\\house\\upload\\";
+		System.out.println(path);
+		//System.out.println(this.getClass().getResource("").getPath());
+		//System.out.println(request.getContextPath());
+		//System.out.println(request.getRealPath(""));
+	//	System.out.println("houseImgUploadPath");
 		String fileName="";
-		
+		String returnFileName="";
 		File dir= new File(path);
 		if(!dir.isDirectory()) {
 			dir.mkdir();
 		}
-		//Iterator<String> files = multi.get
-		
-		return "WEB-INF/views/house/house_Insert.jsp";
+		Iterator<String> files = multi.getFileNames();
+		while(files.hasNext()) {
+			String uploadFile = files.next();
+			
+			MultipartFile mFile = multi.getFile(uploadFile);
+			fileName = mFile.getOriginalFilename();
+			returnFileName += fileName+",";
+			System.out.println("실제 파일 이름 : "+ fileName);
+			try {
+				mFile.transferTo(new File(path + fileName));
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+		return returnFileName.substring(0, returnFileName.length()-1);
 	}
+	
+	@RequestMapping(value="house_insert_process.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String houseInsert_process(HouseAll_VO vo, Model model) {
+		System.out.println("controller/houseInsert_process");
+		
+	
+		return "WEB-INF/views/house/house_Main.jsp";
+	}
+	
 	
 	//------------------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------------------
@@ -129,6 +158,14 @@ public class House_Controller {
 		
 		return "WEB-INF/views/house/house_Detail.jsp";
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	
+	
+	
 }//end class
 
 
