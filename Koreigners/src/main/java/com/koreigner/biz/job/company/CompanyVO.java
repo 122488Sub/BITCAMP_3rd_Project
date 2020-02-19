@@ -7,12 +7,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class CompanyVO {
 	private int company_idx, employee_num; 
-	private String mem_id, ceo_name, company_name, hr_manager, business_num,  
+	private String mem_id, mem_pw, ceo_name, company_name, hr_manager, business_num,  business_img,
 	               business_info, domitory, meals, company_telephone, ip, manager_email,addr_dt_kor, addr_dt_en;  
 	private Date regdate;
 	
 	
-	List<MultipartFile> business_img;
+	List<MultipartFile> business_file;
 	
 	//카테고리 변수
 	private int cate_idx;
@@ -25,12 +25,28 @@ public class CompanyVO {
 	public CompanyVO() {}
 	
 	//파일업로드
-	public List<MultipartFile> getBusiness_img() {
+	public List<MultipartFile> getBusiness_file() {
+		return business_file;
+	}
+	
+	public void setBusiness_file(List<MultipartFile> business_file) {
+		this.business_file = business_file;
+	}
+	
+	public String getBusiness_img() {
 		return business_img;
 	}
-
-	public void setBusiness_img(List<MultipartFile> business_img) {
+	
+	public void setBusiness_img(String business_img) {
 		this.business_img = business_img;
+	}
+
+	public String getMem_pw() {
+		return mem_pw;
+	}
+
+	public void setMem_pw(String mem_pw) {
+		this.mem_pw = mem_pw;
 	}
 
 	public String getCate_child_en() {

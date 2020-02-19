@@ -4,16 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,16 +18,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.koreigner.biz.job.company.CompanyService;
 import com.koreigner.biz.job.company.CompanyServiceImpl;
 import com.koreigner.biz.job.company.CompanyVO;
+import com.koreigner.biz.job.jobservice.JobService;
+import com.koreigner.common.member.SecurityUtil;
 
 @Controller
 public class CompanyController {
 	
 	@Autowired
 	CompanyServiceImpl companyServiceImpl;
-	
+	SecurityUtil pwEncoder = new SecurityUtil();
 	@RequestMapping(value="job_join.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String jobJoin_go() {
 		/*
@@ -57,109 +53,30 @@ public class CompanyController {
 	
 	
 	@RequestMapping(value="join_conf.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String join_conf(CompanyVO vo) {
-			//Iterator<MultipartFile> itr = uploadFile.iterator();
-			//if(itr.hasNext()) {
-			//	MultipartFile file = itr.next();
-		System.out.println("111111111111111111");
-			System.out.println(vo);
-			
-			
-			 String path = "C:/MyStudy/Final_Project/BITCAMP_3rd_Project/Koreigners/src/main/webapp/WEB-INF/views/job/upload/"; 
-
-		     
-
-		      File dir= new File(path);
-		      if(!dir.isDirectory()) {
-		         dir.mkdirs();
-		      }
-
-			
-			//if(vo.getBusiness_img() !=null) {
-			for(MultipartFile file : vo.getBusiness_img()) {
-				String fileName = file.getOriginalFilename();
-				System.out.println("fileName : " + fileName);
-				
-				
-				try {                              //"c:/MyStudy/temp/"
-					System.out.println("passing");
-					file.transferTo(new File("C:/MyStudy/Final_Project/BITCAMP_3rd_Project/Koreigners/src/main/webapp/WEB-INF/views/job/upload/" + fileName));
-				} catch (IOException e) {
-					System.out.println("IOException 발생");
-					e.printStackTrace();
-				}
-			}
-	
+	public String join_conf(CompanyVO vo, HttpServletRequest request) {
 		
-		System.out.println("here");
-		//영어 카테고리 vo에 추가
-		CompanyVO enCate_vo = companyServiceImpl.getCateEn(vo);
-		vo.setCate_prnt_en(enCate_vo.getCate_prnt_en());
-		vo.setCate_child_en(enCate_vo.getCate_child_en());
+		String imgName = saveImg(vo);	     					 //저장 사업자등록증 이미지 명
+		String ip = request.getRemoteAddr();  					 //ip
+		System.out.println("ip" + ip);
+		String pw = pwEncoder.encryptSHA256(vo.getMem_pw());
+		System.out.println("pw : " + pw);
+		
+		
+		CompanyVO enCate_vo = companyServiceImpl.getCateEn(vo);  //영어 카테고리 vo 생성
+		
+		vo.setBusiness_img(imgName);                             //저장 사업자등록증 이미지 명 vo에 추가
+		vo.setIp(ip);											 //ip vo에 추가
+		vo.setCate_prnt_en(enCate_vo.getCate_prnt_en());         //영어 카테고리 대분류 vo에 추가
+		vo.setCate_child_en(enCate_vo.getCate_child_en());       //영어 카테고리 소분류 vo에 추가
+		
+		//companyServiceImpl.comJoin(vo);
 		
 		System.out.println("vo.toStringAddress() : " + vo.toStringAddress());
 		System.out.println("vo.toStringCate() : " + vo.toStringCate());
 		System.out.println("vo.toString() : " + vo.toString());
 		
+		return "job/comp_join.page";
 		
-		
-		
-		
-		return "WEB-INF/views/job/comp_join.jsp";
-		
-		
-		/* *** 파일 업로드 처리 ***
-		 * MultipartFile 인터페이스 주요 메소드
-		 * String fileName = uploadFile.getOriginalFilename(); : 업로드한 파일명 찾기
-		 * void transferTo(File desFile) : 업로드한 파일을 destFile에 저장
-		 * boolean isEmpty() : 업로드한 파일에 존재 여부
-		 * 
-		 		
-		System.out.println("hi");
-		DiskFileItemFactory factory = new DiskFileItemFactory();
-		ServletFileUpload upload = new ServletFileUpload(factory);
-		List<FileItem> items;
-		List<String> originFileList = new ArrayList<String>();
-		List<String> saveFileList = new ArrayList<String>();
-		
-		
-		
-		try {
-			items = upload.parseRequest(request);
-			Iterator<FileItem> iter = items.iterator();
-			
-			 while(iter.hasNext()){
-			        FileItem item = iter.next();
-			        
-		            if (!item.isFormField()) {
-		            	String name = item.getFieldName(); //필드이름
-		                String originFileName = item.getName();  //원본 파일 명
-		            	
-		                String imgName = "job_" + originFileName; //저장 이름 
-		                
-		                //String dir = "C:/MyStudy/BITBANG/-BitCamp_Project02/Code/WebContent/images/resale"; //저장 경로
-		                String dir = "C:/MyStudy/Final_Project/BITCAMP_3rd_Project/Koreigners/src/main/webapp/WEB-INF/views/job/upload"; //저장 경로
-		                originFileList.add(originFileName);
-		                saveFileList.add(imgName);
-		                try {
-							item.write(new File(dir, imgName));
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-		                
-		            }
-			    }//while End
-			} catch (FileUploadException e1) {
-				e1.printStackTrace();
-			}
-		
-			for(int i = 0; i<originFileList.size(); i++) {
-				System.out.println("originFileList.get(" + i + "); : "  +  originFileList.get(i));
-				System.out.println("saveFileList.get(" + i + "); : "  +  saveFileList.get(i));
-			}
-			if(vo.getBusiness_img() != null) {
-			System.out.println("이미지 있음");
-			*/
 	}
 
 	
@@ -213,14 +130,34 @@ public class CompanyController {
 		return addrDoMap;
 	}
 	
-	@RequestMapping("testPage.do")
-	public String test() {
-		return "test.page";
-	}
 	
-	@RequestMapping("testPart.do")
-	public String testPart() {
-		return "test.part";
-	}
 	
+	
+	
+	private String saveImg(CompanyVO vo) {
+		
+		System.out.println("JobService 이다-------------");
+		String path = "/C:/MyStudy/Final_Project/BITCAMP_3rd_Project/Koreigners/src/main/webapp/WEB-INF/views/job/upload/"; 
+		String fileName = null;
+	    File dir= new File(path);
+	    List<MultipartFile> imgFile = vo.getBusiness_file();
+	    
+	    if(!dir.isDirectory()) {
+	       dir.mkdirs();
+	    }
+		
+		for(MultipartFile file : imgFile) {
+			fileName = "businessImg_"+file.getOriginalFilename();
+			System.out.println("fileName : " + fileName);
+			
+			try {                              //"c:/MyStudy/temp/"
+				System.out.println("passing");
+				file.transferTo(new File(path + fileName));
+			} catch (IOException e) {
+				System.out.println("IOException 발생");
+				e.printStackTrace();
+			}
+		}
+		return fileName;
+	}
 }

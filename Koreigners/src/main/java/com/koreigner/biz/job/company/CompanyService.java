@@ -8,5 +8,7 @@ public interface CompanyService {
 	List<CompanyVO> getAddrDoList();
 	List<CompanyVO> getAddrSiList(String si_kor);
 	CompanyVO getCateEn(CompanyVO vo);
+	void comJoin(CompanyVO vo);
+	
 	
 }

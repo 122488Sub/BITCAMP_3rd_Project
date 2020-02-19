@@ -12,167 +12,9 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/js/daumAddr.js"></script>
+<script type="text/javascript" src="resources/js/companySignup.js"></script>
 
 
-<script>
-	var cate_prnt_ko = "";
-	var si_kor = "";
-	$(function(){
-		//카테고리 세션박스 변경 시 하위 카테고리 select ajax
-		$("#selectBox1").change(function(){
-			console.log("바뀜");
-			var selectBox1 = document.getElementById("selectBox1");
-			console.log(this.value);
-			cate_prnt_ko = this.value;
-			
-			$.ajax("getCateJson.do", {
-				type: "get",
-				dataType : "json",
-				data: {"cate_prnt_ko" : cate_prnt_ko},
-				success : function(data){
-					
-					var strData = JSON.stringify(data);
-					
-					var jsData = JSON.parse(strData); //자바 스크립트 데이터로 형 변환
-					
-					
-					var dataTag = "";
-					$.each(data, function(index, obj){
-						dataTag += "<option value=" + this.cate_child_ko +">"
-						dataTag += this.cate_child_ko;
-						dataTag += "</option>";
-					});
-		
-					$("#cate_child_ko").html(dataTag);
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-					alert("Ajax 처리 실패 : \n" +
-						  "jqXHR.readyState : " + jqXHR.readyState + "\n" +
-						  "textStatus : " + textStatus + "\n" +
-						  "errorThrown : " + errorThrown);
-				}
-			});	
-		});
-		
-		//지역 도 세션박스 변경 시 하위 카테고리 select ajax
-		$("#do_kor").change(function(){
-			console.log("바뀜");
-			var selectBox1 = document.getElementById("gu_gun_eup_kor");
-			console.log(this.value);
-			si_kor = this.value;
-			
-			$.ajax("getSiJson.do", {
-				type: "get",
-				dataType : "json",
-				data: {"si_kor" : si_kor},
-				success : function(data){
-					alert("성공 ~~ data : " + data);
-					
-					var strData = JSON.stringify(data);
-					console.log("strData : " + strData);
-					
-					var jsData = JSON.parse(strData); //자바 스크립트 데이터로 형 변환
-					console.log("jsData : " + jsData);
-					
-					var dataTag = "";
-					$.each(data, function(index, obj){
-						dataTag += "<option value=" + this.gu_gun_eup_kor +">"
-						dataTag += this.gu_gun_eup_kor;
-						dataTag += "</option>";
-					});
-		
-					$("#gu_gun_eup_kor").html(dataTag);
-				},
-				error : function(jqXHR, textStatus, errorThrown) {
-					alert("Ajax 처리 실패 : \n" +
-						  "jqXHR.readyState : " + jqXHR.readyState + "\n" +
-						  "textStatus : " + textStatus + "\n" +
-						  "errorThrown : " + errorThrown);
-				}
-			});	
-		});
-		
-	});
-	
-	/*영문주소 팝업창=============================================================================================
-	//form에 name 값 설정
-	function goPopup(){
-		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrEngUrl.do)를 호출하게 됩니다.
-	    var pop = window.open("resources/common/jusoPopup_eng.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-	}
-	function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admCd, rnMgtSn
-							, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, korAddr){
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		document.form.roadAddr.value = roadAddr;
-		document.form.addrDetail.value = addrDetail;
-		document.form.address.value = addrDetail + ", " + roadAddr;
-		document.form.addKor.value = korAddr;
-		console.log("korAddr : " + korAddr);
-		
-	}
-	//영문주소 팝업창 end =============================================================================================
-	*/
-	
-	
-	//한글주소 팝업창=============================================================================================
-	//form에 name 값 설정
-	function goPopup(){
-		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrEngUrl.do)를 호출하게 됩니다.
-	    var pop = window.open("resources/common/jusoPopup_kor.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
-	}
-	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn
-			, detBdNmList, bdNm, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, emdNo){
-		// 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
-		document.form.roadAddrPart1.value = roadAddrPart1;
-		document.form.roadAddrPart2.value = roadAddrPart2;
-		document.form.addrDetail.value = addrDetail;
-		
-		document.form.do_kor.value = siNm;
-		document.form.gu_gun_eup_kor.value = sggNm;
-		
-	}
-	//한글주소 팝업창 end =============================================================================================
-	
-		
-	//회원가입 버튼 클릭	
-	function signInClick() {
-		
-		var form = document.forms[0];
-		var id = $('#regForm [name="mem_id"]').val();
-		var name = $('#regForm [name="hr_manager"]').val();
-		/* 값을 입력했는지 전체 확인
-		for (var i=0; i < form.elements.length; i++) {
-				if(form.elements[i].value.trim() == "") {
-					console.log("form.elements[i].outerText : " + form.elements[i].outerText);
-					console.log("form.elements[i] : " + i);
-					alert(form.elements[i].title + "을 입력하세요");
-					form.elements[i].focus();
-					return;
-			}
-		}
-		
-		var id = $('#regForm [name="mem_id"]').val();
-		var name = $('#regForm [name="hr_manager"]').val();
-		var password = $('#regForm [name="password"]').val();
-		var password_conform= $('#regForm [name="conf_password"]').val();
-		var regExp = /(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{1,20}).{10,20}$/
-			if(password!=password_conform){
-				alert("비밀번호가 서로 다릅니다. 다시한번 확인해주세요.");
-					return;
-			}	
-		*/
-		/*
-		private int company_idx, employee_num; 
-		private String mem_id, ceo_name, company_name, company_cate, hr_manager, 
-		               do_en, gu_gun_eup_eng, address, business_num, business_img, 
-		               business_info, domitory, meals, company_telephone, ip, manager_email;  
-		private Date regdate;
-		*/
-		form.submit();
-		
-	}
-		
-</script>
 <style>
 	#regCotent{
 		height: 1000px;
@@ -186,15 +28,13 @@
 <body>
 
 <div id="regCotent">
-
 <form action="join_conf.do" name="form" id="regForm" method="post" enctype="multipart/form-data" >
-	<label>아이디 : </label><input type="text" name="mem_id" id="mem_id" title="아이디"><br><br>
-	<label>비밀번호 : </label><input type="password" name="password" id="password" title="비밀번호"><br><br>
-	<label>비밀번호 확인 : </label><input type="password" name="conf_password" id="conf_password" title="비밀번호 확인"><br><br>
+
+	<label>아이디 : </label><input type="text" name="mem_id" id="mem_id" title="아이디"><div id="id_check"></div><br><br>
+	<label>비밀번호 : </label><input type="password" name="mem_pw" id="password" title="비밀번호"><br><br>
+	<label>비밀번호 확인 : </label><input type="password" name="conf_password" id="conf_password" title="비밀번호 확인"><div id="pw_check"></div><br><br>
 	<label>회사명 : </label><input type="text" name="company_name" id="company_name" title="회사명"><br><br>
 	<label>대표자명 : </label><input type="text" name="ceo_name" id="ceo_name" title="대표자명"><br><br>
-	
-	
 	
 	<label>직종선택 : </label>
 	<select name="cate_prnt_ko" id="selectBox1" title="직종선택">
@@ -206,16 +46,16 @@
 	<select name="cate_child_ko" title="직종선택"  id="cate_child_ko">
 	</select><br><br>
 	
-       <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br><br>
-       <label>한글주소 : </label><input type="text" id="address" name="address" style="width: 10%;" value="" placeholder="주소"><br><br>
-       <label>한글 상세주소 : </label><input type="text" id="addr_dt_kor" name="addr_dt_kor" style="width: 10%;" value="" placeholder="상세주소"><br><br>
-      
-       <label>영어주소 : </label><input type="text" id="address_en" name="address_en" style="width: 10%;" value="" placeholder="주소en"><br><br>
-       <label>영어 상세주소 : </label><input type="text" id="addr_dt_en" name="addr_dt_en" style="width: 10%;" value="" placeholder="상세주소en"><br><br>
+     <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br><br>
+     <label>한글주소 : </label><input type="text" id="address" name="address" style="width: 10%;" value="" placeholder="주소"><br><br>
+     <label>한글 상세주소 : </label><input type="text" id="addr_dt_kor" name="addr_dt_kor" style="width: 10%;" value="" placeholder="상세주소"><br><br>
+    
+     <label>영어주소 : </label><input type="text" id="address_en" name="address_en" style="width: 10%;" value="" placeholder="주소en"><br><br>
+     <label>영어 상세주소 : </label><input type="text" id="addr_dt_en" name="addr_dt_en" style="width: 10%;" value="" placeholder="상세주소en"><br><br>
 	
 	<label>사업자번호 : </label><input type="text" name="business_num" id="business_num" title="사업자번호"><br><br>
 	
-	<label>사업자등록증 : </label><input type="file" name="business_img" id="business_img" title="사업자등록증" multiple="multiple"/><br><br>
+	<label>사업자등록증 : </label><input type="file" name="business_file" id="business_file" title="사업자등록증" /><br><br>
 	
 	<label>인사담당자 : </label><input type="text" name="hr_manager" id="hr_manager" title="인사담당자"><br><br>
 	
