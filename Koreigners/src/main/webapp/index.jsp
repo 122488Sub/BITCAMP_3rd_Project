@@ -21,8 +21,8 @@
                     <li class="menu"><a href="#">Resale</a></li>
                     <li class="menu"><a href="#">Community</a></li>
                     <li class="menu"><a href="#"></a></li>
-                    <li class="menu"><a href="#">Sign in</a></li>
-                    <li class="menu"><a href="job_join.do">Register</a></li>
+                    <li class="menu"><a href="login_go.do">Sign in</a></li>
+                    <li class="menu"><a href="join_go.do">Register</a></li>
                     <li class="menu"><a href="#"></a></li>
                 </ul>
             </ul>
