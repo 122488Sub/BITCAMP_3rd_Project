@@ -35,17 +35,21 @@ public class House_ServiceImpl implements House_Service {
 	}
 
 
-	@Override
-	public List<HouseAll_VO> getAllList(HouseAll_VO vo) {
-		// TODO Auto-generated method stub
-		return testDAO.myBatis_getAllList_vo(vo);
-	}
-
 
 	@Override
 	public List<HouseAll_VO> getAllList() {
 		// TODO Auto-generated method stub
 		return testDAO.myBatis_getAllList_vo();
+	}
+
+
+
+
+	@Override
+	public HouseAll_VO getHouse(HouseAll_VO vo) {
+		// TODO Auto-generated method stub
+		System.out.println("impl vo"+vo);
+		return testDAO.myBatis_getHouse_vo(vo);
 	}
 
 }

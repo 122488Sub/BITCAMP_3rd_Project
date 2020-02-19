@@ -8,11 +8,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/koreigner/resources/css/republic_korea.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<%
-	String n=request.getParameter("c");
-	System.out.println("afasf: "+n);
-	
-%>
 
 
 </head>
@@ -146,7 +141,7 @@ function getDoSiData(do_kor,do_en,idx) {
 	console.log(do_en);
 	$.ajax({
 		type : "get",
-		url : "/koreigner/getKoreaAddressList.do",
+		url : "getKoreaAddressList.do",
 		datType : "json",
 		async: false,
 		data: {do_kor: do_kor},
