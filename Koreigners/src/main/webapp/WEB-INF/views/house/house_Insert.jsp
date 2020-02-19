@@ -83,7 +83,7 @@ function sample6_execDaumPostcode() {
 	//form에 name 값 설정
 	function goPopup(){
 		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrEngUrl.do)를 호출하게 됩니다.
-	    var pop = window.open("resources/common/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	    var pop = window.open("resources/common/jusoPopup_kor.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	}
 	function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admCd, rnMgtSn
 							, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, korAddr){
@@ -100,6 +100,7 @@ function sample6_execDaumPostcode() {
 <script>
 	
 	function fileUpload(){
+		/*
 		var formData = new FormData();
 		
 		$.each($("input[type='file']")[0].files, function(i, file) {
@@ -121,7 +122,23 @@ function sample6_execDaumPostcode() {
 				
 			} 
 		});
+*/			
+			var formData = new FormData( $("#form")[0]);
 
+			$.ajax({ 
+				type: "POST", 
+				enctype: 'multipart/form-data', // 필수 
+				url: 'house_MultiImgUpload.do', 
+				data: formData,// 필수 
+				processData: false, // 필수
+				contentType: false, // 필수 
+				cache: false, 
+				success: function (result) { 
+					alert(result);
+				}, error: function (e) { 
+					
+				} 
+			});
 			
 	}
 		
@@ -132,7 +149,7 @@ function sample6_execDaumPostcode() {
 	<div id="container">
 	<h1>House Info</h1>
 	<hr>
-	<form action="house_insert.do" name="form" method="post" enctype="multipart/form-data">
+	<form action="" id="form" name="form" method="post" enctype="multipart/form-data">
 	<table>
 		<tr>
 			<th width="70">TITLE</th>
