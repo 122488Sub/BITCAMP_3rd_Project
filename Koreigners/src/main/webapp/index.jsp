@@ -7,6 +7,9 @@
     <title>Document</title>
     <link href="resources/css/header.css" rel="stylesheet" type="text/css">
     <link href="resources/css/style.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+    	#content {height: 775px;}
+    </style>
 </head>
 <body>
     <div id="wrap">
@@ -19,9 +22,9 @@
                     <li class="menu"><a href="#">Job</a></li>
                     <li class="menu"><a href="house_main.do">House</a></li>
                     <li class="menu"><a href="#">Resale</a></li>
-                    <li class="menu"><a href="#">Community</a></li>
-                    <li class="menu"><a href="#"></a></li>
-                    <li class="menu"><a href="#">Sign in</a></li>
+                    <li class="menu"><a href="testPart.do">Community</a></li>
+                    <li class="menu"><a href=""></a></li>
+                    <li class="menu"><a href="testPage.do">Sign in</a></li>
                     <li class="menu"><a href="job_join.do">Register</a></li>
                     <li class="menu"><a href="#"></a></li>
                 </ul>
@@ -38,9 +41,10 @@
          </div>
         </section>
         <section id="section2">
-            section2
             <section id="section2_content">
-                section2_content
+				<div id="content">
+				
+				</div>
             </section>
         </section>
         <div id="footer">footer</div>

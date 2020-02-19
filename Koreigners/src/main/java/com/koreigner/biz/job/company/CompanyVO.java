@@ -1,14 +1,18 @@
 package com.koreigner.biz.job.company;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class CompanyVO {
 	private int company_idx, employee_num; 
-	private String mem_id, ceo_name, company_name, hr_manager, business_num, business_img, 
+	private String mem_id, ceo_name, company_name, hr_manager, business_num,  
 	               business_info, domitory, meals, company_telephone, ip, manager_email,addr_dt_kor, addr_dt_en;  
 	private Date regdate;
 	
 	
+	List<MultipartFile> business_img;
 	
 	//카테고리 변수
 	private int cate_idx;
@@ -20,6 +24,15 @@ public class CompanyVO {
 	//CompanyVO 실행
 	public CompanyVO() {}
 	
+	//파일업로드
+	public List<MultipartFile> getBusiness_img() {
+		return business_img;
+	}
+
+	public void setBusiness_img(List<MultipartFile> business_img) {
+		this.business_img = business_img;
+	}
+
 	public String getCate_child_en() {
 		return cate_child_en;
 	}
@@ -213,14 +226,6 @@ public class CompanyVO {
 	}
 
 
-	public String getBusiness_img() {
-		return business_img;
-	}
-
-
-	public void setBusiness_img(String business_img) {
-		this.business_img = business_img;
-	}
 
 
 	public String getBusiness_info() {
