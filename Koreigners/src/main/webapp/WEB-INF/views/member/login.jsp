@@ -34,7 +34,7 @@ function getLoginData() {
       var passwordValue = $("#mem_pw").val();
          
       $.ajax({
-         url : '/biz/login.do',
+         url : '/koreigner/login.do',
          type : 'post',
          data : {id:idValue, password:passwordValue },
          success : function(data) {
@@ -42,8 +42,8 @@ function getLoginData() {
             
             if(data == 1) {
                // 1 : 아이디 존재
-               alert("Hello there! :)"+ "\n" + "Move to the MyPage");
-               location.href="WEB-INF/views/member/mypage.jsp";
+               alert("Hello there! :)"+ "\n" + "Move to the MainPage");
+               location.href="WEB-INF/views/index.jsp";
                
             } else {
                 // 0 : 존재하지 않는 유저

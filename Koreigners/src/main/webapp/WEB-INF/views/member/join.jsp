@@ -23,7 +23,7 @@ $(function(){
 	$("#mem_name").blur(function() {
 		var name = $('#mem_name').val();
 		$.ajax({
-			url : '/biz/nickCheck.do?mem_name='+ name,
+			url : '/koreigner/nickCheck.do?mem_name='+ name,
 			type : 'get',
 			success : function(data) {
 				console.log("data : " + data);	
@@ -60,7 +60,7 @@ $(function(){
 	$("#mem_id").blur(function() {
 		var id = $('#mem_id').val();
 		$.ajax({
-			url : '/biz/idCheck.do?mem_id='+ id,
+			url : '/koreigner/idCheck.do?mem_id='+ id,
 			type : 'get',
 			success : function(data) {
 				console.log("data : " + data);	
