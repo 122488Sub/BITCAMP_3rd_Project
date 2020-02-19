@@ -1,11 +1,8 @@
 package com.koreigner.view.house;
 
 import java.io.File;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
-
-import javax.mail.Multipart;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.koreigner.biz.house.HouseAll_VO;
 import com.koreigner.biz.house.House_Service;
@@ -103,8 +99,8 @@ public class House_Controller {
 		System.out.println(vo);
 		
 		String path = this.getClass().getResource("").getPath(); 
-		path=path.substring(1,path.indexOf(".metadata"))+"Test/";
-		System.out.println(path);
+		path=path.substring(1,path.indexOf(".metadata"))+"Koreigners/src/main/webapp/WEB-INF/views/house/upload/";
+		System.out.println(path);//workspace가 BITCAMP_3rd_Project일 경우
 	
 
 		String fileName="";
@@ -114,18 +110,17 @@ public class House_Controller {
 			dir.mkdirs();
 		}
 		
+		List<String> fileList= new ArrayList<>();
 		for(MultipartFile file : vo.getFile()) {
 			fileName = file.getOriginalFilename();
-			vo.getRoom_img_nameArr().add(fileName);
+			fileList.add(fileName);
 			System.out.println("실제 파일 이름 : "+ fileName);
 			try {
 				file.transferTo(new File(path + fileName));
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
-		}
+		}vo.setRoom_img_nameArr(fileList);
 		
 		
 		/*
@@ -145,7 +140,7 @@ public class House_Controller {
 		}*/
 	
 		//return returnFileName.substring(0, returnFileName.length()-1);
-		return "Suc";
+		return "WEB-INF/views/house/house_Main.jsp";
 	}
 	
 	
