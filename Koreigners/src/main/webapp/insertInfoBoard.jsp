@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글등록</title>
+	<title>글등록</title>
+	
 <style>
 	#container {
 		width: 700px;

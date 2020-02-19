@@ -41,10 +41,18 @@ public class InfoBoardController {
 		System.out.println(">>> 글 전체 목록 조회 처리-getInfoBoardList()");
 		System.out.println("condition : " +vo.getSearchCondition());
 		System.out.println("keyword : " + vo.getSearchKeyword());
+		if (vo.getSearchCondition() == null) {
+			vo.setSearchCondition("INFO_TITLE");
+		}
+		if (vo.getSearchKeyword() == null) {
+			vo.setSearchKeyword("");
+		}
+		System.out.println("null처리후 condition : " + vo.getSearchCondition());
+		System.out.println("null처리후 keyword : -" + vo.getSearchKeyword() + "-");
 		
 		List<InfoBoardVO> infoBoardList = infoBoardService.getInfoBoardList(vo);
 		model.addAttribute("infoBoardList",infoBoardList);
-		
+	
 		return "/getInfoBoardList.jsp";
 	}
 	

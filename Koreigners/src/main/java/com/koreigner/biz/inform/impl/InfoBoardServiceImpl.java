@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.koreigner.biz.inform.InfoBoardService;
 import com.koreigner.biz.inform.InfoBoardVO;
 
-@Service("InfoBoardService")
+@Service("infoBoardService")
 public class InfoBoardServiceImpl implements InfoBoardService {
 
 	@Autowired

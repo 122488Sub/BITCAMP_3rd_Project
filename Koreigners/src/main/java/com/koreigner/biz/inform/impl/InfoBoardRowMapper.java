@@ -14,12 +14,13 @@ public class InfoBoardRowMapper implements RowMapper<InfoBoardVO>{
 	public InfoBoardVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		InfoBoardVO infoBoard = new InfoBoardVO();
 		infoBoard.setInfo_idx(rs.getInt("info_idx"));
-		infoBoard.setInfo_category(rs.getString("info_category"));
-		infoBoard.setInfo_ins_user(rs.getString("info_ins_user"));
-		infoBoard.setInfo_title(rs.getString("info_title"));
-		infoBoard.setInfo_ins_dt(rs.getDate("info_ins_dt"));
-		infoBoard.setInfo_hit(rs.getInt("info_hit"));
-		
+		//infoBoard.setInfo_category(rs.getString("info_category"));
+		infoBoard.setInfo_title(rs.getString("INFO_TITLE"));
+		infoBoard.setInfo_ins_user(rs.getString("INFO_INS_USER"));
+		infoBoard.setInfo_content("INFO_CONTENT");
+		infoBoard.setInfo_ins_dt(rs.getDate("INFO_INS_DT"));
+		infoBoard.setInfo_hit(rs.getInt("INFO_HIT"));
+		//추천수추가
 		return infoBoard;
 	}
 

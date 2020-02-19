@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name="infoBoardList")
 @XmlAccessorType(XmlAccessType.FIELD) 
 public class InfoBoardListVO {
-	@XmlElement(name="board") 
+	@XmlElement(name="infoBoard") 
 	private List<InfoBoardVO> infoBoardList;
 
 	public List<InfoBoardVO> getBoardList() {
