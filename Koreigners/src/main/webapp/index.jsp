@@ -22,10 +22,10 @@
                     <li class="menu"><a href="#">Job</a></li>
                     <li class="menu"><a href="house_main.do">House</a></li>
                     <li class="menu"><a href="#">Resale</a></li>
-                    <li class="menu"><a href="testPart.do">Community</a></li>
-                    <li class="menu"><a href=""></a></li>
-                    <li class="menu"><a href="testPage.do">Sign in</a></li>
-                    <li class="menu"><a href="job_join.do">Register</a></li>
+                    <li class="menu"><a href="getInfoBoardList.do">Infomation</a></li>
+                    <li class="menu"><a href="#"></a></li>
+                    <li class="menu"><a href="login_go.do">Sign in</a></li>
+                    <li class="menu"><a href="join_go.do">Register</a></li>
                     <li class="menu"><a href="#"></a></li>
                 </ul>
             </ul>

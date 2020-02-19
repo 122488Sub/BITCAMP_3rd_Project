@@ -7,6 +7,7 @@
 		<!-- <typeAlias alias="board" type="com.spring.biz.board.BoardVO"/> -->
 		<typeAlias alias="korea_address" type="com.koreigner.common.address.Korea_Address_VO"/>
 		<typeAlias alias="house_all" type="com.koreigner.biz.house.HouseAll_VO"/>
+		<typeAlias alias="infoBoard" type="com.koreigner.biz.inform.InfoBoardVO"/>
 	</typeAliases>
   
   <!-- SQL 작성파일인 매퍼 파일 위치 지정 -->
@@ -14,6 +15,7 @@
      <mapper resource="mappings/job/company-mapper.xml"/>
      <mapper resource="mappings/korea_address-mapper.xml"/>
    	 <mapper resource="mappings/house-mapper.xml"/>	
+  	 <mapper resource="mappings/infoBoard-mapper.xml"/>
   </mappers>
 </configuration>
 

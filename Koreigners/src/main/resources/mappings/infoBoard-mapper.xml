@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InfoBoardDAO">
+
+	<select id="getInfoBoardList" parameterType="infoBoard"
+		resultType="infoBoard">
+		SELECT * FROM T_INFORM_BOARD
+		WHERE 1=1 
+		<if test="searchCondition == 'INFO_TITLE' ">
+			AND INFO_TITLE LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+		<if test="searchCondition == 'INFO_CONTENT' ">
+			AND INFO_CONTENT LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+		ORDER BY INFO_IDX DESC
+	</select>
+	
+	<select id="getInfoBoard" parameterType="infoBoard"
+		resultType="infoBoard">
+		SELECT * FROM T_INFORM_BOARD WHERE info_idx = #{info_idx}	
+	</select>
+	
+	<insert id="insertInfoBoard" parameterType="infoBoard">
+		INSERT INTO T_INFORM_BOARD (INFO_IDX, INFO_TITLE, INFO_INS_USER, INFO_CONTENT)
+		VALUES ((SELECT NVL(MAX(info_idx), 0) + 1 FROM T_INFORM_BOARD), 
+		       #{info_title}, #{info_ins_user}, #{info_content})
+	</insert>
+	
+	<update id="updateInfoBoard" parameterType="infoBoard">
+		UPDATE T_INFORM_BOARD 
+		   SET TITLE = #{info_title}, 
+		       CONTENT = #{info_content} 
+		 WHERE INFO_IDX = #{info_idx}
+	</update>
+	
+	<delete id="deleteInfoBoard" parameterType="infoBoard">
+		DELETE FROM T_INFORM_BOARD WHERE INFO_IDX = #{info_idx}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
