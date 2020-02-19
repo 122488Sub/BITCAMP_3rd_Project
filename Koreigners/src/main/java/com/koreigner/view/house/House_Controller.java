@@ -98,6 +98,60 @@ public class House_Controller {
 	}
 	
 	@RequestMapping(value="house_MultiImgUpload.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String imgUpload(HouseAll_VO vo) { 
+		System.out.println("controller/house_MultiImgUpload");
+		System.out.println(vo);
+		
+		String path = this.getClass().getResource("").getPath(); 
+		path=path.substring(1,path.indexOf(".metadata"))+"Test/";
+		System.out.println(path);
+	
+
+		String fileName="";
+		
+		File dir= new File(path);
+		if(!dir.isDirectory()) {
+			dir.mkdirs();
+		}
+		
+		for(MultipartFile file : vo.getFile()) {
+			fileName = file.getOriginalFilename();
+			vo.getRoom_img_nameArr().add(fileName);
+			System.out.println("실제 파일 이름 : "+ fileName);
+			try {
+				file.transferTo(new File(path + fileName));
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
+		
+		
+		/*
+		Iterator<String> files = ;
+		while(files.hasNext()) {
+			String uploadFile = files.next();
+			
+			MultipartFile mFile = multi.getFile(uploadFile);
+			fileName = mFile.getOriginalFilename();
+			returnFileName += fileName+",";
+			System.out.println("실제 파일 이름 : "+ fileName);
+			try {
+				mFile.transferTo(new File(path + fileName));
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}*/
+	
+		//return returnFileName.substring(0, returnFileName.length()-1);
+		return "Suc";
+	}
+	
+	
+	
+	/*
+	@RequestMapping(value="house_MultiImgUpload.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String imgUpload(HttpServletRequest request, MultipartHttpServletRequest multi) { 
 		System.out.println("controller/house_MultiImgUpload");
 		
@@ -105,7 +159,9 @@ public class House_Controller {
 		//System.out.println(path);
 		System.out.println(this.getClass().getResource("").getPath());
 		System.out.println(request.getContextPath());
-		System.out.println(request.getRealPath(""));
+		String url = this.getClass().getResource("").getPath(); 
+		url=url.substring(1,url.indexOf(".metadata"))+"Test/WebContent";
+		System.out.println(url);
 	//	System.out.println("houseImgUploadPath");
 		/*String fileName="";
 		String returnFileName="";
@@ -128,10 +184,10 @@ public class House_Controller {
 			}
 		}
 	
-		return returnFileName.substring(0, returnFileName.length()-1);*/
+		return returnFileName.substring(0, returnFileName.length()-1);
 		return null;
 	}
-	
+	*/
 	@RequestMapping(value="house_insert_process.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String houseInsert_process(HouseAll_VO vo, Model model) {
 		System.out.println("controller/houseInsert_process");

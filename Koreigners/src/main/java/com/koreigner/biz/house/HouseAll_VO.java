@@ -1,6 +1,9 @@
 package com.koreigner.biz.house;
 
+import java.util.Arrays;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * [T_ROOM_BOARD]
@@ -80,6 +83,8 @@ public class HouseAll_VO {
 	int monthly_rentMin=0,monthly_rentMax=99999999;
 	List<String> room_img_nameArr;
 	List<String> room_img_ori_nameArr;
+	
+	List<MultipartFile> file;
 	
 	public HouseAll_VO() {
 		// TODO Auto-generated constructor stub
@@ -419,11 +424,12 @@ public class HouseAll_VO {
 		this.parking = parking;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "RoomAll_VO [room_idx=" + room_idx + ", mem_email=" + mem_email + ", subject=" + subject + ", do_en=" + do_en
-				+ ", gu_gun_eup_eng=" + gu_gun_eup_eng + ", address=" + address + ", address_detail=" + address_detail
-				+ ", room_reporting_date=" + room_reporting_date + ", room_img_name=" + room_img_name
+		return "HouseAll_VO [room_idx=" + room_idx + ", mem_email=" + mem_email + ", subject=" + subject + ", do_en="
+				+ do_en + ", gu_gun_eup_eng=" + gu_gun_eup_eng + ", address=" + address + ", address_detail="
+				+ address_detail + ", room_reporting_date=" + room_reporting_date + ", room_img_name=" + room_img_name
 				+ ", room_img_ori_name=" + room_img_ori_name + ", build_type=" + build_type + ", room_type=" + room_type
 				+ ", bulid_layers=" + bulid_layers + ", floor_layers=" + floor_layers + ", floor_type=" + floor_type
 				+ ", stay_num_min=" + stay_num_min + ", deposit=" + deposit + ", monthly_rent=" + monthly_rent
@@ -431,7 +437,14 @@ public class HouseAll_VO {
 				+ closet + ", desk=" + desk + ", chair=" + chair + ", bad_type=" + bad_type + ", air_conditioner="
 				+ air_conditioner + ", heating=" + heating + ", kitchen_stove=" + kitchen_stove + ", refrigerator="
 				+ refrigerator + ", laundry=" + laundry + ", pet=" + pet + ", internet=" + internet + ", wifi=" + wifi
-				+ ", elevator=" + elevator + ", sink=" + sink + ", bathroom=" + bathroom + ", parking=" + parking + "]";
+				+ ", elevator=" + elevator + ", sink=" + sink + ", bathroom=" + bathroom + ", parking=" + parking
+				+ ", gu_gun_eup_engArr=" + gu_gun_eup_engArr + ", build_typeArr=" + Arrays.toString(build_typeArr)
+				+ ", room_typeArr=" + Arrays.toString(room_typeArr) + ", bulid_layersArr="
+				+ Arrays.toString(bulid_layersArr) + ", floor_layersArr=" + Arrays.toString(floor_layersArr)
+				+ ", floor_typeArr=" + Arrays.toString(floor_typeArr) + ", depositMin=" + depositMin + ", depositMax="
+				+ depositMax + ", monthly_rentMin=" + monthly_rentMin + ", monthly_rentMax=" + monthly_rentMax
+				+ ", room_img_nameArr=" + room_img_nameArr + ", room_img_ori_nameArr=" + room_img_ori_nameArr
+				+ ", file=" + file + "]";
 	}
 
 	public String toRoomBoard() {
@@ -553,6 +566,14 @@ public class HouseAll_VO {
 
 	public void setRoom_img_ori_nameArr(List<String> room_img_ori_nameArr) {
 		this.room_img_ori_nameArr = room_img_ori_nameArr;
+	}
+
+	public List<MultipartFile> getFile() {
+		return file;
+	}
+
+	public void setFile(List<MultipartFile> file) {
+		this.file = file;
 	}
 
 	
