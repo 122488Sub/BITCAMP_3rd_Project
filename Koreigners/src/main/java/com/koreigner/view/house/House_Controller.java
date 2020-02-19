@@ -112,6 +112,7 @@ public class House_Controller {
 		
 		List<String> fileList= new ArrayList<>();
 		for(MultipartFile file : vo.getFile()) {
+			if(file.isEmpty()) {break;}
 			fileName = file.getOriginalFilename();
 			fileList.add(fileName);
 			System.out.println("실제 파일 이름 : "+ fileName);
