@@ -101,13 +101,13 @@ public class House_Controller {
 	public String imgUpload(HttpServletRequest request, MultipartHttpServletRequest multi) { 
 		System.out.println("controller/house_MultiImgUpload");
 		
-		String path = "C:\\Users\\sub\\Documents\\Git\\BITCAMP_3rd_Project\\Koreigners\\src\\main\\webapp\\WEB-INF\\views\\house\\upload\\";
-		System.out.println(path);
-		//System.out.println(this.getClass().getResource("").getPath());
-		//System.out.println(request.getContextPath());
-		//System.out.println(request.getRealPath(""));
+		//String path = "C:\\Users\\sub\\Documents\\Git\\BITCAMP_3rd_Project\\Koreigners\\src\\main\\webapp\\WEB-INF\\views\\house\\upload\\";
+		//System.out.println(path);
+		System.out.println(this.getClass().getResource("").getPath());
+		System.out.println(request.getContextPath());
+		System.out.println(request.getRealPath(""));
 	//	System.out.println("houseImgUploadPath");
-		String fileName="";
+		/*String fileName="";
 		String returnFileName="";
 		File dir= new File(path);
 		if(!dir.isDirectory()) {
@@ -128,7 +128,8 @@ public class House_Controller {
 			}
 		}
 	
-		return returnFileName.substring(0, returnFileName.length()-1);
+		return returnFileName.substring(0, returnFileName.length()-1);*/
+		return null;
 	}
 	
 	@RequestMapping(value="house_insert_process.do", method = {RequestMethod.GET, RequestMethod.POST})
