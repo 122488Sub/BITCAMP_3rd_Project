@@ -36,4 +36,10 @@ public class CompanyServiceImpl implements CompanyService{
 		List<CompanyVO> list = companyDAO.getAddrSiList(si_kor);
 		return list;
 	}
+	
+	@Override
+	public CompanyVO getCateEn(CompanyVO vo) {
+		CompanyVO outVO = companyDAO.getCateEn(vo);
+		return outVO;
+	}
 }

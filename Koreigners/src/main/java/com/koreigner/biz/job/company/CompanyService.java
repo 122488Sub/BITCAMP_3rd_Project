@@ -7,6 +7,6 @@ public interface CompanyService {
 	List<CompanyVO> getCateChild(String cate_kor);
 	List<CompanyVO> getAddrDoList();
 	List<CompanyVO> getAddrSiList(String si_kor);
-	
+	CompanyVO getCateEn(CompanyVO vo);
 	
 }

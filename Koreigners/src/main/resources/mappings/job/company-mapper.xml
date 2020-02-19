@@ -4,13 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BoardDAO">
 	<select id="getCateList" resultType="com.koreigner.biz.job.company.CompanyVO">
-		SELECT *
+		SELECT CATE_IDX, CATE_KOR CATE_PRNT_KO, CATE_PRNT CATE_PRNT_EN
 		  FROM T_JOB_CATE_MST
 		 ORDER BY CATE_IDX
 	</select>
 	
 	<select id="getCateChild" parameterType="String" resultType="com.koreigner.biz.job.company.CompanyVO">
-		SELECT CATE_CHILD_KO
+		SELECT CATE_CHILD_KO 
 		  FROM T_JOB_CATE_CHILD C,
 		       T_JOB_CATE_MST M
 	    	WHERE C.CATE_IDX = M.CATE_IDX
@@ -28,6 +28,13 @@
 		  FROM T_TEST
 		   WHERE DO_KOR = #{do_kor}
 		 ORDER BY GU_GUN_EUP_KOR
+	</select>
+	
+	
+	<select id="getCateEn" parameterType="com.koreigner.biz.job.company.CompanyVO" resultType="com.koreigner.biz.job.company.CompanyVO">
+		SELECT DISTINCT P.CATE_PRNT CATE_PRNT_EN, C.CATE_CHILD CATE_CHILD_EN
+			FROM T_JOB_CATE_MST P, T_JOB_CATE_CHILD C
+		  WHERE P.CATE_KOR = #{cate_prnt_ko}  AND C.CATE_CHILD_KO = #{cate_child_ko}
 	</select>	
 	
 </mapper>
