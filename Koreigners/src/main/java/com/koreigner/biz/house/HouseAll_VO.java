@@ -78,8 +78,8 @@ public class HouseAll_VO {
 	int [] floor_typeArr;
 	int depositMin=0,depositMax=99999999;
 	int monthly_rentMin=0,monthly_rentMax=99999999;
-	String[] room_img_nameArr;
-	String[] room_img_ori_nameArr;
+	List<String> room_img_nameArr;
+	List<String> room_img_ori_nameArr;
 	
 	public HouseAll_VO() {
 		// TODO Auto-generated constructor stub
@@ -539,22 +539,23 @@ public class HouseAll_VO {
 		this.monthly_rentMax = monthly_rentMax;
 	}
 
-	public String[] getRoom_img_nameArr() {
+	public List<String> getRoom_img_nameArr() {
 		return room_img_nameArr;
 	}
 
-	public void setRoom_img_nameArr(String[] strings) {
-		this.room_img_nameArr = strings;
+	public void setRoom_img_nameArr(List<String> room_img_nameArr) {
+		this.room_img_nameArr = room_img_nameArr;
 	}
 
-	public String[] getRoom_img_ori_nameArr() {
+	public List<String> getRoom_img_ori_nameArr() {
 		return room_img_ori_nameArr;
 	}
 
-	public void setRoom_img_ori_nameArr(String[] room_img_ori_nameArr) {
+	public void setRoom_img_ori_nameArr(List<String> room_img_ori_nameArr) {
 		this.room_img_ori_nameArr = room_img_ori_nameArr;
 	}
 
+	
 	
 	
 	

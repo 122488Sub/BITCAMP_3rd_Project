@@ -24,8 +24,8 @@ public class House_DAOMyBatis {
 		List<HouseAll_VO> list=mybatis.selectList("House_DAO.getSiList_vo", vo);
 
 		for(int i=0;i<list.size();i++) {
-			list.get(i).setRoom_img_nameArr(list.get(i).getRoom_img_name().split(","));
-			list.get(i).setRoom_img_ori_nameArr(list.get(i).getRoom_img_ori_name().split(","));
+			list.get(i).setRoom_img_nameArr(Arrays.asList(list.get(i).getRoom_img_name().split(",")));
+			list.get(i).setRoom_img_ori_nameArr(Arrays.asList(list.get(i).getRoom_img_ori_name().split(",")));
 		}
 		
 		return list;
@@ -35,8 +35,8 @@ public class House_DAOMyBatis {
 		System.out.println("===> myBatis_getDoList_vo() 실행");
 		List<HouseAll_VO> list=mybatis.selectList("House_DAO.getDoList_vo", vo);
 		for(int i=0;i<list.size();i++) {
-			list.get(i).setRoom_img_nameArr(list.get(i).getRoom_img_name().split(","));
-			list.get(i).setRoom_img_ori_nameArr(list.get(i).getRoom_img_ori_name().split(","));
+			list.get(i).setRoom_img_nameArr(Arrays.asList(list.get(i).getRoom_img_name().split(",")));
+			list.get(i).setRoom_img_ori_nameArr(Arrays.asList(list.get(i).getRoom_img_ori_name().split(",")));
 		}
 		
 		return list;
@@ -46,8 +46,8 @@ public class House_DAOMyBatis {
 		System.out.println("===> myBatis_getAllList_vo() 실행");
 		List<HouseAll_VO> list=mybatis.selectList("House_DAO.getAllList_vo");
 		for(int i=0;i<list.size();i++) {
-			list.get(i).setRoom_img_nameArr(list.get(i).getRoom_img_name().split(","));
-			list.get(i).setRoom_img_ori_nameArr(list.get(i).getRoom_img_ori_name().split(","));
+			list.get(i).setRoom_img_nameArr(Arrays.asList(list.get(i).getRoom_img_name().split(",")));
+			list.get(i).setRoom_img_ori_nameArr(Arrays.asList(list.get(i).getRoom_img_ori_name().split(",")));
 		}
 		
 		return list;
@@ -56,8 +56,8 @@ public class House_DAOMyBatis {
 	public HouseAll_VO myBatis_getHouse_vo(HouseAll_VO vo) {
 		HouseAll_VO house=mybatis.selectOne("House_DAO.getHouse_vo",vo);
 		
-		house.setRoom_img_nameArr(house.getRoom_img_name().split(","));
-		house.setRoom_img_ori_nameArr(house.getRoom_img_ori_name().split(","));
+		house.setRoom_img_nameArr(Arrays.asList(house.getRoom_img_name().split(",")));
+		house.setRoom_img_ori_nameArr(Arrays.asList(house.getRoom_img_ori_name().split(",")));
 		System.out.println(house);
 		
 		return house;
