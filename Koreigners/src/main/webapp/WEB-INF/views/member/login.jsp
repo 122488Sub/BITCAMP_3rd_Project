@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,17 +25,23 @@ $(function(){
 		       + "Now you can sign in :)");
 	}
 });
-
+/*
 //로그인
 function getLoginData() {
 	
-      var idValue = $("#mem_id").val();
-      var passwordValue = $("#mem_pw").val();
+	  var obj = new Object();
+      obj.inputId = $("#mem_id").val();
+      obj.inputPw = $("#mem_pw").val();
          
+      var jsonData = JSON.stringify(obj);
+      
       $.ajax({
          url : '/koreigner/login.do',
-         type : 'post',
-         data : {id:idValue, password:passwordValue },
+         processData : true,
+         dataType : 'json',
+         contentType:"application/json; charset=UTF-8",
+         method : 'post',
+         data : jsonData,
          success : function(data) {
             console.log("data : " + data);   
             
@@ -62,69 +67,100 @@ function getLoginData() {
             console.log("실패");
          }
       });
-}
+	   
+*/	            	
+	            	
+	            	
+    //로그인 처리 함수
+      function loginBt() {
+      	var inputId = $('#mem_id').val();
+      	var inputPw = $('#mem_pw').val();
+      	var jsonObj = {"inputId":inputId, "inputPw":inputPw};
+      	
+      	$.ajax({
+      		url : '/koreigner/login.do',
+              type : 'POST',
+              contentType: "application/json; charset=UTF-8",
+              data : JSON.stringify(jsonObj),
+              dataType : 'text',
+              success : function(resultMsg){
+              	if(resultMsg !='fail'){
+              	  	// 로그인 성공
+                    alert("Hello there! :)"+ "\n" + "Move to the MainPage");
+              		sessionStorage.setItem("tokenStr", resultMsg); //세션스토리지에 토큰 저장
+                    location.href="index.jsp";
+              	
+              	} else if(resultMsg ==='fail'){
+              		// 로그인 실패
+                    if(inputId == "" || inputPw == ""){
+                    	alert('Please fill in the blank :(');
+                    	//location.href="WEB-INF/views/member/login.jsp";
+                    	
+                   } else {
+    	            	alert("There is no such user :(" + "\n" + "Please check your Email or Password");
+    	            	$("#mem_id").val("");
+    	            	$("#mem_pw").val("");
+                	   
+                   }
+              	}
+              },
+              error: function(xhr, status, error){
+              	alert("로그인 에러");
+              }
+          });
+      }
+      
+      function test(){
+    	var token = sessionStorage.getItem("tokenStr");
+    	
+    	$.ajax({
+      		url : '/koreigner/resetPassword_go.do',
+              type : 'POST',
+              contentType: "application/json; charset=UTF-8",
+              data : JSON.stringify(token),
+              dataType : 'text',
+              success : function(data){
+              	if(data !='fail'){
+              		alert(data);
+              	}
+              },
+              error: function(xhr, status, error){
+              	alert("로그인 에러");
+              }
+          });
+      
+      }
+      
+
 </script>
 </head>
 <body>
-    <div id="wrap">
-        <section id="section1">
-        <div id="wrap">    
-            <ul id="header">
-                <a href="#"><li id="logo"> <p>Koreigner</p></li></a>
-                <ul id="menu_wrap">  
-                    <li class="menu"><a href="#">Home</a></li>
-                    <li class="menu"><a href="#">Job</a></li>
-                    <li class="menu"><a href="house_main.do">House</a></li>
-                    <li class="menu"><a href="#">Resale</a></li>
-                    <li class="menu"><a href="#">Community</a></li>
-                    <li class="menu"><a href="#"></a></li>
-                    <li class="menu"><a href="login_go.do">Sign in</a></li>
-                    <li class="menu"><a href="join_go.do">Register</a></li>
-                    <li class="menu"><a href="#"></a></li>
-                </ul>
-            </ul>
-            <div id="header_bottom">
-               <a href="#">
-                <div id="post_btn">
-                    <div id="btn_txt">
-                        Post an ad
-                    </div>
-                </div>
-                </a>            
-            </div>
-         </div>
-        </section>
-        <section id="section2">
-            section2
-            <section id="section2_content">
-				<div id="container">
-				   <h1>Login</h1>
-				   <hr><hr>
-				   
-				   <form action="login.do" method="post" onsubmit="return getLoginData()">
-				      <div>
-				         <label for="mem_id">Email</label>
-				            <input type="text" id="mem_id" name="mem_id">
-				      </div>
-				      <hr>
-				      <div>
-				         <label for="mem_pw">Password</label>
-				            <input type="password" id="mem_pw" name="mem_pw">
-				      </div>
-				      <hr>
-				      <div>         
-				         <input type="submit" id="login" value="Login">
-				      </div>
-				      <div>         
-				         <a href="resetPassword_go.do">Forgot password?</a>
-				      </div>
-				   </form>
-				   
-				</div>
-			</section>
-        </section>
-        <div id="footer">footer</div>
-    </div>
+
+	<div id="container">
+	   <h1>Login</h1>
+	   <hr><hr>
+	   
+	   <form method="post">
+	      <div>
+	         <label for="mem_id">Email</label>
+	            <input type="text" id="mem_id" name="mem_id">
+	      </div>
+	      <hr>
+	      <div>
+	         <label for="mem_pw">Password</label>
+	            <input type="password" id="mem_pw" name="mem_pw">
+	      </div>
+	      <hr>
+	      <div>         
+	         <input type="button" id="login" value="Login" onclick="loginBt()">
+	      </div>
+	      <div>         
+	         <!-- <a href="resetPassword_go.do">Forgot password?</a> -->
+	         <a onclick="test()">Forgot password?</a>
+	      </div>
+	   </form>
+	   
+	</div>
 
 </body>
 </html>

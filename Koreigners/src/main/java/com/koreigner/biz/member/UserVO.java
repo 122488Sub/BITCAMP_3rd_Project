@@ -26,6 +26,9 @@ public class UserVO {
 	//이메일 인증 권한 업데이트
 	private String auth_status;
 	
+	//JWT secretKey
+	private String secretKey;
+	
 	public UserVO() {
 		super();
 	}
@@ -189,6 +192,14 @@ public class UserVO {
 	public void setAuth_status(String auth_status) {
 		this.auth_status = auth_status;
 	}
+	public String getSecretKey() {
+		return secretKey;
+	}
+
+	public void setSecretKey(String secretKey) {
+		this.secretKey = secretKey;
+	}
+	
 
 	@Override
 	public String toString() {

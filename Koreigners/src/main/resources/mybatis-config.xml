@@ -16,6 +16,7 @@
      <mapper resource="mappings/korea_address-mapper.xml"/>
    	 <mapper resource="mappings/house-mapper.xml"/>	
   	 <mapper resource="mappings/infoBoard-mapper.xml"/>
+  	 <mapper resource="mappings/member/user-mapper.xml"/>
   </mappers>
 </configuration>
 

@@ -58,6 +58,11 @@
 			</props>
 		</property>
 	</bean>
+	
+	<!-- JWT 인증 설정 -->
+	<bean id="baseSecretPath" class="java.lang.String">
+	  <constructor-arg value="User-Path"></constructor-arg>
+	</bean>
 </beans>
 
 

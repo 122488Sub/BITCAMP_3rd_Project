@@ -21,9 +21,9 @@
 		VALUES (MEM_SQ.NEXTVAL, #{mem_cate}, #{mem_id}, #{mem_pw}, #{mem_name})	
 	</insert>
 	
-	<!-- 로그인 -->
-	<select id="userLoginCheck" parameterType="com.koreigner.biz.member.UserVO" resultType="int">
-		SELECT COUNT(*) FROM T_MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
+	<!-- 로그인 체크 -->
+	<select id="userLoginCheck" resultType="com.koreigner.biz.member.UserVO">
+		SELECT * FROM T_MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
 	</select>
 	
 	<!-- 이메일 인증(권한상태 업데이트) -->
