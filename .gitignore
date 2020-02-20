@@ -16,3 +16,5 @@ Koreigners/.project
 *.MF
 /.metadata/
 /.metadata/
+
+.recommenders

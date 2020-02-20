@@ -24,11 +24,13 @@ public class House_Controller {
 	@Autowired
 	private House_Service houseService;
 	
+	// /WEB-INF/views/
+	
 	@RequestMapping(value="house_main.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String houseMain_go() {
 		System.out.println("controller/houseMain_go");
 		
-		return "WEB-INF/views/house/house_Main.jsp";
+		return "house/house_Main.page";
 	}
 	
 	
@@ -90,7 +92,7 @@ public class House_Controller {
 	public String houseInsert_go() {
 		System.out.println("controller/houseInsert_go");
 		
-		return "WEB-INF/views/house/house_Insert.jsp";
+		return "house/house_Insert.page";
 	}
 	
 	@RequestMapping(value="house_MultiImgUpload.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -141,7 +143,7 @@ public class House_Controller {
 		}*/
 	
 		//return returnFileName.substring(0, returnFileName.length()-1);
-		return "WEB-INF/views/house/house_Main.jsp";
+		return "redirect:house/house_Main.page";
 	}
 	
 	
@@ -189,7 +191,7 @@ public class House_Controller {
 		System.out.println("controller/houseInsert_process");
 		
 	
-		return "WEB-INF/views/house/house_Main.jsp";
+		return "house/house_Main.page";
 	}
 	
 	
@@ -209,7 +211,7 @@ public class House_Controller {
 		model.addAttribute("house", house); //데이터 저장
 		System.out.println("> house : " + house);
 		
-		return "WEB-INF/views/house/house_Detail.jsp";
+		return "house/house_Detail.page";
 	}
 	
 	//------------------------------------------------------------------------------------------------

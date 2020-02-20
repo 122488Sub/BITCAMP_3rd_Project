@@ -42,4 +42,9 @@ public class CompanyServiceImpl implements CompanyService{
 		CompanyVO outVO = companyDAO.getCateEn(vo);
 		return outVO;
 	}
+	
+	@Override
+	public void comJoin(CompanyVO vo) {
+		companyDAO.comJoin(vo);
+	}
 }
