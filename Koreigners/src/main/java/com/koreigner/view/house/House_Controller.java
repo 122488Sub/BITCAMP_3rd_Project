@@ -114,7 +114,7 @@ public class House_Controller {
 		
 		List<String> fileList= new ArrayList<>();
 		for(MultipartFile file : vo.getFile()) {
-			if(file.isEmpty()) {break;}
+			if(file.isEmpty()) {System.out.println("zz");break;}
 			fileName = file.getOriginalFilename();
 			fileList.add(fileName);
 			System.out.println("실제 파일 이름 : "+ fileName);
@@ -126,24 +126,8 @@ public class House_Controller {
 		}vo.setRoom_img_nameArr(fileList);
 		
 		
-		/*
-		Iterator<String> files = ;
-		while(files.hasNext()) {
-			String uploadFile = files.next();
-			
-			MultipartFile mFile = multi.getFile(uploadFile);
-			fileName = mFile.getOriginalFilename();
-			returnFileName += fileName+",";
-			System.out.println("실제 파일 이름 : "+ fileName);
-			try {
-				mFile.transferTo(new File(path + fileName));
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		}*/
-	
-		//return returnFileName.substring(0, returnFileName.length()-1);
-		return "redirect:house/house_Main.page";
+		
+		return "redirect:house_main.do";
 	}
 	
 	

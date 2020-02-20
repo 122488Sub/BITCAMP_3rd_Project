@@ -6,17 +6,39 @@
 <meta charset="UTF-8">
 <title>글등록</title>
 <style>
+	
 	#container {
-		width: 700px;
+		width: 800px;
 		margin: 0 auto;
+		color: black;
 	}
+	
 	h1, h3, p { text-align: center; }
-	table { border-collapse: collapse; }
+	table { border-collapse: collapse;
+			margin: 0 auto;
+			width:100%;
+	 }
 	table, th, td {
 		border: 1px solid black;
-		margin: 0 auto;
+		margin: 10px auto;
 	}
-	th { background-color: orange; }
+	td {
+		text-align: left;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	#mapDisp{
+		
+		width: 100%;
+		height: 250px;
+		margin: 0 auto;
+		margin-bottom: 5px;
+	}
+	.td_div {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	th { background-color: orange; width:10%; }
 	.center { text-align: center; }
 	.border-none, .border-none td { border: none; }
 	
@@ -73,7 +95,7 @@ function sample6_execDaumPostcode() {
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById("sample6_detailAddress").value="";
             document.getElementById("sample6_detailAddress").focus();
-            document
+            
         }
     }).open();
 }
@@ -83,7 +105,7 @@ function sample6_execDaumPostcode() {
 	//form에 name 값 설정
 	function goPopup(){
 		// 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrEngUrl.do)를 호출하게 됩니다.
-	    var pop = window.open("resources/common/jusoPopup_kor.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	    var pop = window.open("resources/common/jusoPopup_eng.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	}
 	function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admCd, rnMgtSn
 							, bdKdcd, siNm, sggNm, emdNm, liNm, rn, udrtYn, buldMnnm, buldSlno, mtYn, lnbrMnnm, lnbrSlno, korAddr){
@@ -91,7 +113,12 @@ function sample6_execDaumPostcode() {
 		document.form.roadAddr.value = roadAddr;
 		document.form.addrDetail.value = addrDetail;
 		
-		document.form.allAddr.value = addrDetail + ", " + roadAddr;
+		document.form.siNm.value = siNm;
+		document.form.sggNm.value = sggNm;
+		
+		$("#mapDisp").load("/koreigner/resources/html/googleMap.jsp?location="
+		   		+roadAddr.replace(/ /gi,"%20"));
+		
 	}
 	//영문주소 팝업창 end =============================================================================================
 		
@@ -122,9 +149,9 @@ function sample6_execDaumPostcode() {
 				
 			} 
 		});
-*/			
+*/			/*
 			var formData = new FormData( $("#form")[0]);
-
+			var bool= false;
 			$.ajax({ 
 				type: "POST", 
 				enctype: 'multipart/form-data', // 필수 
@@ -133,13 +160,20 @@ function sample6_execDaumPostcode() {
 				processData: false, // 필수
 				contentType: false, // 필수 
 				cache: false, 
+				async:false,
 				success: function (result) { 
-					alert(result);
+					alert("안가"+result);
+					bool=true;
+					//location.replace("house_main.do");
+					//location.replace("house_main.do");
 				}, error: function (e) { 
-					
+					alert(e);
 				} 
 			});
-			
+			if(bool){
+				alert(bool);
+				window.location.replace("house_main.do");
+			}*/
 	}
 		
 </script>
@@ -149,19 +183,21 @@ function sample6_execDaumPostcode() {
 	<div id="container">
 	<h1>House Info</h1>
 	<hr>
-	<form action="" id="form" name="form" method="post" enctype="multipart/form-data">
+	<form action="house_MultiImgUpload.do" id="form" name="form" method="post" enctype="multipart/form-data">
 	<table>
 		<tr>
-			<th width="70">TITLE</th>
-			<td>
-				<input type="text" name="subject" size="30">
+			<th> TITLE</th>
+			<td colspan="3">
+				<div class="td_div">
+					<input type="text" name="subject" size="30">
+				</div>
 			</td>
 		</tr>
 		<tr>
 			<th>Buliding Type</th>
-			<td>
-				<div class="">
-					<select id="" tabindex="-1">
+			<td colspan="3">
+				<div class="td_div">
+					<select id="" name="build_type" tabindex="-1">
 						<option value="0">villa</option>
 						<option value="1">Goshiwon</option>
 						<option value="2">Officetel</option>
@@ -171,23 +207,64 @@ function sample6_execDaumPostcode() {
 			</td>
 		</tr>	
 		<tr>
-			<th>내용</th>
+			<th>Loctation</th>
+			<td colspan="3">
+				<div class="td_div">
+					<label style="width:30%">RoadAddress:</label>
+					<input type="text" id="roadAddr" name="address" style="width:60%"> <input type="button"  value="Search" onclick="goPopup();" style="width:10%">
+				</div>
+				<div class="td_div">
+					<label style="width:30%">DetailAddress:</label>
+					<input type="text" 	 id="addrDetail" name="address_detail" style="width:60%"> <p style="width:10%">
+				</div>
+				<input type="hidden" id="siNm" 		 name="do_en" 		   title="주소" value="">
+				<input type="hidden" id="sggNm" 	 name="gu_gun_eup_eng" title="주소" value="">
+				<div id="mapDisp" style="border: 1px solid black;"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>r</th>
 			<td>
-				<input type="text" id="roadAddr" style="width:30%"> <input type="button"  value="주소검색" onclick="goPopup();">
-				<br>
-				<input type="text" id="addrDetail" style="width:70%"><br>
-				<input type="hidden" name="address" id="allAddr" title="주소" value="">
+				<div class="td_div">
+					<label style="width:30%">RoadAddress:</label>
+					<input type="text" id="roadAddr" name="address" style="width:60%"> <input type="button"  value="Search" onclick="goPopup();" style="width:10%">
+				</div>
+				<div class="td_div">
+					<label style="width:30%">DetailAddress:</label>
+					<input type="text" 	 id="addrDetail" name="address_detail" style="width:60%"> <p style="width:10%">
+				</div>
+				<input type="hidden" id="siNm" 		 name="do_en" 		   title="주소" value="">
+				<input type="hidden" id="sggNm" 	 name="gu_gun_eup_eng" title="주소" value="">
+				<div id="mapDisp" style="border: 1px solid black;"></div>
+			</td>
+			<th>r</th>
+			<td>
+				<div class="td_div">
+					<label style="width:30%">RoadAddress:</label>
+					<input type="text" id="roadAddr" name="address" style="width:60%"> <input type="button"  value="Search" onclick="goPopup();" style="width:10%">
+				</div>
+				<div class="td_div">
+					<label style="width:30%">DetailAddress:</label>
+					<input type="text" 	 id="addrDetail" name="address_detail" style="width:60%"> <p style="width:10%">
+				</div>
+				<input type="hidden" id="siNm" 		 name="do_en" 		   title="주소" value="">
+				<input type="hidden" id="sggNm" 	 name="gu_gun_eup_eng" title="주소" value="">
+				<div id="mapDisp" style="border: 1px solid black;"></div>
 			</td>
 		</tr>
 		<tr>
 			<th>업로드</th>
 			<td>
-				<input type="file" id="file" name="file" multiple>
+				<div class="td_div">
+					<input type="file" id="file" name="file" multiple>
+				</div>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2" class="center">
-				<input type="submit" value="새글 등록" onclick="fileUpload();">
+				<div class="td_div">
+					<input type="submit" value="새글 등록" onclick="fileUpload();">
+				</div>
 			</td>
 		</tr>
 		
