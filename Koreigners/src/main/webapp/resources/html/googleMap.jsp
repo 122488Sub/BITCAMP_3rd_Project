@@ -14,8 +14,9 @@
         html,
         body,
         #google-map {
-            width: 1000px;
-            height: 500px;
+        	position: relative;
+            width: 100%;
+            height: 100%;
             margin: 0;
             padding: 0
         }

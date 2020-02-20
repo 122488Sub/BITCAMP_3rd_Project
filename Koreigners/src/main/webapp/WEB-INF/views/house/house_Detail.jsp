@@ -8,7 +8,16 @@
 <title>Insert title here</title>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<style>
+#mapDisp{
+		
+		width: 500px;
+		height: 250px;
+		margin: 0 auto;
+		margin-bottom: 5px;
+	}
 
+</style>
 </head>
 
 <body>
