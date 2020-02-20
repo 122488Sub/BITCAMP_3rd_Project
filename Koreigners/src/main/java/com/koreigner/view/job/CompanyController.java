@@ -54,32 +54,31 @@ public class CompanyController {
 	
 	@RequestMapping(value="join_conf.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String join_conf(CompanyVO vo, HttpServletRequest request) {
+		System.out.println("한글 카테 : " + vo.getCate_child_ko());
+		
 		
 		String imgName = saveImg(vo);	     					 //저장 사업자등록증 이미지 명
 		String ip = request.getRemoteAddr();  					 //ip
-		System.out.println("ip" + ip);
 		String pw = pwEncoder.encryptSHA256(vo.getMem_pw());
-		System.out.println("pw : " + pw);
-		
 		
 		CompanyVO enCate_vo = companyServiceImpl.getCateEn(vo);  //영어 카테고리 vo 생성
 		
+		
 		vo.setBusiness_img(imgName);                             //저장 사업자등록증 이미지 명 vo에 추가
 		vo.setIp(ip);											 //ip vo에 추가
+		vo.setMem_pw(pw);  										 //바이너리 비밀번호 vo에 추가
 		vo.setCate_prnt_en(enCate_vo.getCate_prnt_en());         //영어 카테고리 대분류 vo에 추가
 		vo.setCate_child_en(enCate_vo.getCate_child_en());       //영어 카테고리 소분류 vo에 추가
-		
-		//companyServiceImpl.comJoin(vo);
 		
 		System.out.println("vo.toStringAddress() : " + vo.toStringAddress());
 		System.out.println("vo.toStringCate() : " + vo.toStringCate());
 		System.out.println("vo.toString() : " + vo.toString());
 		
-		return "job/comp_join.page";
+		companyServiceImpl.comJoin(vo);
+		
+		return "login_go.do";
 		
 	}
-
-	
 	
 	
 	@RequestMapping(value="getSiJson.do", method = {RequestMethod.GET, RequestMethod.POST})

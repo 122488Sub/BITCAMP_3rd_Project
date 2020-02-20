@@ -38,6 +38,7 @@ public class CompanyDAO {
 		return outVO;
 	}
 	void comJoin(CompanyVO vo) {
+		System.out.println("dao : " + vo.toString());
 		mybatis.insert("comJoin", vo);
 	}
 }

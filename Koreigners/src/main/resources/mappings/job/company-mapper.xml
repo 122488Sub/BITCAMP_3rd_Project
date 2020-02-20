@@ -30,43 +30,78 @@
 		 ORDER BY GU_GUN_EUP_KOR
 	</select>
 	
-	<select id="getCateEn" parameterType="companyVO" resultType="companyVO">
+	<select id="getCateEn" parameterType="companyVO" resultType="companyVO">-->
 		SELECT DISTINCT P.CATE_PRNT CATE_PRNT_EN, C.CATE_CHILD CATE_CHILD_EN
 			FROM T_JOB_CATE_MST P, T_JOB_CATE_CHILD C
 		  WHERE P.CATE_KOR = #{cate_prnt_ko}  AND C.CATE_CHILD_KO = #{cate_child_ko}
 	</select>	
 	
 
-	<!-- ===================================insert================================== 
+	<!-- ===================================insert================================== -->
 	<insert id="comJoin" parameterType="companyVO">
-							회원 번호    회원 아이디  회원 비밀번호 
-		INSERT INTO T_MEMBER(MEM_IDX, MEM_ID, MEM_PW, MEM_NAME, MEM_CATE, MEM_PHONE)
- 	 	
- 	 	VALUES(1, #{mem_id},  #{mem_pw}, #{company_name}, 'c', #{company_telephone});
+		 {
+		   call
+	         declare
+	           begin
 	
+	           INSERT INTO T_MEMBER(MEM_IDX, MEM_ID, MEM_PW, MEM_NAME, MEM_CATE, MEM_PHONE, MEM_REG_IP, MEM_REG_DT)
+		  	
+		  	   VALUES(44, #{mem_id}, #{mem_pw}, #{company_name}, 'c', #{company_telephone}, #{ip}, SYSDATE);
+	                
+	           
+	           INSERT INTO T_COMPANY(ADDRESS, ADDRESS_EN, ADDR_DT_EN, ADDR_DT_KOR, 
+		  							 BUSINESS_IMG, BUSINESS_INFO, BUSINESS_NUM, 
+									 CATE_CHILD_EN, CATE_CHILD_KO, CATE_PRNT_EN, CATE_PRNT_KO,
+									 CEO_NAME, COMPANY_IDX, COMPANY_NAME, COMPANY_TELEPHONE,
+								     DOMITORY, DO_EN, DO_KOR, 
+								     EMPLOYEE_NUM, GU_GUN_EUP_ENG, GU_GUN_EUP_KOR, 
+								     HR_MANAGER, IP, 
+								     MANAGER_EMAIL, MEALS, MEM_ID, 
+						 		     REGDATE
+									 )
+				VALUES(#{address},#{address_en},#{addr_dt_en},#{addr_dt_kor},
+					   #{business_img},#{business_info},#{business_num},
+					   #{cate_child_en},#{cate_child_ko},#{cate_prnt_en},#{cate_prnt_ko},
+					   #{ceo_name},44,#{company_name},#{company_telephone},
+					   #{domitory},#{do_en},#{do_kor},
+					   #{employee_num},#{gu_gun_eup_eng},#{gu_gun_eup_kor},
+					   #{hr_manager},#{ip},
+					   #{manager_email},#{meals},#{mem_id},SYSDATE
+					   );
+	     		end
+			}
+	</insert>
 	
-	
-		INSERT INTO T_COMPANY(ADDRESS, ADDRESS_EN, ADDR_DT_EN, ADDR_DT_KOR, 
-  							  BUSINESS_IMG, BUSINESS_INFO, BUSINESS_NUM, 
-							  CATE_CHILD_EN, CATE_CHILD_KO, CATE_PRNT_EN, CATE_PRNT_KO,
-							  CEO_NAME, COMPANY_IDX, COMPANY_NAME, COMPANY_TELEPHONE,
-							  DOMITORY, DO_EN, DO_KOR, 
-							  EMPLOYEE_NUM, GU_GUN_EUP_ENG, GU_GUN_EUP_KOR, 
-							  HR_MANAGER, IP, 
-							  MANAGER_EMAIL, MEALS, MEM_ID, 
-							  REGDATE
-							  )
-		VALUES(#{address},#{address_en},#{addr_dt_en},#{addr_dt_kor},
-			   #{business_img},#{business_info},#{business_num},
-			   #{cate_child_en},#{cate_child_ko},#{cate_prnt_en},#{cate_prnt_ko},
-			   #{ceo_name},#{company_idx},#{company_name},#{company_telephone},
-			   #{domitory},#{do_en},#{do_kor},
-			   #{employee_num},#{gu_gun_eup_eng},#{gu_gun_eup_kor},
-			   #hr_manager},#{ip},
-			   #{manager_email},#{meals},#{mem_id},#{regdate}
-			   )
-	</insert>-->
-	
+	<!--{call
+         declare
+           begin
+
+           INSERT INTO T_MEMBER(MEM_IDX, MEM_ID, MEM_PW, MEM_NAME, MEM_CATE, MEM_PHONE, MEM_REG_IP, MEM_REG_DT)
+	  	
+	  	   VALUES(1, #{mem_id}, #{mem_pw}, #{company_name}, 'c', #{company_telephone}, #{ip}, SYSDATE);
+                
+           
+           INSERT INTO T_COMPANY(ADDRESS, ADDRESS_EN, ADDR_DT_EN, ADDR_DT_KOR, 
+	  							 BUSINESS_IMG, BUSINESS_INFO, BUSINESS_NUM, 
+								 CATE_CHILD_EN, CATE_CHILD_KO, CATE_PRNT_EN, CATE_PRNT_KO,
+								 CEO_NAME, COMPANY_IDX, COMPANY_NAME, COMPANY_TELEPHONE,
+							     DOMITORY, DO_EN, DO_KOR, 
+							     EMPLOYEE_NUM, GU_GUN_EUP_ENG, GU_GUN_EUP_KOR, 
+							     HR_MANAGER, IP, 
+							     MANAGER_EMAIL, MEALS, MEM_ID, 
+					 		     REGDATE
+								 )
+			VALUES(#{address},#{address_en},#{addr_dt_en},#{addr_dt_kor},
+				   #{business_img},#{business_info},#{business_num},
+				   #{cate_child_en},#{cate_child_ko},#{cate_prnt_en},#{cate_prnt_ko},
+				   #{ceo_name},#{company_idx},#{company_name},#{company_telephone},
+				   #{domitory},#{do_en},#{do_kor},
+				   #{employee_num},#{gu_gun_eup_eng},#{gu_gun_eup_kor},
+				   #{hr_manager},#{ip},
+				   #{manager_email},#{meals},#{mem_id},SYSDATE
+				   );
+     		end
+		}-->
 </mapper>
 
 
