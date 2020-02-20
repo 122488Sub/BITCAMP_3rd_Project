@@ -1,4 +1,4 @@
-
+.metadata
 Koreigners/.classpath
 
 Koreigners/.settings/
@@ -14,3 +14,7 @@ Koreigners/test-classes/
 Koreigners/.project
 
 *.MF
+/.metadata/
+/.metadata/
+
+.recommenders
