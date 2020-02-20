@@ -91,6 +91,7 @@
 		    <version>2.5.0</version>
 		</dependency>
 		
+		<!-- ===== 로그인 / 회원가입 시 사용한 라이브러리 ===== -->
 		<!-- JWT Token -->
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
 		<dependency>
@@ -112,6 +113,19 @@
 		</dependency>
 
 		<!-- 비밀번호 암호화 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>1.9</version>
+		</dependency>
+		
+		<!-- 페북으로 로그인 라이브러리 -->
+		<dependency>
+            <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-facebook</artifactId>
+            <version>2.0.3.RELEASE</version>
+        </dependency>
 			
 		<!-- =================== -->		
 		

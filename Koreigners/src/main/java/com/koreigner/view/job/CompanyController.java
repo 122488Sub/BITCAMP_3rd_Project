@@ -47,7 +47,7 @@ public class CompanyController {
 		
 		//return "WEB-INF/views/job/comp_join.jsp";
 		//       /WEB-INF/views
-		return "job/comp_join.page"; //.page suffix는 header와 footer를 함께 view 
+		return "job/login/comp_join.page"; //.page suffix는 header와 footer를 함께 view 
 	}
 	
 	

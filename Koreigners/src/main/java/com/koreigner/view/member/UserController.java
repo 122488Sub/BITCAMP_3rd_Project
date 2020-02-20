@@ -1,5 +1,7 @@
 package com.koreigner.view.member;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -46,7 +48,7 @@ public class UserController {
 		
 		return "/member/resetPassword.page";
 	}
-	
+
 	// 아이디 중복 체크 컨트롤러
 	@RequestMapping(value="/idCheck.do", method=RequestMethod.GET)
 	@ResponseBody
@@ -103,13 +105,18 @@ public class UserController {
 	 * @return entity 반환
 	 */
 	@RequestMapping(value="/login.do", method=RequestMethod.POST)
-	@ResponseBody
 	public ResponseEntity<String> postLogin(HttpServletRequest request, @RequestBody Map<String, Object> jsonMap){
+		
 		ResponseEntity<String> entity = null;
-		String resultMsg= "fail";
-		if(userService.checkLogin((String)jsonMap.get("inputId"), (String)jsonMap.get("inputPw"))){
-			resultMsg= (String)userService.createToken((String)jsonMap.get("inputId"));
-		}
+		String resultMsg = "fail";
+		
+		String inputId = (String)jsonMap.get("inputId");
+		String inputPw = (String)jsonMap.get("inputPw");
+		
+		if(userService.checkLogin(inputId, inputPw)) { //유저가 존재할 경우
+			resultMsg = userService.createToken(inputId); //토큰 생성
+			request.getSession().setAttribute("tokenStr", resultMsg);
+		}	
 		entity = new ResponseEntity<String>(resultMsg, HttpStatus.OK);
 		return entity;
 	}
@@ -147,5 +154,31 @@ public class UserController {
 		userService.resetPassword(vo);
 		
 		return "/member/login.page";
+	}
+	
+	//=================================================================
+	//토큰 검증과 아이디 출력
+	@RequestMapping(value="/validToken.do")
+	@ResponseBody
+	public String TokenNId(Model model, @RequestBody Map<String, Object> jsonMap){
+		
+		String tokenStr = (String)jsonMap.get("tokenStr");
+		
+				
+		if(tokenStr!= null){ //토큰이 발급되었을 경우(로그인을 한 경우)
+			
+		Map<String, Object> tokenPayload = userService.getTokenPayload(tokenStr);
+			
+		String memId = (String)tokenPayload.get("aud"); //토큰대상자의 아이디
+			
+			String tokenValidMsg = userService.validToken(tokenStr, memId);
+						
+			if(tokenValidMsg.equals("Pass")){ //토큰 검증을 마친 경우에만 토큰 정보를 출력한다.
+				model.addAttribute("tokenAud", memId);
+			}
+		}
+		else{model.addAttribute("loginId", "no-login");} //로그인 되어 있지 않은 경우
+		
+		return "index.jsp";
 	}
 }

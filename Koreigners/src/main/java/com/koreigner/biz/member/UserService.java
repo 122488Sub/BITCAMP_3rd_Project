@@ -20,7 +20,7 @@ public interface UserService {
 	boolean checkLogin(String mem_id, String mem_pw);
 
 	//JWT 토큰 생성
-	Object createToken(String string);
+	String createToken(String string);
 	
 	//JWT 토큰 검증
 	String validToken(String tokenStr, String userId);

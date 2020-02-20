@@ -146,7 +146,7 @@ public class UserServiceImpl implements UserService {
         sendMail.setSubject("[KOREIGNERS 비밀번호 재설정 안내]");
         sendMail.setText(new StringBuffer()
         		.append("<h1>비밀번호 재설정</h1>")
-        		.append("<a href='http://localhost:8080/biz/resetPassword_2.jsp?mem_id=")
+        		.append("<a href='http://localhost:8080/biz/resetPassword_2.do?mem_id=")
         		.append(email)
         		.append("' target='_blank'>비밀번호 변경</a>")
         		.toString());
@@ -189,7 +189,7 @@ public class UserServiceImpl implements UserService {
 	
 	private final String TOKEN_FILE_NAME = "token_key"; //토큰 파일 이름
 	
-	@Resource(name="baseSecretPath") //기본 토큰파일이 저장될 경로
+	@Resource(name="baseSecretPath") //기본 토큰파일이 저장될 경로(applicationContext.xml에 빈 설정함)
 	private String baseSecretPath;
 
 	/**
@@ -198,7 +198,7 @@ public class UserServiceImpl implements UserService {
 	 * @return 토큰값을 반환한다.
 	 */
 	@Override
-	public Object createToken(String tokenUserId) {
+	public String createToken(String tokenUserId) {
 		String tokenStr = ""; //토큰 값이 저장될 변수
 		
 		String issure = "Jeyi"; //토큰 발급자

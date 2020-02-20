@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,8 +25,15 @@
                     <li class="menu"><a href="#">Resale</a></li>
                     <li class="menu"><a href="getInfoBoardList.do">Infomation</a></li>
                     <li class="menu"><a href="#"></a></li>
-                    <li class="menu"><a href="login_go.do">Sign in</a></li>
-                    <li class="menu"><a href="join_go.do">Register</a></li>
+               		<c:if test="${empty tokenStr }">
+	                    <li class="menu"><a href="login_go.do">Sign in</a></li>
+                    	<li class="menu"><a href="join_go.do">Register</a></li>
+                    </c:if>
+                    <c:if test="${not empty tokenStr }">
+                    	<li class="menu"><a href="logout_go.do">Log out</a></li>
+                    	<li class="menu"><a href="mypage_go.do">MyPage</a></li>
+                    </c:if>
+                    
                     <li class="menu"><a href="#"></a></li>
                 </ul>
             </ul>
