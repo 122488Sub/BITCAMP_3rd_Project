@@ -31,6 +31,10 @@ public class UserVO {
 	private String tokenStr;
 	private String secretKey;
 	
+	//로그아웃
+	private String logout;
+	
+	
 	public UserVO() {
 		super();
 	}
@@ -217,6 +221,14 @@ public class UserVO {
 
 	public void setTokenStr(String tokenStr) {
 		this.tokenStr = tokenStr;
+	}
+
+	public String getLogout() {
+		return logout;
+	}
+
+	public void setLogout(String logout) {
+		this.logout = logout;
 	}
 
 	@Override

@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 	
 	
 	
-	// 중복 아이디(이메일) 체크
+	//회원가입중 client가 입력한 email이 db에 이미 등록되어 있는지 중복 체크 한다.
 	@Override
 	public int userIdCheck(UserVO vo) {
 		
@@ -64,7 +64,7 @@ public class UserServiceImpl implements UserService {
 		return idCnt;
 	}
 	
-	// 중복 닉네임 체크
+	//회원가입중 client가 입력한 NickName이 db에 이미 등록되어 있는지 중복 체크 한다.
 	@Override
 	public int userNickCheck(UserVO vo) {
 		
@@ -116,7 +116,7 @@ public class UserServiceImpl implements UserService {
 		userDAO.joinUser(vo);		
 	}
 	
-	// 권한 업데이트(가입승인)
+	//회원가입 후 이메일인증 완료하면 auth 권한 상승
 	@Override
 	public void updateAuthstatus(UserVO vo) {
 		userDAO.updateAuthstatus(vo);		

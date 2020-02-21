@@ -27,11 +27,20 @@ public class UserController {
 
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/login_go.do")
-	public String moveToLogin(Model model) {
-		
-		//이메일 인증 후 이동
+	public String moveToLogin(Model model, UserVO vo) {
+		//기본 로그인 페이지 이동 시
 		model.addAttribute("auth_check", "0");
-
+		
+		String logout = vo.getLogout();
+		System.out.println("logout: " + logout);
+		
+		if(logout != null && logout.equals("1")) {
+			//로그아웃 후 이동 시
+			model.addAttribute("logout_check", "1");
+		} else { //처음 페이지 이동 시
+			model.addAttribute("logout_check", "0");
+		}
+		
 		return "/member/login.page";
 	}
 
@@ -70,7 +79,7 @@ public class UserController {
 		UserVO vo = new UserVO();
 		vo.setMem_name(mem_name);
 
-		int nameCnt = userService.userNameCheck(vo);
+		int nameCnt = userService.userNickCheck(vo);
 		System.out.println("nameCnt: " + nameCnt);
 
 		return nameCnt;
@@ -105,7 +114,7 @@ public class UserController {
 	 * @return entity 반환
 	 */
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public ResponseEntity<String> postLogin(HttpServletRequest request, @RequestBody Map<String, Object> jsonMap) {
+	public ResponseEntity<String> postLogin(HttpServletRequest request, @RequestBody Map<String, Object> jsonMap, Model model) {
 
 		ResponseEntity<String> entity = null;
 		String resultMsg = "fail";
@@ -115,9 +124,9 @@ public class UserController {
 
 		if (userService.checkLogin(inputId, inputPw)) { // 유저가 존재할 경우
 			resultMsg = userService.createToken(inputId); // 토큰 생성
-			// request.getSession().setAttribute("tokenStr", resultMsg);
 		}
 		entity = new ResponseEntity<String>(resultMsg, HttpStatus.OK);
+		
 		return entity;
 	}
 
@@ -146,7 +155,7 @@ public class UserController {
 			//model.addAttribute("loginId", "no-login");
 		} 
 		*/ 
-		return "WEB-INF/views/member/mypage/p_profile.jsp";
+		return "member/mypage/p_profile.page";
 	}
 
 	/*
