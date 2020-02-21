@@ -3,10 +3,10 @@
 <section id="section1">
 	<div id="wrap">    
 	   <ul id="header">
-	       <a href="#"><li id="logo"> <p>Koreigner</p></li></a>
+	       <a href="main.do"><li id="logo"> <p>Koreigner</p></li></a>
 	       <ul id="menu_wrap">  
-	           <li class="menu"><a href="#">Home</a></li>
-	           <li class="menu"><a href="hireWrite_go.do">Job</a></li>
+	           <li class="menu"><a href="main.do">Home</a></li>
+	           <li class="menu"><a href="hireList_go.do">Job</a></li>
 	           <li class="menu"><a href="house_main.do">House</a></li>
 	           <li class="menu"><a href="#">Resale</a></li>
 	           <li class="menu"><a href="getInfoBoardList.do">Community</a></li>

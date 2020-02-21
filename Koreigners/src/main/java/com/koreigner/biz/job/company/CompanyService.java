@@ -3,6 +3,8 @@ package com.koreigner.biz.job.company;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.koreigner.biz.job.hire.HireVO;
 
 public interface CompanyService {
@@ -11,8 +13,8 @@ public interface CompanyService {
 	List<CompanyVO> getAddrDoList();
 	List<CompanyVO> getAddrSiList(String si_kor);
 	CompanyVO getCateEn(Map<String, String> map);
-	void comJoin(CompanyVO vo);
-	void insertHire(HireVO vo);
+	void comJoin(CompanyVO vo, HttpServletRequest request);
+	
 	
 	
 }

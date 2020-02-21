@@ -49,34 +49,13 @@ public class CompanyController {
 		return "job/signin/comp_join.page"; //.page suffix는 header와 footer를 함께 view 
 	}
 	
-	
-	
 	@RequestMapping(value="join_conf.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String join_conf(CompanyVO vo, HttpServletRequest request) {
 		
-		Map<String, String> map = new HashMap<>();
-		map.put(vo.getCate_prnt_ko(), vo.getCate_child_ko());
-		
-		CompanyVO enCate_vo = companyServiceImpl.getCateEn(map);      //영어 카테고리 vo 생성
-		String imgName = jobService.saveImg(vo.getBusiness_file());	  //저장 사업자등록증 이미지 명
-		String ip = request.getRemoteAddr();  					      //ip
-		String pw = jobService.pwEncoder(vo.getMem_pw());             //비밀번호 바인드 형태로 인코딩
-		
-		vo.setBusiness_img(imgName);                             	  //저장 사업자등록증 이미지 명 vo에 추가
-		vo.setIp(ip);											 	  //ip vo에 추가
-		vo.setMem_pw(pw);  											  //바이너리 비밀번호 vo에 추가
-		vo.setCate_prnt_en(enCate_vo.getCate_prnt_en());         	  //영어 카테고리 대분류 vo에 추가
-		vo.setCate_child_en(enCate_vo.getCate_child_en());       	  //영어 카테고리 소분류 vo에 추가
-		
-		System.out.println("vo.toStringAddress() : " + vo.toStringAddress());
-		System.out.println("vo.toStringCate() : " + vo.toStringCate());
-		System.out.println("vo.toString() : " + vo.toString());
-		
-		companyServiceImpl.comJoin(vo);
+		companyServiceImpl.comJoin(vo, request);
 		return "login_go.do";
 		
 	}
-	
 	
 	@RequestMapping(value="getSiJson.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
@@ -107,7 +86,6 @@ public class CompanyController {
 			i++;
 		}
 		return jobCateMap;
-		
 	}
 	
 	//페이지 전환 시 addrDoMap 맵 객체 전달 > 직무 카테고리

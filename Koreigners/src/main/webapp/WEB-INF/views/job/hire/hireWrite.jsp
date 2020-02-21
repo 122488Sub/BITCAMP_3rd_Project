@@ -9,8 +9,8 @@
 <title>Insert title here</title>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <link href="resources/css/job/hireWrite.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/js/hireWrite.js"></script>
 <script type="text/javascript" src="resources/js/daumAddr.js"></script>
 </head>
@@ -24,7 +24,6 @@ board_idx, hit, hire_idx, company_idx, mem_id, ,   , , , , ,
 , , , , , , regdate, ip, b_status,  
 
 카테고리
-
 주소
 
 -->
@@ -32,7 +31,6 @@ board_idx, hit, hire_idx, company_idx, mem_id, ,   , , , , ,
 
 <form action="hirePost.do" method="post">
 
- 
 <!-- 근무형태 work_type -->
 	<label>근무 형태 : </label>
 	<input type="radio" name="work_type" id="work_type" value="정규직">정규직
@@ -56,7 +54,7 @@ board_idx, hit, hire_idx, company_idx, mem_id, ,   , , , , ,
 	<select name="cate_child_ko" title="직종선택"  id="cate_child_ko">
 	</select><br><br>
 	
-<!-- 근무지역 address -->		
+	<!-- 근무지역 address -->		
 	<label>근무지역 : </label>
 	<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br><br>
     <label>한글주소 : </label><input type="text" id="address" name="address" style="width: 10%;" value="" placeholder="주소"><br><br>

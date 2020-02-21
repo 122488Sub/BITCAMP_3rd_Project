@@ -46,9 +46,7 @@ public class CompanyDAO {
 		mybatis.insert("comJoin", vo);
 	}
 
-	void insertHire(HireVO vo) {
-		mybatis.insert("insertHire", vo);
-	}
+	
 	
 	
 }

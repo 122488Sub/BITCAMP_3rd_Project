@@ -1,5 +1,6 @@
 package com.koreigner.view.job;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreigner.biz.job.company.CompanyServiceImpl;
 import com.koreigner.biz.job.company.CompanyVO;
@@ -28,7 +31,26 @@ public class HireController {
 	@Autowired
 	JobService jobService;
 	
+	//채용 게시판으로 이동
+	@RequestMapping(value="hireList_go.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String hireList() {
+		
+		
+		return "job/hire/hireList.page";
+	}
+
+	@RequestMapping(value="hireListData.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public List<HireVO> hireListDate() {
+		
+		List<HireVO> hireList = hireServiceImpl.getHireList(); 
+		
+		System.out.println("hireList : " + hireList);
+		return hireList;
+	}
 	
+	
+	//채용 게시글쓰기로 이동
 	@RequestMapping(value="hireWrite_go.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String hireWrite() {
 		return "job/hire/hireWrite.page";
@@ -37,23 +59,7 @@ public class HireController {
 	@RequestMapping(value="hirePost.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String hirePost(HireVO vo, HttpServletRequest request) {
 		
-		String ip = request.getRemoteAddr();  	//ip
-		String insurance = jobService.insuranceInfo(vo.getInsuranceInfo()); //보험 유무 데이터 ex) 0111
-		
-		Map<String, String> map = new HashMap<>();
-		map.put("cate_prnt_ko", vo.getCate_prnt_ko());
-		map.put("cate_child_ko", vo.getCate_child_ko());
-		
-		
-		CompanyVO enCate_vo = companyServiceImpl.getCateEn(map); //영어 카테고리 vo 생성
-		vo.setInsurance(insurance);                              //보험정보 vo에 추가
-		vo.setIp(ip);											 //ip vo에 추가
-		vo.setCate_prnt_en(enCate_vo.getCate_prnt_en());         //영어 카테고리 대분류 vo에 추가
-		vo.setCate_child_en(enCate_vo.getCate_child_en());       //영어 카테고리 소분류 vo에 추가
-		
-		
-		companyServiceImpl.insertHire(vo);
-		
+		hireServiceImpl.insertHire(vo, request);
 		
 		System.out.println("vo.toStringAddr() : " + vo.toStringAddr());
 		System.out.println("vo.toStringCate() : " + vo.toStringCate());
