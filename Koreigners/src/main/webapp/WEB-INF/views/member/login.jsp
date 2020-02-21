@@ -88,13 +88,13 @@ function getLoginData() {
               	  	// 로그인 성공
                     alert("Hello there! :)"+ "\n" + "Move to the MainPage");
               		sessionStorage.setItem("tokenStr", resultMsg); //세션스토리지에 토큰 저장
-                    location.href="index.jsp";
+                    
+              		location.href='/koreigner/index.jsp';
               	
               	} else if(resultMsg ==='fail'){
               		// 로그인 실패
                     if(inputId == "" || inputPw == ""){
                     	alert('Please fill in the blank :(');
-                    	//location.href="WEB-INF/views/member/login.jsp";
                     	
                    } else {
     	            	alert("There is no such user :(" + "\n" + "Please check your Email or Password");
@@ -104,32 +104,13 @@ function getLoginData() {
                    }
               	}
               },
-              error: function(xhr, status, error){
+              error: function(){
               	alert("로그인 에러");
               }
           });
       }
       
-      function test(){
-    	var token = sessionStorage.getItem("tokenStr");
-    	
-    	$.ajax({
-      		url : '/koreigner/resetPassword_go.do',
-              type : 'POST',
-              contentType: "application/json; charset=UTF-8",
-              data : JSON.stringify(token),
-              dataType : 'text',
-              success : function(data){
-              	if(data !='fail'){
-              		alert(data);
-              	}
-              },
-              error: function(xhr, status, error){
-              	alert("로그인 에러");
-              }
-          });
-      
-      }
+     
       
 
 </script>
@@ -155,8 +136,7 @@ function getLoginData() {
 	         <input type="button" id="login" value="Login" onclick="loginBt()">
 	      </div>
 	      <div>         
-	         <!-- <a href="resetPassword_go.do">Forgot password?</a> -->
-	         <a onclick="test()">Forgot password?</a>
+			<a href="resetPassword_go.do">Forgot password?</a>
 	      </div>
 	   </form>
 	   
