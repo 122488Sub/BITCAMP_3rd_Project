@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.koreigner.biz.job.hire.HireVO;
+
 @Service
 public class CompanyServiceImpl implements CompanyService{
 
@@ -47,5 +49,10 @@ public class CompanyServiceImpl implements CompanyService{
 	@Override
 	public void comJoin(CompanyVO vo) {
 		companyDAO.comJoin(vo);
+	}
+	@Override
+	public void insertHire(HireVO vo) {
+		companyDAO.insertHire(vo);
+		
 	}
 }

@@ -6,7 +6,6 @@ import java.util.List;
 public class HireVO {
 	private int board_idx;      		    //게시판 정보   default 2
 	private int hire_idx;      				//채용게시판 번호
-	private int company_idx;                //회사 번호
 	private int salary_min;                 //월급 최소
 	private int salary_max;                 //월급 최대
 	private int hire_number;                //채용 인원
@@ -34,7 +33,8 @@ public class HireVO {
 	private String domitory;                //기숙사 제공 여부
 	private String meals;                   //식사
 	private String work_detail;             //직무 내용
-	private List<String> insurance;         //보험 유무     의료보험/산재보험/고용보험/국민연금보험
+	private String insurance;         //보험 유무     의료보험/산재보험/고용보험/국민연금보험
+	private List<String> insuranceInfo;         //보험 유무     의료보험/산재보험/고용보험/국민연금보험
 	private String apply_way;               //지원방법(전형방법)
 	private String b_status;                //게시판 상태(활성화/비활성화)
 	private String prepare_doc;             //제출 서류 / 준비물
@@ -52,6 +52,15 @@ public class HireVO {
 	
 	
 	
+	public List<String> getInsuranceInfo() {
+		return insuranceInfo;
+	}
+	public void setInsuranceInfo(List<String> insuranceInfo) {
+		this.insuranceInfo = insuranceInfo;
+	}
+	public void setInsurance(String insurance) {
+		this.insurance = insurance;
+	}
 	public String getAddr_dt_kor() {
 		return addr_dt_kor;
 	}
@@ -123,12 +132,6 @@ public class HireVO {
 	}
 	public void setHire_idx(int hire_idx) {
 		this.hire_idx = hire_idx;
-	}
-	public int getCompany_idx() {
-		return company_idx;
-	}
-	public void setCompany_idx(int company_idx) {
-		this.company_idx = company_idx;
 	}
 	public int getSalary_min() {
 		return salary_min;
@@ -256,12 +259,6 @@ public class HireVO {
 	public void setWork_detail(String work_detail) {
 		this.work_detail = work_detail;
 	}
-	public List<String> getInsurance() {
-		return insurance;
-	}
-	public void setInsurance(List<String> insurance) {
-		this.insurance = insurance;
-	}
 	public String getApply_way() {
 		return apply_way;
 	}
@@ -312,23 +309,28 @@ public class HireVO {
 		return "HireVO [cate_prnt_ko=" + cate_prnt_ko + ", cate_child_ko=" + cate_child_ko + ", cate_prnt_en="
 				+ cate_prnt_en + ", cate_child_en=" + cate_child_en + "]";
 	}
-	
+
+
+
+
+
 	@Override
 	public String toString() {
-		return "HireVO [board_idx=" + board_idx + ", hire_idx=" + hire_idx + ", company_idx=" + company_idx
-				+ ", salary_min=" + salary_min + ", salary_max=" + salary_max + ", hire_number=" + hire_number
-				+ ", hire_age_min=" + hire_age_min + ", hire_age_max=" + hire_age_max + ", hit=" + hit + ", mem_id="
-				+ mem_id + ", work_type=" + work_type + ", title=" + title + ", do_en=" + do_en + ", gu_gun_eup_eng="
-				+ gu_gun_eup_eng + ", address_en=" + address_en + ", do_kor=" + do_kor + ", gu_gun_eup_kor="
-				+ gu_gun_eup_kor + ", address=" + address + ", addr_dt_kor=" + addr_dt_kor + ", addr_dt_en="
-				+ addr_dt_en + ", payment_detail=" + payment_detail + ", payment_codition=" + payment_codition
-				+ ", education=" + education + ", experience=" + experience + ", major=" + major + ", prefer_skills="
-				+ prefer_skills + ", foreign_language=" + foreign_language + ", domitory=" + domitory + ", meals="
-				+ meals + ", work_detail=" + work_detail + ", insurance=" + insurance + ", apply_way=" + apply_way
-				+ ", b_status=" + b_status + ", prepare_doc=" + prepare_doc + ", work_time=" + work_time
-				+ ", cate_prnt_ko=" + cate_prnt_ko + ", cate_child_ko=" + cate_child_ko + ", cate_prnt_en="
-				+ cate_prnt_en + ", cate_child_en=" + cate_child_en + ", ip=" + ip + ", regdate=" + regdate + "]";
+		return "HireVO [board_idx=" + board_idx + ", hire_idx=" + hire_idx + ", salary_min=" + salary_min
+				+ ", salary_max=" + salary_max + ", hire_number=" + hire_number + ", hire_age_min=" + hire_age_min
+				+ ", hire_age_max=" + hire_age_max + ", hit=" + hit + ", mem_id=" + mem_id + ", work_type=" + work_type
+				+ ", title=" + title + ", do_en=" + do_en + ", gu_gun_eup_eng=" + gu_gun_eup_eng + ", address_en="
+				+ address_en + ", do_kor=" + do_kor + ", gu_gun_eup_kor=" + gu_gun_eup_kor + ", address=" + address
+				+ ", addr_dt_kor=" + addr_dt_kor + ", addr_dt_en=" + addr_dt_en + ", payment_detail=" + payment_detail
+				+ ", payment_codition=" + payment_codition + ", education=" + education + ", experience=" + experience
+				+ ", major=" + major + ", prefer_skills=" + prefer_skills + ", foreign_language=" + foreign_language
+				+ ", domitory=" + domitory + ", meals=" + meals + ", work_detail=" + work_detail + ", insurance="
+				+ insurance + ", insuranceInfo=" + insuranceInfo + ", apply_way=" + apply_way + ", b_status=" + b_status
+				+ ", prepare_doc=" + prepare_doc + ", work_time=" + work_time + ", cate_prnt_ko=" + cate_prnt_ko
+				+ ", cate_child_ko=" + cate_child_ko + ", cate_prnt_en=" + cate_prnt_en + ", cate_child_en="
+				+ cate_child_en + ", ip=" + ip + ", regdate=" + regdate + "]";
 	}
+	
 	
 	
 	

@@ -7,6 +7,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.koreigner.biz.job.hire.HireVO;
+
 @Repository
 public class CompanyDAO {
 	@Autowired
@@ -38,8 +40,15 @@ public class CompanyDAO {
 		System.out.println(outVO.toStringCate());
 		return outVO;
 	}
+	
 	void comJoin(CompanyVO vo) {
 		System.out.println("dao : " + vo.toString());
 		mybatis.insert("comJoin", vo);
 	}
+
+	void insertHire(HireVO vo) {
+		mybatis.insert("insertHire", vo);
+	}
+	
+	
 }
