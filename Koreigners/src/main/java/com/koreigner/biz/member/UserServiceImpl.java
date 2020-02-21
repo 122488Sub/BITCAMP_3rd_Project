@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -67,9 +66,9 @@ public class UserServiceImpl implements UserService {
 	
 	// 중복 닉네임 체크
 	@Override
-	public int userNameCheck(UserVO vo) {
+	public int userNickCheck(UserVO vo) {
 		
-		int nameCnt = userDAO.userNameCheck(vo);
+		int nameCnt = userDAO.userNickCheck(vo);
 		System.out.println("nameCnt: " + nameCnt);
 
 		return nameCnt;

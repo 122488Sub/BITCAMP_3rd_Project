@@ -49,6 +49,7 @@
 #section2_content {
     width: 80%;
     height: auto;
+    color: black;
     display: inline-block;
     border : 1px solid black;
 }

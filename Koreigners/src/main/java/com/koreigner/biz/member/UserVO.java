@@ -7,6 +7,7 @@ public class UserVO {
 	private String mem_id;
 	private String mem_pw;
 	private String mem_name;
+	private String mem_nick;
 	private String mem_cate;
 	private String mem_phone;
 	private String mem_birth;
@@ -26,7 +27,8 @@ public class UserVO {
 	//이메일 인증 권한 업데이트
 	private String auth_status;
 	
-	//JWT secretKey
+	//JWT
+	private String tokenStr;
 	private String secretKey;
 	
 	public UserVO() {
@@ -63,6 +65,14 @@ public class UserVO {
 
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
+	}
+
+	public String getMem_nick() {
+		return mem_nick;
+	}
+
+	public void setMem_nick(String mem_nick) {
+		this.mem_nick = mem_nick;
 	}
 
 	public String getMem_cate() {
@@ -201,16 +211,26 @@ public class UserVO {
 	}
 	
 
+	public String getTokenStr() {
+		return tokenStr;
+	}
+
+	public void setTokenStr(String tokenStr) {
+		this.tokenStr = tokenStr;
+	}
+
 	@Override
 	public String toString() {
 		return "UserVO [mem_idx=" + mem_idx + ", mem_id=" + mem_id + ", mem_pw=" + mem_pw + ", mem_name=" + mem_name
-				+ ", mem_cate=" + mem_cate + ", mem_phone=" + mem_phone + ", mem_birth=" + mem_birth + ", mem_gender="
-				+ mem_gender + ", mem_image=" + mem_image + ", mem_address=" + mem_address + ", mem_nationality="
-				+ mem_nationality + ", mem_reg_ip=" + mem_reg_ip + ", mem_reg_dt=" + mem_reg_dt + ", mem_mod_dt="
-				+ mem_mod_dt + ", mem_last_login=" + mem_last_login + ", mem_leave_fl=" + mem_leave_fl
+				+ ", mem_nick=" + mem_nick + ", mem_cate=" + mem_cate + ", mem_phone=" + mem_phone + ", mem_birth="
+				+ mem_birth + ", mem_gender=" + mem_gender + ", mem_image=" + mem_image + ", mem_address=" + mem_address
+				+ ", mem_nationality=" + mem_nationality + ", mem_reg_ip=" + mem_reg_ip + ", mem_reg_dt=" + mem_reg_dt
+				+ ", mem_mod_dt=" + mem_mod_dt + ", mem_last_login=" + mem_last_login + ", mem_leave_fl=" + mem_leave_fl
 				+ ", mem_leave_dt=" + mem_leave_dt + ", mailling_fl=" + mailling_fl + ", sms_fl=" + sms_fl
-				+ ", auth_status=" + auth_status + "]";
+				+ ", auth_status=" + auth_status + ", tokenStr=" + tokenStr + ", secretKey=" + secretKey + "]";
 	}
+
+
 	
 	
 
