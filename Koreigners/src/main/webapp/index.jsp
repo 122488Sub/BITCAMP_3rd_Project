@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +10,38 @@
     <style type="text/css">
     	#content {height: 775px;}
     </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(function() {
+	if(sessionStorage.getItem("tokenStr") != null){
+	    $("#menu_wrap").append("<li class='menu'><a href='javascript:logOut();'>Log out</a></li>");
+	    $("#menu_wrap").append("<li class='menu'><a href='javascript:myPage();'>MyPage</a></li>");  
+	} else {
+		$("#menu_wrap").append("<li class='menu'><a href='login_go.do'>Sign in</a></li>");
+	    $("#menu_wrap").append("<li class='menu'><a href='join_go.do'>Register</a></li>"); 
+	}
+	
+});
+
+ function myPage(){
+	var frm = document.token;
+	
+	frm.tokenStr.value = sessionStorage.getItem("tokenStr");
+	frm.action = "myPage_go.do";
+	frm.method = "post";
+	frm.submit();
+ }
+ 
+ function logOut(){
+	 alert("로그아웃되었습니다.\n" + "메인페이지로 이동합니다.")
+	 sessionStorage.clear();
+	 location.href = "/koreigner/index.jsp";
+ }
+ 
+</script>
 </head>
 <body>
+
     <div id="wrap">
         <section id="section1">
         <div id="wrap">    
@@ -24,16 +53,6 @@
                     <li class="menu"><a href="house_main.do">House</a></li>
                     <li class="menu"><a href="#">Resale</a></li>
                     <li class="menu"><a href="getInfoBoardList.do">Infomation</a></li>
-                    <li class="menu"><a href="#"></a></li>
-               		<c:if test="${empty tokenStr }">
-	                    <li class="menu"><a href="login_go.do">Sign in</a></li>
-                    	<li class="menu"><a href="join_go.do">Register</a></li>
-                    </c:if>
-                    <c:if test="${not empty tokenStr }">
-                    	<li class="menu"><a href="logout_go.do">Log out</a></li>
-                    	<li class="menu"><a href="mypage_go.do">MyPage</a></li>
-                    </c:if>
-                    
                     <li class="menu"><a href="#"></a></li>
                 </ul>
             </ul>
@@ -57,5 +76,10 @@
         </section>
         <div id="footer">footer</div>
     </div>
+    
+    
+    <form name="token">
+    	<input type="hidden" name="tokenStr"/>
+    </form>
 </body>
 </html>
