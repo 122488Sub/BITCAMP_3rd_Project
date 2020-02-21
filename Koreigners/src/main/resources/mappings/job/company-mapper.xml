@@ -85,13 +85,7 @@
 	     		end
 			}
 	</insert>
-	
-	
-	
-	<insert id="insertHire" parameterType="hireVO">
-	
-	
-	</insert>
+
 <!-- CompanyVO insert End -->	
 	
 </mapper>

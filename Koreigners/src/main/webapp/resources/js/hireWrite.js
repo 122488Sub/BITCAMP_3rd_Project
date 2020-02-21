@@ -80,6 +80,8 @@ var cate_prnt_ko = "";
 			var selectBox1 = document.getElementById("selectBox1");
 			console.log(this.value);
 			cate_prnt_ko = this.value;
+			var item = document.getElementById("selectBox1").value;
+			console.log(this.item)
 			
 			$.ajax("getCateJson.do", {
 				type: "get",

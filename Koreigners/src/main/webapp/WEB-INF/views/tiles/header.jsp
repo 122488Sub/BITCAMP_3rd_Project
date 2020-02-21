@@ -3,7 +3,7 @@
 <section id="section1">
 	<div id="wrap">    
 	   <ul id="header">
-	       <a href="#"><li id="logo"> <p>Koreigner</p></li></a>
+	       <a href="main.do"><li id="logo"> <p>Koreigner</p></li></a>
 	       <ul id="menu_wrap">  
 	           <li class="menu"><a href="#">Home</a></li>
                     <li class="menu"><a href="#">Job</a></li>
