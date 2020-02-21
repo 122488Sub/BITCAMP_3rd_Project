@@ -1,6 +1,7 @@
 package com.koreigner.biz.job.company;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,8 +39,8 @@ public class CompanyServiceImpl implements CompanyService{
 	}
 	
 	@Override
-	public CompanyVO getCateEn(CompanyVO vo) {
-		CompanyVO outVO = companyDAO.getCateEn(vo);
+	public CompanyVO getCateEn(Map<String, String> map) {
+		CompanyVO outVO = companyDAO.getCateEn(map);
 		return outVO;
 	}
 	

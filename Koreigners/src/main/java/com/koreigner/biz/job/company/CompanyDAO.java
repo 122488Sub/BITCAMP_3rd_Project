@@ -1,6 +1,7 @@
 package com.koreigner.biz.job.company;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,8 @@ public class CompanyDAO {
 		return list;
 	}
 	
-	CompanyVO getCateEn(CompanyVO vo) {
-		CompanyVO outVO = mybatis.selectOne("getCateEn", vo);
+	CompanyVO getCateEn(Map<String, String> map) {
+		CompanyVO outVO = mybatis.selectOne("getCateEn", map);
 		System.out.println(outVO.toStringCate());
 		return outVO;
 	}
