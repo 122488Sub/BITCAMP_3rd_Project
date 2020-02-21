@@ -66,9 +66,9 @@ public class UserServiceImpl implements UserService {
 	
 	// 중복 닉네임 체크
 	@Override
-	public int userNameCheck(UserVO vo) {
+	public int userNickCheck(UserVO vo) {
 		
-		int nameCnt = userDAO.userNameCheck(vo);
+		int nameCnt = userDAO.userNickCheck(vo);
 		System.out.println("nameCnt: " + nameCnt);
 
 		return nameCnt;
