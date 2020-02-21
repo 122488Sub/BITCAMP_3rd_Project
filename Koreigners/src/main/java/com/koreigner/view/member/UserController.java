@@ -28,9 +28,8 @@ public class UserController {
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/login_go.do")
 	public String moveToLogin(Model model) {
-
 		
-		
+		//이메일 인증 후 이동
 		model.addAttribute("auth_check", "0");
 
 		return "/member/login.page";
@@ -147,7 +146,7 @@ public class UserController {
 			//model.addAttribute("loginId", "no-login");
 		} 
 		*/ 
-		return "/member/mypage/p_profile.page";
+		return "WEB-INF/views/member/mypage/p_profile.jsp";
 	}
 
 	/*

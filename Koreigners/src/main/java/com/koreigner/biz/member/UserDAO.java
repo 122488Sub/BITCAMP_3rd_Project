@@ -22,8 +22,8 @@ public class UserDAO {
 	}
 	
 	//닉네임 중복 체크
-	public int userNameCheck(UserVO vo) {
-		int nameCnt = mybatis.selectOne("user.userNameCheck", vo);
+	public int userNickCheck(UserVO vo) {
+		int nameCnt = mybatis.selectOne("user.userNickCheck", vo);
 		return nameCnt;
 	}
 

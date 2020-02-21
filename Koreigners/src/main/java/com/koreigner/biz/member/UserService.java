@@ -6,7 +6,7 @@ public interface UserService {
 	
 	int userIdCheck(UserVO vo);
 
-	int userNameCheck(UserVO vo);
+	int userNickCheck(UserVO vo);
 
 	void joinUser(UserVO vo) throws Exception;
 
