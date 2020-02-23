@@ -46,6 +46,7 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script>
 function sample6_execDaumPostcode() {
     new daum.Postcode({
@@ -123,6 +124,36 @@ function sample6_execDaumPostcode() {
 	//영문주소 팝업창 end =============================================================================================
 		
 		
+</script>
+<!--  ========================================================================================================================-->
+<!--jQuery UI CSS파일 -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<!-- jQuery 기본 js파일-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<!--  jQuery UI 라이브러리 js파일 -->
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<script>
+/*datepicker 캘린더*/
+$(function() {
+    $( "#datepicker" ).datepicker({
+    	showOn: "both", 
+        buttonImage: "resources/img/house/calendar-button.png", 
+        buttonImageOnly: true ,
+    	changeMonth: true, 
+        changeYear: true,
+        nextText: 'Next',
+        prevText: 'Prev', 
+    	 minDate:+1,
+    	 showButtonPanel: true, 
+         currentText: 'Current', 
+         closeText: 'Close', 
+         dateFormat: "yy-mm-dd"
+    });
+    $(".ui-datepicker-trigger").css('margin-left',"5px");
+    $(".ui-datepicker-trigger").attr('width',15);
+    $(".ui-datepicker-trigger").attr('height',15);
+});
+<!--  ========================================================================================================================-->
 </script>
 <script>
 	
@@ -276,7 +307,19 @@ function sample6_execDaumPostcode() {
 				</div>
 			</td>
 		</tr>
-		
+		<tr>
+			<th>Available Days</th>
+			<td colspan="3">
+				<div class="td_div">
+					<input type="radio"  value="0" name="available_date"> Immediately
+				</div>
+				<div class="td_div">
+					<input type="radio"  value="0" name="available_date"> After this
+					<input type="text" id="datepicker">
+				</div>
+				
+			</td>
+		</tr>
 		
 		
 		
@@ -297,6 +340,130 @@ function sample6_execDaumPostcode() {
 		</tr>
 		
 	</table>
+	<!-- ------------------------------------------------------------------------------------------------------------------- -->
+	<table>
+		<tr>
+			<th> TITLE</th>
+			<td colspan="3">
+				<div class="td_div">
+					<input type="text" name="subject" size="30">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th>Buliding Type</th>
+			<td style="width:40%">
+				<div class="td_div">
+					<input type="radio"  value="0" name="build_type"> villa
+					<input type="radio"  value="1" name="build_type" style="margin-left: 15px"> Goshiwon
+					<input type="radio"  value="2" name="build_type" style="margin-left: 15px"> Semi-Officetel
+				</div>
+			</td>
+			<th>Room Type</th>
+			<td style="width:40%">
+				<div class="td_div">
+					<input type="radio"  value="0" name="room_type"> Studio
+					<input type="radio"  value="1" name="room_type" style="margin-left: 15px"> Two BedRoom
+					<input type="radio"  value="2" name="room_type" style="margin-left: 15px"> Three+ BedRoom
+				</div>
+			</td>
+		</tr>	
+		<tr>
+			<th>Loctation</th>
+			<td colspan="3">
+				<div class="td_div">
+					<label style="width:30%">RoadAddress:</label>
+					<input type="text" id="roadAddr" name="address" style="width:60%;  margin-left: 5px;"> 
+					<input type="button"  value="Search" onclick="goPopup();" style="width:10%">
+				</div>
+				<div class="td_div">
+					<label style="width:30%">DetailAddress:</label>
+					<input type="text" 	 id="addrDetail" name="address_detail" style="width:71%;"> 
+				</div>
+				<input type="hidden" id="siNm" 		 name="do_en" 		   title="주소" value="">
+				<input type="hidden" id="sggNm" 	 name="gu_gun_eup_eng" title="주소" value="">
+				<div id="mapDisp" style="border: 1px solid black;"></div>
+			</td>
+		</tr>
+		<tr>
+			<th>Rooms</th>
+			<td style="width:40%">
+				<div class="td_div">
+					<label style="width:70%">A room for sleeping: </label>
+					<input type="number" id="" name="room_of_num" style="width:30%; " step="1" min="1" max="9">
+				</div>
+			</td>
+			<th>Bath<br>rooms</th>
+			<td style="width:40%">
+				<div class="td_div">
+					<label style="width:30%">Bathroom: </label>
+					<input type="number" id="" name="bathroom" style="width:30%; " step="1" min="1" max="9" >
+				</div>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>Area</th>
+			<td style="width:40%">
+				<div class="td_div">
+					<label style="width:70%">Square Meter: </label>
+					<input type="number" id="" name="room_area" style="width:30%; " step="1" min="1">
+				</div>
+			</td>
+			<th>Floor</th>
+			<td style="width:40%">
+				<div class="td_div">
+					<label style="width:20%">Buliding: </label>
+					<input type="number" id="" name="bulid_layers" style="width:30%; " step="1" min="1">
+					<label style="width:20%; margin-left: 10px;">Floor: </label>
+					<input type="number" id="" name="floor_layers" style="width:30%; " step="1" min="1">
+				</div>
+				<div class="td_div">
+					
+				</div>
+				<div class="td_div">
+					<input type="radio"  value="0" name="floor_type"> Nomal
+					<input type="radio"  value="1" name="floor_type" style="margin-left: 15px"> RoofTops
+					<input type="radio"  value="2" name="floor_type" style="margin-left: 15px"> Semi-basement
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th>Available Days</th>
+			<td colspan="3">
+				<div class="td_div">
+					<input type="radio"  value="0" name="available_date"> Immediately
+				</div>
+				<div class="td_div">
+					<input type="radio"  value="0" name="available_date"> After this
+					<input type="text" id="datepicker">
+				</div>
+				
+			</td>
+		</tr>
+		
+		
+		
+		<tr>
+			<th>업로드</th>
+			<td>
+				<div class="td_div">
+					<input type="file" id="file" name="file" multiple>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="center">
+				<div class="td_div">
+					<input type="submit" value="새글 등록" onclick="fileUpload();">
+				</div>
+			</td>
+		</tr>
+		
+	</table>	
+	
+	
+	
 	
 	</form>
 	<p><a href="house_main.do ">글 목록 가기</a></p>
