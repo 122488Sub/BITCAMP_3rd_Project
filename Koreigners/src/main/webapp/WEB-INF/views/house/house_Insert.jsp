@@ -160,9 +160,10 @@ $(function() {
     $(".ui-datepicker-trigger").attr('width',15);
     $(".ui-datepicker-trigger").attr('height',15);
 });
-<!--  ========================================================================================================================  -->
+/**/
 </script>
 <script>
+/*천단위 콤마 처리 스크립트*/
 function inputNumberAutoComma(obj) {
     
     // 콤마( , )의 경우도 문자로 인식되기때문에 콤마를 따로 제거한다.
@@ -195,54 +196,35 @@ function inputNumberRemoveComma(str) {
 </script>
 <script>
 	
-	function fileUpload(){
-		/*
-		var formData = new FormData();
+	function insertForm(){
 		
-		$.each($("input[type='file']")[0].files, function(i, file) {
-			formData.append('file', file);
-		});
-		//formData.append('file', document.getElementById('file').files[0]);
-		alert(document.getElementById('file').files.length);
-		$.ajax({ 
-			type: "POST", 
-			enctype: 'multipart/form-data', // 필수 
-			url: 'house_MultiImgUpload.do', 
-			data: formData,// 필수 
-			processData: false, // 필수
-			contentType: false, // 필수 
-			cache: false, 
-			success: function (result) { 
-				alert(result);
-			}, error: function (e) { 
-				
-			} 
-		});
-*/			/*
-			var formData = new FormData( $("#form")[0]);
-			var bool= false;
-			$.ajax({ 
-				type: "POST", 
-				enctype: 'multipart/form-data', // 필수 
-				url: 'house_MultiImgUpload.do', 
-				data: formData,// 필수 
-				processData: false, // 필수
-				contentType: false, // 필수 
-				cache: false, 
-				async:false,
-				success: function (result) { 
-					alert("안가"+result);
-					bool=true;
-					//location.replace("house_main.do");
-					//location.replace("house_main.do");
-				}, error: function (e) { 
-					alert(e);
-				} 
-			});
-			if(bool){
-				alert(bool);
-				window.location.replace("house_main.do");
-			}*/
+		
+		//보증금 월세 관리비 , 제거
+		$("#deposit").val( inputNumberRemoveComma($("#deposit").val()));
+		$("#monthly_rent").val( inputNumberRemoveComma($("#monthly_rent").val()));
+		$("#management_expense").val( inputNumberRemoveComma($("#management_expense").val()));
+		
+		if($('input[name=chk_management_expense]:checked') ){
+			$("#management_expense").val('0');
+		}
+		;
+		
+		if($('input[name=radio_available_date]:checked').val() == 0){
+			$('input[name=available_date]').datepicker({dateFormat: "yy-mm-dd"});
+			$('input[name=available_date]').datepicker('setDate', 'today') ;
+		}
+		else if($('input[name=radio_available_date]:checked').val() == 1){
+			$('input[name=available_date]').val( $('#datepicker').val());
+		}
+		else{
+			alert("Plese Checked [Available Date]");
+			return;
+		}
+		
+		
+		$("#form").attr('action',"house_MultiImgUpload.do").submit();
+		
+		
 	}
 		
 </script>
@@ -254,7 +236,8 @@ function inputNumberRemoveComma(str) {
 	
 	<div id="container">
 	
-	<form action="house_MultiImgUpload.do" id="form" name="form" method="post" enctype="multipart/form-data">
+	<form action="" id="form" name="form" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="mem_email">
 	<h1>House Info</h1>
 	<hr>
 	
@@ -307,16 +290,16 @@ function inputNumberRemoveComma(str) {
 			<td style="width:40%">
 				<div class="td_div">
 					<label style="width:70%">Square Meter: </label>
-					<input type="number" id="" name="room_area" style="width:30%; " step="1" min="1">
+					<input type="number" id="" name="room_area" style="width:30%; " step="1" min="1" value='0'>
 				</div>
 			</td>
 			<th>Floor</th>
 			<td style="width:40%">
 				<div class="td_div">
 					<label style="width:20%">Buliding: </label>
-					<input type="number" id="" name="bulid_layers" style="width:30%; " step="1" min="1">
+					<input type="number" id="" name="bulid_layers" style="width:30%; " step="1" min="1" value='0'>
 					<label style="width:20%; margin-left: 10px;">Floor: </label>
-					<input type="number" id="" name="floor_layers" style="width:30%; " step="1" min="1">
+					<input type="number" id="" name="floor_layers" style="width:30%; " step="1" min="-3" value='0'>
 				</div>
 				<div class="td_div">
 					
@@ -332,18 +315,20 @@ function inputNumberRemoveComma(str) {
 			<th>Available Days</th>
 			<td>
 				<div class="td_div">
-					<input type="radio"  value="0" name="available_date"> Immediately
+					<input type="radio"  value="0" name="radio_available_date"> Immediately
 				</div>
 				<div class="td_div">
-					<input type="radio"  value="0" name="available_date"> After this
+					<input type="radio"  value="1" name="radio_available_date"> After this
 					<input type="text" id="datepicker">
+					
 				</div>
+				<input type="hidden" name="available_date">
 				
 			</td>
 			<th>Itinerary</th>
 			<td>
 				<div class="td_div">
-					<select name="stay_num_min" class="custom-select"> 
+					<select name="stay_num_min" class=""> 
 						<option value="1">1 month</option> 
 						<option value="2">2 months</option> 
 						<option value="3">3 months</option> 
@@ -372,10 +357,10 @@ function inputNumberRemoveComma(str) {
 			<th>Pricing<br>Information</th>
 			<td colspan="3">
 				<div class="td_div">
-					Deposit <input type="text" class="" name="subject" size="30" onkeyup="inputNumberAutoComma(this)" ><br>
-					Monthly rent <input type="text" class=" " name="subject" size="30" onkeyup="inputNumberAutoComma(this)"><br>
-					Management expense <input type="text" class=" " name="subject" size="30" onkeyup="inputNumberAutoComma(this)"> 
-					<input type="checkbox" value="0">none<br>
+					Deposit <input type="text" id="deposit" class="" name="deposit" size="30" onkeyup="inputNumberAutoComma(this)" value='0' ><br>
+					Monthly rent <input type="text" id="monthly_rent"class=" " name="monthly_rent" size="30" onkeyup="inputNumberAutoComma(this)" value='0'><br>
+					Management expense <input type="text" id="management_expense"class=" " name="management_expense" size="30" onkeyup="inputNumberAutoComma(this)" value='0'> 
+					<input type="checkbox" value="0" name="chk_management_expense">none<br>
 				</div>
 			</td>
 		</tr>
@@ -387,8 +372,8 @@ function inputNumberRemoveComma(str) {
 	<table>
 		<tr>
 			<th>Cooling and Heating</th>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="" > Air conditioner</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="" > Heater</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="air_conditioner" > Air conditioner</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="heating" > Heater</td>
 			<td colspan="3"></td>
 		
 		</tr>
@@ -397,7 +382,7 @@ function inputNumberRemoveComma(str) {
 			<td class="td_option"> <input type="checkbox" class="chk_option" name="closet" > Closet</td>
 			<td class="td_option"> <input type="checkbox" class="chk_option" name="desk" > Desk</td>
 			<td class="td_option"> <input type="checkbox" class="chk_option" name="chair" > Chair</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="bad" > bed</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="bad_type" > bed</td>
 			<td class="td_option"> <input type="checkbox" class="chk_option" name="refrigerator" > Refrigerator</td>
 		
 		</tr>
@@ -433,7 +418,7 @@ function inputNumberRemoveComma(str) {
 		</tr>
 	</table>
 	<div class="td_div">
-		<input type="submit" value="새글 등록" onclick="fileUpload();">
+		<input type="submit" value="새글 등록" onclick="insertForm();">
 	</div>
 	</form>
 	<p><a href="house_main.do ">글 목록 가기</a></p>
