@@ -8,7 +8,7 @@
 <style>
 	
 	#container {
-		width: 800px;
+		width: 90%;
 		margin: 0 auto;
 		color: black;
 	}
@@ -177,6 +177,9 @@ function sample6_execDaumPostcode() {
 	}
 		
 </script>
+<style>
+
+</style>
 </head>
 <body>
 	
@@ -184,6 +187,8 @@ function sample6_execDaumPostcode() {
 	<h1>House Info</h1>
 	<hr>
 	<form action="house_MultiImgUpload.do" id="form" name="form" method="post" enctype="multipart/form-data">
+		
+	
 	<table>
 		<tr>
 			<th> TITLE</th>
@@ -195,14 +200,19 @@ function sample6_execDaumPostcode() {
 		</tr>
 		<tr>
 			<th>Buliding Type</th>
-			<td colspan="3">
+			<td style="width:40%">
 				<div class="td_div">
-					<select id="" name="build_type" tabindex="-1">
-						<option value="0">villa</option>
-						<option value="1">Goshiwon</option>
-						<option value="2">Officetel</option>
-					</select>
-			
+					<input type="radio"  value="0" name="build_type"> villa
+					<input type="radio"  value="1" name="build_type" style="margin-left: 15px"> Goshiwon
+					<input type="radio"  value="2" name="build_type" style="margin-left: 15px"> Semi-Officetel
+				</div>
+			</td>
+			<th>Room Type</th>
+			<td style="width:40%">
+				<div class="td_div">
+					<input type="radio"  value="0" name="room_type"> Studio
+					<input type="radio"  value="1" name="room_type" style="margin-left: 15px"> Two BedRoom
+					<input type="radio"  value="2" name="room_type" style="margin-left: 15px"> Three+ BedRoom
 				</div>
 			</td>
 		</tr>	
@@ -211,11 +221,12 @@ function sample6_execDaumPostcode() {
 			<td colspan="3">
 				<div class="td_div">
 					<label style="width:30%">RoadAddress:</label>
-					<input type="text" id="roadAddr" name="address" style="width:60%"> <input type="button"  value="Search" onclick="goPopup();" style="width:10%">
+					<input type="text" id="roadAddr" name="address" style="width:60%;  margin-left: 5px;"> 
+					<input type="button"  value="Search" onclick="goPopup();" style="width:10%">
 				</div>
 				<div class="td_div">
 					<label style="width:30%">DetailAddress:</label>
-					<input type="text" 	 id="addrDetail" name="address_detail" style="width:60%"> <p style="width:10%">
+					<input type="text" 	 id="addrDetail" name="address_detail" style="width:71%;"> 
 				</div>
 				<input type="hidden" id="siNm" 		 name="do_en" 		   title="주소" value="">
 				<input type="hidden" id="sggNm" 	 name="gu_gun_eup_eng" title="주소" value="">
@@ -223,35 +234,52 @@ function sample6_execDaumPostcode() {
 			</td>
 		</tr>
 		<tr>
-			<th>r</th>
-			<td>
+			<th>Rooms</th>
+			<td style="width:40%">
 				<div class="td_div">
-					<label style="width:30%">RoadAddress:</label>
-					<input type="text" id="roadAddr" name="address" style="width:60%"> <input type="button"  value="Search" onclick="goPopup();" style="width:10%">
+					<label style="width:70%">A room for sleeping: </label>
+					<input type="number" id="" name="room_of_num" style="width:30%; " step="1" min="1" max="9">
 				</div>
-				<div class="td_div">
-					<label style="width:30%">DetailAddress:</label>
-					<input type="text" 	 id="addrDetail" name="address_detail" style="width:60%"> <p style="width:10%">
-				</div>
-				<input type="hidden" id="siNm" 		 name="do_en" 		   title="주소" value="">
-				<input type="hidden" id="sggNm" 	 name="gu_gun_eup_eng" title="주소" value="">
-				<div id="mapDisp" style="border: 1px solid black;"></div>
 			</td>
-			<th>r</th>
-			<td>
+			<th>Bath<br>rooms</th>
+			<td style="width:40%">
 				<div class="td_div">
-					<label style="width:30%">RoadAddress:</label>
-					<input type="text" id="roadAddr" name="address" style="width:60%"> <input type="button"  value="Search" onclick="goPopup();" style="width:10%">
+					<label style="width:30%">Bathroom: </label>
+					<input type="number" id="" name="bathroom" style="width:30%; " step="1" min="1" max="9" >
 				</div>
-				<div class="td_div">
-					<label style="width:30%">DetailAddress:</label>
-					<input type="text" 	 id="addrDetail" name="address_detail" style="width:60%"> <p style="width:10%">
-				</div>
-				<input type="hidden" id="siNm" 		 name="do_en" 		   title="주소" value="">
-				<input type="hidden" id="sggNm" 	 name="gu_gun_eup_eng" title="주소" value="">
-				<div id="mapDisp" style="border: 1px solid black;"></div>
 			</td>
 		</tr>
+		
+		<tr>
+			<th>Area</th>
+			<td style="width:40%">
+				<div class="td_div">
+					<label style="width:70%">Square Meter: </label>
+					<input type="number" id="" name="room_area" style="width:30%; " step="1" min="1">
+				</div>
+			</td>
+			<th>Floor</th>
+			<td style="width:40%">
+				<div class="td_div">
+					<label style="width:20%">Buliding: </label>
+					<input type="number" id="" name="bulid_layers" style="width:30%; " step="1" min="1">
+					<label style="width:20%; margin-left: 10px;">Floor: </label>
+					<input type="number" id="" name="floor_layers" style="width:30%; " step="1" min="1">
+				</div>
+				<div class="td_div">
+					
+				</div>
+				<div class="td_div">
+					<input type="radio"  value="0" name="floor_type"> Nomal
+					<input type="radio"  value="1" name="floor_type" style="margin-left: 15px"> RoofTops
+					<input type="radio"  value="2" name="floor_type" style="margin-left: 15px"> Semi-basement
+				</div>
+			</td>
+		</tr>
+		
+		
+		
+		
 		<tr>
 			<th>업로드</th>
 			<td>
@@ -269,6 +297,7 @@ function sample6_execDaumPostcode() {
 		</tr>
 		
 	</table>
+	
 	</form>
 	<p><a href="house_main.do ">글 목록 가기</a></p>
 </div>
