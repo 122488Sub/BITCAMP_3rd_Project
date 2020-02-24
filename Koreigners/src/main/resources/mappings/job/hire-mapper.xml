@@ -5,11 +5,20 @@
 <mapper namespace="HireDAO">
 
 
-<select id="getHireList" resultType="hireVO">
-	SELECT * 
-	  FROM T_JOB_HIRE
+<select id="getHireList" parameterType="Map" resultType="hireVO">
+	SELECT *
+		FROM (
+		       SELECT ROWNUM R_NUM, HIRE.*
+		        FROM (SELECT *
+		                FROM T_JOB_HIRE
+		               ORDER BY HIRE_IDX DESC) HIRE      
+		    )
+	  WHERE R_NUM BETWEEN #{begin} AND #{end}
+	  
 </select>
-
+<select id="hireListTotal" resultType="int">
+		SELECT COUNT(*) FROM T_JOB_HIRE
+</select>
 <!-- category -->
 	<!-- 카테고리 대분류 검색 -->
 	

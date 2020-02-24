@@ -47,6 +47,9 @@ public class CompanyDAO {
 	}
 
 	
-	
+	String getComName(String mem_id) {
+		String companyName = mybatis.selectOne("getComName", mem_id);
+		return companyName;
+	}
 	
 }
