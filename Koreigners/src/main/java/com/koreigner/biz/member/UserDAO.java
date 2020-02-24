@@ -44,11 +44,17 @@ public class UserDAO {
 		
 	}
 
-	public Object userLoginCheck(String mem_id, String mem_pw) {
+	public Object userLoginCheck(String inputId, String inputPw, String inputCate) {
 		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("mem_id", mem_id);
-		paramMap.put("mem_pw", mem_pw);
+		paramMap.put("mem_id", inputId);
+		paramMap.put("mem_pw", inputPw);
+		paramMap.put("mem_cate", inputCate);
 		return mybatis.selectOne("user.userLoginCheck", paramMap);
+	}
+
+	public String getAuthStatus(String mem_id) {
+		String auth_status = mybatis.selectOne(mem_id);
+		return auth_status;
 	}
 
 }
