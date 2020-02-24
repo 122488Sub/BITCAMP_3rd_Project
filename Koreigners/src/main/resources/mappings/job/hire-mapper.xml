@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="HireDAO">
+
+
+<select id="getHireList" resultType="hireVO">
+	SELECT * 
+	  FROM T_JOB_HIRE
+</select>
+
+<!-- category -->
+	<!-- 카테고리 대분류 검색 -->
+	
+<!-- category END -->	
+	
+
+	<!-- ===================================insert================================== -->
+	
+<!-- CompanyVO insert -->
+	
+	<insert id="insertHire" parameterType="hireVO">
+		INSERT INTO T_JOB_HIRE(ADDRESS ,ADDRESS_EN, ADDR_DT_EN, ADDR_DT_KOR, APPLY_WAY, 
+                        BOARD_IDX, B_STATUS, CATE_CHILD_EN, CATE_CHILD_KO, CATE_PRNT_EN, CATE_PRNT_KO, 
+                        DOMITORY, DO_EN, DO_KOR, 
+                        EDUCATION, EXPERIENCE, 
+                        FOREIGN_LANGUAGE,
+                        GU_GUN_EUP_ENG, GU_GUN_EUP_KOR,
+                        HIRE_AGE_MAX, HIRE_AGE_MIN, HIRE_IDX, HIRE_NUMBER, HIT,
+                        INSURANCE, IP,
+                        MAJOR, MEALS, MEM_ID,
+                        PAYMENT_CODITION, PAYMENT_DETAIL, PREFER_SKILLS, PREPARE_DOC , 
+                        REGDATE, SALARY_MAX, SALARY_MIN ,
+                        TITLE, 
+                        WORK_DETAIL, WORK_TIME, WORK_TYPE
+                      )
+	    VALUES (
+	            #{address} ,#{address_en}, #{addr_dt_en}, #{addr_dt_kor}, #{apply_way}, 
+	            2, 1, #{cate_child_en}, #{cate_child_ko}, #{cate_prnt_en}, #{cate_prnt_ko}, 
+	            #{domitory}, #{do_en}, #{do_kor}, 
+	            #{education}, #{experience}, 
+	            #{foreign_language},
+	            #{gu_gun_eup_eng}, #{gu_gun_eup_kor},
+	            #{hire_age_max}, #{hire_age_min}, 1, #{hire_number}, 0,
+	            #{insurance}, #{ip},
+	            #{major}, #{meals}, #{mem_id},
+	            #{payment_codition}, #{payment_detail}, #{prefer_skills}, #{prepare_doc}, 
+	            sysdate, #{salary_max}, #{salary_min},
+	            #{title}, 
+	            #{work_detail}, #{work_time}, #{work_type}
+	            )
+	</insert>
+<!-- CompanyVO insert End -->	
+	
+</mapper>
+
+
+
+
+
+
+
+
+

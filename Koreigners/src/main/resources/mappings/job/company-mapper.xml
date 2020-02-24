@@ -3,69 +3,90 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="BoardDAO">
+
+<!-- category -->
+	<!-- 카테고리 대분류 검색 -->
 	<select id="getCateList" resultType="companyVO">
 		SELECT CATE_IDX, CATE_KOR CATE_PRNT_KO, CATE_PRNT CATE_PRNT_EN
 		  FROM T_JOB_CATE_MST
 		 ORDER BY CATE_IDX
 	</select>
 	
+	<!-- 대분류 명으로 카테고리 소분류 검색 -->
 	<select id="getCateChild" parameterType="String" resultType="companyVO">
 		SELECT CATE_CHILD_KO 
 		  FROM T_JOB_CATE_CHILD C,
 		       T_JOB_CATE_MST M
 	    	WHERE C.CATE_IDX = M.CATE_IDX
 		  AND CATE_KOR = #{cate_kor}
-	</select>	
 	
+	</select>	
+
+	<!-- 한글 카테고리 대분류,소분류로 영어 카테고리 대분류,소분류 검색 -->
+	<select id="getCateEn" parameterType="Map" resultType="companyVO">-->
+		SELECT DISTINCT P.CATE_PRNT CATE_PRNT_EN, C.CATE_CHILD CATE_CHILD_EN
+			FROM T_JOB_CATE_MST P, T_JOB_CATE_CHILD C
+		  WHERE P.CATE_KOR = #{cate_prnt_ko}  AND C.CATE_CHILD_KO = #{cate_child_ko}
+	</select>	
+<!-- category END-->
+
+
+<!-- address -->
+	<!-- 행정구역 한글 검색 -->
 	<select id="getAddrDoList" parameterType="String" resultType="companyVO">
 		SELECT DISTINCT DO_KOR
   		  FROM T_TEST
 		 ORDER BY DO_KOR
 	</select>	
 	
+	<!-- 행정구역 한글명으로 시구군 한글 검색 -->
 	<select id="getAddrSiList" parameterType="String" resultType="companyVO">
 		SELECT GU_GUN_EUP_KOR
 		  FROM T_TEST
 		   WHERE DO_KOR = #{do_kor}
 		 ORDER BY GU_GUN_EUP_KOR
 	</select>
-	
-	<select id="getCateEn" parameterType="companyVO" resultType="companyVO">
-		SELECT DISTINCT P.CATE_PRNT CATE_PRNT_EN, C.CATE_CHILD CATE_CHILD_EN
-			FROM T_JOB_CATE_MST P, T_JOB_CATE_CHILD C
-		  WHERE P.CATE_KOR = #{cate_prnt_ko}  AND C.CATE_CHILD_KO = #{cate_child_ko}
-	</select>	
+<!-- address END -->	
 	
 
-	<!-- ===================================insert================================== 
+	<!-- ===================================insert================================== -->
+	
+<!-- CompanyVO insert -->
 	<insert id="comJoin" parameterType="companyVO">
-							회원 번호    회원 아이디  회원 비밀번호 
-		INSERT INTO T_MEMBER(MEM_IDX, MEM_ID, MEM_PW, MEM_NAME, MEM_CATE, MEM_PHONE)
- 	 	
- 	 	VALUES(1, #{mem_id},  #{mem_pw}, #{company_name}, 'c', #{company_telephone});
+		 {
+		   call
+	         declare
+	           begin
 	
-	
-	
-		INSERT INTO T_COMPANY(ADDRESS, ADDRESS_EN, ADDR_DT_EN, ADDR_DT_KOR, 
-  							  BUSINESS_IMG, BUSINESS_INFO, BUSINESS_NUM, 
-							  CATE_CHILD_EN, CATE_CHILD_KO, CATE_PRNT_EN, CATE_PRNT_KO,
-							  CEO_NAME, COMPANY_IDX, COMPANY_NAME, COMPANY_TELEPHONE,
-							  DOMITORY, DO_EN, DO_KOR, 
-							  EMPLOYEE_NUM, GU_GUN_EUP_ENG, GU_GUN_EUP_KOR, 
-							  HR_MANAGER, IP, 
-							  MANAGER_EMAIL, MEALS, MEM_ID, 
-							  REGDATE
-							  )
-		VALUES(#{address},#{address_en},#{addr_dt_en},#{addr_dt_kor},
-			   #{business_img},#{business_info},#{business_num},
-			   #{cate_child_en},#{cate_child_ko},#{cate_prnt_en},#{cate_prnt_ko},
-			   #{ceo_name},#{company_idx},#{company_name},#{company_telephone},
-			   #{domitory},#{do_en},#{do_kor},
-			   #{employee_num},#{gu_gun_eup_eng},#{gu_gun_eup_kor},
-			   #hr_manager},#{ip},
-			   #{manager_email},#{meals},#{mem_id},#{regdate}
-			   )
-	</insert>-->
+	           INSERT INTO T_MEMBER(MEM_IDX, MEM_ID, MEM_PW, MEM_NAME, MEM_CATE, MEM_PHONE, MEM_REG_IP, MEM_REG_DT)
+		  	
+		  	   VALUES(44, #{mem_id}, #{mem_pw}, #{company_name}, 'c', #{company_telephone}, #{ip}, SYSDATE);
+	                
+	           
+	           INSERT INTO T_COMPANY(ADDRESS, ADDRESS_EN, ADDR_DT_EN, ADDR_DT_KOR, 
+		  							 BUSINESS_IMG, BUSINESS_INFO, BUSINESS_NUM, 
+									 CATE_CHILD_EN, CATE_CHILD_KO, CATE_PRNT_EN, CATE_PRNT_KO,
+									 CEO_NAME, COMPANY_IDX, COMPANY_NAME, COMPANY_TELEPHONE,
+								     DOMITORY, DO_EN, DO_KOR, 
+								     EMPLOYEE_NUM, GU_GUN_EUP_ENG, GU_GUN_EUP_KOR, 
+								     HR_MANAGER, IP, 
+								     MANAGER_EMAIL, MEALS, MEM_ID, 
+						 		     REGDATE
+									 )
+				VALUES(#{address},#{address_en},#{addr_dt_en},#{addr_dt_kor},
+					   #{business_img},#{business_info},#{business_num},
+					   #{cate_child_en},#{cate_child_ko},#{cate_prnt_en},#{cate_prnt_ko},
+					   #{ceo_name},44,#{company_name},#{company_telephone},
+					   #{domitory},#{do_en},#{do_kor},
+					   #{employee_num},#{gu_gun_eup_eng},#{gu_gun_eup_kor},
+					   #{hr_manager},#{ip},
+					   #{manager_email},#{meals},#{mem_id},SYSDATE
+					   );
+	     		end
+			}
+	</insert>
+
+<!-- CompanyVO insert End -->	
 	
 </mapper>
 

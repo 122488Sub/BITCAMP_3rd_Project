@@ -1,5 +1,8 @@
 package com.koreigner.biz.member;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,20 +22,14 @@ public class UserDAO {
 	}
 	
 	//닉네임 중복 체크
-	public int userNameCheck(UserVO vo) {
-		int nameCnt = mybatis.selectOne("user.userNameCheck", vo);
+	public int userNickCheck(UserVO vo) {
+		int nameCnt = mybatis.selectOne("user.userNickCheck", vo);
 		return nameCnt;
 	}
 
 	//회원 등록
 	public void joinUser(UserVO vo) {
 		mybatis.insert("user.joinUser", vo);
-	}
-	
-	//로그인 시 해당 유저 존재여부 확인
-	public int userLoginCheck(UserVO vo) {
-		int userCnt = mybatis.selectOne("user.userLoginCheck", vo);
-		return userCnt;
 	}
 	
 	//이메일 인증 후 권한 업데이트
@@ -45,6 +42,13 @@ public class UserDAO {
 	public void updatePassword(UserVO vo) {
 		mybatis.update("user.updatePassword", vo);
 		
+	}
+
+	public Object userLoginCheck(String mem_id, String mem_pw) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("mem_id", mem_id);
+		paramMap.put("mem_pw", mem_pw);
+		return mybatis.selectOne("user.userLoginCheck", paramMap);
 	}
 
 }

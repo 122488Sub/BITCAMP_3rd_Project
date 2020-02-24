@@ -6,7 +6,7 @@
 
 	<select id="getInfoBoardList" parameterType="infoBoard"
 		resultType="infoBoard">
-		SELECT * FROM T_INFORM_BOARD
+		SELECT * FROM T_INFORM_TABLE
 		WHERE 1=1 
 		<if test="searchCondition == 'INFO_TITLE' ">
 			AND INFO_TITLE LIKE '%'|| #{searchKeyword} ||'%'
@@ -19,24 +19,24 @@
 	
 	<select id="getInfoBoard" parameterType="infoBoard"
 		resultType="infoBoard">
-		SELECT * FROM T_INFORM_BOARD WHERE info_idx = #{info_idx}	
+		SELECT * FROM T_INFORM_TABLE WHERE info_idx = #{info_idx}	
 	</select>
 	
 	<insert id="insertInfoBoard" parameterType="infoBoard">
-		INSERT INTO T_INFORM_BOARD (INFO_IDX, INFO_TITLE, INFO_INS_USER, INFO_CONTENT)
-		VALUES ((SELECT NVL(MAX(info_idx), 0) + 1 FROM T_INFORM_BOARD), 
-		       #{info_title}, #{info_ins_user}, #{info_content})
+		INSERT INTO T_INFORM_TABLE (INFO_IDX, INFO_TITLE, INFO_INS_USER, INFO_CONTENT, INFO_INS_DT)
+		VALUES ((SELECT NVL(MAX(info_idx), 0) + 1 FROM T_INFORM_TABLE), 
+		       #{info_title}, #{info_ins_user}, #{info_content}, SYSDATE)
 	</insert>
 	
 	<update id="updateInfoBoard" parameterType="infoBoard">
-		UPDATE T_INFORM_BOARD 
-		   SET TITLE = #{info_title}, 
-		       CONTENT = #{info_content} 
+		UPDATE T_INFORM_TABLE 
+		   SET INFO_TITLE = #{info_title}, 
+		       INFO_CONTENT = #{info_content} 
 		 WHERE INFO_IDX = #{info_idx}
 	</update>
 	
 	<delete id="deleteInfoBoard" parameterType="infoBoard">
-		DELETE FROM T_INFORM_BOARD WHERE INFO_IDX = #{info_idx}
+		DELETE FROM T_INFORM_TABLE WHERE INFO_IDX = #{info_idx}
 	</delete>
 </mapper>
 

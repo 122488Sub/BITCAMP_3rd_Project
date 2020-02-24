@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,10 +19,10 @@
 $(function(){
 
 // 닉네임 중복 검사
-	$("#mem_name").blur(function() {
-		var name = $('#mem_name').val();
+	$("#mem_nick").blur(function() {
+		var nick = $('#mem_nick').val();
 		$.ajax({
-			url : '/koreigner/nickCheck.do?mem_name='+ name,
+			url : '/koreigner/nickCheck.do?mem_nick='+ nick,
 			type : 'get',
 			success : function(data) {
 				console.log("data : " + data);	
@@ -122,74 +121,38 @@ $(function(){
 <body>
 
 
+	<div id="container">
+		<h1>Create Account</h1>
+		<hr><hr>
+		
+		<form action="join.do" method="post">
+		Are you an Employer? 기업회원이세요? <a href="job_join.do">click here</a>
+		<input type="hidden" name="mem_cate" value="p">
+		<hr>
+			<div>
+				<label for="mem_nick">Nickname</label>
+					<input type="text" id="mem_nick" name="mem_nick">
+				<div id="nick_check"></div>
+			</div>
+			<hr>
+			<div>
+				<label for="mem_id">Email</label>
+					<input type="text" id="mem_id" name="mem_id">
+				<div id="id_check"></div>
+			</div>
+			<hr>
+			<div>
+				<label for="mem_pw">Password</label>
+					<input type="password" id="mem_pw" name="mem_pw">
+				<div id="password_check">Make sure it's at least 6 characters(maximum:20)</div>
+			</div>
+			<hr>
+			<div>			
+				<input type="submit" id="reg_submit" value="Create Account">
+			</div>
+		</form>
+		
+	</div>
 
-
-    <div id="wrap">
-        <section id="section1">
-        <div id="wrap">    
-            <ul id="header">
-                <a href="#"><li id="logo"> <p>Koreigner</p></li></a>
-                <ul id="menu_wrap">  
-                    <li class="menu"><a href="#">Home</a></li>
-                    <li class="menu"><a href="#">Job</a></li>
-                    <li class="menu"><a href="house_main.do">House</a></li>
-                    <li class="menu"><a href="#">Resale</a></li>
-                    <li class="menu"><a href="#">Community</a></li>
-                    <li class="menu"><a href="#"></a></li>
-                    <li class="menu"><a href="login_go.do">Sign in</a></li>
-                    <li class="menu"><a href="join_go.do">Register</a></li>
-                    <li class="menu"><a href="#"></a></li>
-                </ul>
-            </ul>
-            <div id="header_bottom">
-               <a href="#">
-                <div id="post_btn">
-                    <div id="btn_txt">
-                        Post an ad
-                    </div>
-                </div>
-                </a>            
-            </div>
-         </div>
-        </section>
-        <section id="section2">
-            section2
-            <section id="section2_content">
-				<div id="container">
-					<h1>Create Account</h1>
-					<hr><hr>
-					
-					<form action="join.do" method="post">
-					Are you an Employer? 기업회원이세요? <a href="job_join.do">click here</a>
-					<input type="hidden" name="mem_cate" value="p">
-					<hr>
-						<div>
-							<label for="mem_name">Nickname</label>
-								<input type="text" id="mem_name" name="mem_name">
-							<div id="nick_check"></div>
-						</div>
-						<hr>
-						<div>
-							<label for="mem_id">Email</label>
-								<input type="text" id="mem_id" name="mem_id">
-							<div id="id_check"></div>
-						</div>
-						<hr>
-						<div>
-							<label for="mem_pw">Password</label>
-								<input type="password" id="mem_pw" name="mem_pw">
-							<div id="password_check">Make sure it's at least 6 characters(maximum:20)</div>
-						</div>
-						<hr>
-						<div>			
-							<input type="submit" id="reg_submit" value="Create Account">
-						</div>
-					</form>
-					
-				</div>
-				</section>
-        </section>
-        <div id="footer">footer</div>
-    </div>
 </body>
 </html>

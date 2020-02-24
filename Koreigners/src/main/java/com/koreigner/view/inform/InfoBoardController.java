@@ -11,11 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.koreigner.biz.inform.InfoBoardListVO;
 import com.koreigner.biz.inform.InfoBoardService;
 import com.koreigner.biz.inform.InfoBoardVO;
+
 
 
 @Controller
@@ -30,8 +33,8 @@ public class InfoBoardController {
 		//key: 제목, value: TITLE
 		//key: 내용, value: CONTENT
 		Map<String, String> conditionMap = new HashMap<>();
-		conditionMap.put("제목", "TITLE");
-		conditionMap.put("내용", "CONTENT");
+		conditionMap.put("제목", "INO_TITLE");
+		conditionMap.put("내용", "INO_CONTENT");
 		
 		return conditionMap;
 	}
@@ -100,5 +103,20 @@ public class InfoBoardController {
 		
 		infoBoardService.deleteInfoBoard(vo);
 		return "getInfoBoardList.do";
+	}
+	
+	//-------------------------------
+	@RequestMapping("/dataTransform.do")
+	@ResponseBody //응답객체의 몸체 담아서 전달
+	public InfoBoardListVO dataTransform(InfoBoardVO vo) {
+		System.out.println(">>> dataTransform() 실행(XML)");
+		vo.setSearchCondition("INFO_TITLE");
+		vo.setSearchKeyword("");
+		
+		List<InfoBoardVO> infoBoardList = infoBoardService.getInfoBoardList(vo);
+		InfoBoardListVO infoBoardListVO = new InfoBoardListVO();
+		infoBoardListVO.setBoardList(infoBoardList);
+		
+		return infoBoardListVO;
 	}
 }

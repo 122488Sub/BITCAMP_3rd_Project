@@ -21,10 +21,7 @@ var cate_prnt_ko = "";
 					$("#pw_check").css("color", "blue");
 				}
 			
-			
 		});
-		
-		
 		
 		
 		//아이디(이메일) 중복 검사

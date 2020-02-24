@@ -8,6 +8,10 @@
 <title>Insert title here</title>
 <link href="resources/css/header.css" rel="stylesheet" type="text/css">
 <link href="resources/css/style.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/nav.js"></script>
+
+
 </head>
 <body>
 	<div id="wrap" style="width:100%; height:100%;">

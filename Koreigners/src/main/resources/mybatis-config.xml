@@ -9,14 +9,26 @@
 		<typeAlias alias="house_all" type="com.koreigner.biz.house.HouseAll_VO"/>
 		<typeAlias alias="infoBoard" type="com.koreigner.biz.inform.InfoBoardVO"/>
 		<typeAlias alias="companyVO" type="com.koreigner.biz.job.company.CompanyVO"/>
+		<typeAlias alias="hireVO" type="com.koreigner.biz.job.hire.HireVO"/>
 	</typeAliases>
   
   <!-- SQL 작성파일인 매퍼 파일 위치 지정 -->
   <mappers>
+<!-- common mapper -->
+     <mapper resource="mappings/common/korea_address-mapper.xml"/>
+     
+<!-- job mapper -->
      <mapper resource="mappings/job/company-mapper.xml"/>
-     <mapper resource="mappings/korea_address-mapper.xml"/>
-   	 <mapper resource="mappings/house-mapper.xml"/>	
+     <mapper resource="mappings/job/hire-mapper.xml"/>
+     
+<!-- house mapper -->
+   	 <mapper resource="mappings/house/house-mapper.xml"/>	
+   	 
+<!-- info mapper -->
   	 <mapper resource="mappings/infoBoard-mapper.xml"/>
+  	 
+<!-- member mapper -->  	 
+  	 <mapper resource="mappings/member/user-mapper.xml"/>
   </mappers>
 </configuration>
 

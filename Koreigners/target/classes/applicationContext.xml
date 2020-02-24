@@ -58,6 +58,24 @@
 			</props>
 		</property>
 	</bean>
+	
+	<!-- JWT 인증 설정 -->
+	<bean id="baseSecretPath" class="java.lang.String">
+	  <constructor-arg value="User-Path"></constructor-arg>
+	</bean>
+	
+	<!-- 페북으로 로그인 권한 설정 -->
+	<bean id="connectionFactory"
+        class="org.springframework.social.facebook.connect.FacebookConnectionFactory">
+        <constructor-arg value="186597239316585" />
+        <constructor-arg value="9e3660a4868f638c8e0b5381027407ba" />
+    </bean>
+ 
+    <bean id="oAuth2Parameters"
+        class="org.springframework.social.oauth2.OAuth2Parameters">
+        <property name="scope" value="email" />
+        <property name="redirectUri" value="https://localhost:8443/Path..." />
+    </bean>
 </beans>
 
 
