@@ -39,13 +39,21 @@
 		margin-bottom: 5px;
 	}
 	th { background-color: orange; width:10%; }
-	.center { text-align: center; }
-	.border-none, .border-none td { border: none; }
+
+	.td_option{
+		width:18%;
+	}
+	
+}
+
+
+
 	
 	
 </style>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script>
 function sample6_execDaumPostcode() {
     new daum.Postcode({
@@ -124,6 +132,67 @@ function sample6_execDaumPostcode() {
 		
 		
 </script>
+<!--  ========================================================================================================================-->
+<!--jQuery UI CSS파일 -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<!-- jQuery 기본 js파일-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<!--  jQuery UI 라이브러리 js파일 -->
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<script>
+/*datepicker 캘린더*/
+$(function() {
+    $( "#datepicker" ).datepicker({
+    	showOn: "both", 
+        buttonImage: "resources/img/house/calendar-button.png", 
+        buttonImageOnly: true ,
+    	changeMonth: true, 
+        changeYear: true,
+        nextText: 'Next',
+        prevText: 'Prev', 
+    	 minDate:+1,
+    	 showButtonPanel: true, 
+         currentText: 'Current', 
+         closeText: 'Close', 
+         dateFormat: "yy-mm-dd"
+    });
+    $(".ui-datepicker-trigger").css('margin-left',"5px");
+    $(".ui-datepicker-trigger").attr('width',15);
+    $(".ui-datepicker-trigger").attr('height',15);
+});
+<!--  ========================================================================================================================  -->
+</script>
+<script>
+function inputNumberAutoComma(obj) {
+    
+    // 콤마( , )의 경우도 문자로 인식되기때문에 콤마를 따로 제거한다.
+    var deleteComma = obj.value.replace(/\,/g, "");
+
+    // 콤마( , )를 제외하고 문자가 입력되었는지를 확인한다.
+    if(isFinite(deleteComma) == false) {
+        alert("문자는 입력하실 수 없습니다.");
+        obj.value = "";
+        return false;
+    }
+   
+    // 기존에 들어가있던 콤마( , )를 제거한 이 후의 입력값에 다시 콤마( , )를 삽입한다.
+    obj.value = inputNumberWithComma(inputNumberRemoveComma(obj.value));
+}
+
+// 천단위 이상의 숫자에 콤마( , )를 삽입하는 함수
+function inputNumberWithComma(str) {
+
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, "$1,");
+}
+
+// 콤마( , )가 들어간 값에 콤마를 제거하는 함수
+function inputNumberRemoveComma(str) {
+
+    str = String(str);
+    return str.replace(/[^\d]+/g, "");
+}
+</script>
 <script>
 	
 	function fileUpload(){
@@ -184,10 +253,10 @@ function sample6_execDaumPostcode() {
 <body>
 	
 	<div id="container">
+	
+	<form action="house_MultiImgUpload.do" id="form" name="form" method="post" enctype="multipart/form-data">
 	<h1>House Info</h1>
 	<hr>
-	<form action="house_MultiImgUpload.do" id="form" name="form" method="post" enctype="multipart/form-data">
-		
 	
 	<table>
 		<tr>
@@ -234,23 +303,6 @@ function sample6_execDaumPostcode() {
 			</td>
 		</tr>
 		<tr>
-			<th>Rooms</th>
-			<td style="width:40%">
-				<div class="td_div">
-					<label style="width:70%">A room for sleeping: </label>
-					<input type="number" id="" name="room_of_num" style="width:30%; " step="1" min="1" max="9">
-				</div>
-			</td>
-			<th>Bath<br>rooms</th>
-			<td style="width:40%">
-				<div class="td_div">
-					<label style="width:30%">Bathroom: </label>
-					<input type="number" id="" name="bathroom" style="width:30%; " step="1" min="1" max="9" >
-				</div>
-			</td>
-		</tr>
-		
-		<tr>
 			<th>Area</th>
 			<td style="width:40%">
 				<div class="td_div">
@@ -276,10 +328,101 @@ function sample6_execDaumPostcode() {
 				</div>
 			</td>
 		</tr>
+		<tr>
+			<th>Available Days</th>
+			<td>
+				<div class="td_div">
+					<input type="radio"  value="0" name="available_date"> Immediately
+				</div>
+				<div class="td_div">
+					<input type="radio"  value="0" name="available_date"> After this
+					<input type="text" id="datepicker">
+				</div>
+				
+			</td>
+			<th>Itinerary</th>
+			<td>
+				<div class="td_div">
+					<select name="stay_num_min" class="custom-select"> 
+						<option value="1">1 month</option> 
+						<option value="2">2 months</option> 
+						<option value="3">3 months</option> 
+						<option value="4">4 months</option> 
+						<option value="5">5 months</option> 
+						<option value="6">6 months</option> 
+						<option value="7">7 months</option> 
+						<option value="8">8 months</option> 
+						<option value="9">9 months</option>
+						<option value="10">10 months</option> 
+						<option value="11">11 months</option> 
+						<option value="12" selected>1 year</option> 
+						<option value="13">2 years</option> </select>
+				</div>
+				
+				
+			</td>
+		</tr>
 		
+	</table>
+	<!-- ------------------------------------------------------------------------------------------------------------------- -->
+	<h1>Transaction Information</h1>
+	<hr>
+	<table>
+		<tr>
+			<th>Pricing<br>Information</th>
+			<td colspan="3">
+				<div class="td_div">
+					Deposit <input type="text" class="" name="subject" size="30" onkeyup="inputNumberAutoComma(this)" ><br>
+					Monthly rent <input type="text" class=" " name="subject" size="30" onkeyup="inputNumberAutoComma(this)"><br>
+					Management expense <input type="text" class=" " name="subject" size="30" onkeyup="inputNumberAutoComma(this)"> 
+					<input type="checkbox" value="0">none<br>
+				</div>
+			</td>
+		</tr>
+	</table>	
+	
+	<!-- ------------------------------------------------------------------------------------------------------------------- -->
+	<h1>Facilities information</h1>
+	<hr>
+	<table>
+		<tr>
+			<th>Cooling and Heating</th>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="" > Air conditioner</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="" > Heater</td>
+			<td colspan="3"></td>
 		
+		</tr>
+		<tr >
+			<th rowspan="2">Living facility</th>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="closet" > Closet</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="desk" > Desk</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="chair" > Chair</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="bad" > bed</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="refrigerator" > Refrigerator</td>
 		
+		</tr>
+		<tr>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="laundry" > Laundry </td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="kitchen_stove" > Kitchen_stove</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="sink" > Sink</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="bathroom" > Bathroom</td>
+			<td> </td>
 		
+			
+		</tr>
+		<tr>
+			<th>Ohter</th>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="internet" > Internet</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="wifi" > Wifi</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="elevator" > Elevator</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="pet" > Pet</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="parking" > Parking</td>
+		</tr>
+	</table>	
+	
+	<h1>Room Image</h1>
+	<hr>
+	<table>
 		<tr>
 			<th>업로드</th>
 			<td>
@@ -288,16 +431,10 @@ function sample6_execDaumPostcode() {
 				</div>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2" class="center">
-				<div class="td_div">
-					<input type="submit" value="새글 등록" onclick="fileUpload();">
-				</div>
-			</td>
-		</tr>
-		
 	</table>
-	
+	<div class="td_div">
+		<input type="submit" value="새글 등록" onclick="fileUpload();">
+	</div>
 	</form>
 	<p><a href="house_main.do ">글 목록 가기</a></p>
 </div>
