@@ -8,13 +8,12 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<context:component-scan base-package="com.koreigner.view" />
-
-	<!-- XML 데이터 처리를 위한 설정 -->
+	
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	
 	<mvc:annotation-driven />
 	
-	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		
 		<property name="order" value="2" />
 	</bean>
 	

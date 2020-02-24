@@ -5,7 +5,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%--(실습) 자바코드를 없애고, 데이터출력은 EL, JSTL 사용 형태로 변경 --%>     
+  
     
 
 <!DOCTYPE html>
@@ -33,10 +33,7 @@
 
 <div id="container">
 	<h1>글목록</h1>
-	
-	
-	
-	
+		
 	<!-- 데이터 표시 -->
 	<form>
 	<table>
@@ -50,18 +47,19 @@
 			<th width="100">조회수</th>
 		</tr>
 		
-		<c:forEach var="board" items="${boardList }">
+		<c:forEach var="infoBoard" items="${infoBoardList }">
 		<tr>
-			<td class="center">${board.seq }</td>
+			<td class="center">${infoBoard.info_idx }</td>
 			<td></td>
+			<td>${infoBoard.info_ins_user }</td>
 			<td>
-				<a href="getInfoBoard.do?seq=${board.seq }">
-					${board.title }
+				<a href="getInfoBoard.do?info_idx=${infoBoard.info_idx }">
+					${infoBoard.info_title }
 				</a>
 			</td>
-			<td>${board.writer }</td>
-			<td>${board.regdate }</td>
-			<td class="center">${board.cnt }</td>
+			
+			<td>${infoBoard.info_ins_dt }</td>
+			<td class="center">${infoBoard.info_hit }</td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -73,8 +71,8 @@
 			<td>
 				<!--  
 				<select name="searchCondition">
-					<option value="TITLE">제목
-					<option value="CONTENT">내용
+					<option value="INFO_TITLE">제목
+					<option value="INFO_CONTENT">내용
 				</select>
 				-->
 				<select name="searchCondition">

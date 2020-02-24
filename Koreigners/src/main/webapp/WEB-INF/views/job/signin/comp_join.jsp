@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="resources/css/regCompany.css" rel="stylesheet" type="text/css">
+<link href="resources/css/job/regCompany.css" rel="stylesheet" type="text/css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/js/daumAddr.js"></script>
@@ -19,7 +18,6 @@
 	#regCotent{
 		height: 1000px;
 		padding-top: 50px;
-		
 	}
 	
 </style>
@@ -67,7 +65,7 @@
 	
 	<label>직원 수 : </label><input type="text" name="employee_num" id="employee_num" name="직원 수"><br><br>
 	
-	<label>기숙사제공유무 : </label><input type="radio" name="domitory" id="domitory" name="기숙사제공유무" value="기숙사 제공 함">기숙사 제공 함
+	<label>기숙사제공유무 : </label><input type="radio" name="domitory" id="domitory" value="기숙사 제공 함">기숙사 제공 함
 	<input type="radio" name="domitory" value="기숙사 제공 하지 않음">기숙사 제공 하지 않음
 	<input type="radio" name="domitory" value="회사 내규에 따름(협의)">회사 내규에 따름(협의)
 	<br><br>

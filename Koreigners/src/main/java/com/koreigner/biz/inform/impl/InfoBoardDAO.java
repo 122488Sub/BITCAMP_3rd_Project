@@ -25,27 +25,27 @@ public class InfoBoardDAO {
 	//글입력
 	public void insertInfoBoard(InfoBoardVO vo) {
 		System.out.println("===> MyBatis로 insertInfoBoard() 실행");
-		mybatis.insert("InfoBoardDAO실행",vo);
+		mybatis.insert("InfoBoardDAO.insertInfoBoard",vo);
 	}
 
 	//글삭제
 	public void deleteInfoBoard(InfoBoardVO vo) {
 		System.out.println("===> MyBatis로 deleteInfoBoard() 실행");
-		mybatis.delete("InfoBoardDAO실행",vo);
+		mybatis.delete("InfoBoardDAO.deleteInfoBoard",vo);
 		
 	}
 
 	//글수정
 	public void updateInfoBoard(InfoBoardVO vo) {
 		System.out.println("===> MyBatis로 updateInfoBoard() 실행");
-		mybatis.update("InfoBoardDAO실행",vo);
+		mybatis.update("InfoBoardDAO.updateInfoBoard",vo);
 		
 	}
 
 	//글 상세조회
 	public InfoBoardVO getInfoBoard(InfoBoardVO vo) {
-		System.out.println("===> MyBatis로 getBoard() 실행");
-		return mybatis.selectOne("BoardDAO.getInfoBoard", vo);
+		System.out.println("===> MyBatis로 getInfoBoard() 실행");
+		return mybatis.selectOne("InfoBoardDAO.getInfoBoard", vo);
 	}
 
 
@@ -54,14 +54,15 @@ public class InfoBoardDAO {
 	//리스트 전체조회
 	public List<InfoBoardVO> getBoardInfoList() {
 		System.out.println("===> MyBatis로 getBoardInfoList() 실행");
-		return null;
+		List<InfoBoardVO> list = mybatis.selectList("InfoBoardDAO.getBoardInfoList");
+		return list;
 	}
 	
 	//검색조건 적용조회
 	public List<InfoBoardVO> getInfoBoardList(InfoBoardVO vo) {
 		System.out.println("===> MyBatis로 getInfoBoardList() 실행");
 		
-		return mybatis.selectList("BoardDAO.getInfoBoardList", vo);
+		return mybatis.selectList("InfoBoardDAO.getInfoBoardList", vo);
 	}
 
 	

@@ -19,10 +19,10 @@
 $(function(){
 
 // 닉네임 중복 검사
-	$("#mem_name").blur(function() {
-		var name = $('#mem_name').val();
+	$("#mem_nick").blur(function() {
+		var nick = $('#mem_nick').val();
 		$.ajax({
-			url : '/koreigner/nickCheck.do?mem_name='+ name,
+			url : '/koreigner/nickCheck.do?mem_nick='+ nick,
 			type : 'get',
 			success : function(data) {
 				console.log("data : " + data);	
@@ -130,8 +130,8 @@ $(function(){
 		<input type="hidden" name="mem_cate" value="p">
 		<hr>
 			<div>
-				<label for="mem_name">Nickname</label>
-					<input type="text" id="mem_name" name="mem_name">
+				<label for="mem_nick">Nickname</label>
+					<input type="text" id="mem_nick" name="mem_nick">
 				<div id="nick_check"></div>
 			</div>
 			<hr>

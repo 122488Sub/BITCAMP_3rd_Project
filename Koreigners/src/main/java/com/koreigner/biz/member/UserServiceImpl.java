@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -55,7 +54,7 @@ public class UserServiceImpl implements UserService {
 	
 	
 	
-	// 중복 아이디(이메일) 체크
+	//회원가입중 client가 입력한 email이 db에 이미 등록되어 있는지 중복 체크 한다.
 	@Override
 	public int userIdCheck(UserVO vo) {
 		
@@ -65,11 +64,11 @@ public class UserServiceImpl implements UserService {
 		return idCnt;
 	}
 	
-	// 중복 닉네임 체크
+	//회원가입중 client가 입력한 NickName이 db에 이미 등록되어 있는지 중복 체크 한다.
 	@Override
-	public int userNameCheck(UserVO vo) {
+	public int userNickCheck(UserVO vo) {
 		
-		int nameCnt = userDAO.userNameCheck(vo);
+		int nameCnt = userDAO.userNickCheck(vo);
 		System.out.println("nameCnt: " + nameCnt);
 
 		return nameCnt;
@@ -117,7 +116,7 @@ public class UserServiceImpl implements UserService {
 		userDAO.joinUser(vo);		
 	}
 	
-	// 권한 업데이트(가입승인)
+	//회원가입 후 이메일인증 완료하면 auth 권한 상승
 	@Override
 	public void updateAuthstatus(UserVO vo) {
 		userDAO.updateAuthstatus(vo);		

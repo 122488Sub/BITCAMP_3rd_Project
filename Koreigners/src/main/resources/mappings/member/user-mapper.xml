@@ -10,15 +10,15 @@
 	</select> 
 	
 	<!-- 닉네임 중복검사 -->
-	<select id="userNameCheck" parameterType="com.koreigner.biz.member.UserVO" resultType="int">
+	<select id="userNickCheck" parameterType="com.koreigner.biz.member.UserVO" resultType="int">
 		SELECT COUNT(*) FROM T_MEMBER WHERE MEM_NAME = #{mem_name}
 	</select>
 	
 	<!-- 회원 등록 -->
 	<insert id="joinUser" parameterType="com.koreigner.biz.member.UserVO">
 		INSERT INTO T_MEMBER
-			(MEM_IDX, MEM_CATE, MEM_ID, MEM_PW, MEM_NAME)
-		VALUES (MEM_SQ.NEXTVAL, #{mem_cate}, #{mem_id}, #{mem_pw}, #{mem_name})	
+			(MEM_IDX, MEM_CATE, MEM_ID, MEM_PW, MEM_NICK)
+		VALUES (MEM_SQ.NEXTVAL, #{mem_cate}, #{mem_id}, #{mem_pw}, #{mem_nick})	
 	</insert>
 	
 	<!-- 로그인 체크 -->

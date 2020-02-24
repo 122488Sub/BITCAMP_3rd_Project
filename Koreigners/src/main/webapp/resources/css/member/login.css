@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+	#login_container {
+	/*
+		max-width: 300px;
+		background-color: #fff;
+    	border: 2px solid #E70000;
+    	color: #000;
+    	padding-right: 28px;
+    */
+	}
+	ol {
+	    display: block;
+	    list-style-type: decimal;
+	    margin-block-start: 1em;
+	    margin-block-end: 1em;
+	    margin-inline-start: 0px;
+	    margin-inline-end: 0px;
+	    padding-inline-start: 40px;
+	}
+	#input_box {
+		max-width: 300px;
+		background-color: #fff;
+    	border: 2px solid #E70000;
+    	color: #000;
+    	padding-right: 28px;
+	}
+	.button {
+		background-color: #4CAF50;
+ 		border: none;
+	  	color: white;
+	  	padding: 10px 30px;
+	  	text-align: center;
+	  	text-decoration: none;
+	  	display: inline-block;
+	  	font-size: 16px;
+	  	margin: 8px 2px;
+	  	cursor: pointer;
+	  	border-radius: 8px;
+	}
