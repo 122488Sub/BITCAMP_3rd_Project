@@ -17,13 +17,13 @@
 	<!-- 회원 등록 -->
 	<insert id="joinUser" parameterType="com.koreigner.biz.member.UserVO">
 		INSERT INTO T_MEMBER
-			(MEM_IDX, MEM_CATE, MEM_ID, MEM_PW, MEM_NICK)
-		VALUES (MEM_SQ.NEXTVAL, #{mem_cate}, #{mem_id}, #{mem_pw}, #{mem_nick})	
+			(MEM_IDX, MEM_CATE, MEM_ID, MEM_PW, MEM_NAME)
+		VALUES (MEM_SQ.NEXTVAL, #{mem_cate}, #{mem_id}, #{mem_pw}, #{mem_name})	
 	</insert>
 	
 	<!-- 로그인 체크 -->
 	<select id="userLoginCheck" resultType="com.koreigner.biz.member.UserVO">
-		SELECT * FROM T_MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
+		SELECT * FROM T_MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw} AND MEM_CATE = #{mem_cate}
 	</select>
 	
 	<!-- 이메일 인증(권한상태 업데이트) -->
@@ -32,6 +32,11 @@
 		   SET AUTH_STATUS = '1'
 		 WHERE MEM_ID = #{mem_id}
 	</update>
+	
+	<!-- 권한상태 불러오기 -->
+	<select id="getAuthStatus" parameterType="String" resultType="String">
+		SELECT AUTH_STATUS FROM T_MEMBER WHERE MEM_ID = #{mem_id}
+	</select>
 	
 	<!-- 비밀번호 재설정 -->
 	<update id="updatePassword" parameterType="com.koreigner.biz.member.UserVO">

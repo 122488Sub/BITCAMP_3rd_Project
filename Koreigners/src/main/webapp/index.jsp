@@ -22,7 +22,19 @@ $(function() {
 	    $("#menu_wrap").append("<li class='menu'><a href='join_go.do'>Register</a></li>"); 
 	}
 	
+	
+	
 });
+
+/*
+$(function(){
+
+	var auth_check = ${auth_check};
+	if(auth_check != null && auth_check == 0) {
+		alert("Please verify your e-mail for unlimited access to our website.");
+	}
+});
+*/
 
  function myPage(){
 	var frm = document.token;
