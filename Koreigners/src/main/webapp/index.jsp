@@ -21,9 +21,6 @@ $(function() {
 		$("#menu_wrap").append("<li class='menu'><a href='login_go.do'>Sign in</a></li>");
 	    $("#menu_wrap").append("<li class='menu'><a href='join_go.do'>Register</a></li>"); 
 	}
-	
-	
-	
 });
 
 /*
@@ -53,7 +50,7 @@ $(function(){
 	 frm.method = "post";
 	 frm.submit();
  }
- 
+
 </script>
 </head>
 <body>

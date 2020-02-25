@@ -32,6 +32,7 @@
 
 
 <!-- address -->
+
 	<!-- 행정구역 한글 검색 -->
 	<select id="getAddrDoList" parameterType="String" resultType="companyVO">
 		SELECT DISTINCT DO_KOR
@@ -46,9 +47,25 @@
 		   WHERE DO_KOR = #{do_kor}
 		 ORDER BY GU_GUN_EUP_KOR
 	</select>
-<!-- address END -->	
 	
+<!-- address END -->	
 
+	<!-- 행정구역 한글명으로 시구군 한글 검색 -->
+	<select id="getComName" parameterType="String" resultType="String">
+		SELECT COMPANY_NAME
+		  FROM T_COMPANY
+		   WHERE mem_id = #{mem_id}
+	</select>
+	
+	<!-- mem_id로 회사정보 검색 -->
+	<select id="companyDetailOne" parameterType="String" resultType="companyVO">
+		SELECT *
+		  FROM T_COMPANY
+		   WHERE mem_id = #{mem_id}
+	</select>
+	
+	
+	
 	<!-- ===================================insert================================== -->
 	
 <!-- CompanyVO insert -->
