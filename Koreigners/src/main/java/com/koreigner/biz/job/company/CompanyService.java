@@ -13,8 +13,8 @@ public interface CompanyService {
 	List<CompanyVO> getAddrDoList();
 	List<CompanyVO> getAddrSiList(String si_kor);
 	CompanyVO getCateEn(Map<String, String> map);
+	CompanyVO companyDetailOne(String mem_id);
 	void comJoin(CompanyVO vo, HttpServletRequest request);
-	
 	
 	
 }
