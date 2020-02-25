@@ -132,6 +132,7 @@ function sample6_execDaumPostcode() {
 		
 		
 </script>
+
 <!--  ========================================================================================================================-->
 <!--jQuery UI CSS파일 -->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
@@ -156,13 +157,36 @@ $(function() {
          closeText: 'Close', 
          dateFormat: "yy-mm-dd"
     });
+    $('#current_date').datepicker({dateFormat: "yy-mm-dd"});
+	$('#current_date').datepicker('setDate', 'today') ;
+    
+    
+    
     $(".ui-datepicker-trigger").css('margin-left',"5px");
     $(".ui-datepicker-trigger").attr('width',15);
     $(".ui-datepicker-trigger").attr('height',15);
+    
+    $(".ui-datepicker-trigger, #datepicker").on('click', function() { 
+		$("#radio_available_date_After").prop('checked', true);
+	}); 
+
+	$("input[name=chk_management_expense]").on('click', function() { 
+		if ( $(this).prop('checked') ) { 
+			
+			$("#text_management_expense").attr("disabled",true);
+		} 
+		else { 
+			$("#text_management_expense").removeAttr("disabled");
+		} 
+	}); 
+
+    
+    
 });
-<!--  ========================================================================================================================  -->
+/**/
 </script>
 <script>
+/*천단위 콤마 처리 스크립트*/
 function inputNumberAutoComma(obj) {
     
     // 콤마( , )의 경우도 문자로 인식되기때문에 콤마를 따로 제거한다.
@@ -174,10 +198,21 @@ function inputNumberAutoComma(obj) {
         obj.value = "";
         return false;
     }
-   
+    obj.value = inputNumberRemoveZero(obj.value);
     // 기존에 들어가있던 콤마( , )를 제거한 이 후의 입력값에 다시 콤마( , )를 삽입한다.
     obj.value = inputNumberWithComma(inputNumberRemoveComma(obj.value));
 }
+//천단위 이상의 숫자에 콤마( , )를 삽입하는 함수
+function inputNumberRemoveZero(str) {
+
+    str = String(str);
+    while(str.indexOf('0')=='0'){
+    	str=str.substr(1);
+    }
+    
+    return str;
+}
+
 
 // 천단위 이상의 숫자에 콤마( , )를 삽입하는 함수
 function inputNumberWithComma(str) {
@@ -193,56 +228,122 @@ function inputNumberRemoveComma(str) {
     return str.replace(/[^\d]+/g, "");
 }
 </script>
+<!--  ========================================================================================================================-->
+
+<!--  ========================================================================================================================-->
 <script>
 	
-	function fileUpload(){
-		/*
-		var formData = new FormData();
+	function insertForm(){
 		
-		$.each($("input[type='file']")[0].files, function(i, file) {
-			formData.append('file', file);
-		});
-		//formData.append('file', document.getElementById('file').files[0]);
-		alert(document.getElementById('file').files.length);
-		$.ajax({ 
-			type: "POST", 
-			enctype: 'multipart/form-data', // 필수 
-			url: 'house_MultiImgUpload.do', 
-			data: formData,// 필수 
-			processData: false, // 필수
-			contentType: false, // 필수 
-			cache: false, 
-			success: function (result) { 
-				alert(result);
-			}, error: function (e) { 
+		if($('input[name=subject]').val()==''){
+			 alert("Plese Checked [Title]");
+			 $('input[name=subject]').focus();
+			 return false;
+		}
+		
+		
+		if( ! ( $('input:radio[name=build_type]').is(':checked') ) ){
+			 alert("Plese Checked [Buliding Type]");
+			 $('input[name=build_type]').focus();
+			 return false;
+		}
+		
+		if( ! ( $('input:radio[name=room_type]').is(':checked') ) ){
+			alert("Plese Checked [Room Type]");
+			 $('input[name=room_type]').focus();
+			 return false;
 				
-			} 
-		});
-*/			/*
-			var formData = new FormData( $("#form")[0]);
-			var bool= false;
-			$.ajax({ 
-				type: "POST", 
-				enctype: 'multipart/form-data', // 필수 
-				url: 'house_MultiImgUpload.do', 
-				data: formData,// 필수 
-				processData: false, // 필수
-				contentType: false, // 필수 
-				cache: false, 
-				async:false,
-				success: function (result) { 
-					alert("안가"+result);
-					bool=true;
-					//location.replace("house_main.do");
-					//location.replace("house_main.do");
-				}, error: function (e) { 
-					alert(e);
-				} 
-			});
-			if(bool){
-				alert(bool);
-				window.location.replace("house_main.do");
-			}*/
+		}
+		
+		
+		if( $('input[name=address]').val()==''){
+			alert("Plese Checked [Loctation - Address]");
+			 $('input[name=address]').focus();
+			 return false;
+				
+		}
+		
+		
+		if( $('input[name=room_area]').val()=='' || $('input[name=room_area]').val()=='0'){
+			alert("Plese Checked [Area]");
+			 $('input[name=room_area]').focus();
+			 return false;
+				
+		}
+		
+		if( $('input[name=bulid_layers]').val()=='' || $('input[name=bulid_layers]').val()=='0'){
+			alert("Plese Checked [Buliding Layers]");
+			 $('input[name=bulid_layers]').focus();
+			 return false;
+				
+		}
+		if( $('input[name=floor_layers]').val()=='' || $('input[name=floor_layers]').val()=='0'){
+			alert("Plese Checked [Floor Layers]");
+			 $('input[name=floor_layers]').focus();
+			 return false;
+				
+		}
+		if( $('input[name=bulid_layers]').val() < $('input[name=floor_layers]').val()){
+			alert("Plese Checked [Floor]\n [Floor Layers] cannot be higher than [Buliding Layers]");
+			$('input[name=floor_layers]').focus();
+			return false;
+			
+		}
+		
+	
+		//입주날짜 선택
+		if($('input[name=radio_available_date]:checked').val() == '0'){
+			$('input[name=available_date]').val( $('#current_date').val());
+		}
+		else if($('input[name=radio_available_date]:checked').val() == '1'){
+			$('input[name=available_date]').val( $('#datepicker').val());
+		}
+		else{
+			alert("Plese Checked [Available Date]");
+			$('input[name=radio_available_date]').focus();
+			return false;
+		}
+		
+	
+		
+		
+		//보증금 월세 관리비 , 제거
+		$("#deposit").val( inputNumberRemoveComma($("#deposit").val()));
+		$("#monthly_rent").val( inputNumberRemoveComma($("#monthly_rent").val()));
+	
+		if($('input[name=chk_management_expense]').is(':checked') ){
+			$("#management_expense").val('0');
+		}else {
+			$("#management_expense").val( inputNumberRemoveComma($("#text_management_expense").val()) );
+		}
+		
+		
+		if( $('input[name=deposit]').val()=='' || $('input[name=deposit]').val()=='0'){
+			alert("Plese Checked [Deposit]");
+			 $('input[name=deposit]').focus();
+			 return false;
+				
+		}
+		if( $('input[name=monthly_rent]').val()=='' || $('input[name=monthly_rent]').val()=='0'){
+			alert("Plese Checked [Monthly Rent]");
+			 $('input[name=monthly_rent]').focus();
+			 return false;
+				
+		}
+		if( $('input[name=management_expense]').val()==''){
+			alert("Plese Checked [Management Expense]");
+			 $('input[name=management_expense]').focus();
+			 return false;
+				
+		}
+		
+		
+
+		$("#form").attr('action',"house_MultiImgUpload.do").submit();	
+		
+		
+		
+		
 	}
 		
 </script>
@@ -254,7 +355,8 @@ function inputNumberRemoveComma(str) {
 	
 	<div id="container">
 	
-	<form action="house_MultiImgUpload.do" id="form" name="form" method="post" enctype="multipart/form-data">
+	<form action="" id="form" name="form" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="mem_email">
 	<h1>House Info</h1>
 	<hr>
 	
@@ -290,12 +392,12 @@ function inputNumberRemoveComma(str) {
 			<td colspan="3">
 				<div class="td_div">
 					<label style="width:30%">RoadAddress:</label>
-					<input type="text" id="roadAddr" name="address" style="width:60%;  margin-left: 5px;"> 
+					<input type="text" id="roadAddr" name="address" readonly="readonly" style="width:60%;  margin-left: 5px;"> 
 					<input type="button"  value="Search" onclick="goPopup();" style="width:10%">
 				</div>
 				<div class="td_div">
 					<label style="width:30%">DetailAddress:</label>
-					<input type="text" 	 id="addrDetail" name="address_detail" style="width:71%;"> 
+					<input type="text" 	 id="addrDetail" name="address_detail" readonly="readonly" style="width:71%;"> 
 				</div>
 				<input type="hidden" id="siNm" 		 name="do_en" 		   title="주소" value="">
 				<input type="hidden" id="sggNm" 	 name="gu_gun_eup_eng" title="주소" value="">
@@ -307,22 +409,22 @@ function inputNumberRemoveComma(str) {
 			<td style="width:40%">
 				<div class="td_div">
 					<label style="width:70%">Square Meter: </label>
-					<input type="number" id="" name="room_area" style="width:30%; " step="1" min="1">
+					<input type="number" id="" name="room_area" style="width:30%; " step="1" min="1" value='0'>
 				</div>
 			</td>
 			<th>Floor</th>
 			<td style="width:40%">
 				<div class="td_div">
 					<label style="width:20%">Buliding: </label>
-					<input type="number" id="" name="bulid_layers" style="width:30%; " step="1" min="1">
+					<input type="number" id="" name="bulid_layers" style="width:30%; " step="1" min="1" value='0'>
 					<label style="width:20%; margin-left: 10px;">Floor: </label>
-					<input type="number" id="" name="floor_layers" style="width:30%; " step="1" min="1">
+					<input type="number" id="" name="floor_layers" style="width:30%; " step="1" min="-3" value='0'>
 				</div>
 				<div class="td_div">
 					
 				</div>
 				<div class="td_div">
-					<input type="radio"  value="0" name="floor_type"> Nomal
+					<input type="radio"  value="0" name="floor_type" checked="checked"> Nomal
 					<input type="radio"  value="1" name="floor_type" style="margin-left: 15px"> RoofTops
 					<input type="radio"  value="2" name="floor_type" style="margin-left: 15px"> Semi-basement
 				</div>
@@ -332,18 +434,21 @@ function inputNumberRemoveComma(str) {
 			<th>Available Days</th>
 			<td>
 				<div class="td_div">
-					<input type="radio"  value="0" name="available_date"> Immediately
+					<input type="radio"  value="0" name="radio_available_date"> Immediately
 				</div>
 				<div class="td_div">
-					<input type="radio"  value="0" name="available_date"> After this
-					<input type="text" id="datepicker">
+					<input type="radio"  id="radio_available_date_After" value="1" name="radio_available_date"> After this
+					<input type="text" id="datepicker" readonly="readonly">
+					
 				</div>
+				<input type="hidden" id="current_date" name="current_date">
+				<input type="hidden" id="available_date" name="available_date">
 				
 			</td>
 			<th>Itinerary</th>
 			<td>
 				<div class="td_div">
-					<select name="stay_num_min" class="custom-select"> 
+					<select name="stay_num_min" class=""> 
 						<option value="1">1 month</option> 
 						<option value="2">2 months</option> 
 						<option value="3">3 months</option> 
@@ -372,10 +477,11 @@ function inputNumberRemoveComma(str) {
 			<th>Pricing<br>Information</th>
 			<td colspan="3">
 				<div class="td_div">
-					Deposit <input type="text" class="" name="subject" size="30" onkeyup="inputNumberAutoComma(this)" ><br>
-					Monthly rent <input type="text" class=" " name="subject" size="30" onkeyup="inputNumberAutoComma(this)"><br>
-					Management expense <input type="text" class=" " name="subject" size="30" onkeyup="inputNumberAutoComma(this)"> 
-					<input type="checkbox" value="0">none<br>
+					Deposit <input type="text" id="deposit" class="" name="deposit" size="30" onkeyup="inputNumberAutoComma(this)" value='0' ><br>
+					Monthly rent <input type="text" id="monthly_rent"class=" " name="monthly_rent" size="30" onkeyup="inputNumberAutoComma(this)" value='0'><br>
+					Management expense <input type="text" id="text_management_expense" class=" " name="text_management_expense" size="30" onkeyup="inputNumberAutoComma(this)" > 
+					<input type="checkbox" value="0" name="chk_management_expense">none<br>
+					<input type="hidden" id="management_expense" name="management_expense">
 				</div>
 			</td>
 		</tr>
@@ -387,36 +493,36 @@ function inputNumberRemoveComma(str) {
 	<table>
 		<tr>
 			<th>Cooling and Heating</th>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="" > Air conditioner</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="" > Heater</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="air_conditioner" value="1"> Air conditioner</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="heating" value="1"> Heater</td>
 			<td colspan="3"></td>
 		
 		</tr>
 		<tr >
 			<th rowspan="2">Living facility</th>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="closet" > Closet</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="desk" > Desk</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="chair" > Chair</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="bad" > bed</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="refrigerator" > Refrigerator</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="closet" value="1"> Closet</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="desk" value="1"> Desk</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="chair" value="1"> Chair</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="bad_type" value="1"> bed</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="refrigerator" value="1"> Refrigerator</td>
 		
 		</tr>
 		<tr>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="laundry" > Laundry </td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="kitchen_stove" > Kitchen_stove</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="sink" > Sink</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="bathroom" > Bathroom</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="laundry" value="1"> Laundry </td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="kitchen_stove" value="1"> Kitchen_stove</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="sink" value="1"> Sink</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="bathroom" value="1" > Bathroom</td>
 			<td> </td>
 		
 			
 		</tr>
 		<tr>
 			<th>Ohter</th>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="internet" > Internet</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="wifi" > Wifi</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="elevator" > Elevator</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="pet" > Pet</td>
-			<td class="td_option"> <input type="checkbox" class="chk_option" name="parking" > Parking</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="internet" value="1"> Internet</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="wifi" value="1"> Wifi</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="elevator" value="1"> Elevator</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="pet" value="1"> Pet</td>
+			<td class="td_option"> <input type="checkbox" class="chk_option" name="parking" value="1"> Parking</td>
 		</tr>
 	</table>	
 	
@@ -433,7 +539,7 @@ function inputNumberRemoveComma(str) {
 		</tr>
 	</table>
 	<div class="td_div">
-		<input type="submit" value="새글 등록" onclick="fileUpload();">
+		<input type="button" value="새글 등록" onclick="insertForm();">
 	</div>
 	</form>
 	<p><a href="house_main.do ">글 목록 가기</a></p>

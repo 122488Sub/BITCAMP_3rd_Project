@@ -9,11 +9,11 @@ import org.springframework.web.multipart.MultipartFile;
  * [T_ROOM_BOARD]
 	ROOM_IDX			NUMBER(10,0)
 	MEM_EMAIL			VARCHAR2(100 BYTE)
-	SUBJECT				VARCHAR2(100 BYTE)
-	DO_ENG				VARCHAR2(100 BYTE)
-	GU_GUN_EUP_ENG		VARCHAR2(100 BYTE)
-	ADDRESS				VARCHAR2(500 BYTE)
-	ADDRESS_DETAIL		NVARCHAR2(200 CHAR)
+	SUBJECT				VARCHAR2(100 BYTE) //
+	DO_ENG				VARCHAR2(100 BYTE) //
+	GU_GUN_EUP_ENG		VARCHAR2(100 BYTE) //
+	ADDRESS				VARCHAR2(500 BYTE) //
+	ADDRESS_DETAIL		NVARCHAR2(200 CHAR) //
 	ROOM_REPORTING_DATE	DATE
 
 	[T_ROOM_IMG]
@@ -23,36 +23,36 @@ import org.springframework.web.multipart.MultipartFile;
 	
 	[T_ROOM_INFO]
 	ROOM_IDX			NUMBER(10,0)
-	BUILD_TYPE			NUMBER(1,0)
-	ROOM_TYPE			NUMBER(1,0)
-	ROOM_AREA			NUMBER(3,0)
-	BULID_LAYERS		NUMBER(2,0)
-	FLOOR_LAYERS		NUMBER(2,0)
-	FLOOR_TYPE			NUMBER(1,0)
-	STAY_NUM_MIN		NUMBER(2,0)
-	DEPOSIT				NUMBER(10,0)
-	MONTHLY_RENT		NUMBER(10,0)
-	MANAGEMENT_EXPENSE	NUMBER(10,0)
-	AVAILABLE_DATE		VARCHAR2(100 BYTE)
+	BUILD_TYPE			NUMBER(1,0) //
+	ROOM_TYPE			NUMBER(1,0) //
+	ROOM_AREA			NUMBER(3,0) //
+	BULID_LAYERS		NUMBER(2,0) //
+	FLOOR_LAYERS		NUMBER(2,0) //
+	FLOOR_TYPE			NUMBER(1,0) //
+	STAY_NUM_MIN		NUMBER(2,0) //
+	DEPOSIT				NUMBER(10,0) //
+	MONTHLY_RENT		NUMBER(10,0) //
+	MANAGEMENT_EXPENSE	NUMBER(10,0) //
+	AVAILABLE_DATE		VARCHAR2(100 BYTE) //
 	
 	[T_ROOM_OPTION]
 	ROOM_IDX		NUMBER(10,0)
-	CLOSET			NUMBER(1,0)
-	DESK			NUMBER(1,0)
-	CHAIR			NUMBER(1,0)
-	BAD_TYPE		NUMBER(1,0)
-	AIR_CONDITIONER	NUMBER(1,0)
-	HEATING			NUMBER(1,0)
-	KITCHEN_STOVE	NUMBER(1,0)
-	REFRIGERATOR	NUMBER(1,0)
-	LAUNDRY			NUMBER(1,0)
-	PET				NUMBER(1,0)
-	INTERNET		NUMBER(1,0)
-	WIFI			NUMBER(1,0)
-	ELEVATOR		NUMBER(1,0)
-	SINK			NUMBER(1,0)
-	BATHROOM		NUMBER(1,0)
-	PARKING			NUMBER(1,0)
+	CLOSET			NUMBER(1,0)//
+	DESK			NUMBER(1,0)//
+	CHAIR			NUMBER(1,0)//
+	BAD_TYPE		NUMBER(1,0)//
+	AIR_CONDITIONER	NUMBER(1,0) //
+	HEATING			NUMBER(1,0) //
+	KITCHEN_STOVE	NUMBER(1,0)//
+	REFRIGERATOR	NUMBER(1,0)//
+	LAUNDRY			NUMBER(1,0)//
+	PET				NUMBER(1,0)//
+	INTERNET		NUMBER(1,0)///
+	WIFI			NUMBER(1,0)//
+	ELEVATOR		NUMBER(1,0)//
+	SINK			NUMBER(1,0)//
+	BATHROOM		NUMBER(1,0)//
+	PARKING			NUMBER(1,0)//
  */
 public class HouseAll_VO {
 	// common
@@ -86,6 +86,8 @@ public class HouseAll_VO {
 	List<String> room_img_ori_nameArr;
 	
 	List<MultipartFile> file;
+	
+	String select_available_date;
 	
 	public HouseAll_VO() {
 		// TODO Auto-generated constructor stub
@@ -533,7 +535,14 @@ public class HouseAll_VO {
 	public void setFile(List<MultipartFile> file) {
 		this.file = file;
 	}
+	public String getSelect_available_date() {
+		return select_available_date;
+	}
+	public void setSelect_available_date(String select_available_date) {
+		this.select_available_date = select_available_date;
+	}
 
+	
 	
 	
 	
