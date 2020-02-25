@@ -62,6 +62,11 @@ public class House_DAOMyBatis {
 		
 		return house;
 	}
+
+	public int myBatis_insertNewHouse(HouseAll_VO vo) {
+		// TODO Auto-generated method stub
+		return mybatis.insert("House_DAO.insertNewHouse", vo);
+	}
 }
 
 

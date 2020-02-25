@@ -9,4 +9,7 @@ public interface House_Service {
 	List<HouseAll_VO> getDoList(HouseAll_VO vo);
 	List<HouseAll_VO> getAllList();
 	HouseAll_VO getHouse(HouseAll_VO vo);
+	
+
+	int insertNewHouse(HouseAll_VO vo);
 }
