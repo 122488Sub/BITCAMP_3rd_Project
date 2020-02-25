@@ -35,7 +35,11 @@ public class HireServiceImpl implements HireService {
 		map.put("cate_prnt_ko", vo.getCate_prnt_ko());
 		map.put("cate_child_ko", vo.getCate_child_ko());
 		
+		
+		
 		CompanyVO enCate_vo = companyServiceImpl.getCateEn(map); //영어 카테고리 vo 생성
+		String companyName = companyServiceImpl.getComName(vo.getMem_id());
+		vo.setCompany_name(companyName);
 		vo.setInsurance(insurance);                              //보험정보 vo에 추가
 		vo.setIp(ip);											 //ip vo에 추가
 		vo.setCate_prnt_en(enCate_vo.getCate_prnt_en());         //영어 카테고리 대분류 vo에 추가
@@ -47,10 +51,16 @@ public class HireServiceImpl implements HireService {
 		hireDAO.insertHire(vo);
 	}
 	
-	
-	public List<HireVO> getHireList() {
+	@Override
+	public List<HireVO> getHireList(Map<String, Integer> map) {
 		
-		List<HireVO> hireList = hireDAO.getHireList();
+		List<HireVO> hireList = hireDAO.getHireList(map);
 		return hireList;
+	}
+	
+	@Override
+	public int hireListTotal() {
+		int total = hireDAO.hireListTotal();
+		return total;
 	}
 }

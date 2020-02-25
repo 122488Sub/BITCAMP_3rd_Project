@@ -30,14 +30,12 @@ public class UserController {
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/login_go.do")
 	public String moveToLogin(Model model, UserVO vo) {
+		
 		//기본 로그인 페이지 이동 시
 		model.addAttribute("auth_check", "0");
 		
 		String logout = vo.getLogout();
-		System.out.println("logout: " + logout);
-		
-		if(logout != null && logout.equals("1")) {
-			//로그아웃 후 이동 시
+		if(logout != null && logout.equals("1")) {//로그아웃 후 이동 시
 			model.addAttribute("logout_check", "1");
 		} else { //처음 페이지 이동 시
 			model.addAttribute("logout_check", "0");
@@ -61,7 +59,7 @@ public class UserController {
 	}
 
 	// 아이디 중복 체크 컨트롤러
-	@RequestMapping(value = "/idCheck.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int idCheck(@RequestParam("mem_id") String mem_id) {
 
@@ -74,7 +72,7 @@ public class UserController {
 	}
 
 	// 닉네임 중복 체크 컨트롤러
-	@RequestMapping(value = "/nickCheck.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/nickCheck.do", method = RequestMethod.POST)
 	@ResponseBody
 	public int nickCheck(@RequestParam("mem_name") String mem_name) {
 
@@ -93,7 +91,7 @@ public class UserController {
 
 		userService.joinUser(vo);
 
-		return "/member/emailConfirm.page";
+		return "member/emailAuth.page";
 	}
 
 	// 이메일 인증
@@ -111,31 +109,55 @@ public class UserController {
 	/**
 	 * 로그인 처리
 	 * 
-	 * @param request HttpServletRequest 객체
 	 * @param jsonMap HTTP 요청 몸체(JSON)을 Map으로 치환
 	 * @return entity 반환
 	 */
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public ResponseEntity<String> postLogin(HttpServletRequest request, @RequestBody Map<String, Object> jsonMap, Model model) {
+	public ResponseEntity<String> postLogin(HttpServletResponse response, @RequestBody Map<String, String> jsonMap) {
 
 		ResponseEntity<String> entity = null;
-		String resultMsg = "fail";
+		String tokenStr = "fail";
 
-		String inputId = (String) jsonMap.get("inputId");
-		String inputPw = (String) jsonMap.get("inputPw");
+		String inputId = jsonMap.get("inputId");
+		String inputPw = jsonMap.get("inputPw");
+		String inputCate = jsonMap.get("inputCate");
+		
 
-		if (userService.checkLogin(inputId, inputPw)) { // 유저가 존재할 경우
-			resultMsg = userService.createToken(inputId); // 토큰 생성
-		}
-		entity = new ResponseEntity<String>(resultMsg, HttpStatus.OK);
+		if (userService.checkLogin(inputId, inputPw, inputCate)) { // 유저가 존재할 경우
+			tokenStr = userService.createToken(inputId); // 토큰 생성
+			response.setHeader("tokenStr", tokenStr); //Header에 토큰 실어 보내기 -> 인터셉터에서 토큰 검증  
+		} 
+		entity = new ResponseEntity<String>(tokenStr, HttpStatus.OK); //토큰!
 		
 		return entity;
 	}
 
 	//마이페이지로 이동(토큰 가지고)
 	@RequestMapping(value = "/myPage_go.do", method = RequestMethod.POST)
-	//@ResponseBody
-	public String myPage(UserVO vo) {
+	public String myPage(HttpServletRequest request, Model model, UserVO vo) {
+		
+		
+		
+		
+		
+		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		//vo.getTokenStr()으로 받느냐 Header에서 받느냐...
+		//마이페이지로 넘어가면서 인증여부 알림창은 어떻게 띄우느냐....
+		
+		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+		
+		
+		
+		String auth_status = request.getHeader("auth_status");
+		String mem_id = request.getHeader("mem_id");
+		
+		if(auth_status != null && auth_status.equals("0")) {//이메일 인증을 하지 않은 유저
+			model.addAttribute("auth_check", "0");
+			return "/koreigner/index.jsp";
+		}
+		
 		/*
 		String tokenStr = vo.getTokenStr();
 		
@@ -160,76 +182,6 @@ public class UserController {
 		return "member/mypage/p_profile.page";
 	}
 
-	/*
-	 * // 페이스북 oAuth 관련
-	 * 
-	 * @Autowired private FacebookConnectionFactory connectionFactory;
-	 * 
-	 * @Autowired private OAuth2Parameters oAuth2Parameters;
-	 * 
-	 * // 페이스북으로 로그인
-	 * 
-	 * @RequestMapping(value = "/facebook_join.do", method = { RequestMethod.GET,
-	 * RequestMethod.POST }) public String join(HttpServletResponse response, Model
-	 * model) {
-	 * 
-	 * OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
-	 * String facebook_url =
-	 * oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE,
-	 * oAuth2Parameters);
-	 * 
-	 * model.addAttribute("facebook_url", facebook_url);
-	 * System.out.println("/facebook" + facebook_url);
-	 * 
-	 * return "member/login.page"; }
-	 * 
-	 * @RequestMapping(value = "/facebookSignInCallback", method = {
-	 * RequestMethod.GET, RequestMethod.POST }) public String
-	 * facebookSignInCallback(@RequestParam String code) throws Exception {
-	 * 
-	 * try { String redirectUri = oAuth2Parameters.getRedirectUri();
-	 * System.out.println("Redirect URI : " + redirectUri);
-	 * System.out.println("Code : " + code);
-	 * 
-	 * OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
-	 * AccessGrant accessGrant = oauthOperations.exchangeForAccess(code,
-	 * redirectUri, null); String accessToken = accessGrant.getAccessToken();
-	 * System.out.println("AccessToken: " + accessToken); Long expireTime =
-	 * accessGrant.getExpireTime();
-	 * 
-	 * 
-	 * if (expireTime != null && expireTime < System.currentTimeMillis()) {
-	 * accessToken = accessGrant.getRefreshToken();
-	 * System.out.printf("accessToken is expired. refresh token = {}", accessToken);
-	 * };
-	 * 
-	 * 
-	 * Connection<Facebook> connection =
-	 * connectionFactory.createConnection(accessGrant); Facebook facebook =
-	 * connection == null ? new FacebookTemplate(accessToken) : connection.getApi();
-	 * UserOperations userOperations = facebook.userOperations();
-	 * 
-	 * try
-	 * 
-	 * { String [] fields = { "id", "email", "name"}; User userProfile =
-	 * facebook.fetchObject("me", User.class, fields); System.out.println("유저이메일 : "
-	 * + userProfile.getEmail()); System.out.println("유저 id : " +
-	 * userProfile.getId()); System.out.println("유저 name : " +
-	 * userProfile.getName());
-	 * 
-	 * } catch (MissingAuthorizationException e) { e.printStackTrace(); }
-	 * 
-	 * 
-	 * } catch (Exception e) {
-	 * 
-	 * e.printStackTrace();
-	 * 
-	 * } return "redirect:/koreigner/index.jsp";
-	 * 
-	 * }
-	 * 
-	 */
-	 
 
 	// 비밀번호 재설정 메일보내기
 	@RequestMapping(value = "/resetPwMail.do", method = RequestMethod.POST)
@@ -248,30 +200,5 @@ public class UserController {
 
 		return "/member/login.page";
 	}
-
-	// =================================================================
-	// 토큰 검증과 아이디 출력
-	@RequestMapping(value = "/validToken.do")
-	@ResponseBody
-	public String TokenNId(Model model, @RequestBody Map<String, Object> jsonMap) {
-
-		String tokenStr = (String) jsonMap.get("tokenStr");
-
-		if (tokenStr != null) { // 토큰이 발급되었을 경우(로그인을 한 경우)
-
-			Map<String, Object> tokenPayload = userService.getTokenPayload(tokenStr);
-
-			String memId = (String) tokenPayload.get("aud"); // 토큰대상자의 아이디
-
-			String tokenValidMsg = userService.validToken(tokenStr, memId);
-
-			if (tokenValidMsg.equals("Pass")) { // 토큰 검증을 마친 경우에만 토큰 정보를 출력한다.
-				model.addAttribute("tokenAud", memId);
-			}
-		} else {
-			model.addAttribute("loginId", "no-login");
-		} // 로그인 되어 있지 않은 경우
-
-		return "index.jsp";
-	}
+	
 }

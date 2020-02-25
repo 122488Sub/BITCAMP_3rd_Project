@@ -1,5 +1,9 @@
+<%@page import="com.koreigner.biz.common.page.PagingVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +14,11 @@
 </head>
 <body onload="loadPage()">
 
-
 <a href="hireWrite_go.do">Post an Ad</a>
-
 <table>
 	<thead>
 		<tr>
+			<th>idx</th>
 			<th>Company Name</th>
 			<th>Location</th>
 			<th>Title</th>
@@ -32,6 +35,9 @@
 			<td>Post Date</td>
 		<tr>
 	</tbody>
+	<tfoot id="tfoot">
+		
+	</tfoot>
 </table>
 </body>
 </html>

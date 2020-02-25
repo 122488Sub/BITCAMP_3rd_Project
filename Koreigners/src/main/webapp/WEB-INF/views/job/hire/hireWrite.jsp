@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,18 +17,8 @@
 </head>
 
 <body>
+
 <br><br><br><br>
-		<!-- 
-
-board_idx, hit, hire_idx, company_idx, mem_id, ,   , , , , ,
-, ,  , , , ,, 
-, , , , , , regdate, ip, b_status,  
-
-카테고리
-주소
-
--->
-
 
 <form action="hirePost.do" method="post">
 
