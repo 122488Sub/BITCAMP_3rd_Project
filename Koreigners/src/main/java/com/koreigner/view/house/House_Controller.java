@@ -99,7 +99,7 @@ public class House_Controller {
 	public String imgUpload(HouseAll_VO vo) { 
 		System.out.println("controller/house_MultiImgUpload");
 		System.out.println(vo);
-		
+		System.out.println(vo.getAvailable_date());
 		String path = this.getClass().getResource("").getPath(); 
 		path=path.substring(1,path.indexOf(".metadata"))+"Koreigners/src/main/webapp/WEB-INF/views/house/upload/";
 		System.out.println(path);//workspace가 BITCAMP_3rd_Project일 경우
