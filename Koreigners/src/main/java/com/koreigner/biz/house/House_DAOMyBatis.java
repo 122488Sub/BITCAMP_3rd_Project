@@ -67,6 +67,11 @@ public class House_DAOMyBatis {
 		// TODO Auto-generated method stub
 		return mybatis.insert("House_DAO.insertNewHouse", vo);
 	}
+
+	public int myBatis_getRoom_Sq() {
+		// TODO Auto-generated method stub
+		return mybatis.selectOne("House_DAO.getRoom_Sq");
+	}
 }
 
 
