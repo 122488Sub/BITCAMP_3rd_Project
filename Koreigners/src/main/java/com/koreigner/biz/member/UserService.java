@@ -40,6 +40,9 @@ public interface UserService {
 	//JWT 토큰 payload 정보 추출
 	Map<String, Object> getTokenPayload(String tokenStr);
 
+	// 회원 정보 수정
+	void updateMember(UserVO vo);
+
 
 	
 }

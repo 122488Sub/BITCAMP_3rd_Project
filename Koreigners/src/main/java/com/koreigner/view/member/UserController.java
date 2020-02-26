@@ -95,7 +95,7 @@ public class UserController {
 	}
 
 	// 이메일 인증
-	@RequestMapping(value = "/emailConfirm.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/emailAuth.do", method = RequestMethod.GET)
 	public String emailConfirm(UserVO vo, Model model) throws Exception {
 
 		vo.setAuth_status("1"); // authStatus를 1로, 권한 업데이트
@@ -127,7 +127,7 @@ public class UserController {
 	}
 
 	//마이페이지로 이동
-	@RequestMapping(value = "/myPage_go.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/myPage_go.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String myPage(HttpServletRequest request, Model model, UserVO vo) {
 		
 		String mem_id = (String)request.getAttribute("mem_id"); //토큰에서 아이디 추출해오기
@@ -137,13 +137,31 @@ public class UserController {
 		model.addAttribute("mvo", mvo);
 		String mem_cate = mvo.getMem_cate();
 		
+		String type = request.getParameter("type"); //마이페이지 유형
 		if(mem_cate.equals("c")) { //기업회원일 경우
-			return "member/mypage/c_profile.page";
+			
+			if(type.equals("profile")) {
+				return "member/mypage/c_profile.page";
+			} else if(type.equals("hire")) {
+				return "member/mypage/c_hire.page";
+			} else {
+				return "member/mypage/p_applier.page";
+			}
 			
 		} else if(mem_cate.equals("p")) { //개인회원일 경우
-			return "member/mypage/p_profile.page";
+
+			if(type.equals("profile")) {
+				return "member/mypage/p_profile.page";
+			} else if(type.equals("resume")) {
+				return "member/mypage/p_resume.page";
+			} else if(type.equals("wishlist")) {
+				return "member/mypage/p_wishlist.page";
+			} else {
+				return "member/mypage/p_ads.page";
+			}
 			
 		} else {
+			//"이메일인증하세요" 알림 어떻게 하지ㅠㅠ
 			return "/koreigner/index.jsp";
 		}
 	}
@@ -155,7 +173,7 @@ public class UserController {
 
 		userService.resetPasswordMail(email);
 
-		return "/member/emailConfirm.page";
+		return "/member/emailAuth.page";
 	}
 
 	// 비밀번호 재설정
@@ -167,4 +185,29 @@ public class UserController {
 		return "/member/login.page";
 	}
 	
+	// 회원정보 수정
+	@RequestMapping(value="/updateMember.do", method=RequestMethod.POST)
+	public String updateMember(HttpServletRequest request, UserVO vo) {
+		
+		String mem_cate = vo.getMem_cate();
+		String birth1 = request.getParameter("birth1");
+		String birth2 = request.getParameter("birth2");
+		String birth3 = request.getParameter("birth3");
+		vo.setMem_birth(birth1 + "-" + birth2 + "-" + birth3);
+		
+		String address = request.getParameter("address");
+		String address_detail = request.getParameter("address_detail");
+		vo.setMem_address(address + " " + address_detail);
+		
+		if(mem_cate.equals("c")) {
+			return "/member/mypage/c_profile.page";
+			
+		} else if(mem_cate.equals("p")) {
+			userService.updateMember(vo);
+			return "/member/mypage/p_profile.page";
+			
+		} else {
+			return "/koreigner/index.jsp";
+		}
+	}
 }

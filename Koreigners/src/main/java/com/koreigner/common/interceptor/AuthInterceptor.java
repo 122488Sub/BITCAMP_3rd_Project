@@ -2,6 +2,7 @@ package com.koreigner.common.interceptor;
 
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.koreigner.biz.member.UserService;
-import com.koreigner.biz.member.UserVO;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter{
 	
@@ -24,7 +24,18 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		boolean goController = false;
 		
-		String token = request.getParameter("tokenStr");
+		String token = null;
+		
+		Cookie[] cookie = request.getCookies();
+		for(int i=0; i<cookie.length; i++){   
+			if(cookie[i].getName().equals("tokenStr")){    
+				token = cookie[i].getValue(); 
+			}
+		}
+		if(token.equals("")){
+			response.sendRedirect("/koreigner/login_go.do"); 
+		}
+		
 		System.out.println("권한인터셉터 토큰 : " + token);
 		
 		if(token != null && userService.validToken(token).equals("Pass")) {//토큰 검증 통과 시
@@ -41,6 +52,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 			} else if(auth_status.equals("0")) { //이메일 인증을 완료하지 못한 유저
 				response.sendRedirect("/koreigner/index.jsp"); //메인페이지로 돌아가기
 			}
+		} else {//토큰 검증 통과 못함
+			response.sendRedirect("/koreigner/login_go.do");
 		}
 		
 		return goController;

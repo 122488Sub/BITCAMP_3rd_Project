@@ -1,4 +1,4 @@
-	
+
 $(function() {
 	if(sessionStorage.getItem("tokenStr") != null){
 	    $("#menu_wrap").append("<li class='menu'><a href='javascript:logOut();'>Log out</a></li>");

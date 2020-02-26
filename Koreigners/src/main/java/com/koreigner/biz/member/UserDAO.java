@@ -65,4 +65,9 @@ public class UserDAO {
 		return mvo;
 	}
 
+	//회원정보 수정하기
+	public void updateMember(UserVO vo) {
+		mybatis.update("user.updateMember", vo);		
+	}
+
 }
