@@ -99,33 +99,10 @@ public class House_Controller {
 	public String imgUpload(HouseAll_VO vo) { 
 		System.out.println("controller/house_MultiImgUpload");
 		System.out.println(vo);
-		System.out.println(vo.getAvailable_date());
-		String path = this.getClass().getResource("").getPath(); 
-		path=path.substring(1,path.indexOf(".metadata"))+"Koreigners/src/main/webapp/WEB-INF/views/house/upload/";
-		System.out.println(path);//workspace가 BITCAMP_3rd_Project일 경우
-	
-
-		String fileName="";
-		
-		File dir= new File(path);
-		if(!dir.isDirectory()) {
-			dir.mkdirs();
-		}
-		
-		List<String> fileList= new ArrayList<>();
-		for(MultipartFile file : vo.getFile()) {
-			if(file.isEmpty()) {System.out.println("zz");break;}
-			fileName = file.getOriginalFilename();
-			fileList.add(fileName);
-			System.out.println("실제 파일 이름 : "+ fileName);
-			try {
-				file.transferTo(new File(path + fileName));
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		}vo.setRoom_img_nameArr(fileList);
 		
 		
+		
+		houseService.insertNewHouse(vo);
 		
 		return "redirect:house_main.do";
 	}

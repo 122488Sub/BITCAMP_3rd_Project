@@ -52,4 +52,8 @@ public class CompanyDAO {
 		return companyName;
 	}
 	
+	CompanyVO companyDetailOne(String mem_id) {
+		CompanyVO companyVO = mybatis.selectOne("companyDetailOne", mem_id);
+		return companyVO;
+	}
 }

@@ -12,7 +12,7 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link href="resources/css/job/hireWrite.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="resources/js/hireWrite.js"></script>
+<script type="text/javascript" src="resources/js/hire/hireWrite.js"></script>
 <script type="text/javascript" src="resources/js/daumAddr.js"></script>
 </head>
 

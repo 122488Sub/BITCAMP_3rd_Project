@@ -89,4 +89,10 @@ public class CompanyServiceImpl implements CompanyService{
 		return companyName;
 	}
 
+	@Override
+	public CompanyVO companyDetailOne(String mem_id) {
+		CompanyVO companyVO = companyDAO.companyDetailOne(mem_id);
+		return companyVO;
+	}
+	
 }
