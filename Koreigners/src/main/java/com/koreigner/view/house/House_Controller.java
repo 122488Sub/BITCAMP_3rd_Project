@@ -2,7 +2,9 @@ package com.koreigner.view.house;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -48,22 +50,48 @@ public class House_Controller {
 		return houseList;
 		
 	}
+	/*
+	@RequestMapping(value="getHouseDoList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody //response 객체의 몸체(body)에 데이터 전달
+	//public List<Room_VO> ctrl_getSiList(@RequestParam(value="siListParam[]") List<String> siList) {
+	public List<HouseAll_VO> ctrl_getDoList(@RequestParam(value="do_List[]") List<String> do_List
+										) {
+		HouseAll_VO vo= new HouseAll_VO();
+		System.out.println("원본");
+		System.out.println(do_List);
+		System.out.println(vo);
+		for (String s : do_List) {
+			System.out.println("선택 도: "+s);
+		}
+		vo.setDo_enList(do_List);
+		List<HouseAll_VO> houseList = houseService.getDoList(vo);
+		return houseList;
+		
+		//return null;
+	}*/
 	
 	@RequestMapping(value="getHouseDoList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody //response 객체의 몸체(body)에 데이터 전달
 	//public List<Room_VO> ctrl_getSiList(@RequestParam(value="siListParam[]") List<String> siList) {
-	public List<HouseAll_VO> ctrl_getDoList(HouseAll_VO vo) {
-		System.out.println("원본");
-		System.out.println(vo);
-
+	public List<HouseAll_VO> ctrl_getDoList(HouseAll_VO vo
+										) {
 		
+		System.out.println("원본");
+		
+		System.out.println(vo);
+		for (String s : vo.getDo_enList()) {
+			System.out.println("선택 도: "+s);
+		}
+		System.out.println();
+		for (String s : vo.getGu_gun_eup_engList()) {
+			System.out.println("선택 시: "+s);
+		}
 		List<HouseAll_VO> houseList = houseService.getDoList(vo);
 		return houseList;
 		
 		//return null;
 	}
 	
-
 	@RequestMapping(value="getHouseAllList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody //response 객체의 몸체(body)에 데이터 전달
 	//public List<Room_VO> ctrl_getSiList(@RequestParam(value="siListParam[]") List<String> siList) {

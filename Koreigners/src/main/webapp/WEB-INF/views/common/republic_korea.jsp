@@ -62,6 +62,24 @@
 	
 </style>
 <body>
+<input type="hidden" id="selectDo_Seoul" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Busan" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Daegu" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Incheon" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Gwangju" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Daejeon" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Ulsan" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Sejong-si" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Gyeonggi-do" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Gangwon-do" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Chungcheongbuk-do" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Chungcheongnam-do" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Jeollabuk-do" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Jeollanam-do" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Gyeongsangbuk-do" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Gyeongsangnam-do" name="selectDo" value="0">
+<input type="hidden" id="selectDo_Jeju-do" name="selectDo" value="0">
+
 <div id='content'>
 	<div id='map'>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 350 350 350">
@@ -135,10 +153,23 @@
 	</div>
 </div>
 <script >
-
+//vo에서 도와 시의 내용을 가질 List<String> 변수를 각각 만들것
+var do_List=new Array();
+var si_List=new Array();
+do_List.push("init");
+si_List.push("init");	
 
 function getDoSiData(do_kor,do_en,idx) {
 	console.log(do_en);
+	//선택한 도가 처음 클릭한거라면.
+	if($('#selectDo_'+do_en).val()=='0'){
+		//값을 바꾸고
+		$('#selectDo_'+do_en).val('1');
+		// 선택한 리스트의 추가한다
+		do_List.push(do_en);
+	}
+		
+		
 	$.ajax({
 		type : "get",
 		url : "getKoreaAddressList.do",
@@ -175,7 +206,7 @@ function getDoSiData(do_kor,do_en,idx) {
 					dispHtml += "<td>"
 					dispHtml += "		<input type='checkbox' id='si_"+this.gu_gun_eup_eng+"'"
 											+"class='chk_do_child' value='"+this.gu_gun_eup_eng+"'"
-											+"onClick='javascript:chkChild()'>";
+											+"onClick='javascript:chkChild(this)'>";
 					dispHtml += "</td>"
 					dispHtml += "<td>"
 					dispHtml += "		<label for='si_"+this.gu_gun_eup_eng+"' >"+this.si_gu_gun_eup_eng+"</label>"
@@ -193,7 +224,7 @@ function getDoSiData(do_kor,do_en,idx) {
 			$("#CD"+idx).css( {'fill':'blue'} ); 
 			
 			$(".tbody_dosi").html(dispHtml);
-			getDoData();
+			
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alert("실패 : \n"
@@ -203,6 +234,8 @@ function getDoSiData(do_kor,do_en,idx) {
 		}
 		
 	});
+	
+	getData();
 }
 </script>
 </body>

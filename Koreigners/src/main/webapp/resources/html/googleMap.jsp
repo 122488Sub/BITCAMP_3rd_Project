@@ -37,9 +37,9 @@
 <body>
 	
 	<!--상세페이지시에는 hidden 처리-->
-    <div id="search-panel">
+
         <input id="address" type="hidden" value="<%=location %>" />
-    </div><!--상세페이지시에는 hidden 처리-->
+   <!--상세페이지시에는 hidden 처리-->
     
     <div id="google-map">
     </div>
