@@ -56,4 +56,9 @@ public class CompanyDAO {
 		CompanyVO companyVO = mybatis.selectOne("companyDetailOne", mem_id);
 		return companyVO;
 	}
+	List<CompanyVO> getChildCate(String cate_prnt_en) {
+		System.out.println("cate_prnt_en : dao" + cate_prnt_en);
+		List<CompanyVO> companyVO = mybatis.selectList("getChildCate", cate_prnt_en);
+		return companyVO;
+	}
 }

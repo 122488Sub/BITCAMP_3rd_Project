@@ -65,6 +65,15 @@
 	</select>
 	
 	
+	<!-- 카테고리 대분류로 하위 카테고리 검색 -->
+	<select id="getChildCate" parameterType="String" resultType="companyVO">
+		SELECT C.CATE_CHILD cate_child_en
+   		  FROM T_JOB_CATE_MST P, T_JOB_CATE_CHILD C
+         WHERE C.CATE_IDX = P.CATE_IDX 
+             AND P.CATE_PRNT = #{cate_prnt_en}
+	</select>
+	
+	
 	
 	<!-- ===================================insert================================== -->
 	

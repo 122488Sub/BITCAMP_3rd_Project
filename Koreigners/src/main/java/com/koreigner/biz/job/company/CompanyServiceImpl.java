@@ -95,4 +95,11 @@ public class CompanyServiceImpl implements CompanyService{
 		return companyVO;
 	}
 	
+	@Override
+	public List<CompanyVO> getChildCate(String cate_prnt_en) {
+		List<CompanyVO> companyVO = companyDAO.getChildCate(cate_prnt_en);
+		return companyVO;
+	}
+	
+	
 }
