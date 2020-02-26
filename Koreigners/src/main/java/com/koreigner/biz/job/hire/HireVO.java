@@ -13,6 +13,7 @@ public class HireVO {
 	private int hire_age_max;               //희망 직원 나이 최대
 	private int hit;                        //조회수
 	private String mem_id;                  //회사 계정 아이디
+	private String company_name;            //회사 이름
 	private String work_type;               //근무 형태   정규직 / 아르바이트 / 시간제 등등
 	private String title;                   //게시글 제목
 	private String do_en;                   //근무 행정구역 영어
@@ -50,8 +51,15 @@ public class HireVO {
 	
 	
 	
-	
-	
+	public String getCompany_name() {
+		return company_name;
+	}
+	public void setCompany_name(String company_name) {
+		this.company_name = company_name;
+	}
+	public String getInsurance() {
+		return insurance;
+	}
 	public List<String> getInsuranceInfo() {
 		return insuranceInfo;
 	}

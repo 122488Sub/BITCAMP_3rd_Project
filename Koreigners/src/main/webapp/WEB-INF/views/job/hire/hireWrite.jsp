@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,23 +12,13 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link href="resources/css/job/hireWrite.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="resources/js/hireWrite.js"></script>
+<script type="text/javascript" src="resources/js/hire/hireWrite.js"></script>
 <script type="text/javascript" src="resources/js/daumAddr.js"></script>
 </head>
 
 <body>
+
 <br><br><br><br>
-		<!-- 
-
-board_idx, hit, hire_idx, company_idx, mem_id, ,   , , , , ,
-, ,  , , , ,, 
-, , , , , , regdate, ip, b_status,  
-
-카테고리
-주소
-
--->
-
 
 <form action="hirePost.do" method="post">
 

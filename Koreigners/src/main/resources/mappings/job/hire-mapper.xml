@@ -5,11 +5,28 @@
 <mapper namespace="HireDAO">
 
 
-<select id="getHireList" resultType="hireVO">
-	SELECT * 
-	  FROM T_JOB_HIRE
+<select id="getHireList" parameterType="Map" resultType="hireVO">
+	SELECT *
+		FROM (
+		       SELECT ROWNUM R_NUM, HIRE.*
+		        FROM (SELECT *
+		                FROM T_JOB_HIRE
+		               ORDER BY HIRE_IDX DESC) HIRE      
+		    )
+	  WHERE R_NUM BETWEEN #{begin} AND #{end}
+	  
 </select>
 
+
+<select id="hireListTotal" resultType="int">
+		SELECT COUNT(*) FROM T_JOB_HIRE
+</select>
+
+<select id="hireDetailOne" parameterType="int" resultType="hireVO">
+		SELECT *
+		  FROM T_JOB_HIRE
+		 WHERE HIRE_IDX = #{hire_idx}
+</select>
 <!-- category -->
 	<!-- 카테고리 대분류 검색 -->
 	
@@ -22,7 +39,7 @@
 	
 	<insert id="insertHire" parameterType="hireVO">
 		INSERT INTO T_JOB_HIRE(ADDRESS ,ADDRESS_EN, ADDR_DT_EN, ADDR_DT_KOR, APPLY_WAY, 
-                        BOARD_IDX, B_STATUS, CATE_CHILD_EN, CATE_CHILD_KO, CATE_PRNT_EN, CATE_PRNT_KO, 
+                        BOARD_IDX, B_STATUS, CATE_CHILD_EN, CATE_CHILD_KO, CATE_PRNT_EN, CATE_PRNT_KO, COMPANY_NAME,
                         DOMITORY, DO_EN, DO_KOR, 
                         EDUCATION, EXPERIENCE, 
                         FOREIGN_LANGUAGE,
@@ -37,12 +54,12 @@
                       )
 	    VALUES (
 	            #{address} ,#{address_en}, #{addr_dt_en}, #{addr_dt_kor}, #{apply_way}, 
-	            2, 1, #{cate_child_en}, #{cate_child_ko}, #{cate_prnt_en}, #{cate_prnt_ko}, 
+	            2, 1, #{cate_child_en}, #{cate_child_ko}, #{cate_prnt_en}, #{cate_prnt_ko}, #{company_name},
 	            #{domitory}, #{do_en}, #{do_kor}, 
 	            #{education}, #{experience}, 
 	            #{foreign_language},
 	            #{gu_gun_eup_eng}, #{gu_gun_eup_kor},
-	            #{hire_age_max}, #{hire_age_min}, 1, #{hire_number}, 0,
+	            #{hire_age_max}, #{hire_age_min}, 23, #{hire_number}, 0,
 	            #{insurance}, #{ip},
 	            #{major}, #{meals}, #{mem_id},
 	            #{payment_codition}, #{payment_detail}, #{prefer_skills}, #{prepare_doc}, 
@@ -51,8 +68,19 @@
 	            #{work_detail}, #{work_time}, #{work_type}
 	            )
 	</insert>
+	
+	<insert id="wishInsert" parameterType="hireVO">
+		INSERT INTO T_WISH_LIST(WISH_IDX, MEM_ID, B_IDX, BOARD_IDX, REGDATE)
+		  VALUES (WISH_SQ.NEXTVAL, #{mem_id}, #{hire_idx}, 2, SYSDATE)
+	</insert>
+	
 <!-- CompanyVO insert End -->	
 	
+	
+	
+	<update id="hireHIT" parameterType="int">
+		UPDATE T_JOB_HIRE SET HIT = HIT + 1 WHERE HIRE_IDX = #{hire_idx}
+	</update>
 </mapper>
 
 

@@ -82,5 +82,17 @@ public class CompanyServiceImpl implements CompanyService{
 		
 		companyDAO.comJoin(vo);
 	}
+	
+	
+	public String getComName(String mem_id) {
+		String companyName = companyDAO.getComName(mem_id);
+		return companyName;
+	}
 
+	@Override
+	public CompanyVO companyDetailOne(String mem_id) {
+		CompanyVO companyVO = companyDAO.companyDetailOne(mem_id);
+		return companyVO;
+	}
+	
 }
