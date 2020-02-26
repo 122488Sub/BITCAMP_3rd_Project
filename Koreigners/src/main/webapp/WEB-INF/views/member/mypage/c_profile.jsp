@@ -10,11 +10,11 @@
 <body>
 <div>
 	<ul>
-		<li class="tabs"><a href="#">My 개인정보 수정</a></li>
-		<li class="tabs"><a href="#">My 채용 공고</a></li>
-		<li class="tabs"><a href="#">My 입사지원자</a></li>
+		<li class="tabs"><a href="myPage_go.do?type=profile">My 개인정보 수정</a></li>
+		<li class="tabs"><a href="myPage_go.do?type=hire">My 채용 공고</a></li>
+		<li class="tabs"><a href="myPage_go.do?type=applier">My 입사지원자</a></li>
 	</ul>
 </div>
-
+기업회원 정보수정 페이지!!!!
 </body>
 </html>

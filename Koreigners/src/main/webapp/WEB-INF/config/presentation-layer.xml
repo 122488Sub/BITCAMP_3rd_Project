@@ -58,6 +58,15 @@
         <property name="order" value="1" />
     </bean>  
 	
+	<!-- Interceptors -->
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/myPage_go.do"/>
+			<bean class="com.koreigner.common.interceptor.AuthInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 </beans>
 
 

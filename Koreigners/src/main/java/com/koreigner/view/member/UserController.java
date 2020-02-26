@@ -26,7 +26,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
+	
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/login_go.do")
 	public String moveToLogin(Model model, UserVO vo) {
@@ -95,7 +95,7 @@ public class UserController {
 	}
 
 	// 이메일 인증
-	@RequestMapping(value = "/emailConfirm.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/emailAuth.do", method = RequestMethod.GET)
 	public String emailConfirm(UserVO vo, Model model) throws Exception {
 
 		vo.setAuth_status("1"); // authStatus를 1로, 권한 업데이트
@@ -106,12 +106,7 @@ public class UserController {
 		return "/member/login.page";
 	}
 
-	/**
-	 * 로그인 처리
-	 * 
-	 * @param jsonMap HTTP 요청 몸체(JSON)을 Map으로 치환
-	 * @return entity 반환
-	 */
+	//로그인 처리
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public ResponseEntity<String> postLogin(HttpServletResponse response, @RequestBody Map<String, String> jsonMap) {
 
@@ -125,61 +120,50 @@ public class UserController {
 
 		if (userService.checkLogin(inputId, inputPw, inputCate)) { // 유저가 존재할 경우
 			tokenStr = userService.createToken(inputId); // 토큰 생성
-			response.setHeader("tokenStr", tokenStr); //Header에 토큰 실어 보내기 -> 인터셉터에서 토큰 검증  
 		} 
 		entity = new ResponseEntity<String>(tokenStr, HttpStatus.OK); //토큰!
 		
 		return entity;
 	}
 
-	//마이페이지로 이동(토큰 가지고)
-	@RequestMapping(value = "/myPage_go.do", method = RequestMethod.POST)
+	//마이페이지로 이동
+	@RequestMapping(value = "/myPage_go.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String myPage(HttpServletRequest request, Model model, UserVO vo) {
 		
+		String mem_id = (String)request.getAttribute("mem_id"); //토큰에서 아이디 추출해오기
+		System.out.println("mem_id: " + mem_id);
 		
+		UserVO mvo = userService.getOneMember(mem_id); //회원정보 불러오기
+		model.addAttribute("mvo", mvo);
+		String mem_cate = mvo.getMem_cate();
 		
-		
-		
-		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		
-		//vo.getTokenStr()으로 받느냐 Header에서 받느냐...
-		//마이페이지로 넘어가면서 인증여부 알림창은 어떻게 띄우느냐....
-		
-		//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-		
-		
-		
-		
-		String auth_status = request.getHeader("auth_status");
-		String mem_id = request.getHeader("mem_id");
-		
-		if(auth_status != null && auth_status.equals("0")) {//이메일 인증을 하지 않은 유저
-			model.addAttribute("auth_check", "0");
-			return "/koreigner/index.jsp";
-		}
-		
-		/*
-		String tokenStr = vo.getTokenStr();
-		
-		if(tokenStr!= null){ //토큰이 발급되었을 경우(로그인을 한 경우)
-		Map<String, Object> tokenPayload = userService.getTokenPayload(tokenStr);
-		  
-		String memId = (String)tokenPayload.get("aud"); //토큰대상자의 아이디
-		 
-		String tokenValidMsg = userService.validToken(tokenStr, memId);
-		 
-			if(tokenValidMsg.equals("Pass")) { //토큰 검증을 마친 경우에만 작업 진행
-				//model.addAttribute("tokenAud", memId);
-				
-				// 기업회원/개인회원 구분해서 정보 가져오기
-				
+		String type = request.getParameter("type"); //마이페이지 유형
+		if(mem_cate.equals("c")) { //기업회원일 경우
+			
+			if(type.equals("profile")) {
+				return "member/mypage/c_profile.page";
+			} else if(type.equals("hire")) {
+				return "member/mypage/c_hire.page";
+			} else {
+				return "member/mypage/p_applier.page";
 			}
 			
-		} else { //로그인 되어 있지 않은 경우
-			//model.addAttribute("loginId", "no-login");
-		} 
-		*/ 
-		return "member/mypage/p_profile.page";
+		} else if(mem_cate.equals("p")) { //개인회원일 경우
+
+			if(type.equals("profile")) {
+				return "member/mypage/p_profile.page";
+			} else if(type.equals("resume")) {
+				return "member/mypage/p_resume.page";
+			} else if(type.equals("wishlist")) {
+				return "member/mypage/p_wishlist.page";
+			} else {
+				return "member/mypage/p_ads.page";
+			}
+			
+		} else {
+			//"이메일인증하세요" 알림 어떻게 하지ㅠㅠ
+			return "/koreigner/index.jsp";
+		}
 	}
 
 
@@ -189,7 +173,7 @@ public class UserController {
 
 		userService.resetPasswordMail(email);
 
-		return "/member/emailConfirm.page";
+		return "/member/emailAuth.page";
 	}
 
 	// 비밀번호 재설정
@@ -201,4 +185,29 @@ public class UserController {
 		return "/member/login.page";
 	}
 	
+	// 회원정보 수정
+	@RequestMapping(value="/updateMember.do", method=RequestMethod.POST)
+	public String updateMember(HttpServletRequest request, UserVO vo) {
+		
+		String mem_cate = vo.getMem_cate();
+		String birth1 = request.getParameter("birth1");
+		String birth2 = request.getParameter("birth2");
+		String birth3 = request.getParameter("birth3");
+		vo.setMem_birth(birth1 + "-" + birth2 + "-" + birth3);
+		
+		String address = request.getParameter("address");
+		String address_detail = request.getParameter("address_detail");
+		vo.setMem_address(address + " " + address_detail);
+		
+		if(mem_cate.equals("c")) {
+			return "/member/mypage/c_profile.page";
+			
+		} else if(mem_cate.equals("p")) {
+			userService.updateMember(vo);
+			return "/member/mypage/p_profile.page";
+			
+		} else {
+			return "/koreigner/index.jsp";
+		}
+	}
 }

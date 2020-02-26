@@ -1,4 +1,4 @@
-	
+
 $(function() {
 	if(sessionStorage.getItem("tokenStr") != null){
 	    $("#menu_wrap").append("<li class='menu'><a href='javascript:logOut();'>Log out</a></li>");
@@ -20,7 +20,10 @@ $(function() {
  }
  
  function logOut(){
-	 alert("로그아웃되었습니다.\n" + "메인페이지로 이동합니다.")
 	 sessionStorage.clear();
-	 location.href = "/koreigner/index.jsp";
+	 
+	 var frm = document.logout;
+	 frm.action = "login_go.do";
+	 frm.method = "post";
+	 frm.submit();
  }

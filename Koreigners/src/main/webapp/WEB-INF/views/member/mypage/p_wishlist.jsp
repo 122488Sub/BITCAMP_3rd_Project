@@ -10,12 +10,12 @@
 <body>
 <div>
 	<ul>
-		<li class="tabs"><a href="#">Profile Setting</a></li>
-		<li class="tabs"><a href="#">Resume</a></li>
-		<li class="tabs"><a href="#">Wishlist</a></li>
-		<li class="tabs"><a href="#">My Ads</a></li>
+		<li class="tabs"><a href="myPage_go.do?type=profile">Profile Setting</a></li>
+		<li class="tabs"><a href="myPage_go.do?type=resume">Resume</a></li>
+		<li class="tabs"><a href="myPage_go.do?type=wishlist">Wishlist</a></li>
+		<li class="tabs"><a href="myPage_go.do?type=ads">My Ads</a></li>
 	</ul>
 </div>
-
+위시리스트 페이지!!!!!
 </body>
 </html>

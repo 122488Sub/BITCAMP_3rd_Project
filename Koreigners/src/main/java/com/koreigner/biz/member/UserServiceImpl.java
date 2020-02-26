@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
         sendMail.setSubject("[KOREIGNERS 회원가입 이메일 인증]");
         sendMail.setText(new StringBuffer()
         		.append("<h1>메일인증</h1>")
-        		.append("<a href='http://localhost:8080/biz/emailConfirm.do?mem_id=")
+        		.append("<a href='http://localhost:8080/biz/emailAuth.do?mem_id=")
         		.append(vo.getMem_id())
         		.append("' target='_blank'>이메일 인증 확인</a>")
         		.toString());
@@ -117,12 +117,20 @@ public class UserServiceImpl implements UserService {
 		userDAO.joinUser(vo);		
 	}
 	
-	//auth 가져오기
+	//이메일인증여부 가져오기
 	@Override
 	public String getAuthStatus(String mem_id) {
 		String auth_status = userDAO.getAuthStatus(mem_id);
 		return auth_status;
 	}
+	
+	//회원 정보 가져오기
+	@Override
+	public UserVO getOneMember(String mem_id) {
+		UserVO mvo = userDAO.getOneMember(mem_id);
+		return mvo;
+	}
+
 	
 	//회원가입 후 이메일인증 완료하면 auth 권한 상승
 	@Override
@@ -189,6 +197,12 @@ public class UserServiceImpl implements UserService {
 			System.out.println("[registerAccount] : " + e.getMessage());
 		}	
 		return isSuccess;
+	}
+	
+	//회원정보 수정
+	@Override
+	public void updateMember(UserVO vo) {
+		userDAO.updateMember(vo);		
 	}
 
 
@@ -279,6 +293,7 @@ public class UserServiceImpl implements UserService {
 		
 		return payloadMap;
 	}
+
 
 	
 	

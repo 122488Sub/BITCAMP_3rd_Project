@@ -44,6 +44,7 @@ public class UserDAO {
 		
 	}
 
+	//해당유저의 존재여부 파악
 	public Object userLoginCheck(String inputId, String inputPw, String inputCate) {
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("mem_id", inputId);
@@ -51,10 +52,22 @@ public class UserDAO {
 		paramMap.put("mem_cate", inputCate);
 		return mybatis.selectOne("user.userLoginCheck", paramMap);
 	}
-
+	
+	//이메일인증여부 가져오기
 	public String getAuthStatus(String mem_id) {
-		String auth_status = mybatis.selectOne(mem_id);
+		String auth_status = mybatis.selectOne("user.getAuthStatus", mem_id);
 		return auth_status;
+	}
+	
+	//회원정보 불러오기
+	public UserVO getOneMember(String mem_id) {
+		UserVO mvo = mybatis.selectOne("user.getOneMember", mem_id);
+		return mvo;
+	}
+
+	//회원정보 수정하기
+	public void updateMember(UserVO vo) {
+		mybatis.update("user.updateMember", vo);		
 	}
 
 }
