@@ -28,11 +28,12 @@ public class UserController {
 	private UserService userService;
 	
 	// 로그인 페이지 이동
-	@RequestMapping(value = "/login_go.do")
+	@RequestMapping(value="/login_go.do")
 	public String moveToLogin(Model model, UserVO vo) {
 		
 		//기본 로그인 페이지 이동 시
 		model.addAttribute("auth_check", "0");
+		model.addAttribute("pw_reset", "0");
 		
 		String logout = vo.getLogout();
 		if(logout != null && logout.equals("1")) {//로그아웃 후 이동 시
@@ -45,48 +46,42 @@ public class UserController {
 	}
 
 	// 회원가입 이동
-	@RequestMapping(value = "/join_go.do")
+	@RequestMapping(value="/join_go.do")
 	public String join_go() {
 
 		return "/member/join.page";
 	}
 
 	// 비밀번호 찾기 이동
-	@RequestMapping(value = "/resetPassword_go.do")
+	@RequestMapping(value="/resetPassword_go.do")
 	public String resetPassword_go() {
 
 		return "/member/resetPassword.page";
 	}
 
 	// 아이디 중복 체크 컨트롤러
-	@RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
+	@RequestMapping(value="/idCheck.do", method=RequestMethod.POST)
 	@ResponseBody
 	public int idCheck(@RequestParam("mem_id") String mem_id) {
 
-		UserVO vo = new UserVO();
-		vo.setMem_id(mem_id);
-
-		int idCnt = userService.userIdCheck(vo);
+		int idCnt = userService.userIdCheck(mem_id);
 
 		return idCnt;
 	}
 
 	// 닉네임 중복 체크 컨트롤러
-	@RequestMapping(value = "/nickCheck.do", method = RequestMethod.POST)
+	@RequestMapping(value="/nickCheck.do", method=RequestMethod.POST)
 	@ResponseBody
 	public int nickCheck(@RequestParam("mem_name") String mem_name) {
 
-		UserVO vo = new UserVO();
-		vo.setMem_name(mem_name);
-
-		int nameCnt = userService.userNickCheck(vo);
+		int nameCnt = userService.userNickCheck(mem_name);
 		System.out.println("nameCnt: " + nameCnt);
 
 		return nameCnt;
 	}
 
 	// 회원 등록
-	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
+	@RequestMapping(value="/join.do", method=RequestMethod.POST)
 	public String joinUser(UserVO vo) throws Exception {
 
 		userService.joinUser(vo);
@@ -95,19 +90,23 @@ public class UserController {
 	}
 
 	// 이메일 인증
-	@RequestMapping(value = "/emailAuth.do", method = RequestMethod.GET)
+	@RequestMapping(value="/emailAuth.do", method=RequestMethod.GET)
 	public String emailConfirm(UserVO vo, Model model) throws Exception {
 
 		vo.setAuth_status("1"); // authStatus를 1로, 권한 업데이트
 		userService.updateAuthstatus(vo);
 
 		model.addAttribute("auth_check", "1");
+		
+		//로그인페이지 이동 시 기본 세팅
+		model.addAttribute("logout_check", "0");
+		model.addAttribute("pw_reset", "0");
 
 		return "/member/login.page";
 	}
 
 	//로그인 처리
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@RequestMapping(value="/login.do", method=RequestMethod.POST)
 	public ResponseEntity<String> postLogin(HttpServletResponse response, @RequestBody Map<String, String> jsonMap) {
 
 		ResponseEntity<String> entity = null;
@@ -127,7 +126,7 @@ public class UserController {
 	}
 
 	//마이페이지로 이동
-	@RequestMapping(value = "/myPage_go.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/myPage_go.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String myPage(HttpServletRequest request, Model model, UserVO vo) {
 		
 		String mem_id = (String)request.getAttribute("mem_id"); //토큰에서 아이디 추출해오기
@@ -168,19 +167,34 @@ public class UserController {
 
 
 	// 비밀번호 재설정 메일보내기
-	@RequestMapping(value = "/resetPwMail.do", method = RequestMethod.POST)
-	public String resetPasswordMail(@RequestParam("email") String email) throws Exception {
+	@RequestMapping(value="/resetPwMail.do", method=RequestMethod.POST)
+	public String resetPasswordMail(@RequestParam("email") String email, Model model) throws Exception {
+		
+		int idCnt = userService.userIdCheck(email);
+		
+		if(idCnt > 0) {
+			userService.resetPasswordMail(email);			
+		}
+		
+		model.addAttribute("pw_reset", "1");
+		
+		// 로그인페이지 이동 시 기본 세팅
+		model.addAttribute("auth_check", "0");
+		model.addAttribute("logout_check", "0");
 
-		userService.resetPasswordMail(email);
-
-		return "/member/emailAuth.page";
+		return "/member/login.page";
 	}
 
 	// 비밀번호 재설정
-	@RequestMapping(value = "/resetPw.do", method = RequestMethod.POST)
-	public String resetPassword(UserVO vo) {
+	@RequestMapping(value="/resetPw.do", method=RequestMethod.POST)
+	public String resetPassword(UserVO vo, Model model) {
 
 		userService.resetPassword(vo);
+		
+		//로그인페이지 이동 시 기본 세팅
+		model.addAttribute("auth_check", "0");
+		model.addAttribute("logout_check", "0");
+		model.addAttribute("pw_reset", "0");
 
 		return "/member/login.page";
 	}

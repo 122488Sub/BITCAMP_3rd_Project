@@ -5,12 +5,12 @@
 <mapper namespace="user">
 
 	<!-- 아이디(이메일) 중복검사 -->
-	<select id="userIdCheck" parameterType="userVO" resultType="int">
+	<select id="userIdCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM T_MEMBER WHERE MEM_ID = #{mem_id}
 	</select> 
 	
 	<!-- 닉네임 중복검사 -->
-	<select id="userNickCheck" parameterType="userVO" resultType="int">
+	<select id="userNickCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM T_MEMBER WHERE MEM_NAME = #{mem_name}
 	</select>
 	

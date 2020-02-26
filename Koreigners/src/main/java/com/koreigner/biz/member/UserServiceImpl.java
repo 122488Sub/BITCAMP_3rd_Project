@@ -57,9 +57,9 @@ public class UserServiceImpl implements UserService {
 	
 	//회원가입중 client가 입력한 email이 db에 이미 등록되어 있는지 중복 체크 한다.
 	@Override
-	public int userIdCheck(UserVO vo) {
+	public int userIdCheck(String mem_id) {
 		
-		int idCnt = userDAO.userIdCheck(vo);
+		int idCnt = userDAO.userIdCheck(mem_id);
 		System.out.println("idCnt: " + idCnt);
 
 		return idCnt;
@@ -67,9 +67,9 @@ public class UserServiceImpl implements UserService {
 	
 	//회원가입중 client가 입력한 NickName이 db에 이미 등록되어 있는지 중복 체크 한다.
 	@Override
-	public int userNickCheck(UserVO vo) {
+	public int userNickCheck(String mem_name) {
 		
-		int nameCnt = userDAO.userNickCheck(vo);
+		int nameCnt = userDAO.userNickCheck(mem_name);
 		System.out.println("nameCnt: " + nameCnt);
 
 		return nameCnt;
@@ -161,7 +161,7 @@ public class UserServiceImpl implements UserService {
         sendMail.setSubject("[KOREIGNERS 비밀번호 재설정 안내]");
         sendMail.setText(new StringBuffer()
         		.append("<h1>비밀번호 재설정</h1>")
-        		.append("<a href='http://localhost:8080/biz/resetPassword_2.do?mem_id=")
+        		.append("<a href='http://localhost:8080/biz/resetPassword_2.jsp")
         		.append(email)
         		.append("' target='_blank'>비밀번호 변경</a>")
         		.toString());
@@ -293,6 +293,8 @@ public class UserServiceImpl implements UserService {
 		
 		return payloadMap;
 	}
+
+	
 
 
 	
