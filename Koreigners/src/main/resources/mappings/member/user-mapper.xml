@@ -38,6 +38,11 @@
 		SELECT AUTH_STATUS FROM T_MEMBER WHERE MEM_ID = #{mem_id}
 	</select>
 	
+	<!-- 회원정보 불러오기 -->
+	<select id="getOneMember" parameterType="String" resultType="com.koreigner.biz.member.UserVO">
+		SELECT * FROM T_MEMBER WHERE MEM_ID = #{mem_id}
+	</select>
+	
 	<!-- 비밀번호 재설정 -->
 	<update id="updatePassword" parameterType="com.koreigner.biz.member.UserVO">
 		UPDATE T_MEMBER

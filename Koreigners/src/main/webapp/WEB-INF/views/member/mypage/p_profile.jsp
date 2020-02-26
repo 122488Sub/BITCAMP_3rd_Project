@@ -19,15 +19,11 @@
 	<form action="#">
 		<div>
 			<label for="nickName">Nickname</label>
-			<input type="text" name="mem_nick" value="">
+			<input type="text" name="mem_name" value="${mvo.mem_name }">
 		</div>
 		<div>
 			<label for="id">ID(Email)</label>
-			<input type="text" name="mem_id" value="">
-		</div>
-		<div>
-			<label for="name">Name</label>
-			<input type="text" name="mem_name">
+			<input type="text" name="mem_id" value="${mvo.mem_id }">
 		</div>
 		<div>
 			<label for="phone">Phone number</label>

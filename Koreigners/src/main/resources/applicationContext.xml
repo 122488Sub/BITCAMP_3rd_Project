@@ -60,22 +60,6 @@
 			</props>
 		</property>
 	</bean>
-	
-	<!-- Interceptors -->
-	<bean id="interceptorForToken" class="com.koreigner.common.interceptor.TokenInterceptor" />
-	<bean id="interceptorForEmailAuth" class="com.koreigner.common.interceptor.EmailAuthInterceptor" />
-	
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/logout.do"/>
-			<mvc:mapping path="/myPage_go.do"/>
-			<bean class="com.koreigner.common.interceptor.TokenInterceptor"/>
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/myPage_go.do"/>
-			<bean class="com.koreigner.common.interceptor.EmailAuthInterceptor"/>
-		</mvc:interceptor>
-	</mvc:interceptors>
 
 </beans>
 

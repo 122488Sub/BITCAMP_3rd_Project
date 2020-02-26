@@ -119,13 +119,6 @@
 		    <artifactId>commons-codec</artifactId>
 		    <version>1.9</version>
 		</dependency>
-		
-		<!-- 페북으로 로그인 라이브러리 -->
-		<dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-facebook</artifactId>
-            <version>2.0.3.RELEASE</version>
-        </dependency>
 			
 		<!-- =================== -->		
 		
