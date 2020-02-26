@@ -117,12 +117,20 @@ public class UserServiceImpl implements UserService {
 		userDAO.joinUser(vo);		
 	}
 	
-	//auth 가져오기
+	//이메일인증여부 가져오기
 	@Override
 	public String getAuthStatus(String mem_id) {
 		String auth_status = userDAO.getAuthStatus(mem_id);
 		return auth_status;
 	}
+	
+	//회원 정보 가져오기
+	@Override
+	public UserVO getOneMember(String mem_id) {
+		UserVO mvo = userDAO.getOneMember(mem_id);
+		return mvo;
+	}
+
 	
 	//회원가입 후 이메일인증 완료하면 auth 권한 상승
 	@Override

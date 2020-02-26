@@ -13,8 +13,11 @@ public interface UserService {
 	//회원가입
 	void joinUser(UserVO vo) throws Exception;
 
-	//권한 불러오기
+	//이메일인증여부 불러오기
 	String getAuthStatus(String mem_id);
+	
+	//회원 정보 가져오기
+	UserVO getOneMember(String mem_id);
 
 	//권한 업데이트
 	void updateAuthstatus(UserVO vo);
@@ -36,6 +39,7 @@ public interface UserService {
 	
 	//JWT 토큰 payload 정보 추출
 	Map<String, Object> getTokenPayload(String tokenStr);
+
 
 	
 }
