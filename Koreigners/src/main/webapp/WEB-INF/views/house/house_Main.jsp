@@ -87,7 +87,7 @@
 		var param={
 
 				'do_enList' : do_List,  // '본인 vo변수이름 : 데이터이름'
-				'gu_gun_eup_engList' : si_List
+				'si_enList' : si_List
 		}
 		//----------------------------------------
 	
@@ -98,7 +98,7 @@
 		 jQuery.ajaxSettings.traditional = true;
 		 $.ajax({
 				type : "get",
-			 	url : "getHouseDoList.do", 
+			 	url : "getHouseSearchList.do", 
 				dataType : "json",
 				async: false,
 				data: param,
@@ -154,34 +154,14 @@
 		
 	}
 	function getInitData() {
-		 //추후 옵션 필터값 자리
-		var option=[];
-		option.push("TQTQTQTQ");
-		option.push("wRwRwR");
+		
 		//----------------------------------------
 		 $.ajax({
 				type : "get",
 			 	url : "getHouseAllList.do",  
 				dataType : "json",
 				async: false,
-				data: { //보낼 데이터
-					//"name": data변수 or 값
-					//.do에서 ()@RequestParam(value="name") 자료형 새변수명) 으로 사용됨
-					//이때 데이터가 배열이면 자료형은 @RequestParam(value="name[]") List<String> 새변수명)으로 처리
-					//"do_enParam": do_enParam,
-					"option": option
-				},
 				success : function(data) {
-					
-					console.log(data);
-					//응답받은 데이터 형식 : [{}, {}, ... , {}] - 배열
-					var strData = JSON.stringify(data); //JSON -> string
-					console.log("-" + strData + "-");
-					
-					var jsData = JSON.parse(strData); //string -> JavaScript 객체화
-					console.log("-" + jsData + "-");
-					
-					
 					//-------------------------------------------------
 					var dispHtml = "";
 					dispHtml = "<ul>";

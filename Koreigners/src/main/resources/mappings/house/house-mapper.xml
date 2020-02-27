@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="House_DAO">
 	
-	<select id="getAllList_vo" parameterType="house_all"
+	<select id="getAllList" parameterType="house_all"
 		resultType="house_all">
 		SELECT 
 		    BOARD.ROOM_IDX, BOARD.MEM_EMAIL, BOARD.SUBJECT, BOARD.DO_EN, 
@@ -42,7 +42,7 @@
 		    
 		    
 	</select>
-	<select id="getDoList_vo" parameterType="house_all"
+	<select id="getSearchList" parameterType="house_search"
 		resultType="house_all">
 		SELECT
 			BOARD.ROOM_IDX, BOARD.MEM_EMAIL, BOARD.SUBJECT, BOARD.DO_EN, 
@@ -80,23 +80,23 @@
 		    
 		AND ( 
 		    
-		    <if test="do_enList !=null ">
+		    
 		    	
 		    	BOARD.DO_EN IN
 		    	<foreach collection="do_enList" item="do" index="index" open="(" separator="," close=")"> 
           			  #{do} 
        			</foreach> 
-       		</if>
-       		<if test=" (do_enList != null) and (gu_gun_eup_engList != null) ">
+       		
+       		
        			OR	
-       		</if>
-       		<if test="gu_gun_eup_engList != null">
+       		
+       		
        		
        			BOARD.GU_GUN_EUP_ENG IN 
-				<foreach collection="gu_gun_eup_engList" item="si" index="index" open="(" separator="," close=")"> 
+				<foreach collection="si_enList" item="si" index="index" open="(" separator="," close=")"> 
           			#{si} 
        			</foreach> 
-       		</if>
+       		
 			) 
        		
 		ORDER BY 
@@ -104,7 +104,7 @@
 	</select>
 	
 	
-	<select id="getHouse_vo" parameterType="house_all"
+	<select id="getHouse" parameterType="int"
 		resultType="house_all">
 		SELECT 
 		    BOARD.ROOM_IDX, BOARD.MEM_EMAIL, BOARD.SUBJECT, BOARD.DO_EN, 
@@ -156,7 +156,7 @@
 		    VALUES 
 		        (ROOM_SQ.NEXTVAL,#{mem_email},#{subject}, #{do_en},  
 		        #{gu_gun_eup_eng},#{address},#{address_detail},SYSDATE) 
-		  <foreach collection="room_img_nameArr" item="fileName" index="index">
+		  <foreach collection="img_nameList" item="fileName" index="index">
 		    INTO 
 		        T_ROOM_IMG(ROOM_IDX, ROOM_IMG_NAME, ROOM_IMG_ORI_NAME) 
 		    VALUES 
