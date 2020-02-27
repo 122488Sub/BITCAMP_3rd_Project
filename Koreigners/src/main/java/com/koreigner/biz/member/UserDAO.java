@@ -16,14 +16,14 @@ public class UserDAO {
 	public UserDAO() {}
 	
 	//아이디 중복 체크
-	public int userIdCheck(UserVO vo) {
-		int idCnt = mybatis.selectOne("user.userIdCheck", vo);
+	public int userIdCheck(String mem_id) {
+		int idCnt = mybatis.selectOne("user.userIdCheck", mem_id);
 		return idCnt;
 	}
 	
 	//닉네임 중복 체크
-	public int userNickCheck(UserVO vo) {
-		int nameCnt = mybatis.selectOne("user.userNickCheck", vo);
+	public int userNickCheck(String mem_name) {
+		int nameCnt = mybatis.selectOne("user.userNickCheck", mem_name);
 		return nameCnt;
 	}
 
@@ -63,6 +63,11 @@ public class UserDAO {
 	public UserVO getOneMember(String mem_id) {
 		UserVO mvo = mybatis.selectOne("user.getOneMember", mem_id);
 		return mvo;
+	}
+
+	//회원정보 수정하기
+	public void updateMember(UserVO vo) {
+		mybatis.update("user.updateMember", vo);		
 	}
 
 }

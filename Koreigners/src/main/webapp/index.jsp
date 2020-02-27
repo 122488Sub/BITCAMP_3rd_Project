@@ -8,10 +8,11 @@
     <title>Document</title>
     <link href="resources/css/header.css" rel="stylesheet" type="text/css">
     <link href="resources/css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="resources/js/nav.js"></script>
     <style type="text/css">
     	#content {height: 775px;}
     </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 $(function() {
 	if(sessionStorage.getItem("tokenStr") != null){
@@ -19,25 +20,16 @@ $(function() {
 	    $("#menu_wrap").append("<li class='menu'><a href='javascript:myPage();'>MyPage</a></li>");  
 	} else {
 		$("#menu_wrap").append("<li class='menu'><a href='login_go.do'>Sign in</a></li>");
-	    $("#menu_wrap").append("<li class='menu'><a href='join_go.do'>Register</a></li>"); 
+	    $("#menu_wrap").append("<li class='menu'><a href='register_go.do'>Register</a></li>"); 
 	}
+	
 });
-
-/*
-$(function(){
-
-	var auth_check = ${auth_check};
-	if(auth_check != null && auth_check == 0) {
-		alert("Please verify your e-mail for unlimited access to our website.");
-	}
-});
-*/
 
  function myPage(){
 	var frm = document.token;
 	
-	frm.tokenStr.value = sessionStorage.getItem("tokenStr");
-	frm.action = "myPage_go.do";
+	frm.tokenStr.value = setCookie("tokenStr", sessionStorage.getItem("tokenStr")); /*헤더에 쿠키로 토큰 담아 보냄*/
+	frm.action = "myPage_go.do?type=profile";
 	frm.method = "post";
 	frm.submit();
  }
@@ -50,8 +42,17 @@ $(function(){
 	 frm.method = "post";
 	 frm.submit();
  }
+ 
+ function setCookie(c_name,value,exdays) {
 
-</script>
+ 	var exdate = new Date();
+ 	exdate.setDate(exdate.getDate() + exdays);
+ 	var c_value = escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+ 	document.cookie = c_name + "=" + c_value;
+
+ }
+ 
+ </script>
 </head>
 <body>
 
@@ -89,9 +90,7 @@ $(function(){
         </section>
         <div id="footer">footer</div>
     </div>
-    
-    
-    <form name="token">
+        <form name="token">
     	<input type="hidden" name="tokenStr">
     </form>
     <form name="logout">

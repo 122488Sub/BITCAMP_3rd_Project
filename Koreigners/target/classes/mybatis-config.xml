@@ -10,6 +10,7 @@
 		<typeAlias alias="infoBoard" type="com.koreigner.biz.inform.InfoBoardVO"/>
 		<typeAlias alias="companyVO" type="com.koreigner.biz.job.company.CompanyVO"/>
 		<typeAlias alias="hireVO" type="com.koreigner.biz.job.hire.HireVO"/>
+		<typeAlias alias="userVO" type="com.koreigner.biz.member.UserVO"/>
 	</typeAliases>
   
   <!-- SQL 작성파일인 매퍼 파일 위치 지정 -->

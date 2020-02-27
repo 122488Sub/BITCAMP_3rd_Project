@@ -42,6 +42,8 @@ public class HireController {
 	//채용 게시판으로 이동
 	@RequestMapping(value="hireList_go.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String hireList(HttpServletRequest request, HttpServletResponse response) {
+		//잡카테고리 가져오기
+		//HireVO hireVO = new HireVO();
 		
 		// 현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
@@ -54,7 +56,6 @@ public class HireController {
 		return "job/hire/hireList.page";
 	}
 
-	
 	@RequestMapping(value="hireListData.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String hireListDate(HttpServletRequest request, 
@@ -135,6 +136,25 @@ public class HireController {
 		return 1;
 	}
 	
+	//채용게시글 일자리 카테고리 추가
+	@RequestMapping(value="hireCateFilter.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public List<String> jobCateJson(@RequestParam("cate_prnt_en")String cate_prnt_en) {
+		System.out.println("cate_prnt_en 컨트롤러: " + cate_prnt_en);
+		
+		List<String> list = new ArrayList<>();
+		List<CompanyVO> childCate = companyServiceImpl.getChildCate(cate_prnt_en);
+		
+		System.out.println("childCate : " + childCate);
+		
+		for(CompanyVO vo : childCate) {
+			list.add(vo.getCate_child_en());
+		}
+		
+		
+		return list;
+	}
+	
 	
 	
 	//페이지 전환 시 jobCateMap 맵 객체 전달 > 직무 카테고리
@@ -151,6 +171,24 @@ public class HireController {
 		}
 		return jobCateMap;
 		
+	}
+	
+	
+	@ModelAttribute("jobCateEn")
+	public Map<String, String> searchJobCate() {
+		List<CompanyVO> list = companyServiceImpl.getCateList();
+		System.out.println("list : " + list);
+		//카테고리 대분류 문자 map에 저장
+		Map<String, String> jobCateMap = new HashMap<>();
+		
+		int i = 1;
+		for(CompanyVO vo : list) {
+			jobCateMap.put(Integer.toString(i), vo.getCate_prnt_en());
+			i++;
+		}
+		
+		
+		return jobCateMap;
 	}
 	
 	

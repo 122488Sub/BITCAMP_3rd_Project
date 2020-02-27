@@ -2,8 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,25 +13,13 @@
 <script type="text/javascript" src="resources/js/hire/hireList.js"></script>
 
 <link rel="stylesheet" type="text/css" href="resources/css/republic_korea.css">
-<style>
-	ul {
-		margin:0;
-		padding:0;
-	}
-	li {
-		list-style: none;
-		border : 1px solid black;
-		margin:0;
-		padding:0;
-		float:left;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="resources/css/job/hireList.css">
+
 </head>
 <body onload="loadPage()">
 <jsp:include page="../../common/republic_korea.jsp"/>
 
 <div id="listDisp">
-
 
 
 </div>
@@ -41,10 +29,110 @@
 </div>
 <script type="text/javascript" src="resources/js/hire/map_hire.js"></script>
 
+<br><br><br><br><br><br><br><br>
+
+<div id="filterBox">
+	<div id="jobCate_box">
+		<ul id="jUl">
+			<li class="menuName">
+			<p>Job</p>
+			<p>Category</p>
+			</li>
+			<li class="btnBox">
+				<div class="catePrnt" id="Office Job">
+				<div class="pDiv">
+				<p>Office Job</p>
+				</div>
+				</div>
+				<div class="catePrnt" id="RESEARCH">
+					<div class="pDiv">
+					<p>RESEARCH</p>
+					</div>
+				</div>
+				<div class="catePrnt" id="EDUCATION/WELFARE">
+					<div class="pDiv">
+					<p>EDUCATION</p>
+					<p>WELFARE</p>
+					</div>		</div>
+				<div class="catePrnt" id="HEALTH/MEDICAL TREATMENT">
+					<div class="pDiv">
+					<p class="short2">HEALTH</p>
+					<p class="short2">&</p>
+					<p class="short">MEDICAL</p>
+					<p>TREATMENT</p>
+					</div>
+				</div>
+				<div class="catePrnt" id="FOREIGN LANGUAGE/DESIGN">
+					<div class="pDiv">
+						<p class="short">FOREIGN</p>
+						<p class="short2">LANGUAGE</p>
+						<p class="short2">&</p>
+						<p>DESIGN</p>
+					</div>
+				</div>
+				<div class="catePrnt" id="SERVICE INDUSTRY EMPLOYMENT">
+					<div class="pDiv">
+						<p class="short">SERVICE</p>
+						<p class="short">INDUSTRY</p>
+						<p class="short">EMPLOYMENT</p>
+					</div>
+				</div>
+				<div class="catePrnt" id="SALES/TRANSPORTATION">
+					<div class="pDiv">
+						<p>SALES</p>
+						<p>TRANSPORTATION</p>
+					</div>
+				</div>
+				<div class="catePrnt" id="CONSTRUCTION">
+					<div class="pDiv">
+					<p>CONSTRUCTION</p>
+					</div>
+				</div>
+				<div class="catePrnt" id="MANUFACTURING INDUSTRY">
+					<div class="pDiv">
+					<p class="short">MANUFACTURING</p>
+					<p>INDUSTR</p>
+					</div>
+				</div>
+				<div class="catePrnt" id="AGRICULTURE AND FORESTRY/FISHERY">
+					<div class="pDiv">
+					<p class="short2">AGRICULTURE</p>
+					<p class="short2">&</p>
+					<p class="short">FORESTRY</p>
+					<p>FISHERY</p>
+					</div>
+				</div>	
+			</li>
+		</ul>
+		<ul id="jUl">
+			<li class="menuName">
+			<p>Detail</p>
+			<p>Category</p>
+			</li>
+			<li class="btnBox" id="childCate">
+				
+			</li>
+		</ul>
+		</div>
+	<br><br><br><br><br><br><br><br><br><br><br><br>
+		<h2>Job Category</h2>
+		<br><br><br><br><br>
+		<div class="job_base">
+			cate1
+		</div>
+		<div class="job_base">
+			cate2
+		</div>
+		<div class="job_base">
+			cate3
+		</div>
+	</div>
+
 <br><br><br><br><br><br><br><br><br><br><br>
 
 <hr>
 <a href="hireWrite_go.do">Post an Ad</a>
+
 <table border>
 	<thead>
 		<tr>
