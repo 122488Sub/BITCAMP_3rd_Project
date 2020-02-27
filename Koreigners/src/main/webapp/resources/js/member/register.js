@@ -4,7 +4,7 @@ $(function(){
 // 닉네임 중복 검사
 	$("#mem_name").blur(function() {
 		$.ajax({
-			url : './nickCheck.do',
+			url : 'nickCheck.do',
 			type : 'post',
 			data : $("#regiForm").serialize(),
 			success : function(data) {
@@ -40,7 +40,7 @@ $(function(){
 // 아이디(이메일) 중복 검사
 	$("#mem_id").blur(function() {
 		$.ajax({
-			url : './idCheck.do',
+			url : 'idCheck.do',
 			type : 'post',
 			data : $("#regiForm").serialize(),
 			success : function(data) {

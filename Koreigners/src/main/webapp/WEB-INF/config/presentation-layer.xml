@@ -55,13 +55,17 @@
     </bean>        
     <bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+        
         <property name="order" value="1" />
     </bean>  
 	
-	<!-- Interceptors -->
+	<!-- Interceptors 
+	<mvc:mapping path="/main.do"/>
+	-->
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
+			
 			<mvc:mapping path="/myPage_go.do"/>
 			<bean class="com.koreigner.common.interceptor.AuthInterceptor"/>
 		</mvc:interceptor>

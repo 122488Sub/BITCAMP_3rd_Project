@@ -7,7 +7,7 @@ function loginBt() {
 	var jsonObj = {"inputId":inputId, "inputPw":inputPw, "inputCate":inputCate};
 	
 	$.ajax({
-		url : '/koreigner/login.do',
+		url : 'login.do',
         type : 'POST',
         contentType: "application/json; charset=UTF-8",
         data : JSON.stringify(jsonObj),
@@ -18,7 +18,7 @@ function loginBt() {
               alert("Hello there! :)"+ "\n" + "Move to the MainPage");
         		sessionStorage.setItem("tokenStr", tokenStr); //세션스토리지에 토큰 저장
               
-        		location.href='/koreigner/index.jsp';
+        		location.href='main.do';
         	
         	} else if(tokenStr ==='fail'){
         		// 로그인 실패

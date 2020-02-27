@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+	#container {
+		border: 5px solid lightblue;
+		width: 500px; height: 370px;
+		margin: 0 auto;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		text-align: center;
+	}
+	hr {
+		width: 320px;
+		margin-left: 80px;
+		margin-top: 10px;
+		
+	}
+	.input_box {
+		width: 270px;
+	}
+	.a_href {
+		font-size: 12px;
+	}
+	.text {
+		margin-left: -40%;
+	}
+	.button {
+		background-color: #4CAF50;
+ 		border: none;
+	  	color: white;
+	  	padding: 10px 30px;
+	  	text-align: center;
+	  	text-decoration: none;
+	  	display: inline-block;
+	  	font-size: 16px;
+	  	margin: 8px 2px;
+	  	cursor: pointer;
+	  	border-radius: 8px;
+	}
