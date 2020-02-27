@@ -1,35 +1,5 @@
-<%@page import="com.koreigner.biz.common.page.PagingVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="resources/js/hire/hireList.js"></script>
-
-<link rel="stylesheet" type="text/css" href="resources/css/republic_korea.css">
-<link rel="stylesheet" type="text/css" href="resources/css/job/hireList.css">
-<script type="text/javascript" src="resources/js/hire/map_hire.js"></script>
-</head>
-<body onload="loadPage()">
-<jsp:include page="../../common/republic_korea.jsp"/>
-
-<div id="listDisp">
-
-
-</div>
-
-<div id="mapDisp">
-
-</div>
-
-
-<br><br><br><br><br><br><br><br>
 
 <div id="filterBox">
 	<div id="jobCate_box">
@@ -161,34 +131,15 @@
 		</div>
 		</div>
 	<br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br>
-
-<hr>
-<a href="hireWrite_go.do">Post an Ad</a>
-
-<table border>
-	<thead>
-		<tr>
-			<th>idx</th>
-			<th>Company Name</th>
-			<th>Location</th>
-			<th>Title</th>
-			<th>Salary</th>
-			<th>Post Date</th>
-		</tr>
-	</thead>
-	<tbody id="list_box">
-		<tr>
-			<td>Name</td>
-			<td>Location</td>
-			<td>Title</td>
-			<td>Salary</td>
-			<td>Post Date</td>
-		<tr>
-	</tbody>
-	<tfoot id="tfoot">
-		
-	</tfoot>
-</table>
-</body>
-</html>
+		<h2>Job Category</h2>
+		<br><br><br><br><br>
+		<div class="job_base">
+			cate1
+		</div>
+		<div class="job_base">
+			cate2
+		</div>
+		<div class="job_base">
+			cate3
+		</div>
+	</div>
