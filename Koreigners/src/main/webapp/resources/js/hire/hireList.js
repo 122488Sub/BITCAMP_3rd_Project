@@ -151,8 +151,8 @@ function getDetail(hire_idx, cPage) {
 
 
 let prntCate = "";             // 선택된 직무 카테고리
-let jobCategory = ['init'];   // 선택된 직무 하위 카테고리
-let payCondition = ['init'];  // 선택된 급여종류
+let jobCategory = [];   // 선택된 직무 하위 카테고리
+let payCondition = [];  // 선택된 급여종류
 let cate="";                   // 클릭 한 카테고리 id
 let pay_click="";              // 클릭 한 급여중류 id
 let isValue="";                // 선택된 카테고리의 배열안 인덱스 번호
@@ -267,29 +267,28 @@ function prnt_cate(cate) {
 				console.log("val1 : " + val);
 				val = val.replace(/\//g, "</p><p>");
 				console.log("val2 : " + val);
-				dataTag += '<div class="job_base" id="' + val +'">';
+				dataTag += '<div class="job_base" id="' + this +'">';
 				dataTag += '<div class="pDiv">';
 				dataTag += '<p>' + val +'</p>';
 				dataTag += '</div></div>';
 			});	
-			
 			$("#childCate").html(dataTag);
-	
 		}, 
 		error : function() {
 			console.log("실패");
 		}
 	});
 }
+
 $(document).ready(function(){
     $(document).on("click",".job_base",function(){
-        // 동적으로 여러 태그가 생성된 경우라면 이런식으로 클릭된 객체를 this 키워드를 이용해서 잡아올 수 있다.
+       // 동적으로 여러 태그가 생성된 경우라면 이런식으로 클릭된 객체를 this 키워드를 이용해서 잡아올 수 있다.
        // alert($(this).text());
         
         $(this).toggleClass("job_clicked");
   		
   	  //div 공백제거 텍스트
-        //cate = $(this).text().trim();
+      //cate = $(this).text().trim();
   	  cate = $(this).attr('id');
   	
   	  //선택된 카테고리의 배열안 인덱스 번호
@@ -307,22 +306,21 @@ $(document).ready(function(){
   	  console.log("now_click : " + now_click);
   	  console.log("cate : " + cate);
   	  console.log("jobCategory : " + jobCategory);
-  		  
-  		  
       });
     
     $(document).on("click",".catePrnt, .job_base , .payCondition",function(){
-    	
+    	jQuery.ajaxSettings.traditional = true;
     	$.ajax({
 			url : 'hireJsonFilter.do',
 			type : 'post',
 			dataType : "json",
 			data : {
-				cate_prnt_en : now_click,
-				cate_child_en : jobCategory,
-				payCondition : payCondition,
+				"cate_prnt_en" : now_click,
+				"cate_child_en" : jobCategory,
+				"payCondition" : payCondition,
 				
 				   },
+			async: false,
 			success : function(data) {
 				
 				var dataTag = "";

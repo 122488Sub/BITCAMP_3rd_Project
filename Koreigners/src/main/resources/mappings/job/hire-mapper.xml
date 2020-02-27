@@ -31,7 +31,6 @@
 	<!-- 카테고리 대분류 검색 -->
 	
 <!-- category END -->	
-	
 
 	<!-- ===================================insert================================== -->
 	
@@ -86,7 +85,36 @@
 
 
 
+<!--
 
+
+		 AND ( 
+		    
+		    <if test="do_enList !=null ">
+		    	
+		    	BOARD.DO_EN IN
+		    	<foreach collection="do_enList" item="do" index="index" open="(" separator="," close=")"> 
+          			  #{do} 
+       			</foreach> 
+       		</if>
+       		<if test=" (do_enList != null) and (gu_gun_eup_engList != null) ">
+       			OR	
+       		</if>
+       		<if test="gu_gun_eup_engList != null">
+       		
+       			BOARD.GU_GUN_EUP_ENG IN 
+				<foreach collection="gu_gun_eup_engList" item="si" index="index" open="(" separator="," close=")"> 
+          			#{si} 
+       			</foreach> 
+       		</if>
+			) 
+       		
+		ORDER BY 
+			BOARD.ROOM_IDX  
+			
+			
+			
+-->
 
 
 

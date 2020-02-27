@@ -59,7 +59,6 @@ public class House_Controller {
 		System.out.println("원본");
 		
 		System.out.println(vo);
-		System.out.println("r: "+vo.getRex());
 		System.out.println(vo.getGu_gun_eup_engArr());
 		System.out.println("vo.getDo_enList() : " + vo.getGu_gun_eup_engList());
 		
