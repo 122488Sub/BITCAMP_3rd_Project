@@ -59,11 +59,13 @@
         <property name="order" value="1" />
     </bean>  
 	
-	<!-- Interceptors -->
+	<!-- Interceptors 
+	<mvc:mapping path="/main.do"/>
+	-->
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/main.do"/>
+			
 			<mvc:mapping path="/myPage_go.do"/>
 			<bean class="com.koreigner.common.interceptor.AuthInterceptor"/>
 		</mvc:interceptor>
