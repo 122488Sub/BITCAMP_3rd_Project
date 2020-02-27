@@ -17,60 +17,47 @@ public class House_DAOMyBatis {
 	public House_DAOMyBatis() {
 		System.out.println(">> House_DAOMyBatis 객체 생성");	
 	}
+
+
 	
-	//-------------------------------------------------------------------
-	public List<HouseAll_VO> myBatis_getSiList_vo(HouseAll_VO vo) {
-		System.out.println("===> myBatis_getSiList_vo() 실행");
-		List<HouseAll_VO> list=mybatis.selectList("House_DAO.getSiList_vo", vo);
-
+	public List<HouseAll_VO> myBatis_getAllList() {
+		//System.out.println("===> myBatis_getAllList() 실행");
+		List<HouseAll_VO> list=mybatis.selectList("House_DAO.getAllList");
 		for(int i=0;i<list.size();i++) {
-			list.get(i).setRoom_img_nameArr(Arrays.asList(list.get(i).getRoom_img_name().split(",")));
-			list.get(i).setRoom_img_ori_nameArr(Arrays.asList(list.get(i).getRoom_img_ori_name().split(",")));
+			list.get(i).setImg_nameList(Arrays.asList(list.get(i).getRoom_img_name().split(",")));
+			list.get(i).setImg_ori_nameList(Arrays.asList(list.get(i).getRoom_img_ori_name().split(",")));
 		}
 		
 		return list;
 	}
 
-	public List<HouseAll_VO> myBatis_getDoList_vo(HouseAll_VO vo) {
-		System.out.println("===> myBatis_getDoList_vo() 실행");
-		List<HouseAll_VO> list=mybatis.selectList("House_DAO.getDoList_vo", vo);
-		for(int i=0;i<list.size();i++) {
-			list.get(i).setRoom_img_nameArr(Arrays.asList(list.get(i).getRoom_img_name().split(",")));
-			list.get(i).setRoom_img_ori_nameArr(Arrays.asList(list.get(i).getRoom_img_ori_name().split(",")));
-		}
+	public HouseAll_VO myBatis_getHouse(int room_idx) {
+		HouseAll_VO house=mybatis.selectOne("House_DAO.getHouse",room_idx);
 		
-		return list;
-	}
-
-	public List<HouseAll_VO> myBatis_getAllList_vo() {
-		System.out.println("===> myBatis_getAllList_vo() 실행");
-		List<HouseAll_VO> list=mybatis.selectList("House_DAO.getAllList_vo");
-		for(int i=0;i<list.size();i++) {
-			list.get(i).setRoom_img_nameArr(Arrays.asList(list.get(i).getRoom_img_name().split(",")));
-			list.get(i).setRoom_img_ori_nameArr(Arrays.asList(list.get(i).getRoom_img_ori_name().split(",")));
-		}
-		
-		return list;
-	}
-
-	public HouseAll_VO myBatis_getHouse_vo(HouseAll_VO vo) {
-		HouseAll_VO house=mybatis.selectOne("House_DAO.getHouse_vo",vo);
-		
-		house.setRoom_img_nameArr(Arrays.asList(house.getRoom_img_name().split(",")));
-		house.setRoom_img_ori_nameArr(Arrays.asList(house.getRoom_img_ori_name().split(",")));
-		System.out.println(house);
-		
+		house.setImg_nameList(Arrays.asList(house.getRoom_img_name().split(",")));
+		house.setImg_ori_nameList(Arrays.asList(house.getRoom_img_ori_name().split(",")));
 		return house;
 	}
 
 	public int myBatis_insertNewHouse(HouseAll_VO vo) {
-		// TODO Auto-generated method stub
+		
 		return mybatis.insert("House_DAO.insertNewHouse", vo);
 	}
 
 	public int myBatis_getRoom_Sq() {
-		// TODO Auto-generated method stub
+		
 		return mybatis.selectOne("House_DAO.getRoom_Sq");
+	}
+
+	public List<HouseAll_VO> myBatis_getSearchList(HouseSearch_VO vo) {
+		
+		List<HouseAll_VO> list=mybatis.selectList("House_DAO.getSearchList", vo);
+		for(int i=0;i<list.size();i++) {
+			list.get(i).setImg_nameList(Arrays.asList(list.get(i).getRoom_img_name().split(",")));
+			list.get(i).setImg_ori_nameList(Arrays.asList(list.get(i).getRoom_img_ori_name().split(",")));
+		}
+		
+		return list;
 	}
 }
 

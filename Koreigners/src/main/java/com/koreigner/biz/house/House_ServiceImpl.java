@@ -27,17 +27,11 @@ public class House_ServiceImpl implements House_Service {
 	
 	
 
-	@Override
-	public List<HouseAll_VO> getSiList(HouseAll_VO vo) {
-		// TODO Auto-generated method stub
-		return testDAO.myBatis_getSiList_vo(vo);
-	}
-
 
 	@Override
-	public List<HouseAll_VO> getDoList(HouseAll_VO vo) {
+	public List<HouseAll_VO> getSearchList(HouseSearch_VO vo) {
 		// TODO Auto-generated method stub
-		return testDAO.myBatis_getDoList_vo(vo);
+		return testDAO.myBatis_getSearchList(vo);
 	}
 
 
@@ -45,17 +39,16 @@ public class House_ServiceImpl implements House_Service {
 	@Override
 	public List<HouseAll_VO> getAllList() {
 		// TODO Auto-generated method stub
-		return testDAO.myBatis_getAllList_vo();
+		return testDAO.myBatis_getAllList();
 	}
 
 
 
 
 	@Override
-	public HouseAll_VO getHouse(HouseAll_VO vo) {
-		// TODO Auto-generated method stub
-		System.out.println("impl vo"+vo);
-		return testDAO.myBatis_getHouse_vo(vo);
+	public HouseAll_VO getHouse(int room_idx) {
+		
+		return testDAO.myBatis_getHouse(room_idx);
 	}
 
 
@@ -100,8 +93,8 @@ public class House_ServiceImpl implements House_Service {
 			
 			fileList.add(fileName+"/"+fileOriName+"/");
 		}
-		vo.setRoom_img_nameArr(fileList);
-		vo.setRoom_img_ori_nameArr(fileOriList);
+		vo.setImg_nameList(fileList);
+		vo.setImg_ori_nameList(fileOriList);
 		testDAO.myBatis_insertNewHouse(vo);
 		
 		i=1;
