@@ -64,11 +64,11 @@
 
 <!-- 임금조건 payment_codition --> 
 	<label>임금조건 : </label>
-	<input type="radio" name="payment_codition" id="hour" value="시급">시급
-	<input type="radio" name="payment_codition" id="day" value="일당">일당
-	<input type="radio" name="payment_codition" id="month" value="월급">월급
-	<input type="radio" name="payment_codition" id="year" value="연봉">연봉
-	<input type="radio" name="payment_codition" id="companyLaw" value="회사내규">회사내규
+	<input type="radio" name="payment_codition" id="hour" value="hour">시급
+	<input type="radio" name="payment_codition" id="day" value="day">일당
+	<input type="radio" name="payment_codition" id="month" value="month">월급
+	<input type="radio" name="payment_codition" id="year" value="year">연봉
+	<input type="radio" name="payment_codition" id="companyLaw" value="companyLaw">회사내규
 	<br><br>
 <!-- 임금조건 salary_min salary_max --> 
 	<input type="text" name="salary_min" id="salary_min" placeholder="임금 최저"> -

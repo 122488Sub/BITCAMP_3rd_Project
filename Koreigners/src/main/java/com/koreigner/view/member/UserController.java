@@ -28,7 +28,7 @@ public class UserController {
 	private UserService userService;
 	
 	// 로그인 페이지 이동
-	@RequestMapping(value="/login_go.do", method=RequestMethod.GET)
+	@RequestMapping(value="/login_go.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String login_go(Model model, UserVO vo) {
 		
 		//기본 로그인 페이지 이동 시
@@ -58,7 +58,7 @@ public class UserController {
 		
 		int idCnt = userService.userIdCheck(email);
 		
-		if(idCnt > 0) {
+		if(idCnt > 0) { //해당 아이디가 DB에 있으면 메일보내기
 			userService.resetPasswordMail(email);			
 		}
 		
@@ -84,7 +84,7 @@ public class UserController {
 	@RequestMapping(value="/resetPw.do", method=RequestMethod.POST)
 	public String resetPw(UserVO vo, Model model) {
 
-		userService.resetPassword(vo);
+		userService.updateMember(vo);
 
 		return "/member/resetPwSuccess.page";
 	}
@@ -132,7 +132,7 @@ public class UserController {
 	public String emailConfirm(UserVO vo, Model model) throws Exception {
 
 		vo.setAuth_status("1"); // authStatus를 1로, 권한 업데이트
-		userService.updateAuthstatus(vo);
+		userService.updateMember(vo);
 
 		return "/member/emailAuthSuccess.page";
 	}
@@ -203,6 +203,7 @@ public class UserController {
 	public String updateMember(HttpServletRequest request, UserVO vo) {
 		
 		String mem_cate = vo.getMem_cate();
+		
 		String birth1 = request.getParameter("birth1");
 		String birth2 = request.getParameter("birth2");
 		String birth3 = request.getParameter("birth3");
@@ -222,5 +223,15 @@ public class UserController {
 		} else {
 			return "/koreigner/index.jsp";
 		}
+	}
+	
+	// 비밀번호 확인
+	@RequestMapping(value="/pwCheck.do", method=RequestMethod.POST)
+	@ResponseBody
+	public int pwCheck(@RequestBody Map<String, String> jsonMap) {
+		
+		int userCnt = userService.userPwCheck(jsonMap);
+		
+		return userCnt;
 	}
 }

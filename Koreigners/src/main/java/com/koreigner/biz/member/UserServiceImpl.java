@@ -124,18 +124,17 @@ public class UserServiceImpl implements UserService {
 		return auth_status;
 	}
 	
+//	//이메일 인증 권한 업데이트
+//	@Override
+//	public void updateAuthstatus(UserVO vo) {
+//		userDAO.updateAuthstatus(vo);
+//	}
+	
 	//회원 정보 가져오기
 	@Override
 	public UserVO getOneMember(String mem_id) {
 		UserVO mvo = userDAO.getOneMember(mem_id);
 		return mvo;
-	}
-
-	
-	//회원가입 후 이메일인증 완료하면 auth 권한 상승
-	@Override
-	public void updateAuthstatus(UserVO vo) {
-		userDAO.updateAuthstatus(vo);		
 	}
 	
 	// 비밀번호 재설정 메일 보내기
@@ -172,16 +171,16 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
-	//비밀번호 재설정
-	@Override
-	public void resetPassword(UserVO vo) {
-		
-		// 비밀번호 암호화
-		String securedPw = securityUtil.encryptSHA256(vo.getMem_pw());
-		vo.setMem_pw(securedPw);
-		
-		userDAO.updatePassword(vo);		
-	}
+//	//비밀번호 재설정
+//	@Override
+//	public void resetPassword(UserVO vo) {
+//		
+//		// 비밀번호 암호화
+//		String securedPw = securityUtil.encryptSHA256(vo.getMem_pw());
+//		vo.setMem_pw(securedPw);
+//		
+//		userDAO.updatePassword(vo);		
+//	}
 
 	//로그인 처리
 	@Override
@@ -202,7 +201,29 @@ public class UserServiceImpl implements UserService {
 	//회원정보 수정
 	@Override
 	public void updateMember(UserVO vo) {
+		
+		// 비밀번호 암호화
+		String pw = vo.getMem_pw();
+		if(pw != null) {
+
+			String securedPw = securityUtil.encryptSHA256(vo.getMem_pw());
+			vo.setMem_pw(securedPw);
+		}
 		userDAO.updateMember(vo);		
+	}
+
+	//비밀번호 체크
+	@Override
+	public int userPwCheck(Map<String, String> map) {
+		
+		String mem_pw = map.get("mem_pw");
+		
+		//비밀번호 암호화
+		String securedPw = securityUtil.encryptSHA256(mem_pw);
+		map.put("mem_pw", securedPw);
+		
+		int userCnt = userDAO.userPwCheck(map);
+		return userCnt;
 	}
 
 
@@ -293,9 +314,6 @@ public class UserServiceImpl implements UserService {
 		
 		return payloadMap;
 	}
-
-	
-
 
 	
 	
