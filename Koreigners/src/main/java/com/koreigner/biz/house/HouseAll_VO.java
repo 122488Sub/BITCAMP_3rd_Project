@@ -74,6 +74,9 @@ public class HouseAll_VO {
 		refrigerator, laundry, pet, internet, wifi, elevator, sink, bathroom, parking;		
 	
 	//임시 필터값
+	
+	List<String> do_enList;
+	List<String> gu_gun_eup_engList;
 	List<String> gu_gun_eup_engArr;
 	int [] build_typeArr;
 	int [] room_typeArr; 
@@ -540,6 +543,19 @@ public class HouseAll_VO {
 	}
 	public void setSelect_available_date(String select_available_date) {
 		this.select_available_date = select_available_date;
+	}
+	public List<String> getDo_enList() {
+		return do_enList;
+	}
+	public void setDo_enList(List<String> do_enList) {
+		this.do_enList = do_enList;
+	}
+	
+	public List<String> getGu_gun_eup_engList() {
+		return gu_gun_eup_engList;
+	}
+	public void setGu_gun_eup_engList(List<String> gu_gun_eup_engList) {
+		this.gu_gun_eup_engList = gu_gun_eup_engList;
 	}
 
 	

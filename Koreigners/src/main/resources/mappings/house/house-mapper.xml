@@ -77,54 +77,32 @@
 			BOARD.ROOM_IDX=IMG.ROOM_IDX 
 		    AND BOARD.ROOM_IDX=INFO.ROOM_IDX 
 		    AND BOARD.ROOM_IDX=OPT.ROOM_IDX  
-		    AND BOARD.DO_EN = #{do_en} 
-		ORDER BY 
-			BOARD.ROOM_IDX 
-	</select>
-		<select id="getSiList_vo" parameterType="house_all"
-		resultType="house_all">
-		SELECT
-			BOARD.ROOM_IDX, BOARD.MEM_EMAIL, BOARD.SUBJECT, BOARD.DO_EN, 
-		        BOARD.GU_GUN_EUP_ENG, BOARD.ADDRESS,BOARD.ADDRESS_DETAIL, BOARD.ROOM_REPORTING_DATE, 
-		    IMG.ROOM_IMG_NAME, IMG.ROOM_IMG_ORI_NAME, 
-		    INFO.BUILD_TYPE, INFO.ROOM_TYPE, INFO.ROOM_AREA, INFO.BULID_LAYERS, INFO.FLOOR_LAYERS, 
-		        INFO.FLOOR_TYPE, INFO.STAY_NUM_MIN, INFO.DEPOSIT, INFO.MONTHLY_RENT, 
-		        INFO.MANAGEMENT_EXPENSE, INFO.AVAILABLE_DATE, 
-		    OPT.ROOM_IDX, OPT.CLOSET, OPT.DESK, OPT.CHAIR, OPT.BAD_TYPE, OPT.AIR_CONDITIONER, 
-		        OPT.HEATING, OPT.KITCHEN_STOVE, OPT.REFRIGERATOR, OPT.LAUNDRY, OPT.PET, 
-		        OPT.INTERNET, OPT.WIFI, OPT.ELEVATOR, OPT.SINK, OPT.BATHROOM, OPT.PARKING 
-		FROM 
-			T_ROOM_BOARD BOARD, 
-		    (SELECT    
-		        ROOM_IDX, 
-		        SUBSTR( 
-		            XMLAGG( 
-		                XMLELEMENT(COL ,',', ROOM_IMG_NAME) ORDER BY ROOM_IDX, ROOM_IMG_NAME).EXTRACT('//text()' 
-		            ).GETSTRINGVAL(), 2) ROOM_IMG_NAME, 
-		        SUBSTR( 
-		            XMLAGG( 
-		                XMLELEMENT(COL ,',', ROOM_IMG_ORI_NAME) ORDER BY ROOM_IDX, ROOM_IMG_NAME).EXTRACT('//text()' 
-		            ).GETSTRINGVAL(), 2) ROOM_IMG_ORI_NAME 
-		     FROM 
-		        T_ROOM_IMG 
-		     GROUP BY 
-		        ROOM_IDX 
-		    ) IMG, 
-		    T_ROOM_INFO INFO, 
-		    T_ROOM_OPTION OPT 
-		WHERE 
-			BOARD.ROOM_IDX=IMG.ROOM_IDX 
-		    AND BOARD.ROOM_IDX=INFO.ROOM_IDX 
-		    AND BOARD.ROOM_IDX=OPT.ROOM_IDX  
-		    AND BOARD.GU_GUN_EUP_ENG IN (
-				<foreach collection="gu_gun_eup_engArr" item="sigugun" index="index" separator=","> 
-          			#{sigugun} 
-       			</foreach> 
-			) 
 		    
+		AND ( 
+		    
+		    <if test="do_enList !=null ">
+		    	
+		    	BOARD.DO_EN IN
+		    	<foreach collection="do_enList" item="do" index="index" open="(" separator="," close=")"> 
+          			  #{do} 
+       			</foreach> 
+       		</if>
+       		<if test=" (do_enList != null) and (gu_gun_eup_engList != null) ">
+       			OR	
+       		</if>
+       		<if test="gu_gun_eup_engList != null">
+       		
+       			BOARD.GU_GUN_EUP_ENG IN 
+				<foreach collection="gu_gun_eup_engList" item="si" index="index" open="(" separator="," close=")"> 
+          			#{si} 
+       			</foreach> 
+       		</if>
+			) 
+       		
 		ORDER BY 
 			BOARD.ROOM_IDX 
 	</select>
+	
 	
 	<select id="getHouse_vo" parameterType="house_all"
 		resultType="house_all">
@@ -225,7 +203,7 @@
     						'투룸' 
     				</when>
     				<otherwise>
-    						'쓰리룸||' 
+    						'쓰리룸+' 
     				</otherwise>
     			  </choose> ||chr(13)||chr(10) 
     			  

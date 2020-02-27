@@ -2,7 +2,9 @@ package com.koreigner.view.house;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,32 +55,37 @@ public class House_Controller {
 	@ResponseBody //response 객체의 몸체(body)에 데이터 전달
 	//public List<Room_VO> ctrl_getSiList(@RequestParam(value="siListParam[]") List<String> siList) {
 	public List<HouseAll_VO> ctrl_getDoList(HouseAll_VO vo) {
-		System.out.println("원본");
-		System.out.println(vo);
-
 		
+		System.out.println("원본");
+		
+		System.out.println(vo);
+		System.out.println("r: "+vo.getRex());
+		System.out.println(vo.getGu_gun_eup_engArr());
+		System.out.println("vo.getDo_enList() : " + vo.getGu_gun_eup_engList());
+		
+		
+		/*for (String s : vo.getDo_enList()) {
+			System.out.println("선택 도: "+s);
+		}*/
+		System.out.println();
+		/*for (String s : vo.getGu_gun_eup_engList()) {
+			System.out.println("선택 시: "+s);
+		}*/
 		List<HouseAll_VO> houseList = houseService.getDoList(vo);
 		return houseList;
 		
 		//return null;
 	}
 	
-
 	@RequestMapping(value="getHouseAllList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody //response 객체의 몸체(body)에 데이터 전달
 	//public List<Room_VO> ctrl_getSiList(@RequestParam(value="siListParam[]") List<String> siList) {
 	public List<HouseAll_VO> ctrl_getAllList(
 						@RequestParam(value="option[]") List<String> opt
 					) {
-		//System.out.println("gd");
-		
-		//map.put("do_en", do_en);
-		
-		//List<Room_VO> testList = testService.getAllList(map);
+	
 		List<HouseAll_VO> houseList = houseService.getAllList();
-		//for(HouseAll_VO v : houseList) {
-		//	System.out.println(v);
-		//}
+		
 		return houseList;
 		
 		//return null;
