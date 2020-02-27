@@ -77,15 +77,26 @@
 			BOARD.ROOM_IDX=IMG.ROOM_IDX 
 		    AND BOARD.ROOM_IDX=INFO.ROOM_IDX 
 		    AND BOARD.ROOM_IDX=OPT.ROOM_IDX  
-		    AND ( BOARD.DO_EN IN
+		    
+		AND ( 
+		    
+		    <if test="do_enList !=null ">
+		    	
+		    	BOARD.DO_EN IN
 		    	<foreach collection="do_enList" item="do" index="index" open="(" separator="," close=")"> 
           			  #{do} 
        			</foreach> 
-       		OR
+       		</if>
+       		<if test=" (do_enList != null) and (gu_gun_eup_engList != null) ">
+       			OR	
+       		</if>
+       		<if test="gu_gun_eup_engList != null">
+       		
        			BOARD.GU_GUN_EUP_ENG IN 
 				<foreach collection="gu_gun_eup_engList" item="si" index="index" open="(" separator="," close=")"> 
           			#{si} 
        			</foreach> 
+       		</if>
 			) 
        		
 		ORDER BY 

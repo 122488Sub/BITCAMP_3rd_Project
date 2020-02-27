@@ -30,13 +30,10 @@
 	
 	//페이징로딩후 자동시작 //
 	$(window).on('load',function(){
-		console.log("gd");
 		getInitData();
 		$(".div_option").load("/koreigner/resources/html/houseOption.jsp"); //수정해야함
 	});
 	//여기까지 페이징로딩후 자동시작//
-	
-	
 	
 	//도-All체크 선택시 //
 	function chkParent() { 	
@@ -47,13 +44,16 @@
 	    
 	    
 	    if(  $(".chk_do_parent").is(":checked") ) {
-	    	$('#selectDo_'+ do_en).val('1');
 	    	do_List.push(do_en);
-	    	
 	    }else{
-	    	$('#selectDo_'+ do_en).val('0');
 	    	do_List.splice(do_List.indexOf(do_en), 1);
 	    }
+	    
+	    $(".chk_do_child").each(function(i){   //jQuery로 for문 돌면서 check 된값 배열에 담는다
+			 if(si_List.indexOf($(this).val())!= -1){
+				 si_List.splice(si_List.indexOf($(this).val()), 1);
+		     }
+		});
 	    
 	    console.log(do_List);
 	    
@@ -63,46 +63,37 @@
 	//시 선택시 //
 	function chkChild(chk) { 	
 		var do_en=$(".chk_do_parent").val() ;
-		alert(chk.value);
+		//alert(chk.value);
 	    $(".chk_do_parent").prop('checked', false); 
 	    
 	    if(  chk.checked ) {
-	    	alert('1');
-	    	$('#selectDo_'+ do_en).val('0');
-	    	if(do_List.indexOf(do_en)!=1){
+	    
+	    	if(do_List.indexOf(do_en)!= -1){
 	    		do_List.splice(do_List.indexOf(do_en), 1);
 	    	}
 	    	si_List.push(chk.value);
 	    	
 	    }else{
-	    	alert('2');
 	    	si_List.splice(si_List.indexOf(chk.value), 1);
 	    }
 	    
-	   
 	    getData();
 	}; 
 	
 
 	
-	
-	
 	function getData() {
 		
 		var param={
-				'do_enList' : do_List,
+
+				'do_enList' : do_List,  // '본인 vo변수이름 : 데이터이름'
 				'gu_gun_eup_engList' : si_List
 		}
 		//----------------------------------------
-		//도 선택 값 파라미터 추가 
-		var do_enParam = $(".chk_do_parent").val();
-		 $(".th_selectDoSi").html("Select)"+ (si_List.length + do_List.length) );
+	
+		 $(".th_selectDoSi").html("Select)"+ (si_List.length + do_List.length -2) );
 		//----------------------------------------
-		 //추후 옵션 필터값 자리
-		var option=[];
-		option.push("TQTQTQTQ");
-		option.push("wRwRwR");
-		//----------------------------------------
+		
 		
 		 jQuery.ajaxSettings.traditional = true;
 		 $.ajax({
@@ -111,23 +102,20 @@
 				dataType : "json",
 				async: false,
 				data: param,
-				success : function(data) {
-					
-					console.log(data);
+				success : function(data) {				
+					//console.log(data);
 					//응답받은 데이터 형식 : [{}, {}, ... , {}] - 배열
-					var strData = JSON.stringify(data); //JSON -> string
-					console.log("-" + strData + "-");
-					
-					var jsData = JSON.parse(strData); //string -> JavaScript 객체화
-					console.log("-" + jsData + "-");
+					//var strData = JSON.stringify(data); //JSON -> string
+					//console.log("-" + strData + "-");	
+					//var jsData = JSON.parse(strData); //string -> JavaScript 객체화
+					//console.log("-" + jsData + "-");
 					
 					
 					//-------------------------------------------------
 					var dispHtml = "";
 					dispHtml = "<ul>";
 					if(data.length==0) {
-						dispHtml += "<li>데이터가 없어요 ㅠㅜ</li>";
-						
+						dispHtml += "<li>데이터가 없어요 ㅠㅜ</li>";		
 					}
 					else{
 						//시군구 테이블 값 지정

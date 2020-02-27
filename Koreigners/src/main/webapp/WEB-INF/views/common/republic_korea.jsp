@@ -62,23 +62,6 @@
 	
 </style>
 <body>
-<input type="hidden" id="selectDo_Seoul" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Busan" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Daegu" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Incheon" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Gwangju" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Daejeon" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Ulsan" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Sejong-si" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Gyeonggi-do" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Gangwon-do" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Chungcheongbuk-do" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Chungcheongnam-do" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Jeollabuk-do" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Jeollanam-do" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Gyeongsangbuk-do" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Gyeongsangnam-do" name="selectDo" value="0">
-<input type="hidden" id="selectDo_Jeju-do" name="selectDo" value="0">
 
 <div id='content'>
 	<div id='map'>
@@ -161,15 +144,7 @@ si_List.push("init");
 
 function getDoSiData(do_kor,do_en,idx) {
 	console.log(do_en);
-	//선택한 도가 처음 클릭한거라면.
-	if($('#selectDo_'+do_en).val()=='0'){
-		//값을 바꾸고
-		$('#selectDo_'+do_en).val('1');
-		// 선택한 리스트의 추가한다
-		do_List.push(do_en);
-	}
-		
-		
+	
 	$.ajax({
 		type : "get",
 		url : "getKoreaAddressList.do",
@@ -177,23 +152,15 @@ function getDoSiData(do_kor,do_en,idx) {
 		async: false,
 		data: {do_kor: do_kor},
 		success : function(data) {
-			console.log(data);
-			//응답받은 데이터 형식 : [{}, {}, ... , {}] - 배열
-			var strData = JSON.stringify(data); //JSON -> string
-			console.log("-" + strData + "-");
-			
-			var jsData = JSON.parse(strData); //string -> JavaScript 객체화
-			console.log("-" + jsData + "-");
-			
 			
 			//-------------------------------------------------
 			//시군구 테이블 값 지정
 			var dispHtml = "";
 			dispHtml+="<tr>";
 			dispHtml += "<td>"
-			dispHtml += "		<input type='checkbox' id='chk_do_parent', class='chk_do_parent'"
-								+"value='"+data[0].do_en+"' onClick='javascript:chkParent()'" 
-								+"checked='true'>";
+			dispHtml += "		<input type='checkbox' id='chk_do_parent' class='chk_do_parent'"
+								+"value='"+data[0].do_en+"' onClick='javascript:chkParent()'";
+			dispHtml +=				" >"; 
 			dispHtml += "</td>"					
 			dispHtml += "<td>"
 			dispHtml += "		<label for='siAll'>All</label>"
@@ -206,7 +173,11 @@ function getDoSiData(do_kor,do_en,idx) {
 					dispHtml += "<td>"
 					dispHtml += "		<input type='checkbox' id='si_"+this.gu_gun_eup_eng+"'"
 											+"class='chk_do_child' value='"+this.gu_gun_eup_eng+"'"
-											+"onClick='javascript:chkChild(this)'>";
+											+"onClick='javascript:chkChild(this)'";
+					if(si_List.indexOf(this.gu_gun_eup_eng)!= -1){
+						dispHtml += "        checked='true' ";
+			    	}
+					dispHtml += " >";
 					dispHtml += "</td>"
 					dispHtml += "<td>"
 					dispHtml += "		<label for='si_"+this.gu_gun_eup_eng+"' >"+this.si_gu_gun_eup_eng+"</label>"
@@ -218,12 +189,32 @@ function getDoSiData(do_kor,do_en,idx) {
 				}); 
 			}
 			
-			//여기까지 시군구 테이블값
-			//-------------------------------------------------
-
+			
+			
+			
 			$("#CD"+idx).css( {'fill':'blue'} ); 
 			
 			$(".tbody_dosi").html(dispHtml);
+			
+			$("#chk_do_parent").prop("checked", true);
+			
+			
+			if(do_List.indexOf(do_en)== -1){
+				do_List.push(do_en);	
+			
+				
+			}
+		
+			$(".chk_do_child").each(function(i){
+			
+				 if(si_List.indexOf($(this).val())!= -1){
+					 if(do_List.indexOf(do_en)!= -1){
+					 	do_List.splice(do_List.indexOf(do_en), 1);
+					 }
+					 $(".chk_do_parent").prop('checked', false);
+					 
+			     }
+			});
 			
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
