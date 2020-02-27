@@ -159,7 +159,7 @@ public class UserController {
 
 	//마이페이지로 이동
 	@RequestMapping(value="/myPage_go.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String myPage_go(HttpServletRequest request, Model model, UserVO vo) {
+	public String myPage_go(HttpServletRequest request, Model model) {
 		
 		String mem_id = (String)request.getAttribute("mem_id"); //토큰에서 아이디 추출해오기
 		System.out.println("mem_id: " + mem_id);
@@ -169,17 +169,18 @@ public class UserController {
 		String mem_cate = mvo.getMem_cate();
 		
 		String type = request.getParameter("type"); //마이페이지 유형
-		if(mem_cate.equals("c")) { //기업회원일 경우
+		//기업회원일 경우
+		if(mem_cate.equals("c")) { 
 			
 			if(type.equals("profile")) {
 				return "member/mypage/c_profile.page";
 			} else if(type.equals("hire")) {
 				return "member/mypage/c_hire.page";
 			} else {
-				return "member/mypage/p_applier.page";
+				return "member/mypage/c_applier.page";
 			}
-			
-		} else if(mem_cate.equals("p")) { //개인회원일 경우
+		//개인회원일 경우	
+		} else { 
 
 			if(type.equals("profile")) {
 				return "member/mypage/p_profile.page";
@@ -191,9 +192,6 @@ public class UserController {
 				return "member/mypage/p_ads.page";
 			}
 			
-		} else {
-			//"이메일인증하세요" 알림 어떻게 하지ㅠㅠ
-			return "/koreigner/index.jsp";
 		}
 	}
 

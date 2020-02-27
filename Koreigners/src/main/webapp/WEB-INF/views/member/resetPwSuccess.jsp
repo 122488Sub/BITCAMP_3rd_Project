@@ -21,12 +21,12 @@
 	<div id="container">
 		<h3>Congratulations! You successfully change your password.</h3>
 		<h3>With your NEW password, you can now
-			<a href="/koreigner/login_go.do">login</a>
+			<a href="login_go.do">login</a>
 			to Koreingers anytime.
 		</h3>
 		<h3>축하합니다! 비밀번호 변경이 완료되었습니다.</h3>
 		<h3>새로운 비밀번호를 사용하여 언제든지 Koreingers에
-			<a href="/koreigner/login_go.do">로그인</a>
+			<a href="login_go.do">로그인</a>
 			할 수 있습니다.
 		</h3>
 	</div>

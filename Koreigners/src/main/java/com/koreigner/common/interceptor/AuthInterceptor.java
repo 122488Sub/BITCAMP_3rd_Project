@@ -24,7 +24,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		boolean goController = false;
 		
-		String token = null;
+		String token = "";
 		
 		Cookie[] cookie = request.getCookies();
 		for(int i=0; i<cookie.length; i++){   
@@ -32,28 +32,36 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 				token = cookie[i].getValue(); 
 			}
 		}
-		if(token.equals("")){
-			response.sendRedirect("/koreigner/login_go.do"); 
-		}
-		
 		System.out.println("권한인터셉터 토큰 : " + token);
 		
-		if(token != null && userService.validToken(token).equals("Pass")) {//토큰 검증 통과 시
-			Map<String, Object> tokenPayload = userService.getTokenPayload(token);
-			String mem_id = (String)tokenPayload.get("aud"); //아이디 추출
-			System.out.println("인터셉터id: " + mem_id);
-			String auth_status = userService.getAuthStatus(mem_id); //이메일인증여부 가져오기
-			
-			request.setAttribute("mem_id", mem_id);
-			
-			if(auth_status != null && auth_status.equals("1")) {//이메일 인증을 완료한 유저
-				goController = true; //컨트롤러 수행
+		// 처음 메인페이지 보일 때
+		if(token.equals("") || token == null) {
+			request.setAttribute("auth_check", "1");
+			goController = true;
+		
+		//로그인 후 토큰 검증, 이메일인증 검증
+		} else { 
+			if(token != null && userService.validToken(token).equals("Pass")) {//토큰 검증 통과 시
+				Map<String, Object> tokenPayload = userService.getTokenPayload(token);
+				String mem_id = (String)tokenPayload.get("aud"); //아이디 추출
+				System.out.println("인터셉터id: " + mem_id);
+				String auth_status = userService.getAuthStatus(mem_id); //이메일인증여부 가져오기
 				
-			} else if(auth_status.equals("0")) { //이메일 인증을 완료하지 못한 유저
-				response.sendRedirect("/koreigner/index.jsp"); //메인페이지로 돌아가기
+				request.setAttribute("mem_id", mem_id);
+				
+				if(auth_status != null && auth_status.equals("1")) {//이메일 인증을 완료한 유저
+					goController = true; //컨트롤러 수행
+					
+				} else if(auth_status.equals("0")) { //이메일 인증을 완료하지 못한 유저
+					request.setAttribute("auth_check", "0");
+					response.sendRedirect("common/main.page"); //메인페이지로 돌아가기
+					goController = false;
+				}
+			} else {//토큰 검증 통과 못함
+				response.sendRedirect("login_go.do");
+				goController = false;
 			}
-		} else {//토큰 검증 통과 못함
-			response.sendRedirect("/koreigner/login_go.do");
+			
 		}
 		
 		return goController;

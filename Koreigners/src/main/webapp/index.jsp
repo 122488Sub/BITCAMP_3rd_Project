@@ -9,7 +9,6 @@
 	function main_go() {
 		location.href="main.do";
 	}
-
 </script>
 </head>
 <body onload="main_go()">
