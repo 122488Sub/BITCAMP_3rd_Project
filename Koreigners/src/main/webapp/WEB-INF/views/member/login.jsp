@@ -19,16 +19,6 @@ $(function(){
 		$("#notice").append("<hr><hr>");	
 	}
 	
-	var auth_check = ${auth_check};
-	if(auth_check == 1){
-		alert("Please verify your e-mail for unlimited access to our website. :) ");
-		
-	} else if(auth_check == 2) {
-		alert("Registration is completed!"+ "\n"
-			+ "Welcome to Koreigners!" + "\n"
-			+ "Now you can sign in :)");
-	}
-	
 	var pw_reset = ${pw_reset};
 	if(pw_reset == 1) {
 		$("#notice").append("<h1>If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.</h1>");
@@ -64,7 +54,7 @@ $(function(){
 			</li>
 			<li>
 				<span>
-					<a class="a_href" href="resetPassword_go.do">Forgot your password?</a>
+					<a class="a_href" href="resetPwMail_go.do">Forgot your password?</a>
 				</span>
 			</li>
 			<li>
@@ -76,7 +66,7 @@ $(function(){
 		<p>
 			<span>
 				"Don't have an account? "
-				<a class="a_href" href="./join_go.do">Register now</a>
+				<a class="a_href" href="./register_go.do">Register now</a>
 			</span>
 		</p>
 	</form>
