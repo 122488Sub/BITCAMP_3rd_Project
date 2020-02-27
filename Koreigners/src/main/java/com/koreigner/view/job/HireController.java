@@ -27,6 +27,7 @@ import com.koreigner.biz.job.company.CompanyVO;
 import com.koreigner.biz.job.hire.HireServiceImpl;
 import com.koreigner.biz.job.hire.HireVO;
 import com.koreigner.biz.job.jobservice.JobService;
+import com.koreigner.biz.job.jobservice.JobVO;
 
 @Controller
 public class HireController {
@@ -47,6 +48,7 @@ public class HireController {
 		
 		// 현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
+		
 		// 페이지 처리
 		PagingVO p =  paging.paging(cPage);
 		
@@ -65,14 +67,20 @@ public class HireController {
 		String cPage = request.getParameter("cPage");
 		// 페이지 처리
 		PagingVO p =  paging.paging(cPage);
+		// 리스트 VO 생성
+		JobVO jobVO = new JobVO();
+
+		jobVO.setBegin(p.getBegin());
+		jobVO.setEnd(p.getEnd());
 		
 		// 여러개의 파라미터값을 vo와 상관없이 매개변수로 사용하는 방법 :map형식 
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("begin", p.getBegin());
-		map.put("end", p.getEnd());
+		//Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		//map.put("begin", p.getBegin());
+		//map.put("end", p.getEnd());
 		
 		//리스트 정보 검색
-		List<HireVO> list = hireServiceImpl.getHireList(map);
+		List<HireVO> list = hireServiceImpl.getHireList(jobVO);
 		String result = hireServiceImpl.getHireListJson(list, p);
 		request.setAttribute("pvo", p);
 		
@@ -81,15 +89,11 @@ public class HireController {
 	
 	@RequestMapping(value="hireJsonFilter.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String hireJsonFilter(@RequestParam("cate_prnt_en") String cate_prnt_en,
-								 @RequestParam("cate_child_en") String[] cate_child_en,
-								 @RequestParam("payCondition") String[]  payCondition,
+	public String hireJsonFilter(JobVO jobVO,
 								 HttpServletRequest request, 
 							     HttpServletResponse response) {
-		
-		System.out.println("cate_prnt_en : " + cate_prnt_en);
-		System.out.println("cate_child_en : " + cate_child_en);
-		System.out.println("payCondition : " + payCondition);
+		System.out.println("hirejson controller");
+		System.out.println("jobVO : " + jobVO.toString());
 		// 현재 페이지 구하기
 		//String cPage = request.getParameter("cPage");
 		// 페이지 처리
@@ -105,7 +109,7 @@ public class HireController {
 		//String result = hireServiceImpl.getHireListJson(list, p);
 		//request.setAttribute("pvo", p);
 		
-		return "";
+		return "hi";
 	}
 
 	@RequestMapping(value="hireDetail.do", method = {RequestMethod.GET, RequestMethod.POST})

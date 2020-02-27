@@ -6,6 +6,8 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.koreigner.biz.job.jobservice.JobVO;
 @Repository
 public class HireDAO {
 
@@ -17,8 +19,8 @@ public class HireDAO {
 	}
 	
 	
-	public List<HireVO> getHireList(Map<String, Integer> map){
-		List<HireVO> hireList = mybatis.selectList("getHireList", map);
+	public List<HireVO> getHireList(JobVO jobVO){
+		List<HireVO> hireList = mybatis.selectList("getHireList", jobVO);
 		return hireList;
 	}
 	
