@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
     <title>Document</title>
-<script>
-	function main_go() {
-		location.href="main.do";
-	}
-
-</script>
+    <style type="text/css">
+    	#default {height: 775px;}
+    </style>
 </head>
-<body onload="main_go()">
+<body>
+<div id="default">
+
+</div>
 </body>
 </html>

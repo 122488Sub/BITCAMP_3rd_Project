@@ -14,8 +14,8 @@ public class HomeController {
 
 	@RequestMapping("main.do")
 	public String main_go() {
-
-		return "index.jsp";
+		System.out.println("main.do");
+		return "common/main.page";
 	}
 	
 }

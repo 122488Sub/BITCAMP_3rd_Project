@@ -78,6 +78,35 @@ public class HireController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value="hireJsonFilter.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String hireJsonFilter(@RequestParam("cate_prnt_en") String cate_prnt_en,
+								 @RequestParam("cate_child_en") String[] cate_child_en,
+								 @RequestParam("payCondition") String[]  payCondition,
+								 HttpServletRequest request, 
+							     HttpServletResponse response) {
+		
+		System.out.println("cate_prnt_en : " + cate_prnt_en);
+		System.out.println("cate_child_en : " + cate_child_en);
+		System.out.println("payCondition : " + payCondition);
+		// 현재 페이지 구하기
+		//String cPage = request.getParameter("cPage");
+		// 페이지 처리
+		//PagingVO p =  paging.paging(cPage);
+		
+		// 여러개의 파라미터값을 vo와 상관없이 매개변수로 사용하는 방법 :map형식 
+		//Map<String, Integer> map = new HashMap<String, Integer>();
+		//map.put("begin", p.getBegin());
+		//map.put("end", p.getEnd());
+		
+		//리스트 정보 검색
+		//List<HireVO> list = hireServiceImpl.getHireList(map);
+		//String result = hireServiceImpl.getHireListJson(list, p);
+		//request.setAttribute("pvo", p);
+		
+		return "";
+	}
 
 	@RequestMapping(value="hireDetail.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView hireDetaile(HttpServletRequest request, 
