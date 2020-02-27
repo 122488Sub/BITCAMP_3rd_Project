@@ -20,7 +20,7 @@ $(function() {
 	    $("#menu_wrap").append("<li class='menu'><a href='javascript:myPage();'>MyPage</a></li>");  
 	} else {
 		$("#menu_wrap").append("<li class='menu'><a href='login_go.do'>Sign in</a></li>");
-	    $("#menu_wrap").append("<li class='menu'><a href='join_go.do'>Register</a></li>"); 
+	    $("#menu_wrap").append("<li class='menu'><a href='register_go.do'>Register</a></li>"); 
 	}
 	
 });

@@ -28,7 +28,6 @@ public class UserVO {
 	private String auth_status;
 	
 	//JWT
-	private String tokenStr;
 	private String secretKey;
 	
 	//로그아웃
@@ -199,13 +198,6 @@ public class UserVO {
 		this.sms_fl = sms_fl;
 	}
 
-	public String getAuth_status() {
-		return auth_status;
-	}
-
-	public void setAuth_status(String auth_status) {
-		this.auth_status = auth_status;
-	}
 	public String getSecretKey() {
 		return secretKey;
 	}
@@ -213,15 +205,15 @@ public class UserVO {
 	public void setSecretKey(String secretKey) {
 		this.secretKey = secretKey;
 	}
+
+	public String getAuth_status() {
+		return auth_status;
+	}
+
+	public void setAuth_status(String auth_status) {
+		this.auth_status = auth_status;
+	}
 	
-
-	public String getTokenStr() {
-		return tokenStr;
-	}
-
-	public void setTokenStr(String tokenStr) {
-		this.tokenStr = tokenStr;
-	}
 
 	public String getLogout() {
 		return logout;
@@ -239,7 +231,7 @@ public class UserVO {
 				+ ", mem_nationality=" + mem_nationality + ", mem_reg_ip=" + mem_reg_ip + ", mem_reg_dt=" + mem_reg_dt
 				+ ", mem_mod_dt=" + mem_mod_dt + ", mem_last_login=" + mem_last_login + ", mem_leave_fl=" + mem_leave_fl
 				+ ", mem_leave_dt=" + mem_leave_dt + ", mailling_fl=" + mailling_fl + ", sms_fl=" + sms_fl
-				+ ", auth_status=" + auth_status + ", tokenStr=" + tokenStr + ", secretKey=" + secretKey + "]";
+				+ ", auth_status=" + auth_status + "]";
 	}
 
 
