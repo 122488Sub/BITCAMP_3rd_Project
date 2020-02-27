@@ -20,11 +20,12 @@
 	
 	#jobCate_box{
 		width: 900px;
-		height: auto;
+		height: 500px;
 	
 	}
 	#jUl {
 		float: left;
+		margin-bottom: 10px;
 	}
 	.menuName {
 		text-align: center;
@@ -79,8 +80,31 @@
 		display: table;
 		text-align:center;
 	}
-	
+	.catePrnt p { font-size: 10.3px; font-weight: bold;}
 	.catePrnt_clicked {
+		
+		border: 2px solid red;
+		width : 95px;
+		height: 60px;
+		background-color : lightcoral;
+	}
+	
+	.payCondition {
+		
+		border: 2px solid black;
+		width : 95px;
+		height: 60px;
+		float: left;
+		margin-left: 5px;
+		margin-bottom: 5px;
+		font-size: 8px;
+		font-weight: bold;
+		
+		display: table;
+		text-align:center;
+	}
+	.payCondition p { font-size: 13px; }
+	.pay_clicked {
 		
 		border: 2px solid red;
 		width : 95px;
@@ -100,3 +124,14 @@
 		margin-bottom:5px;
 		
 	}
+	
+	#filter_1 {
+		width : 620px;
+		height : 210px;
+	}
+	
+	#filter_2 {
+		width : 620px;
+		height : 140px;
+	}
+	

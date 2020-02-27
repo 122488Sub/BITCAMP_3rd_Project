@@ -33,12 +33,18 @@
 
 <div id="filterBox">
 	<div id="jobCate_box">
+	  <div id="filter_1">
 		<ul id="jUl">
 			<li class="menuName">
 			<p>Job</p>
 			<p>Category</p>
 			</li>
 			<li class="btnBox">
+				<div class="catePrnt" id="all">
+				<div class="pDiv">
+				<p>ALL</p>
+				</div>
+				</div>
 				<div class="catePrnt" id="Office Job">
 				<div class="pDiv">
 				<p>Office Job</p>
@@ -104,6 +110,9 @@
 				</div>	
 			</li>
 		</ul>
+		</div>
+		<br>
+		<div id="filter_2">
 		<ul id="jUl">
 			<li class="menuName">
 			<p>Detail</p>
@@ -113,6 +122,43 @@
 				
 			</li>
 		</ul>
+		</div>
+		<br>
+		<div id="filter_3">
+		<ul id="jUl">
+			<li class="menuName">
+			<p>Pay</p>
+			<p>Condition</p>
+			</li>
+			<li class="btnBox" id="payment">
+				<div class="payCondition" id="hour">
+				<div class="pDiv">
+				<p>Hour</p>
+				</div>
+				</div>
+				<div class="payCondition" id="day">
+				<div class="pDiv">
+				<p>Day</p>
+				</div>
+				</div>
+				<div class="payCondition" id="month">
+				<div class="pDiv">
+				<p>Month</p>
+				</div>
+				</div>
+				<div class="payCondition" id="year">
+				<div class="pDiv">
+				<p>Year</p>
+				</div>
+				</div>
+				<div class="payCondition" id="negotiable">
+				<div class="pDiv">
+				<p>Negotiable</p>
+				</div>
+				</div>
+			</li>
+		</ul>
+		</div>
 		</div>
 	<br><br><br><br><br><br><br><br><br><br><br><br>
 		<h2>Job Category</h2>
