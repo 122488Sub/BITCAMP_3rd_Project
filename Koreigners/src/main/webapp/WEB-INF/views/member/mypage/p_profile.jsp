@@ -59,9 +59,49 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 				}
 			});
 		});
-
+	
+	//비밀번호 확인
+		var memId = $("#mem_id").val();
+		var curPw = $("#curPw").val();
+		var jsonObj = {"mem_id":memId, "mem_pw":curPw};
+		
+		$("#curPw").blur(function(){
+			$.ajax({
+				url : "./pwCheck.do",
+				type : "POST",
+				contentType: "application/json; charset=UTF-8",
+				data : JSON.stringify(jsonObj),
+				dataType : 'text',
+				success : function(data) {
+					if(data != 1) {
+						$("#getMemberPw").text("Wrong password!");
+						$("#getMemberPw").css("color", "red");
+						$("#submit").attr("disabled", true);
+					}
+				},
+		        error: function(){
+		        	alert("비밀번호 확인 오류");
+		        }
+				
+			});
+		});
+	
+	
+		$("#rePw").blur(function(){
+			var pw1 = $("#newPw").val();
+			var pw2 = $("#rePw").val();
+			if(pw1 == pw2) {
+				$("#checkPw").text("");
+				$("#submit").attr("disabled", false);
+			} else {
+				$("#checkPw").text("Passwords are not same.");
+				$("#checkPw").css("color", "red");
+				$("#submit").attr("disabled", true);
+			}
+		});
 		 
  });
+	
 </script>
 </head>
 <body>
@@ -73,10 +113,11 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 		<li class="tabs"><a href="myPage_go.do?type=ads">My Ads</a></li>
 	</ul>
 </div>
-	<form action="/updateMember.do" method="post">
+	<form action="/koreigner/updateMember.do" method="post">
 		<div>
 			<label for="id">ID(Email)</label>
-			<input value="${mvo.mem_id }" contenteditable="false" disabled="disabled">
+			<input name="mem_id" value="${mvo.mem_id }" contenteditable="false" disabled="disabled">
+			<input type="hidden" id="mem_id" name="mem_id" value="${mvo.mem_id }">
 		</div><br>
 		<div>
 			<label for="nickName">Nickname</label>
@@ -85,7 +126,8 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 		</div><br>
 		<div>
 			<label for="password">Current Password</label>
-			<input type="password" id="curPw" name="mem_pw">
+			<input type="password" id="curPw" name="curPw">
+			<span id="getMemberPw"></span>
 		</div>
 		<div>
 			<label for="password">New Password</label>
@@ -93,7 +135,8 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 		</div>
 		<div>	
 			<label for="password">Re-enter New Password</label>
-			<input type="password" id="rePw" name="mem_pw">
+			<input type="password" id="rePw" name="re_mem_pw">
+			<div id="checkPw"></div>
 		</div><br>
 		<div>
 			<label for="phone">Phone number</label>
@@ -167,6 +210,7 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 	          <input type="radio" name="sms_fl" value="F">do not agree
 		</div><br><br>
 		
+		<input type="hidden" name=mem_cate value="${mvo.mem_cate }">
 		<input type="submit" value="save">
 	</form>
 </body>

@@ -19,14 +19,14 @@ public interface UserService {
 	//회원 정보 가져오기
 	UserVO getOneMember(String mem_id);
 
-	//권한 업데이트
-	void updateAuthstatus(UserVO vo);
+//	//권한 업데이트
+//	void updateAuthstatus(UserVO vo);
 	
 	//비밀번호 재설정 메일 보내기
 	void resetPasswordMail(String email) throws Exception;
 
-	//비밀번호 재설정
-	void resetPassword(UserVO vo);
+//	//비밀번호 재설정
+//	void resetPassword(UserVO vo);
 
 	//로그인처리
 	boolean checkLogin(String inputId, String inputPw, String inputCate);
@@ -40,8 +40,11 @@ public interface UserService {
 	//JWT 토큰 payload 정보 추출
 	Map<String, Object> getTokenPayload(String tokenStr);
 
-	// 회원 정보 수정
+	//회원 정보 수정
 	void updateMember(UserVO vo);
+	
+	//비밀번호 체크
+	int userPwCheck(Map<String, String> map);
 
 
 

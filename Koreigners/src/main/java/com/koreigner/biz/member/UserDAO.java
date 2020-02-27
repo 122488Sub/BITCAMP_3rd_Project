@@ -70,4 +70,10 @@ public class UserDAO {
 		mybatis.update("user.updateMember", vo);		
 	}
 
+	//비밀번호 체크
+	public int userPwCheck(Map<String, String> map) {
+		int userCnt = mybatis.selectOne("user.userPwCheck", map);
+		return userCnt;
+	}
+
 }

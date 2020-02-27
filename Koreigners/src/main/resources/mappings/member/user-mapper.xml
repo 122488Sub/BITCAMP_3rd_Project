@@ -14,6 +14,11 @@
 		SELECT COUNT(*) FROM T_MEMBER WHERE MEM_NAME = #{mem_name}
 	</select>
 	
+	<!-- 로그인 체크 -->
+	<select id="userLoginCheck" resultType="userVO">
+		SELECT * FROM T_MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw} AND MEM_CATE = #{mem_cate}
+	</select>
+	
 	<!-- 회원 등록 -->
 	<insert id="joinUser" parameterType="userVO">
 		INSERT INTO T_MEMBER
@@ -21,17 +26,12 @@
 		VALUES (MEM_SQ.NEXTVAL, #{mem_cate}, #{mem_id}, #{mem_pw}, #{mem_name})	
 	</insert>
 	
-	<!-- 로그인 체크 -->
-	<select id="userLoginCheck" resultType="userVO">
-		SELECT * FROM T_MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw} AND MEM_CATE = #{mem_cate}
-	</select>
-	
 	<!-- 이메일 인증(권한상태 업데이트) -->
-	<update id="updateAuthstatus" parameterType="userVO">
+	<!-- <update id="updateAuthstatus" parameterType="userVO">
 		UPDATE T_MEMBER
 		   SET AUTH_STATUS = '1'
 		 WHERE MEM_ID = #{mem_id}
-	</update>
+	</update> -->
 	
 	<!-- 권한상태 불러오기 -->
 	<select id="getAuthStatus" parameterType="String" resultType="String">
@@ -44,18 +44,35 @@
 	</select>
 	
 	<!-- 비밀번호 재설정 -->
-	<update id="updatePassword" parameterType="userVO">
+	<!-- <update id="updatePassword" parameterType="userVO">
 		UPDATE T_MEMBER
 		   SET MEM_PW = #{mem_pw}
 		 WHERE MEM_ID = #{mem_id}
-	</update>
+	</update> -->
 	
 	<!-- 회원정보 수정하기 -->
 	<update id="updateMember" parameterType="userVO">
 		UPDATE T_MEMBER
-		   SET MEM_ID = #{mem_id},
+		   <set>
+		       <if test="mem_name != null">MEM_NAME = #{mem_name},</if>
+		       <if test="mem_pw != null">MEM_PW = #{mem_pw},</if>
+		       <if test="mem_phone != null">MEM_PHONE = #{mem_phone},</if>
+		       <if test="mem_birth != null">MEM_BIRTH = #{mem_birth},</if>
+		       <if test="mem_gender != null">MEM_GENDER = #{mem_gender},</if>
+		       <if test="mem_address != null">MEM_ADDRESS = #{mem_address},</if>
+		       <if test="mem_nationality != null">MEM_NATIONALITY = #{mem_nationality},</if>
+		       <if test="mailling_fl != null">MAILLING_FL = #{mailling_fl},</if>
+		       <if test="sms_fl != null">SMS_FL = #{sms_fl},</if>
+		       <if test="auth_status != null">AUTH_STATUS = #{auth_status},</if>
+		   </set>
+		 WHERE MEM_ID = #{mem_id}
 	</update>
 	
+	<!-- 비밀번호 체크 -->
+	<select id="userPwCheck" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM T_MEMBER
+		 WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
+	</select>
 </mapper>
 
 

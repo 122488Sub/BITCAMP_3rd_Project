@@ -15,9 +15,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	$(function(){
-		$("#pw2").blur(function(){
-			var pw1 = $("#pw1").val();
-			var pw2 = $("#pw2").val();
+		$("#rePw").blur(function(){
+			var pw1 = $("#newPw").val();
+			var pw2 = $("#rePw").val();
 			if(pw1 == pw2) {
 				$("#checkPw").text("");
 				$("#submit").attr("disabled", false);
@@ -37,14 +37,14 @@
 		<hr><hr>
 		<form action="resetPw.do" method="post">
 			<div>
-				New Password :	<input type="password" id="pw1" name="mem_pw">
-				<input type="hidden" name="mem_id" value="${mem_id }">
+				New Password :	<input type="password" id="newPw" name="mem_pw">
 			</div>
 			<div>
-				Re-enter New Password :	<input type="password" id="pw2" name="re_mem_pw">
+				Re-enter New Password :	<input type="password" id="rePw" name="re_mem_pw">
 				<span id="checkPw"></span>
 			</div>
 			<div>
+				<input type="hidden" name="mem_id" value="${mem_id }">
 				<input type="submit" value="reset password">
 			</div>
 		</form>
