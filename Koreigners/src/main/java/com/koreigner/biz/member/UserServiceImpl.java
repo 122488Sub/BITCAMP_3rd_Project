@@ -217,6 +217,7 @@ public class UserServiceImpl implements UserService {
 	public int userPwCheck(Map<String, String> map) {
 		
 		String mem_pw = map.get("mem_pw");
+		System.out.println("비밀번호 : " + mem_pw);
 		
 		//비밀번호 암호화
 		String securedPw = securityUtil.encryptSHA256(mem_pw);

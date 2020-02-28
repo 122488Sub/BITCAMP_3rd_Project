@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,32 +29,37 @@ public class UserController {
 	private UserService userService;
 	
 	// 로그인 페이지 이동
-	@RequestMapping(value="/login_go.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String login_go(Model model, UserVO vo) {
+	@RequestMapping(value="login_go.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String login_go(HttpServletRequest request, HttpServletResponse response, Model model, UserVO vo) {
 		
 		//기본 로그인 페이지 이동 시
 		model.addAttribute("pw_reset", "0");
-				
-		String logout = vo.getLogout();
-		//로그아웃 후 이동 시
-		if(logout != null && logout.equals("1")) {
-			model.addAttribute("logout_check", "1");
-		} else { //처음 페이지 이동 시
-			model.addAttribute("logout_check", "0");
-		}
-		
+		model.addAttribute("logout_check", "0");
+						
 		return "/member/login.page";
+	}
+	
+	// 로그아웃 처리
+	@RequestMapping(value="logout.do")
+	public String postLogout(HttpServletRequest request, HttpServletResponse response, Model model) {
+		Cookie userToken = new Cookie("userToken", null);
+		userToken.setMaxAge(0);
+	    response.addCookie(userToken);
+	    
+	    model.addAttribute("logout_check", "1");
+	    
+	    return "/member/login.page";
 	}
 
 	// 비밀번호 찾기 이동
-	@RequestMapping(value="/resetPwMail_go.do")
+	@RequestMapping(value="resetPwMail_go.do")
 	public String resetPassword_go() {
 
 		return "/member/resetPwMail.page";
 	}
 	
 	// 비밀번호 재설정 메일보내기
-	@RequestMapping(value="/resetPwMail.do", method=RequestMethod.POST)
+	@RequestMapping(value="resetPwMail.do", method=RequestMethod.POST)
 	public String resetPwMail(@RequestParam("email") String email, Model model) throws Exception {
 		
 		int idCnt = userService.userIdCheck(email);
@@ -72,33 +78,46 @@ public class UserController {
 	}
 	
 	// 비밀번호 재설정 페이지로 이동
-	@RequestMapping(value="/resetPw_go.do", method=RequestMethod.GET)
+	@RequestMapping(value="resetPw_go.do", method=RequestMethod.GET)
 	public String resetPw_go(HttpServletRequest request, Model model) {
 		String mem_id = request.getParameter("mem_id");
+		String mem_cate = request.getParameter("mem_cate");
 		model.addAttribute("mem_id", mem_id);
+		model.addAttribute("mem_cate", mem_cate);
 		
 		return "/member/resetPw.page";
 	}
 
 	// 비밀번호 재설정
-	@RequestMapping(value="/resetPw.do", method=RequestMethod.POST)
-	public String resetPw(UserVO vo, Model model) {
+	@RequestMapping(value="resetPw.do", method=RequestMethod.POST)
+	public String resetPw(HttpServletRequest request, UserVO vo, Model model) {
 
 		userService.updateMember(vo);
-
-		return "/member/resetPwSuccess.page";
+		String mem_cate = vo.getMem_cate();
+		
+		String resetPwType = request.getParameter("resetPwType");
+		if(resetPwType.equals("forgot")) {
+			return "/member/resetPwSuccess.page";
+		} else if(mem_cate.equals("p")) {
+			return "/member/mypage/p_profile.page";
+		} else if(mem_cate.equals("c")) {
+			return "/member/mypage/c_profile.page";
+		} else {
+			System.out.println("페이지 이동시 에러발생");
+			return "/common/main.page";
+		}
 	}
 	
 	
 	// 회원가입 이동
-	@RequestMapping(value="/register_go.do")
+	@RequestMapping(value="register_go.do")
 	public String register_go() {
 
 		return "/member/register.page";
 	}
 
 	// 아이디 중복 체크
-	@RequestMapping(value="/idCheck.do", method=RequestMethod.POST)
+	@RequestMapping(value="idCheck.do", method=RequestMethod.POST)
 	@ResponseBody
 	public int idCheck(@RequestParam("mem_id") String mem_id) {
 
@@ -108,7 +127,7 @@ public class UserController {
 	}
 
 	// 닉네임 중복 체크
-	@RequestMapping(value="/nickCheck.do", method=RequestMethod.POST)
+	@RequestMapping(value="nickCheck.do", method=RequestMethod.POST)
 	@ResponseBody
 	public int nickCheck(@RequestParam("mem_name") String mem_name) {
 
@@ -119,7 +138,7 @@ public class UserController {
 	}
 
 	// 회원 등록 + 이메일 인증 메일 보내기
-	@RequestMapping(value="/join.do", method=RequestMethod.POST)
+	@RequestMapping(value="join.do", method=RequestMethod.POST)
 	public String joinUser(UserVO vo) throws Exception {
 
 		userService.joinUser(vo);
@@ -128,7 +147,7 @@ public class UserController {
 	}
 
 	// 이메일 인증완료 후
-	@RequestMapping(value="/emailAuth.do", method=RequestMethod.GET)
+	@RequestMapping(value="emailAuth.do", method=RequestMethod.GET)
 	public String emailConfirm(UserVO vo, Model model) throws Exception {
 
 		vo.setAuth_status("1"); // authStatus를 1로, 권한 업데이트
@@ -138,7 +157,7 @@ public class UserController {
 	}
 
 	//로그인 처리
-	@RequestMapping(value="/login.do", method=RequestMethod.POST)
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public ResponseEntity<String> postLogin(HttpServletResponse response, @RequestBody Map<String, String> jsonMap) {
 
 		ResponseEntity<String> entity = null;
@@ -151,18 +170,23 @@ public class UserController {
 
 		if (userService.checkLogin(inputId, inputPw, inputCate)) { // 유저가 존재할 경우
 			tokenStr = userService.createToken(inputId); // 토큰 생성
-		} 
+		}
+		
+		Cookie userToken = new Cookie("userToken", tokenStr); //쿠키에 저장
+		userToken.setMaxAge(60*60*24); //쿠키의 유효기간(1일)
+		response.addCookie(userToken);
+		
 		entity = new ResponseEntity<String>(tokenStr, HttpStatus.OK); //토큰!
 		
 		return entity;
 	}
 
 	//마이페이지로 이동
-	@RequestMapping(value="/myPage_go.do", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="myPage_go.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String myPage_go(HttpServletRequest request, Model model) {
 		
 		String mem_id = (String)request.getAttribute("mem_id"); //토큰에서 아이디 추출해오기
-		System.out.println("mem_id: " + mem_id);
+		System.out.println("컨트롤러에서 mem_id: " + mem_id);
 		
 		UserVO mvo = userService.getOneMember(mem_id); //회원정보 불러오기
 		model.addAttribute("mvo", mvo);
@@ -212,21 +236,24 @@ public class UserController {
 		vo.setMem_address(address + " " + address_detail);
 		
 		if(mem_cate.equals("c")) {
-			return "/member/mypage/c_profile.page";
+			return "member/mypage/c_profile.page";
 			
 		} else if(mem_cate.equals("p")) {
 			userService.updateMember(vo);
-			return "/member/mypage/p_profile.page";
+			return "member/mypage/p_profile.page";
 			
 		} else {
-			return "/koreigner/index.jsp";
+			return "common/main.page";
 		}
 	}
 	
 	// 비밀번호 확인
-	@RequestMapping(value="/pwCheck.do", method=RequestMethod.POST)
+	@RequestMapping(value="pwCheck.do", method=RequestMethod.POST)
 	@ResponseBody
 	public int pwCheck(@RequestBody Map<String, String> jsonMap) {
+				
+		String pw = jsonMap.get("mem_pw");
+		System.out.println("pw: " + pw);
 		
 		int userCnt = userService.userPwCheck(jsonMap);
 		

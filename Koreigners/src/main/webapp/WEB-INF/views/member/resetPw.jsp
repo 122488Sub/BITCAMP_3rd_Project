@@ -33,7 +33,7 @@
 <body>
 
 	<div id="container">
-		<h1>Reset Your Password</h1>
+		<h1>Reset/Change Your Password</h1>
 		<hr><hr>
 		<form action="resetPw.do" method="post">
 			<div>
@@ -45,6 +45,8 @@
 			</div>
 			<div>
 				<input type="hidden" name="mem_id" value="${mem_id }">
+				<input type="hidden" name="mem_cate" value="${mem_cate }">
+				<input type="hidden" name="resetPwType" value="forgot">
 				<input type="submit" value="reset password">
 			</div>
 		</form>

@@ -17,7 +17,7 @@
 		<h1>Create Account</h1>
 		<hr>
 		<br>
-		<form id="regiForm" action="./join.do" method="post">
+		<form id="regiForm" action="join.do" method="post">
 			<input type="hidden" name="mem_cate" value="p">
 			<div>
 				<span class="text">

@@ -34,73 +34,78 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
  
  $(function(){
 	// 닉네임 중복 검사
-		$("#mem_name").blur(function() {
-			$.ajax({
-				url : './nickCheck.do',
-				type : 'post',
-				success : function(data) {
-					console.log("data : " + data);	
-					
-					if(data == 1) {
-						// 1 : 닉네임 중복되는 문구
-						$("#getMemberNick").text("Nickname has already been taken :p");
-						$("#getMemberNick").css("color", "red");
-						$("#submit").attr("disabled", true);
-						
-					} else {
-						// 0 : 사용가능
-						$("#getMemberNick").text("It's available!!");
-						$("#getMemberNick").css("color", "blue");
-						$("#submit").attr("disabled", false);
-					}
-				}, 
-				error : function() {
-					console.log("실패");
-				}
-			});
-		});
-	
-	//비밀번호 확인
-		var memId = $("#mem_id").val();
-		var curPw = $("#curPw").val();
-		var jsonObj = {"mem_id":memId, "mem_pw":curPw};
-		
-		$("#curPw").blur(function(){
-			$.ajax({
-				url : "./pwCheck.do",
-				type : "POST",
-				contentType: "application/json; charset=UTF-8",
-				data : JSON.stringify(jsonObj),
-				dataType : 'text',
-				success : function(data) {
-					if(data != 1) {
-						$("#getMemberPw").text("Wrong password!");
-						$("#getMemberPw").css("color", "red");
-						$("#submit").attr("disabled", true);
-					}
-				},
-		        error: function(){
-		        	alert("비밀번호 확인 오류");
-		        }
+	$("#mem_name").blur(function() {
+		$.ajax({
+			url : 'nickCheck.do',
+			type : 'post',
+			success : function(data) {
+				console.log("data : " + data);	
 				
-			});
-		});
-	
-	
-		$("#rePw").blur(function(){
-			var pw1 = $("#newPw").val();
-			var pw2 = $("#rePw").val();
-			if(pw1 == pw2) {
-				$("#checkPw").text("");
-				$("#submit").attr("disabled", false);
-			} else {
-				$("#checkPw").text("Passwords are not same.");
-				$("#checkPw").css("color", "red");
-				$("#submit").attr("disabled", true);
+				if(data == 1) {
+					// 1 : 닉네임 중복되는 문구
+					$("#getMemberNick").text("Nickname has already been taken :p");
+					$("#getMemberNick").css("color", "red");
+					$("#submit").attr("disabled", true);
+					
+				} else {
+					// 0 : 사용가능
+					$("#getMemberNick").text("It's available!!");
+					$("#getMemberNick").css("color", "blue");
+					$("#submit").attr("disabled", false);
+				}
+			}, 
+			error : function() {
+				console.log("실패");
 			}
 		});
-		 
+	});
+	
+	//비밀번호 확인
+	$("#curPw").blur(function(){
+		var memId = $('#mem_id').val();
+		var curPw = $('#curPw').val();
+		var jsonObj = {"mem_id":memId, "mem_pw":curPw};
+		
+		$.ajax({
+			url : 'pwCheck.do',
+			type : 'POST',
+			contentType: "application/json; charset=UTF-8",
+			data : JSON.stringify(jsonObj),
+			dataType : 'text',
+			success : function(data) {
+				if(data != 1) {
+					$('#getMemberPw').text("Wrong password!");
+					$('#getMemberPw').css("color", "red");
+					$('#resetPwGo').attr('disabled', true);
+				} else {
+					$('#getMemberPw').text("Correct!");
+					$('#getMemberPw').css("color", "blue");
+					$('#resetPwGo').attr('disabled', false);
+				}
+			},
+	        error: function(){
+	        	alert("비밀번호 확인 오류");
+	        }
+			
+		});
+	});
+	
+	$("#rePw").blur(function(){
+		var pw1 = $("#newPw").val();
+		var pw2 = $("#rePw").val();
+		if(pw1 == pw2) {
+			$("#checkPw").text("");
+			$("#submit").attr("disabled", false);
+		} else {
+			$("#checkPw").text("Passwords are not same.");
+			$("#checkPw").css("color", "red");
+			$("#submit").attr("disabled", true);
+		}
+	});
+	
  });
+ 
+ 	
 	
 </script>
 </head>
@@ -113,7 +118,7 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 		<li class="tabs"><a href="myPage_go.do?type=ads">My Ads</a></li>
 	</ul>
 </div>
-	<form action="./updateMember.do" method="post">
+	<form action="updateMember.do" method="post">
 		<div>
 			<label for="id">ID(Email)</label>
 			<input name="mem_id" value="${mvo.mem_id }" contenteditable="false" disabled="disabled">
@@ -126,17 +131,17 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 		</div><br>
 		<div>
 			<label for="password">Current Password</label>
-			<input type="password" id="curPw" name="curPw">
+			<input type="password" id="curPw">
 			<span id="getMemberPw"></span>
 		</div>
 		<div>
 			<label for="password">New Password</label>
 			<input type="password" id="newPw" name="mem_pw">
 		</div>
-		<div>	
+		<div>
 			<label for="password">Re-enter New Password</label>
-			<input type="password" id="rePw" name="re_mem_pw">
-			<div id="checkPw"></div>
+			<input type="password" id="rePw">
+			<span id="checkPw"></span>
 		</div><br>
 		<div>
 			<label for="phone">Phone number</label>

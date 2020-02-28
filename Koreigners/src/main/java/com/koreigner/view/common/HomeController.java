@@ -16,7 +16,7 @@ public class HomeController {
 	@Autowired
 	private HomeServiceImpl homeServiceImpl;
 
-	@RequestMapping(value="main.do", method=RequestMethod.GET)
+	@RequestMapping(value="main.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String main_go(HttpServletRequest request, Model model) {
 		System.out.println("main.do");
 		
@@ -28,7 +28,7 @@ public class HomeController {
 			model.addAttribute("auth_check", "1");			
 		}
 		
-		return "common/main.page";
+		return "/common/main.page";
 	}
 	
 }
