@@ -163,8 +163,6 @@
 					$("#listDisp").html(dispHtml);
 					$(".th_selectDoSi").html("");
 					$(".tbody_dosi").html("<h2>&nbsp;&nbsp;← Please select an region</h2>");
-					
-					
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					alert("실패 : \n"

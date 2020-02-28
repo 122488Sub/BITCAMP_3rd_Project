@@ -13,7 +13,7 @@ public interface HireService {
 	void insertHire(HireVO vo, HttpServletRequest reqeust);
 	void hireHIT(int hire_idx);
 	void wishInsert(HireVO hireVO);
-	int hireListTotal();
+	int hireListTotal(JobVO jobVO);
 	List<HireVO> getHireList(JobVO jobVO);
 	HireVO hireDetailOne(int hire_idx);
 	String getHireListJson(List<HireVO> list, PagingVO p);

@@ -119,7 +119,6 @@
 			<p>Category</p>
 			</li>
 			<li class="btnBox" id="childCate">
-				
 			</li>
 		</ul>
 		</div>
@@ -160,8 +159,33 @@
 		</ul>
 		</div>
 		</div>
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br><br><br><br><br>
+<%--
+		<table border>
+	<thead>
+		<tr>
+			<th>idx</th>
+			<th>Company Name</th>
+			<th>Location</th>
+			<th>Title</th>
+			<th>Salary</th>
+			<th>Post Date</th>
+		</tr>
+	</thead>
+	<tbody id="filter_list_box">
+		<tr>
+			<td>Name</td>
+			<td>Location</td>
+			<td>Title</td>
+			<td>Salary</td>
+			<td>Post Date</td>
+		<tr>
+	</tbody>
+	<tfoot id="filter_tfoot">
+		
+	</tfoot>
+</table>
+	<br><br><br><br><br><br><br><br><br><br><br><br> --%>
+<br><br><br><br><br>
 
 <hr>
 <a href="hireWrite_go.do">Post an Ad</a>
