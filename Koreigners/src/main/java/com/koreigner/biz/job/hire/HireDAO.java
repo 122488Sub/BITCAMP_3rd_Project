@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.koreigner.biz.job.jobservice.JobVO;
 @Repository
 public class HireDAO {
-
+	
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
@@ -18,14 +18,13 @@ public class HireDAO {
 		mybatis.insert("insertHire", vo);
 	}
 	
-	
 	public List<HireVO> getHireList(JobVO jobVO){
 		List<HireVO> hireList = mybatis.selectList("getHireList", jobVO);
 		return hireList;
 	}
 	
-	public int hireListTotal() {
-		int total = mybatis.selectOne("hireListTotal");
+	public int hireListTotal(JobVO jobVO) {
+		int total = mybatis.selectOne("hireListTotal", jobVO);
 		return total;
 	}
 	

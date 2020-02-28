@@ -40,50 +40,51 @@ public class HireController {
 	@Autowired
 	PagingService paging;
 	
+	
+	
+	
 	//채용 게시판으로 이동
 	@RequestMapping(value="hireList_go.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String hireList(HttpServletRequest request, HttpServletResponse response) {
+	public String hireList(HttpServletRequest request, HttpServletResponse response, JobVO jobVO) {
 		//잡카테고리 가져오기
 		//HireVO hireVO = new HireVO();
 		
 		// 현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
-		
-		// 페이지 처리
-		PagingVO p =  paging.paging(cPage);
-		
-		//EL, JSTL 사용을 위한 속성 등록
-		request.setAttribute("pvo", p);
-		
+		System.out.println("==================hireList==================");
+		System.out.println("jobVO : " + jobVO);
+		System.out.println("================hireList End================");
 		return "job/hire/hireList.page";
 	}
 
 	@RequestMapping(value="hireListData.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String hireListDate(HttpServletRequest request, 
-							   HttpServletResponse response) {
-		
+							   HttpServletResponse response
+							   ) {
+		System.out.println("hirelistdate.do 여기기기");
 		// 현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
-		// 페이지 처리
-		PagingVO p =  paging.paging(cPage);
 		// 리스트 VO 생성
 		JobVO jobVO = new JobVO();
-
+		System.out.println("==================hireListData==================");
+		// 페이지 처리
+		PagingVO p =  paging.paging(cPage, jobVO);
+		
 		jobVO.setBegin(p.getBegin());
 		jobVO.setEnd(p.getEnd());
+		
 		
 		// 여러개의 파라미터값을 vo와 상관없이 매개변수로 사용하는 방법 :map형식 
 		//Map<String, Integer> map = new HashMap<String, Integer>();
 		
 		//map.put("begin", p.getBegin());
 		//map.put("end", p.getEnd());
-		
+		System.out.println("==================hireListData END==================");
 		//리스트 정보 검색
 		List<HireVO> list = hireServiceImpl.getHireList(jobVO);
 		String result = hireServiceImpl.getHireListJson(list, p);
 		request.setAttribute("pvo", p);
-		
 		return result;
 	}
 	
@@ -92,24 +93,24 @@ public class HireController {
 	public String hireJsonFilter(JobVO jobVO,
 								 HttpServletRequest request, 
 							     HttpServletResponse response) {
-		System.out.println("hirejson controller");
-		System.out.println("jobVO : " + jobVO.toString());
+		System.out.println("==================hireJsonFilter==================");
 		// 현재 페이지 구하기
-		//String cPage = request.getParameter("cPage");
+		String cPage = request.getParameter("cPage");
 		// 페이지 처리
-		//PagingVO p =  paging.paging(cPage);
+		PagingVO p =  paging.paging(cPage, jobVO);
+		System.out.println("p jsonFilter : " + p);
+		// 리스트 VO 생성
+		jobVO.setBegin(p.getBegin());
+		jobVO.setEnd(p.getEnd());
 		
-		// 여러개의 파라미터값을 vo와 상관없이 매개변수로 사용하는 방법 :map형식 
-		//Map<String, Integer> map = new HashMap<String, Integer>();
-		//map.put("begin", p.getBegin());
-		//map.put("end", p.getEnd());
+		List<HireVO> list = hireServiceImpl.getHireList(jobVO);
+		System.out.println("list hireJsonFilter : " + list + "\nlist.length : " + list.size());
+		String result = hireServiceImpl.getHireListJson(list, p);
 		
-		//리스트 정보 검색
-		//List<HireVO> list = hireServiceImpl.getHireList(map);
-		//String result = hireServiceImpl.getHireListJson(list, p);
-		//request.setAttribute("pvo", p);
+		System.out.println("==================hireJsonFilter END==================");
 		
-		return "hi";
+		request.setAttribute("pvo", p);
+		return result;
 	}
 
 	@RequestMapping(value="hireDetail.do", method = {RequestMethod.GET, RequestMethod.POST})

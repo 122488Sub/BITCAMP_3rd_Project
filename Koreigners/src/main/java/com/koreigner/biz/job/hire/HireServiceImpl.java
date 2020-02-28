@@ -55,14 +55,13 @@ public class HireServiceImpl implements HireService {
 	
 	@Override
 	public List<HireVO> getHireList(JobVO jobVO) {
-		
 		List<HireVO> hireList = hireDAO.getHireList(jobVO);
 		return hireList;
 	}
 	
 	@Override
-	public int hireListTotal() {
-		int total = hireDAO.hireListTotal();
+	public int hireListTotal(JobVO jobVO) {
+		int total = hireDAO.hireListTotal(jobVO);
 		return total;
 	}
 	
