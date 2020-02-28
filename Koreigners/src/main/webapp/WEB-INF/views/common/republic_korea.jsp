@@ -6,9 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/koreigner/resources/css/republic_korea.css">
+<link rel="stylesheet" type="text/css" href="resources/css/republic_korea.css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
 
 </head>
 <style>
@@ -59,9 +58,9 @@
 	.table_dosi td:nth-of-type(odd) { width: 5px; }
 	.table_dosi td:nth-of-type(even) { padding-left:5px; width: 180px; height:50px;}
 	.th_selectDoSi{ text-align: left; padding-left :10px;   }
-	
 </style>
 <body>
+
 <div id='content'>
 	<div id='map'>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 350 350 350">
@@ -75,7 +74,7 @@
 			        </feMerge>
 			    </filter>
 			</defs> 
-			<g filter="url(#dropshadow)">
+			<g filter="url(#dropshadow)" id="dMap">
 				<a href="javascript:getDoSiData('서울특별시','Seoul',1)"><path id="CD1" class="OUTLINE" d =" M 178 231 l -4 2 -4 3 -1 0 0 1 -3 1 -4 -5 -4 0 -6 1 -4 3 -2 -1 -1 -1 -3 2 -3 -3 -1 -3 -2 -3 0 0 -1 -2 -3 2 -3 1 -2 -4 0 -8 -3 -1 0 0 0 0 0 0 -2 -1 -3 -2 2 -4 3 -3 0 -1 0 0 0 0 0 -1 1 0 4 2 7 1 2 -2 0 1 2 0 1 -4 2 -8 7 -1 4 2 0 -3 1 -1 2 -4 3 -4 2 0 3 2 7 2 2 8 1 4 1 1 0 0 0 2 0 2 0 1 0 0 -1 6 3 0 8 -1 0 5 -4 3 -1 5 z " /></a>
 				<a href="javascript:getDoSiData('부산광역시','Busan',2)"><path id="CD2" class="OUTLINE" d =" M 496 722 l 0 4 -1 0 -2 -5 -1 6 -1 -2 0 0 -1 0 -1 1 -1 2 0 1 -1 -1 -1 -6 -1 -6 -2 3 -2 -3 0 2 0 0 0 0 0 0 0 0 -1 0 1 0 -4 1 -2 -5 -1 5 -1 2 0 0 -2 0 -7 -2 0 -2 2 -2 -1 -3 -5 -4 -2 -2 4 -1 9 0 0 -5 1 -6 5 -1 6 -2 7 -1 4 -6 1 -4 2 0 3 1 1 -3 6 -3 4 -1 1 -5 3 -6 7 0 3 -2 0 -3 0 0 2 -3 1 3 0 0 1 0 2 0 4 -1 4 4 1 3 0 1 -1 1 5 1 -7 4 -1 6 -1 4 -1 0 0 0 0 -1 -1 2 -1 1 2 2 -1 4 -2 4 -3 6 -3 4 0 1 0 0 -5 0 -4 0 -2 -1 -1 4 -1 4 1 -1 0 4 -7 0 -2 -4 -1 1 -3 4 z " /></a>
 				<a href="javascript:getDoSiData('대구광역시','Daegu',3)"><path id="CD3" class="OUTLINE" d =" M 441 530 l 3 1 3 7 0 4 2 9 1 7 -4 4 -2 -1 0 4 -1 2 -3 6 -2 7 0 8 -4 2 -4 2 -3 1 -3 -5 -6 0 -5 3 -1 6 -3 7 -2 3 -5 0 -7 3 -7 1 0 -8 -4 -4 -1 -3 5 -2 6 0 0 -5 -5 -4 -1 -5 3 -5 3 -2 8 -1 0 -5 -8 -4 -6 0 0 -5 2 -5 3 -4 3 -3 5 -1 2 7 3 3 1 0 2 -4 3 -7 0 -7 2 2 1 1 3 -2 6 -4 3 -3 5 -1 z " /></a>
@@ -135,10 +134,15 @@
 	</div>
 </div>
 <script >
-
+//vo에서 도와 시의 내용을 가질 List<String> 변수를 각각 만들것
+var do_List=new Array();
+var si_List=new Array();
+do_List.push("init");
+si_List.push("init");	
 
 function getDoSiData(do_kor,do_en,idx) {
 	console.log(do_en);
+	
 	$.ajax({
 		type : "get",
 		url : "getKoreaAddressList.do",
@@ -146,23 +150,15 @@ function getDoSiData(do_kor,do_en,idx) {
 		async: false,
 		data: {do_kor: do_kor},
 		success : function(data) {
-			console.log(data);
-			//응답받은 데이터 형식 : [{}, {}, ... , {}] - 배열
-			var strData = JSON.stringify(data); //JSON -> string
-			console.log("-" + strData + "-");
-			
-			var jsData = JSON.parse(strData); //string -> JavaScript 객체화
-			console.log("-" + jsData + "-");
-			
 			
 			//-------------------------------------------------
 			//시군구 테이블 값 지정
 			var dispHtml = "";
 			dispHtml+="<tr>";
 			dispHtml += "<td>"
-			dispHtml += "		<input type='checkbox' id='chk_do_parent', class='chk_do_parent'"
-								+"value='"+data[0].do_en+"' onClick='javascript:chkParent()'" 
-								+"checked='true'>";
+			dispHtml += "		<input type='checkbox' id='chk_do_parent' class='chk_do_parent'"
+								+"value='"+data[0].do_en+"' onClick='javascript:chkParent()'";
+			dispHtml +=				" >"; 
 			dispHtml += "</td>"					
 			dispHtml += "<td>"
 			dispHtml += "		<label for='siAll'>All</label>"
@@ -175,7 +171,11 @@ function getDoSiData(do_kor,do_en,idx) {
 					dispHtml += "<td>"
 					dispHtml += "		<input type='checkbox' id='si_"+this.gu_gun_eup_eng+"'"
 											+"class='chk_do_child' value='"+this.gu_gun_eup_eng+"'"
-											+"onClick='javascript:chkChild()'>";
+											+"onClick='javascript:chkChild(this)'";
+					if(si_List.indexOf(this.gu_gun_eup_eng)!= -1){
+						dispHtml += "        checked='true' ";
+			    	}
+					dispHtml += " >";
 					dispHtml += "</td>"
 					dispHtml += "<td>"
 					dispHtml += "		<label for='si_"+this.gu_gun_eup_eng+"' >"+this.si_gu_gun_eup_eng+"</label>"
@@ -187,13 +187,33 @@ function getDoSiData(do_kor,do_en,idx) {
 				}); 
 			}
 			
-			//여기까지 시군구 테이블값
-			//-------------------------------------------------
-
+			
+			
+			
 			$("#CD"+idx).css( {'fill':'blue'} ); 
 			
 			$(".tbody_dosi").html(dispHtml);
-			getDoData();
+			
+			$("#chk_do_parent").prop("checked", true);
+			
+			
+			if(do_List.indexOf(do_en)== -1){
+				do_List.push(do_en);	
+			
+				
+			}
+		
+			$(".chk_do_child").each(function(i){
+			
+				 if(si_List.indexOf($(this).val())!= -1){
+					 if(do_List.indexOf(do_en)!= -1){
+					 	do_List.splice(do_List.indexOf(do_en), 1);
+					 }
+					 $(".chk_do_parent").prop('checked', false);
+					 
+			     }
+			});
+			
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alert("실패 : \n"
@@ -203,6 +223,8 @@ function getDoSiData(do_kor,do_en,idx) {
 		}
 		
 	});
+	
+	getData();
 }
 </script>
 </body>

@@ -4,9 +4,11 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:applicationContext.xml</param-value>
   </context-param>
+  
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+  
   <filter>
     <filter-name>characterEncoding</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -15,10 +17,12 @@
       <param-value>UTF-8</param-value>
     </init-param>
   </filter>
+  
   <filter-mapping>
     <filter-name>characterEncoding</filter-name>
     <url-pattern>*.do</url-pattern>
   </filter-mapping>
+  
   <servlet>
     <servlet-name>action</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -27,8 +31,10 @@
       <param-value>/WEB-INF/config/presentation-layer.xml</param-value>
     </init-param>
   </servlet>
+ 
   <servlet-mapping>
     <servlet-name>action</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
 </web-app>

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,23 +12,13 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link href="resources/css/job/hireWrite.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="resources/js/hireWrite.js"></script>
+<script type="text/javascript" src="resources/js/hire/hireWrite.js"></script>
 <script type="text/javascript" src="resources/js/daumAddr.js"></script>
 </head>
 
 <body>
+
 <br><br><br><br>
-		<!-- 
-
-board_idx, hit, hire_idx, company_idx, mem_id, ,   , , , , ,
-, ,  , , , ,, 
-, , , , , , regdate, ip, b_status,  
-
-카테고리
-주소
-
--->
-
 
 <form action="hirePost.do" method="post">
 
@@ -73,11 +64,11 @@ board_idx, hit, hire_idx, company_idx, mem_id, ,   , , , , ,
 
 <!-- 임금조건 payment_codition --> 
 	<label>임금조건 : </label>
-	<input type="radio" name="payment_codition" id="hour" value="시급">시급
-	<input type="radio" name="payment_codition" id="day" value="일당">일당
-	<input type="radio" name="payment_codition" id="month" value="월급">월급
-	<input type="radio" name="payment_codition" id="year" value="연봉">연봉
-	<input type="radio" name="payment_codition" id="companyLaw" value="회사내규">회사내규
+	<input type="radio" name="payment_codition" id="hour" value="hour">시급
+	<input type="radio" name="payment_codition" id="day" value="day">일당
+	<input type="radio" name="payment_codition" id="month" value="month">월급
+	<input type="radio" name="payment_codition" id="year" value="year">연봉
+	<input type="radio" name="payment_codition" id="companyLaw" value="companyLaw">회사내규
 	<br><br>
 <!-- 임금조건 salary_min salary_max --> 
 	<input type="text" name="salary_min" id="salary_min" placeholder="임금 최저"> -

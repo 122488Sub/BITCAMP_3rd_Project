@@ -1,6 +1,7 @@
 package com.koreigner.biz.member;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
@@ -56,9 +57,9 @@ public class UserServiceImpl implements UserService {
 	
 	//회원가입중 client가 입력한 email이 db에 이미 등록되어 있는지 중복 체크 한다.
 	@Override
-	public int userIdCheck(UserVO vo) {
+	public int userIdCheck(String mem_id) {
 		
-		int idCnt = userDAO.userIdCheck(vo);
+		int idCnt = userDAO.userIdCheck(mem_id);
 		System.out.println("idCnt: " + idCnt);
 
 		return idCnt;
@@ -66,9 +67,9 @@ public class UserServiceImpl implements UserService {
 	
 	//회원가입중 client가 입력한 NickName이 db에 이미 등록되어 있는지 중복 체크 한다.
 	@Override
-	public int userNickCheck(UserVO vo) {
+	public int userNickCheck(String mem_name) {
 		
-		int nameCnt = userDAO.userNickCheck(vo);
+		int nameCnt = userDAO.userNickCheck(mem_name);
 		System.out.println("nameCnt: " + nameCnt);
 
 		return nameCnt;
@@ -98,7 +99,7 @@ public class UserServiceImpl implements UserService {
         sendMail.setSubject("[KOREIGNERS 회원가입 이메일 인증]");
         sendMail.setText(new StringBuffer()
         		.append("<h1>메일인증</h1>")
-        		.append("<a href='http://localhost:8080/biz/emailConfirm.do?mem_id=")
+        		.append("<a href='http://localhost:8080/koreigner/emailAuth.do?mem_id=")
         		.append(vo.getMem_id())
         		.append("' target='_blank'>이메일 인증 확인</a>")
         		.toString());
@@ -112,14 +113,28 @@ public class UserServiceImpl implements UserService {
 		String securedPw = securityUtil.encryptSHA256(vo.getMem_pw());
 		vo.setMem_pw(securedPw);
 		
-		
+		//DB에 회원정보 입력
 		userDAO.joinUser(vo);		
 	}
 	
-	//회원가입 후 이메일인증 완료하면 auth 권한 상승
+	//이메일인증여부 가져오기
 	@Override
-	public void updateAuthstatus(UserVO vo) {
-		userDAO.updateAuthstatus(vo);		
+	public String getAuthStatus(String mem_id) {
+		String auth_status = userDAO.getAuthStatus(mem_id);
+		return auth_status;
+	}
+	
+//	//이메일 인증 권한 업데이트
+//	@Override
+//	public void updateAuthstatus(UserVO vo) {
+//		userDAO.updateAuthstatus(vo);
+//	}
+	
+	//회원 정보 가져오기
+	@Override
+	public UserVO getOneMember(String mem_id) {
+		UserVO mvo = userDAO.getOneMember(mem_id);
+		return mvo;
 	}
 	
 	// 비밀번호 재설정 메일 보내기
@@ -145,7 +160,7 @@ public class UserServiceImpl implements UserService {
         sendMail.setSubject("[KOREIGNERS 비밀번호 재설정 안내]");
         sendMail.setText(new StringBuffer()
         		.append("<h1>비밀번호 재설정</h1>")
-        		.append("<a href='http://localhost:8080/biz/resetPassword_2.do?mem_id=")
+        		.append("<a href='http://localhost:8080/koreigner/resetPw_go.do?mem_id=")
         		.append(email)
         		.append("' target='_blank'>비밀번호 변경</a>")
         		.toString());
@@ -156,25 +171,25 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
-	//비밀번호 재설정
-	@Override
-	public void resetPassword(UserVO vo) {
-		
-		// 비밀번호 암호화
-		String securedPw = securityUtil.encryptSHA256(vo.getMem_pw());
-		vo.setMem_pw(securedPw);
-		
-		userDAO.updatePassword(vo);		
-	}
+//	//비밀번호 재설정
+//	@Override
+//	public void resetPassword(UserVO vo) {
+//		
+//		// 비밀번호 암호화
+//		String securedPw = securityUtil.encryptSHA256(vo.getMem_pw());
+//		vo.setMem_pw(securedPw);
+//		
+//		userDAO.updatePassword(vo);		
+//	}
 
 	//로그인 처리
 	@Override
-	public boolean checkLogin(String inputId, String inputPw) {
+	public boolean checkLogin(String inputId, String inputPw, String inputCate) {
 		boolean isSuccess =false;
 		try {
 			//암호화된 비밀번호 추출
 			String securedPw = securityUtil.encryptSHA256(inputPw);
-			if(userDAO.userLoginCheck(inputId, securedPw) != null) {
+			if(userDAO.userLoginCheck(inputId, securedPw, inputCate) != null) {
 				isSuccess=true;
 			}
 		} catch(Exception e){
@@ -182,15 +197,40 @@ public class UserServiceImpl implements UserService {
 		}	
 		return isSuccess;
 	}
+	
+	//회원정보 수정
+	@Override
+	public void updateMember(UserVO vo) {
+		
+		// 비밀번호 암호화
+		String pw = vo.getMem_pw();
+		if(pw != null) {
+
+			String securedPw = securityUtil.encryptSHA256(vo.getMem_pw());
+			vo.setMem_pw(securedPw);
+		}
+		userDAO.updateMember(vo);		
+	}
+
+	//비밀번호 체크
+	@Override
+	public int userPwCheck(Map<String, String> map) {
+		
+		String mem_pw = map.get("mem_pw");
+		
+		//비밀번호 암호화
+		String securedPw = securityUtil.encryptSHA256(mem_pw);
+		map.put("mem_pw", securedPw);
+		
+		int userCnt = userDAO.userPwCheck(map);
+		return userCnt;
+	}
 
 
 	//=========================== JWT Token ===============================
 	
-	private final String TOKEN_FILE_NAME = "token_key"; //토큰 파일 이름
+	private static final String SALT =  "koreignerSecret";
 	
-	@Resource(name="baseSecretPath") //기본 토큰파일이 저장될 경로(applicationContext.xml에 빈 설정함)
-	private String baseSecretPath;
-
 	/**
 	 * 토큰을 생성하는 메서드
 	 * @param tokenUserId 토큰 생성을 요청한 사용자 id
@@ -203,7 +243,6 @@ public class UserServiceImpl implements UserService {
 		String issure = "Jeyi"; //토큰 발급자
 		String subject = "tokenData"; //토큰의 주제 (즉 토큰에 담길 내용)
 		Date exDate = new Date(System.currentTimeMillis() + 60000*60); //토큰 만료 시간 (1시간)
-		Key tokenKey = MacProvider.generateKey(SignatureAlgorithm.HS256); //토큰의 서명 알고리즘
 		tokenStr = Jwts.builder()
 				.setIssuer(issure)
 				.setSubject(subject)
@@ -211,56 +250,34 @@ public class UserServiceImpl implements UserService {
 				.setId(SupportUtil.makeUUID2String())
 				.setExpiration(exDate)
 				.setIssuedAt(new Date()) //토큰 발행 시점(토큰 유효기간 검사에 활용)
-				.signWith(SignatureAlgorithm.HS256, tokenKey)
+				.signWith(SignatureAlgorithm.HS256, this.generateKey()) //암호화방식, 키
 				.compact(); //토큰 생성 
-		makeHS512KeyFile(tokenKey, tokenUserId); //토큰 검증을 위해 키를 파일로 생성하고 저장한다.
 		return tokenStr;
 	}
 
-	/**
-	 * 토큰에 사용되는 Key 객체를 파일로 만들어주는 메서드
-	 * @param keyObject 키 객체
-	 * @param userId 키를 생성하게 된 사용자 ID
-	 */
-	private void makeHS512KeyFile(Key keyObject, String userId) {
-		FileChannel fileChannel;
-		String separatorStr = FileSystems.getDefault().getSeparator();
-		String tokenDir = baseSecretPath+separatorStr+userId;
-		String tokenPath = tokenDir+separatorStr+TOKEN_FILE_NAME;
-		String keyObjStr= Base64Utils.encodeToString(keyObject.getEncoded());
-		
-		//토큰파일이 존재하는 경우 삭제해준다.
-		if(Files.exists(Paths.get(tokenPath))) {
-			try{Files.delete(Paths.get(tokenPath));}
-			catch(Exception e){System.out.println("makeHS512KeyFile = " + e.getMessage());}
-		}
-		
+	//토큰 키 생성
+	private byte[] generateKey(){
+		byte[] key = null;
 		try {
-			Files.createDirectories(Paths.get(tokenDir)); //디렉토리 생성
-			Files.createFile(Paths.get(tokenPath)); //토큰 디렉토리에 토큰 키 파일을 생성
-			fileChannel = FileChannel.open(Paths.get(tokenPath), StandardOpenOption.WRITE); //파일 쓰기
-			
-			ByteBuffer buffer = ByteBuffer.allocateDirect(keyObjStr.length());
-			Charset charset = Charset.forName("UTF-8");
-			buffer = charset.encode(keyObjStr);
-			
-			fileChannel.write(buffer);
-			fileChannel.close();
+			key = SALT.getBytes("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
-		catch(IOException e) {System.out.println("makeHS512KeyFile = " + e.getMessage());}
+		
+		return key;
 	}
+	
 	
 	/**
 	 * 전달받은 토큰을 검증하는 메서드
 	 * @param tokenStr 토큰값
-	 * @param userId 토큰을 발급받은 사용자 id
 	 * @return 결과를 String으로 반환
 	 */
 	@Override
-	public String validToken(String tokenStr, String userId) {
+	public String validToken(String tokenStr) {
 		String resultMsg = "";
 		try {
-			Jwts.parser().setSigningKey(getKeyObject4File(userId)).parseClaimsJws(tokenStr).getBody();
+			Jwts.parser().setSigningKey(this.generateKey()).parseClaimsJws(tokenStr).getBody();
 			resultMsg="Pass";
 		}
 		catch(ExpiredJwtException eje) { //토큰의 만료시간이 지난 경우
@@ -297,37 +314,7 @@ public class UserServiceImpl implements UserService {
 		
 		return payloadMap;
 	}
-	
-	/**
-	 * 저장된 파일에서 Key 객체를 가져오는 메서드
-	 * @param userID 사용자 Id
-	 * @return 파일에서 받아온 키 객체를 반환한다.
-	 */
-	private Key getKeyObject4File(String userID) {
-		FileChannel fileChannel;
-		String keyStr = "";
-		String separatorStr = FileSystems.getDefault().getSeparator();
-		String tokenDir = baseSecretPath+separatorStr+userID;
-		String tokenPath = tokenDir+separatorStr+TOKEN_FILE_NAME;
-		try {
-			fileChannel = FileChannel.open(Paths.get(tokenPath));
-			ByteBuffer buffers = ByteBuffer.allocateDirect(100);
-			Charset charset = Charset.forName("UTF-8");
-			
-			int byteCnt = 0;
-			while(true){
-				byteCnt=fileChannel.read(buffers);
-				if(byteCnt==-1)break;
-				buffers.flip();
-				keyStr += charset.decode(buffers).toString();
-				buffers.clear();
-			}
-			fileChannel.close();
 
-		}
-		catch(IOException e) {
-			System.out.println("getKeyObject4File = " + e.getMessage());
-		}
-		return new SecretKeySpec(Base64Utils.decodeFromString(keyStr), "HmacSHA256");
-	}
+	
+	
 }
