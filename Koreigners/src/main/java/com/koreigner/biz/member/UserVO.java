@@ -30,9 +30,6 @@ public class UserVO {
 	//JWT
 	private String secretKey;
 	
-	//로그아웃
-	private String logout;
-	
 	
 	public UserVO() {
 		super();
@@ -214,15 +211,6 @@ public class UserVO {
 		this.auth_status = auth_status;
 	}
 	
-
-	public String getLogout() {
-		return logout;
-	}
-
-	public void setLogout(String logout) {
-		this.logout = logout;
-	}
-
 	@Override
 	public String toString() {
 		return "UserVO [mem_idx=" + mem_idx + ", mem_id=" + mem_id + ", mem_pw=" + mem_pw + ", mem_name=" + mem_name

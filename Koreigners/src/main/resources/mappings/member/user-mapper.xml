@@ -55,7 +55,7 @@
 		UPDATE T_MEMBER
 		   <set>
 		       <if test="mem_name != null">MEM_NAME = #{mem_name},</if>
-		       <if test="mem_pw != null">MEM_PW = #{mem_pw},</if>
+		       <if test='mem_pw != null and mem_pw != ""'>MEM_PW = #{mem_pw},</if>
 		       <if test="mem_phone != null">MEM_PHONE = #{mem_phone},</if>
 		       <if test="mem_birth != null">MEM_BIRTH = #{mem_birth},</if>
 		       <if test="mem_gender != null">MEM_GENDER = #{mem_gender},</if>

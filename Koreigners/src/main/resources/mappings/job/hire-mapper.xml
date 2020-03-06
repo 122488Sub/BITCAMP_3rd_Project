@@ -5,33 +5,78 @@
 <mapper namespace="HireDAO">
 
 
-<select id="getHireList" parameterType="Map" resultType="hireVO">
+<select id="getHireList" parameterType="jobVO" resultType="hireVO">
 	SELECT *
 		FROM (
 		       SELECT ROWNUM R_NUM, HIRE.*
 		        FROM (SELECT *
 		                FROM T_JOB_HIRE
-		               ORDER BY HIRE_IDX DESC) HIRE      
-		    )
+		               ORDER BY HIRE_IDX DESC) HIRE
+		               WHERE 1=1
+		               <!-- List<String> do_en;
+							List<String> gu_gun_eup_en;
+							String cate_prnt_en;
+							List<String> cate_child_en;
+							List<String> payCondition;
+							int begin;
+							int end; 
+		               <choose>
+		               	<when test="do_en =! null">
+			              AND (HIRE.DO_EN IN
+			              <foreach collection="do_en" item="do" index="index" open="(" separator="," close=")">
+			              #{do}
+			              </foreach>
+		               	</when>
+		               	<when test="gu_gun_eup_en == null">
+		               	)
+		               	</when>
+		               	<when test="gu_gun_eup_en != null">
+		               	 OR HIRE.GU_GUN_EUP_ENG IN
+		               	  <foreach collection="gu_gun_eup_en" item="si" index="index" open="(" separator="," close=")">
+		               	  #{si}
+		               	  </foreach>
+		               	  )
+		               	</when>
+		               </choose>
+		               <choose>
+		               	<when test='cate_prnt_en != "" or cate_prnt_en != null or cate_child_en!= null or payCondition != null'>
+		               	AND (
+		               	
+		               	
+		               	)
+		               	</when>
+		               </choose>
+		               
+		               AND (HIRE.DO_EN IN('Seoul','Gyeonggi-do')
+                       OR HIRE.GU_GUN_EUP_ENG IN('Namyangju-si')
+                           )
+                           
+                           
+                       AND (
+                           HIRE.CATE_PRNT_EN IN ('FOREIGN LANGUAGE/DESIGN')
+                       AND HIRE.CATE_CHILD_EN IN ('INTERPRETATION/TRANSLATION')
+                       AND HIRE.PAYMENT_CODITION IN ('day')
+                       )
+			       		-->
+       		)
+		
 	  WHERE R_NUM BETWEEN #{begin} AND #{end}
 	  
 </select>
 
-
-<select id="hireListTotal" resultType="int">
-		SELECT COUNT(*) FROM T_JOB_HIRE
+<select id="hireListTotal" parameterType="jobVO" resultType="int">
+		SELECT COUNT(*) 
+		  FROM T_JOB_HIRE
+		WHERE 1=1
+		
 </select>
+
 
 <select id="hireDetailOne" parameterType="int" resultType="hireVO">
 		SELECT *
 		  FROM T_JOB_HIRE
 		 WHERE HIRE_IDX = #{hire_idx}
 </select>
-<!-- category -->
-	<!-- 카테고리 대분류 검색 -->
-	
-<!-- category END -->	
-	
 
 	<!-- ===================================insert================================== -->
 	
@@ -86,7 +131,36 @@
 
 
 
+<!--
 
+
+		 AND ( 
+		    
+		    <if test="do_enList !=null ">
+		    	
+		    	BOARD.DO_EN IN
+		    	<foreach collection="do_enList" item="do" index="index" open="(" separator="," close=")"> 
+          			  #{do} 
+       			</foreach> 
+       		</if>
+       		<if test=" (do_enList != null) and (gu_gun_eup_engList != null) ">
+       			OR	
+       		</if>
+       		<if test="gu_gun_eup_engList != null">
+       		
+       			BOARD.GU_GUN_EUP_ENG IN 
+				<foreach collection="gu_gun_eup_engList" item="si" index="index" open="(" separator="," close=")"> 
+          			#{si} 
+       			</foreach> 
+       		</if>
+			) 
+       		
+		ORDER BY 
+			BOARD.ROOM_IDX  
+			
+			
+			
+-->
 
 
 

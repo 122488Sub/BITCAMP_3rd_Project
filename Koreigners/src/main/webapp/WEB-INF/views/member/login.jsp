@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
-    <link href="resources/css/header.css" rel="stylesheet" type="text/css">
-    <link href="resources/css/style.css" rel="stylesheet" type="text/css">
+<link href="resources/css/header.css" rel="stylesheet" type="text/css">
+<link href="resources/css/style.css" rel="stylesheet" type="text/css">
 <link href="resources/css/member/login.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/member/login.js"></script>
@@ -66,7 +66,7 @@ $(function(){
 		<p>
 			<span>
 				"Don't have an account? "
-				<a class="a_href" href="./register_go.do">Register now</a>
+				<a class="a_href" href="register_go.do">Register now</a>
 			</span>
 		</p>
 	</form>

@@ -7,9 +7,11 @@
 		<!-- <typeAlias alias="board" type="com.spring.biz.board.BoardVO"/> -->
 		<typeAlias alias="korea_address" type="com.koreigner.common.address.Korea_Address_VO"/>
 		<typeAlias alias="house_all" type="com.koreigner.biz.house.HouseAll_VO"/>
+		<typeAlias alias="house_search" type="com.koreigner.biz.house.HouseSearch_VO"/>
 		<typeAlias alias="infoBoard" type="com.koreigner.biz.inform.InfoBoardVO"/>
 		<typeAlias alias="companyVO" type="com.koreigner.biz.job.company.CompanyVO"/>
 		<typeAlias alias="hireVO" type="com.koreigner.biz.job.hire.HireVO"/>
+		<typeAlias alias="jobVO" type="com.koreigner.biz.job.jobservice.JobVO"/>
 		<typeAlias alias="userVO" type="com.koreigner.biz.member.UserVO"/>
 	</typeAliases>
   
