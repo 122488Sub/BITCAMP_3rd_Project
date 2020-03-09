@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +20,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.koreigner.biz.common.page.PagingService;
+import com.koreigner.biz.common.page.PagingVO;
 import com.koreigner.biz.house.HouseAll_VO;
 import com.koreigner.biz.house.HouseSearch_VO;
 import com.koreigner.biz.house.House_Service;
+import com.koreigner.biz.job.hire.HireVO;
+import com.koreigner.biz.job.jobservice.JobVO;
 
 @Controller
 @SessionAttributes("house") //board 라는 이름의 Model이 있으면 session에 저장
 public class House_Controller {
 	@Autowired
 	private House_Service houseService;
+	
+	@Autowired
+	PagingService paging;
 	
 	// /WEB-INF/views/
 	
@@ -34,18 +44,7 @@ public class House_Controller {
 		//System.out.println("controller/houseMain_go");
 		return "house/house_Main.page";
 	}
-	
-	@RequestMapping(value="getHouseSearchList.do", method = {RequestMethod.GET, RequestMethod.POST})
-	@ResponseBody //response 객체의 몸체(body)에 데이터 전달
-	public List<HouseAll_VO> ctrl_getHouseSearchList(HouseSearch_VO vo) {
-		return houseService.getSearchList(vo);
-	}
-	
-	@RequestMapping(value="getHouseAllList.do", method = {RequestMethod.GET, RequestMethod.POST})
-	@ResponseBody //response 객체의 몸체(body)에 데이터 전달
-	public List<HouseAll_VO> ctrl_getAllList() {
-		return  houseService.getAllList();
-	}
+
 	//------------------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------------------
@@ -83,6 +82,31 @@ public class House_Controller {
 	//------------------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------------------
+	
+	@RequestMapping(value="getHouseListData.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String houseListDate(HouseSearch_VO houseVO,HttpServletRequest request, HttpServletResponse response) {
+	
+		// 현재 페이지 구하기
+		String cPage = request.getParameter("cPage");
+		// 리스트 VO 생성
+		//HouseSearch_VO houseVO = new HouseSearch_VO();
+	//	System.out.println("==================houseListData==================");
+		// 페이지 처리
+		PagingVO p =  paging.paging(cPage, houseVO);
+		
+		houseVO.setBegin(p.getBegin());
+		houseVO.setEnd(p.getEnd());
+		
+		
+	//	System.out.println("==================houseListData END==================");
+		//리스트 정보 검색
+		List<HouseAll_VO> list = houseService.getSearchList(houseVO);
+		String result = houseService.getHouseListJson(list, p);
+		request.setAttribute("pvo", p);
+		return result;
+	}
+	
 	
 	
 	

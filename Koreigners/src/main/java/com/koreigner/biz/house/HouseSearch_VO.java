@@ -6,7 +6,7 @@ public class HouseSearch_VO {
 		
 
 	//임시 필터값
-	
+	int filter=0;
 	List<String> do_enList;
 	List<String> si_enList;
 	int [] build_typeArr;
@@ -17,7 +17,49 @@ public class HouseSearch_VO {
 	int depositMin=0,depositMax=99999999;
 	int monthly_rentMin=0,monthly_rentMax=99999999;
 
+
+	int begin;
+	int end;
 	
+	
+	void changeFilter(int tmp) {
+		this.filter += tmp;
+	}
+	
+	public int getFilter() {
+		return filter;
+	}
+
+
+
+	public void setFilter(int filter) {
+		this.filter = filter;
+	}
+
+
+
+	public int getBegin() {
+		return begin;
+	}
+
+
+
+	public void setBegin(int begin) {
+		this.begin = begin;
+	}
+
+
+
+	public int getEnd() {
+		return end;
+	}
+
+
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+
 
 	public HouseSearch_VO() {
 		// TODO Auto-generated constructor stub
@@ -33,6 +75,9 @@ public class HouseSearch_VO {
 
 	public void setDo_enList(List<String> do_enList) {
 		this.do_enList = do_enList;
+		
+		if(do_enList.size()>1) 
+			changeFilter(1);
 	}
 
 
@@ -45,6 +90,9 @@ public class HouseSearch_VO {
 
 	public void setSi_enList(List<String> si_enList) {
 		this.si_enList = si_enList;
+		if(si_enList.size()>1) 
+			changeFilter(1);
+		
 	}
 
 

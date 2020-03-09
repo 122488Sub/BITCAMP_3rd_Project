@@ -128,7 +128,15 @@
 		</table>
 		<div class='div_option'>
 	
+		<c:choose>
+			<c:when test="${category == house  }">
+				<jsp:include page="/resources/html/houseOption.jsp"/>
+			</c:when>
+			<c:otherwise>
+			
+			</c:otherwise>
 		
+		</c:choose>
 			
 		</div>
 	</div>
