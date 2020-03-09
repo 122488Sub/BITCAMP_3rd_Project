@@ -1,5 +1,6 @@
 package com.koreigner.biz.member;
 
+import java.util.Date;
 import java.util.Map;
 
 public interface UserService {
@@ -45,6 +46,17 @@ public interface UserService {
 	
 	//비밀번호 체크
 	int userPwCheck(Map<String, String> map);
+	
+	//네이버 or 구글계정으로 로그인 할때 db에 데이터가 존재 하는지 확인 한다.
+	UserVO getMemberSns(UserVO snsMemVO);
+
+	void keppLogin(String mem_id, String sessionId, Date expire);
+
+	UserVO checkLoginBefore(String value);
+	
+	//sns(소셜)회원가입 
+	void setSnsRegister(UserVO mvo) throws Exception;
+	
 
 
 

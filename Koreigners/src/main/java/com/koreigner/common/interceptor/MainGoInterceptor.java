@@ -1,7 +1,5 @@
 package com.koreigner.common.interceptor;
 
-import static org.hamcrest.CoreMatchers.notNullValue;
-
 import java.util.Map;
 
 import javax.servlet.http.Cookie;

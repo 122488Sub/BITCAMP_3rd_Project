@@ -75,6 +75,68 @@
 		
 	</mvc:interceptors>
 	
+	
+	<!-- naver oAuth2 -->    
+	<bean id="naverClientID" class="java.lang.String">
+		<constructor-arg value="wDuDt4DI1Sk1zMAeBUO2" />
+	</bean>
+	
+    <bean id="naverClientSecret" class="java.lang.String">
+		<constructor-arg value="hlRCMOeztc" />
+	</bean>
+	
+	<bean id="naverRedirectUrl" class="java.lang.String">
+		<!-- <constructor-arg value="http://localhost:8080/auth/naver/callback" />  -->	
+		<constructor-arg value="http://localhost:8080/koreigner/naver/callback" />	
+	</bean>
+	
+	<bean id="naverSns" class="com.koreigner.biz.member.auth.SnsValue">
+		<constructor-arg value="naver" />
+		<constructor-arg ref="naverClientID" />
+		<constructor-arg ref="naverClientSecret" />
+		<constructor-arg ref="naverRedirectUrl" />
+	</bean>
+	
+	
+	<!-- google oAuth2 -->    
+	<bean id="googleClientID" class="java.lang.String">
+		<constructor-arg value="827596090618-mqtpscfc7k5b7lombqamaps3h9vmv698.apps.googleusercontent.com" />
+	</bean>
+	
+    <bean id="googleClientSecret" class="java.lang.String">
+		<constructor-arg value="e2qRtzeN5fOqHdcmmivBPcxw" />
+	</bean>
+	
+	<bean id="googleRedirectUrl" class="java.lang.String">
+		<constructor-arg value="http://localhost:8080/koreigner/google/callback" />	
+	</bean>
+	
+	<bean id="googleSns" class="com.koreigner.biz.member.auth.SnsValue">
+		<constructor-arg value="google" />
+		<constructor-arg ref="googleClientID" />
+		<constructor-arg ref="googleClientSecret" />
+		<constructor-arg ref="googleRedirectUrl" />
+	</bean>
+	
+	<bean id="googleConnectionFactory" class="org.springframework.social.google.connect.GoogleConnectionFactory">
+		<constructor-arg ref="googleClientID" />
+		<constructor-arg ref="googleClientSecret" />
+	</bean>
+	
+	<bean id="googleOAuth2Parameters" class="org.springframework.social.oauth2.OAuth2Parameters">
+		<property name="scope" value="https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile" />
+<!--	<property name="scope" value="https://www.googleapis.com/auth/contacts.readonly" />  -->
+		<property name="redirectUri" ref="googleRedirectUrl" />
+	</bean>
+	
+	
+	<!-- 
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		
+		<property name="order" value="2" />
+	</bean>
+	 -->
+	
 </beans>
 
 
