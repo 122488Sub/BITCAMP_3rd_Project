@@ -3,7 +3,6 @@ package com.koreigner.biz.common.page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.koreigner.biz.house.HouseAll_VO;
 import com.koreigner.biz.house.HouseSearch_VO;
 import com.koreigner.biz.house.House_Service;
 import com.koreigner.biz.job.hire.HireServiceImpl;
