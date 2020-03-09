@@ -226,6 +226,30 @@ public class UserServiceImpl implements UserService {
 		int userCnt = userDAO.userPwCheck(map);
 		return userCnt;
 	}
+	
+	//=========================== SNS Login ===============================
+	@Override
+	public UserVO getMemberSns(UserVO snsMemVO) {
+		return userDAO.getMemberSns(snsMemVO); 
+	}
+
+	@Override
+	public void keppLogin(String mem_id, String sessionId, Date expire) {
+		userDAO.keepLogin(mem_id, sessionId, expire);
+	}
+
+	@Override
+	public UserVO checkLoginBefore(String loginCookie) {
+		return userDAO.getCheckLoginBefore(loginCookie);
+	}
+
+	//sns 소셜 회원가입 처리
+	@Override
+	public void setSnsRegister(UserVO mvo) throws Exception {
+		System.out.println("setSnsRegister : " + mvo.toString());
+		userDAO.setSnsRegister(mvo);
+	}
+	
 
 
 	//=========================== JWT Token ===============================

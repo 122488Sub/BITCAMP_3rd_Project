@@ -1,18 +1,26 @@
 package com.koreigner.view.member;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.social.google.connect.GoogleConnectionFactory;
+import org.springframework.social.oauth2.GrantType;
+import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Parameters;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,12 +29,30 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
+import com.koreigner.biz.member.auth.SNSLogin;
+import com.koreigner.biz.member.auth.SnsValue;
+import com.koreigner.common.member.SecurityUtil;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private SecurityUtil securityUtil;
+	
+	@Inject
+	private SnsValue naverSns;
+
+	@Inject
+	private SnsValue googleSns;
+	
+	@Inject
+	private GoogleConnectionFactory googleConnectionFactory;
+	
+	@Inject
+	private OAuth2Parameters googleOAuth2Parameters;
 	
 	// 로그인 페이지 이동
 	@RequestMapping(value="login_go.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -39,6 +65,90 @@ public class UserController {
 		return "/member/login.page";
 	}
 	
+	//로그인 처리
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
+	public ResponseEntity<String> postLogin(HttpServletResponse response, Model model, @RequestBody Map<String, String> jsonMap) {
+
+		ResponseEntity<String> entity = null;
+		String tokenStr = "fail";
+		
+		String inputId = jsonMap.get("inputId");
+		String inputPw = jsonMap.get("inputPw");
+		String inputCate = jsonMap.get("inputCate");
+		
+
+		if (userService.checkLogin(inputId, inputPw, inputCate)) { // 유저가 존재할 경우
+			tokenStr = userService.createToken(inputId); // 토큰 생성
+		}
+		
+		Cookie userToken = new Cookie("userToken", tokenStr); //쿠키에 저장
+		userToken.setMaxAge(60*60*24); //쿠키의 유효기간(1일)
+		response.addCookie(userToken);
+		
+		entity = new ResponseEntity<String>(tokenStr, HttpStatus.OK); //토큰!
+		
+		
+		SNSLogin snsLogin = new SNSLogin(naverSns);
+		System.out.println("===> [LoginPage] - snsLogin Data : " + snsLogin);
+		System.out.println("===> [LoginPage] - getNaverAuthURL Data : " + snsLogin.getNaverAuthURL());
+		model.addAttribute("naver_url", snsLogin.getNaverAuthURL());
+		
+//		SNSLogin googleLogin = new SNSLogin(googleSns);
+//		model.addAttribute("google_url", googleLogin.getNaverAuthURL());
+		
+		/* 구글code 발행을 위한 URL 생성 */
+		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+		String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE,googleOAuth2Parameters);
+		model.addAttribute("google_url", url);
+		System.out.println(" ///////////////// google url : " + url );
+		
+		return entity;
+		
+		
+	}
+
+	//네이버 or 구글 계정으로 로그인 할 때 
+	@RequestMapping(value = "/{snsService}/callback", method = {RequestMethod.POST, RequestMethod.GET})
+	public String snsLoginCallback(@PathVariable String snsService, 
+			Model model, @RequestParam String code, HttpSession session) throws Exception {
+		System.out.println("===> [snsLoginCallback] - 진입");
+		
+		SnsValue sns = null;
+		if (StringUtils.equals("naver", snsService)) {
+			sns = naverSns;
+		} else {
+			sns = googleSns;
+		}
+		System.out.println("sns data : " + sns);
+		
+		
+		//1. code를 이용해서 access_token 받기
+		//2. access_token을 이용해서 사용자 profile 정보 가져오기
+		SNSLogin snsLogin = new SNSLogin(sns);
+		
+		System.out.println("snsLogin : " + snsLogin);
+
+		UserVO snsMemVO = snsLogin.getUserProfile(code); //1, 2번 동시
+		System.out.println("profile : " + snsMemVO);
+		
+		//3. DB 해당 유저가 존재하는지 체크 (googleid, naverid 컬럼 추가)
+		//암호화된 비밀번호로 조회
+		String securityPW = securityUtil.encryptSHA256(snsMemVO.getMem_pw());
+		snsMemVO.setMem_pw(securityPW);
+		
+		UserVO mvo = userService.getMemberSns(snsMemVO);
+		if (mvo == null) { //가입되지 않은 사용자이므로 가입 페이지로 안내해 준다.
+			System.out.println("??????????????");
+			model.addAttribute("snsMemVO", snsMemVO);
+			return "member/oauth2Register.page";
+		} else { //가입 된 사용자 
+			model.addAttribute("result", mvo.getMem_name() + "님 반갑습니다.^^");
+			return "loginResult";
+		}
+		
+		//4. 존재시 강제로그인, 미존재시 가입페이지로!!
+	}
+	
 	// 로그아웃 처리
 	@RequestMapping(value="logout.do")
 	public String postLogout(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -47,6 +157,7 @@ public class UserController {
 	    response.addCookie(userToken);
 	    
 	    model.addAttribute("logout_check", "1");
+	    model.addAttribute("pw_reset", "0");
 	    
 	    return "/member/login.page";
 	}
@@ -154,31 +265,6 @@ public class UserController {
 		userService.updateMember(vo);
 
 		return "/member/emailAuthSuccess.page";
-	}
-
-	//로그인 처리
-	@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public ResponseEntity<String> postLogin(HttpServletResponse response, @RequestBody Map<String, String> jsonMap) {
-
-		ResponseEntity<String> entity = null;
-		String tokenStr = "fail";
-
-		String inputId = jsonMap.get("inputId");
-		String inputPw = jsonMap.get("inputPw");
-		String inputCate = jsonMap.get("inputCate");
-		
-
-		if (userService.checkLogin(inputId, inputPw, inputCate)) { // 유저가 존재할 경우
-			tokenStr = userService.createToken(inputId); // 토큰 생성
-		}
-		
-		Cookie userToken = new Cookie("userToken", tokenStr); //쿠키에 저장
-		userToken.setMaxAge(60*60*24); //쿠키의 유효기간(1일)
-		response.addCookie(userToken);
-		
-		entity = new ResponseEntity<String>(tokenStr, HttpStatus.OK); //토큰!
-		
-		return entity;
 	}
 
 	//마이페이지로 이동

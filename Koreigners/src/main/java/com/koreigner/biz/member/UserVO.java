@@ -12,7 +12,7 @@ public class UserVO {
 	private String mem_phone;
 	private String mem_birth;
 	private String mem_gender;
-	private Date mem_image;
+	private String mem_image;
 	private String mem_address;
 	private String mem_nationality;
 	private String mem_reg_ip;
@@ -30,7 +30,27 @@ public class UserVO {
 	//JWT
 	private String secretKey;
 	
+	//SNS Login/register
+	private String mem_google_id;
+	private String mem_naver_id;
 	
+	
+	public String getMem_google_id() {
+		return mem_google_id;
+	}
+
+	public void setMem_google_id(String mem_google_id) {
+		this.mem_google_id = mem_google_id;
+	}
+
+	public String getMem_naver_id() {
+		return mem_naver_id;
+	}
+
+	public void setMem_naver_id(String mem_naver_id) {
+		this.mem_naver_id = mem_naver_id;
+	}
+
 	public UserVO() {
 		super();
 	}
@@ -107,11 +127,11 @@ public class UserVO {
 		this.mem_gender = mem_gender;
 	}
 
-	public Date getMem_image() {
+	public String getMem_image() {
 		return mem_image;
 	}
 
-	public void setMem_image(Date mem_image) {
+	public void setMem_image(String mem_image) {
 		this.mem_image = mem_image;
 	}
 

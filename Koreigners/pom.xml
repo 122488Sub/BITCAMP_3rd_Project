@@ -119,6 +119,36 @@
 		    <artifactId>commons-codec</artifactId>
 		    <version>1.9</version>
 		</dependency>
+		
+		<!-- lombok 설치 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+		</dependency>
+		
+		<!-- 소셜로그인(oAuth2) scribe라는것을 사용하여 oauth를 쉽게 사용할 수 있다. jdbc를 mybatis를 사용하듯이-->
+		<!-- scribejava를 사용하는 이유 springframework에서 기본으로 제공을 해주지 않는다.
+			카카오, 네이버 
+		 -->
+		<dependency>
+			<groupId>com.github.scribejava</groupId>
+			<artifactId>scribejava-apis</artifactId>
+			<version>5.6.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.github.scribejava</groupId>
+			<artifactId>scribejava-core</artifactId>
+			<version>5.6.0</version>
+		</dependency>
+		
+		<!-- 구글은 springframework에서 제공을 해주기 때문에 scribejava가 필요 없음. -->
+		<dependency>
+			<groupId>org.springframework.social</groupId>
+			<artifactId>spring-social-google</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
 			
 		<!-- =================== -->		
 		

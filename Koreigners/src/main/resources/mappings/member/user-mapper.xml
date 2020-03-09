@@ -55,7 +55,7 @@
 		UPDATE T_MEMBER
 		   <set>
 		       <if test="mem_name != null">MEM_NAME = #{mem_name},</if>
-		       <if test='mem_pw != null and mem_pw != ""'>MEM_PW = #{mem_pw},</if>
+		       <if test='mem_pw != null and !mem_pw.equals("")'>MEM_PW = #{mem_pw},</if>
 		       <if test="mem_phone != null">MEM_PHONE = #{mem_phone},</if>
 		       <if test="mem_birth != null">MEM_BIRTH = #{mem_birth},</if>
 		       <if test="mem_gender != null">MEM_GENDER = #{mem_gender},</if>
@@ -73,6 +73,37 @@
 		SELECT COUNT(*) FROM T_MEMBER
 		 WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
 	</select>
+	
+	
+	<!-- client가 회원가입시 입력한 Email이 db에 중복인지 검사 -->
+	<select id="getMemberEmail" parameterType="userVO" resultType="int">
+		SELECT COUNT(*) FROM T_MEMBER
+		WHERE MEM_ID = #{mem_id}
+	</select>
+	
+	<!--  -->
+	<update id="updateKeepLogin">
+		UPDATE T_MEMBER 
+		   SET MEM_SESSIONKEY = #{mem_sessionkey}
+		     , MEM_SESSIONLIMIT = #{mem_sessionlimit}
+		 WHERE MEM_ID = #{mem_id}
+	</update>
+	
+	
+	<!--  -->
+	<select id="getCheckLoginBefore" resultType="userVO">
+		SELECT * FROM T_MEMBER
+		 WHERE MEM_SESSIONKEY = #{loginCookie}
+		   AND MEM_SESSIONLIMIT > now()
+	</select>
+	
+	<!-- sns 소셜 회원가입 -->
+	<insert id="setSnsRegister" parameterType="userVO">
+		INSERT INTO T_MEMBER
+			   (MEM_IDX, MEM_ID, MEM_PW, MEM_NAME, MEM_CATE)
+		VALUES (MEM_SQ.NEXTVAL, #{mem_id}, #{mem_pw}, #{mem_name}, #{mem_cate})
+	</insert>
+	
 </mapper>
 
 

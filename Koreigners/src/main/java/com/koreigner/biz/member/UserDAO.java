@@ -1,8 +1,10 @@
 package com.koreigner.biz.member;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -75,5 +77,36 @@ public class UserDAO {
 		int userCnt = mybatis.selectOne("user.userPwCheck", map);
 		return userCnt;
 	}
+	
+	//네이버 or 구글계정으로 로그인 요청할 시 DB에 데이터가 존재하는지 확인한다.
+	public UserVO getMemberSns(UserVO snsMemVO) {
+		System.out.println("===> [UserDAO] - getMemberSns() 실행");
+		if (StringUtils.isNotEmpty(snsMemVO.getMem_id())) {
+			System.out.println("naver ID가 존재 : " + snsMemVO.getMem_id());
+			return mybatis.selectOne("user.getMemberSns", snsMemVO);
+		} else {
+			return mybatis.selectOne("user.getMemberSns", snsMemVO);
+		}
+	}
+
+	public void keepLogin(String mem_id, String sessionId, Date expire) {
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("mem_id", mem_id);
+		paramMap.put("mem_sessionkey", sessionId);
+		paramMap.put("mem_sessionlimit", expire);
+		mybatis.update("user.updateKeepLogin", paramMap);
+	}
+
+	public UserVO getCheckLoginBefore(String loginCookie) {
+		return mybatis.selectOne("user.getCheckLoginBefore", loginCookie);
+	}
+	
+	//sns 소셜 회원 등록
+	public void setSnsRegister(UserVO mvo) {
+		System.out.println("===> [UserDAO] - setSnsRegister() 실행");
+		mybatis.insert("user.setSnsRegister", mvo);
+	}
+		
+		
 
 }
