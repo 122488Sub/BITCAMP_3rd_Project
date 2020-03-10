@@ -1,14 +1,15 @@
 package com.koreigner.biz.member;
 
+import java.util.Date;
 import java.util.Map;
 
 public interface UserService {
 	
 	//아이디 중복체크
-	int userIdCheck(UserVO vo);
+	int userIdCheck(String mem_id);
 
 	//닉네임 중복체크
-	int userNickCheck(UserVO vo);
+	int userNickCheck(String mem_name);
 
 	//회원가입
 	void joinUser(UserVO vo) throws Exception;
@@ -19,14 +20,14 @@ public interface UserService {
 	//회원 정보 가져오기
 	UserVO getOneMember(String mem_id);
 
-	//권한 업데이트
-	void updateAuthstatus(UserVO vo);
-
+//	//권한 업데이트
+//	void updateAuthstatus(UserVO vo);
+	
 	//비밀번호 재설정 메일 보내기
 	void resetPasswordMail(String email) throws Exception;
 
-	//비밀번호 재설정
-	void resetPassword(UserVO vo);
+//	//비밀번호 재설정
+//	void resetPassword(UserVO vo);
 
 	//로그인처리
 	boolean checkLogin(String inputId, String inputPw, String inputCate);
@@ -39,6 +40,24 @@ public interface UserService {
 	
 	//JWT 토큰 payload 정보 추출
 	Map<String, Object> getTokenPayload(String tokenStr);
+
+	//회원 정보 수정
+	void updateMember(UserVO vo);
+	
+	//비밀번호 체크
+	int userPwCheck(Map<String, String> map);
+	
+	//네이버 or 구글계정으로 로그인 할때 db에 데이터가 존재 하는지 확인 한다.
+	UserVO getMemberSns(UserVO snsMemVO);
+
+	void keppLogin(String mem_id, String sessionId, Date expire);
+
+	UserVO checkLoginBefore(String value);
+	
+	//sns(소셜)회원가입 
+	void setSnsRegister(UserVO mvo) throws Exception;
+	
+
 
 
 	

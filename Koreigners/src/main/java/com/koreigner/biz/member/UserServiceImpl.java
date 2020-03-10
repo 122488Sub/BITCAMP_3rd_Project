@@ -57,9 +57,9 @@ public class UserServiceImpl implements UserService {
 	
 	//회원가입중 client가 입력한 email이 db에 이미 등록되어 있는지 중복 체크 한다.
 	@Override
-	public int userIdCheck(UserVO vo) {
+	public int userIdCheck(String mem_id) {
 		
-		int idCnt = userDAO.userIdCheck(vo);
+		int idCnt = userDAO.userIdCheck(mem_id);
 		System.out.println("idCnt: " + idCnt);
 
 		return idCnt;
@@ -67,9 +67,9 @@ public class UserServiceImpl implements UserService {
 	
 	//회원가입중 client가 입력한 NickName이 db에 이미 등록되어 있는지 중복 체크 한다.
 	@Override
-	public int userNickCheck(UserVO vo) {
+	public int userNickCheck(String mem_name) {
 		
-		int nameCnt = userDAO.userNickCheck(vo);
+		int nameCnt = userDAO.userNickCheck(mem_name);
 		System.out.println("nameCnt: " + nameCnt);
 
 		return nameCnt;
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
         sendMail.setSubject("[KOREIGNERS 회원가입 이메일 인증]");
         sendMail.setText(new StringBuffer()
         		.append("<h1>메일인증</h1>")
-        		.append("<a href='http://localhost:8080/biz/emailConfirm.do?mem_id=")
+        		.append("<a href='http://localhost:8080/koreigner/emailAuth.do?mem_id=")
         		.append(vo.getMem_id())
         		.append("' target='_blank'>이메일 인증 확인</a>")
         		.toString());
@@ -124,18 +124,17 @@ public class UserServiceImpl implements UserService {
 		return auth_status;
 	}
 	
+//	//이메일 인증 권한 업데이트
+//	@Override
+//	public void updateAuthstatus(UserVO vo) {
+//		userDAO.updateAuthstatus(vo);
+//	}
+	
 	//회원 정보 가져오기
 	@Override
 	public UserVO getOneMember(String mem_id) {
 		UserVO mvo = userDAO.getOneMember(mem_id);
 		return mvo;
-	}
-
-	
-	//회원가입 후 이메일인증 완료하면 auth 권한 상승
-	@Override
-	public void updateAuthstatus(UserVO vo) {
-		userDAO.updateAuthstatus(vo);		
 	}
 	
 	// 비밀번호 재설정 메일 보내기
@@ -161,7 +160,7 @@ public class UserServiceImpl implements UserService {
         sendMail.setSubject("[KOREIGNERS 비밀번호 재설정 안내]");
         sendMail.setText(new StringBuffer()
         		.append("<h1>비밀번호 재설정</h1>")
-        		.append("<a href='http://localhost:8080/biz/resetPassword_2.do?mem_id=")
+        		.append("<a href='http://localhost:8080/koreigner/resetPw_go.do?mem_id=")
         		.append(email)
         		.append("' target='_blank'>비밀번호 변경</a>")
         		.toString());
@@ -172,16 +171,16 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
-	//비밀번호 재설정
-	@Override
-	public void resetPassword(UserVO vo) {
-		
-		// 비밀번호 암호화
-		String securedPw = securityUtil.encryptSHA256(vo.getMem_pw());
-		vo.setMem_pw(securedPw);
-		
-		userDAO.updatePassword(vo);		
-	}
+//	//비밀번호 재설정
+//	@Override
+//	public void resetPassword(UserVO vo) {
+//		
+//		// 비밀번호 암호화
+//		String securedPw = securityUtil.encryptSHA256(vo.getMem_pw());
+//		vo.setMem_pw(securedPw);
+//		
+//		userDAO.updatePassword(vo);		
+//	}
 
 	//로그인 처리
 	@Override
@@ -198,6 +197,59 @@ public class UserServiceImpl implements UserService {
 		}	
 		return isSuccess;
 	}
+	
+	//회원정보 수정
+	@Override
+	public void updateMember(UserVO vo) {
+		
+		// 비밀번호 암호화
+		String pw = vo.getMem_pw();
+		if(pw != null) {
+
+			String securedPw = securityUtil.encryptSHA256(vo.getMem_pw());
+			vo.setMem_pw(securedPw);
+		}
+		userDAO.updateMember(vo);		
+	}
+
+	//비밀번호 체크
+	@Override
+	public int userPwCheck(Map<String, String> map) {
+		
+		String mem_pw = map.get("mem_pw");
+		System.out.println("비밀번호 : " + mem_pw);
+		
+		//비밀번호 암호화
+		String securedPw = securityUtil.encryptSHA256(mem_pw);
+		map.put("mem_pw", securedPw);
+		
+		int userCnt = userDAO.userPwCheck(map);
+		return userCnt;
+	}
+	
+	//=========================== SNS Login ===============================
+	@Override
+	public UserVO getMemberSns(UserVO snsMemVO) {
+		return userDAO.getMemberSns(snsMemVO); 
+	}
+
+	@Override
+	public void keppLogin(String mem_id, String sessionId, Date expire) {
+		userDAO.keepLogin(mem_id, sessionId, expire);
+	}
+
+	@Override
+	public UserVO checkLoginBefore(String loginCookie) {
+		return userDAO.getCheckLoginBefore(loginCookie);
+	}
+
+	//sns 소셜 회원가입 처리
+	@Override
+	public void setSnsRegister(UserVO mvo) throws Exception {
+		System.out.println("setSnsRegister : " + mvo.toString());
+		userDAO.setSnsRegister(mvo);
+	}
+	
 
 
 	//=========================== JWT Token ===============================

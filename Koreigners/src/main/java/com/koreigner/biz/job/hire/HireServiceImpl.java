@@ -13,6 +13,7 @@ import com.koreigner.biz.common.page.PagingVO;
 import com.koreigner.biz.job.company.CompanyServiceImpl;
 import com.koreigner.biz.job.company.CompanyVO;
 import com.koreigner.biz.job.jobservice.JobService;
+import com.koreigner.biz.job.jobservice.JobVO;
 
 @Service
 public class HireServiceImpl implements HireService {
@@ -53,15 +54,14 @@ public class HireServiceImpl implements HireService {
 	}
 	
 	@Override
-	public List<HireVO> getHireList(Map<String, Integer> map) {
-		
-		List<HireVO> hireList = hireDAO.getHireList(map);
+	public List<HireVO> getHireList(JobVO jobVO) {
+		List<HireVO> hireList = hireDAO.getHireList(jobVO);
 		return hireList;
 	}
 	
 	@Override
-	public int hireListTotal() {
-		int total = hireDAO.hireListTotal();
+	public int hireListTotal(JobVO jobVO) {
+		int total = hireDAO.hireListTotal(jobVO);
 		return total;
 	}
 	

@@ -27,6 +27,7 @@ import com.koreigner.biz.job.company.CompanyVO;
 import com.koreigner.biz.job.hire.HireServiceImpl;
 import com.koreigner.biz.job.hire.HireVO;
 import com.koreigner.biz.job.jobservice.JobService;
+import com.koreigner.biz.job.jobservice.JobVO;
 
 @Controller
 public class HireController {
@@ -39,42 +40,98 @@ public class HireController {
 	@Autowired
 	PagingService paging;
 	
+	
+	
+	
 	//채용 게시판으로 이동
 	@RequestMapping(value="hireList_go.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String hireList(HttpServletRequest request, HttpServletResponse response) {
+	public String hireList(HttpServletRequest request, HttpServletResponse response, JobVO jobVO) {
+		//잡카테고리 가져오기
+		//HireVO hireVO = new HireVO();
 		
 		// 현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
-		// 페이지 처리
-		PagingVO p =  paging.paging(cPage);
-		
-		//EL, JSTL 사용을 위한 속성 등록
-		request.setAttribute("pvo", p);
-		
+		System.out.println("==================hireList==================");
+		System.out.println("jobVO : " + jobVO);
+		System.out.println("================hireList End================");
 		return "job/hire/hireList.page";
 	}
 
-	
 	@RequestMapping(value="hireListData.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String hireListDate(HttpServletRequest request, 
-							   HttpServletResponse response) {
+							   HttpServletResponse response
+							   ) {
+		System.out.println("hirelistdate.do 여기기기");
+		// 현재 페이지 구하기
+		String cPage = request.getParameter("cPage");
+		// 리스트 VO 생성
+		JobVO jobVO = new JobVO();
+		System.out.println("==================hireListData==================");
+		// 페이지 처리
+		PagingVO p =  paging.paging(cPage, jobVO);
+		
+		jobVO.setBegin(p.getBegin());
+		jobVO.setEnd(p.getEnd());
+		
+		System.out.println("jobVO hireListData : " + jobVO);
+		// 여러개의 파라미터값을 vo와 상관없이 매개변수로 사용하는 방법 :map형식 
+		//Map<String, Integer> map = new HashMap<String, Integer>();
+		
+		//map.put("begin", p.getBegin());
+		//map.put("end", p.getEnd());
+		System.out.println("==================hireListData END==================");
+		//리스트 정보 검색
+		List<HireVO> list = hireServiceImpl.getHireList(jobVO);
+		String result = hireServiceImpl.getHireListJson(list, p);
+		request.setAttribute("pvo", p);
+		return result;
+	}
+	
+	@RequestMapping(value="hireJsonFilter.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String hireJsonFilter(JobVO jobVO,
+								 HttpServletRequest request, 
+							     HttpServletResponse response) {
+		System.out.println("==================hireJsonFilter==================");
+		
+		List<String> do_list = jobVO.getDo_en();
+		List<String> si_list = jobVO.getGu_gun_eup_en();
+		
+		if(do_list != null) {
+			if(do_list.contains("init")) {
+				System.out.println("도리스트");
+				do_list.remove("init");
+				jobVO.setDo_en(do_list);
+			}
+		}
+		
+		if(si_list != null) {
+			if(si_list.contains("init")) {
+				si_list.remove("init");
+				jobVO.setGu_gun_eup_en(si_list);
+			}
+		}
 		
 		// 현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
 		// 페이지 처리
-		PagingVO p =  paging.paging(cPage);
+		PagingVO p =  paging.paging(cPage, jobVO);
+		// 리스트 VO 생성
+		jobVO.setBegin(p.getBegin());
+		jobVO.setEnd(p.getEnd());
+		System.out.println("jobVO jsonFilter : " + jobVO);
 		
-		// 여러개의 파라미터값을 vo와 상관없이 매개변수로 사용하는 방법 :map형식 
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("begin", p.getBegin());
-		map.put("end", p.getEnd());
-		
-		//리스트 정보 검색
-		List<HireVO> list = hireServiceImpl.getHireList(map);
+		List<HireVO> list = hireServiceImpl.getHireList(jobVO);
+		System.out.println();
+		System.out.println("here");
+		System.out.println("list hireJsonFilter : " + list + "\nlist.length : " + list.size());
+		System.out.println("p hireJsonFilter : " + p);
 		String result = hireServiceImpl.getHireListJson(list, p);
-		request.setAttribute("pvo", p);
 		
+		System.out.println("==================hireJsonFilter END==================");
+		
+		//request.setAttribute("pvo", p);
 		return result;
 	}
 
@@ -135,6 +192,25 @@ public class HireController {
 		return 1;
 	}
 	
+	//채용게시글 일자리 카테고리 추가
+	@RequestMapping(value="hireCateFilter.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public List<String> jobCateJson(@RequestParam("cate_prnt_en")String cate_prnt_en) {
+		System.out.println("cate_prnt_en 컨트롤러: " + cate_prnt_en);
+		
+		List<String> list = new ArrayList<>();
+		List<CompanyVO> childCate = companyServiceImpl.getChildCate(cate_prnt_en);
+		
+		System.out.println("childCate : " + childCate);
+		
+		for(CompanyVO vo : childCate) {
+			list.add(vo.getCate_child_en());
+		}
+		
+		
+		return list;
+	}
+	
 	
 	
 	//페이지 전환 시 jobCateMap 맵 객체 전달 > 직무 카테고리
@@ -151,6 +227,24 @@ public class HireController {
 		}
 		return jobCateMap;
 		
+	}
+	
+	
+	@ModelAttribute("jobCateEn")
+	public Map<String, String> searchJobCate() {
+		List<CompanyVO> list = companyServiceImpl.getCateList();
+		System.out.println("list : " + list);
+		//카테고리 대분류 문자 map에 저장
+		Map<String, String> jobCateMap = new HashMap<>();
+		
+		int i = 1;
+		for(CompanyVO vo : list) {
+			jobCateMap.put(Integer.toString(i), vo.getCate_prnt_en());
+			i++;
+		}
+		
+		
+		return jobCateMap;
 	}
 	
 	

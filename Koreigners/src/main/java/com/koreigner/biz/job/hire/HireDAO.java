@@ -6,9 +6,11 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.koreigner.biz.job.jobservice.JobVO;
 @Repository
 public class HireDAO {
-
+	
 	@Autowired
 	SqlSessionTemplate mybatis;
 	
@@ -16,14 +18,20 @@ public class HireDAO {
 		mybatis.insert("insertHire", vo);
 	}
 	
-	
-	public List<HireVO> getHireList(Map<String, Integer> map){
-		List<HireVO> hireList = mybatis.selectList("getHireList", map);
+	public List<HireVO> getHireList(JobVO jobVO){
+		System.out.println();
+		if(jobVO.getDo_en() != null) {System.out.println("do size : " + jobVO.getDo_en().size());}
+		
+		System.out.println("jobVO DAO : " + jobVO);
+		
+		List<HireVO> hireList = mybatis.selectList("getHireList", jobVO);
+		System.out.println("hireList DAO : " + hireList);
 		return hireList;
 	}
 	
-	public int hireListTotal() {
-		int total = mybatis.selectOne("hireListTotal");
+	public int hireListTotal(JobVO jobVO) {
+		if(jobVO.getDo_en() != null) {System.out.println("do size : " + jobVO.getDo_en().size());}
+		int total = mybatis.selectOne("hireListTotal", jobVO);
 		return total;
 	}
 	

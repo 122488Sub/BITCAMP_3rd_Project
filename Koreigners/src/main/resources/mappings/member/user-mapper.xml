@@ -5,33 +5,33 @@
 <mapper namespace="user">
 
 	<!-- 아이디(이메일) 중복검사 -->
-	<select id="userIdCheck" parameterType="com.koreigner.biz.member.UserVO" resultType="int">
+	<select id="userIdCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM T_MEMBER WHERE MEM_ID = #{mem_id}
 	</select> 
 	
 	<!-- 닉네임 중복검사 -->
-	<select id="userNickCheck" parameterType="com.koreigner.biz.member.UserVO" resultType="int">
+	<select id="userNickCheck" parameterType="String" resultType="int">
 		SELECT COUNT(*) FROM T_MEMBER WHERE MEM_NAME = #{mem_name}
 	</select>
 	
+	<!-- 로그인 체크 -->
+	<select id="userLoginCheck" resultType="userVO">
+		SELECT * FROM T_MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw} AND MEM_CATE = #{mem_cate}
+	</select>
+	
 	<!-- 회원 등록 -->
-	<insert id="joinUser" parameterType="com.koreigner.biz.member.UserVO">
+	<insert id="joinUser" parameterType="userVO">
 		INSERT INTO T_MEMBER
 			(MEM_IDX, MEM_CATE, MEM_ID, MEM_PW, MEM_NAME)
 		VALUES (MEM_SQ.NEXTVAL, #{mem_cate}, #{mem_id}, #{mem_pw}, #{mem_name})	
 	</insert>
 	
-	<!-- 로그인 체크 -->
-	<select id="userLoginCheck" resultType="com.koreigner.biz.member.UserVO">
-		SELECT * FROM T_MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw} AND MEM_CATE = #{mem_cate}
-	</select>
-	
 	<!-- 이메일 인증(권한상태 업데이트) -->
-	<update id="updateAuthstatus" parameterType="com.koreigner.biz.member.UserVO">
+	<!-- <update id="updateAuthstatus" parameterType="userVO">
 		UPDATE T_MEMBER
 		   SET AUTH_STATUS = '1'
 		 WHERE MEM_ID = #{mem_id}
-	</update>
+	</update> -->
 	
 	<!-- 권한상태 불러오기 -->
 	<select id="getAuthStatus" parameterType="String" resultType="String">
@@ -39,16 +39,69 @@
 	</select>
 	
 	<!-- 회원정보 불러오기 -->
-	<select id="getOneMember" parameterType="String" resultType="com.koreigner.biz.member.UserVO">
+	<select id="getOneMember" parameterType="String" resultType="userVO">
 		SELECT * FROM T_MEMBER WHERE MEM_ID = #{mem_id}
 	</select>
 	
 	<!-- 비밀번호 재설정 -->
-	<update id="updatePassword" parameterType="com.koreigner.biz.member.UserVO">
+	<!-- <update id="updatePassword" parameterType="userVO">
 		UPDATE T_MEMBER
 		   SET MEM_PW = #{mem_pw}
 		 WHERE MEM_ID = #{mem_id}
+	</update> -->
+	
+	<!-- 회원정보 수정하기 -->
+	<update id="updateMember" parameterType="userVO">
+		UPDATE T_MEMBER
+		<set>
+	       <if test='mem_name != null and !mem_name.equals("")'>MEM_NAME = #{mem_name},</if>
+	       <if test='mem_pw != null and !mem_pw.equals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")'>MEM_PW = #{mem_pw},</if>
+	       <if test='mem_phone != null and !mem_phone.equals("")'>MEM_PHONE = #{mem_phone},</if>
+	       <if test='mem_birth != null and !mem_birth.equals("--")'>MEM_BIRTH = #{mem_birth},</if>
+	       <if test='mem_gender != null and !mem_gender.equals("")'>MEM_GENDER = #{mem_gender},</if>
+	       <if test='mem_address != null and !mem_address.equals("")'>MEM_ADDRESS = #{mem_address},</if>
+	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
+	       <if test="mailling_fl != null">MAILLING_FL = #{mailling_fl},</if>
+	       <if test="sms_fl != null">SMS_FL = #{sms_fl},</if>
+	     </set>
+		 WHERE MEM_ID = #{mem_id}
 	</update>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="userPwCheck" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM T_MEMBER
+		 WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
+	</select>
+	
+	
+	<!-- client가 회원가입시 입력한 Email이 db에 중복인지 검사 -->
+	<select id="getMemberEmail" parameterType="userVO" resultType="int">
+		SELECT COUNT(*) FROM T_MEMBER
+		WHERE MEM_ID = #{mem_id}
+	</select>
+	
+	<!--  -->
+	<update id="updateKeepLogin">
+		UPDATE T_MEMBER 
+		   SET MEM_SESSIONKEY = #{mem_sessionkey}
+		     , MEM_SESSIONLIMIT = #{mem_sessionlimit}
+		 WHERE MEM_ID = #{mem_id}
+	</update>
+	
+	
+	<!--  -->
+	<select id="getCheckLoginBefore" resultType="userVO">
+		SELECT * FROM T_MEMBER
+		 WHERE MEM_SESSIONKEY = #{loginCookie}
+		   AND MEM_SESSIONLIMIT > now()
+	</select>
+	
+	<!-- sns 소셜 회원가입 -->
+	<insert id="setSnsRegister" parameterType="userVO">
+		INSERT INTO T_MEMBER
+			   (MEM_IDX, MEM_ID, MEM_PW, MEM_NAME, MEM_CATE)
+		VALUES (MEM_SQ.NEXTVAL, #{mem_id}, #{mem_pw}, #{mem_name}, #{mem_cate})
+	</insert>
 	
 </mapper>
 
