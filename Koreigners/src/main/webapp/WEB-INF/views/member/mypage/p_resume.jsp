@@ -225,12 +225,12 @@ $(function() {
 		console.log("바뀜");
 		var selectBox1 = document.getElementById("selectBox1");
 		console.log(this.value);
-		cate_prnt_ko = this.value;
+		cate_prnt_en = this.value;
 		
-		$.ajax("getCateJson.do", {
+		$.ajax("getCateEnJson.do", {
 			type: "get",
 			dataType : "json",
-			data: {"cate_prnt_ko" : cate_prnt_ko},
+			data: {"cate_prnt_en" : cate_prnt_en},
 			success : function(data){
 				
 				var strData = JSON.stringify(data);
@@ -240,12 +240,12 @@ $(function() {
 				
 				var dataTag = "";
 				$.each(data, function(index, obj){
-					dataTag += "<option value=" + this.cate_child_ko +">"
-					dataTag += this.cate_child_ko;
+					dataTag += "<option value=" + this.cate_child_en +">"
+					dataTag += this.cate_child_en;
 					dataTag += "</option>";
 				});
 	
-				$("#cate_child_ko").html(dataTag);
+				$("#cate_child_en").html(dataTag);
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
 				alert("Ajax 처리 실패 : \n" +
@@ -317,13 +317,13 @@ $(function() {
               <tr>
                 <th>Professional field<span class="red">*</span></th>
                 <td class="txLeft">
-				  <select name="cate_prnt_ko" id="selectBox1" title="직종선택">
-				    <c:forEach items="${jobCateMap}" var="option">
+				  <select name="cate_prnt_en" id="selectBox1" title="직종선택">
+				    <c:forEach items="${mpCateMap}" var="option">
 					  <option class="${option.key}">${option.value}</option>
 					</c:forEach>
 				  </select>
 				
-				  <select name="cate_child_ko" title="직종선택"  id="cate_child_ko">
+				  <select name="cate_child_en" title="직종선택"  id="cate_child_en">
 				  </select><br><br>
                 </td>
               </tr>

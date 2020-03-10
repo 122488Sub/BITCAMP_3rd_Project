@@ -73,6 +73,14 @@ public class CompanyController {
 		return list;
 	}
 	
+	@RequestMapping(value="getCateEnJson.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public List<CompanyVO> resume_put(@RequestParam("cate_prnt_en") String cate_prnt_en) {
+		List<CompanyVO> list = companyServiceImpl.getCateEnChild(cate_prnt_en);
+		
+		return list;
+	}
+	
 	//페이지 전환 시 jobCateMap 맵 객체 전달 > 직무 카테고리
 	@ModelAttribute("jobCateMap")
 	public Map<String, String> searchJobCateMap() {
