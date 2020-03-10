@@ -74,7 +74,7 @@ public class HireController {
 		jobVO.setBegin(p.getBegin());
 		jobVO.setEnd(p.getEnd());
 		
-		
+		System.out.println("jobVO hireListData : " + jobVO);
 		// 여러개의 파라미터값을 vo와 상관없이 매개변수로 사용하는 방법 :map형식 
 		//Map<String, Integer> map = new HashMap<String, Integer>();
 		
@@ -94,22 +94,44 @@ public class HireController {
 								 HttpServletRequest request, 
 							     HttpServletResponse response) {
 		System.out.println("==================hireJsonFilter==================");
+		
+		List<String> do_list = jobVO.getDo_en();
+		List<String> si_list = jobVO.getGu_gun_eup_en();
+		
+		if(do_list != null) {
+			if(do_list.contains("init")) {
+				System.out.println("도리스트");
+				do_list.remove("init");
+				jobVO.setDo_en(do_list);
+			}
+		}
+		
+		if(si_list != null) {
+			if(si_list.contains("init")) {
+				si_list.remove("init");
+				jobVO.setGu_gun_eup_en(si_list);
+			}
+		}
+		
 		// 현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
 		// 페이지 처리
 		PagingVO p =  paging.paging(cPage, jobVO);
-		System.out.println("p jsonFilter : " + p);
 		// 리스트 VO 생성
 		jobVO.setBegin(p.getBegin());
 		jobVO.setEnd(p.getEnd());
+		System.out.println("jobVO jsonFilter : " + jobVO);
 		
 		List<HireVO> list = hireServiceImpl.getHireList(jobVO);
+		System.out.println();
+		System.out.println("here");
 		System.out.println("list hireJsonFilter : " + list + "\nlist.length : " + list.size());
+		System.out.println("p hireJsonFilter : " + p);
 		String result = hireServiceImpl.getHireListJson(list, p);
 		
 		System.out.println("==================hireJsonFilter END==================");
 		
-		request.setAttribute("pvo", p);
+		//request.setAttribute("pvo", p);
 		return result;
 	}
 
