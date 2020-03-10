@@ -19,11 +19,18 @@ public class HireDAO {
 	}
 	
 	public List<HireVO> getHireList(JobVO jobVO){
+		System.out.println();
+		if(jobVO.getDo_en() != null) {System.out.println("do size : " + jobVO.getDo_en().size());}
+		
+		System.out.println("jobVO DAO : " + jobVO);
+		
 		List<HireVO> hireList = mybatis.selectList("getHireList", jobVO);
+		System.out.println("hireList DAO : " + hireList);
 		return hireList;
 	}
 	
 	public int hireListTotal(JobVO jobVO) {
+		if(jobVO.getDo_en() != null) {System.out.println("do size : " + jobVO.getDo_en().size());}
 		int total = mybatis.selectOne("hireListTotal", jobVO);
 		return total;
 	}
