@@ -13,8 +13,8 @@
 
 <link rel="stylesheet" type="text/css" href="resources/css/republic_korea.css">
 <link rel="stylesheet" type="text/css" href="resources/css/job/hireList.css">
-<script type="text/javascript" src="resources/js/hire/map_hire.js"></script>
 <script type="text/javascript" src="resources/js/hire/hireList.js"></script>
+<script type="text/javascript" src="resources/js/hire/map_hire.js"></script>
 
 </head>
 
