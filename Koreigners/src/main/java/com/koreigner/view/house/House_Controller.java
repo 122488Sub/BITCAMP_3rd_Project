@@ -1,10 +1,7 @@
 package com.koreigner.view.house;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,21 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.koreigner.biz.common.page.PagingService;
 import com.koreigner.biz.common.page.PagingVO;
 import com.koreigner.biz.house.HouseAll_VO;
 import com.koreigner.biz.house.HouseSearch_VO;
 import com.koreigner.biz.house.House_Service;
-import com.koreigner.biz.job.hire.HireVO;
-import com.koreigner.biz.job.jobservice.JobVO;
 
 @Controller
 @SessionAttributes("house") //board 라는 이름의 Model이 있으면 session에 저장
@@ -73,7 +65,8 @@ public class House_Controller {
 	
 	@RequestMapping(value="house_detail.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String houseDetail_go(int room_idx, Model model) { 
-	
+		System.out.println("detail");
+		System.out.println("roomIDX: "+room_idx);
 		model.addAttribute("house",  houseService.getHouse(room_idx)); //데이터 저장
 		return "house/house_Detail.page";
 	}
@@ -86,7 +79,19 @@ public class House_Controller {
 	@RequestMapping(value="getHouseListData.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String houseListDate(HouseSearch_VO houseVO,HttpServletRequest request, HttpServletResponse response) {
-	
+		System.out.println("qq");/*
+		System.out.println(houseVO.getDepositMin());
+		System.out.println(houseVO.getDepositMax());
+		System.out.println(houseVO.getMonthly_rentMin());
+		System.out.println(houseVO.getMonthly_rentMax());
+		*/
+		for(int a: houseVO.getBuild_typeList())
+			System.out.print(a+", ");
+		System.out.println();
+		
+		for(int a: houseVO.getRoom_typeList())
+			System.out.print(a+", ");
+		System.out.println();
 		// 현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
 		// 리스트 VO 생성

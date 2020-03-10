@@ -6,35 +6,71 @@ public class HouseSearch_VO {
 		
 
 	//임시 필터값
-	int filter=0;
+	int dosiFilter=0;
+	boolean buildFilter=true;
+	boolean roomFilter=true;
+	
 	List<String> do_enList;
 	List<String> si_enList;
-	int [] build_typeArr;
-	int [] room_typeArr; 
-	int [] bulid_layersArr;
-	int [] floor_layersArr;
-	int [] floor_typeArr;
-	int depositMin=0,depositMax=99999999;
-	int monthly_rentMin=0,monthly_rentMax=99999999;
+	List<Integer> build_typeList;
+	List<Integer> room_typeList;
+	
+	
+	int depositMin=0,depositMax=50000;
+	int monthly_rentMin=0,monthly_rentMax=50000;
+	
 
 
 	int begin;
 	int end;
 	
 	
-	void changeFilter(int tmp) {
-		this.filter += tmp;
+	void changeDoSiFilter(int tmp) {
+		this.dosiFilter += tmp;
 	}
 	
-	public int getFilter() {
-		return filter;
+	
+
+
+	public int getDosiFilter() {
+		return dosiFilter;
 	}
 
 
 
-	public void setFilter(int filter) {
-		this.filter = filter;
+
+	public void setDosiFilter(int dosiFilter) {
+		this.dosiFilter = dosiFilter;
 	}
+
+
+
+
+	public boolean isBuildFilter() {
+		return buildFilter;
+	}
+
+
+
+
+	public void setBuildFilter(boolean buildFilter) {
+		this.buildFilter = buildFilter;
+	}
+
+
+
+
+	public boolean isRoomFilter() {
+		return roomFilter;
+	}
+
+
+
+
+	public void setRoomFilter(boolean roomFilter) {
+		this.roomFilter = roomFilter;
+	}
+
 
 
 
@@ -77,7 +113,7 @@ public class HouseSearch_VO {
 		this.do_enList = do_enList;
 		
 		if(do_enList.size()>1) 
-			changeFilter(1);
+			changeDoSiFilter(1);
 	}
 
 
@@ -91,69 +127,46 @@ public class HouseSearch_VO {
 	public void setSi_enList(List<String> si_enList) {
 		this.si_enList = si_enList;
 		if(si_enList.size()>1) 
-			changeFilter(1);
+			changeDoSiFilter(1);
+		
+	}
+
+
+	public List<Integer> getBuild_typeList() {
+		return build_typeList;
 		
 	}
 
 
 
-	public int[] getBuild_typeArr() {
-		return build_typeArr;
+
+	public void setBuild_typeList(List<Integer> build_typeList) {
+		this.build_typeList = build_typeList;
+		
+		if(build_typeList.contains(0)||build_typeList.contains(1)||build_typeList.contains(2)){
+			buildFilter=true;
+		}else buildFilter=false;
 	}
 
 
 
-	public void setBuild_typeArr(int[] build_typeArr) {
-		this.build_typeArr = build_typeArr;
+
+	public List<Integer> getRoom_typeList() {
+		return room_typeList;
 	}
 
 
 
-	public int[] getRoom_typeArr() {
-		return room_typeArr;
+
+	public void setRoom_typeList(List<Integer> room_typeList) {
+		this.room_typeList = room_typeList;
+		
+		if(room_typeList.contains(0)||room_typeList.contains(1)||room_typeList.contains(2)){
+			roomFilter=true;
+		}else roomFilter=false;
 	}
 
 
-
-	public void setRoom_typeArr(int[] room_typeArr) {
-		this.room_typeArr = room_typeArr;
-	}
-
-
-
-	public int[] getBulid_layersArr() {
-		return bulid_layersArr;
-	}
-
-
-
-	public void setBulid_layersArr(int[] bulid_layersArr) {
-		this.bulid_layersArr = bulid_layersArr;
-	}
-
-
-
-	public int[] getFloor_layersArr() {
-		return floor_layersArr;
-	}
-
-
-
-	public void setFloor_layersArr(int[] floor_layersArr) {
-		this.floor_layersArr = floor_layersArr;
-	}
-
-
-
-	public int[] getFloor_typeArr() {
-		return floor_typeArr;
-	}
-
-
-
-	public void setFloor_typeArr(int[] floor_typeArr) {
-		this.floor_typeArr = floor_typeArr;
-	}
 
 
 

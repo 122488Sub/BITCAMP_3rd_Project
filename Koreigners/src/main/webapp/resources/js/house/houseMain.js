@@ -1,5 +1,8 @@
-	
-
+	let depositMin, depositMax;
+	let monthlyMin, monthlyMax;
+	let build_type_List=[0,1,2];
+	let room_type_List=[0,1,2];
+	 
 	$( function() {
 		getData();
 		$(".tbody_dosi").html("<h2>&nbsp;&nbsp;← Please select an region</h2>");
@@ -54,12 +57,17 @@
 	    getData();
 	}; 
 	
-
 	
 	function getData() {
 		var param={
 				'do_enList' : do_List,  // '본인 vo변수이름 : 데이터이름'
-				'si_enList' : si_List
+				'si_enList' : si_List,
+				'depositMin': depositMin, 
+				'depositMax': depositMax,
+				'monthly_rentMin':monthlyMin, 
+				'monthly_rentMax':monthlyMax,
+				'build_typeList':build_type_List,
+				'room_typeList':room_type_List
 		}
 		 $(".th_selectDoSi").html("Select)"+ (si_List.length + do_List.length -2) );
 		//----------------------------------------
@@ -82,7 +90,7 @@
 					
 					$.each(list, function(index, obj){
 						dataTag += "<tr>";
-						dataTag += "<td><a href='house_detail?room_idx=" + this.room_idx+"'>" + this.room_idx+ "</a></td>";
+						dataTag += "<td><a href='house_detail.do?room_idx=" + this.room_idx+"'>" + this.room_idx+ "</a></td>";
 						dataTag += "<td>" + this["subject"] + "</td>";
 						dataTag += "<td>" + this["room_type"] + "</td>";
 						dataTag += "<td>" + this["address"] + "</td>";
@@ -142,7 +150,13 @@
 	function getListCPage(cPage){
 		var param={
 				'do_enList' : do_List,  // '본인 vo변수이름 : 데이터이름'
-				'si_enList' : si_List
+				'si_enList' : si_List,
+				'depositMin': depositMin, 
+				'depositMax': depositMax,
+				'monthly_rentMin':monthlyMin, 
+				'monthly_rentMax':monthlyMax,
+				'build_typeList':build_type_List,
+				'room_typeList':room_type_List
 		}
 		 jQuery.ajaxSettings.traditional = true;
 		$.ajax({
@@ -163,7 +177,7 @@
 				$.each(list, function(index, obj){
 					
 					dataTag += "<tr>";
-					dataTag += "<td><a href='house_detail?room_idx=" + this.room_idx+"'>" + this.room_idx+ "</a></td>";
+					dataTag += "<td><a href='house_detail.do?room_idx=" + this.room_idx+"'>" + this.room_idx+ "</a></td>";
 					dataTag += "<td>" + this["subject"] + "</td>";
 					dataTag += "<td>" + this["room_type"] + "</td>";
 					dataTag += "<td>" + this["address"] + "</td>";

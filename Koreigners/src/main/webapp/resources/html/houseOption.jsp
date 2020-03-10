@@ -4,129 +4,10 @@
 <head>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- 
+<link rel="stylesheet" href="resources/css/house/houseOption.css"> 
 
  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
  <script type="text/javascript" src="resources/js/house/houseOption.js"></script>
- 
- <style> 
- 	
- 	#filterBox{
- 		width:550px;
- 		text-align:left;
- 		margin-left: 15px;
- 	}
- 	label{
- 		 font: 700 16px/1 'Montserrat', sans-serif;
- 	
- 	}
- 	
- 	.slider-range{
- 		width: 230px;
- 		margin-top: 5px;
- 	}
- 	
- 	#stayBox, #barBox, #typeBox{
- 		width:100%;
- 		margin-top: 15px;
- 	}
- 	.barText{
- 		width: 100px;
- 	}
- 	.barContent{
- 		
- 		float: left;
- 		width: 50%;
- 		
- 	}
- 	#barBox::after {
-   content: "";
-   display: block;
-   clear: both;
-}
-
- 	
- 	select {
- 		margin-top: 5px;
-	  
-	  border: none;
-	  box-shadow: none;
-	  background: transparent;
-	  background-image: none;
-	  -webkit-appearance: none;
-	  outline: none;
-	  cursor: pointer;
-	
-	  /* Hide arrow on FF */
-	  -moz-appearance: none;
-	  text-indent: 0.01px;
-	  text-overflow: ellipsis;
-	  
-	  border: 1.5px solid;/* #00498c;*/
-	  border-radius: 40px 80px / 80px 40px;
-	  padding: 7px 38px 7px 17px;
-	  /* You can style text of the active select option */
-	 
-	  text-transform: uppercase;
-	  letter-spacing: 2px;
-	 /* color: #00498c;*/
-	}
-select::-ms-expand {
-  display: none;
-}
-optgroup {
-  color: inherit;
-  font: inherit;
-}
-
-#headerBox{
-	position: relative;
-	float: right;
-	
-}
-#stayBox{
-	float: none;
-
-}
-#headerSelect{	
-	
-}
-#staySelect{
-
-	 font: 700 16px/1 'Montserrat', sans-serif;
-	 width: 40%;
-}
-
-.typeContent , .btnDiv{
-	float:left;
-	
-}
-.typeContent {
-	width:48%;
-}
-.btnDiv{
-    width: 30%;
-    text-align: center;
-    background-color: aqua;
-    height: 46px;
-}
-.btnOneLine{
-	line-height: 46px;
-}
-
-.type::after, .btnDiv::after {
-   content: "";
-   display: block;
-   clear: both;
-}
-
-.bulidContent{
-	margin-right: 15px;
-}
-.btnDiv{
-	margin-right: 5px;
-}
- </style>
 </head>
 
 <body>
@@ -172,15 +53,15 @@ optgroup {
 	<div id="typeBox">
 		<div class="bulidContent typeContent">
 			<div><label> Bulid Type</label></div>
-		 	<div class="btnDiv btnOneLine">Villa</div>
-		 	<div class="btnDiv btnOneLine">Goshiwon</div>
-		 	<div class="btnDiv">Semi-<br>Officetel</div>
+		 	<div class="btnDiv buildBtn no-drag btnOneLine">Villa</div>
+		 	<div class="btnDiv buildBtn no-drag btnOneLine">Goshiwon</div>
+		 	<div class="btnDiv buildBtn no-drag">Semi-<br>Officetel</div>
 		</div>
 		<div class="roomContent typeContent">
 			<div><label>Room Type</label></div>
-			<div class="btnDiv btnOneLine">Studio</div>
-			<div class="btnDiv">Two<br>BedRoom</div>
-			<div class="btnDiv">Three+<br>BedRoom</div>
+			<div class="btnDiv roomBtn no-drag btnOneLine" >Studio</div>
+			<div class="btnDiv roomBtn no-drag btnOneLine">Two</div>
+			<div class="btnDiv roomBtn no-drag btnOneLine">Three+</div>
 		</div>
 	</div>
 </div>

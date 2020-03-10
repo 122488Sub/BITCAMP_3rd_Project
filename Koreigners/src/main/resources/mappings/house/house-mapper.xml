@@ -47,7 +47,7 @@ FROM(
 				BOARD.ROOM_IDX=IMG.ROOM_IDX 
 			    AND BOARD.ROOM_IDX=INFO.ROOM_IDX 
 			    AND BOARD.ROOM_IDX=OPT.ROOM_IDX  
-			<if test="filter gt 0 ">  
+			<if test="dosiFilter gt 0 ">  
 			AND ( 
 			    	BOARD.DO_EN IN
 		
@@ -63,7 +63,24 @@ FROM(
 		       		</foreach> 
 		       	)
 	       	</if>
+	   <if test="buildFilter">
+	       AND (
+	       			 INFO.BUILD_TYPE IN
+	       			 <foreach collection="build_typeList" item="bu" index="index" open="(" separator="," close=")"> 
+		          		  #{bu} 
+		       		</foreach> 
+	       	   )
 	       
+	   </if>
+	   <if test="roomFilter">
+	       AND (
+	       			 INFO.ROOM_TYPE IN
+	       			 <foreach collection="room_typeList" item="ro" index="index" open="(" separator="," close=")"> 
+		          		  #{ro} 
+		       		</foreach> 
+	       	   )
+	    </if>
+	     
 	       	ORDER BY 
 				BOARD.ROOM_IDX 
 				) HOUSE
@@ -75,25 +92,44 @@ FROM(
 
 	<select id="getHouseTotal" parameterType="house_search" resultType="int">
 		SELECT COUNT(*) 
-		FROM T_ROOM_BOARD BOARD
+		FROM T_ROOM_BOARD BOARD, T_ROOM_INFO INFO
 		
-	  <if test="filter gt 0 ">
 		WHERE	
-		
-		    BOARD.DO_EN IN
-		
-		    <foreach collection="do_enList" item="do" index="index" open="(" separator="," close=")"> 
-          		  #{do} 
-       		</foreach> 
-       		
-       		OR	
-       		
-       		BOARD.GU_GUN_EUP_ENG IN 
-			<foreach collection="si_enList" item="si" index="index" open="(" separator="," close=")"> 
-          		#{si} 
-       		</foreach> 
-      	
+			BOARD.ROOM_IDX=INFO.ROOM_IDX 
+	  <if test="dosiFilter gt 0 ">
+		  	AND ( 
+			    BOARD.DO_EN IN
+			
+			    <foreach collection="do_enList" item="do" index="index" open="(" separator="," close=")"> 
+	          		  #{do} 
+	       		</foreach> 
+	       		
+	       		OR	
+	       		
+	       		BOARD.GU_GUN_EUP_ENG IN 
+				<foreach collection="si_enList" item="si" index="index" open="(" separator="," close=")"> 
+	          		#{si} 
+	       		</foreach> 
+      		)
       </if>
+	  <if test="buildFilter">
+	       AND (
+	       			 INFO.BUILD_TYPE IN
+	       			 <foreach collection="build_typeList" item="bu" index="index" open="(" separator="," close=")"> 
+		          		  #{bu} 
+		       		</foreach> 
+	       	   )
+	       
+	   </if>
+	   <if test="roomFilter">
+	       AND (
+	       			 INFO.ROOM_TYPE IN
+	       			 <foreach collection="room_typeList" item="ro" index="index" open="(" separator="," close=")"> 
+		          		  #{ro} 
+		       		</foreach> 
+	       	   )
+	    </if>
+	   
 	</select>
 	
 	
