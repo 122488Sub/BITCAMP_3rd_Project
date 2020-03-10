@@ -2,6 +2,8 @@ package com.koreigner.biz.job.jobservice;
 
 import java.util.List;
 
+import com.koreigner.biz.common.page.PagingVO;
+
 public class JobVO {
 	
 	List<String> do_en;
@@ -9,6 +11,7 @@ public class JobVO {
 	String cate_prnt_en;
 	List<String> cate_child_en;
 	List<String> payCondition;
+	PagingVO pagingVO;
 	int begin;
 	int end;
 	

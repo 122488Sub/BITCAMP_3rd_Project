@@ -13,53 +13,45 @@
 		                FROM T_JOB_HIRE
 		               ORDER BY HIRE_IDX DESC) HIRE
 		               WHERE 1=1
-		               <!-- List<String> do_en;
-							List<String> gu_gun_eup_en;
-							String cate_prnt_en;
-							List<String> cate_child_en;
-							List<String> payCondition;
-							int begin;
-							int end; 
-		               <choose>
-		               	<when test="do_en =! null">
-			              AND (HIRE.DO_EN IN
-			              <foreach collection="do_en" item="do" index="index" open="(" separator="," close=")">
-			              #{do}
-			              </foreach>
-		               	</when>
-		               	<when test="gu_gun_eup_en == null">
-		               	)
-		               	</when>
-		               	<when test="gu_gun_eup_en != null">
-		               	 OR HIRE.GU_GUN_EUP_ENG IN
-		               	  <foreach collection="gu_gun_eup_en" item="si" index="index" open="(" separator="," close=")">
-		               	  #{si}
-		               	  </foreach>
-		               	  )
-		               	</when>
-		               </choose>
-		               <choose>
-		               	<when test='cate_prnt_en != "" or cate_prnt_en != null or cate_child_en!= null or payCondition != null'>
-		               	AND (
+		              	<!-- <if test="do_en != null">
+		               		<if test="do_en.size != 0">
+					          AND ( HIRE.DO_EN IN
+					         <foreach collection="do_en" item="do" index="index" open=" (" separator="," close=")">
+					          #{do}
+					         </foreach>
+					         
+					         )
+					         </if>
+		               	</if>
 		               	
 		               	
-		               	)
-		               	</when>
-		               </choose>
-		               
-		               AND (HIRE.DO_EN IN('Seoul','Gyeonggi-do')
-                       OR HIRE.GU_GUN_EUP_ENG IN('Namyangju-si')
-                           )
-                           
-                           
-                       AND (
-                           HIRE.CATE_PRNT_EN IN ('FOREIGN LANGUAGE/DESIGN')
-                       AND HIRE.CATE_CHILD_EN IN ('INTERPRETATION/TRANSLATION')
-                       AND HIRE.PAYMENT_CODITION IN ('day')
-                       )
-			       		-->
+	               		<if test="do_en == null and gu_gun_eup_en != null">
+		               		<if test="gu_gun_eup_en.size != 0">
+		               		 AND ( HIRE.GU_GUN_EUP_ENG IN
+					         <foreach collection="gu_gun_eup_en" item="si" index="index" open=" (" separator="," close="))">
+					          #{si}
+					         </foreach>
+		               		</if>
+	               		</if>
+		               		
+	               		<if test="do_en != null and do_en.size != 0 and gu_gun_eup_en != null">
+			               	<if test="gu_gun_eup_en.size != 0">
+			               	 OR ( HIRE.GU_GUN_EUP_ENG IN
+						         <foreach collection="gu_gun_eup_en" item="si" index="index" open=" (" separator="," close="))">
+						          #{si}
+						         </foreach>
+			               	</if>
+		               	</if> -->
+		              	<if test="do_en != null">
+		               		<if test="do_en.size != 0">
+						          AND ( HIRE.DO_EN IN
+						         <foreach collection="do_en" item="do" index="index" open=" (" separator="," close=")">
+						          #{do}
+						         </foreach>
+						         )
+					         </if>
+					    </if>
        		)
-		
 	  WHERE R_NUM BETWEEN #{begin} AND #{end}
 	  
 </select>
@@ -68,9 +60,16 @@
 		SELECT COUNT(*) 
 		  FROM T_JOB_HIRE
 		WHERE 1=1
-		
+		<if test="do_en != null">
+	         <if test="do_en.size != 0">
+		          AND (DO_EN IN
+		         <foreach collection="do_en" item="do" index="index" open=" (" separator="," close=")">
+		          #{do}
+		         </foreach>
+		         )
+	         </if>
+	    </if>
 </select>
-
 
 <select id="hireDetailOne" parameterType="int" resultType="hireVO">
 		SELECT *
@@ -132,8 +131,6 @@
 
 
 <!--
-
-
 		 AND ( 
 		    
 		    <if test="do_enList !=null ">
@@ -157,8 +154,6 @@
        		
 		ORDER BY 
 			BOARD.ROOM_IDX  
-			
-			
 			
 -->
 
