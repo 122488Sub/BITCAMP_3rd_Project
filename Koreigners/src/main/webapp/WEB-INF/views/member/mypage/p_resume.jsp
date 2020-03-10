@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@ no-repeat 1px 50%;}
 /* 테이블 td 왼쪽 정렬 */
 .tdLeft tbody td,table th.text_left,table td.text_left,table td.fleft {text-align:left;}
 </style>
-
+<script type="text/javascript" src="resources/js/member/sojaeji.js"></script>
 <script type="text/javascript">
 $(function() {
 
@@ -217,7 +218,45 @@ $(function() {
   $('.only-num').keyup(function () {
       this.value = this.value.replace(/[^0-9]/g,'');
   });
+  
+  
+	//카테고리 세션박스 변경 시 하위 카테고리 select ajax
+	$("#selectBox1").change(function(){
+		console.log("바뀜");
+		var selectBox1 = document.getElementById("selectBox1");
+		console.log(this.value);
+		cate_prnt_ko = this.value;
+		
+		$.ajax("getCateJson.do", {
+			type: "get",
+			dataType : "json",
+			data: {"cate_prnt_ko" : cate_prnt_ko},
+			success : function(data){
+				
+				var strData = JSON.stringify(data);
+				
+				var jsData = JSON.parse(strData); //자바 스크립트 데이터로 형 변환
+				
+				
+				var dataTag = "";
+				$.each(data, function(index, obj){
+					dataTag += "<option value=" + this.cate_child_ko +">"
+					dataTag += this.cate_child_ko;
+					dataTag += "</option>";
+				});
+	
+				$("#cate_child_ko").html(dataTag);
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				alert("Ajax 처리 실패 : \n" +
+					  "jqXHR.readyState : " + jqXHR.readyState + "\n" +
+					  "textStatus : " + textStatus + "\n" +
+					  "errorThrown : " + errorThrown);
+			}
+		});	
+	});
 });
+
 </script>
 </head>
 <body>
@@ -231,7 +270,7 @@ $(function() {
 </div>
 
           <form name="form1" id="form1" method="post" enctype="multipart/form-data" action="">
-          <input type="hidden" name="mem_id" value="${mem_id }">
+          <input type="hidden" name="mem_id" value="${mvo.mem_id }">
 
           <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
           	<caption>
@@ -244,23 +283,19 @@ $(function() {
                 <input type="text" name="mem_name">
                 </td>
                 <th width="15%">Nationality</th>
-                <td width="40%" class="txLeft">&nbsp;Korea</td>
+                <td width="40%" class="txLeft">&nbsp;${mvo.mem_nationality }</td>
               </tr>
               <tr>
                 <th>Sex</th>
-                <td class="txLeft">&nbsp;Female</td>
+                <td class="txLeft">&nbsp;${mvo.mem_gender }</td>
                 <th>Birthday</th>
-                <td class="txLeft">&nbsp;1988-04-15</td>
+                <td class="txLeft">&nbsp;${mvo.mem_birth }</td>
               </tr>
               <tr>
-                <th>Phone</th>
-                <td class="txLeft">&nbsp;</td>
                 <th>Cell phone</th>
-                <td class="txLeft">&nbsp;010-3366-2756</td>
-              </tr>
-              <tr>
+                <td class="txLeft">&nbsp;${mvo.mem_phone }</td>
                 <th>Residence area</th>
-                <td colspan="3" class="txLeft">&nbsp;Seoul</td>
+                <td colspan="3" class="txLeft">&nbsp;${mvo.mem_address }</td>
               </tr>
             </tbody>
           </table>
@@ -271,35 +306,25 @@ $(function() {
               <tr>
                 <th width="15%">Desired working area<span class="red">*</span></th>
                 <td width="85%" class="txLeft">
-                	<select id="req_area" name="req_area">
-                    <option value="">==Select==</option>
-                      <option value="9">Seoul</option>
-                      <option value="11">Incheon</option>
-                      <option value="8">Busan</option>
-                      <option value="6">Daegu</option>
-                      <option value="5">Gwangju</option>
-                      <option value="7">Daejun</option>
-                      <option value="10">Ulsan</option>
-                      <option value="2">Gyeonggi</option>
-                      <option value="1">Gangwon</option>
-                      <option value="16">Chungbuk</option>
-                      <option value="15">Chungnam</option>
-                      <option value="4">Gyeongbuk</option>
-                      <option value="3">Gyeongnam</option>
-                      <option value="13">Jeonbuk</option>
-                      <option value="12">Jeonnam</option>
-                      <option value="14">Jeju</option>
-                      <option value="19">Sejong</option>
-                  </select>
+					<select name="sido1" id="sido1"></select>
+					<select name="gugun1" id="gugun1"></select>
+					
+					<script type="text/javascript">
+					new sojaeji('sido1', 'gugun1');
+					</script>
                 </td>
-              </tr>
+              </tr>				
               <tr>
                 <th>Professional field<span class="red">*</span></th>
                 <td class="txLeft">
-                  <select name="field_seq1" id="field_seq1" class="cat">
-                  <option value="">==Select==</option>
-                  <option value="2">Manufacturing industry</option><option value="1">office job</option><option value="3">service industry employment</option><option value="4">others</option></select> &nbsp;
-                  <select name="field_seq2" id="field_seq2" class="cat"></select>
+				  <select name="cate_prnt_ko" id="selectBox1" title="직종선택">
+				    <c:forEach items="${jobCateMap}" var="option">
+					  <option class="${option.key}">${option.value}</option>
+					</c:forEach>
+				  </select>
+				
+				  <select name="cate_child_ko" title="직종선택"  id="cate_child_ko">
+				  </select><br><br>
                 </td>
               </tr>
               <tr>

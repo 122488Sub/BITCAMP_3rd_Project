@@ -176,15 +176,9 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 		</div><br>
 		<div>
 			<label for="gender">Gender</label>
-			  <select>
-			  	<option value='' selected>gender
-			  	<option>Male
-			  	<option>Female
-			  	<option>Other
-			  </select>
-			<c:if test="${not empty mvo.mem_gender }">
-				<input value="${mvo.mem_gender }" contenteditable="false" disabled="disabled">
-			</c:if>
+			<input type="radio" name="mem_gender" value="M"> Male
+			<input type="radio" name="mem_gender" value="F"> Female
+			<input type="radio" name="mem_gender" value="O"> Other
 		</div><br>
 		<div>
 			<div><label for="address">Address</label></div>
