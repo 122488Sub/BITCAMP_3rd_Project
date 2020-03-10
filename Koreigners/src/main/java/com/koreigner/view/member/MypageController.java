@@ -25,6 +25,8 @@ public class MypageController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private CompanyServiceImpl companyServiceImpl;
 	
 	//마이페이지로 이동
 	@RequestMapping(value="myPage_go.do", method={RequestMethod.GET, RequestMethod.POST})
@@ -107,20 +109,20 @@ public class MypageController {
 	
 	
 	//페이지 전환 시 jobCateMap 맵 객체 전달 > 직무 카테고리
-//	@ModelAttribute("jobCateMap")
-//	public Map<String, String> searchJobCateMap() {
-//		List<CompanyVO> list = CompanyServiceImpl.getCateList();
-//		System.out.println("list : " + list);
-//		//카테고리 대분류 문자 map에 저장
-//		Map<String, String> jobCateMap = new HashMap<>();
-//		
-//		int i = 1;
-//		for(CompanyVO vo : list) {
-//			jobCateMap.put(Integer.toString(i), vo.getCate_prnt_ko());
-//			i++;
-//		}
-//		
-//		
-//		return jobCateMap;
-//	}
+	@ModelAttribute("mpCateMap")
+	public Map<String, String> searchJobCateMap() {
+		List<CompanyVO> list = companyServiceImpl.getCateList();
+		System.out.println("list : " + list);
+		//카테고리 대분류 문자 map에 저장
+		Map<String, String> jobCateMap = new HashMap<>();
+		
+		int i = 1;
+		for(CompanyVO vo : list) {
+			jobCateMap.put(Integer.toString(i), vo.getCate_prnt_en());
+			i++;
+		}
+		
+		
+		return jobCateMap;
+	}
 }
