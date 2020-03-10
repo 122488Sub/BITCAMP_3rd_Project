@@ -53,18 +53,17 @@
 	<!-- 회원정보 수정하기 -->
 	<update id="updateMember" parameterType="userVO">
 		UPDATE T_MEMBER
-		   <set>
-		       <if test="mem_name != null">MEM_NAME = #{mem_name},</if>
-		       <if test='mem_pw != null and !mem_pw.equals("")'>MEM_PW = #{mem_pw},</if>
-		       <if test="mem_phone != null">MEM_PHONE = #{mem_phone},</if>
-		       <if test="mem_birth != null">MEM_BIRTH = #{mem_birth},</if>
-		       <if test="mem_gender != null">MEM_GENDER = #{mem_gender},</if>
-		       <if test="mem_address != null">MEM_ADDRESS = #{mem_address},</if>
-		       <if test="mem_nationality != null">MEM_NATIONALITY = #{mem_nationality},</if>
-		       <if test="mailling_fl != null">MAILLING_FL = #{mailling_fl},</if>
-		       <if test="sms_fl != null">SMS_FL = #{sms_fl},</if>
-		       <if test="auth_status != null">AUTH_STATUS = #{auth_status},</if>
-		   </set>
+		<set>
+	       <if test='mem_name != null and !mem_name.equals("")'>MEM_NAME = #{mem_name},</if>
+	       <if test='mem_pw != null and !mem_pw.equals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")'>MEM_PW = #{mem_pw},</if>
+	       <if test='mem_phone != null and !mem_phone.equals("")'>MEM_PHONE = #{mem_phone},</if>
+	       <if test='mem_birth != null and !mem_birth.equals("--")'>MEM_BIRTH = #{mem_birth},</if>
+	       <if test='mem_gender != null and !mem_gender.equals("")'>MEM_GENDER = #{mem_gender},</if>
+	       <if test='mem_address != null and !mem_address.equals("")'>MEM_ADDRESS = #{mem_address},</if>
+	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
+	       <if test="mailling_fl != null">MAILLING_FL = #{mailling_fl},</if>
+	       <if test="sms_fl != null">SMS_FL = #{sms_fl},</if>
+	     </set>
 		 WHERE MEM_ID = #{mem_id}
 	</update>
 	
