@@ -79,19 +79,8 @@ public class House_Controller {
 	@RequestMapping(value="getHouseListData.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String houseListDate(HouseSearch_VO houseVO,HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("qq");/*
-		System.out.println(houseVO.getDepositMin());
-		System.out.println(houseVO.getDepositMax());
-		System.out.println(houseVO.getMonthly_rentMin());
-		System.out.println(houseVO.getMonthly_rentMax());
-		*/
-		for(int a: houseVO.getBuild_typeList())
-			System.out.print(a+", ");
-		System.out.println();
 		
-		for(int a: houseVO.getRoom_typeList())
-			System.out.print(a+", ");
-		System.out.println();
+	
 		// 현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
 		// 리스트 VO 생성

@@ -1,8 +1,9 @@
-	let depositMin, depositMax;
-	let monthlyMin, monthlyMax;
+	let depositMin=0, depositMax=50000;
+	let monthlyMin=0, monthlyMax=50000;
 	let build_type_List=[0,1,2];
 	let room_type_List=[0,1,2];
-	 
+	let stayNum=1; 
+	
 	$( function() {
 		getData();
 		$(".tbody_dosi").html("<h2>&nbsp;&nbsp;← Please select an region</h2>");
@@ -67,7 +68,8 @@
 				'monthly_rentMin':monthlyMin, 
 				'monthly_rentMax':monthlyMax,
 				'build_typeList':build_type_List,
-				'room_typeList':room_type_List
+				'room_typeList':room_type_List,
+				'stayNum':stayNum
 		}
 		 $(".th_selectDoSi").html("Select)"+ (si_List.length + do_List.length -2) );
 		//----------------------------------------
@@ -156,7 +158,8 @@
 				'monthly_rentMin':monthlyMin, 
 				'monthly_rentMax':monthlyMax,
 				'build_typeList':build_type_List,
-				'room_typeList':room_type_List
+				'room_typeList':room_type_List,
+				'stayNum':stayNum
 		}
 		 jQuery.ajaxSettings.traditional = true;
 		$.ajax({

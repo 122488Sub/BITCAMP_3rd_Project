@@ -51,7 +51,12 @@ $( function() {
 			 getData();
 		 });
 		
-		
+		//----------------------------------------------------------
+		 
+		 $("#staySelect").change(function(){
+			 stayNum= $("#staySelect option:selected").val();
+			 getData();
+		 });
 
 });
 	    
@@ -87,14 +92,7 @@ function chkBuildAndRoomType(chk){
 	 
 	
 }
-function chkRoomType(val){
-	if(val=='Studio')
-		return 0;
-	else if(val=='Two')
-		return 1;
-	else 
-		return 2;
-}
+
 
 
 function setSliderValue(){

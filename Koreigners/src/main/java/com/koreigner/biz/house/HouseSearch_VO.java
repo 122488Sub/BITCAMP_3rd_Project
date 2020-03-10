@@ -5,17 +5,23 @@ import java.util.List;
 public class HouseSearch_VO {
 		
 
-	//임시 필터값
+	//필터 확인값
 	int dosiFilter=0;
 	boolean buildFilter=true;
 	boolean roomFilter=true;
 	
+	//도시 필터
 	List<String> do_enList;
 	List<String> si_enList;
+	
+	//타입버튼 필터
 	List<Integer> build_typeList;
 	List<Integer> room_typeList;
 	
 	
+	//가격필터
+	
+	int stayNum=12;
 	int depositMin=0,depositMax=50000;
 	int monthly_rentMin=0,monthly_rentMax=50000;
 	
@@ -214,6 +220,20 @@ public class HouseSearch_VO {
 
 	public void setMonthly_rentMax(int monthly_rentMax) {
 		this.monthly_rentMax = monthly_rentMax;
+	}
+
+
+
+
+	public int getStayNum() {
+		return stayNum;
+	}
+
+
+
+
+	public void setStayNum(int stayNum) {
+		this.stayNum = stayNum;
 	}
 	
 	

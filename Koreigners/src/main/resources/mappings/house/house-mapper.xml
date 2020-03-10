@@ -80,7 +80,54 @@ FROM(
 		       		</foreach> 
 	       	   )
 	    </if>
+	    <![CDATA[
+	       AND  INFO.STAY_NUM_MIN >= #{stayNum}	 
+	     ]]>
 	     
+	     AND
+	     	<choose>
+	     		<when test="depositMax==50000">
+	     		(    
+	     			 <![CDATA[
+	     			   INFO.DEPOSIT >= #{depositMin}
+	     			 ]]>
+	     		)
+	     		</when>
+	     		<otherwise>
+	     		(    
+	     			 <![CDATA[
+	     			   INFO.DEPOSIT >= #{depositMin}
+	     			 ]]>
+	     			   AND
+	     			 <![CDATA[
+	     			   INFO.DEPOSIT <= #{depositMax}
+	     			 ]]>  
+	     			 
+	     		)
+	     		</otherwise>
+	     	</choose>
+	     AND
+	     	<choose>
+	     		<when test="monthly_rentMax==50000">
+	     		(    
+	     			 <![CDATA[
+	     			   INFO.MONTHLY_RENT >= #{monthly_rentMin}
+	     			 ]]>
+	     		)
+	     		</when>
+	     		<otherwise>
+	     		(    
+	     			 <![CDATA[
+	     			   INFO.MONTHLY_RENT >= #{monthly_rentMin}
+	     			 ]]>
+	     			   AND
+	     			 <![CDATA[
+	     			   INFO.MONTHLY_RENT <= #{monthly_rentMax}
+	     			 ]]>  
+	     			 
+	     		)
+	     		</otherwise>
+	     	</choose>
 	       	ORDER BY 
 				BOARD.ROOM_IDX 
 				) HOUSE
@@ -129,6 +176,54 @@ FROM(
 		       		</foreach> 
 	       	   )
 	    </if>
+	      <![CDATA[
+	       AND  INFO.STAY_NUM_MIN >= #{stayNum}
+	      ]]>
+	      
+	      AND
+	     	<choose>
+	     		<when test="depositMax==50000">
+	     		(    
+	     			 <![CDATA[
+	     			   INFO.DEPOSIT >= #{depositMin}
+	     			 ]]>
+	     		)
+	     		</when>
+	     		<otherwise>
+	     		(    
+	     			 <![CDATA[
+	     			   INFO.DEPOSIT >= #{depositMin}
+	     			 ]]>
+	     			   AND
+	     			 <![CDATA[
+	     			   INFO.DEPOSIT <= #{depositMax}
+	     			 ]]>  
+	     			 
+	     		)
+	     		</otherwise>
+	     	</choose>
+	     AND
+	     	<choose>
+	     		<when test="monthly_rentMax==50000">
+	     		(    
+	     			 <![CDATA[
+	     			   INFO.MONTHLY_RENT >= #{monthly_rentMin}
+	     			 ]]>
+	     		)
+	     		</when>
+	     		<otherwise>
+	     		(    
+	     			 <![CDATA[
+	     			   INFO.MONTHLY_RENT >= #{monthly_rentMin}
+	     			 ]]>
+	     			   AND
+	     			 <![CDATA[
+	     			   INFO.MONTHLY_RENT <= #{monthly_rentMax}
+	     			 ]]>  
+	     			 
+	     		)
+	     		</otherwise>
+	     	</choose>
 	   
 	</select>
 	
