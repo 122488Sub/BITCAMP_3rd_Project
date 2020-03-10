@@ -7,7 +7,6 @@ public class UserVO {
 	private String mem_id;
 	private String mem_pw;
 	private String mem_name;
-	private String mem_nick;
 	private String mem_cate;
 	private String mem_phone;
 	private String mem_birth;
@@ -85,14 +84,6 @@ public class UserVO {
 
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
-	}
-
-	public String getMem_nick() {
-		return mem_nick;
-	}
-
-	public void setMem_nick(String mem_nick) {
-		this.mem_nick = mem_nick;
 	}
 
 	public String getMem_cate() {
@@ -233,8 +224,8 @@ public class UserVO {
 	
 	@Override
 	public String toString() {
-		return "UserVO [mem_idx=" + mem_idx + ", mem_id=" + mem_id + ", mem_pw=" + mem_pw + ", mem_name=" + mem_name
-				+ ", mem_nick=" + mem_nick + ", mem_cate=" + mem_cate + ", mem_phone=" + mem_phone + ", mem_birth="
+		return "UserVO [mem_idx=" + mem_idx + ", mem_id=" + mem_id + ", mem_pw=" + mem_pw
+				+ ", mem_name=" + mem_name + ", mem_cate=" + mem_cate + ", mem_phone=" + mem_phone + ", mem_birth="
 				+ mem_birth + ", mem_gender=" + mem_gender + ", mem_image=" + mem_image + ", mem_address=" + mem_address
 				+ ", mem_nationality=" + mem_nationality + ", mem_reg_ip=" + mem_reg_ip + ", mem_reg_dt=" + mem_reg_dt
 				+ ", mem_mod_dt=" + mem_mod_dt + ", mem_last_login=" + mem_last_login + ", mem_leave_fl=" + mem_leave_fl

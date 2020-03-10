@@ -20,8 +20,18 @@
 	    	WHERE C.CATE_IDX = M.CATE_IDX
 		  AND CATE_KOR = #{cate_kor}
 	
+	</select>
+	
+	<!-- 영문 대분류 명으로 카테고리 소분류 검색 -->
+	<select id="getCateEnChild" parameterType="String" resultType="companyVO">
+		SELECT CATE_CHILD 
+		  FROM T_JOB_CATE_CHILD C,
+		       T_JOB_CATE_MST M
+	     WHERE C.CATE_IDX = M.CATE_IDX
+		   AND CATE_PRNT = #{cate_prnt}
+	
 	</select>	
-
+	
 	<!-- 한글 카테고리 대분류,소분류로 영어 카테고리 대분류,소분류 검색 -->
 	<select id="getCateEn" parameterType="Map" resultType="companyVO">-->
 		SELECT DISTINCT P.CATE_PRNT CATE_PRNT_EN, C.CATE_CHILD CATE_CHILD_EN
