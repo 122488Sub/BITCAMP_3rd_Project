@@ -198,6 +198,7 @@ public class UserServiceImpl implements UserService {
 		return isSuccess;
 	}
 	
+//============================== 마이페이지 =======================================
 	//회원정보 수정
 	@Override
 	public void updateMember(UserVO vo) {
@@ -227,7 +228,19 @@ public class UserServiceImpl implements UserService {
 		return userCnt;
 	}
 	
-	//=========================== SNS Login ===============================
+	//이력서 입력
+	@Override
+	public void insertResume(ResumeVO rvo) {
+		userDAO.insertResume(rvo);
+	}
+	@Override
+	public void insertCareer(CareerVO cvo) {
+		userDAO.insertCareer(cvo);
+	}
+	
+	
+
+//=========================== SNS Login ===============================
 	@Override
 	public UserVO getMemberSns(UserVO snsMemVO) {
 		return userDAO.getMemberSns(snsMemVO); 
@@ -252,7 +265,7 @@ public class UserServiceImpl implements UserService {
 	
 
 
-	//=========================== JWT Token ===============================
+//=========================== JWT Token ===============================
 	
 	private static final String SALT =  "koreignerSecret";
 	
@@ -339,6 +352,7 @@ public class UserServiceImpl implements UserService {
 		
 		return payloadMap;
 	}
+
 
 	
 	
