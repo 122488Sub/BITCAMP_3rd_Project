@@ -64,6 +64,7 @@ public class CompanyDAO {
 	}
 
 	public List<CompanyVO> getCateEnChild(String cate_en) {
+		System.out.println("cate_en : " + cate_en);
 		List<CompanyVO> list = mybatis.selectList("getCateEnChild", cate_en);
 		System.out.println("list : " + list);
 		return list;

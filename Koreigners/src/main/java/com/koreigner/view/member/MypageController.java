@@ -112,7 +112,6 @@ public class MypageController {
 	@ModelAttribute("mpCateMap")
 	public Map<String, String> searchJobCateMap() {
 		List<CompanyVO> list = companyServiceImpl.getCateList();
-		System.out.println("list : " + list);
 		//카테고리 대분류 문자 map에 저장
 		Map<String, String> jobCateMap = new HashMap<>();
 		

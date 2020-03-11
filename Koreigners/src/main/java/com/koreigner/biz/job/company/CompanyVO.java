@@ -16,8 +16,16 @@ public class CompanyVO {
 	
 	//카테고리 변수
 	private int cate_idx;
-	private String cate_child_en, cate_child_ko, cate_prnt_en, cate_prnt_ko;
+	private String cate_child_en, cate_child_ko, cate_prnt_en, cate_prnt_ko, cate_child;
 	
+	public String getCate_child() {
+		return cate_child;
+	}
+
+	public void setCate_child(String cate_child) {
+		this.cate_child = cate_child;
+	}
+
 	//주소 변수
 	private String do_kor, gu_gun_eup_kor, do_en, gu_gun_eup_eng, address, address_en;
 	
@@ -325,7 +333,7 @@ public class CompanyVO {
 				+ cate_child_en + ", cate_child_ko=" + cate_child_ko + ", cate_prnt_en=" + cate_prnt_en
 				+ ", cate_prnt_ko=" + cate_prnt_ko + ", do_kor=" + do_kor + ", gu_gun_eup_kor=" + gu_gun_eup_kor
 				+ ", do_en=" + do_en + ", gu_gun_eup_eng=" + gu_gun_eup_eng + ", address=" + address + ", address_en="
-				+ address_en + "]";
+				+ address_en + ", cate_child=" + cate_child + "]";
 	}
 	public String toStringAddress() {
 		return "CompanyVO [do_en=" + do_en + ", gu_gun_eup_eng=" + gu_gun_eup_eng + ", address=" + address

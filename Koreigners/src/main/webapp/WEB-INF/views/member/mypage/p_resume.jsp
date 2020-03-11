@@ -232,16 +232,11 @@ $(function() {
 			dataType : "json",
 			data: {"cate_prnt_en" : cate_prnt_en},
 			success : function(data){
-				
-				var strData = JSON.stringify(data);
-				
-				var jsData = JSON.parse(strData); //자바 스크립트 데이터로 형 변환
-				
-				
+							
 				var dataTag = "";
 				$.each(data, function(index, obj){
-					dataTag += "<option value=" + this.cate_child_en +">"
-					dataTag += this.cate_child_en;
+					dataTag += "<option value=" + this.cate_child +">"
+					dataTag += this.cate_child;
 					dataTag += "</option>";
 				});
 	
@@ -255,6 +250,7 @@ $(function() {
 			}
 		});	
 	});
+
 });
 
 </script>
