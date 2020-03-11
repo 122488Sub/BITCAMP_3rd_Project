@@ -79,11 +79,8 @@ public class HouseAll_VO {
 	
 	//String select_available_date;
 	
-	
-	
-	
-	
-	
+
+
 	public HouseAll_VO() {
 		// TODO Auto-generated constructor stub
 	}

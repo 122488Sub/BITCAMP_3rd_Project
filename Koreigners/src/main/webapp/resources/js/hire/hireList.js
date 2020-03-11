@@ -299,51 +299,51 @@ $(document).on("click",".catePrnt, .job_base , .payCondition, #dMap, .chk_do_chi
 			var dataTag = "";
 			var i = 1;
 			
-				var list = data.list;
-				console.log(">>>>>>>>>>>list :" + list); 
+			var list = data.list;
+			console.log(">>>>>>>>>>>list :" + list); 
+			
+			var pvo = data.pvo;
+			console.log(">>>>>>>>>>>pvo  :" + pvo); 
+			
+			$.each(list, function(index, obj){
+				console.log("this['hire_idx'] : " + this["hire_idx"]);
+				dataTag += "<tr>";
+				dataTag += "<td>" + i+1 + "</td>";
+				dataTag += "<td>" + this["company_name"] + "</td>";
+				dataTag += "<td>" + this["do_en"] + "</td>";
+				dataTag += "<td><a href='javascript:getDetail(" + this["hire_idx"] + ' ,' + pvo.nowPage +")'>" + this["title"] + "</a></td>";
+				dataTag += "<td>" + this["salary_max"] + "</td>";
+				dataTag += "<td>" + this["regdate"] + "</td>";
+				dataTag += "</tr>";
+				i++;
+			});	
+			
+			$("#list_box").html(dataTag);
+			
+			var tfoot = "";
+			tfoot += '<tr><td><ol class="paging">'
 				
-				var pvo = data.pvo;
-				console.log(">>>>>>>>>>>pvo  :" + pvo); 
-				
-				$.each(list, function(index, obj){
-					console.log("this['hire_idx'] : " + this["hire_idx"]);
-					dataTag += "<tr>";
-					dataTag += "<td>" + i+1 + "</td>";
-					dataTag += "<td>" + this["company_name"] + "</td>";
-					dataTag += "<td>" + this["do_en"] + "</td>";
-					dataTag += "<td><a href='javascript:getDetail(" + this["hire_idx"] + ' ,' + pvo.nowPage +")'>" + this["title"] + "</a></td>";
-					dataTag += "<td>" + this["salary_max"] + "</td>";
-					dataTag += "<td>" + this["regdate"] + "</td>";
-					dataTag += "</tr>";
-					i++;
-				});	
-				
-				$("#list_box").html(dataTag);
-				
-				var tfoot = "";
-				tfoot += '<tr><td><ol class="paging">'
-					
-				if(pvo.beginPage < pvo.pagePerBlock){
-					tfoot += '<li class="disable">이전으로</li>';
-				} else{
-					tfoot += '<li><a href="javascript:getListCPage(' + pvo.beginPage - pvo.pagePerBlock + '}")>이전으로</a></li>';
+			if(pvo.beginPage < pvo.pagePerBlock){
+				tfoot += '<li class="disable">이전으로</li>';
+			} else{
+				tfoot += '<li><a href="javascript:getListCPage(' + pvo.beginPage - pvo.pagePerBlock + '}")>이전으로</a></li>';
+			}
+			for(var k=pvo.beginPage; k<=pvo.endPage; k++) {
+				if(k == pvo.nowPage) {
+					tfoot += '<li class="now">'+ k +'</li>';
 				}
-				for(var k=pvo.beginPage; k<=pvo.endPage; k++) {
-					if(k == pvo.nowPage) {
-						tfoot += '<li class="now">'+ k +'</li>';
-					}
-					else if (k != pvo.nowPage) {
-						tfoot += '<li><a href="javascript:getListCPage('+ k +')">'+ k +'</a></li>';
-					}
+				else if (k != pvo.nowPage) {
+					tfoot += '<li><a href="javascript:getListCPage('+ k +')">'+ k +'</a></li>';
 				}
-				if(pvo.endPage >= pvo.totalPage) {
-					tfoot+= '<li class="disable">다음으로</li>';
-				} else {
-					tfoot += '<li><a href="javascript:getListCPage(${pvo.beginPage + pvo.pagePerBlock})">다음으로</a></li>';
-				}
-				
-				tfoot += '</ol></td></tr>'
-					$("#tfoot").html(tfoot);
+			}
+			if(pvo.endPage >= pvo.totalPage) {
+				tfoot+= '<li class="disable">다음으로</li>';
+			} else {
+				tfoot += '<li><a href="javascript:getListCPage(${pvo.beginPage + pvo.pagePerBlock})">다음으로</a></li>';
+			}
+			
+			tfoot += '</ol></td></tr>'
+				$("#tfoot").html(tfoot);
 		}, 
 		error : function() {
 			console.log("실패");

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.koreigner.biz.common.page.PagingVO;
+
 //@Service : @Component 상속바아 만든
 //비즈니스 로직 처리 서비스 영역에 사용
 @Service("houseService")
@@ -35,12 +37,6 @@ public class House_ServiceImpl implements House_Service {
 	}
 
 
-
-	@Override
-	public List<HouseAll_VO> getAllList() {
-		// TODO Auto-generated method stub
-		return testDAO.myBatis_getAllList();
-	}
 
 
 
@@ -115,4 +111,67 @@ public class House_ServiceImpl implements House_Service {
 		return 1;
 	}
 
+
+
+
+
+	@Override
+	public int getHouseTotal(HouseSearch_VO vo) {
+		// TODO Auto-generated method stub
+		return testDAO.myBatis_getHouseTotal(vo);
+		
+	}
+
+
+
+
+
+	@Override
+	public String getHouseListJson(List<HouseAll_VO> list, PagingVO p) {
+		System.out.println(p);
+		for(HouseAll_VO v: list) {
+		System.out.println(v);
+		}
+		
+		String result = "{";
+		if(!list.isEmpty()) {
+			result +=          "\"list\" : [";
+			for(HouseAll_VO vo : list) {
+				result += "{";
+				result += "\"room_idx\":\"" + vo.getRoom_idx() + "\","; 
+				result += "\"subject\":\"" + vo.getSubject() + "\","; 
+				result += "\"gu_gun_eup_eng\":\"" + vo.getGu_gun_eup_eng() + "\","; 
+				result += "\"do_en\":\"" + vo.getDo_en() + "\","; 
+				result += "\"deposit\":\"" + vo.getDeposit() + "\","; 
+				result += "\"monthly_rent\":\"" + vo.getMonthly_rent() + "\","; 
+				result += "\"address\":\"" + vo.getAddress() + "\","; 
+				result += "\"room_reporting_date\":\"" + vo.getRoom_reporting_date() + "\""; 
+				result += "},";
+				
+			}
+			
+			// {},{},{},{},{}, 형태로 저장 되므로 맨마지막 ,는 제거
+			result = result.substring(0,result.length()-1);
+			result +="],";
+		}
+		result += " \"pvo\" : {";
+		result += "\"nowPage\" :"+ p.getNowPage() +","; 
+		result += "\"nowBlock\":" + p.getNowBlock() + ","; 
+		result += "\"pagePerBlock\":" + p.getPagePerBlock() + ","; 
+		result += "\"totalRecord\":" + p.getTotalRecord() + ","; 
+		result += "\"totalPage\":" + p.getTotalPage() + ","; 
+		result += "\"totalBlock\":" + p.getTotalBlock() + ","; 
+		result += "\"begin\":" + p.getBegin() + ","; 
+		result += "\"end\":" + p.getEnd() + ","; 
+		result += "\"beginPage\":" + p.getBeginPage() + ","; 
+		result += "\"endPage\":" + p.getEndPage() +"}"; 
+		result +="}";
+		System.out.println(result);
+		return result;
+	}
+
+	
+	
+	
+	
 }

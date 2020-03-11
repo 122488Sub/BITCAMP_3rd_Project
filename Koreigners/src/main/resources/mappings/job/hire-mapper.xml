@@ -50,9 +50,8 @@
 						         </foreach>
 						         )
 					         </if>
-					         </if>
+					    </if>
        		)
-		
 	  WHERE R_NUM BETWEEN #{begin} AND #{end}
 	  
 </select>
@@ -69,7 +68,7 @@
 		         </foreach>
 		         )
 	         </if>
-	         </if>
+	    </if>
 </select>
 
 <select id="hireDetailOne" parameterType="int" resultType="hireVO">
