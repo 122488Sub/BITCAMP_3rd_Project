@@ -77,7 +77,7 @@ public class CompanyController {
 	@ResponseBody
 	public List<CompanyVO> resume_put(@RequestParam("cate_prnt_en") String cate_prnt_en) {
 		List<CompanyVO> list = companyServiceImpl.getCateEnChild(cate_prnt_en);
-		
+		System.out.println("controller list: " + list);
 		return list;
 	}
 	
