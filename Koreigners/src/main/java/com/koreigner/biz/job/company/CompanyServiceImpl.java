@@ -74,12 +74,6 @@ public class CompanyServiceImpl implements CompanyService{
 		vo.setCate_prnt_en(enCate_vo.getCate_prnt_en());         	  //영어 카테고리 대분류 vo에 추가
 		vo.setCate_child_en(enCate_vo.getCate_child_en());       	  //영어 카테고리 소분류 vo에 추가
 		
-		
-		System.out.println("vo.toStringAddress() : " + vo.toStringAddress());
-		System.out.println("vo.toStringCate() : " + vo.toStringCate());
-		System.out.println("vo.toString() : " + vo.toString());
-		
-		
 		companyDAO.comJoin(vo);
 	}
 	

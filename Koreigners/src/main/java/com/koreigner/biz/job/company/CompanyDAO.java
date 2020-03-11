@@ -21,7 +21,6 @@ public class CompanyDAO {
 	
 	List<CompanyVO> getCateChild(String cate_kor){
 		List<CompanyVO> list = mybatis.selectList("getCateChild", cate_kor);
-		System.out.println("list : " + list);
 		return list;
 	}
 	
@@ -37,15 +36,12 @@ public class CompanyDAO {
 	
 	CompanyVO getCateEn(Map<String, String> map) {
 		CompanyVO outVO = mybatis.selectOne("getCateEn", map);
-		System.out.println(outVO.toStringCate());
 		return outVO;
 	}
 	
 	void comJoin(CompanyVO vo) {
-		System.out.println("dao : " + vo.toString());
 		mybatis.insert("comJoin", vo);
 	}
-
 	
 	String getComName(String mem_id) {
 		String companyName = mybatis.selectOne("getComName", mem_id);
@@ -58,15 +54,12 @@ public class CompanyDAO {
 	}
 	
 	List<CompanyVO> getChildCate(String cate_prnt_en) {
-		System.out.println("cate_prnt_en : dao" + cate_prnt_en);
 		List<CompanyVO> companyVO = mybatis.selectList("getChildCate", cate_prnt_en);
 		return companyVO;
 	}
 
 	public List<CompanyVO> getCateEnChild(String cate_en) {
-		System.out.println("cate_en : " + cate_en);
 		List<CompanyVO> list = mybatis.selectList("getCateEnChild", cate_en);
-		System.out.println("list : " + list);
 		return list;
 	}
 }

@@ -14,12 +14,12 @@
 <link rel="stylesheet" type="text/css" href="resources/css/republic_korea.css">
 <link rel="stylesheet" type="text/css" href="resources/css/job/hireList.css">
 <script type="text/javascript" src="resources/js/hire/hireList.js"></script>
-<script type="text/javascript" src="resources/js/hire/map_hire.js"></script>
+<!-- <script type="text/javascript" src="resources/js/hire/map_hire.js"></script> -->
 
 </head>
 
 <body onload="loadPage()">
-<jsp:include page="../../common/republic_korea.jsp"/>
+<jsp:include page="../job_map.jsp"/>
 
 <div id="listDisp">
 
@@ -42,11 +42,6 @@
 			<p>Category</p>
 			</li>
 			<li class="btnBox">
-				<div class="catePrnt" id="all">
-				<div class="pDiv">
-				<p>ALL</p>
-				</div>
-				</div>
 				<div class="catePrnt" id="Office Job">
 				<div class="pDiv">
 				<p>Office Job</p>

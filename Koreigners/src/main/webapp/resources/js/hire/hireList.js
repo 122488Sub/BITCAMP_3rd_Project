@@ -1,75 +1,17 @@
+let prntCate = "";             // 선택된 직무 카테고리
+let jobCategory =  new Array;  // 선택된 직무 하위 카테고리
+let payCondition = [];  	   // 선택된 급여종류
+let cate="";                   // 클릭 한 카테고리 id
+let pay_click="";              // 클릭 한 급여중류 id
+let isValue="";                // 선택된 카테고리의 배열안 인덱스 번호
+let now_click = "";
+
 //페이지 로딩 시 실행
 function loadPage(){
-$.ajax({
-		url : 'hireJsonFilter.do',
-		type : 'post',
-		dataType : "json",
-		
-		success : function(data) {
-			
-			console.log("data : " +data);
-			var strData = JSON.stringify(data);
-			console.log("strData : " + strData);
-			var jsData = JSON.parse(strData); //자바 스크립트 데이터로 형 변환
-			console.log("jsData : " + jsData);
-			console.log(jsData);
-			
-			
-			var dataTag = "";
-			var i = 1;
-			
-			var list = data.list;
-			console.log(">>>>>>>>>>>list :" + list); 
-			
-			var pvo = data.pvo;
-			console.log(">>>>>>>>>>>pvo  :" + pvo); 
-			
-			$.each(list, function(index, obj){
-				console.log("this['hire_idx'] : " + this["hire_idx"]);
-				dataTag += "<tr>";
-				dataTag += "<td>" + i+1 + "</td>";
-				dataTag += "<td>" + this["company_name"] + "</td>";
-				dataTag += "<td>" + this["do_en"] + "</td>";
-				dataTag += "<td><a href='javascript:getDetail(" + this["hire_idx"] + ' ,' + pvo.nowPage +")'>" + this["title"] + "</a></td>";
-				dataTag += "<td>" + this["salary_max"] + "</td>";
-				dataTag += "<td>" + this["regdate"] + "</td>";
-				dataTag += "</tr>";
-				i++;
-			});	
-			
-			$("#list_box").html(dataTag);
-			
-			var tfoot = "";
-			tfoot += '<tr><td><ol class="paging">'
-				
-			if(pvo.beginPage < pvo.pagePerBlock){
-				tfoot += '<li class="disable">이전으로</li>';
-			} else{
-				tfoot += '<li><a href="javascript:getListCPage(' + pvo.beginPage - pvo.pagePerBlock + '}")>이전으로</a></li>';
-			}
-			for(var k=pvo.beginPage; k<=pvo.endPage; k++) {
-				if(k == pvo.nowPage) {
-					tfoot += '<li class="now">'+ k +'</li>';
-				}
-				else if (k != pvo.nowPage) {
-					tfoot += '<li><a href="javascript:getListCPage('+ k +')">'+ k +'</a></li>';
-				}
-			}
-			if(pvo.endPage >= pvo.totalPage) {
-				tfoot+= '<li class="disable">다음으로</li>';
-			} else {
-				tfoot += '<li><a href="javascript:getListCPage(${pvo.beginPage + pvo.pagePerBlock})">다음으로</a></li>';
-			}
-			
-			tfoot += '</ol></td></tr>'
-				$("#tfoot").html(tfoot);
-		}, 
-		error : function() {
-			console.log("실패");
-		}
-	});
+	getJson();
 }
 
+//페이징
 function getListCPage(cPage){
 	$.ajax({
 		url : 'hireJsonFilter.do?cPage=' + cPage,
@@ -173,30 +115,14 @@ $(document).ready(function(){
 		console.log("now_click : " + now_click);
 		console.log("cate : " + cate);
 		console.log("jobCategory : " + jobCategory);
+		getJson();
 	});
 	
 	//$(document).on("click",".catePrnt, .job_base , .payCondition, #dMap, .chk_do_child, .doHref",function(){
 	
-	
-	
-	
-	
-	
-	
 });
 
 
-
-
-
-
-let prntCate = "";             // 선택된 직무 카테고리
-let jobCategory = [];   	   // 선택된 직무 하위 카테고리
-let payCondition = [];  	   // 선택된 급여종류
-let cate="";                   // 클릭 한 카테고리 id
-let pay_click="";              // 클릭 한 급여중류 id
-let isValue="";                // 선택된 카테고리의 배열안 인덱스 번호
-let now_click = "";
 
 $(function(){
 	
@@ -220,44 +146,22 @@ $(function(){
 			now_click = cate;
 			$(this).toggleClass("catePrnt_clicked");
 		}
-		jobCategory = new Array
+		jobCategory = new Array;
 		prnt_cate(cate);
 		
 		console.log("payCondition : " + payCondition);
 		console.log("now_click : " + now_click);
 		console.log("cate : " + cate);
-		console.log("jobCategory : " + jobCategory);		
+		console.log("jobCategory ㅎㅇㅎ: " + jobCategory);		
+		getJson();
 	});
 	
-	$(".job_base").click(function(){
-		//alert("클릭");
-		$(this).toggleClass("job_clicked");
-		
-		//div 공백제거 텍스트
-		//cate = $(this).text().trim();
-		cate = $(this).attr('id');
-		
-		
-		//선택된 카테고리의 배열안 인덱스 번호
-		//없을 시 -1
-		isValue = jobCategory.indexOf(cate);
-		
-		//선택된 카테고리가 0보다 작으면 리스트에 추가
-		if(isValue < 0) {
-			jobCategory.push(cate);	
-		//아니면 해당 카테고리 검색 후 삭제
-		} else{
-			jobCategory.splice(isValue,1);
-		}
-	 });
-	
-	
+	//급여 종류에 따른 필터
 	$(".payCondition").click(function(){
 		//alert("클릭");
 		$(this).toggleClass("pay_clicked");
 		
 		cate = $(this).attr('id');
-		
 		
 		//선택된 카테고리의 배열안 인덱스 번호
 		//없을 시 -1
@@ -271,15 +175,14 @@ $(function(){
 			payCondition.splice(isValue,1);
 		}
 		console.log("payCondition : " + payCondition);
+		getJson();
 	});
 	
 	
 });
-//$(document).on("click",".catePrnt, .job_base , .payCondition, #dMap, .chk_do_child, .doHref",function(){
-//$(".catePrnt, .job_base , .payCondition, #dMap, .chk_do_child, .OUTLINE").click(function(){
-$(document).on("click",".catePrnt, .job_base , .payCondition, #dMap, .chk_do_child, .doHref",function(){
-	
-	console.log("allDoList 클릭 : " + allDoList);
+
+//json 데이터 가져오기
+function getJson(){
 	
 	jQuery.ajaxSettings.traditional = true;
 	$.ajax({
@@ -290,7 +193,7 @@ $(document).on("click",".catePrnt, .job_base , .payCondition, #dMap, .chk_do_chi
 			"cate_prnt_en" : now_click,
 			"cate_child_en" : jobCategory,
 			"payCondition" : payCondition,
-			"do_en" : allDoList,
+			"do_en" : do_List,
 			"gu_gun_eup_en" : si_List
 		},
 		//async: false,
@@ -301,61 +204,68 @@ $(document).on("click",".catePrnt, .job_base , .payCondition, #dMap, .chk_do_chi
 			
 			var list = data.list;
 			console.log(">>>>>>>>>>>list :" + list); 
+			console.log("list.size() : " + list.length);
 			
-			var pvo = data.pvo;
-			console.log(">>>>>>>>>>>pvo  :" + pvo); 
-			
-			$.each(list, function(index, obj){
-				console.log("this['hire_idx'] : " + this["hire_idx"]);
+			if(list.length == 0) {
 				dataTag += "<tr>";
-				dataTag += "<td>" + i+1 + "</td>";
-				dataTag += "<td>" + this["company_name"] + "</td>";
-				dataTag += "<td>" + this["do_en"] + "</td>";
-				dataTag += "<td><a href='javascript:getDetail(" + this["hire_idx"] + ' ,' + pvo.nowPage +")'>" + this["title"] + "</a></td>";
-				dataTag += "<td>" + this["salary_max"] + "</td>";
-				dataTag += "<td>" + this["regdate"] + "</td>";
-				dataTag += "</tr>";
-				i++;
-			});	
-			
-			$("#list_box").html(dataTag);
-			
-			var tfoot = "";
-			tfoot += '<tr><td><ol class="paging">'
+				dataTag += "<th colspan='6'>데이터가 없습니다.</th>";
+				dataTag += "</tr>"
 				
-			if(pvo.beginPage < pvo.pagePerBlock){
-				tfoot += '<li class="disable">이전으로</li>';
-			} else{
-				tfoot += '<li><a href="javascript:getListCPage(' + pvo.beginPage - pvo.pagePerBlock + '}")>이전으로</a></li>';
-			}
-			for(var k=pvo.beginPage; k<=pvo.endPage; k++) {
-				if(k == pvo.nowPage) {
-					tfoot += '<li class="now">'+ k +'</li>';
+				$("#list_box").html(dataTag);
+			}else {
+				var pvo = data.pvo;
+				console.log(">>>>>>>>>>>pvo  :" + pvo); 
+				
+				$.each(list, function(index, obj){
+					console.log("this['hire_idx'] : " + this["hire_idx"]);
+					dataTag += "<tr>";
+					dataTag += "<td>" + i+1 + "</td>";
+					dataTag += "<td>" + this["company_name"] + "</td>";
+					dataTag += "<td>" + this["do_en"] + "</td>";
+					dataTag += "<td><a href='javascript:getDetail(" + this["hire_idx"] + ' ,' + pvo.nowPage +")'>" + this["title"] + "</a></td>";
+					dataTag += "<td>" + this["salary_max"] + "</td>";
+					dataTag += "<td>" + this["regdate"] + "</td>";
+					dataTag += "</tr>";
+					i++;
+				});	
+				
+				$("#list_box").html(dataTag);
+				
+				var tfoot = "";
+				tfoot += '<tr><td><ol class="paging">'
+					
+					if(pvo.beginPage < pvo.pagePerBlock){
+						tfoot += '<li class="disable">이전으로</li>';
+					} else{
+						tfoot += '<li><a href="javascript:getListCPage(' + pvo.beginPage - pvo.pagePerBlock + '}")>이전으로</a></li>';
+					}
+				for(var k=pvo.beginPage; k<=pvo.endPage; k++) {
+					if(k == pvo.nowPage) {
+						tfoot += '<li class="now">'+ k +'</li>';
+					}
+					else if (k != pvo.nowPage) {
+						tfoot += '<li><a href="javascript:getListCPage('+ k +')">'+ k +'</a></li>';
+					}
 				}
-				else if (k != pvo.nowPage) {
-					tfoot += '<li><a href="javascript:getListCPage('+ k +')">'+ k +'</a></li>';
+				if(pvo.endPage >= pvo.totalPage) {
+					tfoot+= '<li class="disable">다음으로</li>';
+				} else {
+					tfoot += '<li><a href="javascript:getListCPage(${pvo.beginPage + pvo.pagePerBlock})">다음으로</a></li>';
 				}
+				
+				tfoot += '</ol></td></tr>'
+					$("#tfoot").html(tfoot);
 			}
-			if(pvo.endPage >= pvo.totalPage) {
-				tfoot+= '<li class="disable">다음으로</li>';
-			} else {
-				tfoot += '<li><a href="javascript:getListCPage(${pvo.beginPage + pvo.pagePerBlock})">다음으로</a></li>';
-			}
-			
-			tfoot += '</ol></td></tr>'
-				$("#tfoot").html(tfoot);
 		}, 
 		error : function() {
 			console.log("실패");
 		}
 	});
-	
-});
-
-
+}
 
 
 var val = "";
+//카테고리 필터
 function prnt_cate(cate) {
 	
 		$.ajax({

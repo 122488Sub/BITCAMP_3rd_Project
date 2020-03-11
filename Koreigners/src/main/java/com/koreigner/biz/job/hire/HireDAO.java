@@ -18,19 +18,31 @@ public class HireDAO {
 		mybatis.insert("insertHire", vo);
 	}
 	
+	//채용 게시판 리스트 객체 검색
 	public List<HireVO> getHireList(JobVO jobVO){
-		System.out.println();
-		if(jobVO.getDo_en() != null) {System.out.println("do size : " + jobVO.getDo_en().size());}
-		
-		System.out.println("jobVO DAO : " + jobVO);
 		
 		List<HireVO> hireList = mybatis.selectList("getHireList", jobVO);
-		System.out.println("hireList DAO : " + hireList);
 		return hireList;
 	}
-	
+	//채용 게시판 리스트 검색 갯수
 	public int hireListTotal(JobVO jobVO) {
-		if(jobVO.getDo_en() != null) {System.out.println("do size : " + jobVO.getDo_en().size());}
+		
+		if(jobVO.getDo_en().size() > 1 || jobVO.getGu_gun_eup_en().size() > 1){
+			jobVO.setAddrFilter(true);
+		}else {jobVO.setAddrFilter(false);}
+		
+		System.out.println();
+		System.out.println("do_en : " + jobVO.getDo_en());
+		System.out.println("getGu_gun_eup_en : " + jobVO.getGu_gun_eup_en());
+		System.out.println("getCate_prnt_en" + jobVO.getCate_prnt_en());
+		System.out.println("getCate_child_en : " + jobVO.getCate_child_en());
+		System.out.println("getPayCondition : " + jobVO.getPayCondition());
+		System.out.println("isAddrFilter : " + jobVO.isAddrFilter());
+		System.out.println("isCateFilter : " + jobVO.isCateFilter());
+		System.out.println("isCateChildFilter : " + jobVO.isCateChildFilter());
+		System.out.println("isPayFilter : " + jobVO.isPayFilter());
+		System.out.println();
+		
 		int total = mybatis.selectOne("hireListTotal", jobVO);
 		return total;
 	}

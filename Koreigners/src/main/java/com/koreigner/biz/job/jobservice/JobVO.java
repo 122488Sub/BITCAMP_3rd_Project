@@ -16,8 +16,54 @@ public class JobVO {
 	int end;
 	
 	
+	//필터 확인값
+	boolean addrFilter = false;
+	boolean cateFilter = false;
+	boolean cateChildFilter = false;
+	boolean payFilter = false;
 	
 	public JobVO() {}
+	
+	public PagingVO getPagingVO() {
+		return pagingVO;
+	}
+
+	public boolean isCateChildFilter() {
+		return cateChildFilter;
+	}
+
+	public void setCateChildFilter(boolean cateChildFilter) {
+		this.cateChildFilter = cateChildFilter;
+	}
+
+	public void setPagingVO(PagingVO pagingVO) {
+		this.pagingVO = pagingVO;
+	}
+
+	public boolean isAddrFilter() {
+		return addrFilter;
+	}
+
+	public void setAddrFilter(boolean addrFilter) {
+		
+		this.addrFilter = addrFilter;
+	}
+
+	public boolean isCateFilter() {
+		return cateFilter;
+	}
+
+	public void setCateFilter(boolean cateFilter) {
+		this.cateFilter = cateFilter;
+	}
+
+	public boolean isPayFilter() {
+		return payFilter;
+	}
+
+	public void setPayFilter(boolean payFilter) {
+		this.payFilter = payFilter;
+	}
 
 	public int getBegin() {
 		return begin;
@@ -41,6 +87,10 @@ public class JobVO {
 
 	public void setDo_en(List<String> do_en) {
 		this.do_en = do_en;
+		if(do_en.size() > 1){
+			addrFilter=true;
+		}else addrFilter=false;
+		
 	}
 
 	public List<String> getGu_gun_eup_en() {
@@ -48,6 +98,9 @@ public class JobVO {
 	}
 
 	public void setGu_gun_eup_en(List<String> gu_gun_eup_en) {
+		if(gu_gun_eup_en.size() > 1){
+			addrFilter=true;
+		}else addrFilter=false;
 		this.gu_gun_eup_en = gu_gun_eup_en;
 	}
 
@@ -56,6 +109,10 @@ public class JobVO {
 	}
 
 	public void setCate_prnt_en(String cate_prnt_en) {
+		if(!cate_prnt_en.equals("")){
+			cateFilter=true;
+		}else cateFilter=false;
+		
 		this.cate_prnt_en = cate_prnt_en;
 	}
 
@@ -64,6 +121,9 @@ public class JobVO {
 	}
 
 	public void setCate_child_en(List<String> cate_child_en) {
+		if(cate_child_en.size() > 0){
+			cateChildFilter=true;
+		}else cateChildFilter=false;
 		this.cate_child_en = cate_child_en;
 	}
 
@@ -72,6 +132,9 @@ public class JobVO {
 	}
 
 	public void setPayCondition(List<String> payCondition) {
+		if(payCondition.size() > 0){
+			payFilter=true;
+		}else payFilter=false;
 		this.payCondition = payCondition;
 	}
 

@@ -13,44 +13,45 @@
 		                FROM T_JOB_HIRE
 		               ORDER BY HIRE_IDX DESC) HIRE
 		               WHERE 1=1
-		              	<!-- <if test="do_en != null">
-		               		<if test="do_en.size != 0">
-					          AND ( HIRE.DO_EN IN
-					         <foreach collection="do_en" item="do" index="index" open=" (" separator="," close=")">
-					          #{do}
-					         </foreach>
-					         
-					         )
-					         </if>
-		               	</if>
-		               	
-		               	
-	               		<if test="do_en == null and gu_gun_eup_en != null">
-		               		<if test="gu_gun_eup_en.size != 0">
-		               		 AND ( HIRE.GU_GUN_EUP_ENG IN
-					         <foreach collection="gu_gun_eup_en" item="si" index="index" open=" (" separator="," close="))">
-					          #{si}
-					         </foreach>
-		               		</if>
-	               		</if>
-		               		
-	               		<if test="do_en != null and do_en.size != 0 and gu_gun_eup_en != null">
-			               	<if test="gu_gun_eup_en.size != 0">
-			               	 OR ( HIRE.GU_GUN_EUP_ENG IN
-						         <foreach collection="gu_gun_eup_en" item="si" index="index" open=" (" separator="," close="))">
-						          #{si}
-						         </foreach>
-			               	</if>
-		               	</if> -->
-		              	<if test="do_en != null">
-		               		<if test="do_en.size != 0">
-						          AND ( HIRE.DO_EN IN
-						         <foreach collection="do_en" item="do" index="index" open=" (" separator="," close=")">
-						          #{do}
-						         </foreach>
-						         )
-					         </if>
-					    </if>
+		              	
+					    
+						<if test="addrFilter">  
+							 AND ( 
+						    	HIRE.DO_EN IN
+					
+							    <foreach collection="do_en" item="do" index="index" open="(" separator="," close=")"> 
+					          		  #{do} 
+					       		</foreach> 
+					       		
+					       		OR	
+					       		
+					       		HIRE.GU_GUN_EUP_ENG IN
+								<foreach collection="gu_gun_eup_en" item="si" index="index" open="(" separator="," close=")"> 
+					          		#{si} 
+					       		</foreach> 
+					       	)
+				       	</if>
+				       	<if test="cateFilter">
+			      			 AND (
+				       			  HIRE.CATE_PRNT_EN IN #{cate_prnt_en}
+			       	 		  )
+	  					 </if>
+				       	<if test="cateChildFilter">
+			      			 AND (
+				       			 HIRE.CATE_CHILD_EN IN 
+				       			 <foreach collection="cate_child_en" item="cateChild" index="index" open="(" separator="," close=")"> 
+					          		  #{cateChild} 
+					       		</foreach> 
+			       	 		  )
+	  					 </if>
+	  					 <if test="payFilter">
+			      			 AND (
+				       			 HIRE.PAYMENT_CODITION IN 
+				       			 <foreach collection="payCondition" item="pay" index="index" open="(" separator="," close=")"> 
+					          		  #{pay} 
+					       		</foreach> 
+			       	 		  )
+	  					 </if>
        		)
 	  WHERE R_NUM BETWEEN #{begin} AND #{end}
 	  
@@ -60,15 +61,42 @@
 		SELECT COUNT(*) 
 		  FROM T_JOB_HIRE
 		WHERE 1=1
-		<if test="do_en != null">
-	         <if test="do_en.size != 0">
-		          AND (DO_EN IN
-		         <foreach collection="do_en" item="do" index="index" open=" (" separator="," close=")">
-		          #{do}
-		         </foreach>
-		         )
-	         </if>
-	    </if>
+		<if test="addrFilter">  
+			 AND ( 
+		    	DO_EN IN
+			    <foreach collection="do_en" item="do" index="index" open="(" separator="," close=")"> 
+	          		  #{do} 
+	       		</foreach> 
+	       		
+	       		OR	
+	       		
+	       		GU_GUN_EUP_ENG IN
+				<foreach collection="gu_gun_eup_en" item="si" index="index" open="(" separator="," close=")"> 
+	          		#{si} 
+	       		</foreach> 
+	       	)
+       	</if>
+       	<if test="cateFilter">
+     			 AND (
+       				 CATE_PRNT_EN IN #{cate_prnt_en}
+      	 		  )
+		</if>
+       	<if test="cateChildFilter">
+     			 AND (
+       			 CATE_CHILD_EN IN 
+       			 <foreach collection="cate_child_en" item="cateChild" index="index" open="(" separator="," close=")"> 
+	          		  #{cateChild} 
+	       		</foreach> 
+      	 		  )
+				 </if>
+		 <if test="payFilter">
+     			 AND (
+       			 PAYMENT_CODITION IN 
+       			 <foreach collection="payCondition" item="pay" index="index" open="(" separator="," close=")"> 
+	          		  #{pay} 
+	       		</foreach> 
+      	 		  )
+		 </if>
 </select>
 
 <select id="hireDetailOne" parameterType="int" resultType="hireVO">

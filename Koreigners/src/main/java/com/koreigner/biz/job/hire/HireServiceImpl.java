@@ -40,7 +40,6 @@ public class HireServiceImpl implements HireService {
 		vo.setMem_id("rex");
 		CompanyVO enCate_vo = companyServiceImpl.getCateEn(map); //영어 카테고리 vo 생성
 		String companyName = companyServiceImpl.getComName(vo.getMem_id());
-		System.out.println("company name : " + companyName);
 		vo.setCompany_name(companyName);
 		vo.setInsurance(insurance);                              //보험정보 vo에 추가
 		vo.setIp(ip);											 //ip vo에 추가
