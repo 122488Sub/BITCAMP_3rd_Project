@@ -49,7 +49,7 @@
 	  box-shadow: none;
 	  background: transparent;
 	  background-image: none;
-	  -webkit-appearance: none;
+	  /*-webkit-appearance: none;*/
 	  outline: none;
 	  cursor: pointer;
 	
@@ -68,7 +68,7 @@
 	 /* color: #00498c;*/
 	}
 select::-ms-expand {
-  display: none;
+ /* display: none;*/
 }
 optgroup {
   color: inherit;

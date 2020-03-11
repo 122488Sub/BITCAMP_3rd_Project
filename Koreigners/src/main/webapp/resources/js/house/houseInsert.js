@@ -104,7 +104,11 @@ $(function() {
     $(".ui-datepicker-trigger, #datepicker").on('click', function() { 
 		$("#radio_available_date_After").prop('checked', true);
 	}); 
-
+    
+    $("#radio_available_date_After").on('click', function() { 
+    	$( "#datepicker" ).datepicker("show");
+	}); 
+    
 	$("input[name=chk_management_expense]").on('click', function() { 
 		if ( $(this).prop('checked') ) { 
 			
