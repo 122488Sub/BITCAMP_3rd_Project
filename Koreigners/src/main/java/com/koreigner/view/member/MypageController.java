@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreigner.biz.job.company.CompanyServiceImpl;
 import com.koreigner.biz.job.company.CompanyVO;
+import com.koreigner.biz.member.CareerVO;
+import com.koreigner.biz.member.ResumeVO;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
 
@@ -100,7 +102,6 @@ public class MypageController {
 	public int pwCheck(@RequestBody Map<String, String> jsonMap) {
 				
 		String pw = jsonMap.get("mem_pw");
-		System.out.println("pw: " + pw);
 		
 		int userCnt = userService.userPwCheck(jsonMap);
 		
@@ -108,7 +109,7 @@ public class MypageController {
 	}
 	
 	
-	//페이지 전환 시 jobCateMap 맵 객체 전달 > 직무 카테고리
+	// 이력서 직무 카테고리
 	@ModelAttribute("mpCateMap")
 	public Map<String, String> searchJobCateMap() {
 		List<CompanyVO> list = companyServiceImpl.getCateList();
@@ -121,7 +122,15 @@ public class MypageController {
 			i++;
 		}
 		
-		
 		return jobCateMap;
+	}
+	
+	// 이력서 입력
+	@RequestMapping(value="insertResume.do", method=RequestMethod.POST)
+	public String insertResume(ResumeVO rvo, CareerVO cvo) {
+		
+		userService.insertResume(rvo);
+		userService.insertCareer(cvo);
+		return null;
 	}
 }

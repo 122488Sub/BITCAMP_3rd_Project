@@ -40,12 +40,6 @@ public interface UserService {
 	
 	//JWT 토큰 payload 정보 추출
 	Map<String, Object> getTokenPayload(String tokenStr);
-
-	//회원 정보 수정
-	void updateMember(UserVO vo);
-	
-	//비밀번호 체크
-	int userPwCheck(Map<String, String> map);
 	
 	//네이버 or 구글계정으로 로그인 할때 db에 데이터가 존재 하는지 확인 한다.
 	UserVO getMemberSns(UserVO snsMemVO);
@@ -57,8 +51,17 @@ public interface UserService {
 	//sns(소셜)회원가입 
 	void setSnsRegister(UserVO mvo) throws Exception;
 	
-
-
-
+	
+//==================== 마이페이지 =========================================	
+	
+	//회원 정보 수정
+	void updateMember(UserVO vo);
+		
+	//동일한 비밀번호인지 체크
+	int userPwCheck(Map<String, String> map);
+	
+	//이력서 입력
+	void insertResume(ResumeVO rvo);
+	void insertCareer(CareerVO cvo);
 	
 }

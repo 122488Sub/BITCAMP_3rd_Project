@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+/* 버튼 */
+.Button {font-weight:600;color:#333;line-height:1.2em;border:1px solid #BEBEBE;background-color:#EBEBEB;cursor:hand;}
+.Button.x-small {height:21px;padding:1px 10px;font-size:12px;font-weight:400;}
+.Button.small {height:25px;padding:3px 20px;font-size:13px;}
+.Button.large {height:35px;padding:5px 30px;font-size:16px;}
+.Button.white {color:#000;border:1px solid #999;background-color:#fff;}
+.Button.orange {color:#fff;border:1px solid #C03312;background-color:#EA6242;}
+.Button.black {color:#fff;border:1px solid #000;background-color:#333;}
+/* 테이블 기본 속성 */
+.data_t {clear:both;overflow:hidden;width:100%;margin-bottom:70px;border-left:1px solid #E3E3E3;border-top:2px solid #312F2F;
+border-collapse:separate;empty-cells:show;border-spacing:0;}
+.data_t caption {padding:0;margin-bottom:30px;font-size:20pt;font-weight:600;color:#000;line-height:1.3em;text-align:left;}
+.data_t caption span {float:right;right:0;font-size:11px;font-weight:400;color:#333;}
+.data_t caption a {float:right;right:0;padding:5px 20px 5px 5px;margin-top:10px;font-size:11px;font-weight:400;color:#333;line-height:1.0em;
+border:1px solid #ddd;background:url(/coding/images/more.png) no-repeat 90% 50%;}
+.data_t thead th {padding:12px 0;font-weight:600;color:#000;border-bottom:1px solid #989898;background-color:#FAFAFA;}
+.data_t thead th.none {border-top:none;} /*text-transform:uppercase;*/
+.data_t th,.data_t td {padding:4px 5px;text-align:center;line-height:2.2em;border-bottom:1px solid #c3c3c3;border-right:1px solid #c3c3c3;color:#333;text-align:center;}
+.data_t tbody th {font-weight:600;}
+.data_t tfoot th,.data_t tfoot td {background-color:#f6f6f6;}
+.data_t tbody td.txLeft {text-align:left; background-color:rgba(81, 68, 56, 0.05);}
+.data_t td,.data_t td a,.data_t td strong,.data_t td span {font-size:12px;font-family:dotum,gulim;}
+.data_t td {color:#666; background: rgba(81, 68, 56, 0.05);}
+.data_t td a {color:#000;}
+.data_t td a:hover {text-decoration:underline;color:#710F0F;}
+.data_t td input,.data_t td select,.data_t td select option {margin:0 3px;font-size:12px;font-family:dotum,gulim;color:#333;vertical-align:middle;}
+
+.data_t.recruit tr:hover {background-color:#F2ECE6;}
+
+.data_t.job {background-color:#FAFAFA;}
+.data_t.jog thead td {background-color:#F3F3F3;}
+.data_t.job tr:hover {background-color:#fff;}
+
+.data_t.recruit_re caption {padding-left:18px;margin-bottom:10px;font-size:15px;color:#710F0F;background:url(/coding/images/bl_square.png) 
+no-repeat 1px 50%;}
+.data_t.recruit_re tbody th {background-color:#FAFAFA;}
+
+/* 테이블 td 왼쪽 정렬 */
+.tdLeft tbody td,table th.text_left,table td.text_left,table td.fleft {text-align:left;}

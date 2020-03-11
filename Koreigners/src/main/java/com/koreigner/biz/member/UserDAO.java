@@ -67,16 +67,6 @@ public class UserDAO {
 		return mvo;
 	}
 
-	//회원정보 수정하기
-	public void updateMember(UserVO vo) {
-		mybatis.update("user.updateMember", vo);		
-	}
-
-	//비밀번호 체크
-	public int userPwCheck(Map<String, String> map) {
-		int userCnt = mybatis.selectOne("user.userPwCheck", map);
-		return userCnt;
-	}
 	
 	//네이버 or 구글계정으로 로그인 요청할 시 DB에 데이터가 존재하는지 확인한다.
 	public UserVO getMemberSns(UserVO snsMemVO) {
@@ -105,6 +95,28 @@ public class UserDAO {
 	public void setSnsRegister(UserVO mvo) {
 		System.out.println("===> [UserDAO] - setSnsRegister() 실행");
 		mybatis.insert("user.setSnsRegister", mvo);
+	}
+
+	
+//========================= 마이페이지 ===========================================
+	//회원정보 수정하기
+	public void updateMember(UserVO vo) {
+		mybatis.update("user.updateMember", vo);		
+	}
+
+	//비밀번호 체크
+	public int userPwCheck(Map<String, String> map) {
+		int userCnt = mybatis.selectOne("user.userPwCheck", map);
+		return userCnt;
+	}
+	
+	//이력서 입력
+	public void insertResume(ResumeVO rvo) {
+		mybatis.insert("user.insertResume", rvo);
+	}
+
+	public void insertCareer(CareerVO cvo) {
+		mybatis.insert("user.insertCareer", cvo);		
 	}
 		
 		
