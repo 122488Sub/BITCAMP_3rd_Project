@@ -76,8 +76,9 @@ function sample6_execDaumPostcode() {
 		
 		
 
-/*datepicker 캘린더*/
+
 $(function() {
+	/*datepicker 캘린더*/
     $( "#datepicker" ).datepicker({
     	showOn: "both", 
         buttonImage: "resources/img/house/calendar-button.png", 
@@ -119,8 +120,51 @@ $(function() {
 		} 
 	}); 
 
-    
-    
+    /*---------------------------------------------------*/
+	$("input[name=room_area]").on('keydown',function(){
+		if ($("input[name=room_area]").val()<=0 ) {
+			$("input[name=room_area]").val(1);
+		}
+	});
+	
+	
+	
+	$("#floorSemi-basement").on('click', function() { 
+		$("input[name=floor_layers]").val( -1);
+	}); 
+	$("#floorRoofTops").on('click', function() { 
+		$("input[name=floor_layers]").val( $("input[name=bulid_layers]").val());
+	}); 
+	$("input[name=bulid_layers]").on('change',function(){
+		if ($("#floorRoofTops").prop('checked') ) {
+			$("input[name=floor_layers]").val( $("input[name=bulid_layers]").val());
+		}
+	});
+	
+	$("input[name=floor_layers]").on('change',function(){
+		
+		if ($("#floorRoofTops").prop('checked') && $("input[name=floor_layers]").val()==0) {
+			$("input[name=floor_layers]").val(1)
+		}
+		else if($("#floorSemi-basement").prop('checked') && $("input[name=floor_layers]").val()==0) {
+			$("input[name=floor_layers]").val(-1)
+		}
+		
+		if ($("#floorRoofTops").prop('checked') ) {
+			 $("input[name=bulid_layers]").val($("input[name=floor_layers]").val());
+		}
+		
+	});
+	
+	
+	$("input[name=bulid_layers], input[name=floor_layers]").on('keydown ',function(){
+		return false;
+	});
+	
+	
+	
+	
+	
 });
 /**/
 

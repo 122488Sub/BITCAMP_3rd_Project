@@ -117,24 +117,24 @@
 			<td style="width:40%">
 				<div class="td_div">
 					<label style="width:70%">Square Meter: </label>
-					<input type="number" id="" name="room_area" style="width:30%; " step="1" min="1" value='0'>
+					<input type="number" id="" name="room_area" style="width:30%; " step="1" min="1" value='1'>
 				</div>
 			</td>
 			<th>Floor</th>
 			<td style="width:40%">
 				<div class="td_div">
 					<label style="width:20%">Buliding: </label>
-					<input type="number" id="" name="bulid_layers" style="width:30%; " step="1" min="1" value='0'>
+					<input type="number" id="" name="bulid_layers" style="width:30%; " step="1" min="1" value='1'>
 					<label style="width:20%; margin-left: 10px;">Floor: </label>
-					<input type="number" id="" name="floor_layers" style="width:30%; " step="1" min="-3" value='0'>
+					<input type="number" id="" name="floor_layers" style="width:30%; " step="1" min="-3" value='1'>
 				</div>
 				<div class="td_div">
 					
 				</div>
 				<div class="td_div">
-					<input type="radio"  value="0" name="floor_type" checked="checked"> Nomal
-					<input type="radio"  value="1" name="floor_type" style="margin-left: 15px"> RoofTops
-					<input type="radio"  value="2" name="floor_type" style="margin-left: 15px"> Semi-basement
+					<input type="radio" id="floorNomal"  value="0" name="floor_type" checked="checked"> Nomal
+					<input type="radio" id="floorRoofTops" value="1" name="floor_type" style="margin-left: 15px"> RoofTops
+					<input type="radio" id="floorSemi-basement" value="2" name="floor_type" style="margin-left: 15px"> Semi-basement
 				</div>
 			</td>
 		</tr>
