@@ -94,16 +94,16 @@ public class CompanyServiceImpl implements CompanyService{
 		CompanyVO companyVO = companyDAO.companyDetailOne(mem_id);
 		return companyVO;
 	}
-	
-	@Override
-	public List<CompanyVO> getChildCate(String cate_prnt_en) {
-		List<CompanyVO> companyVO = companyDAO.getChildCate(cate_prnt_en);
-		return companyVO;
-	}
 
 	@Override
 	public List<CompanyVO> getCateEnChild(String cate_en) {
 		List<CompanyVO> list = companyDAO.getCateEnChild(cate_en);
+		return list;
+	}
+
+	@Override
+	public List<CompanyVO> getChildCate(String cate_prnt_en) {
+		List<CompanyVO> list = companyDAO.getChildCate(cate_prnt_en);
 		
 		return list;
 	}

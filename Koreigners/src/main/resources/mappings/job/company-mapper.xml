@@ -28,7 +28,7 @@
 		  FROM T_JOB_CATE_CHILD C,
 		       T_JOB_CATE_MST M
 	     WHERE C.CATE_IDX = M.CATE_IDX
-		   AND CATE_PRNT = #{cate_prnt}
+		   AND CATE_PRNT = #{cate_en}
 	
 	</select>	
 	
