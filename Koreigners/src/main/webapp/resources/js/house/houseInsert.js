@@ -1,4 +1,4 @@
-
+var chkDateRadioVar=0;
 
 function sample6_execDaumPostcode() {
     new daum.Postcode({
@@ -76,8 +76,9 @@ function sample6_execDaumPostcode() {
 		
 		
 
-/*datepicker 캘린더*/
+
 $(function() {
+	/*datepicker 캘린더*/
     $( "#datepicker" ).datepicker({
     	showOn: "both", 
         buttonImage: "resources/img/house/calendar-button.png", 
@@ -104,7 +105,18 @@ $(function() {
     $(".ui-datepicker-trigger, #datepicker").on('click', function() { 
 		$("#radio_available_date_After").prop('checked', true);
 	}); 
-
+    
+    $("#radio_available_date_Imme").on('click', function() { 
+    	chkDateRadioVar=1;
+	}); 
+    
+    $("#radio_available_date_After").on('click', function() {
+    	if(chkDateRadioVar!=2){
+    		$( "#datepicker" ).focus();
+    		chkDateRadioVar=2;
+    	}
+	}); 
+    
 	$("input[name=chk_management_expense]").on('click', function() { 
 		if ( $(this).prop('checked') ) { 
 			
@@ -115,8 +127,51 @@ $(function() {
 		} 
 	}); 
 
-    
-    
+    /*---------------------------------------------------*/
+	$("input[name=room_area]").on('keydown',function(){
+		if ($("input[name=room_area]").val()<=0 ) {
+			$("input[name=room_area]").val(1);
+		}
+	});
+	
+	
+	
+	$("#floorSemi-basement").on('click', function() { 
+		$("input[name=floor_layers]").val( -1);
+	}); 
+	$("#floorRoofTops").on('click', function() { 
+		$("input[name=floor_layers]").val( $("input[name=bulid_layers]").val());
+	}); 
+	$("input[name=bulid_layers]").on('change',function(){
+		if ($("#floorRoofTops").prop('checked') ) {
+			$("input[name=floor_layers]").val( $("input[name=bulid_layers]").val());
+		}
+	});
+	
+	$("input[name=floor_layers]").on('change',function(){
+		
+		if ($("#floorRoofTops").prop('checked') && $("input[name=floor_layers]").val()==0) {
+			$("input[name=floor_layers]").val(1)
+		}
+		else if($("#floorSemi-basement").prop('checked') && $("input[name=floor_layers]").val()==0) {
+			$("input[name=floor_layers]").val(-1)
+		}
+		
+		if ($("#floorRoofTops").prop('checked') ) {
+			 $("input[name=bulid_layers]").val($("input[name=floor_layers]").val());
+		}
+		
+	});
+	
+	
+	$("input[name=bulid_layers], input[name=floor_layers]").on('keydown ',function(){
+		return false;
+	});
+	
+	
+	
+	
+	
 });
 /**/
 

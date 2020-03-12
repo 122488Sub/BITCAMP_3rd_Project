@@ -133,13 +133,27 @@ public class House_ServiceImpl implements House_Service {
 		System.out.println(v);
 		}
 		
+		String room_type = "", build_type = "";
+		
+		
 		String result = "{";
 		if(!list.isEmpty()) {
 			result +=          "\"list\" : [";
 			for(HouseAll_VO vo : list) {
+				if(vo.getRoom_type()==0) room_type="Studio";
+				else if(vo.getRoom_type()==1) room_type="Two";
+				else if(vo.getRoom_type()==2) room_type="Three+";
+				
+				if(vo.getBuild_type()==0) build_type="Villa";
+				else if(vo.getBuild_type()==1) build_type="Goshiwon";
+				else if(vo.getBuild_type()==2) build_type="Semi-Officetel";
+				
+				
 				result += "{";
 				result += "\"room_idx\":\"" + vo.getRoom_idx() + "\","; 
-				result += "\"subject\":\"" + vo.getSubject() + "\","; 
+				result += "\"subject\":\"" + vo.getSubject() + "\",";
+				result += "\"build_type\":\"" + build_type + "\","; 
+				result += "\"room_type\":\"" +room_type+ "\","; 
 				result += "\"gu_gun_eup_eng\":\"" + vo.getGu_gun_eup_eng() + "\","; 
 				result += "\"do_en\":\"" + vo.getDo_en() + "\","; 
 				result += "\"deposit\":\"" + vo.getDeposit() + "\","; 

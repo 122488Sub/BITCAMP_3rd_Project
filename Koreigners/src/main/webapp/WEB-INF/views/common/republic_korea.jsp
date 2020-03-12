@@ -12,27 +12,33 @@
 </head>
 <style>
 	#content{
-	width: 90%;
-	height: 350px;
+	width: 100%;
+	height: 450px;
     margin: 10px auto;
 	}
 	#map{
 		
 		height: 100%; 
 		float: left;
-		width:200px;
+		width:360px;
    		box-sizing: border-box;
    		overflow: hidden;
+   		padding-right: 120px;
 	}
 	#option_panel{
-		
-		float: left;
+   		float : left;
+		width : 100 %;
 		height: 100%; 
-		width:60%;
-   		box-sizing: border-box;
+		box-sizing : border-box;
    		}
+   		
+   	#map::after,#option_panel::after{
+	   content: "";
+	   display: block;
+	   clear: both;
+	}
 	svg{
-		width: 100px; 
+		width: 150px; 
 		height: 100% ; 
 		background:white; 
 		overflow:visible
