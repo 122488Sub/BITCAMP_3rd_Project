@@ -91,8 +91,8 @@
 					console.log(">>>>>>>>>>>pvo  :" + pvo); 
 					
 					$.each(list, function(index, obj){
-						dataTag += "<tr>";
-						dataTag += "<td><a href='house_detail.do?room_idx=" + this.room_idx+"'>" + this.room_idx+ "</a></td>";
+						dataTag += "<tr onclick='javascript:goHouseDetailPage("+this.room_idx+")' style='cursor: pointer;'>";
+						dataTag += "<td>" + this.room_idx+ "</td>";
 						dataTag += "<td>" + this["subject"] + "</td>";
 						dataTag += "<td>" + this["room_type"] + "</td>";
 						dataTag += "<td>" + this["address"] + "</td>";
@@ -179,8 +179,8 @@
 				
 				$.each(list, function(index, obj){
 					
-					dataTag += "<tr>";
-					dataTag += "<td><a href='house_detail.do?room_idx=" + this.room_idx+"'>" + this.room_idx+ "</a></td>";
+					dataTag += "<tr onclick='javascript:goHouseDetailPage("+this.room_idx+")' style='cursor: pointer;'>";
+					dataTag += "<td>" + this.room_idx+ "</td>";
 					dataTag += "<td>" + this["subject"] + "</td>";
 					dataTag += "<td>" + this["room_type"] + "</td>";
 					dataTag += "<td>" + this["address"] + "</td>";
@@ -222,3 +222,7 @@
 			}
 		});
 	}
+	
+	function goHouseDetailPage(idx) {
+		window.open("about:blank").location.href='house_detail.do?room_idx=' + idx;
+	} 
