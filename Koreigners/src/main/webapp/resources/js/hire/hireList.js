@@ -5,7 +5,7 @@ let cate="";                   // 클릭 한 카테고리 id
 let pay_click="";              // 클릭 한 급여중류 id
 let isValue="";                // 선택된 카테고리의 배열안 인덱스 번호
 let now_click = "";
-
+let searchKeyword = "";        // 검색 단어
 //페이지 로딩 시 실행
 function loadPage(){
 	getJson();
@@ -194,11 +194,12 @@ function getJson(){
 			"cate_child_en" : jobCategory,
 			"payCondition" : payCondition,
 			"do_en" : do_List,
-			"gu_gun_eup_en" : si_List
+			"gu_gun_eup_en" : si_List,
+			"searchKeyword" : searchKeyword
 		},
 		//async: false,
 		success : function(data) {
-			alert("컨트롤러갔다옴");
+			//alert("컨트롤러갔다옴");
 			var dataTag = "";
 			var i = 1;
 			
@@ -219,7 +220,6 @@ function getJson(){
 				$.each(list, function(index, obj){
 					console.log("this['hire_idx'] : " + this["hire_idx"]);
 					dataTag += "<tr>";
-					dataTag += "<td>" + i+1 + "</td>";
 					dataTag += "<td>" + this["company_name"] + "</td>";
 					dataTag += "<td>" + this["do_en"] + "</td>";
 					dataTag += "<td><a href='javascript:getDetail(" + this["hire_idx"] + ' ,' + pvo.nowPage +")'>" + this["title"] + "</a></td>";
@@ -300,4 +300,11 @@ function prnt_cate(cate) {
 			console.log("실패");
 		}
 	});
+}
+
+function search(){
+	alert("search 여기");
+	var keyword = $('#searchBox').val();
+	searchKeyword = keyword;
+	getJson();
 }

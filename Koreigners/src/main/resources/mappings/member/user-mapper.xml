@@ -27,11 +27,11 @@
 	</insert>
 	
 	<!-- 이메일 인증(권한상태 업데이트) -->
-	<!-- <update id="updateAuthstatus" parameterType="userVO">
+ <update id="updateAuthstatus" parameterType="userVO">
 		UPDATE T_MEMBER
 		   SET AUTH_STATUS = '1'
 		 WHERE MEM_ID = #{mem_id}
-	</update> -->
+	</update>
 	
 	<!-- 권한상태 불러오기 -->
 	<select id="getAuthStatus" parameterType="String" resultType="String">
@@ -89,6 +89,8 @@
 	       <if test='mem_phone != null and !mem_phone.equals("")'>MEM_PHONE = #{mem_phone},</if>
 	       <if test='mem_birth != null and !mem_birth.equals("--")'>MEM_BIRTH = #{mem_birth},</if>
 	       <if test='mem_gender != null and !mem_gender.equals("")'>MEM_GENDER = #{mem_gender},</if>
+	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
+	       <if test='auth_status != null and !auth_status.equals("")'>AUTH_STATUS = #{auth_status},</if>
 	       <if test='mem_address != null and !mem_address.equals("")'>MEM_ADDRESS = #{mem_address},</if>
 	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
 	       <if test='auth_status != null and !auth_status.equals("")'>AUTH_STATUS = #{auth_status},</if>

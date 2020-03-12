@@ -63,7 +63,8 @@ FROM(
 		       		</foreach> 
 		       	)
 	       	</if>
-	   <if test="buildFilter">
+	<choose>	       	
+	   <when test="buildFilter">
 	       AND (
 	       			 INFO.BUILD_TYPE IN
 	       			 <foreach collection="build_typeList" item="bu" index="index" open="(" separator="," close=")"> 
@@ -71,15 +72,24 @@ FROM(
 		       		</foreach> 
 	       	   )
 	       
-	   </if>
-	   <if test="roomFilter">
+	   </when>
+	   <otherwise>
+			AND 1=2    
+	   </otherwise>
+	</choose>
+	<choose>
+	   <when test="roomFilter">
 	       AND (
 	       			 INFO.ROOM_TYPE IN
 	       			 <foreach collection="room_typeList" item="ro" index="index" open="(" separator="," close=")"> 
 		          		  #{ro} 
 		       		</foreach> 
 	       	   )
-	    </if>
+	    </when>
+	    <otherwise>
+			AND 1=2    
+	    </otherwise>
+	</choose>
 	    <![CDATA[
 	       AND  INFO.STAY_NUM_MIN >= #{stayNum}	 
 	     ]]>
