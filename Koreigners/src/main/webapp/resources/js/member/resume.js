@@ -17,10 +17,9 @@ $(function() {
 
   });
 
-  // 최종학력 > 해당사항없음 선택 시 '학위', '최종학교' 비활성화
-  var st = $(":input:radio[name=edu_level]:checked").val();
-  if ($(":input:radio[name=edu_level]:checked").val() == '') {
-    $(':input:radio[name=degree]').attr('disabled', true);
+ // 최종학력 > 해당사항없음 선택 시 '학위', '최종학교' 비활성화
+  if ($(":input:radio[name=graduate_sch]:checked").val() == '') {
+    $(':input:radio[name=dep]').attr('disabled', true);
     $('#school_entr_year').val('').attr('disabled', true);
     $('#school_entr_month').val('').attr('disabled', true);
     $('#school_grad_year').val('').attr('disabled', true);
@@ -28,10 +27,10 @@ $(function() {
     $('#school_area').val('').attr('disabled', true);
     $('#school_name').val('').attr('disabled', true);
     $('#school_major').val('').attr('disabled', true);
-  } else if ($(":input:radio[name=edu_level]:checked").val() == '중/고졸') {
-    $(':input:radio[name=degree]').attr('disabled', true);
+  } else if ($(":input:radio[name=graduate_sch]:checked").val() == '중/고졸') {
+    $(':input:radio[name=dep]').attr('disabled', true);
   } else {
-    $(':input:radio[name=degree]').attr('disabled', false);
+    $(':input:radio[name=dep]').attr('disabled', false);
     $('#school_entr_year').attr('disabled', false);
     $('#school_entr_month').attr('disabled', false);
     $('#school_grad_year').attr('disabled', false);
@@ -40,9 +39,9 @@ $(function() {
     $('#school_name').attr('disabled', false);
     $('#school_major').attr('disabled', false);
   }
-  $('input[type=radio][name=edu_level]').change(function() {
-    if ($(":input:radio[name=edu_level]:checked").val() == '') {
-      $(':input:radio[name=degree]').attr('disabled', true);
+  $('input[type=radio][name=graduate_sch]').change(function() {
+    if ($(":input:radio[name=graduate_sch]:checked").val() == '') {
+      $(':input:radio[name=dep]').attr('disabled', true);
       $('#school_entr_year').val('').attr('disabled', true);
       $('#school_entr_month').val('').attr('disabled', true);
       $('#school_grad_year').val('').attr('disabled', true);
@@ -50,8 +49,8 @@ $(function() {
       $('#school_area').val('').attr('disabled', true);
       $('#school_name').val('').attr('disabled', true);
       $('#school_major').val('').attr('disabled', true);
-    } else if ($(":input:radio[name=edu_level]:checked").val() == '중/고졸') {
-      $(':input:radio[name=degree]').attr('disabled', true);
+    } else if ($(":input:radio[name=graduate_sch]:checked").val() == '중/고졸') {
+      $(':input:radio[name=dep]').attr('disabled', true);
       $('#school_entr_year').attr('disabled', false);
       $('#school_entr_month').attr('disabled', false);
       $('#school_grad_year').attr('disabled', false);
@@ -60,7 +59,7 @@ $(function() {
       $('#school_name').attr('disabled', false);
       $('#school_major').attr('disabled', false);
     } else {
-      $(':input:radio[name=degree]').attr('disabled', false);
+      $(':input:radio[name=dep]').attr('disabled', false);
       $('#school_entr_year').attr('disabled', false);
       $('#school_entr_month').attr('disabled', false);
       $('#school_grad_year').attr('disabled', false);
@@ -72,13 +71,13 @@ $(function() {
   });
 
   // 어학당 이름 비활성화.
-  if ($(":input:radio[name=lang_school_type]:checked").val() == '해당사항없음') {
+  if ($(":input:radio[name=lang_learn]:checked").val() == '해당사항없음') {
     $('#div_lang_school_name').hide();
   } else {
     $('#div_lang_school_name').show();
   }
-  $('input[type=radio][name=lang_school_type]').change(function() {
-    if ($(":input:radio[name=lang_school_type]:checked").val() == '해당사항없음') {
+  $('input[type=radio][name=lang_learn]').change(function() {
+    if ($(":input:radio[name=lang_learn]:checked").val() == '해당사항없음') {
       $('#lang_school_name').val('');
       $('#div_lang_school_name').hide();
     } else {
@@ -119,12 +118,11 @@ $(function() {
     //var num_check = /^[0-9]*$/;
     var num_check = /^(\d|-)?(\d|,)*?\d*$/;
 
-    if (this.req_area.value == '') { return alert('Select your preferred working area'), this.req_area.focus(), false; }
-    if ($("select#field_seq1").val() == null || $("select#field_seq1").val() == "") {
+    if (this.sido1.value == '') { return alert('Select your preferred working area'), this.sido1.focus(), false; }
+    if ($("select#selectBox1").val() == null || $("select#selectBox1").val() == "") {
       alert("Select your specialty"); return false;
     }
-    if (this.req_job.value == '') { return alert('Enter your desired job'), this.req_job.focus(), false; }
-
+   
     // 희망급여 추가
     if (this.pay_type[0].checked == false && this.pay_type[1].checked == false && this.pay_type[2].checked == false && this.pay_type[3].checked == false) return alert('please select salary type'), this.pay_type[0].focus(), false;
     if (this.pay_amount1.value == '') { return alert('Enter your desired salary'), this.pay_amount1.focus(), false; }
@@ -137,11 +135,10 @@ $(function() {
       if ($("input[name='work_time_week']:checked").length == 0) { return alert('You should select over than one'), this.work_time_week1.focus(), false; }
     } // 선호요일을 1개 이상 선택해야 합니다
 
-    if ($(":input:radio[name=lang_school_type]:checked").val() == '재학중' || $(":input:radio[name=lang_school_type]:checked").val() == '졸업') {
+    if ($(":input:radio[name=lang_learn]:checked").val() == '재학중' || $(":input:radio[name=lang_learn]:checked").val() == '졸업') {
       if ($.trim(this.lang_school_name.value) == '') { return alert('Please enter the school name'), this.lang_school_name.focus(), false; }
     }
 
-    this.target = 'ifr_user_form';
     return true;
   });
 

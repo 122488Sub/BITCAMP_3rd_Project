@@ -8,6 +8,30 @@
 <link href="resources/css/member/resume.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="resources/js/member/sojaeji.js"></script>
 <script type="text/javascript" src="resources/js/member/resume.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+   $(document).ready(function(){
+       // 옵션추가 버튼 클릭시
+       $("#addItemBtn1").click(function(){
+           // item 의 최대번호 구하기
+           var lastItemNo = $("#career tr:last").attr("class").replace("item", "");
+           
+           var newitem = $("#career tr:eq(0)").clone();
+           newitem.removeClass();
+           newitem.find("td:eq(1)").attr("rowspan", "1");
+           newitem.addClass("item"+(parseInt(lastItemNo)+1));
+
+           $("#career").append(newitem);
+       });
+        
+        
+       // 삭제버튼 클릭시
+       $("#delBtn").click(function(){
+           var clickedRow = $(this).parent().parent();
+           clickedRow.remove();
+       });
+   });
+</script>
 </head>
 <body>
 <div>
@@ -19,7 +43,7 @@
 	</ul>
 </div>
 
-          <form name="form1" id="form1" method="post" enctype="multipart/form-data" action="insertResume.do">
+          <form name="form1" id="form1" action="insertResume.do" method="post">
           <input type="hidden" name="mem_id" value="${mvo.mem_id }">
 
           <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
@@ -139,7 +163,7 @@
             </tbody>
           </table>
 
-          <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+        <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
            <h4><strong>02</strong>Academic background</h4>
             <tbody>
               <tr>
@@ -167,13 +191,16 @@
               <tr>
                 <th>Final level of education</th>
                 <td class="txLeft">
-                	Admission / Graduation : <input type="text" size="4" id="school_entr_year" name="final_a_y" value="" class="only-num">Year <input type="text" size="2" id="school_entr_month" name="school_entr_month" value="" class="only-num">Month ~
-                  <input type="text" size="4" id="school_grad_year" name="final_g_y" value="" class="only-num">Year <input type="text" size="2" id="school_grad_month" name="school_grad_month" value="" class="only-num">Month<br>
-                  Region : <input type="text" size="20" id="school_area" name="final_region" value="">
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  School name : <input type="text" size="20" id="school_name" name="final_sch" value="">
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  Major :<input type="text" size="20" id="school_major" name="final_major" value="">
+                	Admission / Graduation : 
+                	<input type="text" size="4" id="school_entr_year" name="final_a_y" value="" class="only-num">Year 
+                	<input type="text" size="2" id="school_entr_month" name="final_a_m" value="" class="only-num">Month ~
+                    <input type="text" size="4" id="school_grad_year" name="final_g_y" value="" class="only-num">Year 
+                    <input type="text" size="2" id="school_grad_month" name="final_g_m" value="" class="only-num">Month<br>
+                    Region : <input type="text" size="20" id="school_area" name="final_region" value="">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    School name : <input type="text" size="20" id="school_name" name="final_sch" value="">
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    Major :<input type="text" size="20" id="school_major" name="final_major" value="">
                 </td>
               </tr>
 
@@ -183,7 +210,7 @@
                     <label><input name="lang_learn" type="radio" value="해당사항없음" checked="checked">N/A</label>
                     <label><input name="lang_learn" type="radio" value="재학중">Studying</label>
                     <label><input name="lang_learn" type="radio" value="졸업">Graduation</label>
-                  <div name="div_lang_school_name" id="div_lang_school_name">
+                  <div id="div_lang_school_name">
                     &nbsp; School Name&nbsp;:&nbsp;<input type="text" size="30" maxlength="25" id="lang_school_name" name="lang_sch" value="">
                   </div>
                 </td>
@@ -192,37 +219,33 @@
             </tbody>
           </table>
 
-          <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+		    <button type="button" id="addItemBtn1">Add Career</button>
+      <table class="data_t recruit_re" id="career" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
            <h4><strong>03</strong>Career</h4>
             <tbody>
-              <tr>
-                <th width="15%">Career 1</th>
+              <tr class="item1">
+                <th id="number" width="15%">Career 1</th>
                 <td width="85%" class="txLeft">Joining/Leaving :
-                  <input type="text" size="4" id="career1_join_year" name="Join_year" value="" class="only-num">
+                  <input type="text" size="4" name="Join_year" value="" class="only-num">
                   Year
-                  <input type="text" size="2" id="career1_join_month" name="join_month" value="" class="only-num">
+                  <input type="text" size="2" name="join_month" value="" class="only-num">
                   Month ~
-                  <input type="text" size="4" id="career1_resign_year" name="resign_year" value="" class="only-num">
+                  <input type="text" size="4" name="resign_year" value="" class="only-num">
                   Year
-                  <input type="text" size="2" id="career1_resign_month" name="resign_month" value="" class="only-num">
+                  <input type="text" size="2" name="resign_month" value="" class="only-num">
                   Month<br>
                   Region :
-                  <input type="text" size="20" id="career1_area" name="region" value="">
+                  <input type="text" size="20" name="region" value="">
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   Name of company :
-                  <input type="text" size="40" id="career1_company" name="company" value="">
+                  <input type="text" size="40" name="company" value="">
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <br>
                   Assigned task :
-                  <input type="text" size="40" id="career1_job" name="task" value="">
+                  <input type="text" size="40" name="task" value="">
                 </td>
-              </tr>
-              <tr>
-              	<td colspan="2">
-                  <input type="button" value="Add Career" onclick="">              	
-              	</td>
-              </tr>
-
+                <td><button type="button" id="delBtn">delete</button></td>
+            </tr>
             </tbody>
           </table>
 
@@ -231,43 +254,63 @@
             <tbody>
               <tr>
                 <th>Korean</th>
-                <td class="txLeft">Conversational ability : <label><input name="ko_spk_abil" type="radio" value="상">Advanced </label>
-                	<label><input name="ko_spk_abil" type="radio" value="중">Intermediate</label>
-                  <label><input name="ko_spk_abil" type="radio" value="하">Beginner</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <td class="txLeft">
+                  Conversational ability : 
+                  <label><input name="ko_spk_abil" type="radio" value="상">Advanced </label>
+                  <label><input name="ko_spk_abil" type="radio" value="중">Intermediate</label>
+                  <label><input name="ko_spk_abil" type="radio" value="하">Beginner</label>
+                  <label><input name="ko_spk_abil" type="radio" value="해당사항없음">N/A</label>&nbsp;&nbsp;&nbsp;&nbsp;
                 <br>
-                Ability to work with documents : <label><input name="ko_doc_abil" type="radio" value="상">Advanced</label>
-                	<label><input name="ko_doc_abil" type="radio" value="중">Intermediate</label>
-                  <label><input name="ko_doc_abil" type="radio" value="하">Beginner</label></td>
+                  Ability to work with documents :
+                  <label><input name="ko_doc_abil" type="radio" value="상">Advanced</label>
+                  <label><input name="ko_doc_abil" type="radio" value="중">Intermediate</label>
+                  <label><input name="ko_doc_abil" type="radio" value="하">Beginner</label>
+                  <label><input name="ko_doc_abil" type="radio" value="해당사항없음">N/A</label></td>
               </tr>
               <tr>
                 <th>Chinese</th>
-                <td class="txLeft">Conversational ability : <label><input name="ch_spk_abil" type="radio" value="상">Advanced </label>
-                	<label><input name="ch_spk_abil" type="radio" value="중">Intermediate</label>
-                  <label><input name="ch_spk_abil" type="radio" value="하">Beginner</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <td class="txLeft">
+                  Conversational ability :
+                  <label><input name="ch_spk_abil" type="radio" value="상">Advanced </label>
+                  <label><input name="ch_spk_abil" type="radio" value="중">Intermediate</label>
+                  <label><input name="ch_spk_abil" type="radio" value="하">Beginner</label>
+                  <label><input name="ch_spk_abil" type="radio" value="해당사항없음">N/A</label>&nbsp;&nbsp;&nbsp;&nbsp;
                 <br>
-                Ability to work with documents : <label><input name="ch_doc_abil" type="radio" value="상">Advanced</label>
-                	<label><input name="ch_doc_abil" type="radio" value="중">Intermediate</label>
-                  <label><input name="ch_doc_abil" type="radio" value="하">Beginner</label></td>
+                  Ability to work with documents :
+                  <label><input name="ch_doc_abil" type="radio" value="상">Advanced</label>
+                  <label><input name="ch_doc_abil" type="radio" value="중">Intermediate</label>
+                  <label><input name="ch_doc_abil" type="radio" value="하">Beginner</label>
+                  <label><input name="ch_doc_abil" type="radio" value="해당사항없음">N/A</label></td>
               </tr>
               <tr>
                 <th>English</th>
-                <td class="txLeft">Conversational ability : <label><input name="en_spk_abil" type="radio" value="상">Advanced </label>
-                	<label><input name="en_spk_abil" type="radio" value="중">Intermediate</label>
-                  <label><input name="en_spk_abil" type="radio" value="하">Beginner</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <td class="txLeft">
+                  Conversational ability :
+                  <label><input name="en_spk_abil" type="radio" value="상">Advanced </label>
+                  <label><input name="en_spk_abil" type="radio" value="중">Intermediate</label>
+                  <label><input name="en_spk_abil" type="radio" value="하">Beginner</label>
+                  <label><input name="en_spk_abil" type="radio" value="해당사항없음">N/A</label>&nbsp;&nbsp;&nbsp;&nbsp;
                 <br>
-                Ability to work with documents : <label><input name="en_doc_abil" type="radio" value="상">Advanced</label>
-                	<label><input name="en_doc_abil" type="radio" value="중">Intermediate</label>
-                  <label><input name="en_doc_abil" type="radio" value="하">Beginner</label></td>
+                  Ability to work with documents :
+                  <label><input name="en_doc_abil" type="radio" value="상">Advanced</label>
+                  <label><input name="en_doc_abil" type="radio" value="중">Intermediate</label>
+                  <label><input name="en_doc_abil" type="radio" value="하">Beginner</label>
+                  <label><input name="en_doc_abil" type="radio" value="해당사항없음">N/A</label></td>
               </tr>
               <tr>
                 <th>Vietnamese</th>
-                <td class="txLeft">Conversational ability : <label><input name="vt_spk_abil" type="radio" value="상">Advanced </label>
-                	<label><input name="vt_spk_abil" type="radio" value="중">Intermediate</label>
-                  <label><input name="vt_spk_abil" type="radio" value="하">Beginner</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <td class="txLeft">
+                  Conversational ability :
+                  <label><input name="vt_spk_abil" type="radio" value="상">Advanced </label>
+                  <label><input name="vt_spk_abil" type="radio" value="중">Intermediate</label>
+                  <label><input name="vt_spk_abil" type="radio" value="하">Beginner</label>
+                  <label><input name="vt_spk_abil" type="radio" value="해당사항없음">N/A</label>&nbsp;&nbsp;&nbsp;&nbsp;
                 <br>
-                Ability to work with documents : <label><input name="vt_doc_abil" type="radio" value="상">Advanced</label>
-                	<label><input name="vt_doc_abil" type="radio" value="중">Intermediate</label>
-                  <label><input name="vt_doc_abil" type="radio" value="하">Beginner</label></td>
+                  Ability to work with documents :
+                  <label><input name="vt_doc_abil" type="radio" value="상">Advanced</label>
+                  <label><input name="vt_doc_abil" type="radio" value="중">Intermediate</label>
+                  <label><input name="vt_doc_abil" type="radio" value="하">Beginner</label>
+                  <label><input name="vt_doc_abil" type="radio" value="해당사항없음">N/A</label></td>
               </tr>
               <tr>
                 <th>Other language</th>
@@ -275,7 +318,7 @@
               </tr>
             </tbody>
           </table>
-
+          
           <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
             <h4><strong>05</strong>Other Items</h4>
             <tbody>
@@ -288,13 +331,14 @@
             </tbody>
           </table>
 
+
           <p align="center">
             <a href="" target="_self" class="button white small">Cancel</a>
             &nbsp; &nbsp;
-          	<button type="submit" id="" class="Button orange small">Registration</button>
+          	<input type="submit" class="Button orange small" value="Registration">
           </p>
 
           </form>
-
+       
 </body>
 </html>

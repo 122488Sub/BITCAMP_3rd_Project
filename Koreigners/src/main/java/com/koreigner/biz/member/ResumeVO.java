@@ -2,6 +2,8 @@ package com.koreigner.biz.member;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ResumeVO {
 
 	private int resume_idx;
@@ -19,7 +21,7 @@ public class ResumeVO {
 	private String work_time_end;
 	private String work_time_isweek;
 	private String work_time_week;
-	private String domitory;
+	private String dormitory;
 	private String introduce;
 	private String graduate_sch;
 	private String dep;
@@ -43,6 +45,91 @@ public class ResumeVO {
 	private String regdate;
 	private Date ip;
 	private String other_lang;
+	
+	//파일 업로드용 필드 추가
+	private MultipartFile ori_file;
+	private MultipartFile save_file;
+	
+	//커리어
+	private int join_year;
+	private int join_month;
+	private int resign_year;
+	private int resign_month;
+	private String region;
+	private String company;
+	private String task;
+
+
+	public int getJoin_year() {
+		return join_year;
+	}
+
+
+	public void setJoin_year(int join_year) {
+		this.join_year = join_year;
+	}
+
+
+	public int getJoin_month() {
+		return join_month;
+	}
+
+
+	public void setJoin_month(int join_month) {
+		this.join_month = join_month;
+	}
+
+
+	public int getResign_year() {
+		return resign_year;
+	}
+
+
+	public void setResign_year(int resign_year) {
+		this.resign_year = resign_year;
+	}
+
+
+	public int getResign_month() {
+		return resign_month;
+	}
+
+
+	public void setResign_month(int resign_month) {
+		this.resign_month = resign_month;
+	}
+
+
+	public String getRegion() {
+		return region;
+	}
+
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+
+	public String getCompany() {
+		return company;
+	}
+
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+
+	public String getTask() {
+		return task;
+	}
+
+
+	public void setTask(String task) {
+		this.task = task;
+	}
+	
+	
 	
 	public ResumeVO() {
 		super();
@@ -168,12 +255,12 @@ public class ResumeVO {
 		this.work_time_week = work_time_week;
 	}
 
-	public String getDomitory() {
-		return domitory;
+	public String getDormitory() {
+		return dormitory;
 	}
 
-	public void setDomitory(String domitory) {
-		this.domitory = domitory;
+	public void setDormitory(String dormitory) {
+		this.dormitory = dormitory;
 	}
 
 	public String getIntroduce() {
@@ -359,6 +446,23 @@ public class ResumeVO {
 	public void setOther_lang(String other_lang) {
 		this.other_lang = other_lang;
 	}
+	
+	// 파일업로드 용
+	public MultipartFile getOri_file() {
+		return ori_file;
+	}
+
+	public void setOri_file(MultipartFile ori_file) {
+		this.ori_file = ori_file;
+	}
+
+	public MultipartFile getSave_file() {
+		return save_file;
+	}
+
+	public void setSave_file(MultipartFile save_file) {
+		this.save_file = save_file;
+	}
 
 	@Override
 	public String toString() {
@@ -367,14 +471,16 @@ public class ResumeVO {
 				+ ", req_salary_min=" + req_salary_min + ", req_salary_max=" + req_salary_max + ", salary_type="
 				+ salary_type + ", work_time=" + work_time + ", work_time_start=" + work_time_start + ", work_time_end="
 				+ work_time_end + ", work_time_isweek=" + work_time_isweek + ", work_time_week=" + work_time_week
-				+ ", domitory=" + domitory + ", introduce=" + introduce + ", graduate_sch=" + graduate_sch + ", dep="
+				+ ", dormitory=" + dormitory + ", introduce=" + introduce + ", graduate_sch=" + graduate_sch + ", dep="
 				+ dep + ", lang_learn=" + lang_learn + ", lang_sch=" + lang_sch + ", final_a_m=" + final_a_m
 				+ ", final_a_y=" + final_a_y + ", final_g_m=" + final_g_m + ", final_g_y=" + final_g_y
 				+ ", final_region=" + final_region + ", final_sch=" + final_sch + ", final_major=" + final_major
 				+ ", ko_spk_abil=" + ko_spk_abil + ", ko_doc_abil=" + ko_doc_abil + ", ch_spk_abil=" + ch_spk_abil
 				+ ", ch_doc_abil=" + ch_doc_abil + ", en_spk_abil=" + en_spk_abil + ", en_doc_abil=" + en_doc_abil
 				+ ", vt_spk_abil=" + vt_spk_abil + ", vt_doc_abil=" + vt_doc_abil + ", regdate=" + regdate + ", ip="
-				+ ip + ", other_lang=" + other_lang + "]";
+				+ ip + ", other_lang=" + other_lang + ", join_year=" + join_year + ", join_month=" + join_month
+				+ ", resign_year=" + resign_year + ", resign_month=" + resign_month + ", region=" + region
+				+ ", company=" + company + ", task=" + task + "]";
 	}
 	
 	
