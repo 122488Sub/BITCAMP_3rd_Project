@@ -11,19 +11,39 @@ public class JobVO {
 	String cate_prnt_en;
 	List<String> cate_child_en;
 	List<String> payCondition;
+	String searchKeyword;
 	PagingVO pagingVO;
 	int begin;
 	int end;
-	
 	
 	//필터 확인값
 	boolean addrFilter = false;
 	boolean cateFilter = false;
 	boolean cateChildFilter = false;
 	boolean payFilter = false;
+	boolean searchFilter = false;
 	
 	public JobVO() {}
 	
+	public boolean isSearchFilter() {
+		return searchFilter;
+	}
+
+	public void setSearchFilter(boolean searchFilter) {
+		this.searchFilter = searchFilter;
+	}
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+
+	public void setSearchKeyword(String searchKeyword) {
+		if(!searchKeyword.equals("")) {
+			searchFilter=true;
+		}else searchFilter=false;
+		this.searchKeyword = searchKeyword;
+	}
+
 	public PagingVO getPagingVO() {
 		return pagingVO;
 	}

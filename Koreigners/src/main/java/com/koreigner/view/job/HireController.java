@@ -95,9 +95,13 @@ public class HireController {
 		System.out.println("getCate_prnt_en" + jobVO.getCate_prnt_en());
 		System.out.println("getCate_child_en : " + jobVO.getCate_child_en());
 		System.out.println("getPayCondition : " + jobVO.getPayCondition());
+		System.out.println();
+		System.out.println("getSearchKeyword : " + jobVO.getSearchKeyword());
+		System.out.println();
 		System.out.println("isAddrFilter : " + jobVO.isAddrFilter());
 		System.out.println("isCateFilter : " + jobVO.isCateFilter());
 		System.out.println("isCateChildFilter : " + jobVO.isCateChildFilter());
+		System.out.println("isSearchFilter : " + jobVO.isSearchFilter());
 		
 		
 		// 현재 페이지 구하기

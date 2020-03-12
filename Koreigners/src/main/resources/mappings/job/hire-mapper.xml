@@ -52,6 +52,16 @@
 					       		</foreach> 
 			       	 		  )
 	  					 </if>
+	  					<!--  
+	  					<if test="searchFilter">
+			      			 AND (
+				       			 HIRE.PAYMENT_CODITION IN 
+				       			 <foreach collection="payCondition" item="pay" index="index" open="(" separator="," close=")"> 
+					          		  #{pay} 
+					       		</foreach> 
+			       	 		  )
+	  					 </if> 
+	  					 -->
        		)
 	  WHERE R_NUM BETWEEN #{begin} AND #{end}
 	  

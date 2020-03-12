@@ -14,14 +14,29 @@
 	}
 	
 	#filterBox {
+		position:absolute;
 		width: 900px;
-		height: auto;
+		height: 300px;
+		margin-left: 720px;
+		margin-top: 250px;
 	}
 	
 	#jobCate_box{
+		
 		width: 900px;
-		height: 500px;
+		height: 300px;
 	
+	}
+	#search {
+		float:left;
+		height:50px;
+	}
+	#searchBox {
+		height: 30px;
+	}
+	#searchBtn {
+		width: 50px;
+		height: 34px;
 	}
 	#jUl {
 		float: left;
@@ -31,7 +46,7 @@
 		text-align: center;
 	
 		width: 85px;
-		height: 65px;
+		height: 55px;
 	}
 	li.btnBox {
 		width: 520px;
@@ -41,13 +56,12 @@
 		
 		border: 2px solid black;
 		width : 95px;
-		height: 60px;
+		height: 50px;
 		float: left;
 		margin-left: 5px;
 		margin-bottom: 5px;
 		font-size: 6px;
 		font-weight: bold;
-		
 		display: table;
 		text-align:center;
 	}
@@ -61,7 +75,7 @@
 		
 		border: 2px solid red;
 		width : 95px;
-		height: 60px;
+		height: 50px;
 		background-color : lightcoral;
 	}
 	
@@ -70,7 +84,7 @@
 		
 		border: 2px solid black;
 		width : 95px;
-		height: 60px;
+		height: 50px;
 		float: left;
 		margin-left: 5px;
 		margin-bottom: 5px;
@@ -85,7 +99,7 @@
 		
 		border: 2px solid red;
 		width : 95px;
-		height: 60px;
+		height: 50px;
 		background-color : lightcoral;
 	}
 	
@@ -93,7 +107,7 @@
 		
 		border: 2px solid black;
 		width : 95px;
-		height: 60px;
+		height: 50px;
 		float: left;
 		margin-left: 5px;
 		margin-bottom: 5px;
@@ -108,7 +122,7 @@
 		
 		border: 2px solid red;
 		width : 95px;
-		height: 60px;
+		height: 50px;
 		background-color : lightcoral;
 	}
 	
@@ -127,11 +141,11 @@
 	
 	#filter_1 {
 		width : 620px;
-		height : 210px;
+		height : 120px;
 	}
 	
 	#filter_2 {
 		width : 620px;
-		height : 140px;
+		height : 120px;
 	}
 	

@@ -41,6 +41,7 @@ public class HireDAO {
 		System.out.println("isCateFilter : " + jobVO.isCateFilter());
 		System.out.println("isCateChildFilter : " + jobVO.isCateChildFilter());
 		System.out.println("isPayFilter : " + jobVO.isPayFilter());
+		System.out.println("isSearchFilter : " + jobVO.isSearchFilter());
 		System.out.println();
 		
 		int total = mybatis.selectOne("hireListTotal", jobVO);
