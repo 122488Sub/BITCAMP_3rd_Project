@@ -1,4 +1,4 @@
-
+var chkDateRadioVar=0;
 
 function sample6_execDaumPostcode() {
     new daum.Postcode({
@@ -106,8 +106,15 @@ $(function() {
 		$("#radio_available_date_After").prop('checked', true);
 	}); 
     
-    $("#radio_available_date_After").on('click', function() { 
-    	$( "#datepicker" ).datepicker("show");
+    $("#radio_available_date_Imme").on('click', function() { 
+    	chkDateRadioVar=1;
+	}); 
+    
+    $("#radio_available_date_After").on('click', function() {
+    	if(chkDateRadioVar!=2){
+    		$( "#datepicker" ).focus();
+    		chkDateRadioVar=2;
+    	}
 	}); 
     
 	$("input[name=chk_management_expense]").on('click', function() { 

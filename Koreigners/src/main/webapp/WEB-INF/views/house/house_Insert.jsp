@@ -8,7 +8,7 @@
 <style>
 	
 	#container {
-		width: 90%;
+		width: 1020px;
 		margin: 0 auto;
 		color: black;
 	}
@@ -38,12 +38,17 @@
 		margin-top: 5px;
 		margin-bottom: 5px;
 	}
-	th { background-color: orange; width:10%; }
+	th { background-color: orange; width:100px; }
 
 	.td_option{
 		width:18%;
 	}
-	
+	.borderRight-none{
+		border-right: none;
+	}
+	.borderLeft-none{
+		border-left: none;
+	}
 }
 	
 </style>
@@ -142,7 +147,7 @@
 			<th>Available Days</th>
 			<td>
 				<div class="td_div">
-					<input type="radio"  value="0" name="radio_available_date"> Immediately
+					<input type="radio" id="radio_available_date_Imme" value="0" name="radio_available_date"> Immediately
 				</div>
 				<div class="td_div">
 					<input type="radio"  id="radio_available_date_After" value="1" name="radio_available_date"> After this
@@ -181,18 +186,50 @@
 	<h1>Transaction Information</h1>
 	<hr>
 	<table>
+		<colgroup>
+			<col>
+			<col width="195px">
+		</colgroup>
 		<tr>
-			<th>Pricing<br>Information</th>
-			<td colspan="3">
+			<th rowspan="3">Pricing<br>Information</th>
+			<td class="borderRight-none">
 				<div class="td_div">
-					Deposit <input type="text" id="deposit" class="" name="deposit" size="30" onkeyup="inputNumberAutoComma(this)" value='0' ><br>
-					Monthly rent <input type="text" id="monthly_rent"class=" " name="monthly_rent" size="30" onkeyup="inputNumberAutoComma(this)" value='0'><br>
-					Management expense <input type="text" id="text_management_expense" class=" " name="text_management_expense" size="30" onkeyup="inputNumberAutoComma(this)" > 
-					<input type="checkbox" value="0" name="chk_management_expense">none<br>
-					<input type="hidden" id="management_expense" name="management_expense">
+					Deposit
+				</div>
+			</td>
+			<td class="borderLeft-none">
+				<div class="td_div">
+					<input type="text" id="deposit" class="" name="deposit" size="30" onkeyup="inputNumberAutoComma(this)" value='0' ><br>
 				</div>
 			</td>
 		</tr>
+		<tr>
+			<td class="borderRight-none">
+				<div class="td_div">
+					Monthly rent
+				</div>
+			</td>
+			<td class="borderLeft-none">
+				<div class="td_div">				
+					<input type="text" id="monthly_rent"class=" " name="monthly_rent" size="30" onkeyup="inputNumberAutoComma(this)" value='0'><br>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="borderRight-none">
+				<div class="td_div">
+					Management expense 
+				</div>
+			</td>
+			<td class="borderLeft-none">
+				<div class="td_div">
+					<input type="text" id="text_management_expense" class=" " name="text_management_expense" size="30" onkeyup="inputNumberAutoComma(this)" > 
+					<input type="checkbox" value="0" name="chk_management_expense">none<br>					
+				</div>
+				<input type="hidden" id="management_expense" name="management_expense">
+			</td>
+		</tr>
+		
 	</table>	
 	
 	<!-- ------------------------------------------------------------------------------------------------------------------- -->
