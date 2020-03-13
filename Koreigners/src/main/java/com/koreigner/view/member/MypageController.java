@@ -1,5 +1,7 @@
 package com.koreigner.view.member;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.koreigner.biz.job.company.CompanyServiceImpl;
 import com.koreigner.biz.job.company.CompanyVO;
@@ -70,7 +74,7 @@ public class MypageController {
 
 	
 	// 회원정보 수정
-	@RequestMapping(value="/updateMember.do", method=RequestMethod.POST)
+	@RequestMapping(value="updateMember.do", method=RequestMethod.POST)
 	public String updateMember(HttpServletRequest request, UserVO vo) {
 		
 		String mem_cate = vo.getMem_cate();
@@ -100,8 +104,6 @@ public class MypageController {
 	@RequestMapping(value="pwCheck.do", method=RequestMethod.POST)
 	@ResponseBody
 	public int pwCheck(@RequestBody Map<String, String> jsonMap) {
-				
-		String pw = jsonMap.get("mem_pw");
 		
 		int userCnt = userService.userPwCheck(jsonMap);
 		
@@ -127,10 +129,30 @@ public class MypageController {
 	
 	// 이력서 입력
 	@RequestMapping(value="insertResume.do", method=RequestMethod.POST)
-	public String insertResume(ResumeVO rvo, CareerVO cvo) {
+	public String insertResume(@RequestParam("ori_file") MultipartFile file, ResumeVO rvo) {
+		
+		System.out.println("ResumeVO : " + rvo);
+		/*
+		 ********* 파일 업로드처리 **********
+		 * MultipartFile 인터페이스 주요 메소드
+		 * String getOriginalFilename() : 업로드한 파일명 찾기
+		 * void transferTo(대상위치) : 업로드한  파일을 destFile(위치)에 저장
+		 * boolean isEmpty() : 업로드한 파일의 존재여부(없으면 true 리턴)
+		 
+		MultipartFile uploadFile = rvo.getOri_file();
+		System.out.println("uploadFile: " + uploadFile);
+		
+		if(!uploadFile.isEmpty()) { //파일이 있으면 지정한 경로에 저장해라 
+			String fileName = uploadFile.getOriginalFilename(); //실제 업로드되는 파일명
+			uploadFile.transferTo(new File("c:/Mystudy/temp/" + fileName)); //데이터 저장 메소드(transferTo())
+		}
 		
 		userService.insertResume(rvo);
-		userService.insertCareer(cvo);
-		return null;
+		if(cvo != null) {
+					
+			userService.insertCareer(cvo);
+		}*/
+		
+		return "common/main.page"; //getOne
 	}
 }

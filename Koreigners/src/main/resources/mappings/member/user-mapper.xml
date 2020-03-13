@@ -43,38 +43,6 @@
 		SELECT * FROM T_MEMBER WHERE MEM_ID = #{mem_id}
 	</select>
 	
-	<!-- 비밀번호 재설정 -->
-	<!-- <update id="updatePassword" parameterType="userVO">
-		UPDATE T_MEMBER
-		   SET MEM_PW = #{mem_pw}
-		 WHERE MEM_ID = #{mem_id}
-	</update> -->
-	
-	<!-- 회원정보 수정하기 -->
-	<update id="updateMember" parameterType="userVO">
-		UPDATE T_MEMBER
-		<set>
-	       <if test='mem_name != null and !mem_name.equals("")'>MEM_NAME = #{mem_name},</if>
-	       <if test='mem_pw != null and !mem_pw.equals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")'>MEM_PW = #{mem_pw},</if>
-	       <if test='mem_phone != null and !mem_phone.equals("")'>MEM_PHONE = #{mem_phone},</if>
-	       <if test='mem_birth != null and !mem_birth.equals("--")'>MEM_BIRTH = #{mem_birth},</if>
-	       <if test='mem_gender != null and !mem_gender.equals("")'>MEM_GENDER = #{mem_gender},</if>
-	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
-	       <if test='auth_status != null and !auth_status.equals("")'>AUTH_STATUS = #{auth_status},</if>
-	       <if test='mem_address != null and !mem_address.equals("")'>MEM_ADDRESS = #{mem_address},</if>
-	       <if test="mailling_fl != null">MAILLING_FL = #{mailling_fl},</if>
-	       <if test="sms_fl != null">SMS_FL = #{sms_fl},</if>
-	     </set>
-		 WHERE MEM_ID = #{mem_id}
-	</update>
-	
-	<!-- 비밀번호 체크 -->
-	<select id="userPwCheck" parameterType="Map" resultType="int">
-		SELECT COUNT(*) FROM T_MEMBER
-		 WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
-	</select>
-	
-	
 	<!-- client가 회원가입시 입력한 Email이 db에 중복인지 검사 -->
 	<select id="getMemberEmail" parameterType="userVO" resultType="int">
 		SELECT COUNT(*) FROM T_MEMBER
@@ -102,6 +70,95 @@
 		INSERT INTO T_MEMBER
 			   (MEM_IDX, MEM_ID, MEM_PW, MEM_NAME, MEM_CATE)
 		VALUES (MEM_SQ.NEXTVAL, #{mem_id}, #{mem_pw}, #{mem_name}, #{mem_cate})
+	</insert>
+	
+	<!-- 비밀번호 재설정 -->
+	<!-- <update id="updatePassword" parameterType="userVO">
+		UPDATE T_MEMBER
+		   SET MEM_PW = #{mem_pw}
+		 WHERE MEM_ID = #{mem_id}
+	</update> -->
+	
+	<!-- ================================= 마이페이지 =========================================== -->
+	<!-- 회원정보 수정하기 -->
+	<update id="updateMember" parameterType="userVO">
+		UPDATE T_MEMBER
+		<set>
+	       <if test='mem_name != null and !mem_name.equals("")'>MEM_NAME = #{mem_name},</if>
+	       <if test='mem_pw != null and !mem_pw.equals("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")'>MEM_PW = #{mem_pw},</if>
+	       <if test='mem_phone != null and !mem_phone.equals("")'>MEM_PHONE = #{mem_phone},</if>
+	       <if test='mem_birth != null and !mem_birth.equals("--")'>MEM_BIRTH = #{mem_birth},</if>
+	       <if test='mem_gender != null and !mem_gender.equals("")'>MEM_GENDER = #{mem_gender},</if>
+	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
+	       <if test='auth_status != null and !auth_status.equals("")'>AUTH_STATUS = #{auth_status},</if>
+	       <if test='mem_address != null and !mem_address.equals("")'>MEM_ADDRESS = #{mem_address},</if>
+	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
+	       <if test='auth_status != null and !auth_status.equals("")'>AUTH_STATUS = #{auth_status},</if>
+	       <if test="mailling_fl != null">MAILLING_FL = #{mailling_fl},</if>
+	       <if test="sms_fl != null">SMS_FL = #{sms_fl},</if>
+	     </set>
+		 WHERE MEM_ID = #{mem_id}
+	</update>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="userPwCheck" parameterType="Map" resultType="int">
+		SELECT COUNT(*) FROM T_MEMBER
+		 WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
+	</select>
+	
+	<!-- 이력서 입력 -->
+	<insert id="insertResume" parameterType="ResumeVO">
+		INSERT INTO T_MEMBER_RESUME
+		VALUES (
+		 	RESUME_IDX,	MEM_NAME, WISH_DO, WISH_SI, JOB_CATE, 
+		 	JOB_CATE_CHILD, REQ_SALARY_MIN, REQ_SALARY_MAX, SALARY_TYPE, WORK_TIME,
+		 	<if test='work_time_start != null and !work_time_start.equals("")'>WORK_TIME_START,</if>
+		 	<if test='work_time_end != null and !work_time_end.equals("")'>WORK_TIME_END,</if>
+		 	WORK_TIME_ISWEEK, WORK_TIME_WEEK, DORMITORY,	INTRODUCE, GRADUATE_SCH,
+		 	<if test='dep != null and !dep.equals("")'>DEP,</if>
+		 	<if test='final_a_m != null and !final_a_m.equals("")'>FINAL_A_M,</if>
+		 	<if test='final_a_y != null and !final_a_y.equals("")'>FINAL_A_Y,</if>
+		 	<if test='final_g_m != null and !final_g_m.equals("")'>FINAL_G_M,</if>
+		 	<if test='final_g_y != null and !final_g_y.equals("")'>FINAL_G_Y,</if>
+		 	<if test='final_region != null and !final_region.equals("")'>FINAL_REGION,</if>
+		 	<if test='final_sch != null and !final_sch.equals("")'>FINAL_SCH,</if>
+		 	<if test='final_major != null and !final_major.equals("")'>FINAL_MAJOR,</if>
+		 	LANG_LEARN,
+		 	<if test='lang_sch != null and !lang_sch.equals("")'>LANG_SCH,</if>
+		 	KO_SPK_ABIL, KO_DOC_ABIL, CH_SPK_ABIL, CH_DOC_ABIL,	EN_SPK_ABIL, EN_DOC_ABIL, VT_SPK_ABIL, VT_DOC_ABIL,
+		 	REGDATE, IP,
+		 	<if test='other_lang != null and !other_lang.equals("")'>OTHER_LANG</if>
+		 	)
+		 	
+		 	(
+		 	RESUME_SQ.NEXTVAL, #{mem_name}, #{wish_do}, #{wish_si}, #{job_cate},
+		 	#{job_cate_child}, #{req_salary_min}, #{req_salary_max}, #{salary_type}, #{work_time},
+		 	<if test='work_time_start != null and !work_time_start.equals("")'>#{work_time_start},</if>
+		 	<if test='work_time_end != null and !work_time_end.equals("")'>#{work_time_end},</if>
+		 	#{work_time_isweek}, #{work_time_week}, #{dormitory}, #{introduce}, #{graduate_sch},
+		 	<if test='dep != null and !dep.equals("")'>#{dep},</if>
+		 	<if test='final_a_m != null and !final_a_m.equals("")'>#{final_a_m},</if>
+		 	<if test='final_a_y != null and !final_a_y.equals("")'>#{final_a_y},</if>
+		 	<if test='final_g_m != null and !final_g_m.equals("")'>#{final_g_m},</if>
+		 	<if test='final_g_y != null and !final_g_y.equals("")'>#{final_g_y},</if>
+		 	<if test='final_region != null and !final_region.equals("")'>#{final_region},</if>
+		 	<if test='final_sch != null and !final_sch.equals("")'>#{final_sch},</if>
+		 	<if test='final_major != null and !final_major.equals("")'>#{final_major},</if>
+		 	#{lang_learn},
+		 	<if test='lang_sch != null and !lang_sch.equals("")'>#{lang_sch},</if>
+		 	#{ko_spk_abil}, #{ko_doc_abil}, #{ch_spk_abil},	#{ch_doc_abil},	#{en_spk_abil},	#{en_doc_abil},	#{vt_spk_abil},	#{vt_doc_abil},
+		 	SYSDATE, #{ip},
+		 	<if test='other_lang != null and !other_lang.equals("")'>#{other_lang}</if>
+		 	)
+		WHERE MEM_ID = #{mem_id}
+	</insert>
+	
+	<insert id="insertCareer" parameterType="CareerVO">
+		INSERT INTO T_MEMBER_CAREER
+		VALUES (JOIN_YEAR, JOIN_MONTH, RESIGN_YEAR, RESIGN_MONTH, REGION, COMPANY, TASK)
+			(#{join_year}, #{join_month}, #{resign_year}, #{resign_month}, #{region}, #{company}, #{task})
+		WHERE RESUME_IDX = #{resume_idx}
+	
 	</insert>
 	
 </mapper>
