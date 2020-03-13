@@ -16,6 +16,7 @@
 			alert("Please verify your e-mail for unlimited access to our website.");
 		}
 	});
+
 </script>
 </head>
 <body>

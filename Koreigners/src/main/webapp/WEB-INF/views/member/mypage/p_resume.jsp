@@ -9,29 +9,7 @@
 <script type="text/javascript" src="resources/js/member/sojaeji.js"></script>
 <script type="text/javascript" src="resources/js/member/resume.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript">
-   $(document).ready(function(){
-       // 옵션추가 버튼 클릭시
-       $("#addItemBtn1").click(function(){
-           // item 의 최대번호 구하기
-           var lastItemNo = $("#career tr:last").attr("class").replace("item", "");
-           
-           var newitem = $("#career tr:eq(0)").clone();
-           newitem.removeClass();
-           newitem.find("td:eq(1)").attr("rowspan", "1");
-           newitem.addClass("item"+(parseInt(lastItemNo)+1));
 
-           $("#career").append(newitem);
-       });
-        
-        
-       // 삭제버튼 클릭시
-       $("#delBtn").click(function(){
-           var clickedRow = $(this).parent().parent();
-           clickedRow.remove();
-       });
-   });
-</script>
 </head>
 <body>
 <div>
@@ -224,7 +202,7 @@
            <h4><strong>03</strong>Career</h4>
             <tbody>
               <tr class="item1">
-                <th id="number" width="15%">Career 1</th>
+                <th width="15%" class="number">1</th>
                 <td width="85%" class="txLeft">Joining/Leaving :
                   <input type="text" size="4" name="Join_year" value="" class="only-num">
                   Year
@@ -244,7 +222,7 @@
                   Assigned task :
                   <input type="text" size="40" name="task" value="">
                 </td>
-                <td><button type="button" id="delBtn">delete</button></td>
+                <td><input type="button" id="delBtn" value="delete"></td>
             </tr>
             </tbody>
           </table>

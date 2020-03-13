@@ -280,7 +280,8 @@ public class UserServiceImpl implements UserService {
 		
 		String issure = "Jeyi"; //토큰 발급자
 		String subject = "tokenData"; //토큰의 주제 (즉 토큰에 담길 내용)
-		Date exDate = new Date(System.currentTimeMillis() + 60000*60); //토큰 만료 시간 (1시간)
+//		Date exDate = new Date(System.currentTimeMillis() + 60000*60); //토큰 만료 시간 (1시간)
+		Date exDate = new Date(System.currentTimeMillis() + 1000*60); //토큰 만료 시간 (60초)
 		tokenStr = Jwts.builder()
 				.setIssuer(issure)
 				.setSubject(subject)
