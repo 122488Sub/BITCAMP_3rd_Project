@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.koreigner.biz.member.UserService;
@@ -24,6 +26,7 @@ public class MainGoInterceptor extends HandlerInterceptorAdapter{
 		boolean goController = false;
 		
 		String token = "";
+	
 		
 		Cookie[] cookie = request.getCookies();
 		for(int i=0; i<cookie.length; i++){   
