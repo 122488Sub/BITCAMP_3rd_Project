@@ -121,7 +121,6 @@ public class UserController {
 		}
 		System.out.println("sns data : " + sns);
 		
-		
 		//1. code를 이용해서 access_token 받기
 		//2. access_token을 이용해서 사용자 profile 정보 가져오기
 		SNSLogin snsLogin = new SNSLogin(sns);
