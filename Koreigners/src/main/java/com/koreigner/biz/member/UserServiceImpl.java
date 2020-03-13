@@ -296,6 +296,8 @@ public class UserServiceImpl implements UserService {
 				.setIssuedAt(new Date()) //토큰 발행 시점(토큰 유효기간 검사에 활용)
 				.signWith(SignatureAlgorithm.HS256, this.generateKey()) //암호화방식, 키
 				.compact(); //토큰 생성 
+		System.out.println("tokenStr : " + tokenStr);
+		
 		return tokenStr;
 	}
 

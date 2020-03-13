@@ -28,12 +28,6 @@ public class UserInterceptor extends HandlerInterceptorAdapter{
 		boolean goController = false;
 		
 		String token = "";
-				
-		request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-		System.out.println();
-		System.out.println("request.getHeader(Authorization) : " + request.getHeader("Authorization"));
-		System.out.println();
-		
 		Cookie[] cookie = request.getCookies();
 		for(int i=0; i<cookie.length; i++){   
 			if(cookie[i].getName().equals("userToken")){    

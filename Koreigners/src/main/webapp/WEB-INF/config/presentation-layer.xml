@@ -64,7 +64,11 @@
 	<mvc:interceptors>
 		
 		<mvc:interceptor>
-			<mvc:mapping path="/myPage_go.do"/>
+			<mvc:mapping path="/*.do"/>
+			<mvc:exclude-mapping path="/main.do"/>
+			<mvc:exclude-mapping path="/login_go.do"/>
+			<mvc:exclude-mapping path="/login.do"/>
+			<mvc:exclude-mapping path="/logout.do"/>
 			<bean class="com.koreigner.common.interceptor.UserInterceptor"/>
 		</mvc:interceptor>
  		

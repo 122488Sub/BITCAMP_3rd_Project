@@ -58,6 +58,7 @@ public class MainGoInterceptor extends HandlerInterceptorAdapter{
 		} else {
 			String token_status = userService.validToken(token);
 			System.out.println("token_status: " + token_status);
+			goController = true;
 		}
 		return goController;
 	}
