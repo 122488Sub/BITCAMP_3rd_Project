@@ -276,6 +276,10 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public String createToken(String tokenUserId) {
+		Map<String, Object> headers = new HashMap<>();
+//		headers.put("typ", "JWT");
+//		headers.put("alg", "HS256");
+		
 		String tokenStr = ""; //토큰 값이 저장될 변수
 		
 		String issure = "Jeyi"; //토큰 발급자
@@ -283,6 +287,7 @@ public class UserServiceImpl implements UserService {
 //		Date exDate = new Date(System.currentTimeMillis() + 60000*60); //토큰 만료 시간 (1시간)
 		Date exDate = new Date(System.currentTimeMillis() + 1000*60); //토큰 만료 시간 (60초)
 		tokenStr = Jwts.builder()
+//				.setHeader(headers)
 				.setIssuer(issure)
 				.setSubject(subject)
 				.setAudience(tokenUserId)
@@ -291,6 +296,8 @@ public class UserServiceImpl implements UserService {
 				.setIssuedAt(new Date()) //토큰 발행 시점(토큰 유효기간 검사에 활용)
 				.signWith(SignatureAlgorithm.HS256, this.generateKey()) //암호화방식, 키
 				.compact(); //토큰 생성 
+		System.out.println("tokenStr : " + tokenStr);
+		
 		return tokenStr;
 	}
 

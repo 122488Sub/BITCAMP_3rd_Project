@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
@@ -75,16 +74,17 @@ public class UserController {
 		String inputPw = jsonMap.get("inputPw");
 		String inputCate = jsonMap.get("inputCate");
 		
+		System.out.println("==========로그인점두 스타트 토큰 발행 전=================");
 
 		if (userService.checkLogin(inputId, inputPw, inputCate)) { // 유저가 존재할 경우
 			tokenStr = userService.createToken(inputId); // 토큰 생성
 		}
+		System.out.println("==========로그인점두 스타트 토큰 발행 후=================");
+		System.out.println("==========로그인점두 스타트 토큰 발행  tokenStr ================= : " + tokenStr);
 		
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("tokenStr", "tokenStr");
-		Cookie userToken = new Cookie("userToken", tokenStr); //쿠키에 저장
-		userToken.setMaxAge(60*60*24); //쿠키의 유효기간(1일)
-		response.addCookie(userToken);
+//		Cookie userToken = new Cookie("userToken", tokenStr); //쿠키에 저장
+//		userToken.setMaxAge(60*60*24); //쿠키의 유효기간(1일)
+//		response.addCookie(userToken);
 		
 		entity = new ResponseEntity<String>(tokenStr, HttpStatus.OK); //토큰!
 		
@@ -152,10 +152,8 @@ public class UserController {
 	// 로그아웃 처리
 	@RequestMapping(value="logout.do")
 	public String postLogout(HttpServletRequest request, HttpServletResponse response, Model model) {
-		Cookie userToken = new Cookie("userToken", null);
-		userToken.setMaxAge(0);
-	    response.addCookie(userToken);
-	    
+		
+		
 	    model.addAttribute("logout_check", "1");
 	    model.addAttribute("pw_reset", "0");
 	    

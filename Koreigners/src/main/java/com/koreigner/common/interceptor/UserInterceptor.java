@@ -28,12 +28,7 @@ public class UserInterceptor extends HandlerInterceptorAdapter{
 		boolean goController = false;
 		
 		String token = "";
-		
 		Cookie[] cookie = request.getCookies();
-		request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-		System.out.println();
-		
-		System.out.println();
 		for(int i=0; i<cookie.length; i++){   
 			if(cookie[i].getName().equals("userToken")){    
 				token = cookie[i].getValue(); 
@@ -42,7 +37,6 @@ public class UserInterceptor extends HandlerInterceptorAdapter{
 		System.out.println("권한인터셉터 토큰 : " + token);
 		
 		if(token != null && userService.validToken(token).equals("Pass")) {//토큰 검증 통과 시
-			System.out.println("request.getHeader(tokenStr) : " + request.getHeader("tokenStr"));
 			Map<String, Object> tokenPayload = userService.getTokenPayload(token);
 			String mem_id = (String)tokenPayload.get("aud"); //아이디 추출
 			System.out.println("인터셉터id: " + mem_id);

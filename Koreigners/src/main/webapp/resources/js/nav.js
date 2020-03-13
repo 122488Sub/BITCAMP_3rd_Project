@@ -1,9 +1,22 @@
-
-
+function deleteCookie(name) {
+	//document.cookie = createCookie(name,"",-1);
+	  var expireDate = new Date();
+	  
+	  //어제 날짜를 쿠키 소멸 날짜로 설정한다.
+	  expireDate.setDate( expireDate.getDate() - 1 );
+	  document.cookie = name + "= " + "; expires=" + expireDate.toGMTString() + "; path=/";
+}
 function logout(){
 	sessionStorage.clear();
+	console.log("user토큰  :  " + document.cookie);
+//	document.cookie = 'userToken=;';
+	deleteCookie("userToken");
+	console.log("user토큰  :  " + document.cookie);
 	location.href = "logout.do";
+	
 }
+
+
 
 $(function(){
 	

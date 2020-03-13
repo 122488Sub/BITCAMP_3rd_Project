@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,14 @@ public class MypageController {
 	//마이페이지로 이동
 	@RequestMapping(value="myPage_go.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String myPage_go(HttpServletRequest request, Model model) {
+		String token = "";
+		Cookie[] cookie = request.getCookies();
+		for(int i=0; i<cookie.length; i++){   
+			if(cookie[i].getName().equals("userToken")){    
+				token = cookie[i].getValue(); 
+			}
+		}
+		System.out.println("token logottttttttttttttttttttttttttttttttttttt : " + token);
 		
 		String mem_id = (String)request.getAttribute("mem_id"); //토큰에서 아이디 추출해오기
 		System.out.println("컨트롤러에서 mem_id: " + mem_id);
