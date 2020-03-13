@@ -146,7 +146,35 @@ $(function() {
       this.value = this.value.replace(/[^0-9]/g,'');
   });
   
-  
+  // 커리어 옵션추가 버튼 클릭시
+  $("#addItemBtn1").click(function(){
+      // item 의 최대번호 구하기
+      var lastItemNo = $("#career tr:last").attr("class").replace("item", "");
+      
+      var number =$("#career th:last").text();
+      var newitem = $("#career tr:eq(0)").clone();
+      newitem.removeClass();
+      newitem.find("td:eq(1)").attr("rowspan", "1");
+      newitem.addClass("item"+(parseInt(lastItemNo)+1));
+      newitem.find('th').text(parseInt(number)+1);
+      
+      $("#career").append(newitem);
+  });
+   
+
+	//삭제버튼 클릭시
+	$('#delBtn').click(function(){
+	 var clickedRow = $(this).parent().parent();
+	 // 각 항목의 첫번째 row를 삭제한 경우 다음 row에 td 하나를 추가해 준다.
+     if( clickedRow.find("td:eq(0)").attr("rowspan") ){
+         if( clickedRow.next().hasClass(cls) ){
+             clickedRow.next().prepend(clickedRow.find("td:eq(0)"));
+         }
+     }
+	 clickedRow.remove();
+	});
+	
+ 
 	//카테고리 세션박스 변경 시 하위 카테고리 select ajax
 	$("#selectBox1").change(function(){
 		console.log("바뀜");
@@ -179,3 +207,5 @@ $(function() {
 	});
 
 });
+
+

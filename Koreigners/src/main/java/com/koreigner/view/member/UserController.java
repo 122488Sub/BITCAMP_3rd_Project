@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.google.connect.GoogleConnectionFactory;
@@ -81,6 +80,8 @@ public class UserController {
 			tokenStr = userService.createToken(inputId); // 토큰 생성
 		}
 		
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("tokenStr", "tokenStr");
 		Cookie userToken = new Cookie("userToken", tokenStr); //쿠키에 저장
 		userToken.setMaxAge(60*60*24); //쿠키의 유효기간(1일)
 		response.addCookie(userToken);
