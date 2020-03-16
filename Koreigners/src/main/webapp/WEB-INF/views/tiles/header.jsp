@@ -8,7 +8,7 @@
 	           <li class="menu"><a href="#">Home</a></li>
                     <li class="menu"><a href="hireList_go.do">Job</a></li>
                     <li class="menu"><a href="house_main.do">House</a></li>
-                    <li class="menu"><a href="#">Resale</a></li>
+                    <li class="menu"><a href="resale_go.do">Resale</a></li>
                     <li class="menu"><a href="getInfoBoardList.do">Infomation</a></li>
                     <li class="menu"><a href="#"></a></li>
                     <c:if test="${loginUser == null }">

@@ -11,7 +11,6 @@ public class CompanyVO {
 	               business_info, domitory, meals, company_telephone, ip, manager_email,addr_dt_kor, addr_dt_en;  
 	private Date regdate;
 	
-	
 	List<MultipartFile> business_file;
 	
 	//카테고리 변수

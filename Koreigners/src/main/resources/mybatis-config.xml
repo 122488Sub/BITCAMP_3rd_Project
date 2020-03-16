@@ -14,6 +14,7 @@
 		<typeAlias alias="jobVO" type="com.koreigner.biz.job.jobservice.JobVO"/>
 		<typeAlias alias="userVO" type="com.koreigner.biz.member.UserVO"/>
 		<typeAlias alias="ResumeVO" type="com.koreigner.biz.member.ResumeVO"/>
+		<typeAlias alias="rsVO" type="com.koreigner.biz.resale.ResaleVO"/>
 	</typeAliases>
   
   <!-- SQL 작성파일인 매퍼 파일 위치 지정 -->
@@ -25,6 +26,10 @@
      <mapper resource="mappings/job/company-mapper.xml"/>
      <mapper resource="mappings/job/hire-mapper.xml"/>
      
+<!-- resale mapper -->
+   	 <mapper resource="mappings/resale/resale-mapper.xml"/>	
+   	 
+   	 
 <!-- house mapper -->
    	 <mapper resource="mappings/house/house-mapper.xml"/>	
    	 

@@ -28,16 +28,16 @@ public class HireServiceImpl implements HireService {
 	
 	
 	@Override
-	public void insertHire(HireVO vo, HttpServletRequest reqeust) {
+	public void insertHire(HireVO vo, HttpServletRequest request) {
 		
-		String ip = reqeust.getRemoteAddr();  	//ip
+		String ip = request.getRemoteAddr();  	//ip
 		String insurance = jobService.insuranceInfo(vo.getInsuranceInfo()); //보험 유무 데이터 ex) 0111
 		
 		Map<String, String> map = new HashMap<>();
 		map.put("cate_prnt_ko", vo.getCate_prnt_ko());
 		map.put("cate_child_ko", vo.getCate_child_ko());
 		
-		vo.setMem_id("rex");
+		vo.setMem_id((String)request.getAttribute("mem_id"));
 		CompanyVO enCate_vo = companyServiceImpl.getCateEn(map); //영어 카테고리 vo 생성
 		String companyName = companyServiceImpl.getComName(vo.getMem_id());
 		vo.setCompany_name(companyName);
@@ -45,7 +45,6 @@ public class HireServiceImpl implements HireService {
 		vo.setIp(ip);											 //ip vo에 추가
 		vo.setCate_prnt_en(enCate_vo.getCate_prnt_en());         //영어 카테고리 대분류 vo에 추가
 		vo.setCate_child_en(enCate_vo.getCate_child_en());       //영어 카테고리 소분류 vo에 추가
-		
 		
 		System.out.println("vo.toString() : " + vo.toString());
 		
