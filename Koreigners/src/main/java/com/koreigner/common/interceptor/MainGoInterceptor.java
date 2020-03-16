@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
+import org.springframework.web.util.WebUtils;
 import com.koreigner.biz.member.UserService;
 
 public class MainGoInterceptor extends HandlerInterceptorAdapter{
@@ -25,41 +25,38 @@ public class MainGoInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		boolean goController = false;
 		
-		String token = "";
-	
+		Cookie loginCookie = WebUtils.getCookie(request, "userToken");
 		
-		Cookie[] cookie = request.getCookies();
-		for(int i=0; i<cookie.length; i++){   
-			if(cookie[i].getName().equals("userToken")){    
-				token = cookie[i].getValue(); 
-			}
-		}
-		System.out.println("메인페이지인터셉터 토큰 : " + token);
-		
-		// 로그인 전 메인페이지 이동(토큰 없는 상태)
-		if(token.equals("") || token == null) {
-			request.setAttribute("auth_check", "1");
+		if(loginCookie == null) {
+			System.out.println("///////////쿠키없음, 로그인 하지 않음");
 			goController = true;
-			
-		// 로그인 후 메인페이지 이동
-		} else if(token != null && userService.validToken(token).equals("Pass")) {
-			Map<String, Object> tokenPayload = userService.getTokenPayload(token); //토큰 정보 추출
-			String mem_id = (String)tokenPayload.get("aud"); //아이디 추출
-			String auth_status = userService.getAuthStatus(mem_id);
-			System.out.println("메인인터셉터 auth_status: " + auth_status);
-			
-			if(token != null && auth_status.equals("0")) {//이메일 인증을 하지 않은 회원
-				request.setAttribute("auth_check", "0");
-				goController = true;
-			} else {//이메일 인증을 마친 회원
-				request.setAttribute("auth_check", "1");
-				goController = true;
-			}
+						
 		} else {
-			String token_status = userService.validToken(token);
-			System.out.println("token_status: " + token_status);
+			System.out.println("///////////쿠키존재");
+			
+			String userToken = "";
+			Cookie[] cookie = request.getCookies();
+			for(int i=0; i<cookie.length; i++){   
+				if(cookie[i].getName().equals("userToken")){    
+					userToken = cookie[i].getValue(); 
+				}
+			}
+			
+			if(userToken != null && userService.validToken(userToken).equals("Pass")) {
+				Map<String, Object> tokenPayload = userService.getTokenPayload(userToken); //토큰 정보 추출
+				String mem_id = (String)tokenPayload.get("aud"); //아이디 추출
+				String auth_status = userService.getAuthStatus(mem_id);
+				
+				if(userToken != null && auth_status.equals("0")) {//이메일 인증을 하지 않은 회원
+					request.setAttribute("auth_check", "0");
+					goController = true;
+				} else {//이메일 인증을 마친 회원
+					request.setAttribute("auth_check", "1");
+					goController = true;
+				}
+			}
 			goController = true;
-		}
+		}			
 		return goController;
 	}
 }

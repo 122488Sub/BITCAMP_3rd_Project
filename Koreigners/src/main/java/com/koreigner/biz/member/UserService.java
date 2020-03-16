@@ -62,6 +62,5 @@ public interface UserService {
 	
 	//이력서 입력
 	void insertResume(ResumeVO rvo);
-	void insertCareer(CareerVO cvo);
 	
 }

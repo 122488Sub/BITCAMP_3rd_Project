@@ -114,10 +114,6 @@ public class UserDAO {
 	public void insertResume(ResumeVO rvo) {
 		mybatis.insert("user.insertResume", rvo);
 	}
-
-	public void insertCareer(CareerVO cvo) {
-		mybatis.insert("user.insertCareer", cvo);		
-	}
 		
 		
 

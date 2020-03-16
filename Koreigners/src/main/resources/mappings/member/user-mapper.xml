@@ -153,14 +153,6 @@
 		WHERE MEM_ID = #{mem_id}
 	</insert>
 	
-	<insert id="insertCareer" parameterType="CareerVO">
-		INSERT INTO T_MEMBER_CAREER
-		VALUES (JOIN_YEAR, JOIN_MONTH, RESIGN_YEAR, RESIGN_MONTH, REGION, COMPANY, TASK)
-			(#{join_year}, #{join_month}, #{resign_year}, #{resign_month}, #{region}, #{company}, #{task})
-		WHERE RESUME_IDX = #{resume_idx}
-	
-	</insert>
-	
 </mapper>
 
 

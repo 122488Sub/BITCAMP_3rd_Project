@@ -1,7 +1,5 @@
 package com.koreigner.view.member;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,13 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.koreigner.biz.job.company.CompanyServiceImpl;
 import com.koreigner.biz.job.company.CompanyVO;
-import com.koreigner.biz.member.CareerVO;
 import com.koreigner.biz.member.ResumeVO;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
@@ -83,9 +78,8 @@ public class MypageController {
 
 	
 	// 회원정보 수정
-	@RequestMapping(value="updateMember.do", method=RequestMethod.POST)
-	public String updateMember(HttpServletRequest request, UserVO vo) {
-		
+	@RequestMapping(value="updateMember.do", method= {RequestMethod.POST, RequestMethod.GET})
+	public String updateMember(HttpServletRequest request, UserVO vo, Model model) {
 		String mem_cate = vo.getMem_cate();
 		
 		String birth1 = request.getParameter("birth1");
@@ -102,6 +96,8 @@ public class MypageController {
 			
 		} else if(mem_cate.equals("p")) {
 			userService.updateMember(vo);
+			UserVO mvo = userService.getOneMember(vo.getMem_id());
+			model.addAttribute("mvo", mvo);
 			return "member/mypage/p_profile.page";
 			
 		} else {
@@ -137,10 +133,10 @@ public class MypageController {
 	}
 	
 	// 이력서 입력
-	@RequestMapping(value="insertResume.do", method=RequestMethod.POST)
-	public String insertResume(@RequestParam("ori_file") MultipartFile file, ResumeVO rvo) {
+	@RequestMapping(value="/insertResume.do", method= {RequestMethod.POST, RequestMethod.GET})
+	public String insertResume(ResumeVO rvo) {
 		
-		System.out.println("ResumeVO : " + rvo);
+		System.out.println("ResumeVO : " + rvo.toString());
 		/*
 		 ********* 파일 업로드처리 **********
 		 * MultipartFile 인터페이스 주요 메소드

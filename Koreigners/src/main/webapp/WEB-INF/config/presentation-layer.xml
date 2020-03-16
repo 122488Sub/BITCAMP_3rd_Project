@@ -64,11 +64,7 @@
 	<mvc:interceptors>
 		
 		<mvc:interceptor>
-			<mvc:mapping path="/*.do"/>
-			<mvc:exclude-mapping path="/main.do"/>
-			<mvc:exclude-mapping path="/login_go.do"/>
-			<mvc:exclude-mapping path="/login.do"/>
-			<mvc:exclude-mapping path="/logout.do"/>
+			<mvc:mapping path="/myPage_go.do"/>
 			<bean class="com.koreigner.common.interceptor.UserInterceptor"/>
 		</mvc:interceptor>
  		
@@ -91,7 +87,7 @@
 	
 	<bean id="naverRedirectUrl" class="java.lang.String">
 		<!-- <constructor-arg value="http://localhost:8080/auth/naver/callback" />  -->	
-		<constructor-arg value="http://localhost:8080/koreigner/naver/callback" />	
+		<constructor-arg value="http://localhost:8080/biz/naver/callback" />	
 	</bean>
 	
 	<bean id="naverSns" class="com.koreigner.biz.member.auth.SnsValue">
@@ -112,7 +108,7 @@
 	</bean>
 	
 	<bean id="googleRedirectUrl" class="java.lang.String">
-		<constructor-arg value="http://localhost:8080/koreigner/google/callback" />	
+		<constructor-arg value="http://localhost:8080/biz/google/callback" />	
 	</bean>
 	
 	<bean id="googleSns" class="com.koreigner.biz.member.auth.SnsValue">

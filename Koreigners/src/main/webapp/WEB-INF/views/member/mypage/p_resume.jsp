@@ -297,18 +297,7 @@
             </tbody>
           </table>
           
-          <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
-            <h4><strong>05</strong>Other Items</h4>
-            <tbody>
-              <tr>
-                <th width="15%">The attached file</th>
-                <td width="85%" class="txLeft">
-                  <input type="file" name="ori_file" id="file1"> &nbsp; 
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
+         
 
           <p align="center">
             <a href="" target="_self" class="button white small">Cancel</a>
@@ -316,6 +305,27 @@
           	<input type="submit" class="Button orange small" value="Registration">
           </p>
 
+          </form>
+          
+          <form id="form2" method="post">
+	           <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+	            <h4><strong>05</strong>Other Items</h4>
+	            <tbody>
+	              <tr>
+	                <th width="15%">The attached file</th>
+	                <td width="85%" class="txLeft">
+	                  <input type="file" name="ori_file" id="file1"> &nbsp; 
+	                </td>
+	              </tr>
+	            </tbody>
+	          </table>
+	          
+	           <p align="center">
+            <a href="" target="_self" class="button white small">Cancel</a>
+            &nbsp; &nbsp;
+          	<input type="submit" class="Button orange small" value="Registration">
+          </p>
+	          
           </form>
        
 </body>

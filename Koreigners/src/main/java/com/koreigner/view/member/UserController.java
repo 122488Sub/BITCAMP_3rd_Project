@@ -3,7 +3,6 @@ package com.koreigner.view.member;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.scribejava.core.httpclient.HttpClient;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
 import com.koreigner.biz.member.auth.SNSLogin;
@@ -59,6 +59,20 @@ public class UserController {
 		//기본 로그인 페이지 이동 시
 		model.addAttribute("pw_reset", "0");
 		model.addAttribute("logout_check", "0");
+		
+		SNSLogin snsLogin = new SNSLogin(naverSns);
+		System.out.println("===> [LoginPage] - snsLogin Data : " + snsLogin);
+		System.out.println("===> [LoginPage] - getNaverAuthURL Data : " + snsLogin.getNaverAuthURL());
+		model.addAttribute("naver_url", snsLogin.getNaverAuthURL());
+		
+//		SNSLogin googleLogin = new SNSLogin(googleSns);
+//		model.addAttribute("google_url", googleLogin.getNaverAuthURL());
+		
+		/* 구글code 발행을 위한 URL 생성 */
+		OAuth2Operations oauthOperations = googleConnectionFactory.getOAuthOperations();
+		String url = oauthOperations.buildAuthorizeUrl(GrantType.AUTHORIZATION_CODE,googleOAuth2Parameters);
+		model.addAttribute("google_url", url);
+		System.out.println(" ///////////////// google url : " + url );
 						
 		return "/member/login.page";
 	}
@@ -74,17 +88,9 @@ public class UserController {
 		String inputPw = jsonMap.get("inputPw");
 		String inputCate = jsonMap.get("inputCate");
 		
-		System.out.println("==========로그인점두 스타트 토큰 발행 전=================");
-
 		if (userService.checkLogin(inputId, inputPw, inputCate)) { // 유저가 존재할 경우
 			tokenStr = userService.createToken(inputId); // 토큰 생성
 		}
-		System.out.println("==========로그인점두 스타트 토큰 발행 후=================");
-		System.out.println("==========로그인점두 스타트 토큰 발행  tokenStr ================= : " + tokenStr);
-		
-//		Cookie userToken = new Cookie("userToken", tokenStr); //쿠키에 저장
-//		userToken.setMaxAge(60*60*24); //쿠키의 유효기간(1일)
-//		response.addCookie(userToken);
 		
 		entity = new ResponseEntity<String>(tokenStr, HttpStatus.OK); //토큰!
 		
@@ -143,7 +149,7 @@ public class UserController {
 			return "member/oauth2Register.page";
 		} else { //가입 된 사용자 
 			model.addAttribute("result", mvo.getMem_name() + "님 반갑습니다.^^");
-			return "loginResult";
+			return "common/main.page";
 		}
 		
 		//4. 존재시 강제로그인, 미존재시 가입페이지로!!

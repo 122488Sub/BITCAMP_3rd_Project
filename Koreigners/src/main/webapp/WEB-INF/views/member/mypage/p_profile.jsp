@@ -118,7 +118,7 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 		<li class="tabs"><a href="myPage_go.do?type=ads">My Ads</a></li>
 	</ul>
 </div>
-	<form action="updateMember.do" method="post">
+	<form action="updateMember.do" method="get">
 		<div>
 			<label for="id">ID(Email)</label>
 			<input name="mem_id" value="${mvo.mem_id }" contenteditable="false" disabled="disabled">
@@ -126,7 +126,7 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 		</div><br>
 		<div>
 			<label for="nickName">Nickname</label>
-			<input type="text" name="mem_name" value="${mvo.mem_name }" >
+			<input type="text" name="mem_name" placeholder="${mvo.mem_name }" >
 			<span id="getMemberNick"></span>
 		</div><br>
 		<div>
@@ -145,7 +145,7 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 		</div><br>
 		<div>
 			<label for="phone">Phone number</label>
-			<input type="text" name="mem_phone" value="${mvo.mem_phone }">
+			<input type="text" name="mem_phone" placeholder="${mvo.mem_phone }">
 		</div><br>
 		<div>
 			<label for="birth">Birthday</label>
@@ -171,7 +171,7 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 				document.write("</select>"); 
 			</script> 
 			<c:if test="${not empty mvo.mem_birth }">
-				<input value="${mvo.mem_birth }" contenteditable="false" disabled="disabled">
+				<input placeholder="${mvo.mem_birth }" contenteditable="false" disabled="disabled">
 			</c:if>
 		</div><br>
 		<div>
@@ -189,12 +189,12 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
             </div>
             <div>
             <label>DetailAddress:</label>
-               <input type="text"   id="detailAddr" name="address_detail">
+               <input type="text"   id="detailAddr" name="address_detail" placeholder="${mvo.mem_address }">
 	        </div>
 		</div><br>
 		<div>
 			<label for="nationality">Nationality</label>
-			<input type="text" id="nationality" name="mem_nationality" value="${mvo.mem_nationality }">
+			<input type="text" id="nationality" name="mem_nationality" placeholder="${mvo.mem_nationality }">
 		</div><br>
 		<hr>
 		<br>

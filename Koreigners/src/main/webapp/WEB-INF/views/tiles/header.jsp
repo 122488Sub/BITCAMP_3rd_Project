@@ -11,6 +11,14 @@
                     <li class="menu"><a href="#">Resale</a></li>
                     <li class="menu"><a href="getInfoBoardList.do">Infomation</a></li>
                     <li class="menu"><a href="#"></a></li>
+                    <c:if test="${loginUser == null }">
+                   		<li class="menu"><a href="login.do">Sign in</a></li>
+                    	<li class="menu"><a href="register.do">Register</a></li>
+                    </c:if>
+                    <c:if test="${loginUser != null }">
+                   		<li class="menu"><h3>${loginUser.mem_name }</h3></li>
+                   		<li class="menu"><a href="javascript:logout()">Logout</a></li>
+                    </c:if>
 	       </ul>
 	   </ul>
 	   <div id="header_bottom">

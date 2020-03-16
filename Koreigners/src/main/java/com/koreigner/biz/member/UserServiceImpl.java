@@ -233,10 +233,6 @@ public class UserServiceImpl implements UserService {
 	public void insertResume(ResumeVO rvo) {
 		userDAO.insertResume(rvo);
 	}
-	@Override
-	public void insertCareer(CareerVO cvo) {
-		userDAO.insertCareer(cvo);
-	}
 	
 	
 
@@ -285,7 +281,7 @@ public class UserServiceImpl implements UserService {
 		String issure = "Jeyi"; //토큰 발급자
 		String subject = "tokenData"; //토큰의 주제 (즉 토큰에 담길 내용)
 //		Date exDate = new Date(System.currentTimeMillis() + 60000*60); //토큰 만료 시간 (1시간)
-		Date exDate = new Date(System.currentTimeMillis() + 1000*60); //토큰 만료 시간 (60초)
+		Date exDate = new Date(System.currentTimeMillis() + 1000*60*60); //토큰 만료 시간 (1시간)
 		tokenStr = Jwts.builder()
 //				.setHeader(headers)
 				.setIssuer(issure)

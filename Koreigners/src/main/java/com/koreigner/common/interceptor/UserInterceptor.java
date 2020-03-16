@@ -1,17 +1,14 @@
 package com.koreigner.common.interceptor;
 
+import java.io.IOException;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
 import com.koreigner.biz.member.UserService;
 
 public class UserInterceptor extends HandlerInterceptorAdapter{
@@ -26,7 +23,7 @@ public class UserInterceptor extends HandlerInterceptorAdapter{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		boolean goController = false;
-		
+	
 		String token = "";
 		Cookie[] cookie = request.getCookies();
 		for(int i=0; i<cookie.length; i++){   
@@ -55,7 +52,7 @@ public class UserInterceptor extends HandlerInterceptorAdapter{
 				goController = false;
 			}
 			
-		} else {//토큰 검증 통과 못함
+		} else {//토큰 검증 통과 못함 or token == null
 			//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 만료 후 logout mypage 다시 login register로
 			request.setAttribute("validToken", "1");
 			response.sendRedirect("login_go.do");

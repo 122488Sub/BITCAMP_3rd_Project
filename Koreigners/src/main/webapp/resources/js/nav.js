@@ -17,7 +17,7 @@ function logout(){
 }
 
 
-
+/*
 $(function(){
 	
 	if(sessionStorage.getItem("tokenStr") != null){
@@ -29,4 +29,4 @@ $(function(){
 	}
 	
 	
-});
+});*/
