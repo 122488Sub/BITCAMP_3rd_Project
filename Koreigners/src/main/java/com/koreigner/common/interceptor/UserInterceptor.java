@@ -35,6 +35,8 @@ public class UserInterceptor extends HandlerInterceptorAdapter{
 			}
 		}
 		System.out.println("권한인터셉터 토큰 : " + token);
+		
+		//토큰이 공백일 시 로그인 안한 것이므로 그냥 실행 하게 true 반환
 		if(token.equals("")) {
 			goController =  true;
 			request.setAttribute("mem_id", "");
