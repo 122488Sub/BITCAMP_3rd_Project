@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="resaleDAO">
+	<select id="getRsUser" parameterType="String" resultType="userVO">
+		SELECT *
+		  FROM T_MEMBER
+		  WHERE MEM_ID = #{id}
+	</select>
+
+
+
+	<!-- 중고게시판 작성 텍스트 insert -->
+	<insert id="writeRs" parameterType="rsVO">
+		INSERT INTO T_RESALE_BOARD (RS_IDX, BOARD_IDX, MEM_ID, MEM_PW, MEM_NAME, SUBJECT, ADDRESS, RS_CATE_PRNT, CATEGORY_CHILD, CONTENT, FILENAME, FILE_ORI_NAME, IP,  HASH_TAG, REGDATE, B_STATUS, HIT)
+		  	               VALUES(RS_SEQ.NEXTVAL, 3,  #{mem_id}, #{mem_pw}, #{mem_name}, #{subject}, #{address},  #{rs_cate_prnt}, #{category_child}, #{content}, #{fileStr}, #{file_ori_name}, #{ip}, #{hash_tag}, SYSDATE, #{b_status}, #{hit})
+	</insert>
+	
+	<!-- 중고게시판 작성 이미지 파일명 insert -->
+	<insert id="writeImg" parameterType="Map">
+		INSERT INTO T_RESALE_IMG 
+		 VALUES(RS_SEQ.CURRVAL,#{saveFile}, #{originFile})
+	</insert>
+</mapper>
+
+
+
+
+
+
+

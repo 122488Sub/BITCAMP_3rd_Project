@@ -51,9 +51,16 @@
 </table>
 	<br><br><br><br><br><br><br><br><br><br><br><br> --%>
 
-
 <hr>
-<p><a href="hireWrite_go.do">Post an Ad</a></p>
+<c:choose>
+	<c:when test="${not empty mem_id}">
+		<p><a href="hireWrite_go.do">Post an Ad</a></p>
+	</c:when>
+	<c:otherwise>
+		<p></p>
+	</c:otherwise>
+</c:choose>
+
 
 <table border>
 	<thead>

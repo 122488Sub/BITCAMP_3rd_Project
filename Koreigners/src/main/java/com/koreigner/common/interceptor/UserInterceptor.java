@@ -35,8 +35,11 @@ public class UserInterceptor extends HandlerInterceptorAdapter{
 			}
 		}
 		System.out.println("권한인터셉터 토큰 : " + token);
-		
-		if(token != null && userService.validToken(token).equals("Pass")) {//토큰 검증 통과 시
+		if(token.equals("")) {
+			goController =  true;
+			request.setAttribute("mem_id", "");
+		}else if(token != null && userService.validToken(token).equals("Pass")) {//토큰 검증 통과 시
+			System.out.println("토큰검증 통과");
 			Map<String, Object> tokenPayload = userService.getTokenPayload(token);
 			String mem_id = (String)tokenPayload.get("aud"); //아이디 추출
 			System.out.println("인터셉터id: " + mem_id);
@@ -57,12 +60,12 @@ public class UserInterceptor extends HandlerInterceptorAdapter{
 			
 		} else {//토큰 검증 통과 못함
 			//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 만료 후 logout mypage 다시 login register로
+			System.out.println("잡가는데 공백");
 			request.setAttribute("validToken", "1");
 			response.sendRedirect("login_go.do");
 			goController = false;
 		}
 			
-		
 		return goController;
 	}
 }
