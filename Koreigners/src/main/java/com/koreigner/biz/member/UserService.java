@@ -3,6 +3,8 @@ package com.koreigner.biz.member;
 import java.util.Date;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+
 public interface UserService {
 	
 	//아이디 중복체크
@@ -33,7 +35,7 @@ public interface UserService {
 	boolean checkLogin(String inputId, String inputPw, String inputCate);
 
 	//JWT 토큰 생성
-	String createToken(String string);
+	String createToken(String string, String jSessionId);
 	
 	//JWT 토큰 검증
 	String validToken(String tokenStr);

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.WebUtils;
 
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
@@ -80,7 +81,7 @@ public class UserController {
 	
 	//로그인 처리
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public ResponseEntity<String> postLogin(HttpServletResponse response, HttpServletRequest request, Model model, @RequestBody Map<String, String> jsonMap, HttpSession session) {
+	public ResponseEntity<String> postLogin(HttpServletResponse response, HttpServletRequest request, Model model, @RequestBody Map<String, String> jsonMap) {
 
 		ResponseEntity<String> entity = null;
 		String tokenStr = "fail";
@@ -88,26 +89,33 @@ public class UserController {
 		String inputId = jsonMap.get("inputId");
 		String inputPw = jsonMap.get("inputPw");
 		String inputCate = jsonMap.get("inputCate");
-		String autoLogin = jsonMap.get("autoLogin");
+//		String autoLogin = jsonMap.get("autoLogin");
 		
-		System.out.println("autoLogin: " + autoLogin);
+		String jSessionId = "";
+		
+		Cookie[] userCookie = request.getCookies();
+		for(int i=0; i<userCookie.length; i++){   
+			if(userCookie[i].getName().equals("JSESSIONID")){    
+				jSessionId = userCookie[i].getValue(); 
+			}
+		}
 		
 		if (userService.checkLogin(inputId, inputPw, inputCate)) { // 유저가 존재할 경우
-			tokenStr = userService.createToken(inputId); // 토큰 생성
+			tokenStr = userService.createToken(inputId, jSessionId); // 토큰 생성
 			System.out.println("login.do tokenStr: " + tokenStr);
 			
-			if(autoLogin != null && autoLogin.equals("1")) { //자동로그인 하겠다
-//				userService.setAutoLogin(inputId, "1");
-				Cookie autoCookie = new Cookie("autoCookie", tokenStr);
-				autoCookie.setMaxAge(SessionNames.EXPIRE);
-				response.addCookie(autoCookie);
-				
-			} else { //자동로그인 안해
-//				userService.setAutoLogin(inputId, "0");
-				Cookie delCookie = new Cookie("autoCookie", null);
-				delCookie.setMaxAge(0);
-				response.addCookie(delCookie);
-			}
+//			if(autoLogin != null && autoLogin.equals("1")) { //자동로그인 하겠다
+////				userService.setAutoLogin(inputId, "1");
+//				Cookie autoCookie = new Cookie("autoCookie", tokenStr);
+//				autoCookie.setMaxAge(SessionNames.EXPIRE);
+//				response.addCookie(autoCookie);
+//				
+//			} else { //자동로그인 안해
+////				userService.setAutoLogin(inputId, "0");
+//				Cookie delCookie = new Cookie("autoCookie", null);
+//				delCookie.setMaxAge(0);
+//				response.addCookie(delCookie);
+//			}
 			
 		}
 		

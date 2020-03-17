@@ -24,37 +24,40 @@ public class MainGoInterceptor extends HandlerInterceptorAdapter implements Sess
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		System.out.println("===> [MainGoInterceptor]");
-		boolean goController = false;
-		
-		Cookie loginCookie = WebUtils.getCookie(request, "userToken");
-		System.out.println("userToken : " + loginCookie);
-		
-		if(loginCookie == null) {//쿠키없음, 로그인하지 않음
-			System.out.println("===> [MainGoInterceptor] - 쿠키없음, 로그인하지 않음");
-			goController = true; //메인페이지 간다, 잡페이지 간다, ... 페이지이동/리스트/상세보기 .do에 쓰임
-						
-		} else {//쿠키존재, 로그인 했을수도/ 안했을수도
-			System.out.println("===> [MainGoInterceptor] - 쿠키존재, 로그인 했을수도/안했을 수도");
-			
-			//쿠키 내용 꺼내서
-			String userToken = "";
-			String autoCookie = "";
-			Cookie[] userCookie = request.getCookies();
-			for(int i=0; i<userCookie.length; i++){   
-				if(userCookie[i].getName().equals("userToken")){    
-					userToken = userCookie[i].getValue(); 
-				} 
-				else if(userCookie[i].getName().equals("autoCookie")) {
-					autoCookie = userCookie[i].getValue();
-				}
+				
+		//쿠키 내용 꺼내서
+		String userToken = "";
+		String autoCookie = "";
+		String JSESSIONID = "";
+		Cookie[] userCookie = request.getCookies();
+		for(int i=0; i<userCookie.length; i++){   
+			if(userCookie[i].getName().equals("userToken")){    
+				userToken = userCookie[i].getValue(); 
+			} 
+			else if(userCookie[i].getName().equals("autoCookie")) {
+				autoCookie = userCookie[i].getValue();
 			}
-			System.out.println("autoCookie: " + autoCookie);
+			else if(userCookie[i].getName().equals("JSESSIONID")) {
+				JSESSIONID = userCookie[i].getValue();
+			}
+		}
+		
+		
+		if(userToken == null || userToken.equals("")) {//쿠키없음, 로그인하지 않음
+						
+		} else {//쿠키존재
+			
 			//토큰 유효할 경우
 			if(userToken != null && userService.validToken(userToken).equals("Pass")) {
 				System.out.println("===> [MainGoInterceptor] - 토큰 유효할때");
 				Map<String, Object> tokenPayload = userService.getTokenPayload(userToken); //토큰 정보 추출
-				String mem_id = (String)tokenPayload.get("aud"); //아이디 추출
-//					String autoLogin = userService.getAutoLogin(mem_id); //자동로그인 유무
+				String mem_id = (String)tokenPayload.get("mem_id"); //아이디 추출
+				String userJsId = (String)tokenPayload.get("jSessionId"); // JSESSIONID 추출
+				
+				if(userJsId.equals(JSESSIONID)) {
+					UserVO member = userService.getOneMember(mem_id);
+					request.setAttribute(LOGIN, member);					
+				}
 				
 				if(autoCookie != null && !autoCookie.equals("")) {
 					UserVO member = userService.getOneMember(mem_id);
@@ -66,20 +69,17 @@ public class MainGoInterceptor extends HandlerInterceptorAdapter implements Sess
 				
 				if(userToken != null && auth_status.equals("0")) {//이메일 인증을 하지 않은 회원
 					request.setAttribute("auth_check", "0");
-					goController = true;
 				} else {//이메일 인증을 마친 회원
 					request.setAttribute("auth_check", "1");
-					goController = true;
 				}
 				
 			} else  {
 			//토큰 유효하지 않을 경우 또는 userToken이 없는경우
 				String token_status = userService.validToken(userToken); 
 				System.out.println("token_status: " + token_status); 
-				goController = true; 
 			}
 			
 		}			
-		return goController;
+		return true;
 	}
 }

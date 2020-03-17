@@ -9,9 +9,8 @@ function deleteCookie(name) {
 function logout(){
 	sessionStorage.clear();
 	console.log("user토큰  :  " + document.cookie);
-//	document.cookie = 'userToken=;';
+	deleteCookie("autoCookie");
 	deleteCookie("userToken");
-	console.log("user토큰  :  " + document.cookie);
 	location.href = "logout.do";
 	
 }

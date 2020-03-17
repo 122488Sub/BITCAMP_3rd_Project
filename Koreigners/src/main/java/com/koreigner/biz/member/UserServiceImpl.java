@@ -20,6 +20,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.mail.Authenticator;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
+import org.springframework.web.util.WebUtils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -218,7 +220,6 @@ public class UserServiceImpl implements UserService {
 	public int userPwCheck(Map<String, String> map) {
 		
 		String mem_pw = map.get("mem_pw");
-		System.out.println("비밀번호 : " + mem_pw);
 		
 		//비밀번호 암호화
 		String securedPw = securityUtil.encryptSHA256(mem_pw);
@@ -281,24 +282,26 @@ public class UserServiceImpl implements UserService {
 	 * @return 토큰값을 반환한다.
 	 */
 	@Override
-	public String createToken(String tokenUserId) {
+	public String createToken(String tokenUserId, String jSessionId) {
+		
+		System.out.println("토큰 생성할 때  JSESSIONID : " + jSessionId);
+		
 		Map<String, Object> headers = new HashMap<>();
-//		headers.put("typ", "JWT");
-//		headers.put("alg", "HS256");
+		headers.put("typ", "JWT");
+		headers.put("alg", "HS256");
 		
-		String tokenStr = ""; //토큰 값이 저장될 변수
+		Map<String, Object> payload = new HashMap<>();
+		payload.put("mem_id", tokenUserId);
+		payload.put("jSessionId", jSessionId);
 		
-		String issure = "Jeyi"; //토큰 발급자
-		String subject = "tokenData"; //토큰의 주제 (즉 토큰에 담길 내용)
 //		Date exDate = new Date(System.currentTimeMillis() + 60000*60); //토큰 만료 시간 (1시간)
 		Date exDate = new Date(System.currentTimeMillis() + 1000*60*60); //토큰 만료 시간 (1시간)
+		
+		String tokenStr = ""; //토큰 값이 저장될 변수
 		tokenStr = Jwts.builder()
-//				.setHeader(headers)
-				.setIssuer(issure)
-				.setSubject(subject)
-				.setAudience(tokenUserId)
-				.setId(SupportUtil.makeUUID2String())
-				.setExpiration(exDate)
+				.setHeader(headers)
+				.setClaims(payload)
+				.setExpiration(exDate)				
 				.setIssuedAt(new Date()) //토큰 발행 시점(토큰 유효기간 검사에 활용)
 				.signWith(SignatureAlgorithm.HS256, this.generateKey()) //암호화방식, 키
 				.compact(); //토큰 생성 

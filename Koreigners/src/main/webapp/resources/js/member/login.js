@@ -25,6 +25,10 @@ function loginBt() {
 				
 				setCookie("userToken", tokenStr, 1);
 				
+				if(autoLogin == 1) {
+					setCookie("autoCookie", tokenStr, 24*7);
+				}
+				
 				alert("Hello there! :)"+ "\n" + "Move to the MainPage");
 				
 				location.href='main.do';

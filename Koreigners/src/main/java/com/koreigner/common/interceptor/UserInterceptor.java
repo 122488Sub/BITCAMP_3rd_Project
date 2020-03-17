@@ -13,6 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.koreigner.biz.member.UserService;
+import com.koreigner.biz.member.UserVO;
 
 public class UserInterceptor extends HandlerInterceptorAdapter implements SessionNames{
 	
@@ -26,60 +27,62 @@ public class UserInterceptor extends HandlerInterceptorAdapter implements Sessio
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		boolean goController = false;
-	
-		String token = "";
-		Cookie[] cookie = request.getCookies();
-		for(int i=0; i<cookie.length; i++){   
-			if(cookie[i].getName().equals("userToken")){    
-				token = cookie[i].getValue(); 
+		
+		//쿠키 내용 꺼내서
+		String userToken = "";
+		String autoCookie = "";
+		String JSESSIONID = "";
+		Cookie[] userCookie = request.getCookies();
+		for(int i=0; i<userCookie.length; i++){   
+			if(userCookie[i].getName().equals("userToken")){    
+				userToken = userCookie[i].getValue(); 
+			}else if(userCookie[i].getName().equals("autoCookie")) {
+				autoCookie = userCookie[i].getValue();
+			}else if(userCookie[i].getName().equals("JSESSIONID")) {
+				JSESSIONID = userCookie[i].getValue();
 			}
 		}
-		System.out.println("권한인터셉터 토큰 : " + token);
 		
-		//토큰이 공백일 시 로그인 안한 것이므로 그냥 실행 하게 true 반환
-		if(token.equals("")) {
-			goController =  true;
-			request.setAttribute("mem_id", "");
-		}else if(token != null && userService.validToken(token).equals("Pass")) {//토큰 검증 통과 시
-			System.out.println("토큰검증 통과");
-			Map<String, Object> tokenPayload = userService.getTokenPayload(token);
-			String mem_id = (String)tokenPayload.get("aud"); //아이디 추출
-			System.out.println("인터셉터id: " + mem_id);
+		//자동로그인 할 경우
+		if(autoCookie != null && !autoCookie.equals("")) {
+			
+			Map<String, Object> tokenPayload = userService.getTokenPayload(autoCookie); //토큰 정보 추출
+			String mem_id = (String)tokenPayload.get("mem_id"); //아이디 추출
+			
 			request.setAttribute("mem_id", mem_id);
+			UserVO member = userService.getOneMember(mem_id);
+			request.setAttribute(SessionNames.LOGIN, member);
+			goController = true;
 			
-			String auth_status = userService.getAuthStatus(mem_id); //이메일인증여부 가져오기
-			System.out.println("auth_status: " + auth_status);
-			
-			if(auth_status != null && auth_status.equals("1")) {//이메일 인증을 완료한 유저
-				goController = true;
+		//자동로그인하지 않을 경우
+		} else {
+			//userToken 검증
+			if(userToken != null && !userToken.equals("") && userService.validToken(userToken).equals("Pass")) {
+				Map<String, Object> tokenPayload = userService.getTokenPayload(userToken); //토큰 정보 추출
+				String mem_id = (String)tokenPayload.get("mem_id"); //아이디 추출
+				String userJsId = (String)tokenPayload.get("jSessionId"); // JSESSIONID 추출
 				
-			} else if(auth_status.equals("0")) { //이메일 인증을 완료하지 못한 유저
-				request.setAttribute("auth_status", "0");
-				RequestDispatcher dispatcher = request.getRequestDispatcher("main.do");
-				dispatcher.forward(request, response);
+				if(userJsId.equals(JSESSIONID)) {
+					UserVO member = userService.getOneMember(mem_id);
+					request.setAttribute(SessionNames.LOGIN, member);
+					request.setAttribute("mem_id", mem_id);
+					goController = true;
+				} else {
+					System.out.println("//////이번에 로그인한 쿠키가 아님!!!");
+					response.sendRedirect("login_go.do");
+					goController = false;
+				}
+				
+			//userToken 유효하지 않을 경우
+			} else {
+				String token_status = userService.validToken(userToken);
+				System.out.println("token_status : " + token_status);
+				response.sendRedirect("login_go.do");
 				goController = false;
 			}
-			
-		} else {//토큰 검증 통과 못함 or token == null
-			//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 만료 후 logout mypage 다시 login register로
-			System.out.println("잡가는데 공백");
-			request.setAttribute("validToken", "1");
-			response.sendRedirect("login_go.do");
-			goController = false;
 		}
-			
+		
 		return goController;
-	}
-	
-	private void saveAttemptedLocation(HttpServletRequest request, HttpSession session) throws IOException {
-		String uri = request.getRequestURI(); 
-		String query = request.getQueryString();
-		if (StringUtils.isNotEmpty(query)) {
-			uri += "?" + query;
-			
-			session.setAttribute(ATTEMPTED, uri);
-			
-		}
 	}
 	
 }
