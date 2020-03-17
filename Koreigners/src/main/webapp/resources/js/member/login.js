@@ -9,7 +9,8 @@ function loginBt() {
 	var inputId = $('#mem_id').val();
 	var inputPw = $('#mem_pw').val();
 	var inputCate = $('input[name=mem_cate]:checked').val();
-	var jsonObj = {"inputId":inputId, "inputPw":inputPw, "inputCate":inputCate};
+	var autoLogin = $('input[name=autoLogin]:checked').val();
+	var jsonObj = {"inputId":inputId, "inputPw":inputPw, "inputCate":inputCate, "autoLogin":autoLogin};
 	
 	$.ajax({
 		url : 'login.do',
@@ -24,7 +25,8 @@ function loginBt() {
 				
 				setCookie("userToken", tokenStr, 1);
 				
-				alert("Hello there! :)"+ "\n" + "Move to the MainPage");     
+				alert("Hello there! :)"+ "\n" + "Move to the MainPage");
+				
 				location.href='main.do';
 				
 			} else if(tokenStr ==='fail'){

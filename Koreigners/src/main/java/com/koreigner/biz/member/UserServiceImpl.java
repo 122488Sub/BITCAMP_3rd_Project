@@ -235,7 +235,17 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	
+	@Override
+	public String getAutoLogin(String mem_id) {
+		String autoLogin = userDAO.getAutoLogin(mem_id);
+		return autoLogin;
+	}
 
+	@Override
+	public void setAutoLogin(String mem_id, String Fl) {
+		userDAO.setAutoLogin(mem_id, Fl);
+		
+	}
 //=========================== SNS Login ===============================
 	@Override
 	public UserVO getMemberSns(UserVO snsMemVO) {
@@ -356,6 +366,8 @@ public class UserServiceImpl implements UserService {
 		
 		return payloadMap;
 	}
+
+
 
 
 	

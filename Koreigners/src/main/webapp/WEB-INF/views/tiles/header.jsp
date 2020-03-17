@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section id="section1">
 	<div id="wrap">    
 	   <ul id="header">
@@ -11,12 +12,12 @@
                     <li class="menu"><a href="resale_go.do">Resale</a></li>
                     <li class="menu"><a href="getInfoBoardList.do">Infomation</a></li>
                     <li class="menu"><a href="#"></a></li>
-                    <c:if test="${loginUser == null }">
-                   		<li class="menu"><a href="login.do">Sign in</a></li>
-                    	<li class="menu"><a href="register.do">Register</a></li>
+                    <c:if test="${empty loginUser }">
+                   		<li class="menu"><a href="login_go.do">Sign in</a></li>
+                    	<li class="menu"><a href="register_go.do">Register</a></li>
                     </c:if>
-                    <c:if test="${loginUser != null }">
-                   		<li class="menu"><h3>${loginUser.mem_name }</h3></li>
+                    <c:if test="${!empty loginUser}">
+                   		<li class="menu"><a href="myPage_go.do">${loginUser.mem_name }</a></li>
                    		<li class="menu"><a href="javascript:logout()">Logout</a></li>
                     </c:if>
 	       </ul>
