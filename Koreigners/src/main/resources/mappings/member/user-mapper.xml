@@ -49,7 +49,7 @@
 		WHERE MEM_ID = #{mem_id}
 	</select>
 	
-	<!--  -->
+	<!-- 자동로그인 설정 -->
 	<update id="updateKeepLogin">
 		UPDATE T_MEMBER 
 		   SET MEM_SESSIONKEY = #{mem_sessionkey}
@@ -58,7 +58,7 @@
 	</update>
 	
 	
-	<!--  -->
+	<!-- 자동로그인 설정 여부 -->
 	<select id="getCheckLoginBefore" resultType="userVO">
 		SELECT * FROM T_MEMBER
 		 WHERE MEM_SESSIONKEY = #{loginCookie}
@@ -71,6 +71,20 @@
 			   (MEM_IDX, MEM_ID, MEM_PW, MEM_NAME, MEM_CATE)
 		VALUES (MEM_SQ.NEXTVAL, #{mem_id}, #{mem_pw}, #{mem_name}, #{mem_cate})
 	</insert>
+	
+	<!-- 자동로그인 여부 가져오기 -->
+	<select id="getAutoLogin" parameterType="String" resultType="String">
+		SELECT AUTOLOGIN FROM T_MEMBER
+		 WHERE MEM_ID = #{mem_id}
+	</select>
+	
+	<!-- 자동로그인 여부 입력 -->
+	<update id="setAutoLogin" parameterType="Map">
+		UPDATE T_MEMBER
+		   SET AUTOLOGIN = #{Fl}
+		 WHERE MEM_ID = #{mem_id} 
+	</update>
+	
 	
 	<!-- 비밀번호 재설정 -->
 	<!-- <update id="updatePassword" parameterType="userVO">

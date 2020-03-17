@@ -59,7 +59,7 @@ $(function(){
 				</li>
 				<li class="logLi">
 					<label class="returnText">
-						<input type="checkbox" id="useCookie" name="useCookie" checked /> Remember Me
+						<input type="checkbox" id="autoLogin" name="autoLogin" value="1" checked /> Remember Me
 					</label>
 					<span class="returnText">
 						<a class="p_href" href="resetPwMail_go.do">Forgot your password?</a>

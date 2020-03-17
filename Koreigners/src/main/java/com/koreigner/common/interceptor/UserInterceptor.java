@@ -7,11 +7,14 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.koreigner.biz.member.UserService;
 
-public class UserInterceptor extends HandlerInterceptorAdapter{
+public class UserInterceptor extends HandlerInterceptorAdapter implements SessionNames{
 	
 	// controller로 보내기 전에 처리하는 인터셉터(preHandle)
 	// 반환이 false라면 controller로 요청을 안함
@@ -67,4 +70,16 @@ public class UserInterceptor extends HandlerInterceptorAdapter{
 			
 		return goController;
 	}
+	
+	private void saveAttemptedLocation(HttpServletRequest request, HttpSession session) throws IOException {
+		String uri = request.getRequestURI(); 
+		String query = request.getQueryString();
+		if (StringUtils.isNotEmpty(query)) {
+			uri += "?" + query;
+			
+			session.setAttribute(ATTEMPTED, uri);
+			
+		}
+	}
+	
 }
