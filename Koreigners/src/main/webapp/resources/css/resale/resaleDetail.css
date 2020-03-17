@@ -1,0 +1,115 @@
+@charset "UTF-8";
+
+body {
+		margin: 0 auto;
+		
+	}
+
+	#detailBox {
+		left: 23%;
+		right: 88%;
+		display: inline-block;
+		width: 1000px;
+		height: 1500px;
+		 
+	}
+	#cate {
+
+		text-align: left;
+	}
+	#cateText {
+		font-weight: bold; 
+		font-size: 11px;
+		margin-bottom: 0;
+		
+	}
+	#infoTable {
+		width: 1000px;
+		height: 450px;
+	}
+	
+	
+	#imgBox {
+		width: 400px;
+		height: 450px;
+	}
+	
+	#imgFile {
+		margin-top: 0;
+		margin-right: 50px;
+		width: 450px;
+		height: 450px;
+		float: left;
+	}
+	#commText {
+		text-decoration: underline;
+		text-underline-position: under;
+
+	}
+	td {
+		width: 700px;
+	}
+	
+	td#subject {
+		height: 20%;
+		font-size: 35px;
+	}
+	td#price {
+		height: 25%;
+		border-bottom: 1px solid black;
+		font-size: 35px;
+	}
+	td#name {
+		height: 10%;
+	}
+	td#address {
+		height: 10%;
+	}
+	td#reg_date {
+		height: 10%;
+	}
+	td#hit {
+		height: 10%;
+	}
+	#contentBox {
+		width: 900px;
+		height: 650px;
+		text-align: left;
+		display: inline;
+	}
+	#contentText{
+		display: inline;
+		float: left;
+
+		width: 400px;
+		height: 600px;
+		margin-right: 100px;
+	}
+	#commentBox{
+
+		display: inline;
+		float: left;
+
+		width: 496px;
+		height: 600px;
+	}
+	.userInfo {
+		text-align: left;
+	}
+	#commText {
+		width:490px;
+		height:100px;
+	}
+	
+	.commUp {
+		margin-top: 5px;
+		
+	}
+	.commDown {
+		margin-bottom: 5px;
+		border-bottom: 1px solid black;
+	}
+	
+	#commTable {
+		border-top: 1px solid black;
+	}

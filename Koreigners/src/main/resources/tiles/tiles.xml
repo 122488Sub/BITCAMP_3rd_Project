@@ -41,7 +41,4 @@
         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
     </definition>        
     
-    
-    
-    
 </tiles-definitions>

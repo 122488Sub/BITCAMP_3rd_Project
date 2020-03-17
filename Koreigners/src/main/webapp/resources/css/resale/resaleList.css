@@ -1,0 +1,183 @@
+@charset "UTF-8";
+
+body {
+		margin: 0 auto;
+		text-align: center;
+		
+	}
+	
+	#img_content {
+		
+		display: inline-block;
+		width: 1130px;
+		height: 1500px;
+		margin: 0 auto;
+
+	}
+	#listBox {
+		width: 1130px;
+		height: 1200px;
+
+	}
+	#pagingBox {
+	
+		margin-left: auto;
+		margin-right: auto;
+		width: 1130px;
+		height: 200px;
+
+		float: left;
+	}
+	#olPaging {
+		margin-left: auto;
+		margin-right: auto;
+		width: 400px;
+		height: 100px;
+		text-align:center;
+	}
+	ol {
+		margin-left: auto;
+		margin-right: auto;
+		
+		padding:0;
+		width: 240px;
+		height: 80px;
+	}
+	
+	#onePostBox {
+		width: 230px;
+		height: 370px;
+		float: left;
+		margin-right: 25px;
+		margin-left: 25px;
+		margin-bottom: 25px;
+		color: black;
+	}
+	
+	#imgBox {
+		margin: 0;
+		padding: 0;
+		width: 230px;
+		height: 230px;
+		
+	}
+	#infoBox {
+		margin: 0;
+		padding: 0;
+		width: 230px;
+		height: 80px;
+		
+	}
+	#infoChildBox {
+		margin-top: 20px;
+		padding: 0;
+		width: 230px;
+		height: 40px;
+		display: inline;
+	}
+	#infoTable {
+		width: 230px;
+		height: 50px;
+	}
+	#addrBox{
+		margin-top: 4px;
+		padding: 0;
+		width: 230px;
+		height: 30px;
+		
+		text-align: left;
+			
+	}
+	#listSubject{
+		width: 230px;
+		height: 30px;
+		font-size: 15px;
+		font-weight: bold;
+		font-family: 'Noto Sans KR', sans-serif;
+		text-align: left;
+		padding:0 5px; 
+		overflow:hidden; 
+		text-overflow:ellipsis; white-space:nowrap;
+
+	}
+	#priceBox {
+		text-align: left;
+	}
+	#listPrice{
+		display: inline;
+		font-size: 25px;
+		font-weight: bold;
+		font-family: 'Noto Sans KR', sans-serif;
+		text-align: left;
+	}
+	#listDate{
+		font-size: 13px;
+		font-weight: bold;
+		font-family: 'Noto Sans KR', sans-serif;
+		text-align: right;
+	}
+	#won{
+		font-size: 15px;
+		font-weight: bold;
+		text-align: left;
+	}
+	#write { 
+		padding-right: 10px;
+		
+
+	}
+	#write > input {
+				width: 100px;
+			height:50px;
+	}
+	#imgFileList {
+		margin: 0;
+		padding: 0;
+		width: 230px;
+		height: 230px;
+	}
+	
+	
+	.paging li {
+		list-style: none;
+		float: left;
+		margin-right: 8px;
+
+	}
+	.paging li a {
+
+		text-decoration: none;
+		display: inline-block;
+		padding: 3px 7px;
+		border: 1px solid lightgray;
+		font-weight: bold;
+		color: black;
+		border-radius: 5px;
+	}
+	.paging .disable {
+		border: 1px solid Gray;
+		padding: 3px 7px;
+		color: silver;
+	}
+	.paging .now {
+		border: 1px solid lightgray;
+		border-radius: 5px;
+		padding: 3px 7px;
+		background-color: Gray;
+		color: white;
+	}
+	.paging li a:hover {
+		background-color: Gray;
+		color: white;
+	}
+	#pointer {
+		border: 0px;
+	}
+	#writeBtn {
+		
+		margin-left: 995px;
+		margin-bottom: 20px;
+	}
+	#searchForm {
+		margin-left: 750px;
+	}s

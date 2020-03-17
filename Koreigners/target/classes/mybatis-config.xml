@@ -15,6 +15,7 @@
 		<typeAlias alias="userVO" type="com.koreigner.biz.member.UserVO"/>
 		<typeAlias alias="ResumeVO" type="com.koreigner.biz.member.ResumeVO"/>
 		<typeAlias alias="rsVO" type="com.koreigner.biz.resale.ResaleVO"/>
+		<typeAlias alias="rsImgVO" type="com.koreigner.biz.resale.ResaleImgVO"/>
 	</typeAliases>
   
   <!-- SQL 작성파일인 매퍼 파일 위치 지정 -->
