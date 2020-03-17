@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "prefab-hull-267303",
+  "private_key_id": "c9e22ab31029a77667941eafb8b55fb710af4c2b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCYHRqq+SmFPouh\nbPajr1OM0FlI+epNe3baVE5IKAKIHXq9PuuQJ6RC9BaXxj9/MJ60rGCyQahb4ycM\nBw8Sy08gyzCwGdvrVu4G0B6aNNCNrvLJEzZIoAsHdn29CSWE8mB2q/tq/sh4z290\nBz5Yzl97rWqwbVEv2YgMZ8POiR6+ekKiRcpl0eD1WCi9x7eL6pyciQEywO8DRWvs\nVw9z+lzqIoUjmlmK1CSqlyDDSdek9Ebl5AgGG2JyHjdm31FqufrVZuLUjLQV7Czc\nSrcjSSBWa7TMcxcXNheMBcNXoiIIaiEkQJoXvsUnSu2A5POHqEBS7vGRngn0dzrZ\nzTlcxmHDAgMBAAECggEACHwLGkFGmxuHf0wMH8ouP1r5t/PUqVi7Iudz7Ftq9Lus\nNnUVf5dudpuVzQZuUUJdf9djl13JLcLoUSfto886TSp4P0JZ/XD+Wtvt8Q0EGvsI\nqMWNEBT5OIPX9JzXfmhkkAn8vpWSigaMAW1MAXkVY1kja87VKfWYvJRnHBSS5e3m\n0nrDxcs+cpp32NFfH0UPDbpJzPNZ+kBmxMVu2AKUuun7JAO64u8+U0ViozpSyMtZ\nIn0MjyBHyvmIx3Z/kpTeREqOJxLyAAWCnEuDKj1/bWubSSneISlb6JCcYaPMRAPE\nLdX/pCgIurYSt5WuzoSUR6SkrqtuIIKpDDQFb3O7AQKBgQDPCcE4Z7d6vLjSUQOr\nEE+32lDFEhhU8iWZXNDQ10+lFFYoVEiNDuLRZQQmoUNJ53qbGM+53sJb7OFjWttk\nBBJZn2OpAdMH0tlgugJY2Z/YGa34pq//19EYeEfCntM0Ejy4nm/ya3DOjyqnh0KG\nF716DYSJN6cYM7ihSwORuYo1AQKBgQC8Fi7ndj2toQKcVMy8oxcSXTXaERnZBJje\n1s1jc9gC+rCpSNVKLdk3XPwivkS9oidapWTEonlrsrM71XD/tWjJgL+mQf+YGGN2\n4l7Q8lIUzg3WJTDqJTQcCltMF90MKIca4rv/TnwxKIt2JU5cwXES8KXgZgCNisPi\nFbvHZhYCwwKBgEaTCK51jHHmSwpGW33AfawqW0YSOQEb2f1BSl0mSBv5prTwphqP\nbHn8eUHBzvIuWfjsqEKv0IkNYnc/zXF2gdrTHmHKIWmVUkxKm+o1pOtBNbCBAZWw\nt7IjrjKFeXFSlihIudhlD3saCmw5C1AyX4BvgzJTKj5xwwoYTAssuBQBAoGAeauz\n/eFcduRwRucIZoLuGuAXRRDI8r1pksXLqak3tH2tKGVILKtKF+lb5bHF0BKEeLwD\nWrxr5YJ9NZiWd6RHvApAb/HDwQUN2ssHYQ1QkcrV4pC+eslEU1tTwf6x7PqOo5LG\n4JpJ9pbu2Ke7cH9mgUURWP9DHk0E+Ezs40mjtXcCgYEAw1dXVHG2/fmLzVrtW9d3\nZJK/iLTQP1pD72Ml9RNvV5aisSedY89XAgUFhtSMrvzTimMGdhRxEMbwf2nuW9Yc\n+XTg3m14RfDzD7O0l3eTfbYBYiTjShwvAnnoVjppTnqwrZMsQF5KD9ekRbtxKtC/\ncG9owG/N08VFvfJ9wDQRyy0=\n-----END PRIVATE KEY-----\n",
+  "client_email": "bitimgupload@prefab-hull-267303.iam.gserviceaccount.com",
+  "client_id": "100998870561168809697",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/bitimgupload%40prefab-hull-267303.iam.gserviceaccount.com"
+}
