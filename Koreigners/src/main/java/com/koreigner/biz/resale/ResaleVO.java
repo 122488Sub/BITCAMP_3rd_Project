@@ -9,12 +9,16 @@ import org.springframework.web.multipart.MultipartFile;
  * @author bitcamp
  *
  */
+/**
+ * @author bitcamp
+ *
+ */
 public class ResaleVO {
 		int rs_idx, board_idx, b_status, hit, price;
 		String mem_id, mem_pw, mem_name, subject, address, work_loc_si, fileStr,
 		       work_loc_do, rs_cate_prnt, category_child, content, file_ori_name, ip,condition, hash_tag;
 		List<MultipartFile> filename;
-		Date REGDATE;
+		Date regdate;
 		
 		public ResaleVO() {}
 
@@ -230,13 +234,13 @@ public class ResaleVO {
 		}
 
 
-		public Date getREGDATE() {
-			return REGDATE;
+		public Date getRegdate() {
+			return regdate;
 		}
 
 
-		public void setREGDATE(Date rEGDATE) {
-			REGDATE = rEGDATE;
+		public void setRegdate(Date regdate) {
+			this.regdate = regdate;
 		}
 
 
@@ -248,8 +252,11 @@ public class ResaleVO {
 					+ fileStr + ", work_loc_do=" + work_loc_do + ", rs_cate_prnt=" + rs_cate_prnt + ", category_child="
 					+ category_child + ", content=" + content + ", file_ori_name=" + file_ori_name + ", ip=" + ip
 					+ ", condition=" + condition + ", hash_tag=" + hash_tag + ", filename=" + filename + ", REGDATE="
-					+ REGDATE + "]";
+					+ regdate + "]";
 		}
+
+
+		
 		
 		
 		

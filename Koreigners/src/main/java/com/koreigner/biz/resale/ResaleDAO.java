@@ -38,4 +38,31 @@ public class ResaleDAO {
 		mybatis.insert("writeRs", rsVO);
 		
 	}
+	
+	int resaleTotal() {
+		int cnt = mybatis.selectOne("resaleTotal");
+		return cnt;
+	}
+	
+	List<ResaleVO> getResaleList(Map<String, Integer> map){
+		List<ResaleVO> list = mybatis.selectList("getResaleList", map);
+		return list;
+		
+	}
+	
+	List<ResaleImgVO> getResaleImgList(Map<String, Integer> map){
+		List<ResaleImgVO> list = mybatis.selectList("getResaleImgList", map);
+		return list;
+		
+	}
+	
+	ResaleVO getRsDetail(int rs_idx) {
+		ResaleVO rsVO = mybatis.selectOne("getRsDetail", rs_idx);
+		return rsVO;
+	}
+	
+	List<ResaleImgVO> resaleDetailImg(int rs_idx) {
+		List<ResaleImgVO> imgList = mybatis.selectList("resaleDetailImg", rs_idx);
+		return imgList;
+	}
 }

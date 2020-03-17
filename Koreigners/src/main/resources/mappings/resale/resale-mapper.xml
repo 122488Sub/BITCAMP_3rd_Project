@@ -8,9 +8,50 @@
 		  FROM T_MEMBER
 		  WHERE MEM_ID = #{id}
 	</select>
+	
+	<select id="resaleTotal" resultType="int">
+		SELECT COUNT(*)
+		  FROM T_RESALE_BOARD
+	</select>
 
-
-
+	<select id="getResaleList" parameterType="map" resultType="rsVO">
+		SELECT *
+		FROM (
+		       SELECT ROWNUM R_NUM, RESALE.*
+		        FROM (SELECT *
+		                FROM T_RESALE_BOARD
+		               ORDER BY RS_IDX DESC) RESALE    
+		           
+		    )
+	  WHERE R_NUM BETWEEN #{begin} AND #{end}
+	  
+	</select>
+	
+	<select id="getResaleImgList" parameterType="map" resultType="rsImgVO">
+		SELECT *
+ 		 FROM ( 
+ 		 		SELECT ROWNUM R_NUM, IMG.*
+                FROM(SELECT *
+           			 FROM T_RESALE_IMG 
+            		 WHERE ROWID IN (SELECT MAX(ROWID) 
+                            		 FROM T_RESALE_IMG 
+                            		  GROUP BY RS_IDX)
+                           				 ORDER BY RS_IDX DESC) IMG
+                             		)
+ 		WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="getRsDetail" parameterType="int" resultType="rsVO">
+		SELECT * FROM T_RESALE_BOARD
+		WHERE RS_IDX = #{rs_idx}
+	</select>
+	
+	<select id="resaleDetailImg" parameterType="int" resultType="rsImgVO">
+		SELECT RS_FILE_NAME
+		  FROM T_RESALE_IMG
+		  WHERE RS_IDX = #{rs_idx}
+	</select>
+	
 	<!-- 중고게시판 작성 텍스트 insert -->
 	<insert id="writeRs" parameterType="rsVO">
 		INSERT INTO T_RESALE_BOARD (RS_IDX, BOARD_IDX, MEM_ID, MEM_PW, MEM_NAME, SUBJECT, ADDRESS, RS_CATE_PRNT, CATEGORY_CHILD, CONTENT, FILENAME, FILE_ORI_NAME, IP,  HASH_TAG, REGDATE, B_STATUS, HIT)

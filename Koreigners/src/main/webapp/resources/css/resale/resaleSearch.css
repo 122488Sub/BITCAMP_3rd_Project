@@ -1,0 +1,86 @@
+@charset "UTF-8";
+
+
+
+
+
+
+
+.selectbox_div{
+
+	width: 100%;
+    height: 100px;
+    padding: 18px 10px;
+    margin-bottom: 40px;
+    background-color: rgb(245, 246, 248);
+    border-radius: 3px;
+    text-align: center;
+}
+#searchForm {
+	
+	margin: 0 auto;
+	width: 50%;
+    height: 100px;
+	
+}
+#searchBar {
+	margin-left: 5px;
+	margin-right: 5px;
+	float: left;
+	border: 2px solid #3e64ff;
+	width: 400px;
+	height: 60px;
+	border-radius: 5px;
+	font-size: 15px;
+}
+.selectbox {
+	margin: 0 auto;
+	float: left;
+	display: inline-block;
+	position: relative;
+	width: 80px;
+	height: 60px;
+	border: 2px solid #3e64ff;
+	background-color: white;
+	z-index: 1;
+	border-radius: 3px;
+}
+.ex_select_tit{
+	position:absolute;
+	top: 7px;
+    left: 15px;
+}
+.selectbox:before { /* 화살표 대체 */
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 15px;
+	width: 0;
+	height: 0;
+	margin-top: -1px;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid #333;
+}
+.selectbox label {
+	position: absolute;
+	top: 1px;
+	left: 5px;
+	padding: .8em .5em;
+	color: #999;
+	z-index: -1;
+}
+
+.selectbox select {
+	width: 100%;
+	height: auto;
+	line-height: normal;
+	font-family: inherit;
+	padding: .8em .5em;
+	border: 0;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}

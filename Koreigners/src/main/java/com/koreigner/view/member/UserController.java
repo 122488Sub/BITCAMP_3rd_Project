@@ -3,6 +3,7 @@ package com.koreigner.view.member;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,11 +25,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.github.scribejava.core.httpclient.HttpClient;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
 import com.koreigner.biz.member.auth.SNSLogin;
 import com.koreigner.biz.member.auth.SnsValue;
+import com.koreigner.common.interceptor.SessionNames;
 import com.koreigner.common.member.SecurityUtil;
 
 @Controller
@@ -79,7 +80,7 @@ public class UserController {
 	
 	//로그인 처리
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public ResponseEntity<String> postLogin(HttpServletResponse response, Model model, @RequestBody Map<String, String> jsonMap) {
+	public ResponseEntity<String> postLogin(HttpServletResponse response, HttpServletRequest request, Model model, @RequestBody Map<String, String> jsonMap, HttpSession session) {
 
 		ResponseEntity<String> entity = null;
 		String tokenStr = "fail";
@@ -87,9 +88,27 @@ public class UserController {
 		String inputId = jsonMap.get("inputId");
 		String inputPw = jsonMap.get("inputPw");
 		String inputCate = jsonMap.get("inputCate");
+		String autoLogin = jsonMap.get("autoLogin");
+		
+		System.out.println("autoLogin: " + autoLogin);
 		
 		if (userService.checkLogin(inputId, inputPw, inputCate)) { // 유저가 존재할 경우
 			tokenStr = userService.createToken(inputId); // 토큰 생성
+			System.out.println("login.do tokenStr: " + tokenStr);
+			
+			if(autoLogin != null && autoLogin.equals("1")) { //자동로그인 하겠다
+//				userService.setAutoLogin(inputId, "1");
+				Cookie autoCookie = new Cookie("autoCookie", tokenStr);
+				autoCookie.setMaxAge(SessionNames.EXPIRE);
+				response.addCookie(autoCookie);
+				
+			} else { //자동로그인 안해
+//				userService.setAutoLogin(inputId, "0");
+				Cookie delCookie = new Cookie("autoCookie", null);
+				delCookie.setMaxAge(0);
+				response.addCookie(delCookie);
+			}
+			
 		}
 		
 		entity = new ResponseEntity<String>(tokenStr, HttpStatus.OK); //토큰!
@@ -158,7 +177,6 @@ public class UserController {
 	// 로그아웃 처리
 	@RequestMapping(value="logout.do")
 	public String postLogout(HttpServletRequest request, HttpServletResponse response, Model model) {
-		
 		
 	    model.addAttribute("logout_check", "1");
 	    model.addAttribute("pw_reset", "0");
