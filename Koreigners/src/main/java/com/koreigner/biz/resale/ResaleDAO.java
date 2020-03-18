@@ -65,4 +65,16 @@ public class ResaleDAO {
 		List<ResaleImgVO> imgList = mybatis.selectList("resaleDetailImg", rs_idx);
 		return imgList;
 	}
+	
+	void insertComm(ResaleCommVO commVO) {
+		mybatis.insert("insertComm",commVO);
+		
+	}
+	
+	List<ResaleCommVO> resaleCommList(int rs_idx) {
+		System.out.println("rs_idx : ===================================" + rs_idx);
+		List<ResaleCommVO> c_list = mybatis.selectList("resaleCommList", rs_idx);
+		System.out.println("c_list DAO : =======================================" + c_list);
+		return c_list;
+	}
 }

@@ -20,11 +20,12 @@
 		<div id="cate">
 		<p style="font-weight: bold">카테고리 &nbsp;: &nbsp;${rsVO.rs_cate_prnt}&nbsp;&gt;&nbsp;${rsVO.category_child}</p>
 		<div id="detailBtn">
-				<c:if test="${not empty mem_id}">
-<!-- 				<input type="button" id="editBtn" value="수정" onclick="javascript:location.href='edit.do&rs_seq=${rsVO.rs_idx}&postId=${rsVO.id}'">
-					<input type="button" id="deleteBtn" value="삭제" onclick="javascript:location.href='edit.do&rs_seq=${rsVO.rs_idx}&postId=${rsVO.id}'"> -->
-					<input type="button" id="editBtn" value="수정" onclick="#">
-					<input type="button" id="deleteBtn" value="삭제" onclick="#">
+		
+				<c:if test="${not empty mem_id && mem_id == rsVO.mem_id}">
+<!-- 				<input type="button" id="editBtn" value="수정" onclick="javascript:location.href='editResale.do&rs_seq=${rsVO.rs_idx}&postId=${rsVO.mem_id}'">
+					<input type="button" id="deleteBtn" value="삭제" onclick="javascript:location.href='resaleDelete.do&rs_seq=${rsVO.rs_idx}&postId=${rsVO.mem_id}'"> -->
+					<input type="button" id="editBtn" value="수정">
+					<input type="button" id="deleteBtn" value="삭제">
 				</c:if>
 		</div>
 		<br>
@@ -93,16 +94,20 @@
 			<p>${rsVO.content}</p>
 			</div><!-- contentText End -->
 			</div>
-			<%--
+	
 			<div id="commentBox">
 			<div>
 			<label style="font-weight: bold; font-size: 25px">댓글</label>
 			</div>
 			<br><hr><br>
-			<!-- <form action="putComm.do&rs_idx=${rsVO.rs_idx}&cPage=${cPage}" method="post">-->
-			<form action="#" method="post">
-				<input type="text" name="inComm" id="commText">
+			<form action="commWrite.do" method="post">
+				<input type="text" name="content" id="commText">
 				<input type="submit" value="댓글입력" style="float: right">
+				
+				<input type="hidden" name="mem_id"value="${mem_id}">
+			    <input type="hidden" name="rs_idx" value="${rsVO.rs_idx}">
+			    <input type="hidden" name="cPage" value="${cPage}">
+				
 			</form>
 			<br>
 			<br>
@@ -112,16 +117,15 @@
 			<c:if test="${not empty c_list }">
 				<c:forEach items="${c_list}" var="comm">
 					<tr>
-						<td class="commUp" style="padding-bottom: 10px">${comm.name}</td>
-						<td class="commUp" style="text-align: right;">${comm.write_date}</td>
-					</tr>
-					<tr>
-						<td colspan="2" style="padding-top: 10px">
 							<c:forEach var="k2" begin="1" end="${comm.step}" step="1">
 											&nbsp;&nbsp;
 							</c:forEach>
+						<td class="commUp" style="padding-bottom: 10px">ㄴ${comm.mem_name}&nbsp;&nbsp;&nbsp;&nbsp;${comm.content}</td>
+						<td class="commUp" style="text-align: right;">${comm.regdate}</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="padding-top: 10px">
 						<!--<a href="reComm.do&groups=${comm.groups}&step=${comm.step}&lev=${comm.lev}">ㄴ${comm.content}</a> -->
-						<a href="#">ㄴ${comm.content}</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -130,7 +134,7 @@
 			
 			</div>
 		</div><!-- contentBox End -->
-		 --%>
+	
 	</div><!-- detailBox End -->
 </body>
 

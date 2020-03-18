@@ -42,7 +42,8 @@
 	</select>
 	
 	<select id="getRsDetail" parameterType="int" resultType="rsVO">
-		SELECT * FROM T_RESALE_BOARD
+		SELECT * 
+		FROM T_RESALE_BOARD
 		WHERE RS_IDX = #{rs_idx}
 	</select>
 	
@@ -51,6 +52,23 @@
 		  FROM T_RESALE_IMG
 		  WHERE RS_IDX = #{rs_idx}
 	</select>
+	
+	
+	<select id="resaleCommList" parameterType="int" resultType="rsCommVO">
+		SELECT RS_IDX, C_IDX, MEM_ID, MEM_PW, MEM_NAME, CONTENT, IP, GROUPS, REGDATE, STEP, LEV
+		  FROM T_RESALE_COMM
+		 WHERE RS_IDX = #{rs_idx}
+	</select>
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
 	
 	<!-- 중고게시판 작성 텍스트 insert -->
 	<insert id="writeRs" parameterType="rsVO">
@@ -63,6 +81,12 @@
 		INSERT INTO T_RESALE_IMG 
 		 VALUES(RS_SEQ.CURRVAL,#{saveFile}, #{originFile})
 	</insert>
+		<insert id="insertComm" parameterType="rsCommVO">
+		INSERT INTO T_RESALE_COMM(RS_IDX, C_IDX, MEM_ID, MEM_PW, MEM_NAME, CONTENT,  IP, GROUPS, REGDATE, STEP, LEV)
+		VALUES(#{rs_idx}, C_IDX_SEQ.NEXTVAL, #{mem_id}, #{mem_pw}, #{mem_name}, #{content}, #{ip}, RS_COMM_GROUPS.NEXTVAL, SYSDATE, 0, 0)
+	</insert>
+	
+	
 </mapper>
 
 
