@@ -235,18 +235,6 @@ public class UserServiceImpl implements UserService {
 		userDAO.insertResume(rvo);
 	}
 	
-	
-	@Override
-	public String getAutoLogin(String mem_id) {
-		String autoLogin = userDAO.getAutoLogin(mem_id);
-		return autoLogin;
-	}
-
-	@Override
-	public void setAutoLogin(String mem_id, String Fl) {
-		userDAO.setAutoLogin(mem_id, Fl);
-		
-	}
 //=========================== SNS Login ===============================
 	@Override
 	public UserVO getMemberSns(UserVO snsMemVO) {

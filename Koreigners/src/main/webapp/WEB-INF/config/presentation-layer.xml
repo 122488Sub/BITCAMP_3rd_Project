@@ -64,6 +64,11 @@
 	<mvc:interceptors>
 		
 		<mvc:interceptor>
+			<mvc:mapping path="/*.do"/>
+			<bean class="com.koreigner.common.interceptor.PageGoInterceptor"/>
+		</mvc:interceptor>
+		
+		<mvc:interceptor>
 			<mvc:mapping path="/myPage_go.do"/>
 			<mvc:mapping path="/hireWrite_go.do"/>
 			<mvc:mapping path="/house_insert.do"/>

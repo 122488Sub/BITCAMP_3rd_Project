@@ -104,19 +104,6 @@ public class UserController {
 			tokenStr = userService.createToken(inputId, jSessionId); // 토큰 생성
 			System.out.println("login.do tokenStr: " + tokenStr);
 			
-//			if(autoLogin != null && autoLogin.equals("1")) { //자동로그인 하겠다
-////				userService.setAutoLogin(inputId, "1");
-//				Cookie autoCookie = new Cookie("autoCookie", tokenStr);
-//				autoCookie.setMaxAge(SessionNames.EXPIRE);
-//				response.addCookie(autoCookie);
-//				
-//			} else { //자동로그인 안해
-////				userService.setAutoLogin(inputId, "0");
-//				Cookie delCookie = new Cookie("autoCookie", null);
-//				delCookie.setMaxAge(0);
-//				response.addCookie(delCookie);
-//			}
-			
 		}
 		
 		entity = new ResponseEntity<String>(tokenStr, HttpStatus.OK); //토큰!

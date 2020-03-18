@@ -26,6 +26,7 @@ public class UserInterceptor extends HandlerInterceptorAdapter implements Sessio
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		System.out.println("=============== [UserInterceptor 시작]");
 		boolean goController = false;
 		
 		//쿠키 내용 꺼내서
@@ -52,11 +53,18 @@ public class UserInterceptor extends HandlerInterceptorAdapter implements Sessio
 			request.setAttribute("mem_id", mem_id);
 			UserVO member = userService.getOneMember(mem_id);
 			request.setAttribute(SessionNames.LOGIN, member);
+			
+			String auth_status = userService.getAuthStatus(mem_id);
+			if(auth_status.equals("0")) { //이메일 인증 안함
+				response.sendRedirect("main.do");
+				goController = false;
+			}
+			
 			goController = true;
 			
 		//자동로그인하지 않을 경우
 		} else {
-			//userToken 검증
+			//userToken 검증 통과 시
 			if(userToken != null && !userToken.equals("") && userService.validToken(userToken).equals("Pass")) {
 				Map<String, Object> tokenPayload = userService.getTokenPayload(userToken); //토큰 정보 추출
 				String mem_id = (String)tokenPayload.get("mem_id"); //아이디 추출
@@ -66,6 +74,11 @@ public class UserInterceptor extends HandlerInterceptorAdapter implements Sessio
 					UserVO member = userService.getOneMember(mem_id);
 					request.setAttribute(SessionNames.LOGIN, member);
 					request.setAttribute("mem_id", mem_id);
+					String auth_status = userService.getAuthStatus(mem_id);
+					if(auth_status.equals("0")) { //이메일 인증 안함
+						response.sendRedirect("main.do");
+						goController = false;
+					}
 					goController = true;
 				} else {
 					System.out.println("//////이번에 로그인한 쿠키가 아님!!!");

@@ -13,7 +13,7 @@ import org.springframework.web.util.WebUtils;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
 
-public class MainGoInterceptor extends HandlerInterceptorAdapter implements SessionNames{
+public class PageGoInterceptor extends HandlerInterceptorAdapter implements SessionNames{
 	
 	// controller로 보내기 전에 처리하는 인터셉터(preHandle)
 	// 반환이 false라면 controller로 요청을 안함
@@ -23,8 +23,8 @@ public class MainGoInterceptor extends HandlerInterceptorAdapter implements Sess
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		System.out.println("===> [MainGoInterceptor]");
-				
+		System.out.println("=============== [PageGoInterceptor 시작]");
+		
 		//쿠키 내용 꺼내서
 		String userToken = "";
 		String autoCookie = "";
@@ -42,44 +42,42 @@ public class MainGoInterceptor extends HandlerInterceptorAdapter implements Sess
 			}
 		}
 		
-		
-		if(userToken == null || userToken.equals("")) {//쿠키없음, 로그인하지 않음
-						
-		} else {//쿠키존재
+		//자동로그인 할 경우
+		if(autoCookie != null && !autoCookie.equals("")) {
+			System.out.println("==============자동로그인 할 경우");
 			
-			//토큰 유효할 경우
-			if(userToken != null && userService.validToken(userToken).equals("Pass")) {
-				System.out.println("===> [MainGoInterceptor] - 토큰 유효할때");
+			Map<String, Object> tokenPayload = userService.getTokenPayload(autoCookie); //토큰 정보 추출
+			String mem_id = (String)tokenPayload.get("mem_id"); //아이디 추출
+			
+			UserVO member = userService.getOneMember(mem_id);
+			request.setAttribute(SessionNames.LOGIN, member);
+			request.setAttribute("mem_id", mem_id);
+			
+		//자동로그인하지 않을 경우
+		} else {			
+			System.out.println("==============자동로그인 하지 않을 경우");
+
+			if(userToken != null && !userToken.equals("") && userService.validToken(userToken).equals("Pass")) {
+				System.out.println("==============userToken이 있으면서 토큰 유효기간이 남은경우");
 				Map<String, Object> tokenPayload = userService.getTokenPayload(userToken); //토큰 정보 추출
 				String mem_id = (String)tokenPayload.get("mem_id"); //아이디 추출
 				String userJsId = (String)tokenPayload.get("jSessionId"); // JSESSIONID 추출
 				
 				if(userJsId.equals(JSESSIONID)) {
+					System.out.println("============== 토큰 jsid와 브라우저 jsid가 같을 경우");
 					UserVO member = userService.getOneMember(mem_id);
-					request.setAttribute(LOGIN, member);					
+					request.setAttribute(SessionNames.LOGIN, member);
+					request.setAttribute("mem_id", mem_id);
 				}
-				
-				if(autoCookie != null && !autoCookie.equals("")) {
-					UserVO member = userService.getOneMember(mem_id);
-					request.setAttribute(LOGIN, member);
-				}
-					
-				//main.do를 간다면??
-				String auth_status = userService.getAuthStatus(mem_id);
-				
-				if(userToken != null && auth_status.equals("0")) {//이메일 인증을 하지 않은 회원
-					request.setAttribute("auth_check", "0");
-				} else {//이메일 인증을 마친 회원
-					request.setAttribute("auth_check", "1");
-				}
-				
-			} else  {
-			//토큰 유효하지 않을 경우 또는 userToken이 없는경우
-				String token_status = userService.validToken(userToken); 
-				System.out.println("token_status: " + token_status); 
+			} else if(userToken != null && !userToken.equals("") && !userService.validToken(userToken).equals("Pass")){
+				System.out.println("==============userToken이 있으면서 토큰 유효기간이 만료된 경우");
+				String token_status = userService.validToken(userToken);
+				System.out.println("token_status : " + token_status);
+			} else { //첫방문, 비회원인 경우
+				System.out.println("================ 아무것도 없는 경우");
 			}
-			
-		}			
+		}
+		
 		return true;
 	}
 }

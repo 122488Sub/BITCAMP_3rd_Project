@@ -96,21 +96,6 @@ public class UserDAO {
 		System.out.println("===> [UserDAO] - setSnsRegister() 실행");
 		mybatis.insert("user.setSnsRegister", mvo);
 	}
-
-	//자동로그인 여부 가져오기
-	public String getAutoLogin(String mem_id) {
-		String autoLogin = mybatis.selectOne("user.getAutoLogin", mem_id);
-		return autoLogin;
-	}
-
-	//자동로그인 여부 입력
-	public void setAutoLogin(String mem_id, String Fl) {
-		Map<String, String> autoLogin = new HashMap<>();
-		autoLogin.put("mem_id", mem_id);
-		autoLogin.put("Fl", Fl);
-		mybatis.insert("user.setAutoLogin", autoLogin);
-		
-	}
 	
 //========================= 마이페이지 ===========================================
 	//회원정보 수정하기

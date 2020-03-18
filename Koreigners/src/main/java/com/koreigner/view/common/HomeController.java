@@ -26,8 +26,6 @@ public class HomeController {
 	@RequestMapping(value="main.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String main_go(HttpServletRequest request, Model model) {
 		System.out.println("main.do");
-		
-		String auth_status = (String)request.getAttribute("auth_status");
 
 		//쿠키 내용 꺼내서
 		String userToken = "";
@@ -48,32 +46,40 @@ public class HomeController {
 		
 		//자동로그인 할 경우
 		if(autoCookie != null && !autoCookie.equals("")) {
+			System.out.println("==============자동로그인 할 경우");
 			
 			Map<String, Object> tokenPayload = userService.getTokenPayload(autoCookie); //토큰 정보 추출
 			String mem_id = (String)tokenPayload.get("mem_id"); //아이디 추출
 			
 			UserVO member = userService.getOneMember(mem_id);
 			request.setAttribute(SessionNames.LOGIN, member);
+			String auth_status = userService.getAuthStatus(mem_id);
 			checkEmail(auth_status, model);
 			
 		//자동로그인하지 않을 경우
-		} else {
-			
+		} else {			
+			System.out.println("==============자동로그인 하지 않을 경우");
+
 			if(userToken != null && !userToken.equals("") && userService.validToken(userToken).equals("Pass")) {
+				System.out.println("==============userToken이 있으면서 토큰 유효기간이 남은경우");
 				Map<String, Object> tokenPayload = userService.getTokenPayload(userToken); //토큰 정보 추출
 				String mem_id = (String)tokenPayload.get("mem_id"); //아이디 추출
 				String userJsId = (String)tokenPayload.get("jSessionId"); // JSESSIONID 추출
 				
 				if(userJsId.equals(JSESSIONID)) {
+					System.out.println("============== 토큰 jsid와 브라우저 jsid가 같을 경우");
 					UserVO member = userService.getOneMember(mem_id);
 					request.setAttribute(SessionNames.LOGIN, member);
+					String auth_status = userService.getAuthStatus(mem_id);
 					checkEmail(auth_status, model);
 				}
-			} else {
+			} else if(userToken != null && !userToken.equals("") && !userService.validToken(userToken).equals("Pass")){
+				System.out.println("==============userToken이 있으면서 토큰 유효기간이 만료된 경우");
 				String token_status = userService.validToken(userToken);
 				System.out.println("token_status : " + token_status);
 			}
-			
+			System.out.println("================ 아무것도 없는 경우");
+			model.addAttribute("auth_check", "1");
 		}
 		return "/common/main.page";
 	}

@@ -53,13 +53,6 @@ public interface UserService {
 	//sns(소셜)회원가입 
 	void setSnsRegister(UserVO mvo) throws Exception;
 	
-	
-	//자동로그인 여부 가져오기
-	String getAutoLogin(String mem_id);
-	
-	//자동로그인 여부 입력
-	void setAutoLogin(String mem_id, String Fl);
-	
 //==================== 마이페이지 =========================================	
 	
 	//회원 정보 수정
