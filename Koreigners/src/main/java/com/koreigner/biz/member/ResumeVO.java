@@ -47,8 +47,8 @@ public class ResumeVO {
 	private String other_lang;
 	
 	//파일 업로드용 필드 추가
-	private MultipartFile ori_file;
-	private MultipartFile save_file;
+	private String ori_file;
+	private String save_file;
 	
 	//커리어
 	private int join_year;
@@ -448,19 +448,19 @@ public class ResumeVO {
 	}
 	
 	// 파일업로드 용
-	public MultipartFile getOri_file() {
+	public String getOri_file() {
 		return ori_file;
 	}
 
-	public void setOri_file(MultipartFile ori_file) {
+	public void setOri_file(String ori_file) {
 		this.ori_file = ori_file;
 	}
 
-	public MultipartFile getSave_file() {
+	public String getSave_file() {
 		return save_file;
 	}
 
-	public void setSave_file(MultipartFile save_file) {
+	public void setSave_file(String save_file) {
 		this.save_file = save_file;
 	}
 

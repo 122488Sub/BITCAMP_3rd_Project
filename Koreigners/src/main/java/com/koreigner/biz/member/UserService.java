@@ -1,9 +1,13 @@
 package com.koreigner.biz.member;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public interface UserService {
 	
@@ -62,6 +66,8 @@ public interface UserService {
 	int userPwCheck(Map<String, String> map);
 	
 	//이력서 입력
-	void insertResume(ResumeVO rvo);
+	void insertResume(Map<String, Object> map, HttpServletRequest request);
+	
+	
 
 }
