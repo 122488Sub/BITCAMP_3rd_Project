@@ -59,4 +59,14 @@ public class ResaleServiceImpl implements ResaleService{
 		List<ResaleImgVO> imgList = resaleDAO.resaleDetailImg(rs_idx);
 		return imgList;
 	}
+	@Override
+	public void insertComm(ResaleCommVO commVO) {
+		resaleDAO.insertComm(commVO);
+		
+	}
+	@Override
+	public List<ResaleCommVO> resaleCommList(int rs_idx) {
+		List<ResaleCommVO> c_list = resaleDAO.resaleCommList(rs_idx);
+		return c_list;
+	}
 }

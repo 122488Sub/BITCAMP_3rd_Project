@@ -5,14 +5,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.koreigner.biz.job.company.CompanyVO;
+import com.koreigner.biz.member.UserVO;
 import com.koreigner.common.member.SecurityUtil;
 
 @Service
 public class JobService {
+	
+	@Autowired
+	JobServiceDAO jobServiceDAO;
 	
 	// signin Method======================================================================================================
 	
@@ -42,9 +49,12 @@ public class JobService {
 		return fileName;
 	}
 	
-	public List<String> getFileList(List<MultipartFile> imgFile){
+	public List<String> getFileList(List<MultipartFile> imgFile, HttpServletRequest request){
 		System.out.println("JobService 이다-------------");
-		String path = "/C:/MyStudy/Final_Project/BITCAMP_3rd_Project/Koreigners/src/main/webapp/WEB-INF/views/job/upload/"; 
+		String path = "/C:/MyStudy/Final_Project/BITCAMP_3rd_Project/biz/src/main/resources/upload/resale/"; 
+		//String path = request.getSession().getServletContext().getRealPath("/");  
+	    //String attach_path = "resources\\upload\\resale";
+	    System.out.println("real path : " + path);
 		String fileName = null; 
 		List<String> saveFileList = new ArrayList<>();
 	    File dir= new File(path);
@@ -126,7 +136,10 @@ public class JobService {
 		return insurance;
 	}
 	
-	
+	public UserVO getUserInfo(String mem_id) {
+		UserVO user = jobServiceDAO.getUserInfo(mem_id);
+		return user;
+	}
 	
 	// hire END =========================================================================================================
 	

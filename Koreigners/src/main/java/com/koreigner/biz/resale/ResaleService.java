@@ -14,4 +14,6 @@ public interface ResaleService {
 	List<ResaleImgVO> getResaleImgList(Map<String, Integer> map);
 	ResaleVO getRsDetail(int rs_idx);
 	List<ResaleImgVO> resaleDetailImg(int rs_idx);
+	void insertComm(ResaleCommVO commVO);
+	List<ResaleCommVO> resaleCommList(int rs_idx);
 }

@@ -3,15 +3,17 @@ var cate_prnt_ko = "";
 	$(function(){
 		//비밀번호 중복 검사
 		$("#conf_password").blur(function() {
-			var password = $('#regForm [name="password"]').val();
+			var password = $('#regForm [name="mem_pw"]').val();
 			var password_conform= $('#regForm [name="conf_password"]').val();
+			console.log("password : " + password);
+			console.log("password_conform : " + password_conform);
 			var regExp = /(?=.*\d{1,20})(?=.*[~`!@#$%\^&*()-+=]{1,20})(?=.*[a-zA-Z]{1,20}).{10,20}$/
 				if(password == "" || password_conform == ""){
 					$('#pw_check').text('비밀번호를 입력하세요 :)');
 					$('#pw_check').css('color', 'red');
 					$("#reg_submit").attr("disabled", true);				
 				}else if(password!=password_conform){
-					$("#pw_check").text("비밀번호가 일치하지 않습니다.");
+					$("#pw_check").text("비밀번호가 일치하지 않습니다..");
 					$("#pw_check").css("color", "red");
 					$("#reg_submit").attr("disabled", true);
 					
@@ -30,13 +32,13 @@ var cate_prnt_ko = "";
 			console.log("id : " + id);	
 			$.ajax({
 				url : 'idCheck.do?mem_id='+ id,
-				type : 'get',
+				type : 'post',
 				success : function(data) {
 					console.log("data : " + data);	
 					
 					if(data == 1) {
 						// 1 : 아이디가 중복되는 문구
-						$("#id_check").text("이메일 형식으로 입력 해 주세요.");
+						$("#id_check").text("이미 사용중인 아이디입니다. 다른아이디를 입력해 주세요");
 						$("#id_check").css("color", "red");
 						$("#reg_submit").attr("disabled", true);
 						
