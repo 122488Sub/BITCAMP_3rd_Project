@@ -110,8 +110,8 @@ public class UserDAO {
 	}
 	
 	//이력서 입력
-	public void insertResume(ResumeVO rvo) {
-		mybatis.insert("user.insertResume", rvo);
+	public void insertResume(Map<String, Object> map) {
+		mybatis.insert("user.insertResume", map);
 	}
 
 

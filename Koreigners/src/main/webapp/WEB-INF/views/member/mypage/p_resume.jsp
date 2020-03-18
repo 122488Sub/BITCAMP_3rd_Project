@@ -21,10 +21,10 @@
 	</ul>
 </div>
 
-          <form name="form1" id="form1" action="insertResume.do" method="post">
+          <form name="form1" id="form1" action="insertResume.do" method="post" enctype="multipart/form-data">
           <input type="hidden" name="mem_id" value="${mvo.mem_id }">
 
-          <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+           <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
           	<caption>
           	Personal information
           	</caption>
@@ -50,9 +50,9 @@
                 <td colspan="3" class="txLeft">&nbsp;${mvo.mem_address }</td>
               </tr>
             </tbody>
-          </table>
+          </table> 
 
-          <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+         <%-- <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
           	<caption>Required fields</caption>
             <tbody>
               <tr>
@@ -119,7 +119,9 @@
               </tr>
              </tbody>
           </table>    
-          <div class="old" style="color: #514438 !important;    padding: 10px 0;background: none;margin-bottom: 10px; font-size: 15px;font-weight: 600; color: #000; line-height: 1.3em; text-align: left;">Optional fields</div>                                      
+          
+          
+          <%--<div class="old" style="color: #514438 !important;    padding: 10px 0;background: none;margin-bottom: 10px; font-size: 15px;font-weight: 600; color: #000; line-height: 1.3em; text-align: left;">Optional fields</div>                                      
           <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
                        <h4><strong>01</strong>Detailed job-hunting information</h4>
                                        
@@ -295,10 +297,20 @@
                 <td class="txLeft"><input type="text" size="40" id="etc_language" name="other_lang" value=""> (E.g. French, Spanish, Russian, etc.)</td>
               </tr>
             </tbody>
-          </table>
+          </table> --%>
           
-         
-
+	      <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+	            <h4><strong>05</strong>Other Items</h4>
+	            <tbody>
+	              <tr>
+	                <th width="15%">The attached file</th>
+	                <td width="85%" class="txLeft">
+	                  <input type="file" name="ori_file" id="file1" multiple="multiple"> &nbsp; 
+	                </td>
+	              </tr>
+	            </tbody>
+	      </table>      
+          
           <p align="center">
             <a href="" target="_self" class="button white small">Cancel</a>
             &nbsp; &nbsp;
@@ -307,26 +319,8 @@
 
           </form>
           
-          <form id="form2" method="post">
-	           <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
-	            <h4><strong>05</strong>Other Items</h4>
-	            <tbody>
-	              <tr>
-	                <th width="15%">The attached file</th>
-	                <td width="85%" class="txLeft">
-	                  <input type="file" name="ori_file" id="file1"> &nbsp; 
-	                </td>
-	              </tr>
-	            </tbody>
-	          </table>
-	          
-	           <p align="center">
-            <a href="" target="_self" class="button white small">Cancel</a>
-            &nbsp; &nbsp;
-          	<input type="submit" class="Button orange small" value="Registration">
-          </p>
-	          
-          </form>
+
+          
        
 </body>
 </html>

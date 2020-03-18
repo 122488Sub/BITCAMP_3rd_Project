@@ -1,47 +1,38 @@
 package com.koreigner.biz.member;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.annotation.Resource;
-import javax.crypto.spec.SecretKeySpec;
 import javax.mail.Authenticator;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Base64Utils;
-import org.springframework.web.util.WebUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.koreigner.common.member.FileUtils;
 import com.koreigner.common.member.MailHandler;
 import com.koreigner.common.member.MailUtil;
 import com.koreigner.common.member.SecurityUtil;
-import com.koreigner.common.member.SupportUtil;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.impl.crypto.MacProvider;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -55,6 +46,10 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private SecurityUtil securityUtil;
 	
+	@Autowired
+	private FileUtils fileUtils;
+
+	Logger log = Logger.getLogger(this.getClass());
 	
 	
 	//회원가입중 client가 입력한 email이 db에 이미 등록되어 있는지 중복 체크 한다.
@@ -231,8 +226,26 @@ public class UserServiceImpl implements UserService {
 	
 	//이력서 입력
 	@Override
-	public void insertResume(ResumeVO rvo) {
-		userDAO.insertResume(rvo);
+	public void insertResume(Map<String, Object> map, HttpServletRequest request) {
+		
+//		userDAO.insertResume(map); //이력서 기본정보 입력
+		
+		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
+		Iterator<String> iterator = multipartHttpServletRequest.getFileNames(); MultipartFile multipartFile = null;
+		while(iterator.hasNext()){
+			multipartFile = multipartHttpServletRequest.getFile(iterator.next()); 
+			if(multipartFile.isEmpty() == false){
+				log.debug("------------- file start -------------");
+				log.debug("name : "+multipartFile.getName()); 
+				log.debug("filename : "+multipartFile.getOriginalFilename()); 
+				log.debug("size : "+multipartFile.getSize()); 
+				log.debug("-------------- file end --------------\n");
+			}
+		}
+
+		
+		
+		
 	}
 	
 //=========================== SNS Login ===============================
@@ -358,9 +371,6 @@ public class UserServiceImpl implements UserService {
 		return payloadMap;
 	}
 
-
-
-
 	
-	
+
 }

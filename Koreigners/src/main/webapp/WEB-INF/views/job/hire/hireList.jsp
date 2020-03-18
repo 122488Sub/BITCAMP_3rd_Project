@@ -53,7 +53,7 @@
 
 <hr>
 <c:choose>
-	<c:when test="${not empty mem_id}">
+	<c:when test="${loginUser.mem_cate eq 'c'}">
 		<p><a href="hireWrite_go.do">Post an Ad</a></p>
 	</c:when>
 	<c:otherwise>
