@@ -69,4 +69,10 @@ public class ResaleServiceImpl implements ResaleService{
 		List<ResaleCommVO> c_list = resaleDAO.resaleCommList(rs_idx);
 		return c_list;
 	}
+	
+	@Override
+	public void deleteResale(int rs_idx) {
+		resaleDAO.deleteResale(rs_idx);
+		
+	}
 }

@@ -22,10 +22,17 @@
 		<div id="detailBtn">
 		
 				<c:if test="${not empty mem_id && mem_id == rsVO.mem_id}">
-<!-- 				<input type="button" id="editBtn" value="수정" onclick="javascript:location.href='editResale.do&rs_seq=${rsVO.rs_idx}&postId=${rsVO.mem_id}'">
-					<input type="button" id="deleteBtn" value="삭제" onclick="javascript:location.href='resaleDelete.do&rs_seq=${rsVO.rs_idx}&postId=${rsVO.mem_id}'"> -->
-					<input type="button" id="editBtn" value="수정">
-					<input type="button" id="deleteBtn" value="삭제">
+				<form action="editResale.do" method="post">
+				<input type="hidden" name="cPage" value="${cPage}">
+				<input type="hidden" name="rs_idx" value="${rsVO.rs_idx}">
+				<input type="submit" id="editBtn" value="수정">
+				</form>
+				<form action="deleteResale.do" method="post">
+				<input type="hidden" name="cPage" value="${cPage}">
+				<input type="hidden" name="rs_idx" value="${rsVO.rs_idx}">
+				<input type="submit" id="deleteBtn" value="삭제">
+				
+				</form>
 				</c:if>
 		</div>
 		<br>
@@ -43,7 +50,7 @@
 						     </c:when>
 						     <c:otherwise>
 							     <c:forEach items="${imgList}" var="img" >
-							        <li><img id="imgFile" src="${pageContext.request.contextPath}/WEB-INF/views/job/upload/${img.rs_file_name}"></li>
+							        <li><img id="imgFile" src="${pageContext.request.contextPath}/resources/img/resale/${img.rs_file_name}"></li>
 							     </c:forEach>
 						     </c:otherwise>
 					     </c:choose>

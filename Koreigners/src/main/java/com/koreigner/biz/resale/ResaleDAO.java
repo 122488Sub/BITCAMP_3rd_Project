@@ -77,4 +77,9 @@ public class ResaleDAO {
 		System.out.println("c_list DAO : =======================================" + c_list);
 		return c_list;
 	}
+	
+	void deleteResale(int rs_idx) {
+		mybatis.delete("deleteResale", rs_idx);
+		
+	}
 }

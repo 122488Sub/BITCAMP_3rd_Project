@@ -16,4 +16,5 @@ public interface ResaleService {
 	List<ResaleImgVO> resaleDetailImg(int rs_idx);
 	void insertComm(ResaleCommVO commVO);
 	List<ResaleCommVO> resaleCommList(int rs_idx);
+	void deleteResale(int rs_idx);
 }
