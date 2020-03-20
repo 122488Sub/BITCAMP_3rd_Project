@@ -1,6 +1,7 @@
 package com.koreigner.biz.member;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,93 +48,110 @@ public class ResumeVO {
 	private String other_lang;
 	
 	//파일 업로드용 필드 추가
-	private String ori_file;
+	private List<MultipartFile> ori_file;
 	private String save_file;
 	
 	//커리어
-	private int join_year;
-	private int join_month;
-	private int resign_year;
-	private int resign_month;
-	private String region;
-	private String company;
-	private String task;
+	private Integer join_year;
+	private Integer join_month;
+	private Integer resign_year;
+	private Integer resign_month;
+	private String[] region;
+	private String[] company;
+	private String[] task;
+
+
+	
+	
+	
+
+	public ResumeVO() {
+		super();
+	}
+	
+	
+	public String[] getRegion() {
+		return region;
+	}
+
+
+	public void setRegion(String[] region) {
+		this.region = region;
+	}
+
+
+	public String[] getCompany() {
+		return company;
+	}
+
+
+	public void setCompany(String[] company) {
+		this.company = company;
+	}
+
+
+	public String[] getTask() {
+		return task;
+	}
+
+
+	public void setTask(String[] task) {
+		this.task = task;
+	}
+
+
+	public void setJoin_year(Integer join_year) {
+		this.join_year = join_year;
+	}
+
+
+	public void setJoin_month(Integer join_month) {
+		this.join_month = join_month;
+	}
+
+
+	public void setResign_year(Integer resign_year) {
+		this.resign_year = resign_year;
+	}
+
+
+	public void setResign_month(Integer resign_month) {
+		this.resign_month = resign_month;
+	}
 
 
 	public int getJoin_year() {
 		return join_year;
 	}
 
-
 	public void setJoin_year(int join_year) {
 		this.join_year = join_year;
 	}
-
 
 	public int getJoin_month() {
 		return join_month;
 	}
 
-
 	public void setJoin_month(int join_month) {
 		this.join_month = join_month;
 	}
-
 
 	public int getResign_year() {
 		return resign_year;
 	}
 
-
 	public void setResign_year(int resign_year) {
 		this.resign_year = resign_year;
 	}
-
 
 	public int getResign_month() {
 		return resign_month;
 	}
 
-
 	public void setResign_month(int resign_month) {
 		this.resign_month = resign_month;
 	}
 
-
-	public String getRegion() {
-		return region;
-	}
-
-
-	public void setRegion(String region) {
-		this.region = region;
-	}
-
-
-	public String getCompany() {
-		return company;
-	}
-
-
-	public void setCompany(String company) {
-		this.company = company;
-	}
-
-
-	public String getTask() {
-		return task;
-	}
-
-
-	public void setTask(String task) {
-		this.task = task;
-	}
-	
-	
-	
-	public ResumeVO() {
-		super();
-	}
 
 	public int getResume_idx() {
 		return resume_idx;
@@ -448,11 +466,11 @@ public class ResumeVO {
 	}
 	
 	// 파일업로드 용
-	public String getOri_file() {
+	public List<MultipartFile> getOri_file() {
 		return ori_file;
 	}
 
-	public void setOri_file(String ori_file) {
+	public void setOri_file(List<MultipartFile> ori_file) {
 		this.ori_file = ori_file;
 	}
 
@@ -463,6 +481,7 @@ public class ResumeVO {
 	public void setSave_file(String save_file) {
 		this.save_file = save_file;
 	}
+
 
 	@Override
 	public String toString() {
@@ -478,10 +497,12 @@ public class ResumeVO {
 				+ ", ko_spk_abil=" + ko_spk_abil + ", ko_doc_abil=" + ko_doc_abil + ", ch_spk_abil=" + ch_spk_abil
 				+ ", ch_doc_abil=" + ch_doc_abil + ", en_spk_abil=" + en_spk_abil + ", en_doc_abil=" + en_doc_abil
 				+ ", vt_spk_abil=" + vt_spk_abil + ", vt_doc_abil=" + vt_doc_abil + ", regdate=" + regdate + ", ip="
-				+ ip + ", other_lang=" + other_lang + ", join_year=" + join_year + ", join_month=" + join_month
-				+ ", resign_year=" + resign_year + ", resign_month=" + resign_month + ", region=" + region
-				+ ", company=" + company + ", task=" + task + "]";
+				+ ip + ", other_lang=" + other_lang + ", ori_file=" + ori_file + ", save_file=" + save_file
+				+ ", join_year=" + join_year + ", join_month=" + join_month + ", resign_year=" + resign_year
+				+ ", resign_month=" + resign_month + ", region=" + region + ", company=" + company + ", task=" + task
+				+ "]";
 	}
+
 	
 	
 	

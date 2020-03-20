@@ -114,8 +114,16 @@ public class UserDAO {
 		mybatis.insert("user.insertResume", map);
 	}
 
+	//이력서 커리어 입력
+	public void insertCareer(Map<String, Object> map) {
+		mybatis.insert("user.insertCareer", map);
+		
+	}
 
-		
-		
+	//이력서 첨부파일 업로드
+	public void insertFile(Map<String, Object> map) {
+		mybatis.insert("user.insertFile", map);		
+	}
+	
 
 }

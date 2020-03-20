@@ -3,7 +3,7 @@ package com.koreigner.biz.member;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -18,12 +18,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.koreigner.common.member.FileUtils;
 import com.koreigner.common.member.MailHandler;
 import com.koreigner.common.member.MailUtil;
@@ -226,25 +223,16 @@ public class UserServiceImpl implements UserService {
 	
 	//이력서 입력
 	@Override
-	public void insertResume(Map<String, Object> map, HttpServletRequest request) {
+	public void insertResume(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
-//		userDAO.insertResume(map); //이력서 기본정보 입력
+		userDAO.insertResume(map); //이력서 기본정보 입력
 		
-		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
-		Iterator<String> iterator = multipartHttpServletRequest.getFileNames(); MultipartFile multipartFile = null;
-		while(iterator.hasNext()){
-			multipartFile = multipartHttpServletRequest.getFile(iterator.next()); 
-			if(multipartFile.isEmpty() == false){
-				log.debug("------------- file start -------------");
-				log.debug("name : "+multipartFile.getName()); 
-				log.debug("filename : "+multipartFile.getOriginalFilename()); 
-				log.debug("size : "+multipartFile.getSize()); 
-				log.debug("-------------- file end --------------\n");
-			}
+		userDAO.insertCareer(map);
+		
+		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(map, request);
+		for(int i=0, size=list.size(); i<size; i++) {
+			userDAO.insertFile(list.get(i));
 		}
-
-		
-		
 		
 	}
 	

@@ -22,7 +22,7 @@
 </div>
 
           <form name="form1" id="form1" action="insertResume.do" method="post" enctype="multipart/form-data">
-          <input type="hidden" name="mem_id" value="${mvo.mem_id }">
+<!--           <input type="hidden" name="mem_id" value="${mvo.mem_id }">
 
            <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
           	<caption>
@@ -52,7 +52,7 @@
             </tbody>
           </table> 
 
-         <%-- <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+         <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
           	<caption>Required fields</caption>
             <tbody>
               <tr>
@@ -121,7 +121,7 @@
           </table>    
           
           
-          <%--<div class="old" style="color: #514438 !important;    padding: 10px 0;background: none;margin-bottom: 10px; font-size: 15px;font-weight: 600; color: #000; line-height: 1.3em; text-align: left;">Optional fields</div>                                      
+          <div class="old" style="color: #514438 !important;    padding: 10px 0;background: none;margin-bottom: 10px; font-size: 15px;font-weight: 600; color: #000; line-height: 1.3em; text-align: left;">Optional fields</div>                                      
           <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
                        <h4><strong>01</strong>Detailed job-hunting information</h4>
                                        
@@ -198,7 +198,7 @@
 
             </tbody>
           </table>
-
+ -->
 		    <button type="button" id="addItemBtn1">Add Career</button>
       <table class="data_t recruit_re" id="career" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
            <h4><strong>03</strong>Career</h4>
@@ -206,7 +206,7 @@
               <tr class="item1">
                 <th width="15%" class="number">1</th>
                 <td width="85%" class="txLeft">Joining/Leaving :
-                  <input type="text" size="4" name="Join_year" value="" class="only-num">
+                  <input type="text" size="4" name="join_year" value="" class="only-num">
                   Year
                   <input type="text" size="2" name="join_month" value="" class="only-num">
                   Month ~
@@ -228,7 +228,7 @@
             </tr>
             </tbody>
           </table>
-
+<!-- 
           <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
             <h4><strong>04</strong>Linguistic ability</h4>
             <tbody>
@@ -297,7 +297,7 @@
                 <td class="txLeft"><input type="text" size="40" id="etc_language" name="other_lang" value=""> (E.g. French, Spanish, Russian, etc.)</td>
               </tr>
             </tbody>
-          </table> --%>
+          </table>
           
 	      <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
 	            <h4><strong>05</strong>Other Items</h4>
@@ -305,12 +305,12 @@
 	              <tr>
 	                <th width="15%">The attached file</th>
 	                <td width="85%" class="txLeft">
-	                  <input type="file" name="ori_file" id="file1" multiple="multiple"> &nbsp; 
+	                  <input type="file" name="ori_file" id="file1" multiple> &nbsp; 
 	                </td>
 	              </tr>
 	            </tbody>
 	      </table>      
-          
+           -->
           <p align="center">
             <a href="" target="_self" class="button white small">Cancel</a>
             &nbsp; &nbsp;

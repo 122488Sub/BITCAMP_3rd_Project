@@ -19,10 +19,10 @@ import com.koreigner.biz.member.ResumeVO;
 @Component("fileUtils")
 public class FileUtils {
 	
-	private static final String filePath = "C:\\dev\\file\\";
+	private static final String filePath = "C:\\koreigner\\file\\";
 
-	public List<ResumeVO> 
-		parseInsertFileInfo(ResumeVO rvo, HttpServletRequest request) throws Exception{
+	public List<Map<String, Object>> 
+		parseInsertFileInfo(Map<String, Object> map, HttpServletRequest request) throws Exception{
 		
 		
 		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest)request;
@@ -32,9 +32,9 @@ public class FileUtils {
 		String originalFileExtension = null;
 		String storedFileName = null;
 
-		List<ResumeVO> rvolist = new ArrayList<ResumeVO>();
-		ResumeVO vo = null;
-		int memIdx = rvo.getResume_idx(); 
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		Map<String, Object> listMap = null;
+				
 		File file = new File(filePath);
 		if(file.exists() == false){
 			file.mkdirs();
@@ -50,14 +50,17 @@ public class FileUtils {
 				
 				file = new File(filePath + storedFileName);
 				multipartFile.transferTo(file);
-				vo.setResume_idx(memIdx);
-				vo.setOri_file(originalFileName);
-				vo.setSave_file(storedFileName);
-				rvolist.add(vo);
+				
+				listMap = new HashMap<String, Object>();
+				listMap.put("RESUME_IDX", (String)map.get("RESUME_IDX"));
+				listMap.put("ORI_FILE", originalFileName);
+				listMap.put("SAVE_FILE", storedFileName);
+				listMap.put("FILE_SIZE", multipartFile.getSize());
+				list.add(listMap);
 			}
 		} 
 			
-		return rvolist; 
+		return list; 
 	}
 	
 	//서버에 저장할 랜덤 파일명 생성
