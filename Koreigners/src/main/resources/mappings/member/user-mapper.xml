@@ -108,7 +108,7 @@
 	</select>
 	
 	<!-- 이력서 입력 -->
-	<insert id="insertResume" parameterType="HashMap" useGeneratedKeys="true" keyProperty="RESUME_IDX">
+	<insert id="insertResume" parameterType="ResumeVO" useGeneratedKeys="true" keyProperty="RESUME_IDX">
 		<selectKey keyProperty="RESUME_IDX" resultType="String" order="BEFORE">
 			SELECT RESUME_SQ.NEXTVAL FROM DUAL
 		</selectKey>
@@ -118,7 +118,7 @@
 			 	JOB_CATE_CHILD, REQ_SALARY_MIN, REQ_SALARY_MAX, SALARY_TYPE, WORK_TIME,
 			 	<if test='work_time_start != null and !work_time_start.equals("")'>WORK_TIME_START,</if>
 			 	<if test='work_time_end != null and !work_time_end.equals("")'>WORK_TIME_END,</if>
-			 	WORK_TIME_ISWEEK, WORK_TIME_WEEK, DORMITORY,	INTRODUCE, GRADUATE_SCH,
+			 	WORK_TIME_ISWEEK, WORK_TIME_WEEK, DORMITORY, INTRODUCE, GRADUATE_SCH,
 			 	<if test='dep != null and !dep.equals("")'>DEP,</if>
 			 	<if test='final_a_m != null and !final_a_m.equals("")'>FINAL_A_M,</if>
 			 	<if test='final_a_y != null and !final_a_y.equals("")'>FINAL_A_Y,</if>
@@ -158,19 +158,28 @@
 		WHERE MEM_ID = #{mem_id}
 	</insert>
 	
-	<insert id="insertCarrer" parameterType="HashMap">
+	<!-- 이력서 경력 입력 -->
+	<insert id="insertCareer" parameterType="ResumeVO">
 		INSERT INTO T_MEMBER_CAREER
 			( CAREER_IDX, RESUME_IDX, JOIN_YEAR, JOIN_MONTH, RESIGN_YEAR, RESIGN_MONTH, REGION, COMPANY, TASK )
 		VALUES
-			( CAREER_SQ.NEXTVAL, #{RESUME_IDX}, #{join_year}, #{join_month}, #{resign_year}, #{resign_month}, #{region}, #{company}, #{task} )
+			( CAREER_SQ.NEXTVAL, #{resume_idx}, #{join_year}, #{join_month}, #{resign_year}, #{resign_month}, #{region}, #{company}, #{task} )
 	</insert>
 	
-	<insert id="inserFile" parameterType="HashMap">
+	<!-- 이력서 파일업로드 -->
+	<insert id="inserFile" parameterType="map">
 		INSERT INTO T_RESUME_FILE
 			( FILE_IDX, RESUME_IDX, ORI_FILE, SAVE_FILE, FILE_SIZE )
 		VALUES
 			( RESUME_FILE_SQ.NEXTVAL, #{RESUME_IDX}, #{ORI_FILE}, #{SAVE_FILE}, #{FILE_SIZE} )
 	</insert>
+	
+	<!-- 이력서 가져오기 -->
+	<select id="getOneResume" parameterType="String" resultType="ResumeVO">
+		SELECT * FROM T_MEMBER_RESUME
+		 WHERE MEM_ID = #{mem_id}
+	</select>
+	
 </mapper>
 
 

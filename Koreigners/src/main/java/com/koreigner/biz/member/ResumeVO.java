@@ -1,5 +1,6 @@
 package com.koreigner.biz.member;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -48,31 +49,74 @@ public class ResumeVO {
 	private String other_lang;
 	
 	//파일 업로드용 필드 추가
-	private List<MultipartFile> ori_file;
+	private List<MultipartFile> originalFile;
+	private String ori_file;
 	private String save_file;
 	
 	//커리어
-	private Integer join_year;
-	private Integer join_month;
-	private Integer resign_year;
-	private Integer resign_month;
+	private String[] join_year;
+	private String[] join_month;
+	private String[] resign_year;
+	private String[] resign_month;
 	private String[] region;
 	private String[] company;
 	private String[] task;
 
 
-	
-	
-	
 
-	public ResumeVO() {
-		super();
+
+	public String[] getJoin_year() {
+		return join_year;
 	}
-	
-	
+
+
+
+	public void setJoin_year(String[] join_year) {
+		this.join_year = join_year;
+	}
+
+
+
+	public String[] getJoin_month() {
+		return join_month;
+	}
+
+
+
+	public void setJoin_month(String[] join_month) {
+		this.join_month = join_month;
+	}
+
+
+
+	public String[] getResign_year() {
+		return resign_year;
+	}
+
+
+
+	public void setResign_year(String[] resign_year) {
+		this.resign_year = resign_year;
+	}
+
+
+
+	public String[] getResign_month() {
+		return resign_month;
+	}
+
+
+
+	public void setResign_month(String[] resign_month) {
+		this.resign_month = resign_month;
+	}
+
+
+
 	public String[] getRegion() {
 		return region;
 	}
+
 
 
 	public void setRegion(String[] region) {
@@ -80,9 +124,11 @@ public class ResumeVO {
 	}
 
 
+
 	public String[] getCompany() {
 		return company;
 	}
+
 
 
 	public void setCompany(String[] company) {
@@ -90,9 +136,11 @@ public class ResumeVO {
 	}
 
 
+
 	public String[] getTask() {
 		return task;
 	}
+
 
 
 	public void setTask(String[] task) {
@@ -100,59 +148,13 @@ public class ResumeVO {
 	}
 
 
-	public void setJoin_year(Integer join_year) {
-		this.join_year = join_year;
+
+	public ResumeVO() {
+		super();
 	}
-
-
-	public void setJoin_month(Integer join_month) {
-		this.join_month = join_month;
-	}
-
-
-	public void setResign_year(Integer resign_year) {
-		this.resign_year = resign_year;
-	}
-
-
-	public void setResign_month(Integer resign_month) {
-		this.resign_month = resign_month;
-	}
-
-
-	public int getJoin_year() {
-		return join_year;
-	}
-
-	public void setJoin_year(int join_year) {
-		this.join_year = join_year;
-	}
-
-	public int getJoin_month() {
-		return join_month;
-	}
-
-	public void setJoin_month(int join_month) {
-		this.join_month = join_month;
-	}
-
-	public int getResign_year() {
-		return resign_year;
-	}
-
-	public void setResign_year(int resign_year) {
-		this.resign_year = resign_year;
-	}
-
-	public int getResign_month() {
-		return resign_month;
-	}
-
-	public void setResign_month(int resign_month) {
-		this.resign_month = resign_month;
-	}
-
-
+	
+	
+	
 	public int getResume_idx() {
 		return resume_idx;
 	}
@@ -465,12 +467,21 @@ public class ResumeVO {
 		this.other_lang = other_lang;
 	}
 	
+	
 	// 파일업로드 용
-	public List<MultipartFile> getOri_file() {
+	public List<MultipartFile> getOriginalFile() {
+		return originalFile;
+	}
+
+	public void setOriginalFile(List<MultipartFile> originalFile) {
+		this.originalFile = originalFile;
+	}
+	
+	public String getOri_file() {
 		return ori_file;
 	}
 
-	public void setOri_file(List<MultipartFile> ori_file) {
+	public void setOri_file(String ori_file) {
 		this.ori_file = ori_file;
 	}
 
@@ -481,6 +492,7 @@ public class ResumeVO {
 	public void setSave_file(String save_file) {
 		this.save_file = save_file;
 	}
+
 
 
 	@Override
@@ -497,13 +509,12 @@ public class ResumeVO {
 				+ ", ko_spk_abil=" + ko_spk_abil + ", ko_doc_abil=" + ko_doc_abil + ", ch_spk_abil=" + ch_spk_abil
 				+ ", ch_doc_abil=" + ch_doc_abil + ", en_spk_abil=" + en_spk_abil + ", en_doc_abil=" + en_doc_abil
 				+ ", vt_spk_abil=" + vt_spk_abil + ", vt_doc_abil=" + vt_doc_abil + ", regdate=" + regdate + ", ip="
-				+ ip + ", other_lang=" + other_lang + ", ori_file=" + ori_file + ", save_file=" + save_file
-				+ ", join_year=" + join_year + ", join_month=" + join_month + ", resign_year=" + resign_year
-				+ ", resign_month=" + resign_month + ", region=" + region + ", company=" + company + ", task=" + task
-				+ "]";
+				+ ip + ", other_lang=" + other_lang + ", originalFile=" + originalFile + ", ori_file=" + ori_file
+				+ ", save_file=" + save_file + ", join_year=" + Arrays.toString(join_year) + ", join_month="
+				+ Arrays.toString(join_month) + ", resign_year=" + Arrays.toString(resign_year) + ", resign_month="
+				+ Arrays.toString(resign_month) + ", region=" + Arrays.toString(region) + ", company="
+				+ Arrays.toString(company) + ", task=" + Arrays.toString(task) + "]";
 	}
 
-	
-	
 	
 }
