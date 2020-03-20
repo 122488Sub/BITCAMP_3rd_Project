@@ -41,7 +41,7 @@
 		width: 150px; 
 		height: 100% ; 
 		background:white; 
-		overflow:visible
+		overflow:visible;
 		
 	}
 	.table_dosi {

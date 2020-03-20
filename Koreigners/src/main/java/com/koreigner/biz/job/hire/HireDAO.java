@@ -26,10 +26,11 @@ public class HireDAO {
 	}
 	//채용 게시판 리스트 검색 갯수
 	public int hireListTotal(JobVO jobVO) {
-		
-		if(jobVO.getDo_en().size() > 1 || jobVO.getGu_gun_eup_en().size() > 1){
-			jobVO.setAddrFilter(true);
-		}else {jobVO.setAddrFilter(false);}
+		System.out.println("dao total jobvo : " + jobVO);
+		if(jobVO.getDo_en() == null){
+			jobVO.setAddrFilter(false);
+		}else if(jobVO.getDo_en().size() > 1 || jobVO.getGu_gun_eup_en().size() > 1){jobVO.setAddrFilter(true);}
+		else {jobVO.setAddrFilter(false);}
 		
 		System.out.println();
 		System.out.println("do_en : " + jobVO.getDo_en());

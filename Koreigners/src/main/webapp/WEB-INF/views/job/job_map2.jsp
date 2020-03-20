@@ -70,6 +70,7 @@
 		margin-left: 100px;
 		margin-top: 60px;
 	}
+	#map {width :300px;overflow:visible;}
 	.table_dosi th {height:25px;  width:555px; }
 	.table_dosi td {}
 	.table_dosi td:nth-of-type(odd) { width: 5px; }
@@ -203,6 +204,7 @@
 		</div>
 	</div>
 </div>
+
 <div id="mapBg">
 			
 		</div>
@@ -262,8 +264,7 @@
 			
 	</div>
 	
-	
-	<div id="option_panel">
+	 <div id="option_panel">
 		<table class='table_dosi'>
 			<thead>
 				<tr>
@@ -274,11 +275,7 @@
 				<!-- $(".tbody_dosi").html(); 로 내용추가 -->
 			</tbody>
 		</table>
-		<div class='div_option'>
-	
-			
-		</div>
-	</div>
+	</div> 
 </div>
 <script >
 //vo에서 도와 시의 내용을 가질 List<String> 변수를 각각 만들것
