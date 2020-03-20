@@ -1,5 +1,6 @@
 package com.koreigner.view.resale;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -60,9 +61,8 @@ public class ResaleController {
 		request.setAttribute("imgList", imgList);
 		request.setAttribute("pvo", p);
 		
-		return "resale/resaleList2.page";
+		return "resale/resaleList.page";
 	}
-	
 	
 	
 	@RequestMapping(value="resale_go.do", method= {RequestMethod.GET, RequestMethod.POST})
@@ -75,7 +75,7 @@ public class ResaleController {
 	}
 	
 	@RequestMapping(value="resalePost.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public String resale_post(HttpServletRequest request, Model model, ResaleVO rsVO) {
+	public String resale_post(HttpServletRequest request, Model model, ResaleVO rsVO) throws IOException {
 		System.out.println("=============resalewrite start================");
 		
 		
@@ -92,6 +92,7 @@ public class ResaleController {
 		List<String> saveFileList = jobService.getFileList(rsVO.getFilename(), request);
 		List<String> originFileList = saveFileList;
 		
+		
 		String file_name = saveFileList.get(0);
 		String file_ori_name = saveFileList.get(0);
 		
@@ -104,7 +105,7 @@ public class ResaleController {
 		resaleServiceImpl.writeRs(rsVO);
 		resaleServiceImpl.writeImg(originFileList, saveFileList);
 		
-		return "resale/resaleWrite.page";
+		return "resale/resaleList.page";
 	}
 	
 	@RequestMapping(value="resaleDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
@@ -168,4 +169,38 @@ public class ResaleController {
 		mav.setViewName("redirect:resaleDetail.do");
 		return mav;
 	}
+	
+	
+	@RequestMapping(value="editResale.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String editResale(HttpServletRequest request, 
+					  	     HttpServletResponse response, 
+						     ModelAndView mav) {
+		
+		int rs_idx = Integer.parseInt(request.getParameter("rs_idx"));
+		int cPage = Integer.parseInt(request.getParameter("cPage"));
+		ResaleVO rsVO = resaleServiceImpl.getRsDetail(rs_idx);
+		
+		request.setAttribute("rsVO", rsVO);
+		request.setAttribute("rs_idx", rs_idx);
+		request.setAttribute("cPage", cPage);
+		System.out.println("rsVO editResale : " + rsVO);
+		return "resale/resaleEdit.page";
+	}
+	
+	@RequestMapping(value="deleteResale.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView deleteResale(HttpServletRequest request, 
+			HttpServletResponse response, 
+			ModelAndView mav) {
+		
+		int rs_idx = Integer.parseInt(request.getParameter("rs_idx"));
+		int cPage = Integer.parseInt(request.getParameter("cPage"));
+		
+		resaleServiceImpl.deleteResale(rs_idx);
+		
+		request.setAttribute("rs_idx", rs_idx);
+		request.setAttribute("cPage", cPage);
+		mav.setViewName("redirect:resaleList.do");
+		return mav;
+	}
+	
 }

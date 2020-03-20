@@ -53,7 +53,7 @@
 					    	<img id="imgFileList" src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg">
 					    </c:when>
 					    <c:otherwise>
-							<img id="imgFileList" src="../job/upload/${vo.getFile_ori_name()}">
+							<img id="imgFileList" src="${pageContext.request.contextPath}/resources/img/resale/${vo.getFile_ori_name()}">
 					    	<%-- <img id="imgFileList" src="images/resale/${imgList.get(voCnt.index).rs_file_name}">--%>
 					    </c:otherwise>
 					    </c:choose>
@@ -103,7 +103,7 @@
 					</c:when>
 					<c:otherwise>
 						<li id="pointer">
-												<!-- 이전으로 클릭 할 시 현재 블록의 시작 페이지에서 1을 뺀 값 -->
+						<!-- 이전으로 클릭 할 시 현재 블록의 시작 페이지에서 1을 뺀 값 -->
 						<a href="resaleList.do&cPage=${pvo.beginPage - 1}" id="pointer">&lt;</a>
 						</li>
 					</c:otherwise>

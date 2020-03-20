@@ -87,6 +87,26 @@
 	</insert>
 	
 	
+	
+	
+	
+	<delete id="deleteResale" parameterType="int">
+		 {
+		   call
+	         declare
+	           begin
+				DELETE FROM T_RESALE_IMG 
+		     	    WHERE RS_IDX = #{rs_idx};
+		     	    
+				DELETE FROM  T_RESALE_COMM
+		    		WHERE RS_IDX = #{rs_idx};
+		    		
+				DELETE FROM T_RESALE_BOARD 
+			    	 WHERE RS_IDX = #{rs_idx};
+	     		end
+			}
+	</delete>
+	
 </mapper>
 
 
