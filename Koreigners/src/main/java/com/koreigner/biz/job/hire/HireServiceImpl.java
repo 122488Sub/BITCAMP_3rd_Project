@@ -86,6 +86,7 @@ public class HireServiceImpl implements HireService {
 			result += "\"gu_gun_eup_eng\":\"" + vo.getGu_gun_eup_eng() + "\","; 
 			result += "\"do_en\":\"" + vo.getDo_en() + "\","; 
 			result += "\"title\":\"" + vo.getTitle() + "\","; 
+			result += "\"payment_codition\":\"" + vo.getPayment_codition() + "\","; 
 			result += "\"salary_min\":\"" + vo.getSalary_min() + "\","; 
 			result += "\"salary_max\":\"" + vo.getSalary_max() + "\","; 
 			result += "\"regdate\":\"" + vo.getRegdate() + "\""; 

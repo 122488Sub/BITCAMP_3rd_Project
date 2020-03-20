@@ -106,8 +106,11 @@ public class HireController {
 		
 		// 현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
+		System.out.println("cPage : " + cPage);
+		System.out.println("jobVO : " + jobVO);
 		// 페이지 처리
 		PagingVO p =  paging.paging(cPage, jobVO);
+		System.out.println("p jsonFilterjsonFilter : " + p);
 		// 리스트 VO 생성
 		jobVO.setBegin(p.getBegin());
 		jobVO.setEnd(p.getEnd());
