@@ -108,52 +108,69 @@
 	</select>
 	
 	<!-- 이력서 입력 -->
-	<insert id="insertResume" parameterType="ResumeVO">
+	<insert id="insertResume" parameterType="HashMap" useGeneratedKeys="true" keyProperty="RESUME_IDX">
+		<selectKey keyProperty="RESUME_IDX" resultType="String" order="BEFORE">
+			SELECT RESUME_SQ.NEXTVAL FROM DUAL
+		</selectKey>
 		INSERT INTO T_MEMBER_RESUME
-		VALUES (
-		 	RESUME_IDX,	MEM_NAME, WISH_DO, WISH_SI, JOB_CATE, 
-		 	JOB_CATE_CHILD, REQ_SALARY_MIN, REQ_SALARY_MAX, SALARY_TYPE, WORK_TIME,
-		 	<if test='work_time_start != null and !work_time_start.equals("")'>WORK_TIME_START,</if>
-		 	<if test='work_time_end != null and !work_time_end.equals("")'>WORK_TIME_END,</if>
-		 	WORK_TIME_ISWEEK, WORK_TIME_WEEK, DORMITORY,	INTRODUCE, GRADUATE_SCH,
-		 	<if test='dep != null and !dep.equals("")'>DEP,</if>
-		 	<if test='final_a_m != null and !final_a_m.equals("")'>FINAL_A_M,</if>
-		 	<if test='final_a_y != null and !final_a_y.equals("")'>FINAL_A_Y,</if>
-		 	<if test='final_g_m != null and !final_g_m.equals("")'>FINAL_G_M,</if>
-		 	<if test='final_g_y != null and !final_g_y.equals("")'>FINAL_G_Y,</if>
-		 	<if test='final_region != null and !final_region.equals("")'>FINAL_REGION,</if>
-		 	<if test='final_sch != null and !final_sch.equals("")'>FINAL_SCH,</if>
-		 	<if test='final_major != null and !final_major.equals("")'>FINAL_MAJOR,</if>
-		 	LANG_LEARN,
-		 	<if test='lang_sch != null and !lang_sch.equals("")'>LANG_SCH,</if>
-		 	KO_SPK_ABIL, KO_DOC_ABIL, CH_SPK_ABIL, CH_DOC_ABIL,	EN_SPK_ABIL, EN_DOC_ABIL, VT_SPK_ABIL, VT_DOC_ABIL,
-		 	REGDATE, IP,
-		 	<if test='other_lang != null and !other_lang.equals("")'>OTHER_LANG</if>
+			(
+			 	RESUME_IDX,	MEM_NAME, WISH_DO, WISH_SI, JOB_CATE, 
+			 	JOB_CATE_CHILD, REQ_SALARY_MIN, REQ_SALARY_MAX, SALARY_TYPE, WORK_TIME,
+			 	<if test='work_time_start != null and !work_time_start.equals("")'>WORK_TIME_START,</if>
+			 	<if test='work_time_end != null and !work_time_end.equals("")'>WORK_TIME_END,</if>
+			 	WORK_TIME_ISWEEK, WORK_TIME_WEEK, DORMITORY,	INTRODUCE, GRADUATE_SCH,
+			 	<if test='dep != null and !dep.equals("")'>DEP,</if>
+			 	<if test='final_a_m != null and !final_a_m.equals("")'>FINAL_A_M,</if>
+			 	<if test='final_a_y != null and !final_a_y.equals("")'>FINAL_A_Y,</if>
+			 	<if test='final_g_m != null and !final_g_m.equals("")'>FINAL_G_M,</if>
+			 	<if test='final_g_y != null and !final_g_y.equals("")'>FINAL_G_Y,</if>
+			 	<if test='final_region != null and !final_region.equals("")'>FINAL_REGION,</if>
+			 	<if test='final_sch != null and !final_sch.equals("")'>FINAL_SCH,</if>
+			 	<if test='final_major != null and !final_major.equals("")'>FINAL_MAJOR,</if>
+			 	LANG_LEARN,
+			 	<if test='lang_sch != null and !lang_sch.equals("")'>LANG_SCH,</if>
+			 	KO_SPK_ABIL, KO_DOC_ABIL, CH_SPK_ABIL, CH_DOC_ABIL,	EN_SPK_ABIL, EN_DOC_ABIL, VT_SPK_ABIL, VT_DOC_ABIL,
+			 	REGDATE, IP,
+			 	<if test='other_lang != null and !other_lang.equals("")'>OTHER_LANG</if>
 		 	)
 		 	
-		 	(
-		 	RESUME_SQ.NEXTVAL, #{mem_name}, #{wish_do}, #{wish_si}, #{job_cate},
-		 	#{job_cate_child}, #{req_salary_min}, #{req_salary_max}, #{salary_type}, #{work_time},
-		 	<if test='work_time_start != null and !work_time_start.equals("")'>#{work_time_start},</if>
-		 	<if test='work_time_end != null and !work_time_end.equals("")'>#{work_time_end},</if>
-		 	#{work_time_isweek}, #{work_time_week}, #{dormitory}, #{introduce}, #{graduate_sch},
-		 	<if test='dep != null and !dep.equals("")'>#{dep},</if>
-		 	<if test='final_a_m != null and !final_a_m.equals("")'>#{final_a_m},</if>
-		 	<if test='final_a_y != null and !final_a_y.equals("")'>#{final_a_y},</if>
-		 	<if test='final_g_m != null and !final_g_m.equals("")'>#{final_g_m},</if>
-		 	<if test='final_g_y != null and !final_g_y.equals("")'>#{final_g_y},</if>
-		 	<if test='final_region != null and !final_region.equals("")'>#{final_region},</if>
-		 	<if test='final_sch != null and !final_sch.equals("")'>#{final_sch},</if>
-		 	<if test='final_major != null and !final_major.equals("")'>#{final_major},</if>
-		 	#{lang_learn},
-		 	<if test='lang_sch != null and !lang_sch.equals("")'>#{lang_sch},</if>
-		 	#{ko_spk_abil}, #{ko_doc_abil}, #{ch_spk_abil},	#{ch_doc_abil},	#{en_spk_abil},	#{en_doc_abil},	#{vt_spk_abil},	#{vt_doc_abil},
-		 	SYSDATE, #{ip},
-		 	<if test='other_lang != null and !other_lang.equals("")'>#{other_lang}</if>
+		VALUES
+			(
+			 	RESUME_SQ.NEXTVAL, #{mem_name}, #{wish_do}, #{wish_si}, #{job_cate},
+			 	#{job_cate_child}, #{req_salary_min}, #{req_salary_max}, #{salary_type}, #{work_time},
+			 	<if test='work_time_start != null and !work_time_start.equals("")'>#{work_time_start},</if>
+			 	<if test='work_time_end != null and !work_time_end.equals("")'>#{work_time_end},</if>
+			 	#{work_time_isweek}, #{work_time_week}, #{dormitory}, #{introduce}, #{graduate_sch},
+			 	<if test='dep != null and !dep.equals("")'>#{dep},</if>
+			 	<if test='final_a_m != null and !final_a_m.equals("")'>#{final_a_m},</if>
+			 	<if test='final_a_y != null and !final_a_y.equals("")'>#{final_a_y},</if>
+			 	<if test='final_g_m != null and !final_g_m.equals("")'>#{final_g_m},</if>
+			 	<if test='final_g_y != null and !final_g_y.equals("")'>#{final_g_y},</if>
+			 	<if test='final_region != null and !final_region.equals("")'>#{final_region},</if>
+			 	<if test='final_sch != null and !final_sch.equals("")'>#{final_sch},</if>
+			 	<if test='final_major != null and !final_major.equals("")'>#{final_major},</if>
+			 	#{lang_learn},
+			 	<if test='lang_sch != null and !lang_sch.equals("")'>#{lang_sch},</if>
+			 	#{ko_spk_abil}, #{ko_doc_abil}, #{ch_spk_abil},	#{ch_doc_abil},	#{en_spk_abil},	#{en_doc_abil},	#{vt_spk_abil},	#{vt_doc_abil},
+			 	SYSDATE, #{ip},
+			 	<if test='other_lang != null and !other_lang.equals("")'>#{other_lang}</if>
 		 	)
 		WHERE MEM_ID = #{mem_id}
 	</insert>
 	
+	<insert id="insertCarrer" parameterType="HashMap">
+		INSERT INTO T_MEMBER_CAREER
+			( CAREER_IDX, RESUME_IDX, JOIN_YEAR, JOIN_MONTH, RESIGN_YEAR, RESIGN_MONTH, REGION, COMPANY, TASK )
+		VALUES
+			( CAREER_SQ.NEXTVAL, #{RESUME_IDX}, #{join_year}, #{join_month}, #{resign_year}, #{resign_month}, #{region}, #{company}, #{task} )
+	</insert>
+	
+	<insert id="inserFile" parameterType="HashMap">
+		INSERT INTO T_RESUME_FILE
+			( FILE_IDX, RESUME_IDX, ORI_FILE, SAVE_FILE, FILE_SIZE )
+		VALUES
+			( RESUME_FILE_SQ.NEXTVAL, #{RESUME_IDX}, #{ORI_FILE}, #{SAVE_FILE}, #{FILE_SIZE} )
+	</insert>
 </mapper>
 
 
