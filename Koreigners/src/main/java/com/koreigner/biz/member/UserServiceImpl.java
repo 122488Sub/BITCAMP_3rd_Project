@@ -15,7 +15,6 @@ import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -49,8 +48,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private FileUtils fileUtils;
-
-	Logger log = Logger.getLogger(this.getClass());
 	
 	
 	//회원가입중 client가 입력한 email이 db에 이미 등록되어 있는지 중복 체크 한다.
