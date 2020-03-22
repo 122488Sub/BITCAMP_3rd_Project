@@ -59,7 +59,7 @@ public class House_ServiceImpl implements House_Service {
 		
 		// System.out.println(vo.getAvailable_date());
 		String path = this.getClass().getResource("").getPath();
-		path = path.substring(1, path.indexOf(".metadata")) + "Koreigners/src/main/webapp/WEB-INF/views/house/upload/";
+		path = path.substring(1, path.indexOf(".metadata")) + "Koreigners/src/main/webapp/resources/img/house/upload/";
 		// System.out.println(path);//workspace가 BITCAMP_3rd_Project일 경우
 
 		File dir = new File(path);
