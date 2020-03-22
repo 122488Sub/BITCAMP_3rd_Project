@@ -121,11 +121,14 @@ public class House_ServiceImpl implements House_Service {
 		return testDAO.myBatis_getHouseTotal(vo);
 		
 	}
-
-
-
-
-
+	
+	@Override
+	public String getHousePrice(int price) {
+		
+		return String.format("%,d", price);
+	}
+	
+	
 	@Override
 	public String getHouseListJson(List<HouseAll_VO> list, PagingVO p) {
 		System.out.println(p);

@@ -66,7 +66,11 @@ public class House_Controller {
 	public String houseDetail_go(int room_idx, Model model) { 
 		System.out.println("detail");
 		System.out.println("roomIDX: "+room_idx);
-		model.addAttribute("house",  houseService.getHouse(room_idx)); //데이터 저장
+		HouseAll_VO vo=houseService.getHouse(room_idx);
+		
+		model.addAttribute("house",  vo); //데이터 저장
+		model.addAttribute("deposit",  houseService.getHousePrice(vo.getDeposit()) ); //데이터 저장
+		model.addAttribute("monthly",  houseService.getHousePrice(vo.getMonthly_rent())); //데이터 저장
 		return "house/house_Detail.page";
 	}
 	

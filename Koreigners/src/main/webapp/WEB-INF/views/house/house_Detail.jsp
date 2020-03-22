@@ -140,12 +140,12 @@
 				<br>
 				<div>
 					<label class="priceData" style="margin-right: 30px;">Deposit
-					</label> <label class="priceData">$${house.deposit} </label>
+					</label> <label class="priceData">$${deposit} </label>
 				</div>
 				<br>
 				<div>
 					<label class="priceData" style="margin-right: 30px;">Monthly
-					</label> <label class="priceData">$${house.monthly_rent}</label>
+					</label> <label class="priceData">$${monthly}</label>
 				</div>
 				<br>
 				<br>
@@ -186,11 +186,11 @@
 				<th>Minimum Stay</th>
 				<td>
 				<c:choose>
-				  <c:when test="${house.stay_num_min gt 12 }">
-					${house.stay_num_min}Month
+				  <c:when test="${house.stay_num_min lt 12 }">
+					${house.stay_num_min} Month
 				  </c:when>
 				  <c:otherwise>
-				    ${house.stay_num_min-11}Year
+				    ${house.stay_num_min-11} Year
 				  </c:otherwise>	
 				</c:choose>
 				</td>
