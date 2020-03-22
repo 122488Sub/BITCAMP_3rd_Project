@@ -10,12 +10,6 @@
 
 	<context:component-scan base-package="com.koreigner.biz,com.koreigner.common" />
 
-	<mvc:annotation-driven> 
-		<mvc:argument-resolvers> 
-			<bean class="com.koreigner.common.resolver.CustomMapArgumentResolver" /> 
-		</mvc:argument-resolvers> 
-	</mvc:annotation-driven>
-
 
 	
 	<!-- ===== Spring JDBC 관련 설정 ======== -->
