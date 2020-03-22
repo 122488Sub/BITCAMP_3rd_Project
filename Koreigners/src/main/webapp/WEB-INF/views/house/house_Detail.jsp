@@ -1,6 +1,7 @@
+<%@page import="com.koreigner.biz.house.HouseAll_VO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,84 +9,355 @@
 <title>Insert title here</title>
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="resources/js/common/slide.js"></script>
+<link rel="stylesheet" href="resources/css/house/houseDetail_slide.css">
 <style>
+#detailContent {
+	margin: 0 auto;
+	width: 1200px;
+}
+
+
+
+#detailHeader{
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+}
+	
+#imgBox, #baseBox {
+	display: inline-block;
+	vertical-align: text-top;
+}
+
+#imgBox {
+	margin-right: 30px;
+}
+
+#baseBox {
+	text-align: left;
+	padding-top: 15px;
+}
+
+.subject {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.address, .priceData {
+	width: 500px;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+#detailInfo, #detailMap, #detailUtil{
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 70px;
+	
+}
+#infoTable{
+	width:1000px;
+	font-size: 1.1em;
+	font-weight: bold;
+	text-align: left;
+	margin-top: 5px;
+	margin-bottom: 120px;
+}
+#utilTable{
+	border-spacing: 10px;
+	font-size: 0.8em;
+}
+
+.font-1_3em{
+	font-size: 1.3em;
+	font-weight: bold;
+	text-align: left;
+}
+
 #mapDisp{
-		
-		width: 500px;
-		height: 250px;
-		margin: 0 auto;
-		margin-bottom: 5px;
-	}
+	width: 1000px;
+	height: 350px;
+	margin: 0 auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
 
 </style>
 </head>
 
 <body>
-<table id="infoTable">
-				<tr>
-					<td rowspan="6" id="imgBox">
-					    <div class="slider">
-					     <ul class="panel">
-					     <c:choose>
-						     <c:when test="${empty imgList }">
-						     	<li><img id="imgFile" src="./images/default-placeholder.jpg"></li>
-						     </c:when>
-						     <c:otherwise>
-							     <c:forEach items="${imgList}" var="img" >
-							        <li><img id="imgFile" src="./images/resale/${img.rs_file_name}"></li>
-							     </c:forEach>
-						     </c:otherwise>
-					     </c:choose>
-					      </ul>					      
-					      <ul class="btn">
-					        <li class="on"></li>
-					         <c:choose>
-						     <c:when test="${empty imgList }">
-						     	<li></li>
-						     </c:when>
-						     <c:otherwise>
-							     <c:forEach begin="1" end="${imgList.size()-1}" step="1" var="img">
-							        <li></li>
-							     </c:forEach>
-						     </c:otherwise>
-					     </c:choose>
-					      </ul>
-					      <button class="prev"><img src="./images/back.png" style="width:50px"></button>
-					      <button class="next"><img src="./images/next.png" style="width:50px"></button>
-					    </div>
-					</td>
-					<td id="subject" class="userInfo">&nbsp;&nbsp;&nbsp;&nbsp;${rsVO.subject}</td>
-				</tr>
-				<tr>
-					<td id="price" class="userInfo">&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 50px">${rsVO.price}</span>원</td>
-				</tr>
-				<tr>
-					<td id="name" class="userInfo">&nbsp;&nbsp;&nbsp;&nbsp;<spand>&middot;&nbsp;판매자</spand>&nbsp;&nbsp;&nbsp;&nbsp;${rsVO.name}</td>
-				</tr>
-				<tr>
-					<td id="address" class="userInfo">&nbsp;&nbsp;&nbsp;&nbsp;<spand>&middot;&nbsp;지역</spand>&nbsp;&nbsp;&nbsp;&nbsp;<img src ="../../images/pin.png" width="15px" height="15px">&nbsp;${rsVO.address}</td>
-				</tr>
-				<tr>
-					<td id="reg_date" class="userInfo">&nbsp;&nbsp;&nbsp;&nbsp;<spand>&middot;&nbsp;날짜</spand>&nbsp;&nbsp;&nbsp;&nbsp;${rsVO.reg_date}</td>
-				</tr>
-				<tr>
-					<td id="hit" class="userInfo">&nbsp;&nbsp;&nbsp;&nbsp;<span>&middot;&nbsp;조회</span>&nbsp;&nbsp;&nbsp;&nbsp;${rsVO.hit}</td>
-				</tr>
-			</table>
+	<div id="detailContent">
+		<div id="detailHeader">
+			<div id="imgBox">
+				<div class="slider">
+					<ul class="panel">
+						<c:choose>
+							<c:when test="${empty house.img_nameList }">
+								<li><img id="imgFile"
+									src="resources/img/common/default-placeholder.jpg"></li>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${house.img_nameList}" var="img">
+									<li><img id="" src="resources/img/house/upload/${img}"
+										width="350px" height="350px"></li>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</ul>
+					<ul class="btn">
+						<li class="on"></li>
+						<c:choose>
+							<c:when test="${empty house.img_nameList }">
+								<li></li>
+							</c:when>
+							<c:otherwise>
+								<c:forEach begin="1" end="${house.img_nameList.size()-1}"
+									step="1" var="img">
+									<li></li>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</ul>
+					<button class="prev">
+						<img src="resources/img/common/back.png" style="width: 50px">
+					</button>
+					<button class="next">
+						<img src="resources/img/common/next.png" style="width: 50px">
+					</button>
+				</div>
+			</div>
 
-<div id="mapDisp">
-</div>
+			<div id="baseBox">
+				<div>
+					<label class="subject"> ${house.subject} </label>
+				</div>
+				<br>
+				<div>
+					<p class="address">${house.address_detail},${house.address}</p>
+				</div>
+				<br>
+				<br>
+				<div>
+					<label class="priceData" style="margin-right: 30px;">Deposit
+					</label> <label class="priceData">$${deposit} </label>
+				</div>
+				<br>
+				<div>
+					<label class="priceData" style="margin-right: 30px;">Monthly
+					</label> <label class="priceData">$${monthly}</label>
+				</div>
+				<br>
+				<br>
+				<div>
+					<input type="button" id="" value="♡pick"> <input
+						type="button" id="" value="Send Message">
+				</div>
+			</div>
+		</div>
 
+	</div>
+	<div id="detailInfo">
+		<div class="font-1_3em">Info</div>
+		<hr>
+		<table id="infoTable">
+			<colgroup>
+				<col width="20%" span="1">
+				<col width="25%" span="1">
+				<col width="20%" span="1">
+				<col width="25%" span="1">
+			</colgroup>
+			<tr>
+				<th>Build Type</th>
+				<td>
+				<c:choose>
+				  <c:when test="${house.build_type eq 0 }">
+					Villa
+				  </c:when>
+				  <c:when test="${house.build_type eq 1 }">
+					Goshiwon
+				  </c:when>
+				  <c:otherwise>
+				    Semi-Officetel
+				  </c:otherwise>	
+				</c:choose>
+				
+				</td>
+				<th>Minimum Stay</th>
+				<td>
+				<c:choose>
+				  <c:when test="${house.stay_num_min lt 12 }">
+					${house.stay_num_min} Month
+				  </c:when>
+				  <c:otherwise>
+				    ${house.stay_num_min-11} Year
+				  </c:otherwise>	
+				</c:choose>
+				</td>
+			</tr>
 
-<script>
-	//페이징로딩후 자동시작 //
-	$(window).on('load',function(){
+			<tr>
+				<th>Room Type</th>
+				<td>
+				<c:choose>
+				  <c:when test="${house.room_type eq 0  }">
+					Studio
+				  </c:when>
+				  <c:when test="${house.room_type eq 1 }">
+					Two
+				  </c:when>
+				  <c:otherwise>
+				    Three+
+				  </c:otherwise>	
+				</c:choose>
+				
+				</td>
+				<th>Available Date</th>
+				<td>${house.available_date} Later</td>
+			</tr>
 
-		$("#mapDisp").load("/koreigner/resources/html/googleMap.jsp?location="
-	   		+'${house.address}'.replace(/ /gi,"%20"));
-		
-	});
-	//여기까지 페이징로딩후 자동시작//
-</script>
+			<tr>
+				<th>Area</th>
+				<td>${house.room_area}m<sup>2</sup></td>
+				
+			</tr>
+		</table>
+
+	</div>
+	
+	<div id="detailUtil">
+		<div class="font-1_3em">Utilities</div>
+		<hr>
+		<table id="utilTable">
+			<colgroup>
+				<col width="10%" span="8">
+			</colgroup>
+			<tr>
+				<td>
+					<div style="opacity: ${house.closet eq 1 ? 1.0 :0.3}" >
+						<div><img id="icon_closet" src="resources/img/house/icon/closet.png"></div>
+						<div>Closet</div>
+					</div>
+				</td>
+				<td>
+					<div style="opacity: ${house.desk eq 1 ? 1.0 :0.3}" >
+						<div><img id="icon_desk" src="resources/img/house/icon/desk.png"></div>
+						<div>Desk</div>
+					</div>
+				</td>
+				<td> 
+					<div style="opacity: ${house.chair eq 1 ? 1.0 :0.3}" >
+						<div><img id="icon_chair"src="resources/img/house/icon/chair.png"></div>
+						<div>Chair</div>
+					</div>
+				</td>
+				<td> 
+					<div style="opacity: ${house.bad_type eq 1 ? 1.0 :0.3}" >
+						<div><img id="icon_bed"src="resources/img/house/icon/bed.png"></div>
+						<div>Bed</div>
+					</div>
+				</td>
+				<td> 
+					<div style="opacity: ${house.air_conditioner eq 1 ? 1.0 :0.3}" >
+						<div><img id="icon_aircondition" src="resources/img/house/icon/aircondition.png"></div>
+						<div>Air conditioner</div>
+					</div>
+				</td>
+				<td> 
+					<div style="opacity: ${house.heating eq 1 ? 1.0 :0.3}" >
+						<div><img id="icon_heating" src="resources/img/house/icon/heating.png"></div>
+						<div>Heating</div>
+					</div>
+				</td>
+				<td> 
+					<div style="opacity: ${house.bathroom eq 1 ? 1.0 :0.3}" >
+						<div><img id="icon_bathroom" src="resources/img/house/icon/bathroom.png"></div>
+						<div>Bathroom</div>
+					</div>
+				</td>
+				<td> 
+					<div style="opacity: ${house.sink eq 1 ? 1.0 :0.3}" >
+						<div><img id="icon_sink" src="resources/img/house/icon/sink.png"></div>
+						<div>Sink</div>
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<div style="opacity: ${house.kitchen_stove eq 1 ? 1.0 :0.3}">
+						<div><img id="icon_stove" src="resources/img/house/icon/stove.png"  ></div>
+						<div>Kitchen Stove</div>
+					</div>
+				</td>
+				<td>
+					<div style="opacity: ${house.refrigerator eq 1 ? 1.0 :0.3}">
+						<div><img id="icon_refrigerator" src="resources/img/house/icon/refrigerator.png"  ></div>
+						<div style="opacity: ">Refrigerator</div>
+					</div>
+				</td>
+				<td> 
+					<div style="opacity: ${house.laundry eq 1 ? 1.0 :0.3}">
+						<div><img id="icon_laundry" src="resources/img/house/icon/laundry.png"  ></div>
+						<div>Laundry</div>
+					</div>
+				</td>
+				<td> 
+					<div style="opacity: ${house.pet eq 1 ? 1.0 :0.3}">
+						<div><img id="icon_pet" src="resources/img/house/icon/pet.png"  ></div>
+						<div>Pet</div>
+					</div>
+				</td>
+				<td> 
+					<div style="opacity: ${house.internet eq 1 ? 1.0 :0.3}">
+						<div><img id="icon_internet" src="resources/img/house/icon/internet.png"  ></div>
+						<div>Internet</div>
+					</div>
+				</td>
+				<td> 
+					<div style="opacity: ${house.wifi eq 1 ? 1.0 :0.3}">
+						<div><img id="icon_wifi" src="resources/img/house/icon/wifi.png"  ></div>
+						<div>Wifi</div>
+					</div>
+				</td>
+				<td> 
+					<div style="opacity: ${house.elevator eq 1 ? 1.0 :0.3}">
+						<div><img id="icon_elevator" src="resources/img/house/icon/elevator.png" ></div>
+						<div>Elevator</div>
+					</div>
+				</td>
+				<td> 
+					<div style="opacity: ${house.parking eq 1 ? 1.0 :0.3}" >
+						<div><img id="icon_parking" src="resources/img/house/icon/parking.png" ></div>
+						<div>Parking</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+	</div>
+	
+	
+	<div id="detailMap">
+		<div class="font-1_3em">Location</div>
+		<hr>
+		<div id="mapDisp"></div>
+	</div>
+
+	<script>
+		//페이징로딩후 자동시작 //
+		$(window)
+				.on(
+						'load',
+						function() {
+
+							$("#mapDisp").load(
+									"/koreigner/resources/html/googleMap.jsp?location="
+											+ '${house.address}'.replace(/ /gi,
+													"%20"));
+
+						});
+		//여기까지 페이징로딩후 자동시작//
+	</script>
 </body>
 </html>

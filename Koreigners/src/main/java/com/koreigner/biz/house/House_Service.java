@@ -17,5 +17,5 @@ public interface House_Service {
 	
 	String getHouseListJson(List<HouseAll_VO> list, PagingVO p);
 	
-
+	String getHousePrice(int price);
 }
