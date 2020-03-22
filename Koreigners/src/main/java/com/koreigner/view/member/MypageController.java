@@ -130,16 +130,16 @@ public class MypageController {
 	// 이력서 입력
 	@RequestMapping(value="insertResume.do", method= RequestMethod.POST)
 	public String insertResume(ResumeVO rvo, HttpServletRequest request) throws Exception {
-		System.out.println("rsvo : " + rvo.toString());
+		
+//		userService.insertResume(rvo);
+		System.out.println("rvo : " + rvo.toString());
+		
 		String[] list = rvo.getRegion();
 		for(String vo : list) {
 			System.out.println("vo : " + vo);
 		}
-//		System.out.println("mem_name: " + commandMap.get("mem_name"));
-				
-//		userService.insertResume(commandMap.getMap(), request); 
-
-		return "myPage_go.do?type=profile";
+		
+		return "myPage_go.do?type=resume";
 	}
 	
 	

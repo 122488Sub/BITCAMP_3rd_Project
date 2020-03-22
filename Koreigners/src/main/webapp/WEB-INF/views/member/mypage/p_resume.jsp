@@ -298,7 +298,7 @@
               </tr>
             </tbody>
           </table>
-          
+  -->        
 	      <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
 	            <h4><strong>05</strong>Other Items</h4>
 	            <tbody>
@@ -310,7 +310,7 @@
 	              </tr>
 	            </tbody>
 	      </table>      
-           -->
+           
           <p align="center">
             <a href="" target="_self" class="button white small">Cancel</a>
             &nbsp; &nbsp;

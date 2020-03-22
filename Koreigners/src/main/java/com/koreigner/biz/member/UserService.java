@@ -66,7 +66,13 @@ public interface UserService {
 	int userPwCheck(Map<String, String> map);
 	
 	//이력서 입력
-	void insertResume(Map<String, Object> map, HttpServletRequest request) throws Exception;
+	void insertResume(ResumeVO rvo);
+	
+	//파일 업로드
+	
+	
+	//이력서 가져오기
+	ResumeVO getOneResume(String mem_id);
 	
 	
 
