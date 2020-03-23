@@ -1,0 +1,70 @@
+#detailContent {
+	margin: 0 auto;
+	width: 1200px;
+}
+
+
+
+#detailHeader{
+	width: 100%;
+	text-align: center;
+	margin-top: 20px;
+}
+	
+#imgBox, #baseBox {
+	display: inline-block;
+	vertical-align: text-top;
+}
+
+#imgBox {
+	margin-right: 30px;
+}
+
+#baseBox {
+	text-align: left;
+	padding-top: 15px;
+}
+
+.subject {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.address, .priceData {
+	width: 500px;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+#detailInfo, #detailMap, #detailUtil{
+	width: 1000px;
+	margin: 0 auto;
+	margin-top: 70px;
+	
+}
+#infoTable{
+	width:1000px;
+	font-size: 1.1em;
+	font-weight: bold;
+	text-align: left;
+	margin-top: 5px;
+	margin-bottom: 120px;
+}
+#utilTable{
+	border-spacing: 10px;
+	font-size: 0.8em;
+}
+
+.font-1_3em{
+	font-size: 1.3em;
+	font-weight: bold;
+	text-align: left;
+}
+
+#mapDisp{
+	width: 1000px;
+	height: 350px;
+	margin: 0 auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+

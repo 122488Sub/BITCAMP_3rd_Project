@@ -54,7 +54,6 @@ public class House_ServiceImpl implements House_Service {
 	public int insertNewHouse(HouseAll_VO vo) {
 		
 		//임시
-		vo.setMem_email("임시");
 		System.out.println(vo);
 		
 		// System.out.println(vo.getAvailable_date());
