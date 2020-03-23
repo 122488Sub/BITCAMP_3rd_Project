@@ -58,6 +58,16 @@ public class House_DAOMyBatis {
 		
 		return list;
 	}
+
+	public int myBatis_deleteHouse(int room_idx) {
+		return mybatis.update("House_DAO.deleteHouse", room_idx);
+		
+	}
+
+	public int myBatis_updateHouse(HouseAll_VO vo) {
+		
+		return mybatis.update("House_DAO.updateHouse", vo);
+	}
 }
 
 

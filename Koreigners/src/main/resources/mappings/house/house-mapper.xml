@@ -47,6 +47,7 @@ FROM(
 				BOARD.ROOM_IDX=IMG.ROOM_IDX 
 			    AND BOARD.ROOM_IDX=INFO.ROOM_IDX 
 			    AND BOARD.ROOM_IDX=OPT.ROOM_IDX  
+			    AND BOARD.STATE=1 
 			<if test="dosiFilter gt 0 ">  
 			AND ( 
 			    	BOARD.DO_EN IN
@@ -275,6 +276,7 @@ FROM(
 		    AND BOARD.ROOM_IDX=IMG.ROOM_IDX 
 		    AND BOARD.ROOM_IDX=INFO.ROOM_IDX 
 		    AND BOARD.ROOM_IDX=OPT.ROOM_IDX 
+		    AND BOARD.STATE=1 
 		    
 		    
 	</select>
@@ -595,6 +597,18 @@ FROM(
 		    AND BOARD.ROOM_IDX=INFO.ROOM_IDX 
 		    AND BOARD.ROOM_IDX=OPT.ROOM_IDX 
 	</select>
+	
+	
+	
+	<update id="deleteHouse" parameterType="int">
+		UPDATE 
+			T_ROOM_BOARD
+		SET 
+			STATE = 2 
+		WHERE
+		    ROOM_IDX = #{room_idx} 
+	</update>
+	
 </mapper>
 
 

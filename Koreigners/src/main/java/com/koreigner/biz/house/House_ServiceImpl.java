@@ -186,6 +186,25 @@ public class House_ServiceImpl implements House_Service {
 		return result;
 	}
 
+
+
+
+
+	@Override
+	public int deleteHouse(int room_idx) {
+		return testDAO.myBatis_deleteHouse(room_idx);
+	}
+
+
+
+
+
+	@Override
+	public int updateHouse(HouseAll_VO vo) {
+		// TODO Auto-generated method stub
+		return testDAO.myBatis_updateHouse(vo);
+	}
+
 	
 	
 	

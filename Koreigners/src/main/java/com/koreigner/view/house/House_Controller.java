@@ -124,10 +124,22 @@ public class House_Controller {
 		HouseAll_VO vo=houseService.getHouse(room_idx);
 		model.addAttribute("house",  vo); //데이터 저장
 		
-		
 		return "house/house_Modify.page";
 	}
+	@RequestMapping(value="house_Update.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String houseModify_process(HttpServletRequest request, HouseAll_VO vo, Model model) {
+		
+		houseService.updateHouse(vo);
+		
+		return "redirect:house_main.do";
+	}
 	
+	
+	@RequestMapping(value="house_Delete.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String houseDelete(HttpServletRequest request, int room_idx, Model model) {
+		houseService.deleteHouse(room_idx);
+		return "redirect:house_main.do";
+	}
 }//end class
 
 

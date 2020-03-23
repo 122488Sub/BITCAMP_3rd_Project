@@ -8,7 +8,7 @@ function clickModify() {
 function clickDelete() {
 	var jbResult = prompt( 'If you want to delete this post, please enter "Delete".', '' );
 	if(jbResult=='Delete')
-		post_goto('house_delete.do', {'room_idx':getParam("room_idx")},false);
+		post_goto('house_Delete.do', {'room_idx':getParam("room_idx")},false);
 	else 
 		return;
 }
