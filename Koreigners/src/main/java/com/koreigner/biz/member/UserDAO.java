@@ -2,7 +2,7 @@ package com.koreigner.biz.member;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -111,33 +111,19 @@ public class UserDAO {
 	}
 	
 	//이력서 입력
-	public void insertResume(ResumeVO rvo) {
-		mybatis.insert("user.insertResume", rvo);
+	public void insertResume(Map<String, Object> map) {
+		mybatis.insert("user.insertResume", map);
 	}
-
-	//이력서 커리어 입력
-	public void insertCareer(ResumeVO rvo) {
-		mybatis.insert("user.insertCareer", rvo);
-		
-	}
-
-	//이력서 첨부파일 업로드
-	public void insertFile(int resume_idx, List<String> ori_file_list, List<String> save_file_list) {
-		
-		ResumeVO rvo = new ResumeVO();
-		rvo.setResume_idx(resume_idx);
-		
-		int cnt = 0;
-		for(String ori_file : ori_file_list) {
-		}
-		
-		mybatis.insert("user.insertFile", rvo);		
+	
+	//파일업로드
+	public void insertFile(Map<String, Object> map)  throws Exception {
+		mybatis.insert("user.insertFile", map);
 	}
 	
 	
-	//이력서 가져오기
-	public ResumeVO getOneResume(String mem_id) {
-		return mybatis.selectOne("user.getOneResume", mem_id);
-	}
+//	//이력서 가져오기
+//	public ResumeVO getOneResume(String mem_id) {
+//		return mybatis.selectOne("user.getOneResume", mem_id);
+//	}
 
 }

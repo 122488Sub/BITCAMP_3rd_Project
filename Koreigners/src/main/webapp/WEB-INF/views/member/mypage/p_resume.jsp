@@ -21,8 +21,8 @@
 	</ul>
 </div>
 
-          <form name="form1" id="form1" action="insertResume.do" method="post" enctype="multipart/form-data">
-<!--           <input type="hidden" name="mem_id" value="${mvo.mem_id }">
+          <form name="form1" id="form1" action="insertResume.do" method="post" encType="multipart/form-data">
+          <input type="hidden" name="mem_id" value="${mvo.mem_id }">
 
            <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
           	<caption>
@@ -52,7 +52,7 @@
             </tbody>
           </table> 
 
-         <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+         <!-- <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
           	<caption>Required fields</caption>
             <tbody>
               <tr>
@@ -197,39 +197,42 @@
               </tr>
 
             </tbody>
-          </table>
- -->
-		    <button type="button" id="addItemBtn1">Add Career</button>
+          </table>-->
+ 
+ 	
       <table class="data_t recruit_re" id="career" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+         
            <h4><strong>03</strong>Career</h4>
-            <tbody>
+			    <a href="#this" class="btn" id="addCareer">Add Career</a>			    
+            <tbody id="career">
               <tr class="item1">
-                <th width="15%" class="number">1</th>
+                <th width="15%" class="number"><span class="id_row_num" id="id_row_num">1</span></th>
                 <td width="85%" class="txLeft">Joining/Leaving :
-                  <input type="text" size="4" name="join_year" value="" class="only-num">
+                  <input type="text" size="4" name="join_year1" value="" class="only-num">
                   Year
-                  <input type="text" size="2" name="join_month" value="" class="only-num">
+                  <input type="text" size="2" name="join_month1" value="" class="only-num">
                   Month ~
-                  <input type="text" size="4" name="resign_year" value="" class="only-num">
+                  <input type="text" size="4" name="resign_year1" value="" class="only-num">
                   Year
-                  <input type="text" size="2" name="resign_month" value="" class="only-num">
+                  <input type="text" size="2" name="resign_month1" value="" class="only-num">
                   Month<br>
                   Region :
-                  <input type="text" size="20" name="region" value="">
+                  <input type="text" size="20" name="region1" value="">
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   Name of company :
-                  <input type="text" size="40" name="company" value="">
+                  <input type="text" size="40" name="company1" value="">
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <br>
                   Assigned task :
-                  <input type="text" size="40" name="task" value="">
+                  <input type="text" size="40" name="task1" value="">
                 </td>
-                <td><input type="button" id="delBtn" value="delete"></td>
-            </tr>
+                <td><a href="#this" class="btn" id="delete" name="delete">Delete</a></td>                
+             </tr>
+             <tr id="addCareer"></tr>
             </tbody>
           </table>
-<!-- 
-          <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+
+          <!-- <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
             <h4><strong>04</strong>Linguistic ability</h4>
             <tbody>
               <tr>
@@ -305,7 +308,7 @@
 	              <tr>
 	                <th width="15%">The attached file</th>
 	                <td width="85%" class="txLeft">
-	                  <input type="file" name="ori_file" id="file1" multiple> &nbsp; 
+	                  <input type="file" name="ori_file" id="file1"> &nbsp; 
 	                </td>
 	              </tr>
 	            </tbody>

@@ -1,10 +1,8 @@
 package com.koreigner.view.member;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.koreigner.biz.job.company.CompanyServiceImpl;
 import com.koreigner.biz.job.company.CompanyVO;
-import com.koreigner.biz.member.ResumeVO;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
 import com.koreigner.common.CommandMap;
@@ -129,17 +126,13 @@ public class MypageController {
 	
 	// 이력서 입력
 	@RequestMapping(value="insertResume.do", method= RequestMethod.POST)
-	public String insertResume(ResumeVO rvo, HttpServletRequest request) throws Exception {
+	public ModelAndView insertResume(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		
-//		userService.insertResume(rvo);
-		System.out.println("rvo : " + rvo.toString());
+		ModelAndView mv = new ModelAndView("redirect:myPage_go.do?type=resume");
 		
-		String[] list = rvo.getRegion();
-		for(String vo : list) {
-			System.out.println("vo : " + vo);
-		}
+		userService.insertResume(commandMap.getMap(), request);
 		
-		return "myPage_go.do?type=resume";
+		return mv;
 	}
 	
 	

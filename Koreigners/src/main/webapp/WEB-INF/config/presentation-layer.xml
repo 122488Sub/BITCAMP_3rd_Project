@@ -12,13 +12,13 @@
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	
 	<mvc:annotation-driven/>
-	<!-- <mvc:annotation-driven> 
+	
+	<mvc:annotation-driven> 
 		<mvc:argument-resolvers> 
-			<bean class="com.koreigner.common.resolver.CustomMapArgumentResolver" > 
-				<property name="order" value="3" />
+			<bean class="com.koreigner.common.resolver.CustomMapArgumentResolver" >
 			</bean>
 		</mvc:argument-resolvers> 
-	</mvc:annotation-driven> -->
+	</mvc:annotation-driven>
 
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

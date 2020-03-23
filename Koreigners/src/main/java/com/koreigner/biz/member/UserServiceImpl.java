@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -21,6 +22,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -222,74 +224,30 @@ public class UserServiceImpl implements UserService {
 		return userCnt;
 	}
 	
-	//서버저장용파일 가져오기
-	public List<String> getSaveFileList(List<MultipartFile> originalFile){
-		
-		String path = "/C:/MyStudy/Final_Project/BITCAMP_3rd_Project/Koreigners/src/main/webapp/resources/resume_file/"; 
-		
-		//경로 생성
-		File dir= new File(path);
-		if(!dir.isDirectory()) {
-			dir.mkdirs();
-		}
-		
-		String saveFileName = null; 
-		
-		List<String> saveFileList = new ArrayList<>();
-		
-		
-		//원본파일 가져와서 서버저장용파일로 만들기
-		for(MultipartFile file : originalFile) {
-			saveFileName = "resume_"+file.getOriginalFilename();
-			
-			try {
-				System.out.println("passing");
-				file.transferTo(new File(path + saveFileName));
-				saveFileList.add(saveFileName);
-				
-			} catch (IOException e) {
-				System.out.println("IOException 발생");
-				e.printStackTrace();
-			}
-		}
-		return saveFileList;
-	}
+	
 	
 	//이력서 입력
 	@Override
-	public void insertResume(ResumeVO rvo) {
+	public void insertResume(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
-		userDAO.insertResume(rvo); //이력서 기본정보 입력
+		userDAO.insertResume(map);
 		
-		ResumeVO vo = userDAO.getOneResume(rvo.getMem_id());
-		int resume_idx = vo.getResume_idx();
-
-		rvo.setResume_idx(resume_idx);
-		
-		userDAO.insertCareer(rvo);
-		
-		String oriFileName = "";
-		List<String> oriFileList = new ArrayList<>();
-		
-		for(MultipartFile file : rvo.getOriginalFile()) {
-			oriFileName = file.getOriginalFilename();
-			oriFileList.add(oriFileName);
+		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(map, request);
+		for(int i=0, size=list.size(); i<size; i++) {
+			System.out.println("///////파일 : " + list.get(i));
+			userDAO.insertFile(list.get(i));
 		}
-		
-		List<String> saveFileList = getSaveFileList(rvo.getOriginalFile());
-		
-		userDAO.insertFile(resume_idx, oriFileList, saveFileList);
-		
-		
-		
-		
+
+	
 	}
+	
 	
 	//이력서 가져오기
 	@Override
 	public ResumeVO getOneResume(String mem_id) {
 		
-		return userDAO.getOneResume(mem_id);
+//		return userDAO.getOneResume(mem_id);
+		return null;
 	}
 	
 	
