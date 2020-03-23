@@ -2,6 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	if( (boolean)request.getAttribute("authentication")){
+		System.out.println("qq");
+	}else{
+		System.out.println("aa");
+	}
+
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,83 +19,15 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/js/common/slide.js"></script>
+<script type="text/javascript" src="resources/js/common/post_go.js"></script>
+<script type="text/javascript" src="resources/js/house/houseDetail.js"></script>
 <link rel="stylesheet" href="resources/css/house/houseDetail_slide.css">
-<style>
-#detailContent {
-	margin: 0 auto;
-	width: 1200px;
-}
+<link rel="stylesheet" href="resources/css/house/houseDetail.css">
 
-
-
-#detailHeader{
-	width: 100%;
-	text-align: center;
-	margin-top: 20px;
-}
-	
-#imgBox, #baseBox {
-	display: inline-block;
-	vertical-align: text-top;
-}
-
-#imgBox {
-	margin-right: 30px;
-}
-
-#baseBox {
-	text-align: left;
-	padding-top: 15px;
-}
-
-.subject {
-	font-size: 2em;
-	font-weight: bold;
-}
-
-.address, .priceData {
-	width: 500px;
-	font-size: 1.1em;
-	font-weight: bold;
-}
-#detailInfo, #detailMap, #detailUtil{
-	width: 1000px;
-	margin: 0 auto;
-	margin-top: 70px;
-	
-}
-#infoTable{
-	width:1000px;
-	font-size: 1.1em;
-	font-weight: bold;
-	text-align: left;
-	margin-top: 5px;
-	margin-bottom: 120px;
-}
-#utilTable{
-	border-spacing: 10px;
-	font-size: 0.8em;
-}
-
-.font-1_3em{
-	font-size: 1.3em;
-	font-weight: bold;
-	text-align: left;
-}
-
-#mapDisp{
-	width: 1000px;
-	height: 350px;
-	margin: 0 auto;
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-
-</style>
 </head>
 
 <body>
+ 
 	<div id="detailContent">
 		<div id="detailHeader">
 			<div id="imgBox">
@@ -134,7 +75,12 @@
 				</div>
 				<br>
 				<div>
-					<p class="address">${house.address_detail},${house.address}</p>
+					<p class="address">
+					  <c:if test="${not empty house.address_detail}">
+						${house.address_detail},
+					  </c:if>
+						${house.address}
+					</p>
 				</div>
 				<br>
 				<br>
@@ -150,8 +96,18 @@
 				<br>
 				<br>
 				<div>
-					<input type="button" id="" value="♡pick"> <input
-						type="button" id="" value="Send Message">
+					<c:choose>
+						<c:when test="${authentication }">
+							<input type="button" id="" value="Modify" onClick="clickModify()">
+							<input type="button" id="" value="Delete" onClick="clickDelete()">
+						</c:when>
+						<c:otherwise>
+							<input type="button" id="" value="♡pick" onclick="clickWishList()">
+							<input type="button" id="" value="Send Message">
+						</c:otherwise>
+					</c:choose>
+				
+				
 				</div>
 			</div>
 		</div>
@@ -340,6 +296,13 @@
 	
 	<div id="detailMap">
 		<div class="font-1_3em">Location</div>
+		<hr>
+		<p style="text-align: left;">
+		  <c:if test="${not empty house.address_detail}">
+			${house.address_detail},
+		  </c:if>
+			${house.address}
+		</p>
 		<hr>
 		<div id="mapDisp"></div>
 	</div>
