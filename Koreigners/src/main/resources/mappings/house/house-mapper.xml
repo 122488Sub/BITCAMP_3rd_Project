@@ -537,7 +537,7 @@ FROM(
     			 </otherwise> 
     	        </choose>||chr(13)||chr(10)
     			  
-		          , SYSDATE,'11111') 
+		          , SYSDATE, (SELECT SYS_CONTEXT ('USERENV', 'IP_ADDRESS') FROM DUAL)) 
 		SELECT * FROM DUAL
 	
 	
@@ -601,12 +601,49 @@ FROM(
 	
 	
 	<update id="deleteHouse" parameterType="int">
-		UPDATE 
-			T_ROOM_BOARD
-		SET 
-			STATE = 2 
-		WHERE
-		    ROOM_IDX = #{room_idx} 
+		
+		    
+		{call
+        declare
+        begin
+			UPDATE 
+				T_ROOM_BOARD
+			SET 
+				STATE = 2, 
+				ROOM_MODIFY_DATE=SYSDATE  
+			WHERE
+			    ROOM_IDX = #{room_idx} ;
+              
+            INSERT INTO 
+		        T_ROOM_LOG(ROOM_LOG_IDX, ROOM_LOG_CATEGORY, ROOM_IDX, MEM_EMAIL, ROOM_CONTENT, ROOM_LOG_DATE, IP) 
+		    VALUES 
+		        (
+		        	ROOM_LOG_SQ.NEXTVAL,
+		        	'글 삭제', 
+		        	#{room_idx},
+		        	(SELECT 
+		        		MEM_EMAIL  
+		        	 FROM  
+		        	 	T_ROOM_BOARD  
+		        	 WHERE 
+		        	 	ROOM_IDX= #{room_idx} 
+		        	),  
+		        	(SELECT
+		        	 	MAX(DBMS_LOB.SUBSTR(ROOM_CONTENT, 3000, 1)) 
+		        	 	KEEP(DENSE_RANK LAST ORDER BY ROOM_LOG_DATE) 
+		        	 FROM 
+		        	 	T_ROOM_LOG 
+		        	 WHERE 
+		        	 	ROOM_IDX=#{room_idx} 
+		        	),
+		        	SYSDATE, (SELECT SYS_CONTEXT ('USERENV', 'IP_ADDRESS') FROM DUAL)  
+		        
+		        );
+		          
+              
+         end
+     	}     
+		
 	</update>
 	
 </mapper>
