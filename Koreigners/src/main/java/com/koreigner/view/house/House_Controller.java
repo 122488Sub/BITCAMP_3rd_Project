@@ -121,6 +121,9 @@ public class House_Controller {
 		
 	@RequestMapping(value="house_Modify.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String houseModify(HttpServletRequest request, int room_idx, Model model) {
+		if(request.getAttribute("mem_id")==null) {
+			return "redirect:house_main.do";
+		}
 		HouseAll_VO vo=houseService.getHouse(room_idx);
 		model.addAttribute("house",  vo); //데이터 저장
 		
@@ -128,8 +131,11 @@ public class House_Controller {
 	}
 	@RequestMapping(value="house_Update.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String houseModify_process(HttpServletRequest request, HouseAll_VO vo, Model model) {
+		if(request.getAttribute("mem_id")==null) {
+			return "redirect:house_main.do";
+		}
 		
-		houseService.updateHouse(vo);
+		//houseService.updateHouse(vo);
 		
 		return "redirect:house_main.do";
 	}
