@@ -60,38 +60,49 @@ FROM(
 	</select>
 	
 	<insert id="insertNewHouse" parameterType="house_all">
-		INSERT ALL 
+	  {call
+        declare
+        begin
+		INSERT 
 		    INTO  
 		        T_ROOM_BOARD(ROOM_IDX, MEM_EMAIL, SUBJECT, DO_EN, 
 		        GU_GUN_EUP_ENG, ADDRESS, ADDRESS_DETAIL, ROOM_REPORTING_DATE) 
 		    VALUES 
 		        (ROOM_SQ.NEXTVAL,#{mem_email},#{subject}, #{do_en},  
-		        #{gu_gun_eup_eng},#{address},#{address_detail},SYSDATE) 
+		        #{gu_gun_eup_eng},#{address},#{address_detail},SYSDATE);
 		  <foreach collection="img_nameList" item="fileName" index="index">
+		  INSERT
 		    INTO 
 		        T_ROOM_IMG(ROOM_IDX, ROOM_IMG_NAME, ROOM_IMG_ORI_NAME) 
 		    VALUES 
 		        (ROOM_SQ.CURRVAL,  ('house_' || ROOM_SQ.CURRVAL || '_' || SUBSTR(#{fileName}, 1, INSTR(#{fileName}, '/', 1, 1) - 1) )  , 
-		         ( SUBSTR(#{fileName}, INSTR(#{fileName}, '/', 1, 1) + 1, INSTR(#{fileName}, '/', 1, 2) - INSTR(#{fileName}, '/', 1, 1) - 1) ) )
+		         ( SUBSTR(#{fileName}, INSTR(#{fileName}, '/', 1, 1) + 1, INSTR(#{fileName}, '/', 1, 2) - INSTR(#{fileName}, '/', 1, 1) - 1) ) );
 		  </foreach> 
+		  INSERT
 		    INTO 
 		        T_ROOM_INFO(ROOM_IDX, BUILD_TYPE, ROOM_TYPE, ROOM_AREA, BULID_LAYERS, FLOOR_LAYERS,  
 		            FLOOR_TYPE, STAY_NUM_MIN, DEPOSIT, MONTHLY_RENT, MANAGEMENT_EXPENSE, AVAILABLE_DATE) 
 		    VALUES 
 		        (ROOM_SQ.CURRVAL, #{build_type}, #{room_type}, #{room_area}, #{bulid_layers}, #{floor_layers} 
-		        , #{floor_type}, #{stay_num_min}, #{deposit}, #{monthly_rent}, #{management_expense}, #{available_date}) 
+		        , #{floor_type}, #{stay_num_min}, #{deposit}, #{monthly_rent}, #{management_expense}, #{available_date}); 
+		   INSERT
 		    INTO 
 		        T_ROOM_OPTION(ROOM_IDX, CLOSET, DESK, CHAIR, BAD_TYPE, AIR_CONDITIONER, HEATING, KITCHEN_STOVE,  
 		        REFRIGERATOR, LAUNDRY, PET, INTERNET, WIFI, ELEVATOR, SINK, BATHROOM, PARKING) 
 		    VALUES 
 		        (ROOM_SQ.CURRVAL,#{closet}, #{desk}, #{chair}, #{bad_type}, #{air_conditioner}, #{heating}, #{kitchen_stove} 
-		         , #{refrigerator}, #{laundry}, #{pet}, #{internet}, #{wifi}, #{elevator}, #{sink}, #{bathroom}, #{parking} ) 
-		    
+		         , #{refrigerator}, #{laundry}, #{pet}, #{internet}, #{wifi}, #{elevator}, #{sink}, #{bathroom}, #{parking} );
+		
+		INSERT 
 		    <include refid="House_Include.house_insertLog" />
-		          ,(SELECT MAX(ROOM_IDX) FROM T_ROOM_BOARD),'글 등록') 
-		SELECT * FROM DUAL
-	
-	
+		          ,ROOM_SQ.CURRVAL,'글 등록') ;
+		
+		
+	end
+	}
+	<selectKey keyProperty="room_idx" resultType="Integer" order="AFTER">
+			SELECT ROOM_SQ.CURRVAL FROM DUAL
+		</selectKey>
 	</insert>
 	
 	

@@ -180,7 +180,7 @@ public class House_ServiceImpl implements House_Service {
 				break;
 			}
 			fileOriName = file.getOriginalFilename();
-			fileName = "house_"+testDAO.myBatis_getRoom_Sq()+"_" +sysTime+"_"+ i++ +"."+ FilenameUtils.getExtension(fileOriName);
+			fileName = "house_"+vo.getRoom_idx()+"_" +sysTime+"_"+ i++ +"."+ FilenameUtils.getExtension(fileOriName);
 			try {
 				file.transferTo(new File(path + fileName));
 			} catch (Exception e) {
@@ -202,9 +202,13 @@ public class House_ServiceImpl implements House_Service {
 		String sysTime=getSystime();
 		
 		vo=fileProcess1(vo, sysTime);
-		
+		System.out.println("zzzzzz");
+		System.out.println(vo.getRoom_idx());
 		int result=testDAO.myBatis_insertNewHouse(vo);
-		
+		System.out.println("<<<<<<<<<<<<<<>>>>>>>");
+		System.out.println(result);
+		System.out.println(vo.getRoom_idx());
+		System.out.println(">>>>>>>");
 		fileProcess2(vo,sysTime);
 		
 		return result;
