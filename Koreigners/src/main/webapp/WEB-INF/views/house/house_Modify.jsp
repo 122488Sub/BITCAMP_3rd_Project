@@ -21,7 +21,7 @@
 <script type="text/javascript" src="resources/js/house/houseModify.js"></script>
 <script type="text/javascript">
 	$(function() {
-		
+		console.log("${house.room_idx}")
 		$('input[name=subject]').val("${house.subject}");
 		$('input[name=build_type]:radio[value="${house.build_type}"]').prop('checked',true);
 		$('input[name=room_type]:radio[value="${house.room_type}"]').prop('checked',true);
@@ -101,7 +101,7 @@
 		}	
 		if ("${house.parking}" == 1) {
 			$('input[name=parking]').prop('checked',true);
-		}
+		}	
 	});
 </script>
 </head>
@@ -110,7 +110,7 @@
 	<div id="container">
 	
 	<form action="" id="form" name="form" method="post" enctype="multipart/form-data">
-	
+	<input type='hidden' name="room_idx" value="${house.room_idx }">
 	<jsp:include page="house_formData.jsp"></jsp:include>
 	
 	<div class="td_div">

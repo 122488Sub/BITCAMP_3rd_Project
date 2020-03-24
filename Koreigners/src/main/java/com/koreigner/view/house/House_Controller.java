@@ -135,8 +135,7 @@ public class House_Controller {
 			return "redirect:house_main.do";
 		}
 		
-		//houseService.updateHouse(vo);
-		
+		houseService.updateHouse(vo);
 		return "redirect:house_main.do";
 	}
 	

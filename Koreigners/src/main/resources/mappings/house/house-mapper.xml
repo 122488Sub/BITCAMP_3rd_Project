@@ -646,6 +646,69 @@ FROM(
 		
 	</update>
 	
+	<update id="updateHouse" parameterType="house_all">
+		{call
+        declare
+        begin
+		     UPDATE
+		     	 T_ROOM_BOARD
+		     SET
+				SUBJECT=#{subject},
+				DO_EN=#{do_en},  
+				GU_GUN_EUP_ENG= #{gu_gun_eup_eng}, 
+				ADDRESS=#{address},
+				ADDRESS_DETAIL=#{address_detail}, 
+				ROOM_MODIFY_DATE= ( SYSDATE + (interval '9' hour) )
+			 WHERE
+			 	ROOM_IDX=#{room_idx};
+			 
+			 UPDATE
+		     	 T_ROOM_INFO
+		     SET
+				BUILD_TYPE= #{build_type},
+				ROOM_TYPE= #{room_type},
+				ROOM_AREA= #{room_area}, 
+				BULID_LAYERS=#{bulid_layers}, 
+				FLOOR_LAYERS= #{floor_layers}, 
+		        FLOOR_TYPE=#{floor_type},
+				STAY_NUM_MIN=#{stay_num_min}, 
+				DEPOSIT=#{deposit}, 
+				MONTHLY_RENT= #{monthly_rent}, 
+		        MANAGEMENT_EXPENSE= #{management_expense}, 
+		        AVAILABLE_DATE= #{available_date}
+			 WHERE
+			 	ROOM_IDX=#{room_idx};
+			 
+			 
+			 UPDATE
+		     	 T_ROOM_OPTION
+		     SET
+				CLOSET=#{closet}, 
+			    DESK= #{desk}, 
+			    CHAIR= #{chair}, 
+			    BAD_TYPE= #{bad_type}, 
+			    AIR_CONDITIONER= #{air_conditioner}, 
+		        HEATING= #{heating}, 
+		        KITCHEN_STOVE=#{kitchen_stove}, 
+		        REFRIGERATOR=#{refrigerator}, 
+		        LAUNDRY= #{laundry}, 
+		        PET= #{pet}, 
+		        INTERNET= #{internet}, 
+		        WIFI= #{wifi}, 
+		        ELEVATOR= #{elevator}, 
+		        SINK= #{sink}, 
+		        BATHROOM= #{bathroom}
+			 WHERE
+			 	ROOM_IDX=#{room_idx};
+		     	
+			      
+         end
+     	}       
+		  
+		    
+		
+	</update>
+	
 </mapper>
 
 

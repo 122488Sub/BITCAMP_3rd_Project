@@ -3,6 +3,7 @@
 <h1>House Info</h1>
 <hr>
 
+<input type="hidden" name="mem_email" value="${mem_id }">
 <table>
 	<tr>
 		<th>TITLE</th>
