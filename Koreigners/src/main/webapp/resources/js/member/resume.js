@@ -188,7 +188,12 @@ $(function() {
 		e.preventDefault();
 		fn_deleteCareer($(this));
 	});
-	
+
+	$("a[name='file']").on("click", function(e){ //파일 이름 
+		e.preventDefault(); 
+		fn_downloadFile($(this)); 
+		
+	});
 	
 	 
 });
@@ -232,4 +237,24 @@ function fn_deleteCareer(obj){
 	obj.parent().parent().remove();
 }
 
+
+
+function fn_downloadFile(obj){ 
+	var idx = obj.parent().find("#IDX").val(); 
+	var comSubmit = new ComSubmit(); 
+	comSubmit.setUrl("downloadFile.do");
+	comSubmit.addParam("IDX", idx); 
+	comSubmit.submit(); 
+	
+}
+
+function insertResume(frm) {
+	frm.action = "insertResume.do";
+	frm.submit();
+}
+
+function updateResume(frm) {
+	frm.action = "updateResume.do";
+	frm.submit();
+}
 

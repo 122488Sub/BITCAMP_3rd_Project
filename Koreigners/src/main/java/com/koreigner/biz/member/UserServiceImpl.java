@@ -237,19 +237,41 @@ public class UserServiceImpl implements UserService {
 			System.out.println("///////파일 : " + list.get(i));
 			userDAO.insertFile(list.get(i));
 		}
-
-	
 	}
-	
 	
 	//이력서 가져오기
 	@Override
-	public ResumeVO getOneResume(String mem_id) {
+	public Map<String, Object> selectResume(String mem_id) {
 		
-//		return userDAO.getOneResume(mem_id);
-		return null;
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> tempMap = userDAO.selectResume(mem_id);
+		System.out.println("====== selectResume : " + tempMap);
+		resultMap.put("map", tempMap);
+		
+		if(tempMap != null) {
+	//		List<Map<String, Object>> careerList = userDAO.selectCareerList(map);
+			List<Map<String, Object>> fileList = userDAO.selectFileList(tempMap);
+			System.out.println("====== selectFile : " + fileList);			
+			
+	//		resultMap.put("careerList", careerList);
+			resultMap.put("fileList", fileList);
+		}
+		return resultMap;
 	}
 	
+	//이력서 파일 다운받기위한 정보가져오기
+	@Override
+	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
+		return userDAO.selectFileInfo(map);
+	}
+
+	//이력서 수정하기
+	@Override
+	public void updateResume(Map<String, Object> map, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 //=========================== SNS Login ===============================
 	@Override
@@ -373,6 +395,10 @@ public class UserServiceImpl implements UserService {
 		
 		return payloadMap;
 	}
+
+
+	
+
 
 	
 

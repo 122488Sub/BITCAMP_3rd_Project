@@ -22,16 +22,16 @@
 	<!-- 회원 등록 -->
 	<insert id="joinUser" parameterType="userVO">
 		INSERT INTO T_MEMBER
-			(MEM_IDX, MEM_CATE, MEM_ID, MEM_PW, MEM_NAME)
-		VALUES (MEM_SQ.NEXTVAL, #{mem_cate}, #{mem_id}, #{mem_pw}, #{mem_name})	
+			(MEM_IDX, MEM_CATE, MEM_ID, MEM_PW, MEM_NAME, MEM_REG_DT)
+		VALUES (MEM_SQ.NEXTVAL, #{mem_cate}, #{mem_id}, #{mem_pw}, #{mem_name}, SYSDATE)	
 	</insert>
 	
 	<!-- 이메일 인증(권한상태 업데이트) -->
- <update id="updateAuthstatus" parameterType="userVO">
+ 	<!-- <update id="updateAuthstatus" parameterType="userVO">
 		UPDATE T_MEMBER
 		   SET AUTH_STATUS = '1'
 		 WHERE MEM_ID = #{mem_id}
-	</update>
+	</update> -->
 	
 	<!-- 권한상태 불러오기 -->
 	<select id="getAuthStatus" parameterType="String" resultType="String">
@@ -91,12 +91,12 @@
 	       <if test='mem_birth != null and !mem_birth.equals("--")'>MEM_BIRTH = #{mem_birth},</if>
 	       <if test='mem_gender != null and !mem_gender.equals("")'>MEM_GENDER = #{mem_gender},</if>
 	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
-	       <if test='auth_status != null and !auth_status.equals("")'>AUTH_STATUS = #{auth_status},</if>
 	       <if test='mem_address != null and !mem_address.equals("")'>MEM_ADDRESS = #{mem_address},</if>
 	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
-	       <if test='auth_status != null and !auth_status.equals("")'>AUTH_STATUS = #{auth_status},</if>
+	       <if test='auth_status != null and !auth_status.equals("") and auth_status.equals("0") '>AUTH_STATUS = #{auth_status},</if>
 	       <if test="mailling_fl != null">MAILLING_FL = #{mailling_fl},</if>
 	       <if test="sms_fl != null">SMS_FL = #{sms_fl},</if>
+	       MEM_MOD_DT = SYSDATE
 	     </set>
 		 WHERE MEM_ID = #{mem_id}
 	</update>
@@ -113,9 +113,9 @@
 			SELECT RESUME_SQ.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO T_MEMBER_RESUME
-			( RESUME_IDX, MEM_ID, MEM_NAME )
+			( RESUME_IDX, MEM_ID, MEM_NAME, REGDATE )
 		VALUES
-			( #{RESUME_IDX}, #{mem_id}, #{mem_name})
+			( #{RESUME_IDX}, #{MEM_ID}, #{MEM_NAME}, SYSDATE )
 	</insert>
 	
 	<!-- 이력서 경력 입력 -->
@@ -129,16 +129,33 @@
 	<!-- 이력서 파일업로드 -->
 	<insert id="insertFile" parameterType="hashmap">
 		INSERT INTO T_RESUME_FILE
-			( FILE_IDX, RESUME_IDX, ORI_FILE, SAVE_FILE, FILE_SIZE )
+			( IDX, RESUME_IDX, ORI_FILE, SAVE_FILE, FILE_SIZE )
 		VALUES
 			( RESUME_FILE_SQ.NEXTVAL, #{RESUME_IDX}, #{ORI_FILE}, #{SAVE_FILE}, #{FILE_SIZE} )
 	</insert>
 	
 	<!-- 이력서 가져오기 -->
-	<!-- <select id="getOneResume" parameterType="String" resultType="ResumeVO">
-		SELECT * FROM T_MEMBER_RESUME
+	<select id="selectResume" parameterType="String" resultType="hashmap">
+		SELECT RESUME_IDX, MEM_ID, MEM_NAME, REGDATE
+		  FROM T_MEMBER_RESUME
 		 WHERE MEM_ID = #{mem_id}
-	</select> -->
+	</select>
+	
+	<!-- 이력서 파일 가져오기 -->
+	<select id="selectFileList" parameterType="hashmap" resultType="hashmap">
+		SELECT IDX, ORI_FILE, ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+		  FROM T_RESUME_FILE
+		 WHERE RESUME_IDX = #{RESUME_IDX}
+		   AND DEL_GB = 'N'
+	</select>
+	
+	<!-- 이력서 파일정보 가져오기 -->
+	<select id="selectFileInfo" parameterType="hashmap" resultType="hashmap">
+		SELECT SAVE_FILE, ORI_FILE
+		  FROM T_RESUME_FILE
+		 WHERE IDX = #{IDX}	
+	</select>
+
 	
 </mapper>
 

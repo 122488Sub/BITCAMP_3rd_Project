@@ -64,12 +64,15 @@ public interface UserService {
 	
 	//이력서 입력
 	void insertResume(Map<String, Object> map, HttpServletRequest request) throws Exception;
-	
-	//파일 업로드
-	
-	
+
 	//이력서 가져오기
-	ResumeVO getOneResume(String mem_id);
+	Map<String, Object> selectResume(String mem_id);
+	
+	//이력서 파일 다운받기위한 정보
+	Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
+
+	//이력서 수정하기
+	void updateResume(Map<String, Object> map, HttpServletRequest request);
 	
 	
 
