@@ -3,6 +3,7 @@ package com.koreigner.biz.member;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -35,11 +36,11 @@ public class UserDAO {
 		mybatis.insert("user.joinUser", vo);
 	}
 	
-	//이메일 인증 후 권한 업데이트
-	public void updateAuthstatus(UserVO vo) {
-		mybatis.update("user.updateAuthstatus", vo);
-		
-	}
+//	//이메일 인증 후 권한 업데이트
+//	public void updateAuthstatus(UserVO vo) {
+//		mybatis.update("user.updateAuthstatus", vo);
+//		
+//	}
 	
 	//비밀번호 재설정
 	public void updatePassword(UserVO vo) {
@@ -101,6 +102,7 @@ public class UserDAO {
 //========================= 마이페이지 ===========================================
 	//회원정보 수정하기
 	public void updateMember(UserVO vo) {
+		System.out.println("DAO에서 vo : " + vo.toString());
 		mybatis.update("user.updateMember", vo);		
 	}
 
@@ -112,18 +114,28 @@ public class UserDAO {
 	
 	//이력서 입력
 	public void insertResume(Map<String, Object> map) {
-		mybatis.insert("user.insertResume", map);
+		mybatis.update("user.insertResume", map);
 	}
 	
 	//파일업로드
 	public void insertFile(Map<String, Object> map)  throws Exception {
 		mybatis.insert("user.insertFile", map);
 	}
-	
-	
-//	//이력서 가져오기
-//	public ResumeVO getOneResume(String mem_id) {
-//		return mybatis.selectOne("user.getOneResume", mem_id);
-//	}
 
+	//이력서 가져오기
+	public Map<String, Object> selectResume(String mem_id) {
+		return mybatis.selectOne("user.selectResume", mem_id);
+	}
+	
+	//이력서 파일 가져오기
+	public List<Map<String, Object>> selectFileList(Map<String, Object> map) {
+		return mybatis.selectList("user.selectFileList", map);
+	}
+
+	//이력서 파일 다운 정보가져오기
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> selectFileInfo(Map<String, Object> map) {
+		return (Map<String, Object>)mybatis.selectOne("user.selectFileInfo", map);
+	}
+	
 }

@@ -279,6 +279,7 @@ public class UserController {
 	public String emailConfirm(UserVO vo, Model model) throws Exception {
 
 		vo.setAuth_status("1"); // authStatus를 1로, 권한 업데이트
+		System.out.println("이메일 인증 완료 후 vo : " + vo.toString());
 		userService.updateMember(vo);
 
 		return "/member/emailAuthSuccess.page";
