@@ -40,7 +40,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${house.img_nameList}" var="img">
-									<li><img id="" src="resources/img/house/upload/${img}"
+									<li><img id="" src="resources/img/house/upload/${house.mem_email}/${img}"
 										width="350px" height="350px"></li>
 								</c:forEach>
 							</c:otherwise>

@@ -262,6 +262,8 @@
 		            ).GETSTRINGVAL(), 2) ROOM_IMG_ORI_NAME 
 		     FROM 
 		        T_ROOM_IMG 
+		     WHERE
+		     	ROOM_IMG_STATE=1 
 		     GROUP BY 
 		        ROOM_IDX 
 		    ) IMG, 
@@ -274,6 +276,9 @@
 	    AND BOARD.ROOM_IDX=OPT.ROOM_IDX  
 	    AND BOARD.STATE=1 
 	</sql>
+	
+
+	
 	
 	<sql id="house_Filter">
 		<if test="dosiFilter gt 0 ">  
