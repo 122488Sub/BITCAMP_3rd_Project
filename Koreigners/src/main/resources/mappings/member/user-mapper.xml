@@ -113,18 +113,57 @@
 			SELECT RESUME_SQ.NEXTVAL FROM DUAL
 		</selectKey>
 		INSERT INTO T_MEMBER_RESUME
-			( RESUME_IDX, MEM_ID, MEM_NAME, REGDATE )
+			( 
+			RESUME_IDX, MEM_ID, MEM_NAME, REGDATE, WISH_DO,
+			WISH_SI, JOB_CATE, JOB_CATE_CHILD, REQ_SALARY_MIN, REQ_SALARY_MAX,
+			SALARY_TYPE, WORK_TIME,
+			<if test="WORK_TIME_START != null">WORK_TIME_START,</if>
+			<if test="WORK_TIME_END != null">WORK_TIME_END,</if>
+			WORK_TIME_ISWEEK,
+			<if test="WORK_TIME_WEEK != null">WORK_TIME_WEEK,</if>
+			DORMITORY, INTRODUCE, GRADUATE_SCH, DEP, LANG_LEARN,
+			<if test="LANG_SCH != null">LANG_SCH,</if>
+			<if test="FINAL_A_M != null">FINAL_A_M,</if>
+			<if test="FINAL_A_Y != null">FINAL_A_Y,</if>
+			<if test="FINAL_G_M != null">FINAL_G_M,</if>
+			<if test="FINAL_G_Y != null">FINAL_G_Y,</if>
+			<if test="FINAL_REGION != null">FINAL_REGION,</if>
+			<if test="FINAL_SCH != null">FINAL_SCH,</if>
+			<if test="FINAL_MAJOR != null">FINAL_MAJOR,</if>
+			KO_SPK_ABIL, KO_DOC_ABIL, CH_SPK_ABIL, CH_DOC_ABIL, EN_SPK_ABIL, EN_DOC_ABIL, VT_SPK_ABIL, VT_DOC_ABIL,
+			<if test='OTHER_LANG != null and !OTHER_LANG.equals("")'>OTHER_LANG</if>
+			)
+			
 		VALUES
-			( #{RESUME_IDX}, #{MEM_ID}, #{MEM_NAME}, SYSDATE )
+			( 
+			#{RESUME_IDX}, #{MEM_ID}, #{MEM_NAME}, SYSDATE, #{WISH_DO},
+			#{WISH_SI}, #{JOB_CATE}, #{JOB_CATE_CHILD}, #{REQ_SALARY_MIN}, #{REQ_SALARY_MAX},
+			#{SALARY_TYPE}, #{WORK_TIME},
+			<if test="WORK_TIME_START != null">#{WORK_TIME_START},</if>
+			<if test="WORK_TIME_END != null">#{WORK_TIME_END},</if>
+			#{WORK_TIME_ISWEEK},
+			<if test="WORK_TIME_WEEK != null">#{WORK_TIME_WEEK},</if>
+			#{DORMITORY}, #{INTRODUCE}, #{GRADUATE_SCH}, #{DEP}, #{LANG_LEARN},
+			<if test="LANG_SCH != null">#{LANG_SCH},</if>
+			<if test="FINAL_A_M != null">#{FINAL_A_M},</if>
+			<if test="FINAL_A_Y != null">#{FINAL_A_Y},</if>
+			<if test="FINAL_G_M != null">#{FINAL_G_M},</if>
+			<if test="FINAL_G_Y != null">#{FINAL_G_Y},</if>
+			<if test="FINAL_REGION != null">#{FINAL_REGION},</if>
+			<if test="FINAL_SCH != null">#{FINAL_SCH},</if>
+			<if test="FINAL_MAJOR != null">#{FINAL_MAJOR},</if>
+			#{KO_SPK_ABIL}, #{KO_DOC_ABIL}, #{CH_SPK_ABIL}, #{CH_DOC_ABIL}, #{EN_SPK_ABIL}, #{EN_DOC_ABIL}, #{VT_SPK_ABIL}, #{VT_DOC_ABIL},
+			<if test='OTHER_LANG != null and OTHER_LANG.equals("")'>#{OTHER_LANG}</if>
+			)
 	</insert>
 	
 	<!-- 이력서 경력 입력 -->
-	<!-- <insert id="insertCareer" parameterType="ResumeVO">
-		INSERT INTO T_MEMBER_CAREER
-			( CAREER_IDX, RESUME_IDX, JOIN_YEAR, JOIN_MONTH, RESIGN_YEAR, RESIGN_MONTH, REGION, COMPANY, TASK )
+	<insert id="insertCareer" parameterType="hashmap">
+		INSERT INTO T_RESUME_CAREER
+			( IDX, RESUME_IDX, JOIN_YEAR, JOIN_MONTH, RESIGN_YEAR, RESIGN_MONTH, REGION, COMPANY, TASK )
 		VALUES
-			( CAREER_SQ.NEXTVAL, #{resume_idx}, #{join_year}, #{join_month}, #{resign_year}, #{resign_month}, #{region}, #{company}, #{task} )
-	</insert> -->
+			( CAREER_SQ.NEXTVAL, #{RESUME_IDX}, #{JOIN_YEAR}, #{JOIN_MONTH}, #{RESIGN_YEAR}, #{RESIGN_MONTH}, #{REGION}, #{COMPANY}, #{TASK} )
+	</insert>
 	
 	<!-- 이력서 파일업로드 -->
 	<insert id="insertFile" parameterType="hashmap">
@@ -147,6 +186,11 @@
 		  FROM T_RESUME_FILE
 		 WHERE RESUME_IDX = #{RESUME_IDX}
 		   AND DEL_GB = 'N'
+	</select>
+	
+	<!-- 이력서 경력 가져오기 -->
+	<select id="selectCareerList" parameterType="hashmap" resultType="hashmap">
+		SELECT * FROM T_RESUME_CAREER WHERE RESUME_IDX = #{RESUME_IDX} AND DEL_GB = 'N'
 	</select>
 	
 	<!-- 이력서 파일정보 가져오기 -->
