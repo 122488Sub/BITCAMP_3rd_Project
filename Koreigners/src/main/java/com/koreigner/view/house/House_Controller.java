@@ -33,6 +33,7 @@ public class House_Controller {
 	@RequestMapping(value="house_main.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String houseMain_go() {
 		//System.out.println("controller/houseMain_go");
+		
 		return "house/house_Main.page";
 	}
 
@@ -50,7 +51,9 @@ public class House_Controller {
 	
 	
 	@RequestMapping(value="house_insert_process.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String houseInsert_process(HouseAll_VO vo, Model model) {
+	public String houseInsert_process(HttpServletRequest request, HouseAll_VO vo, Model model) {
+		String mem_id = (String) request.getAttribute("mem_id"); 
+		vo.setMem_email(mem_id);
 		houseService.insertNewHouse(vo);
 		
 		return "redirect:house_main.do";
@@ -63,14 +66,21 @@ public class House_Controller {
 	//------------------------------------------------------------------------------------------------
 	
 	@RequestMapping(value="house_detail.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String houseDetail_go(int room_idx, Model model) { 
+	public String houseDetail_go(HttpServletRequest request,int room_idx, Model model) { 
 		System.out.println("detail");
 		System.out.println("roomIDX: "+room_idx);
 		HouseAll_VO vo=houseService.getHouse(room_idx);
+		String mem_id = (String) request.getAttribute("mem_id");
 		
 		model.addAttribute("house",  vo); //데이터 저장
 		model.addAttribute("deposit",  houseService.getHousePrice(vo.getDeposit()) ); //데이터 저장
 		model.addAttribute("monthly",  houseService.getHousePrice(vo.getMonthly_rent())); //데이터 저장
+		if (vo.getMem_email().equals(mem_id)) {
+			model.addAttribute("authentication",  true);
+		}else {
+			model.addAttribute("authentication",  false);
+		}
+		
 		return "house/house_Detail.page";
 	}
 	
@@ -104,9 +114,37 @@ public class House_Controller {
 		return result;
 	}
 	
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+	//------------------------------------------------------------------------------------------------
+		
+	@RequestMapping(value="house_Modify.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String houseModify(HttpServletRequest request, int room_idx, Model model) {
+		if(request.getAttribute("mem_id")==null) {
+			return "redirect:house_main.do";
+		}
+		HouseAll_VO vo=houseService.getHouse(room_idx);
+		model.addAttribute("house",  vo); //데이터 저장
+		
+		return "house/house_Modify.page";
+	}
+	@RequestMapping(value="house_Update.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String houseModify_process(HttpServletRequest request, HouseAll_VO vo, Model model) {
+		if(request.getAttribute("mem_id")==null) {
+			return "redirect:house_main.do";
+		}
+		
+		houseService.updateHouse(vo);
+		return "redirect:house_main.do";
+	}
 	
 	
-	
+	@RequestMapping(value="house_Delete.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String houseDelete(HttpServletRequest request, int room_idx, Model model) {
+		houseService.deleteHouse(room_idx);
+		return "redirect:house_main.do";
+	}
 }//end class
 
 

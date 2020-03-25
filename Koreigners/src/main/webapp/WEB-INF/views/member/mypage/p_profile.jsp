@@ -118,7 +118,7 @@ function jusoCallBack(roadFullAddr, roadAddr, addrDetail, jibunAddr, zipNo, admC
 		<li class="tabs"><a href="myPage_go.do?type=ads">My Ads</a></li>
 	</ul>
 </div>
-	<form action="updateMember.do" method="get">
+	<form action="updateMember.do" method="post">
 		<div>
 			<label for="id">ID(Email)</label>
 			<input name="mem_id" value="${mvo.mem_id }" contenteditable="false" disabled="disabled">

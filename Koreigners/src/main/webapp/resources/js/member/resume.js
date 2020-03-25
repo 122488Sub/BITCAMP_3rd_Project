@@ -146,35 +146,7 @@ $(function() {
       this.value = this.value.replace(/[^0-9]/g,'');
   });
   
-  // 커리어 옵션추가 버튼 클릭시
-  $("#addItemBtn1").click(function(){
-      // item 의 최대번호 구하기
-      var lastItemNo = $("#career tr:last").attr("class").replace("item", "");
-      
-      var number =$("#career th:last").text();
-      var newitem = $("#career tr:eq(0)").clone();
-      newitem.removeClass();
-      newitem.find("td:eq(1)").attr("rowspan", "1");
-      newitem.addClass("item"+(parseInt(lastItemNo)+1));
-      newitem.find('th').text(parseInt(number)+1);
-      
-      $("#career").append(newitem);
-  });
-   
-
-	//삭제버튼 클릭시
-	$('#delBtn').click(function(){
-	 var clickedRow = $(this).parent().parent();
-	 // 각 항목의 첫번째 row를 삭제한 경우 다음 row에 td 하나를 추가해 준다.
-     if( clickedRow.find("td:eq(0)").attr("rowspan") ){
-         if( clickedRow.next().hasClass(cls) ){
-             clickedRow.next().prepend(clickedRow.find("td:eq(0)"));
-         }
-     }
-	 clickedRow.remove();
-	});
 	
- 
 	//카테고리 세션박스 변경 시 하위 카테고리 select ajax
 	$("#selectBox1").change(function(){
 		console.log("바뀜");
@@ -205,7 +177,84 @@ $(function() {
 			}
 		});	
 	});
+	
+	
+	$("#addCareer").on("click", function(e){ //파일 추가 버튼
+		e.preventDefault();
+		fn_addCareer();
+	});
+	
+	$("a[name='delete']").on("click", function(e){ //삭제 버튼
+		e.preventDefault();
+		fn_deleteCareer($(this));
+	});
 
+	$("a[name='file']").on("click", function(e){ //파일 이름 
+		e.preventDefault(); 
+		fn_downloadFile($(this)); 
+		
+	});
+	
+	 
 });
 
+
+var count = 1;
+
+function fn_addCareer(){
+	count++;
+	var str = "<tr class='item"+ count +"'>";
+	str += "<th width='15%' class='number'>"+ count +"</th>";
+	str += "<td width='85%' class='txLeft'>Joining/Leaving : ";
+	str += "<input type='text' size='4' name='join_year" + count + "' value='' class='only-num'>Year ";
+	str += "<input type='text' size='2' name='join_month" + count + "' value='' class='only-num'>Month ~ ";
+	str += "<input type='text' size='4' name='resign_year" + count + "' value='' class='only-num'>Year ";
+	str += "<input type='text' size='2' name='resign_month" + count + "' value='' class='only-num'>Month<br>";
+	str += "Region : <input type='text' size='20' name='region" + count + "' value=''> &nbsp;&nbsp;&nbsp;&nbsp;";
+	str += "Name of company : <input type='text' size='40' name='company" + count + "' value=''> &nbsp;&nbsp;&nbsp;&nbsp;<br>";
+	str += "Assigned task : <input type='text' size='40' name='task" + count + "' value=''></td>";
+	str += "<td><a href='#this' class='btn' id='delete' name='delete'>Delete</a></td></tr>";
+	
+	$("#career").append(str);
+	
+	$("a[name='delete']").on("click", function(e){ //삭제 버튼
+		e.preventDefault();
+		fn_deleteCareer($(this));
+	});
+}
+
+//function fn_addCareer() {
+//	$("#career").clone().appendTo($("#addCareer"));
+//	
+//	$("a[name='delete]").on("click", function(e) {
+//		e.preventDefault();
+//		fn_deleteCareer($(this));
+//	});
+//}
+//
+
+function fn_deleteCareer(obj){
+	obj.parent().parent().remove();
+}
+
+
+
+function fn_downloadFile(obj){ 
+	var idx = obj.parent().find("#IDX").val(); 
+	var comSubmit = new ComSubmit(); 
+	comSubmit.setUrl("downloadFile.do");
+	comSubmit.addParam("IDX", idx); 
+	comSubmit.submit(); 
+	
+}
+
+function insertResume(frm) {
+	frm.action = "insertResume.do";
+	frm.submit();
+}
+
+function updateResume(frm) {
+	frm.action = "updateResume.do";
+	frm.submit();
+}
 

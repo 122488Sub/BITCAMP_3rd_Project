@@ -35,6 +35,7 @@
    	 
 <!-- house mapper -->
    	 <mapper resource="mappings/house/house-mapper.xml"/>	
+   	 <mapper resource="mappings/house/house-include-mapper.xml"/>
    	 
 <!-- info mapper -->
   	 <mapper resource="mappings/infoBoard-mapper.xml"/>

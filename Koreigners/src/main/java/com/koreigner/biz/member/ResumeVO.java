@@ -49,7 +49,7 @@ public class ResumeVO {
 	private String other_lang;
 	
 	//파일 업로드용 필드 추가
-	private List<MultipartFile> originalFile;
+	private MultipartFile originalFile;
 	private String ori_file;
 	private String save_file;
 	
@@ -469,11 +469,11 @@ public class ResumeVO {
 	
 	
 	// 파일업로드 용
-	public List<MultipartFile> getOriginalFile() {
+	public MultipartFile getOriginalFile() {
 		return originalFile;
 	}
 
-	public void setOriginalFile(List<MultipartFile> originalFile) {
+	public void setOriginalFile(MultipartFile originalFile) {
 		this.originalFile = originalFile;
 	}
 	

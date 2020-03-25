@@ -18,4 +18,8 @@ public interface House_Service {
 	String getHouseListJson(List<HouseAll_VO> list, PagingVO p);
 	
 	String getHousePrice(int price);
+
+	int deleteHouse(int room_idx);
+
+	int updateHouse(HouseAll_VO vo);
 }

@@ -1,0 +1,44 @@
+
+	#container {
+		width: 1020px;
+		margin: 0 auto;
+		color: black;
+	}
+	
+	h1, h3, p { text-align: center; }
+	table { border-collapse: collapse;
+			margin: 0 auto;
+			width:100%;
+	 }
+	table, th, td {
+		border: 1px solid black;
+		margin: 10px auto;
+	}
+	td {
+		text-align: left;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	#mapDisp{
+		
+		width: 100%;
+		height: 250px;
+		margin: 0 auto;
+		margin-bottom: 5px;
+	}
+	.td_div {
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+	th { background-color: orange; width:100px; }
+
+	.td_option{
+		width:18%;
+	}
+	.borderRight-none{
+		border-right: none;
+	}
+	.borderLeft-none{
+		border-left: none;
+	}
+}

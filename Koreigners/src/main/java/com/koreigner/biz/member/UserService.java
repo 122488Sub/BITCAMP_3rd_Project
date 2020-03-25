@@ -1,13 +1,10 @@
 package com.koreigner.biz.member;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.web.multipart.MultipartFile;
 
 public interface UserService {
 	
@@ -66,13 +63,16 @@ public interface UserService {
 	int userPwCheck(Map<String, String> map);
 	
 	//이력서 입력
-	void insertResume(ResumeVO rvo);
-	
-	//파일 업로드
-	
-	
+	void insertResume(Map<String, Object> map, HttpServletRequest request) throws Exception;
+
 	//이력서 가져오기
-	ResumeVO getOneResume(String mem_id);
+	Map<String, Object> selectResume(String mem_id);
+	
+	//이력서 파일 다운받기위한 정보
+	Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
+
+	//이력서 수정하기
+	void updateResume(Map<String, Object> map, HttpServletRequest request);
 	
 	
 

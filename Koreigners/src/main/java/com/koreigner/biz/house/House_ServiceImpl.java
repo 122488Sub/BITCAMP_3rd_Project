@@ -50,67 +50,7 @@ public class House_ServiceImpl implements House_Service {
 
 
 
-	@Override
-	public int insertNewHouse(HouseAll_VO vo) {
-		
-		//임시
-		vo.setMem_email("임시");
-		System.out.println(vo);
-		
-		// System.out.println(vo.getAvailable_date());
-		String path = this.getClass().getResource("").getPath();
-		path = path.substring(1, path.indexOf(".metadata")) + "Koreigners/src/main/webapp/resources/img/house/upload/";
-		// System.out.println(path);//workspace가 BITCAMP_3rd_Project일 경우
-
-		File dir = new File(path);
-		if (!dir.isDirectory()) {
-			dir.mkdirs();
-		}
-		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyyMMdd_HHmmss");
-		Date time = new Date();
-		String sysTime = format1.format(time);
-		System.out.println(sysTime);
-		
 	
-		String fileName = "";
-		String fileOriName = "";
-		List<String> fileOriList = new ArrayList<>();
-		List<String> fileList = new ArrayList<>();
-		int i = 1;
-		for (MultipartFile file : vo.getFile()) {
-			if (file.isEmpty()) {
-				System.out.println("파일없음");
-				break;
-			}
-			fileOriName = file.getOriginalFilename();
-			fileOriList.add(fileOriName);
-			System.out.println("실제 파일 이름 : " + fileOriName);
-			fileName = sysTime+"_"+ i++ +"."+FilenameUtils.getExtension(fileOriName);
-			
-			fileList.add(fileName+"/"+fileOriName+"/");
-		}
-		vo.setImg_nameList(fileList);
-		vo.setImg_ori_nameList(fileOriList);
-		testDAO.myBatis_insertNewHouse(vo);
-		
-		i=1;
-		for (MultipartFile file : vo.getFile()) {
-			if (file.isEmpty()) {
-				System.out.println("파일없음");
-				break;
-			}
-			fileOriName = file.getOriginalFilename();
-			fileName = "house_"+testDAO.myBatis_getRoom_Sq()+"_" +sysTime+"_"+ i++ +"."+ FilenameUtils.getExtension(fileOriName);
-			try {
-				file.transferTo(new File(path + fileName));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return 1;
-	}
-
 
 
 
@@ -184,6 +124,110 @@ public class House_ServiceImpl implements House_Service {
 		result += "\"endPage\":" + p.getEndPage() +"}"; 
 		result +="}";
 		System.out.println(result);
+		return result;
+	}
+
+
+
+
+
+	@Override
+	public int deleteHouse(int room_idx) {
+		return testDAO.myBatis_deleteHouse(room_idx);
+	}
+
+
+	private HouseAll_VO fileProcess1(HouseAll_VO vo, String sysTime) {
+		
+		String fileName = "";
+		String fileOriName = "";
+		List<String> fileOriList = new ArrayList<>();
+		List<String> fileList = new ArrayList<>();
+		int i = 1;
+		for (MultipartFile file : vo.getFile()) {
+			if (file.isEmpty()) {
+				System.out.println("파일없음");
+				break;
+			}
+			fileOriName = file.getOriginalFilename();
+			fileOriList.add(fileOriName);
+			System.out.println("실제 파일 이름 : " + fileOriName);
+			fileName = sysTime+"_"+ i++ +"."+FilenameUtils.getExtension(fileOriName);
+			
+			fileList.add(fileName+"/"+fileOriName+"/");
+		}
+		vo.setImg_nameList(fileList);
+		vo.setImg_ori_nameList(fileOriList);
+		return vo;
+	}
+	
+	private void fileProcess2(HouseAll_VO vo, String sysTime) {
+		// System.out.println(vo.getAvailable_date());
+		String path = this.getClass().getResource("").getPath();
+		path = path.substring(1, path.indexOf(".metadata")) + "Koreigners/src/main/webapp/resources/img/house/upload/"+vo.getMem_email()+"/";
+		
+		File dir = new File(path);
+		if (!dir.isDirectory()) {
+			dir.mkdirs();
+		}
+		
+		String fileName = "";
+		String fileOriName = "";
+		int i=1;
+		for (MultipartFile file : vo.getFile()) {
+			if (file.isEmpty()) {
+				System.out.println("파일없음");
+				break;
+			}
+			fileOriName = file.getOriginalFilename();
+			fileName = "house_"+vo.getRoom_idx()+"_" +sysTime+"_"+ i++ +"."+ FilenameUtils.getExtension(fileOriName);
+			try {
+				file.transferTo(new File(path + fileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	private String getSystime() {
+		SimpleDateFormat format1 = new SimpleDateFormat ( "yyyyMMdd_HHmmss");
+		Date time = new Date();
+		String sysTime = format1.format(time);
+		return sysTime;
+	}
+	
+	
+	@Override
+	public int insertNewHouse(HouseAll_VO vo) {
+		
+		String sysTime=getSystime();
+		
+		vo=fileProcess1(vo, sysTime);
+		System.out.println("zzzzzz");
+		System.out.println(vo.getRoom_idx());
+		int result=testDAO.myBatis_insertNewHouse(vo);
+		System.out.println("<<<<<<<<<<<<<<>>>>>>>");
+		System.out.println(result);
+		System.out.println(vo.getRoom_idx());
+		System.out.println(">>>>>>>");
+		fileProcess2(vo,sysTime);
+		
+		return result;
+	}
+
+
+	@Override
+	public int updateHouse(HouseAll_VO vo) {
+		String sysTime=getSystime();
+
+		vo=fileProcess1(vo, sysTime);
+		System.out.println("=======aaaaaa============");
+		System.out.println(vo.toRoomBoard());
+		System.out.println("=======aaaaaa============");
+		
+		int result=testDAO.myBatis_updateHouse(vo);
+		
+		fileProcess2(vo,sysTime);
+		
 		return result;
 	}
 

@@ -9,9 +9,11 @@
 <script type="text/javascript" src="resources/js/member/sojaeji.js"></script>
 <script type="text/javascript" src="resources/js/member/resume.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="<c:url value='resources/js/common/common.js'/>" charset="utf-8"></script>
 
 </head>
 <body>
+
 <div>
 	<ul>
 		<li class="tabs"><a href="myPage_go.do?type=profile">Profile Setting</a></li>
@@ -21,8 +23,8 @@
 	</ul>
 </div>
 
-          <form name="form1" id="form1" action="insertResume.do" method="post" enctype="multipart/form-data">
-<!--           <input type="hidden" name="mem_id" value="${mvo.mem_id }">
+          <form method="post" encType="multipart/form-data">
+          <input type="hidden" name="MEM_ID" value="${mvo.mem_id }">
 
            <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
           	<caption>
@@ -32,7 +34,7 @@
               <tr>
                 <th width="15%">Name</th>
                 <td width="30%" class="txLeft">
-                <input type="text" name="mem_name">
+                <input type="text" name="MEM_NAME" value="${map.MEM_NAME }">
                 </td>
                 <th width="15%">Nationality</th>
                 <td width="40%" class="txLeft">&nbsp;${mvo.mem_nationality }</td>
@@ -52,7 +54,7 @@
             </tbody>
           </table> 
 
-         <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+         <!-- <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
           	<caption>Required fields</caption>
             <tbody>
               <tr>
@@ -197,39 +199,42 @@
               </tr>
 
             </tbody>
-          </table>
- -->
-		    <button type="button" id="addItemBtn1">Add Career</button>
+          </table>-->
+ 
+ 	
       <table class="data_t recruit_re" id="career" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+         
            <h4><strong>03</strong>Career</h4>
-            <tbody>
+			    <a href="#this" class="btn" id="addCareer">Add Career</a>			    
+            <tbody id="career">
               <tr class="item1">
-                <th width="15%" class="number">1</th>
+                <th width="15%" class="number"><span class="id_row_num" id="id_row_num">1</span></th>
                 <td width="85%" class="txLeft">Joining/Leaving :
-                  <input type="text" size="4" name="join_year" value="" class="only-num">
+                  <input type="text" size="4" name="join_year1" value="" class="only-num">
                   Year
-                  <input type="text" size="2" name="join_month" value="" class="only-num">
+                  <input type="text" size="2" name="join_month1" value="" class="only-num">
                   Month ~
-                  <input type="text" size="4" name="resign_year" value="" class="only-num">
+                  <input type="text" size="4" name="resign_year1" value="" class="only-num">
                   Year
-                  <input type="text" size="2" name="resign_month" value="" class="only-num">
+                  <input type="text" size="2" name="resign_month1" value="" class="only-num">
                   Month<br>
                   Region :
-                  <input type="text" size="20" name="region" value="">
+                  <input type="text" size="20" name="region1" value="">
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   Name of company :
-                  <input type="text" size="40" name="company" value="">
+                  <input type="text" size="40" name="company1" value="">
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <br>
                   Assigned task :
-                  <input type="text" size="40" name="task" value="">
+                  <input type="text" size="40" name="task1" value="">
                 </td>
-                <td><input type="button" id="delBtn" value="delete"></td>
-            </tr>
+                <td><a href="#this" class="btn" id="delete" name="delete">Delete</a></td>                
+             </tr>
+             <tr id="addCareer"></tr>
             </tbody>
           </table>
-<!-- 
-          <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
+
+          <!-- <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
             <h4><strong>04</strong>Linguistic ability</h4>
             <tbody>
               <tr>
@@ -302,10 +307,20 @@
 	      <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
 	            <h4><strong>05</strong>Other Items</h4>
 	            <tbody>
+	                <c:forEach var="row" items="${fileList }">
+	            	  <tr>
+	            	 <th width="15%">file</th>
+	            	 <td width="85%" class="txLeft">
+	            	  	<input type="hidden" id="IDX" value="${row.IDX }">
+	            	  	<a href="#this" name="file">${row.ORI_FILE }</a>(${row.FILE_SIZE }kb)
+	            	  </td>
+	            	  </tr>
+	                </c:forEach>
 	              <tr>
 	                <th width="15%">The attached file</th>
 	                <td width="85%" class="txLeft">
-	                  <input type="file" name="ori_file" id="file1" multiple> &nbsp; 
+	                	
+	                  <input type="file" name="ori_file" id="file"> &nbsp; 
 	                </td>
 	              </tr>
 	            </tbody>
@@ -314,13 +329,19 @@
           <p align="center">
             <a href="" target="_self" class="button white small">Cancel</a>
             &nbsp; &nbsp;
-          	<input type="submit" class="Button orange small" value="Registration">
+            <c:choose>
+	            <c:when test="${not empty map }">
+	            	<input type="button" class="Button orange small" onclick="javascript:updateResume(this.form)" value="Update">
+	            </c:when>
+	            <c:when test="${empty map }">
+	            	<input type="button" class="Button orange small" onclick="javascript:insertResume(this.form)" value="Registration">
+	            </c:when>
+            </c:choose>
           </p>
 
           </form>
           
+          <form id="commonForm" name="commonForm"></form>
 
-          
-       
 </body>
 </html>
