@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="House_Include">
+	<sql id="house_insertLog">
+		INTO 
+		    T_ROOM_LOG(ROOM_LOG_IDX, MEM_EMAIL, ROOM_CONTENT, ROOM_LOG_DATE, IP, ROOM_IDX, ROOM_LOG_CATEGORY) 
+		    VALUES 
+		        (ROOM_LOG_SQ.NEXTVAL ,#{mem_email},
+		          '제목: '||#{subject} || chr(13)||chr(10)
+		           ||'주소: '|| #{address_detail} || ', ' || #{address} || chr(13)||chr(10)
+		           ||'건물: '||
+		          <choose>
+    				<when test="build_type == 0">
+    						'빌라' 
+    				</when>
+    				<when test="build_type == 1">
+    						'고시원' 
+    				</when>
+    				<otherwise>
+    						'오피스텔' 
+    				</otherwise>
+    			  </choose> || chr(13)||chr(10) 
+    			   
+    			   ||'방: '||
+    			  <choose>
+    				<when test="room_type == 0">
+    						'원룸' 
+    				</when>
+    				<when test="room_type == 1">
+    						'투룸' 
+    				</when>
+    				<otherwise>
+    						'쓰리룸+' 
+    				</otherwise>
+    			  </choose> ||chr(13)||chr(10) 
+    			  
+    			   ||'면적: '||#{room_area}  ||chr(13)||chr(10) 
+    			   ||'해당층/건물층: '|| #{floor_layers} ||' / ' || #{bulid_layers} ||chr(13)||chr(10) 
+    			   
+    			   ||'층옵션: ' ||
+    			    <choose>
+    				<when test="floor_type == 0">
+    						'일반' 
+    				</when>
+    				<when test="floor_type == 1">
+    						'옥탑방' 
+    				</when>
+    				<otherwise>
+    						'반지하' 
+    				</otherwise>
+    			  </choose> ||chr(13)||chr(10) 
+    			  
+    			  ||'최소거주기간: ' || 
+    			  <choose>
+    				<when test="stay_num_min == 12">
+    						'1년' 
+    				</when>
+    				<when test="floor_type == 13">
+    						'2년' 
+    				</when>
+    				<otherwise>
+    						#{stay_num_min}||'개월'  
+    				</otherwise>
+    			  </choose> ||chr(13)||chr(10) 
+    			  
+    			  ||'입주가능일: ' || #{available_date} ||chr(13)||chr(10) 
+    			  
+    			  ||'보증금/월세/관리금: ' || #{deposit} ||' / '|| #{monthly_rent} ||' / '|| #{management_expense} ||chr(13)||chr(10) 
+    			  
+    			  ||'옷장: ' || 
+    			<choose>
+    			 <when test="closet==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10) 
+    			  
+    			 ||'책상: '||  
+    			<choose>
+    			 <when test="desk==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	        
+    	        ||'의자: '||
+    	        <choose>
+    			 <when test="chair==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	        
+    	        ||'침대: '||
+    	        <choose>
+    			 <when test="bad_type==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	        
+    	        ||'에어컨: '||
+    	        <choose>
+    			 <when test="air_conditioner==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	        
+    	        ||'난방: '||
+    	        <choose>
+    			 <when test="heating==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	        
+    	       || '가스레인지: '||
+    	        <choose>
+    			 <when test="kitchen_stove==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	        
+    	        ||'냉장고: '||
+    	        <choose>
+    			 <when test="refrigerator==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	        
+    	        ||'세탁기: ' ||
+    	        <choose>
+    			 <when test="laundry==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	        
+    	        ||'인터넷: ' ||
+    	        <choose>
+    			 <when test="internet==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	
+		         ||'와이파이: '||
+    			  <choose>
+    			 <when test="wifi==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	        
+    	        ||'화장실: '||
+    	        <choose>
+    			 <when test="bathroom==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	        
+    	        ||'싱크대: '||
+    	        <choose>
+    			 <when test="sink==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    			  
+    			  ||'엘리베이터: '||
+    			  <choose>
+    			 <when test="elevator==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	        
+    	        ||'주차장: '||
+    	        <choose>
+    			 <when test="parking==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    	        
+    	        ||'애완동물: '||
+    	        <choose>
+    			 <when test="pet==1">
+    			 		'o'
+    			 </when>  
+    			 <otherwise>
+    			 		'x'
+    			 </otherwise> 
+    	        </choose>||chr(13)||chr(10)
+    			  
+		          , ( SYSDATE + (interval '9' hour) ), (SELECT SYS_CONTEXT ('USERENV', 'IP_ADDRESS') FROM DUAL)
+	
+	
+	
+	</sql>
+
+
+
+	<sql id="house_select">
+			BOARD.ROOM_IDX, BOARD.MEM_EMAIL, BOARD.SUBJECT, BOARD.DO_EN, 
+		        BOARD.GU_GUN_EUP_ENG, BOARD.ADDRESS,BOARD.ADDRESS_DETAIL, BOARD.ROOM_REPORTING_DATE, 
+		    IMG.ROOM_IMG_NAME, IMG.ROOM_IMG_ORI_NAME, 
+		    INFO.BUILD_TYPE, INFO.ROOM_TYPE, INFO.ROOM_AREA, INFO.BULID_LAYERS, INFO.FLOOR_LAYERS, 
+		        INFO.FLOOR_TYPE, INFO.STAY_NUM_MIN, INFO.DEPOSIT, INFO.MONTHLY_RENT, 
+		        INFO.MANAGEMENT_EXPENSE, INFO.AVAILABLE_DATE, 
+		    OPT.CLOSET, OPT.DESK, OPT.CHAIR, OPT.BAD_TYPE, OPT.AIR_CONDITIONER, 
+		        OPT.HEATING, OPT.KITCHEN_STOVE, OPT.REFRIGERATOR, OPT.LAUNDRY, OPT.PET, 
+		        OPT.INTERNET, OPT.WIFI, OPT.ELEVATOR, OPT.SINK, OPT.BATHROOM, OPT.PARKING 
+	</sql>
+	<sql id="house_From">
+			T_ROOM_BOARD BOARD, 
+		    (SELECT    
+		        ROOM_IDX, 
+		        SUBSTR( 
+		            XMLAGG( 
+		                XMLELEMENT(COL ,',', ROOM_IMG_NAME) ORDER BY ROOM_IDX, ROOM_IMG_NAME).EXTRACT('//text()' 
+		            ).GETSTRINGVAL(), 2) ROOM_IMG_NAME, 
+		        SUBSTR( 
+		            XMLAGG( 
+		                XMLELEMENT(COL ,',', ROOM_IMG_ORI_NAME) ORDER BY ROOM_IDX, ROOM_IMG_NAME).EXTRACT('//text()' 
+		            ).GETSTRINGVAL(), 2) ROOM_IMG_ORI_NAME 
+		     FROM 
+		        T_ROOM_IMG 
+		     WHERE
+		     	ROOM_IMG_STATE=1 
+		     GROUP BY 
+		        ROOM_IDX 
+		    ) IMG, 
+		    T_ROOM_INFO INFO, 
+		    T_ROOM_OPTION OPT 
+	</sql>
+	
+	<sql id="house_Where">
+		BOARD.ROOM_IDX=IMG.ROOM_IDX 
+	    AND BOARD.ROOM_IDX=INFO.ROOM_IDX 
+	    AND BOARD.ROOM_IDX=OPT.ROOM_IDX  
+	    AND BOARD.STATE=1 
+	</sql>
+	
+
+	
+	
+	<sql id="house_Filter">
+		<if test="dosiFilter gt 0 ">  
+			AND ( 
+			    	BOARD.DO_EN IN
+		
+				    <foreach collection="do_enList" item="do" index="index" open="(" separator="," close=")"> 
+		          		  #{do} 
+		       		</foreach> 
+		       		
+		       		OR	
+		       		
+		       		BOARD.GU_GUN_EUP_ENG IN 
+					<foreach collection="si_enList" item="si" index="index" open="(" separator="," close=")"> 
+		          		#{si} 
+		       		</foreach> 
+		       	)
+	       	</if>
+	<choose>	       	
+	   <when test="buildFilter">
+	       AND (
+	       			 INFO.BUILD_TYPE IN
+	       			 <foreach collection="build_typeList" item="bu" index="index" open="(" separator="," close=")"> 
+		          		  #{bu} 
+		       		</foreach> 
+	       	   )
+	       
+	   </when>
+	   <otherwise>
+			AND 1=2    
+	   </otherwise>
+	</choose>
+	<choose>
+	   <when test="roomFilter">
+	       AND (
+	       			 INFO.ROOM_TYPE IN
+	       			 <foreach collection="room_typeList" item="ro" index="index" open="(" separator="," close=")"> 
+		          		  #{ro} 
+		       		</foreach> 
+	       	   )
+	    </when>
+	    <otherwise>
+			AND 1=2    
+	    </otherwise>
+	</choose>
+	    <![CDATA[
+	       AND  INFO.STAY_NUM_MIN >= #{stayNum}	 
+	     ]]>
+	     
+	     AND
+	     	<choose>
+	     		<when test="depositMax==50000">
+	     		(    
+	     			 <![CDATA[
+	     			   INFO.DEPOSIT >= #{depositMin}
+	     			 ]]>
+	     		)
+	     		</when>
+	     		<otherwise>
+	     		(    
+	     			 <![CDATA[
+	     			   INFO.DEPOSIT >= #{depositMin}
+	     			 ]]>
+	     			   AND
+	     			 <![CDATA[
+	     			   INFO.DEPOSIT <= #{depositMax}
+	     			 ]]>  
+	     			 
+	     		)
+	     		</otherwise>
+	     	</choose>
+	     AND
+	     	<choose>
+	     		<when test="monthly_rentMax==50000">
+	     		(    
+	     			 <![CDATA[
+	     			   INFO.MONTHLY_RENT >= #{monthly_rentMin}
+	     			 ]]>
+	     		)
+	     		</when>
+	     		<otherwise>
+	     		(    
+	     			 <![CDATA[
+	     			   INFO.MONTHLY_RENT >= #{monthly_rentMin}
+	     			 ]]>
+	     			   AND
+	     			 <![CDATA[
+	     			   INFO.MONTHLY_RENT <= #{monthly_rentMax}
+	     			 ]]>  
+	     			 
+	     		)
+	     		</otherwise>
+	     	</choose>
+	</sql>
+	
+	
+	
+	
+	
+	
+</mapper>
+
+
+
+
+
+
+
+
+

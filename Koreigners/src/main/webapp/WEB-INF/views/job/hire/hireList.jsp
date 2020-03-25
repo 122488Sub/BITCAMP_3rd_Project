@@ -50,7 +50,7 @@ td{height:80px;}
 #monthSalary{font-weight: bold; color:white; text-align: center; width:40px;height:20px;background-color: yellow;border-radius: 5px; padding-bottom: 6px;}
 #daySalary{font-weight: bold; color:white; text-align: center; width:40px;height:20px;background-color: brown;border-radius: 5px; padding-bottom: 6px;}
 #hourSalary{font-weight: bold; color:white; text-align: center; width:40px;height:20px;background-color: gray;border-radius: 5px; padding-bottom: 6px;}
-#pay{font-weight: bold; color:white; text-align: center; width:40px;height:20px;background-color: aqua;border-radius: 5px; padding-bottom: 6px;}
+#pay{font-weight: bold; color:white; text-align: center; width:40px;height:20px;background-color: aqua;border-radius: 5px; padding-bottom: 12px; margin-bottom: 6px; overflow:visible;}
 .salaryCondtion {display:flex;}
 </style>
 <script>

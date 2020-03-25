@@ -110,7 +110,7 @@ function getListCPage(cPage){
 				else if(this["payment_codition"] == "hour"){dataTag += "<td class='quantity-box' id='salryTd'><div class='salaryCondtion'><span id='hourSalary'>H</span>" + this["salary_max"] + "</div></td>"}
 				else {dataTag += "<td class='quantity-box' id='salryTd'><div class='salaryCondtion'><span id='pay'>C</span>" + "Negotiable" + "</div></td>"}
 				dataTag += "<td class='add-pr'>" + this["regdate"] + "</td>";
-				dataTag += "</tr>";
+				dataTag += "</tr><hr>";
 				i++;
 			});	
 			$("#list_box").html(dataTag);
@@ -303,7 +303,7 @@ function getJson(){
 					else if(this["payment_codition"] == "hour"){dataTag += "<td class='quantity-box' id='salryTd'><div class='salaryCondtion'><span id='hourSalary'>H</span>" + this["salary_max"] + "</div></td>"}
 					else {dataTag += "<td class='quantity-box' id='salryTd'><div class='salaryCondtion'><span id='pay'>C</span>" + "Negotiable" + "</div></td>"}
 					dataTag += "<td class='add-pr'>" + this["regdate"] + "</td>";
-					dataTag += "</tr>";
+					dataTag += "</tr><hr>";
 					i++;
 				});	
 				
