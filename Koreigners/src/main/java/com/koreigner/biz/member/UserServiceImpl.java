@@ -230,11 +230,18 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void insertResume(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
-		String[] work_time_week = (String[])map.get("WORK_TIME_WEEK");
 		String workday = "";
-		for(int i=0; i<work_time_week.length; i++) {
-			workday += work_time_week[i] + "/";
+		
+		if(map.get("WORK_TIME_WEEK") instanceof String[]) {
+			String[] work_time_week = (String[])map.get("WORK_TIME_WEEK");
+			for (int i = 0; i < work_time_week.length; i++) {
+				workday += work_time_week[i] + "/";
+			}
+		} else if(map.get("WORK_TIME_WEEK") instanceof String) {
+			String work_time_week = (String)map.get("WORK_TIME_WEEK");
+				workday += work_time_week;
 		}
+		 
 		map.put("WORK_TIME_WEEK", workday);
 		
 		userDAO.insertResume(map);
@@ -246,6 +253,7 @@ public class UserServiceImpl implements UserService {
 		String[] region = (String[])map.get("REGION");
 		String[] company = (String[])map.get("COMPANY");
 		String[] task = (String[])map.get("TASK");
+		
 		
 		for(int i=0; i<join_year.length; i++) {
 			map.put("JOIN_YEAR", join_year[i]);

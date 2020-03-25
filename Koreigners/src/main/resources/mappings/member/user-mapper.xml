@@ -112,7 +112,7 @@
 		<selectKey keyProperty="RESUME_IDX" resultType="String" order="BEFORE">
 			SELECT RESUME_SQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO T_MEMBER_RESUME
+<!-- 		INSERT INTO T_MEMBER_RESUME
 			( 
 			RESUME_IDX, MEM_ID, MEM_NAME, REGDATE, WISH_DO,
 			WISH_SI, JOB_CATE, JOB_CATE_CHILD, REQ_SALARY_MIN, REQ_SALARY_MAX,
@@ -130,8 +130,8 @@
 			<if test="FINAL_REGION != null">FINAL_REGION,</if>
 			<if test="FINAL_SCH != null">FINAL_SCH,</if>
 			<if test="FINAL_MAJOR != null">FINAL_MAJOR,</if>
-			KO_SPK_ABIL, KO_DOC_ABIL, CH_SPK_ABIL, CH_DOC_ABIL, EN_SPK_ABIL, EN_DOC_ABIL, VT_SPK_ABIL, VT_DOC_ABIL,
-			<if test='OTHER_LANG != null and !OTHER_LANG.equals("")'>OTHER_LANG</if>
+			KO_SPK_ABIL, KO_DOC_ABIL, CH_SPK_ABIL, CH_DOC_ABIL, EN_SPK_ABIL, EN_DOC_ABIL, VT_SPK_ABIL, VT_DOC_ABIL
+			<if test='OTHER_LANG != null and !OTHER_LANG.equals("")'>, OTHER_LANG</if>
 			)
 			
 		VALUES
@@ -152,9 +152,40 @@
 			<if test="FINAL_REGION != null">#{FINAL_REGION},</if>
 			<if test="FINAL_SCH != null">#{FINAL_SCH},</if>
 			<if test="FINAL_MAJOR != null">#{FINAL_MAJOR},</if>
-			#{KO_SPK_ABIL}, #{KO_DOC_ABIL}, #{CH_SPK_ABIL}, #{CH_DOC_ABIL}, #{EN_SPK_ABIL}, #{EN_DOC_ABIL}, #{VT_SPK_ABIL}, #{VT_DOC_ABIL},
-			<if test='OTHER_LANG != null and OTHER_LANG.equals("")'>#{OTHER_LANG}</if>
-			)
+			#{KO_SPK_ABIL}, #{KO_DOC_ABIL}, #{CH_SPK_ABIL}, #{CH_DOC_ABIL}, #{EN_SPK_ABIL}, #{EN_DOC_ABIL}, #{VT_SPK_ABIL}, #{VT_DOC_ABIL}
+			<if test='OTHER_LANG != null and !OTHER_LANG.equals("")'>, #{OTHER_LANG}</if>
+			) -->
+			INSERT INTO T_MEMBER_RESUME
+				( 
+					RESUME_IDX, MEM_ID, MEM_NAME, REGDATE, WISH_DO,	WISH_SI, 
+					JOB_CATE, JOB_CATE_CHILD, REQ_SALARY_MIN, REQ_SALARY_MAX, SALARY_TYPE, 
+					WORK_TIME, WORK_TIME_START, WORK_TIME_END, WORK_TIME_ISWEEK, WORK_TIME_WEEK, 
+					DORMITORY, INTRODUCE, GRADUATE_SCH, DEP, LANG_LEARN, LANG_SCH, 
+					FINAL_A_M, FINAL_A_Y, FINAL_G_M, 
+					FINAL_G_Y, FINAL_REGION, FINAL_SCH, FINAL_MAJOR,
+					KO_SPK_ABIL, KO_DOC_ABIL, CH_SPK_ABIL, CH_DOC_ABIL, 
+					EN_SPK_ABIL, EN_DOC_ABIL, VT_SPK_ABIL, VT_DOC_ABIL,
+					OTHER_LANG
+				)
+			
+			VALUES
+				( 
+					#{RESUME_IDX}, #{MEM_ID}, #{MEM_NAME}, SYSDATE, #{WISH_DO},	#{WISH_SI}, 
+					#{JOB_CATE}, #{JOB_CATE_CHILD}, #{REQ_SALARY_MIN}, #{REQ_SALARY_MAX}, #{SALARY_TYPE},
+					#{WORK_TIME}, #{WORK_TIME_START, jdbcType=VARCHAR},	#{WORK_TIME_END, jdbcType=VARCHAR},
+					#{WORK_TIME_ISWEEK}, #{WORK_TIME_WEEK, jdbcType=VARCHAR},
+					#{DORMITORY}, #{INTRODUCE}, #{GRADUATE_SCH}, #{DEP}, #{LANG_LEARN},
+					#{LANG_SCH, jdbcType=VARCHAR},
+					#{FINAL_A_M, jdbcType=VARCHAR},
+					#{FINAL_A_Y, jdbcType=VARCHAR},
+					#{FINAL_G_M, jdbcType=VARCHAR},
+					#{FINAL_G_Y, jdbcType=VARCHAR},
+					#{FINAL_REGION, jdbcType=VARCHAR},
+					#{FINAL_SCH, jdbcType=VARCHAR},
+					#{FINAL_MAJOR, jdbcType=VARCHAR},
+					#{KO_SPK_ABIL}, #{KO_DOC_ABIL}, #{CH_SPK_ABIL}, #{CH_DOC_ABIL}, #{EN_SPK_ABIL}, #{EN_DOC_ABIL}, #{VT_SPK_ABIL}, #{VT_DOC_ABIL},
+					#{OTHER_LANG, jdbcType=VARCHAR}
+				)
 	</insert>
 	
 	<!-- 이력서 경력 입력 -->

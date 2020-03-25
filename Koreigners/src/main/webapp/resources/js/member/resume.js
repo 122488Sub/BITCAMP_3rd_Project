@@ -18,7 +18,7 @@ $(function() {
   });
 
  // 최종학력 > 해당사항없음 선택 시 '학위', '최종학교' 비활성화
-  if ($(":input:radio[name=GRADUATE_SCH]:checked").val() == '') {
+  if ($(":input:radio[name=GRADUATE_SCH]:checked").val() == 'N/A') {
     $(':input:radio[name=DEP]').attr('disabled', true);
     $('#school_entr_year').val('').attr('disabled', true);
     $('#school_entr_month').val('').attr('disabled', true);
@@ -40,7 +40,7 @@ $(function() {
     $('#school_major').attr('disabled', false);
   }
   $('input[type=radio][name=GRADUATE_SCH]').change(function() {
-    if ($(":input:radio[name=GRADUATE_SCH]:checked").val() == '') {
+    if ($(":input:radio[name=GRADUATE_SCH]:checked").val() == 'N/A') {
       $(':input:radio[name=DEP]').attr('disabled', true);
       $('#school_entr_year').val('').attr('disabled', true);
       $('#school_entr_month').val('').attr('disabled', true);
