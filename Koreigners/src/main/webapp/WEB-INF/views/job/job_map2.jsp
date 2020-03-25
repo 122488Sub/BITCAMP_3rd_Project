@@ -211,7 +211,7 @@
 <div id='content'>
 	<div id='map'>
 		
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 350 350 350">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 350 350 350" style="overflow:visible">
 			<defs>
 			    <filter id="dropshadow">
 			        <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
