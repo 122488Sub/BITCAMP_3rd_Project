@@ -270,6 +270,7 @@
 		    T_ROOM_INFO INFO, 
 		    T_ROOM_OPTION OPT 
 	</sql>
+	
 	<sql id="house_Where">
 		BOARD.ROOM_IDX=IMG.ROOM_IDX 
 	    AND BOARD.ROOM_IDX=INFO.ROOM_IDX 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wish">
+
+	
+	<!-- 위시리스트 정보 불러오기 -->
+	<select id="getWishTotal" parameterType="wishVO" resultType="int">
+		SELECT COUNT(*) FROM T_WISH_LIST  WHERE MEM_ID = #{mem_id} AND BOARD_IDX= #{board_idx}
+	</select>
+	
+	<!-- 위시리스트 정보 불러오기 -->
+	<select id="getSelectWishList" parameterType="wishVO" resultType="wishVO">
+		SELECT * <include refid="wish.include.wish_Select" />
+	</select>
+	
+	
+	<!-- 집 위시리스트 정보 불러오기 -->
+	<select id="getHouseWishList" parameterType="wishVO" resultType="house_all">
+		SELECT 
+			*
+		FROM(
+			SELECT
+				ROWNUM R_NUM, HOUSE.*
+			FROM (
+		
+					SELECT 
+		    			<include refid="House_Include.house_select" />
+					FROM 
+					   <include refid="House_Include.house_From" />
+					WHERE 
+						<include refid="House_Include.house_Where" />
+					AND
+						BOARD.ROOM_IDX IN (SELECT B_IDX <include refid="wish.include.wish_Select" />) 	
+					ORDER BY 
+						BOARD.ROOM_IDX 
+					) HOUSE
+		 )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end} 
+		 
+	</select>
+	
+	<select id="getHireWishList" parameterType="wishVO" resultType="hireVO">
+		SELECT *
+		FROM (
+		       SELECT ROWNUM R_NUM, HIRE.*
+		        FROM (SELECT *
+		              FROM T_JOB_HIRE
+		              WHERE 
+						HIRE_IDX IN ( SELECT B_IDX <include refid="wish.include.wish_Select" /> )
+		                
+		               ORDER BY HIRE_IDX DESC) HIRE
+		 )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end} 
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

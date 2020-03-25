@@ -17,6 +17,7 @@
 		<typeAlias alias="rsVO" type="com.koreigner.biz.resale.ResaleVO"/>
 		<typeAlias alias="rsImgVO" type="com.koreigner.biz.resale.ResaleImgVO"/>
 		<typeAlias alias="rsCommVO" type="com.koreigner.biz.resale.ResaleCommVO"/>
+		<typeAlias alias="wishVO" type="com.koreigner.biz.member.wish.WishVO"/>
 	</typeAliases>
   
   <!-- SQL 작성파일인 매퍼 파일 위치 지정 -->
@@ -42,6 +43,10 @@
   	 
 <!-- member mapper -->  	 
   	 <mapper resource="mappings/member/user-mapper.xml"/>
+  	 <mapper resource="mappings/member/wish-mapper.xml"/>
+  	 <mapper resource="mappings/member/wish-include-mapper.xml"/>
+  	 
+  	 
   </mappers>
 </configuration>
 

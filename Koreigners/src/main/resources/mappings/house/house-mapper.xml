@@ -102,7 +102,7 @@ FROM(
 	}
 	<selectKey keyProperty="room_idx" resultType="Integer" order="AFTER">
 			SELECT ROOM_SQ.CURRVAL FROM DUAL
-		</selectKey>
+	</selectKey>
 	</insert>
 	
 	
