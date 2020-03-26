@@ -117,6 +117,11 @@ public class UserDAO {
 		mybatis.update("user.insertResume", map);
 	}
 	
+	//커리어 입력
+	public void insertCareer(Map<String, Object> map) {
+		mybatis.insert("user.insertCareer", map);
+	}
+	
 	//파일업로드
 	public void insertFile(Map<String, Object> map)  throws Exception {
 		mybatis.insert("user.insertFile", map);
@@ -132,10 +137,18 @@ public class UserDAO {
 		return mybatis.selectList("user.selectFileList", map);
 	}
 
+	//이력서 경력 가져오기
+	public List<Map<String, Object>> selectCareerList(Map<String, Object> map) {
+		return mybatis.selectList("user.selectCareerList", map);
+	}
+	
 	//이력서 파일 다운 정보가져오기
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> selectFileInfo(Map<String, Object> map) {
 		return (Map<String, Object>)mybatis.selectOne("user.selectFileInfo", map);
 	}
+
+	
+	
 	
 }

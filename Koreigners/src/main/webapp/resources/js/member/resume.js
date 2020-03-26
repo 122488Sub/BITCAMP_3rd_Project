@@ -18,8 +18,8 @@ $(function() {
   });
 
  // 최종학력 > 해당사항없음 선택 시 '학위', '최종학교' 비활성화
-  if ($(":input:radio[name=graduate_sch]:checked").val() == '') {
-    $(':input:radio[name=dep]').attr('disabled', true);
+  if ($(":input:radio[name=GRADUATE_SCH]:checked").val() == 'N/A') {
+    $(':input:radio[name=DEP]').attr('disabled', true);
     $('#school_entr_year').val('').attr('disabled', true);
     $('#school_entr_month').val('').attr('disabled', true);
     $('#school_grad_year').val('').attr('disabled', true);
@@ -27,10 +27,10 @@ $(function() {
     $('#school_area').val('').attr('disabled', true);
     $('#school_name').val('').attr('disabled', true);
     $('#school_major').val('').attr('disabled', true);
-  } else if ($(":input:radio[name=graduate_sch]:checked").val() == '중/고졸') {
-    $(':input:radio[name=dep]').attr('disabled', true);
+  } else if ($(":input:radio[name=GRADUATE_SCH]:checked").val() == '중/고졸') {
+    $(':input:radio[name=DEP]').attr('disabled', true);
   } else {
-    $(':input:radio[name=dep]').attr('disabled', false);
+    $(':input:radio[name=DEP]').attr('disabled', false);
     $('#school_entr_year').attr('disabled', false);
     $('#school_entr_month').attr('disabled', false);
     $('#school_grad_year').attr('disabled', false);
@@ -39,9 +39,9 @@ $(function() {
     $('#school_name').attr('disabled', false);
     $('#school_major').attr('disabled', false);
   }
-  $('input[type=radio][name=graduate_sch]').change(function() {
-    if ($(":input:radio[name=graduate_sch]:checked").val() == '') {
-      $(':input:radio[name=dep]').attr('disabled', true);
+  $('input[type=radio][name=GRADUATE_SCH]').change(function() {
+    if ($(":input:radio[name=GRADUATE_SCH]:checked").val() == 'N/A') {
+      $(':input:radio[name=DEP]').attr('disabled', true);
       $('#school_entr_year').val('').attr('disabled', true);
       $('#school_entr_month').val('').attr('disabled', true);
       $('#school_grad_year').val('').attr('disabled', true);
@@ -49,8 +49,8 @@ $(function() {
       $('#school_area').val('').attr('disabled', true);
       $('#school_name').val('').attr('disabled', true);
       $('#school_major').val('').attr('disabled', true);
-    } else if ($(":input:radio[name=graduate_sch]:checked").val() == '중/고졸') {
-      $(':input:radio[name=dep]').attr('disabled', true);
+    } else if ($(":input:radio[name=GRADUATE_SCH]:checked").val() == '중/고졸') {
+      $(':input:radio[name=DEP]').attr('disabled', true);
       $('#school_entr_year').attr('disabled', false);
       $('#school_entr_month').attr('disabled', false);
       $('#school_grad_year').attr('disabled', false);
@@ -59,7 +59,7 @@ $(function() {
       $('#school_name').attr('disabled', false);
       $('#school_major').attr('disabled', false);
     } else {
-      $(':input:radio[name=dep]').attr('disabled', false);
+      $(':input:radio[name=DEP]').attr('disabled', false);
       $('#school_entr_year').attr('disabled', false);
       $('#school_entr_month').attr('disabled', false);
       $('#school_grad_year').attr('disabled', false);
@@ -71,13 +71,13 @@ $(function() {
   });
 
   // 어학당 이름 비활성화.
-  if ($(":input:radio[name=lang_learn]:checked").val() == '해당사항없음') {
+  if ($(":input:radio[name=LANG_LEARN]:checked").val() == '해당사항없음') {
     $('#div_lang_school_name').hide();
   } else {
     $('#div_lang_school_name').show();
   }
-  $('input[type=radio][name=lang_learn]').change(function() {
-    if ($(":input:radio[name=lang_learn]:checked").val() == '해당사항없음') {
+  $('input[type=radio][name=LANG_LEARN]').change(function() {
+    if ($(":input:radio[name=LANG_LEARN]:checked").val() == '해당사항없음') {
       $('#lang_school_name').val('');
       $('#div_lang_school_name').hide();
     } else {
@@ -92,7 +92,7 @@ $(function() {
     $('#view_span').hide();
   }
   //--근무시간 관련 이벤트
-  $("input[name=work_time]").change(function() {
+  $("input[name=WORK_TIME]").change(function() {
     if( $('#work_time_type3').is(':checked') ) {
       $('#view_span').show();
     } else {
@@ -106,7 +106,7 @@ $(function() {
     $('#view_div').hide();
   }
   //--선호요일 관련 이벤트
-  $("input[name=work_time_isweek]").change(function() {
+  $("input[name=WORK_TIME_ISWEEK]").change(function() {
     if( $('#work_time_isweek1').is(':checked') ) {
       $('#view_div').show();
     } else {
@@ -132,10 +132,10 @@ $(function() {
 
     //--선호요일 관련
     if( $('#work_time_isweek1').is(':checked') ) {
-      if ($("input[name='work_time_week']:checked").length == 0) { return alert('You should select over than one'), this.work_time_week1.focus(), false; }
+      if ($("input[name='WORK_TIME_WEEK']:checked").length == 0) { return alert('You should select over than one'), this.work_time_week1.focus(), false; }
     } // 선호요일을 1개 이상 선택해야 합니다
 
-    if ($(":input:radio[name=lang_learn]:checked").val() == '재학중' || $(":input:radio[name=lang_learn]:checked").val() == '졸업') {
+    if ($(":input:radio[name=LANG_LEARN]:checked").val() == '재학중' || $(":input:radio[name=LANG_LEARN]:checked").val() == '졸업') {
       if ($.trim(this.lang_school_name.value) == '') { return alert('Please enter the school name'), this.lang_school_name.focus(), false; }
     }
 
@@ -179,7 +179,7 @@ $(function() {
 	});
 	
 	
-	$("#addCareer").on("click", function(e){ //파일 추가 버튼
+	$("#addCareer").on("click", function(e){ //경력 추가 버튼
 		e.preventDefault();
 		fn_addCareer();
 	});
@@ -199,20 +199,18 @@ $(function() {
 });
 
 
-var count = 1;
 
 function fn_addCareer(){
-	count++;
-	var str = "<tr class='item"+ count +"'>";
-	str += "<th width='15%' class='number'>"+ count +"</th>";
+	var str = "<tr>";
+	str += "<th width='15%' class='number'>Career</th>";
 	str += "<td width='85%' class='txLeft'>Joining/Leaving : ";
-	str += "<input type='text' size='4' name='join_year" + count + "' value='' class='only-num'>Year ";
-	str += "<input type='text' size='2' name='join_month" + count + "' value='' class='only-num'>Month ~ ";
-	str += "<input type='text' size='4' name='resign_year" + count + "' value='' class='only-num'>Year ";
-	str += "<input type='text' size='2' name='resign_month" + count + "' value='' class='only-num'>Month<br>";
-	str += "Region : <input type='text' size='20' name='region" + count + "' value=''> &nbsp;&nbsp;&nbsp;&nbsp;";
-	str += "Name of company : <input type='text' size='40' name='company" + count + "' value=''> &nbsp;&nbsp;&nbsp;&nbsp;<br>";
-	str += "Assigned task : <input type='text' size='40' name='task" + count + "' value=''></td>";
+	str += "<input type='text' size='4' name='JOIN_YEAR' value='' class='only-num'>Year ";
+	str += "<input type='text' size='2' name='JOIN_MONTH' value='' class='only-num'>Month ~ ";
+	str += "<input type='text' size='4' name='RESIGN_YEAR' value='' class='only-num'>Year ";
+	str += "<input type='text' size='2' name='RESIGN_MONTH' value='' class='only-num'>Month<br>";
+	str += "Region : <input type='text' size='20' name='REGION' value=''> &nbsp;&nbsp;&nbsp;&nbsp;";
+	str += "Name of company : <input type='text' size='40' name='COMPANY' value=''> &nbsp;&nbsp;&nbsp;&nbsp;<br>";
+	str += "Assigned task : <input type='text' size='40' name='TASK' value=''></td>";
 	str += "<td><a href='#this' class='btn' id='delete' name='delete'>Delete</a></td></tr>";
 	
 	$("#career").append(str);

@@ -230,13 +230,50 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void insertResume(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
+		String workday = "";
+		
+		if(map.get("WORK_TIME_WEEK") instanceof String[]) {
+			String[] work_time_week = (String[])map.get("WORK_TIME_WEEK");
+			for (int i = 0; i < work_time_week.length; i++) {
+				workday += work_time_week[i] + "/";
+			}
+		} else if(map.get("WORK_TIME_WEEK") instanceof String) {
+			String work_time_week = (String)map.get("WORK_TIME_WEEK");
+				workday += work_time_week;
+		}
+		 
+		map.put("WORK_TIME_WEEK", workday);
+		
 		userDAO.insertResume(map);
+		
+		String[] join_year = (String[])map.get("JOIN_YEAR");
+		String[] join_month = (String[])map.get("JOIN_MONTH");
+		String[] resign_year = (String[])map.get("RESIGN_YEAR");
+		String[] resign_month = (String[])map.get("RESIGN_MONTH");
+		String[] region = (String[])map.get("REGION");
+		String[] company = (String[])map.get("COMPANY");
+		String[] task = (String[])map.get("TASK");
+		
+		
+		for(int i=0; i<join_year.length; i++) {
+			map.put("JOIN_YEAR", join_year[i]);
+			map.put("JOIN_MONTH", join_month[i]);
+			map.put("RESIGN_YEAR", resign_year[i]);
+			map.put("RESIGN_MONTH", resign_month[i]);
+			map.put("REGION", region[i]);
+			map.put("COMPANY", company[i]);
+			map.put("TASK", task[i]);
+			userDAO.insertCareer(map);
+		}
 		
 		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(map, request);
 		for(int i=0, size=list.size(); i<size; i++) {
 			System.out.println("///////파일 : " + list.get(i));
 			userDAO.insertFile(list.get(i));
 		}
+		
+				
+		
 	}
 	
 	//이력서 가져오기
@@ -249,11 +286,12 @@ public class UserServiceImpl implements UserService {
 		resultMap.put("map", tempMap);
 		
 		if(tempMap != null) {
-	//		List<Map<String, Object>> careerList = userDAO.selectCareerList(map);
+			List<Map<String, Object>> careerList = userDAO.selectCareerList(tempMap);
 			List<Map<String, Object>> fileList = userDAO.selectFileList(tempMap);
+			System.out.println("====== selectCareer : " + careerList);			
 			System.out.println("====== selectFile : " + fileList);			
 			
-	//		resultMap.put("careerList", careerList);
+			resultMap.put("careerList", careerList);
 			resultMap.put("fileList", fileList);
 		}
 		return resultMap;
@@ -268,7 +306,6 @@ public class UserServiceImpl implements UserService {
 	//이력서 수정하기
 	@Override
 	public void updateResume(Map<String, Object> map, HttpServletRequest request) {
-		// TODO Auto-generated method stub
 		
 	}
 

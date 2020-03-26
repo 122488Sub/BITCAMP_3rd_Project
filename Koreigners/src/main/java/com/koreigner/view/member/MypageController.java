@@ -3,6 +3,7 @@ package com.koreigner.view.member;
 import java.io.File;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +73,7 @@ public class MypageController {
 				
 				if(map != null) {
 					mv.addObject("map", map.get("map"));
-//				mv.addObject("careerList", map.get("careerList"));
+					mv.addObject("careerList", map.get("careerList"));
 					mv.addObject("fileList", map.get("fileList"));					
 				}
 				
@@ -185,8 +186,8 @@ public class MypageController {
 	public ModelAndView updateResume(CommandMap commandMap, HttpServletRequest request) throws Exception {
 		
 		ModelAndView mv = new ModelAndView("redirect:myPage_go.do?type=resume");
-		
-		userService.updateResume(commandMap.getMap(), request);
+				
+//		userService.updateResume(commandMap.getMap(), request);
 		
 		return mv;
 	}
