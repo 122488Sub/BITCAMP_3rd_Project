@@ -13,7 +13,7 @@ import org.springframework.web.util.WebUtils;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
 
-public class PageGoInterceptor extends HandlerInterceptorAdapter implements SessionNames{
+public class PageGoInterceptor extends HandlerInterceptorAdapter {
 	
 	// controller로 보내기 전에 처리하는 인터셉터(preHandle)
 	// 반환이 false라면 controller로 요청을 안함
@@ -50,7 +50,7 @@ public class PageGoInterceptor extends HandlerInterceptorAdapter implements Sess
 			String mem_id = (String)tokenPayload.get("mem_id"); //아이디 추출
 			
 			UserVO member = userService.getOneMember(mem_id);
-			request.setAttribute(SessionNames.LOGIN, member);
+			request.setAttribute("user", member);
 			request.setAttribute("mem_id", mem_id);
 			
 		//자동로그인하지 않을 경우
@@ -66,7 +66,7 @@ public class PageGoInterceptor extends HandlerInterceptorAdapter implements Sess
 				if(userJsId.equals(JSESSIONID)) {
 					System.out.println("============== 토큰 jsid와 브라우저 jsid가 같을 경우");
 					UserVO member = userService.getOneMember(mem_id);
-					request.setAttribute(SessionNames.LOGIN, member);
+					request.setAttribute("user", member);
 					request.setAttribute("mem_id", mem_id);
 				}
 			} else if(userToken != null && !userToken.equals("") && !userService.validToken(userToken).equals("Pass")){

@@ -93,7 +93,7 @@
 	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
 	       <if test='mem_address != null and !mem_address.equals("")'>MEM_ADDRESS = #{mem_address},</if>
 	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
-	       <if test='auth_status != null and !auth_status.equals("") and auth_status.equals("0") '>AUTH_STATUS = #{auth_status},</if>
+	       <if test='auth_status != null and !auth_status.equals("")'>AUTH_STATUS = #{auth_status},</if>
 	       <if test="mailling_fl != null">MAILLING_FL = #{mailling_fl},</if>
 	       <if test="sms_fl != null">SMS_FL = #{sms_fl},</if>
 	       MEM_MOD_DT = SYSDATE
@@ -107,130 +107,6 @@
 		 WHERE MEM_ID = #{mem_id} AND MEM_PW = #{mem_pw}
 	</select>
 	
-	<!-- 이력서 입력 -->
-	<insert id="insertResume" parameterType="hashmap" useGeneratedKeys="true" keyProperty="RESUME_IDX">
-		<selectKey keyProperty="RESUME_IDX" resultType="String" order="BEFORE">
-			SELECT RESUME_SQ.NEXTVAL FROM DUAL
-		</selectKey>
-<!-- 		INSERT INTO T_MEMBER_RESUME
-			( 
-			RESUME_IDX, MEM_ID, MEM_NAME, REGDATE, WISH_DO,
-			WISH_SI, JOB_CATE, JOB_CATE_CHILD, REQ_SALARY_MIN, REQ_SALARY_MAX,
-			SALARY_TYPE, WORK_TIME,
-			<if test="WORK_TIME_START != null">WORK_TIME_START,</if>
-			<if test="WORK_TIME_END != null">WORK_TIME_END,</if>
-			WORK_TIME_ISWEEK,
-			<if test="WORK_TIME_WEEK != null">WORK_TIME_WEEK,</if>
-			DORMITORY, INTRODUCE, GRADUATE_SCH, DEP, LANG_LEARN,
-			<if test="LANG_SCH != null">LANG_SCH,</if>
-			<if test="FINAL_A_M != null">FINAL_A_M,</if>
-			<if test="FINAL_A_Y != null">FINAL_A_Y,</if>
-			<if test="FINAL_G_M != null">FINAL_G_M,</if>
-			<if test="FINAL_G_Y != null">FINAL_G_Y,</if>
-			<if test="FINAL_REGION != null">FINAL_REGION,</if>
-			<if test="FINAL_SCH != null">FINAL_SCH,</if>
-			<if test="FINAL_MAJOR != null">FINAL_MAJOR,</if>
-			KO_SPK_ABIL, KO_DOC_ABIL, CH_SPK_ABIL, CH_DOC_ABIL, EN_SPK_ABIL, EN_DOC_ABIL, VT_SPK_ABIL, VT_DOC_ABIL
-			<if test='OTHER_LANG != null and !OTHER_LANG.equals("")'>, OTHER_LANG</if>
-			)
-			
-		VALUES
-			( 
-			#{RESUME_IDX}, #{MEM_ID}, #{MEM_NAME}, SYSDATE, #{WISH_DO},
-			#{WISH_SI}, #{JOB_CATE}, #{JOB_CATE_CHILD}, #{REQ_SALARY_MIN}, #{REQ_SALARY_MAX},
-			#{SALARY_TYPE}, #{WORK_TIME},
-			<if test="WORK_TIME_START != null">#{WORK_TIME_START},</if>
-			<if test="WORK_TIME_END != null">#{WORK_TIME_END},</if>
-			#{WORK_TIME_ISWEEK},
-			<if test="WORK_TIME_WEEK != null">#{WORK_TIME_WEEK},</if>
-			#{DORMITORY}, #{INTRODUCE}, #{GRADUATE_SCH}, #{DEP}, #{LANG_LEARN},
-			<if test="LANG_SCH != null">#{LANG_SCH},</if>
-			<if test="FINAL_A_M != null">#{FINAL_A_M},</if>
-			<if test="FINAL_A_Y != null">#{FINAL_A_Y},</if>
-			<if test="FINAL_G_M != null">#{FINAL_G_M},</if>
-			<if test="FINAL_G_Y != null">#{FINAL_G_Y},</if>
-			<if test="FINAL_REGION != null">#{FINAL_REGION},</if>
-			<if test="FINAL_SCH != null">#{FINAL_SCH},</if>
-			<if test="FINAL_MAJOR != null">#{FINAL_MAJOR},</if>
-			#{KO_SPK_ABIL}, #{KO_DOC_ABIL}, #{CH_SPK_ABIL}, #{CH_DOC_ABIL}, #{EN_SPK_ABIL}, #{EN_DOC_ABIL}, #{VT_SPK_ABIL}, #{VT_DOC_ABIL}
-			<if test='OTHER_LANG != null and !OTHER_LANG.equals("")'>, #{OTHER_LANG}</if>
-			) -->
-			INSERT INTO T_MEMBER_RESUME
-				( 
-					RESUME_IDX, MEM_ID, MEM_NAME, REGDATE, WISH_DO,	WISH_SI, 
-					JOB_CATE, JOB_CATE_CHILD, REQ_SALARY_MIN, REQ_SALARY_MAX, SALARY_TYPE, 
-					WORK_TIME, WORK_TIME_START, WORK_TIME_END, WORK_TIME_ISWEEK, WORK_TIME_WEEK, 
-					DORMITORY, INTRODUCE, GRADUATE_SCH, DEP, LANG_LEARN, LANG_SCH, 
-					FINAL_A_M, FINAL_A_Y, FINAL_G_M, 
-					FINAL_G_Y, FINAL_REGION, FINAL_SCH, FINAL_MAJOR,
-					KO_SPK_ABIL, KO_DOC_ABIL, CH_SPK_ABIL, CH_DOC_ABIL, 
-					EN_SPK_ABIL, EN_DOC_ABIL, VT_SPK_ABIL, VT_DOC_ABIL,
-					OTHER_LANG
-				)
-			
-			VALUES
-				( 
-					#{RESUME_IDX}, #{MEM_ID}, #{MEM_NAME}, SYSDATE, #{WISH_DO},	#{WISH_SI}, 
-					#{JOB_CATE}, #{JOB_CATE_CHILD}, #{REQ_SALARY_MIN}, #{REQ_SALARY_MAX}, #{SALARY_TYPE},
-					#{WORK_TIME}, #{WORK_TIME_START, jdbcType=VARCHAR},	#{WORK_TIME_END, jdbcType=VARCHAR},
-					#{WORK_TIME_ISWEEK}, #{WORK_TIME_WEEK, jdbcType=VARCHAR},
-					#{DORMITORY}, #{INTRODUCE}, #{GRADUATE_SCH}, #{DEP}, #{LANG_LEARN},
-					#{LANG_SCH, jdbcType=VARCHAR},
-					#{FINAL_A_M, jdbcType=VARCHAR},
-					#{FINAL_A_Y, jdbcType=VARCHAR},
-					#{FINAL_G_M, jdbcType=VARCHAR},
-					#{FINAL_G_Y, jdbcType=VARCHAR},
-					#{FINAL_REGION, jdbcType=VARCHAR},
-					#{FINAL_SCH, jdbcType=VARCHAR},
-					#{FINAL_MAJOR, jdbcType=VARCHAR},
-					#{KO_SPK_ABIL}, #{KO_DOC_ABIL}, #{CH_SPK_ABIL}, #{CH_DOC_ABIL}, #{EN_SPK_ABIL}, #{EN_DOC_ABIL}, #{VT_SPK_ABIL}, #{VT_DOC_ABIL},
-					#{OTHER_LANG, jdbcType=VARCHAR}
-				)
-	</insert>
-	
-	<!-- 이력서 경력 입력 -->
-	<insert id="insertCareer" parameterType="hashmap">
-		INSERT INTO T_RESUME_CAREER
-			( IDX, RESUME_IDX, JOIN_YEAR, JOIN_MONTH, RESIGN_YEAR, RESIGN_MONTH, REGION, COMPANY, TASK )
-		VALUES
-			( CAREER_SQ.NEXTVAL, #{RESUME_IDX}, #{JOIN_YEAR}, #{JOIN_MONTH}, #{RESIGN_YEAR}, #{RESIGN_MONTH}, #{REGION}, #{COMPANY}, #{TASK} )
-	</insert>
-	
-	<!-- 이력서 파일업로드 -->
-	<insert id="insertFile" parameterType="hashmap">
-		INSERT INTO T_RESUME_FILE
-			( IDX, RESUME_IDX, ORI_FILE, SAVE_FILE, FILE_SIZE )
-		VALUES
-			( RESUME_FILE_SQ.NEXTVAL, #{RESUME_IDX}, #{ORI_FILE}, #{SAVE_FILE}, #{FILE_SIZE} )
-	</insert>
-	
-	<!-- 이력서 가져오기 -->
-	<select id="selectResume" parameterType="String" resultType="hashmap">
-		SELECT RESUME_IDX, MEM_ID, MEM_NAME, REGDATE
-		  FROM T_MEMBER_RESUME
-		 WHERE MEM_ID = #{mem_id}
-	</select>
-	
-	<!-- 이력서 파일 가져오기 -->
-	<select id="selectFileList" parameterType="hashmap" resultType="hashmap">
-		SELECT IDX, ORI_FILE, ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
-		  FROM T_RESUME_FILE
-		 WHERE RESUME_IDX = #{RESUME_IDX}
-		   AND DEL_GB = 'N'
-	</select>
-	
-	<!-- 이력서 경력 가져오기 -->
-	<select id="selectCareerList" parameterType="hashmap" resultType="hashmap">
-		SELECT * FROM T_RESUME_CAREER WHERE RESUME_IDX = #{RESUME_IDX} AND DEL_GB = 'N'
-	</select>
-	
-	<!-- 이력서 파일정보 가져오기 -->
-	<select id="selectFileInfo" parameterType="hashmap" resultType="hashmap">
-		SELECT SAVE_FILE, ORI_FILE
-		  FROM T_RESUME_FILE
-		 WHERE IDX = #{IDX}	
-	</select>
-
 	
 </mapper>
 

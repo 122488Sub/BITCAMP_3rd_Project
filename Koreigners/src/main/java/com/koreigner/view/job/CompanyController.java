@@ -1,9 +1,11 @@
 package com.koreigner.view.job;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +52,11 @@ public class CompanyController {
 	}
 	
 	@RequestMapping(value="join_conf.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String join_conf(CompanyVO vo, HttpServletRequest request) {
+	public String join_conf(CompanyVO vo, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
 		
 		companyServiceImpl.comJoin(vo, request);
-		return "login_go.do";
+		
+		return "member/emailAuth.page";
 		
 	}
 	

@@ -13,12 +13,12 @@
                     <li class="menu"><a href="resaleList.do">Resale</a></li>
                     <li class="menu"><a href="getInfoBoardList.do">Information</a></li>
                     <li class="menu"><a href="#"></a></li>
-                    <c:if test="${empty loginUser }">
+                    <c:if test="${empty user}">
                    		<li class="menu"><a href="login_go.do">Sign in</a></li>
                     	<li class="menu"><a href="register_go.do">Register</a></li>
                     </c:if>
-                    <c:if test="${!empty loginUser}">
-                   		<li class="menu"><a href="myPage_go.do?type=profile">${loginUser.mem_name }</a></li>
+                    <c:if test="${!empty user}">
+                   		<li class="menu"><a href="myPage_go.do?type=profile">${user.mem_name }</a></li>
                    		<li class="menu"><a href="javascript:logout()">Logout</a></li>
                     </c:if>
 	       </ul>

@@ -148,7 +148,7 @@ public class HireController {
 		
 		//2. 게시글(hire_idx) 데이터 조회 
 		HireVO hireVO = hireServiceImpl.hireDetailOne(hire_idx);
-		CompanyVO companyVO = companyServiceImpl.companyDetailOne("rex");
+		CompanyVO companyVO = companyServiceImpl.companyDetailOne(hireVO.getMem_id());
 		
 		mav.addObject("hireVO", hireVO);
 		mav.addObject("companyVO", companyVO);

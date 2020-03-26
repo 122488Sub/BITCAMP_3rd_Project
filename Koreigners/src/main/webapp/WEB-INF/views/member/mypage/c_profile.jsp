@@ -4,8 +4,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link href="resources/css/header.css" rel="stylesheet" type="text/css">
-    <link href="resources/css/style.css" rel="stylesheet" type="text/css">
+    <link href="resources/css/job/regCompany.css" rel="stylesheet" type="text/css">
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="resources/js/daumAddr.js"></script>
+	<script type="text/javascript" src="resources/js/companySignup.js"></script>
+	<link href="resources/css/member/register.css" rel="stylesheet" type="text/css">
+<style>
+	#regCotent{
+		height: auto;
+		padding-top: 50px;
+	}
+	
+</style>
 </head>
 <body>
 <div>

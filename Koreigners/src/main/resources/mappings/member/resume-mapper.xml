@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="resume">
+	
+	<!-- 이력서 입력 -->
+	<insert id="insertResume" parameterType="hashmap" useGeneratedKeys="true" keyProperty="RESUME_IDX">
+		<selectKey keyProperty="RESUME_IDX" resultType="String" order="BEFORE">
+			SELECT RESUME_SQ.NEXTVAL FROM DUAL
+		</selectKey>
+			INSERT INTO T_MEMBER_RESUME
+				( 
+					RESUME_IDX, MEM_ID, MEM_NAME, REGDATE, WISH_DO,	WISH_SI, 
+					JOB_CATE, JOB_CATE_CHILD, REQ_SALARY_MIN, REQ_SALARY_MAX, SALARY_TYPE, 
+					WORK_TIME, WORK_TIME_ISWEEK, 
+					WORK_TIME_START, 
+					WORK_TIME_END, 
+					WORK_TIME_WEEK, 
+					DORMITORY, INTRODUCE, GRADUATE_SCH, LANG_LEARN,
+					DEP, 
+					LANG_SCH, 
+					FINAL_A_M, 
+					FINAL_A_Y, 
+					FINAL_G_M, 
+					FINAL_G_Y, 
+					FINAL_REGION, 
+					FINAL_SCH, 
+					FINAL_MAJOR,
+					KO_SPK_ABIL, KO_DOC_ABIL, CH_SPK_ABIL, CH_DOC_ABIL, 
+					EN_SPK_ABIL, EN_DOC_ABIL, VT_SPK_ABIL, VT_DOC_ABIL,
+					OTHER_LANG
+				)
+			
+			VALUES
+				( 
+					#{RESUME_IDX}, #{MEM_ID}, #{MEM_NAME}, SYSDATE, #{WISH_DO},	#{WISH_SI}, 
+					#{JOB_CATE}, #{JOB_CATE_CHILD}, #{REQ_SALARY_MIN}, #{REQ_SALARY_MAX}, #{SALARY_TYPE},
+					#{WORK_TIME}, #{WORK_TIME_ISWEEK}, 
+					#{WORK_TIME_START, jdbcType=VARCHAR},	
+					#{WORK_TIME_END, jdbcType=VARCHAR},
+					#{WORK_TIME_WEEK, jdbcType=VARCHAR},
+					#{DORMITORY}, #{INTRODUCE}, #{GRADUATE_SCH}, #{LANG_LEARN},
+					#{DEP, jdbcType=VARCHAR},
+					#{LANG_SCH, jdbcType=VARCHAR},
+					#{FINAL_A_M, jdbcType=VARCHAR},
+					#{FINAL_A_Y, jdbcType=VARCHAR},
+					#{FINAL_G_M, jdbcType=VARCHAR},
+					#{FINAL_G_Y, jdbcType=VARCHAR},
+					#{FINAL_REGION, jdbcType=VARCHAR},
+					#{FINAL_SCH, jdbcType=VARCHAR},
+					#{FINAL_MAJOR, jdbcType=VARCHAR},
+					#{KO_SPK_ABIL}, #{KO_DOC_ABIL}, #{CH_SPK_ABIL}, #{CH_DOC_ABIL}, 
+					#{EN_SPK_ABIL}, #{EN_DOC_ABIL}, #{VT_SPK_ABIL}, #{VT_DOC_ABIL},
+					#{OTHER_LANG, jdbcType=VARCHAR}
+				)
+	</insert>
+	
+	<!-- 이력서 경력 입력 -->
+	<insert id="insertCareer" parameterType="hashmap">
+		INSERT INTO T_RESUME_CAREER
+			( IDX, RESUME_IDX, JOIN_YEAR, JOIN_MONTH, RESIGN_YEAR, RESIGN_MONTH, REGION, COMPANY, TASK )
+		VALUES
+			( CAREER_SQ.NEXTVAL, #{RESUME_IDX}, #{JOIN_YEAR}, #{JOIN_MONTH}, #{RESIGN_YEAR}, #{RESIGN_MONTH}, #{REGION}, #{COMPANY}, #{TASK} )
+	</insert>
+	
+	<!-- 이력서 파일업로드 -->
+	<insert id="insertFile" parameterType="hashmap">
+		INSERT INTO T_RESUME_FILE
+			( IDX, RESUME_IDX, ORI_FILE, SAVE_FILE, FILE_SIZE )
+		VALUES
+			( RESUME_FILE_SQ.NEXTVAL, #{RESUME_IDX}, #{ORI_FILE}, #{SAVE_FILE}, #{FILE_SIZE} )
+	</insert>
+	
+	<!-- 이력서 가져오기 -->
+	<select id="selectResume" parameterType="String" resultType="hashmap">
+		SELECT *
+		  FROM T_MEMBER_RESUME
+		 WHERE MEM_ID = #{mem_id}
+	</select>
+	
+	<!-- 이력서 파일 가져오기 -->
+	<select id="selectFileList" parameterType="hashmap" resultType="hashmap">
+		SELECT IDX, ORI_FILE, ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+		  FROM T_RESUME_FILE
+		 WHERE RESUME_IDX = #{RESUME_IDX}
+		   AND DEL_GB = 'N'
+	</select>
+	
+	<!-- 이력서 경력 가져오기 -->
+	<select id="selectCareerList" parameterType="hashmap" resultType="hashmap">
+		SELECT * FROM T_RESUME_CAREER WHERE RESUME_IDX = #{RESUME_IDX} AND DEL_GB = 'N'
+	</select>
+	
+	<!-- 이력서 파일정보 가져오기 -->
+	<select id="selectFileInfo" parameterType="hashmap" resultType="hashmap">
+		SELECT SAVE_FILE, ORI_FILE
+		  FROM T_RESUME_FILE
+		 WHERE IDX = #{IDX}	
+	</select>
+
+	<!-- 이력서 수정하기 -->
+	<update id="updateResume" parameterType="hashmap">
+		UPDATE T_MEMBER_RESUME
+		<set>
+			<if test=""></if>
+		</set>
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+
+

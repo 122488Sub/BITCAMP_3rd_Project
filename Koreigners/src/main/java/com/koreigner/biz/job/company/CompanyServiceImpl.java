@@ -1,16 +1,27 @@
 package com.koreigner.biz.job.company;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.mail.Authenticator;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.koreigner.biz.job.hire.HireVO;
 import com.koreigner.biz.job.jobservice.JobService;
+import com.koreigner.common.member.MailHandler;
+import com.koreigner.common.member.MailUtil;
 
 @Service
 public class CompanyServiceImpl implements CompanyService{
@@ -23,6 +34,9 @@ public class CompanyServiceImpl implements CompanyService{
 	
 	@Autowired
 	private CompanyServiceImpl companyServiceImpl;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@Override
 	public List<CompanyVO> getCateList() {
@@ -57,7 +71,36 @@ public class CompanyServiceImpl implements CompanyService{
 	}
 	
 	@Override
-	public void comJoin(CompanyVO vo, HttpServletRequest request) {
+	public void comJoin(CompanyVO vo, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+		
+		//인증 메일 보내기
+		Properties prop = System.getProperties();
+		 prop.put("mail.smtp.starttls.enable", "true");
+	     prop.put("mail.smtp.host", "smtp.gmail.com");
+	     prop.put("mail.smtp.auth", "true");
+	     prop.put("mail.smtp.port", "587");
+		
+		Authenticator auth = new MailUtil(); // google 인증
+        
+        Session session = Session.getDefaultInstance(prop, auth); //session에 담기
+        
+        MimeMessage msg = new MimeMessage(session);
+        MimeMessageHelper helper = new MimeMessageHelper(msg);
+        
+        helper.setSentDate(new Date());
+        
+        MailHandler sendMail = new MailHandler(mailSender);
+        sendMail.setSubject("[KOREIGNERS 회원가입 이메일 인증]");
+        sendMail.setText(new StringBuffer()
+        		.append("<h1>메일인증</h1>")
+        		.append("<a href='http://localhost:8080/koreigner/emailAuth.do?mem_id=")
+        		.append(vo.getMem_id())
+        		.append("' target='_blank'>이메일 인증 확인</a>")
+        		.toString());
+        sendMail.setFrom("jeyi2756@gmail.com", "관리자");
+
+        sendMail.setTo(vo.getMem_id());
+        sendMail.send();
 		
 		Map<String, String> map = new HashMap<>();
 		map.put("cate_prnt_ko", vo.getCate_prnt_ko());

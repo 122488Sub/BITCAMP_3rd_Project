@@ -12,10 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.koreigner.biz.common.HomeServiceImpl;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
-import com.koreigner.common.interceptor.SessionNames;
 
 @Controller
 public class HomeController {
@@ -52,7 +50,7 @@ public class HomeController {
 			String mem_id = (String)tokenPayload.get("mem_id"); //아이디 추출
 			
 			UserVO member = userService.getOneMember(mem_id);
-			request.setAttribute(SessionNames.LOGIN, member);
+			request.setAttribute("user", member);
 			String auth_status = userService.getAuthStatus(mem_id);
 			checkEmail(auth_status, model);
 			
@@ -69,7 +67,7 @@ public class HomeController {
 				if(userJsId.equals(JSESSIONID)) {
 					System.out.println("============== 토큰 jsid와 브라우저 jsid가 같을 경우");
 					UserVO member = userService.getOneMember(mem_id);
-					request.setAttribute(SessionNames.LOGIN, member);
+					request.setAttribute("user", member);
 					String auth_status = userService.getAuthStatus(mem_id);
 					checkEmail(auth_status, model);
 				}

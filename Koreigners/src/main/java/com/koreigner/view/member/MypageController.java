@@ -3,7 +3,6 @@ package com.koreigner.view.member;
 import java.io.File;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +24,7 @@ import com.koreigner.biz.job.company.CompanyServiceImpl;
 import com.koreigner.biz.job.company.CompanyVO;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
+import com.koreigner.biz.member.resume.ResumeService;
 import com.koreigner.common.CommandMap;
 
 @Controller
@@ -32,6 +32,10 @@ public class MypageController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ResumeService resumeService;
+	
 	@Autowired
 	private CompanyServiceImpl companyServiceImpl;
 	
@@ -68,7 +72,7 @@ public class MypageController {
 				mv = new ModelAndView("member/mypage/p_resume.page");
 
 				System.out.println("//mypage이동 컨트롤러에서 mem_id : " + mem_id);
-				Map<String, Object> map = userService.selectResume(mem_id);
+				Map<String, Object> map = resumeService.selectResume(mem_id);
 				System.out.println("//mypage이동 컨트롤러에서 map : " + map);
 				
 				if(map != null) {
@@ -155,7 +159,7 @@ public class MypageController {
 		
 		ModelAndView mv = new ModelAndView("redirect:myPage_go.do?type=resume");
 		
-		userService.insertResume(commandMap.getMap(), request);
+		resumeService.insertResume(commandMap.getMap(), request);
 		
 		return mv;
 	}
@@ -163,7 +167,7 @@ public class MypageController {
 	//파일다운받기
 	@RequestMapping(value="downloadFile.do")
 	public void downloadFile(CommandMap commandMap, HttpServletResponse response) throws Exception {
-		Map<String, Object> map = userService.selectFileInfo(commandMap.getMap());
+		Map<String, Object> map = resumeService.selectFileInfo(commandMap.getMap());
 		System.out.println("파일다운 컨트롤러 map : " + map);
 		String save_file = (String)map.get("SAVE_FILE");
 		String ori_file = (String)map.get("ORI_FILE");
@@ -187,7 +191,7 @@ public class MypageController {
 		
 		ModelAndView mv = new ModelAndView("redirect:myPage_go.do?type=resume");
 				
-//		userService.updateResume(commandMap.getMap(), request);
+		resumeService.updateResume(commandMap.getMap(), request);
 		
 		return mv;
 	}

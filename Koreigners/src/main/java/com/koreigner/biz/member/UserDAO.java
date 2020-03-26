@@ -112,42 +112,7 @@ public class UserDAO {
 		return userCnt;
 	}
 	
-	//이력서 입력
-	public void insertResume(Map<String, Object> map) {
-		mybatis.update("user.insertResume", map);
-	}
 	
-	//커리어 입력
-	public void insertCareer(Map<String, Object> map) {
-		mybatis.insert("user.insertCareer", map);
-	}
-	
-	//파일업로드
-	public void insertFile(Map<String, Object> map)  throws Exception {
-		mybatis.insert("user.insertFile", map);
-	}
-
-	//이력서 가져오기
-	public Map<String, Object> selectResume(String mem_id) {
-		return mybatis.selectOne("user.selectResume", mem_id);
-	}
-	
-	//이력서 파일 가져오기
-	public List<Map<String, Object>> selectFileList(Map<String, Object> map) {
-		return mybatis.selectList("user.selectFileList", map);
-	}
-
-	//이력서 경력 가져오기
-	public List<Map<String, Object>> selectCareerList(Map<String, Object> map) {
-		return mybatis.selectList("user.selectCareerList", map);
-	}
-	
-	//이력서 파일 다운 정보가져오기
-	@SuppressWarnings("unchecked")
-	public Map<String, Object> selectFileInfo(Map<String, Object> map) {
-		return (Map<String, Object>)mybatis.selectOne("user.selectFileInfo", map);
-	}
-
 	
 	
 	

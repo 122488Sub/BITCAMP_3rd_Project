@@ -15,7 +15,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
 
-public class UserInterceptor extends HandlerInterceptorAdapter implements SessionNames{
+public class UserInterceptor extends HandlerInterceptorAdapter {
 	
 	// controller로 보내기 전에 처리하는 인터셉터(preHandle)
 	// 반환이 false라면 controller로 요청을 안함
@@ -52,7 +52,7 @@ public class UserInterceptor extends HandlerInterceptorAdapter implements Sessio
 			
 			request.setAttribute("mem_id", mem_id);
 			UserVO member = userService.getOneMember(mem_id);
-			request.setAttribute(SessionNames.LOGIN, member);
+			request.setAttribute("user", member);
 			
 			String auth_status = userService.getAuthStatus(mem_id);
 			if(auth_status.equals("0")) { //이메일 인증 안함
@@ -72,7 +72,7 @@ public class UserInterceptor extends HandlerInterceptorAdapter implements Sessio
 				
 				if(userJsId.equals(JSESSIONID)) {
 					UserVO member = userService.getOneMember(mem_id);
-					request.setAttribute(SessionNames.LOGIN, member);
+					request.setAttribute("user", member);
 					request.setAttribute("mem_id", mem_id);
 					String auth_status = userService.getAuthStatus(mem_id);
 					if(auth_status.equals("0")) { //이메일 인증 안함

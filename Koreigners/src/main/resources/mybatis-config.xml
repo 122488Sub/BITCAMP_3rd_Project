@@ -13,7 +13,6 @@
 		<typeAlias alias="hireVO" type="com.koreigner.biz.job.hire.HireVO"/>
 		<typeAlias alias="jobVO" type="com.koreigner.biz.job.jobservice.JobVO"/>
 		<typeAlias alias="userVO" type="com.koreigner.biz.member.UserVO"/>
-		<typeAlias alias="ResumeVO" type="com.koreigner.biz.member.ResumeVO"/>
 		<typeAlias alias="rsVO" type="com.koreigner.biz.resale.ResaleVO"/>
 		<typeAlias alias="rsImgVO" type="com.koreigner.biz.resale.ResaleImgVO"/>
 		<typeAlias alias="rsCommVO" type="com.koreigner.biz.resale.ResaleCommVO"/>
@@ -43,6 +42,7 @@
   	 
 <!-- member mapper -->  	 
   	 <mapper resource="mappings/member/user-mapper.xml"/>
+  	 <mapper resource="mappings/member/resume-mapper.xml"/>
   	 <mapper resource="mappings/member/wish-mapper.xml"/>
   	 <mapper resource="mappings/member/wish-include-mapper.xml"/>
   	 

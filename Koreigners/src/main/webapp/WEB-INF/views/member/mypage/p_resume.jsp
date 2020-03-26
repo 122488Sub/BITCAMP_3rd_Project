@@ -37,19 +37,54 @@
                 <input type="text" name="MEM_NAME" value="${map.MEM_NAME }">
                 </td>
                 <th width="15%">Nationality</th>
-                <td width="40%" class="txLeft">&nbsp;${mvo.mem_nationality }</td>
+                <td width="40%" class="txLeft">&nbsp;
+	                <c:if test="${not empty mvo.mem_nationality }">
+	                	${mvo.mem_nationality }
+	                </c:if>
+	                <c:if test="${empty mvo.mem_nationality }">
+	                	Please fill your profile first.
+	                </c:if>
+                </td>
               </tr>
               <tr>
                 <th>Sex</th>
-                <td class="txLeft">&nbsp;${mvo.mem_gender }</td>
+                <td class="txLeft">&nbsp;
+                <c:if test="${not empty mvo.mem_gender }">
+                	 ${mvo.mem_gender }
+                </c:if>
+                <c:if test="${empty mvo.mem_gender }">
+                	Please fill your profile first.
+                </c:if>
+                </td>
                 <th>Birthday</th>
-                <td class="txLeft">&nbsp;${mvo.mem_birth }</td>
+                <td class="txLeft">&nbsp;
+                <c:if test="${not empty mvo.mem_birth }">
+                	 ${mvo.mem_birth }
+                </c:if>
+                <c:if test="${empty mvo.mem_birth }">
+                	Please fill your profile first.
+                </c:if>
+                </td>
               </tr>
               <tr>
                 <th>Cell phone</th>
-                <td class="txLeft">&nbsp;${mvo.mem_phone }</td>
+                <td class="txLeft">&nbsp;
+                <c:if test="${not empty mvo.mem_phone }">
+                	${mvo.mem_phone }
+                </c:if>
+                <c:if test="${empty mvo.mem_phone }">
+                	Please fill your profile first.
+                </c:if>
+                </td>
                 <th>Residence area</th>
-                <td colspan="3" class="txLeft">&nbsp;${mvo.mem_address }</td>
+                <td colspan="3" class="txLeft">&nbsp;
+                 <c:if test="${not empty mvo.mem_address }">
+                	${mvo.mem_address }
+                </c:if>
+                <c:if test="${empty mvo.mem_address }">
+                	Please fill your profile first.
+                </c:if>
+                </td>
               </tr>
             </tbody>
           </table> 
@@ -86,12 +121,12 @@
                 <th>Requested salary<span class="red">*</span></th>
                 <td class="txLeft">
                   
-                    <input name="SALARY_TYPE" id="pay_type0" type="radio" value="시급"><label for="pay_type0">Hourly pay system</label> &nbsp;
-                    <input name="SALARY_TYPE" id="pay_type1" type="radio" value="일급"><label for="pay_type1">Daily pay system</label> &nbsp;
-                    <input name="SALARY_TYPE" id="pay_type2" type="radio" value="월급"><label for="pay_type2">Monthly salary system</label> &nbsp;
-                    <input name="SALARY_TYPE" id="pay_type3" type="radio" value="연봉"><label for="pay_type3">Annual wage system</label> &nbsp;
+                    <input name="SALARY_TYPE" id="pay_type0" type="radio" value="시급" <c:if test="${map.SALARY_TYPE eq '시급'}">checked</c:if>><label for="pay_type0">Hourly pay system</label> &nbsp;
+                    <input name="SALARY_TYPE" id="pay_type1" type="radio" value="일급" <c:if test="${map.SALARY_TYPE eq '일급'}">checked</c:if>><label for="pay_type1">Daily pay system</label> &nbsp;
+                    <input name="SALARY_TYPE" id="pay_type2" type="radio" value="월급" <c:if test="${map.SALARY_TYPE eq '월급'}">checked</c:if>><label for="pay_type2">Monthly salary system</label> &nbsp;
+                    <input name="SALARY_TYPE" id="pay_type3" type="radio" value="연봉" <c:if test="${map.SALARY_TYPE eq '연봉'}">checked</c:if>><label for="pay_type3">Annual wage system</label> &nbsp;
                   <br>
-                  <input type="text" size="11" maxlength="11" id="pay_amount1" name="REQ_SALARY_MIN" class="num_only2"> ~ <input type="text" size="11" maxlength="11" id="pay_amount2" name="REQ_SALARY_MAX" class="num_only2">￦
+                  <input type="text" size="11" maxlength="11" id="pay_amount1" name="REQ_SALARY_MIN" class="num_only2" value="${map.REQ_SALARY_MIN }"> ~ <input type="text" size="11" maxlength="11" id="pay_amount2" name="REQ_SALARY_MAX" class="num_only2" value="${map.REQ_SALARY_MAX }">￦
                   <span class="msg"></span>
                 </td>
               </tr>
@@ -109,9 +144,9 @@
                     </select>
                   </span>
                     <br>
-                    <label><input type="radio" name="WORK_TIME_ISWEEK" id="work_time_isweek0" value="0" checked="checked">Regardless day of the week</label>
+                    <label><input type="radio" name="WORK_TIME_ISWEEK" id="work_time_isweek0" value="0" checked="checked" <c:if test="${map.WORK_TIME_ISWEEK eq '0'}">checked</c:if>>Regardless day of the week</label>
                     &nbsp; &nbsp;
-                    <label><input type="radio" name="WORK_TIME_ISWEEK" id="work_time_isweek1" value="1">Prefer working day of the week(Multiple selections available)</label>
+                    <label><input type="radio" name="WORK_TIME_ISWEEK" id="work_time_isweek1" value="1" <c:if test="${map.WORK_TIME_ISWEEK eq '1'}">checked</c:if>>Prefer working day of the week(Multiple selections available)</label>
 
                   <div id="view_div">
                     <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week1" value="매주 월요일">Every Monday</label> &nbsp;<label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week2" value="매주 화요일">Every Tuesday</label> &nbsp;<label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week3" value="매주 수요일">Every Wednesday</label> &nbsp;<label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week4" value="매주 목요일">Every Thursday</label> &nbsp;<label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week5" value="매주 금요일">Every Friday</label> &nbsp;<label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week6" value="매주 토요일">Every Saturday</label> &nbsp;<label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week7" value="매주 일요일">Every Sunday</label> &nbsp;
@@ -131,15 +166,20 @@
               <tr>
                 <th>Dormitory/Commute</th>
                 <td class="txLeft">
-                	<label><input name="DORMITORY" id="commute_way1" type="radio" value="기숙사">Dormitory</label>
-                  <label><input name="DORMITORY" id="commute_way2" type="radio" value="출퇴근">Commute</label>
-                  <label><input name="DORMITORY" id="commute_way3" type="radio" value="상관없음" checked="checked">N/A</label>
+                	<label><input name="DORMITORY" id="commute_way1" type="radio" value="기숙사" <c:if test="${map.DORMITORY eq '기숙사'}">checked</c:if>>Dormitory</label>
+                  <label><input name="DORMITORY" id="commute_way2" type="radio" value="출퇴근" <c:if test="${map.DORMITORY eq '출퇴근'}">checked</c:if>>Commute</label>
+                  <label><input name="DORMITORY" id="commute_way3" type="radio" value="상관없음" checked="checked" <c:if test="${map.DORMITORY eq '상관없음'}">checked</c:if>>N/A</label>
                 </td>
               </tr>
               <tr>
                 <th>Introduce yourself.</th>
                 <td class="txLeft">
-                	<textarea name="INTRODUCE" id="introduce" cols="100" rows="5"></textarea>
+                	<c:if test="${not empty map }">
+                		${map.INTRODUCE }
+                	</c:if>
+                	<c:if test="${empty map }">
+                		<textarea name="INTRODUCE" id="introduce" cols="100" rows="5"></textarea>
+                	</c:if>
                 </td>
               </tr>
             </tbody>
@@ -151,47 +191,47 @@
               <tr>
                 <th width="15%">Highest level of education</th>
                 <td width="85%" class="txLeft">
-                	<label><input name="GRADUATE_SCH" type="radio" value="N/A" checked="checked">N/A</label>
-                    <label><input name="GRADUATE_SCH" type="radio" value="중/고졸">Middle school graduate/ High school graduate</label>
-                    <label><input name="GRADUATE_SCH" type="radio" value="전문대재학">Technical College In School</label>
-                    <label><input name="GRADUATE_SCH" type="radio" value="전문대졸업">Technical College Graduation</label>
-                    <label><input name="GRADUATE_SCH" type="radio" value="4년제대학재학">Fourth-Year College In School</label>
-                    <label><input name="GRADUATE_SCH" type="radio" value="4년제대학졸업">Fourth-Year College Graduation</label>
-                    <label><input name="GRADUATE_SCH" type="radio" value="대학원재학">Graduate School In School</label>
-                    <label><input name="GRADUATE_SCH" type="radio" value="대학원졸업">Graduate School Graduation</label>
+                	<label><input name="GRADUATE_SCH" type="radio" value="N/A" checked="checked" <c:if test="${map.GRADUATE_SCH eq 'N/A'}">checked</c:if>>N/A</label>
+                    <label><input name="GRADUATE_SCH" type="radio" value="중/고졸" <c:if test="${map.GRADUATE_SCH eq '중/고졸'}">checked</c:if>>Middle school graduate/ High school graduate</label>
+                    <label><input name="GRADUATE_SCH" type="radio" value="전문대재학" <c:if test="${map.GRADUATE_SCH eq '전문대재학'}">checked</c:if>>Technical College In School</label>
+                    <label><input name="GRADUATE_SCH" type="radio" value="전문대졸업" <c:if test="${map.GRADUATE_SCH eq '전문대졸업'}">checked</c:if>>Technical College Graduation</label>
+                    <label><input name="GRADUATE_SCH" type="radio" value="4년제대학재학" <c:if test="${map.GRADUATE_SCH eq '4년제대학재학'}">checked</c:if>>Fourth-Year College In School</label>
+                    <label><input name="GRADUATE_SCH" type="radio" value="4년제대학졸업" <c:if test="${map.GRADUATE_SCH eq '4년제대학졸업'}">checked</c:if>>Fourth-Year College Graduation</label>
+                    <label><input name="GRADUATE_SCH" type="radio" value="대학원재학" <c:if test="${map.GRADUATE_SCH eq '대학원재학'}">checked</c:if>>Graduate School In School</label>
+                    <label><input name="GRADUATE_SCH" type="radio" value="대학원졸업" <c:if test="${map.GRADUATE_SCH eq '대학원졸업'}">checked</c:if>>Graduate School Graduation</label>
                 </td>
               </tr>
               <tr>
                 <th>Diploma</th>
                 <td class="txLeft">
-                	<label><input name="DEP" type="radio" value="N/A" checked="checked">N/A</label>
-                    <label><input name="DEP" type="radio" value="학사">Bachelor</label>
-                    <label><input name="DEP" type="radio" value="석사">Master</label>
-                    <label><input name="DEP" type="radio" value="박사">Doctorate</label>
+                	<label><input name="DEP" type="radio" value="N/A" checked="checked" <c:if test="${map.DEP eq 'N/A'}">checked</c:if>>N/A</label>
+                    <label><input name="DEP" type="radio" value="학사" <c:if test="${map.DEP eq '학사'}">checked</c:if>>Bachelor</label>
+                    <label><input name="DEP" type="radio" value="석사" <c:if test="${map.DEP eq '석사'}">checked</c:if>>Master</label>
+                    <label><input name="DEP" type="radio" value="박사" <c:if test="${map.DEP eq '박사'}">checked</c:if>>Doctorate</label>
                 </td>
               </tr>
               <tr>
                 <th>Final level of education</th>
                 <td class="txLeft">
                 	Admission / Graduation : 
-                	<input type="text" size="4" id="school_entr_year" name="FINAL_A_Y" class="only-num" value="">Year 
-                	<input type="text" size="2" id="school_entr_month" name="FINAL_A_M" class="only-num" value="">Month ~
-                    <input type="text" size="4" id="school_grad_year" name="FINAL_G_Y" class="only-num" value="">Year 
-                    <input type="text" size="2" id="school_grad_month" name="FINAL_G_M" class="only-num" value="">Month<br>
-                    Region : <input type="text" size="20" id="school_area" name="FINAL_REGION" value="">
+                	<input type="text" size="4" id="school_entr_year" name="FINAL_A_Y" class="only-num" value="${map.FINAL_A_Y }">Year 
+                	<input type="text" size="2" id="school_entr_month" name="FINAL_A_M" class="only-num" value="${map.FINAL_A_M }">Month ~
+                    <input type="text" size="4" id="school_grad_year" name="FINAL_G_Y" class="only-num" value="${map.FINAL_G_Y }">Year 
+                    <input type="text" size="2" id="school_grad_month" name="FINAL_G_M" class="only-num" value="${map.FINAL_G_M }">Month<br>
+                    Region : <input type="text" size="20" id="school_area" name="FINAL_REGION" value="${map.FINAL_REGION }">
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    School name : <input type="text" size="20" id="school_name" name="FINAL_SCH" value="">
+                    School name : <input type="text" size="20" id="school_name" name="FINAL_SCH" value="${map.FINAL_SCH }">
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    Major :<input type="text" size="20" id="school_major" name="FINAL_MAJOR" value="">
+                    Major :<input type="text" size="20" id="school_major" name="FINAL_MAJOR" value="${map.FINAL_MAJOR }">
                 </td>
               </tr>
 
               <tr>
                 <th width="15%">Language Learning Institute</th>
                 <td width="85%" class="txLeft">
-                    <label><input name="LANG_LEARN" type="radio" value="해당사항없음" checked="checked">N/A</label>
-                    <label><input name="LANG_LEARN" type="radio" value="재학중">Studying</label>
-                    <label><input name="LANG_LEARN" type="radio" value="졸업">Graduation</label>
+                    <label><input name="LANG_LEARN" type="radio" value="해당사항없음" checked="checked" <c:if test="${map.LANG_LEARN eq '해당사항없음'}">checked</c:if>>N/A</label>
+                    <label><input name="LANG_LEARN" type="radio" value="재학중" <c:if test="${map.LANG_LEARN eq '재학중'}">checked</c:if>>Studying</label>
+                    <label><input name="LANG_LEARN" type="radio" value="졸업" <c:if test="${map.LANG_LEARN eq '졸업'}">checked</c:if>>Graduation</label>
                   <div id="div_lang_school_name">
                     &nbsp; School Name&nbsp;:&nbsp;<input type="text" size="30" maxlength="25" id="lang_school_name" name="LANG_SCH">
                   </div>
@@ -243,65 +283,65 @@
                 <th>Korean</th>
                 <td class="txLeft">
                   Conversational ability : 
-                  <label><input name="KO_SPK_ABIL" type="radio" value="상">Advanced </label>
-                  <label><input name="KO_SPK_ABIL" type="radio" value="중">Intermediate</label>
-                  <label><input name="KO_SPK_ABIL" type="radio" value="하">Beginner</label>
-                  <label><input name="KO_SPK_ABIL" type="radio" value="해당사항없음">N/A</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label><input name="KO_SPK_ABIL" type="radio" value="상" <c:if test="${map.KO_SPK_ABIL eq '상'}">checked</c:if>>Advanced </label>
+                  <label><input name="KO_SPK_ABIL" type="radio" value="중" <c:if test="${map.KO_SPK_ABIL eq '중'}">checked</c:if>>Intermediate</label>
+                  <label><input name="KO_SPK_ABIL" type="radio" value="하" <c:if test="${map.KO_SPK_ABIL eq '하'}">checked</c:if>>Beginner</label>
+                  <label><input name="KO_SPK_ABIL" type="radio" value="해당사항없음" <c:if test="${map.KO_SPK_ABIL eq '해당사항없음'}">checked</c:if>>N/A</label>&nbsp;&nbsp;&nbsp;&nbsp;
                 <br>
                   Ability to work with documents :
-                  <label><input name="KO_DOC_ABIL" type="radio" value="상">Advanced</label>
-                  <label><input name="KO_DOC_ABIL" type="radio" value="중">Intermediate</label>
-                  <label><input name="KO_DOC_ABIL" type="radio" value="하">Beginner</label>
-                  <label><input name="KO_DOC_ABIL" type="radio" value="해당사항없음">N/A</label></td>
+                  <label><input name="KO_DOC_ABIL" type="radio" value="상" <c:if test="${map.KO_DOC_ABIL eq '상'}">checked</c:if>>Advanced</label>
+                  <label><input name="KO_DOC_ABIL" type="radio" value="중" <c:if test="${map.KO_DOC_ABIL eq '중'}">checked</c:if>>Intermediate</label>
+                  <label><input name="KO_DOC_ABIL" type="radio" value="하" <c:if test="${map.KO_DOC_ABIL eq '하'}">checked</c:if>>Beginner</label>
+                  <label><input name="KO_DOC_ABIL" type="radio" value="해당사항없음" <c:if test="${map.KO_DOC_ABIL eq '해당사항없음'}">checked</c:if>>N/A</label></td>
               </tr>
               <tr>
                 <th>Chinese</th>
                 <td class="txLeft">
                   Conversational ability :
-                  <label><input name="CH_SPK_ABIL" type="radio" value="상">Advanced </label>
-                  <label><input name="CH_SPK_ABIL" type="radio" value="중">Intermediate</label>
-                  <label><input name="CH_SPK_ABIL" type="radio" value="하">Beginner</label>
-                  <label><input name="CH_SPK_ABIL" type="radio" value="해당사항없음">N/A</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label><input name="CH_SPK_ABIL" type="radio" value="상" <c:if test="${map.CH_SPK_ABIL eq '상'}">checked</c:if>>Advanced </label>
+                  <label><input name="CH_SPK_ABIL" type="radio" value="중" <c:if test="${map.CH_SPK_ABIL eq '중'}">checked</c:if>>Intermediate</label>
+                  <label><input name="CH_SPK_ABIL" type="radio" value="하" <c:if test="${map.CH_SPK_ABIL eq '하'}">checked</c:if>>Beginner</label>
+                  <label><input name="CH_SPK_ABIL" type="radio" value="해당사항없음" <c:if test="${map.CH_SPK_ABIL eq '해당사항없음'}">checked</c:if>>N/A</label>&nbsp;&nbsp;&nbsp;&nbsp;
                 <br>
                   Ability to work with documents :
-                  <label><input name="CH_DOC_ABIL" type="radio" value="상">Advanced</label>
-                  <label><input name="CH_DOC_ABIL" type="radio" value="중">Intermediate</label>
-                  <label><input name="CH_DOC_ABIL" type="radio" value="하">Beginner</label>
-                  <label><input name="CH_DOC_ABIL" type="radio" value="해당사항없음">N/A</label></td>
+                  <label><input name="CH_DOC_ABIL" type="radio" value="상" <c:if test="${map.CH_DOC_ABIL eq '상'}">checked</c:if>>Advanced</label>
+                  <label><input name="CH_DOC_ABIL" type="radio" value="중" <c:if test="${map.CH_DOC_ABIL eq '중'}">checked</c:if>>Intermediate</label>
+                  <label><input name="CH_DOC_ABIL" type="radio" value="하" <c:if test="${map.CH_DOC_ABIL eq '하'}">checked</c:if>>Beginner</label>
+                  <label><input name="CH_DOC_ABIL" type="radio" value="해당사항없음" <c:if test="${map.CH_DOC_ABIL eq '해당사항없음'}">checked</c:if>>N/A</label></td>
               </tr>
               <tr>
                 <th>English</th>
                 <td class="txLeft">
                   Conversational ability :
-                  <label><input name="EN_SPK_ABIL" type="radio" value="상">Advanced </label>
-                  <label><input name="EN_SPK_ABIL" type="radio" value="중">Intermediate</label>
-                  <label><input name="EN_SPK_ABIL" type="radio" value="하">Beginner</label>
-                  <label><input name="EN_SPK_ABIL" type="radio" value="해당사항없음">N/A</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label><input name="EN_SPK_ABIL" type="radio" value="상" <c:if test="${map.EN_SPK_ABIL eq '상'}">checked</c:if>>Advanced </label>
+                  <label><input name="EN_SPK_ABIL" type="radio" value="중" <c:if test="${map.EN_SPK_ABIL eq '중'}">checked</c:if>>Intermediate</label>
+                  <label><input name="EN_SPK_ABIL" type="radio" value="하" <c:if test="${map.EN_SPK_ABIL eq '하'}">checked</c:if>>Beginner</label>
+                  <label><input name="EN_SPK_ABIL" type="radio" value="해당사항없음" <c:if test="${map.EN_SPK_ABIL eq '해당사항없음'}">checked</c:if>>N/A</label>&nbsp;&nbsp;&nbsp;&nbsp;
                 <br>
                   Ability to work with documents :
-                  <label><input name="EN_DOC_ABIL" type="radio" value="상">Advanced</label>
-                  <label><input name="EN_DOC_ABIL" type="radio" value="중">Intermediate</label>
-                  <label><input name="EN_DOC_ABIL" type="radio" value="하">Beginner</label>
-                  <label><input name="EN_DOC_ABIL" type="radio" value="해당사항없음">N/A</label></td>
+                  <label><input name="EN_DOC_ABIL" type="radio" value="상" <c:if test="${map.EN_DOC_ABIL eq '상'}">checked</c:if>>Advanced</label>
+                  <label><input name="EN_DOC_ABIL" type="radio" value="중" <c:if test="${map.EN_DOC_ABIL eq '중'}">checked</c:if>>Intermediate</label>
+                  <label><input name="EN_DOC_ABIL" type="radio" value="하" <c:if test="${map.EN_DOC_ABIL eq '하'}">checked</c:if>>Beginner</label>
+                  <label><input name="EN_DOC_ABIL" type="radio" value="해당사항없음" <c:if test="${map.EN_DOC_ABIL eq '해당사항없음'}">checked</c:if>>N/A</label></td>
               </tr>
               <tr>
                 <th>Vietnamese</th>
                 <td class="txLeft">
                   Conversational ability :
-                  <label><input name="VT_SPK_ABIL" type="radio" value="상">Advanced </label>
-                  <label><input name="VT_SPK_ABIL" type="radio" value="중">Intermediate</label>
-                  <label><input name="VT_SPK_ABIL" type="radio" value="하">Beginner</label>
-                  <label><input name="VT_SPK_ABIL" type="radio" value="해당사항없음">N/A</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                  <label><input name="VT_SPK_ABIL" type="radio" value="상" <c:if test="${map.VT_SPK_ABIL eq '상'}">checked</c:if>>Advanced </label>
+                  <label><input name="VT_SPK_ABIL" type="radio" value="중" <c:if test="${map.VT_SPK_ABIL eq '중'}">checked</c:if>>Intermediate</label>
+                  <label><input name="VT_SPK_ABIL" type="radio" value="하" <c:if test="${map.VT_SPK_ABIL eq '하'}">checked</c:if>>Beginner</label>
+                  <label><input name="VT_SPK_ABIL" type="radio" value="해당사항없음" <c:if test="${map.VT_SPK_ABIL eq '해당사항없음'}">checked</c:if>>N/A</label>&nbsp;&nbsp;&nbsp;&nbsp;
                 <br>
                   Ability to work with documents :
-                  <label><input name="VT_DOC_ABIL" type="radio" value="상">Advanced</label>
-                  <label><input name="VT_DOC_ABIL" type="radio" value="중">Intermediate</label>
-                  <label><input name="VT_DOC_ABIL" type="radio" value="하">Beginner</label>
-                  <label><input name="VT_DOC_ABIL" type="radio" value="해당사항없음">N/A</label></td>
+                  <label><input name="VT_DOC_ABIL" type="radio" value="상" <c:if test="${map.VT_DOC_ABIL eq '상'}">checked</c:if>>Advanced</label>
+                  <label><input name="VT_DOC_ABIL" type="radio" value="중" <c:if test="${map.VT_DOC_ABIL eq '중'}">checked</c:if>>Intermediate</label>
+                  <label><input name="VT_DOC_ABIL" type="radio" value="하" <c:if test="${map.VT_DOC_ABIL eq '하'}">checked</c:if>>Beginner</label>
+                  <label><input name="VT_DOC_ABIL" type="radio" value="해당사항없음" <c:if test="${map.VT_DOC_ABIL eq '해당사항없음'}">checked</c:if>>N/A</label></td>
               </tr>
               <tr>
                 <th>Other language</th>
-                <td class="txLeft"><input type="text" size="40" id="etc_language" name="OTHER_LANG"> (E.g. French, Spanish, Russian, etc.)</td>
+                <td class="txLeft"><input type="text" size="40" id="etc_language" name="OTHER_LANG" value="${map.OTHER_LANG }"> (E.g. French, Spanish, Russian, etc.)</td>
               </tr>
             </tbody>
           </table>

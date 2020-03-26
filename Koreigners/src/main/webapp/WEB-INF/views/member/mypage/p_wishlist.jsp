@@ -23,7 +23,6 @@
 <input type="button" value="resale" onclick="javascript:changeCategory(3)">
 <input type="button" value="free" onclick="javascript:changeCategory(4)">
 
-위시리스트 페이지!!!!!
 <table id="wishListTable"  border>
 		<thead id="tHead">			
 			

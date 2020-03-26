@@ -24,13 +24,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.util.WebUtils;
 
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
 import com.koreigner.biz.member.auth.SNSLogin;
 import com.koreigner.biz.member.auth.SnsValue;
-import com.koreigner.common.interceptor.SessionNames;
 import com.koreigner.common.member.SecurityUtil;
 
 @Controller
@@ -276,10 +274,14 @@ public class UserController {
 
 	// 이메일 인증완료 후
 	@RequestMapping(value="emailAuth.do", method=RequestMethod.GET)
-	public String emailConfirm(UserVO vo, Model model) throws Exception {
-
+	public String emailConfirm(UserVO vo, HttpServletRequest request, Model model) throws Exception {
+		
+		System.out.println("///////////////////////////////이메일 인증 완료 후 id : " + vo.getMem_id());
+		
 		vo.setAuth_status("1"); // authStatus를 1로, 권한 업데이트
+		
 		System.out.println("이메일 인증 완료 후 vo : " + vo.toString());
+		
 		userService.updateMember(vo);
 
 		return "/member/emailAuthSuccess.page";

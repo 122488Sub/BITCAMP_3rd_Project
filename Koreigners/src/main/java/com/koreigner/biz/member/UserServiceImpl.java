@@ -1,32 +1,23 @@
 package com.koreigner.biz.member;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.koreigner.common.member.FileUtils;
 import com.koreigner.common.member.MailHandler;
 import com.koreigner.common.member.MailUtil;
 import com.koreigner.common.member.SecurityUtil;
@@ -47,9 +38,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private SecurityUtil securityUtil;
-	
-	@Autowired
-	private FileUtils fileUtils;
 	
 	
 	//회원가입중 client가 입력한 email이 db에 이미 등록되어 있는지 중복 체크 한다.
@@ -224,91 +212,6 @@ public class UserServiceImpl implements UserService {
 		return userCnt;
 	}
 	
-	
-	
-	//이력서 입력
-	@Override
-	public void insertResume(Map<String, Object> map, HttpServletRequest request) throws Exception {
-		
-		String workday = "";
-		
-		if(map.get("WORK_TIME_WEEK") instanceof String[]) {
-			String[] work_time_week = (String[])map.get("WORK_TIME_WEEK");
-			for (int i = 0; i < work_time_week.length; i++) {
-				workday += work_time_week[i] + "/";
-			}
-		} else if(map.get("WORK_TIME_WEEK") instanceof String) {
-			String work_time_week = (String)map.get("WORK_TIME_WEEK");
-				workday += work_time_week;
-		}
-		 
-		map.put("WORK_TIME_WEEK", workday);
-		
-		userDAO.insertResume(map);
-		
-		String[] join_year = (String[])map.get("JOIN_YEAR");
-		String[] join_month = (String[])map.get("JOIN_MONTH");
-		String[] resign_year = (String[])map.get("RESIGN_YEAR");
-		String[] resign_month = (String[])map.get("RESIGN_MONTH");
-		String[] region = (String[])map.get("REGION");
-		String[] company = (String[])map.get("COMPANY");
-		String[] task = (String[])map.get("TASK");
-		
-		
-		for(int i=0; i<join_year.length; i++) {
-			map.put("JOIN_YEAR", join_year[i]);
-			map.put("JOIN_MONTH", join_month[i]);
-			map.put("RESIGN_YEAR", resign_year[i]);
-			map.put("RESIGN_MONTH", resign_month[i]);
-			map.put("REGION", region[i]);
-			map.put("COMPANY", company[i]);
-			map.put("TASK", task[i]);
-			userDAO.insertCareer(map);
-		}
-		
-		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(map, request);
-		for(int i=0, size=list.size(); i<size; i++) {
-			System.out.println("///////파일 : " + list.get(i));
-			userDAO.insertFile(list.get(i));
-		}
-		
-				
-		
-	}
-	
-	//이력서 가져오기
-	@Override
-	public Map<String, Object> selectResume(String mem_id) {
-		
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-		Map<String, Object> tempMap = userDAO.selectResume(mem_id);
-		System.out.println("====== selectResume : " + tempMap);
-		resultMap.put("map", tempMap);
-		
-		if(tempMap != null) {
-			List<Map<String, Object>> careerList = userDAO.selectCareerList(tempMap);
-			List<Map<String, Object>> fileList = userDAO.selectFileList(tempMap);
-			System.out.println("====== selectCareer : " + careerList);			
-			System.out.println("====== selectFile : " + fileList);			
-			
-			resultMap.put("careerList", careerList);
-			resultMap.put("fileList", fileList);
-		}
-		return resultMap;
-	}
-	
-	//이력서 파일 다운받기위한 정보가져오기
-	@Override
-	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception {
-		return userDAO.selectFileInfo(map);
-	}
-
-	//이력서 수정하기
-	@Override
-	public void updateResume(Map<String, Object> map, HttpServletRequest request) {
-		
-	}
-
 	
 //=========================== SNS Login ===============================
 	@Override
