@@ -35,6 +35,7 @@
     background-size: cover;
     position: relative;
     color: red;
+    
 }
 
 
@@ -44,6 +45,7 @@
     float: left;
     text-align: center;
     border:0;
+    background-color: #E2E2E2;
 }
 
 #section2_content {
@@ -51,7 +53,7 @@
     height: auto;
     color: black;
     display: inline-block;
-    border : 1px solid black;
+    background-color: white;
 }
 
 footer{

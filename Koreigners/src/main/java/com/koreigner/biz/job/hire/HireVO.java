@@ -1,6 +1,6 @@
 package com.koreigner.biz.job.hire;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public class HireVO {

@@ -8,18 +8,17 @@
 
 .selectbox_div{
 
-	width: 100%;
+	width: 90%;
     height: 100px;
     padding: 18px 10px;
     margin-bottom: 40px;
-    background-color: rgb(245, 246, 248);
     border-radius: 3px;
     text-align: center;
 }
 #searchForm {
 	
 	margin: 0 auto;
-	width: 50%;
+	width: 60%;
     height: 100px;
 	
 }

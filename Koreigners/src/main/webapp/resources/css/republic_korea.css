@@ -1,59 +1,59 @@
 .OUTLINE {
     stroke-linejoin:round;
-    stroke: #ffffff;
+    stroke: #fff;
     stroke-width: 2;
 }
 #CD1 {
-    fill: #f8d0d8;
+    fill: #0169D1;
 }
 #CD2 {
-    fill: #f6c4ce;
+    fill: #0A70D7;
 }
 #CD3 {
-    fill: #f4b8c4;
+    fill: #1B7CDC;
 }
 #CD4 {
-    fill: #f3adbb;
+    fill: #408CD8;
 }
 #CD5 {
-    fill: #f1a1b1;
+    fill: #66A4E1;
 }
 #CD6 {
-    fill: #ef95a7;
+    fill: #4F8AC6;
 }
 #CD7 {
-    fill: #ee8a9e;
+    fill: #86ABD1;
 }
 #CD8 {
-    fill: #ec7e94;
+    fill: #479FCB;
 }
 #CD9 {
-    fill: #ea728a;
+    fill: #77B8D8;
 }
 #CD10 {
-    fill: #e86680;
+    fill: #96C2D8;
 }
 
 #CD11 {
-    fill: #e65b77;
+    fill: #10569C;
 }
 #CD12 {
-    fill: #e54f6d;
+    fill: #1D68B3;
 }
 #CD13 {
-    fill: #e34363;
+    fill: #084D92;
 }
 #CD14 {
-    fill: #e13759;
+    fill: #547DA6;
 }
 #CD15 {
-    fill: #e02b50;
+    fill: #99BBDE;
 }
 #CD16 {
-    fill: #de2046;
+    fill: #AFC2D5;
 }
 #CD17 {
-    fill: #dc143c;
+    fill: #0B80F5;
 }
 #CD1:hover {
 	fill: lightgray;

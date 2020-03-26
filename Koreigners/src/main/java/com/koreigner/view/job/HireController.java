@@ -166,12 +166,13 @@ public class HireController {
 	
 	//채용 글쓰기 완료버튼
 	@RequestMapping(value="hirePost.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String hirePost(HireVO vo, HttpServletRequest request) {
+	public ModelAndView hirePost(HireVO vo, HttpServletRequest request) {
 		String mem_id = (String)request.getAttribute("mem_id");
 		System.out.println("mem_id : " + mem_id);
 		hireServiceImpl.insertHire(vo, request);
-		
-		return "job/hire/hireWrite.page";
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:hireList_go.do");
+		return mav;
 	}
 	
 	//채용게시글 위시리스트 추가

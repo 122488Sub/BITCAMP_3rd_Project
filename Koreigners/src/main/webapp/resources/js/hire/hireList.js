@@ -99,7 +99,7 @@ function getListCPage(cPage){
 				console.log("this['hire_idx'] : " + this["hire_idx"]);
 				console.log("this['payment_codition'] : " + this["payment_codition"]);
 				
-				dataTag += "<tr>";
+				dataTag += "<tr class='trTag'>";
 				dataTag += "<td class='thumbnail-img'><p>" +this["company_name"] + "</p></td>";
 				dataTag += "<td class='name-pr'>" + this["do_en"] + "</td>";
 				dataTag += "<td class='price-pr'><a href='javascript:getDetail(" + this["hire_idx"] +  ' ,'  + pvo.nowPage +")'><p>" + this["title"] + "</p></a></td>";
@@ -110,7 +110,7 @@ function getListCPage(cPage){
 				else if(this["payment_codition"] == "hour"){dataTag += "<td class='quantity-box' id='salryTd'><div class='salaryCondtion'><span id='hourSalary'>H</span>" + this["salary_max"] + "</div></td>"}
 				else {dataTag += "<td class='quantity-box' id='salryTd'><div class='salaryCondtion'><span id='pay'>C</span>" + "Negotiable" + "</div></td>"}
 				dataTag += "<td class='add-pr'>" + this["regdate"] + "</td>";
-				dataTag += "</tr><hr>";
+				dataTag += "</tr>";
 				i++;
 			});	
 			$("#list_box").html(dataTag);
@@ -292,7 +292,7 @@ function getJson(){
 					console.log("this['hire_idx'] : " + this["hire_idx"]);
 					console.log("this['payment_codition'] : " + this["payment_codition"]);
 					
-					dataTag += "<tr>";
+					dataTag += "<tr class='trTag'>";
 					dataTag += "<td class='thumbnail-img'><p>" +this["company_name"] + "</p></td>";
 					dataTag += "<td class='name-pr'>" + this["do_en"] + "</td>";
 					dataTag += "<td class='price-pr'><a href='javascript:getDetail(" + this["hire_idx"] +  ' ,'  + pvo.nowPage +")'><p>" + this["title"] + "</p></a></td>";
@@ -303,7 +303,7 @@ function getJson(){
 					else if(this["payment_codition"] == "hour"){dataTag += "<td class='quantity-box' id='salryTd'><div class='salaryCondtion'><span id='hourSalary'>H</span>" + this["salary_max"] + "</div></td>"}
 					else {dataTag += "<td class='quantity-box' id='salryTd'><div class='salaryCondtion'><span id='pay'>C</span>" + "Negotiable" + "</div></td>"}
 					dataTag += "<td class='add-pr'>" + this["regdate"] + "</td>";
-					dataTag += "</tr><hr>";
+					dataTag += "</tr>";
 					i++;
 				});	
 				
