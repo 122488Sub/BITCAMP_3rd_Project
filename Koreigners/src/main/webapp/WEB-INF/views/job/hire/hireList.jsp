@@ -3,7 +3,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<fmt:parseDate var="date" value="${regdate}" pattern="yyyy-MM-dd"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,13 +24,14 @@
 <link rel="stylesheet" href="${contextPath}/bootstrap/css/custom.css">
 <link rel="stylesheet" type="text/css" href="resources/css/republic_korea.css">
 <link rel="stylesheet" type="text/css" href="resources/css/job/hireList.css">
+<script type="text/javascript" src="resources/js/hire/moment.js"></script>
 <script type="text/javascript" src="resources/js/hire/hireList.js"></script>
 
 <style>
 .wishlist-box-main {
 	height: auto;
 }
-.table {width:80%; height: auto;}
+.table {width:100%; height: auto;}
 
 #location{
 	width:10%;
@@ -51,7 +54,8 @@ td{height:80px;}
 #daySalary{font-weight: bold; color:white; text-align: center; width:40px;height:20px;background-color: brown;border-radius: 5px; padding-bottom: 6px;}
 #hourSalary{font-weight: bold; color:white; text-align: center; width:40px;height:20px;background-color: gray;border-radius: 5px; padding-bottom: 6px;}
 #pay{font-weight: bold; color:white; text-align: center; width:40px;height:20px;background-color: aqua;border-radius: 5px; padding-bottom: 12px; margin-bottom: 6px; overflow:visible;}
-.salaryCondtion {display:flex;}
+.salaryCondtion {display:flex; text-align: center;}
+.trTag td {border-bottom: 1px solid #808080;}
 </style>
 <script>
 </script>

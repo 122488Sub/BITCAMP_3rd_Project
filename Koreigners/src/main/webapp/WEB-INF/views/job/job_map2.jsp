@@ -51,6 +51,7 @@
 		border-collapse: collapse;
 		border: 2px solid #000;
 		margin-left: 300px;
+		border-radius: 5px;
 	}
 	.table_dosi thead {
 	 	display: block;
@@ -63,7 +64,7 @@
 	}
 	#mapBg {
 		position: absolute;
-		border: 5px solid black;
+		border: 5px solid #0F4C81;
 		border-radius: 10px;
 		width:25%;
 		height:55%;
@@ -266,11 +267,6 @@
 	
 	 <div id="option_panel">
 		<table class='table_dosi'>
-			<thead>
-				<tr>
-					<th colspan = '6' class='th_selectDoSi'></th>
-				</tr>
-			</thead>
 			<tbody class='tbody_dosi'>
 				<!-- $(".tbody_dosi").html(); 로 내용추가 -->
 			</tbody>
