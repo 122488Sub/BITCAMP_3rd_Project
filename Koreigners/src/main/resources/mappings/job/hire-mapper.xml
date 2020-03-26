@@ -134,7 +134,7 @@
 	            #{education}, #{experience}, 
 	            #{foreign_language},
 	            #{gu_gun_eup_eng}, #{gu_gun_eup_kor},
-	            #{hire_age_max}, #{hire_age_min}, 23, #{hire_number}, 0,
+	            #{hire_age_max}, #{hire_age_min}, HIRE_SQ.NEXTVAL, #{hire_number}, 0,
 	            #{insurance}, #{ip},
 	            #{major}, #{meals}, #{mem_id},
 	            #{payment_codition}, #{payment_detail}, #{prefer_skills}, #{prepare_doc}, 

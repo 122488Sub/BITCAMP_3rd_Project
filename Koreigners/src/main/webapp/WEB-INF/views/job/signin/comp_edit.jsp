@@ -48,33 +48,33 @@
 	<table id="regCom">
 		<tr>
 			<td class="title"><label>아이디 : </label></td>
-			<td class="contents"><input type="text" name="mem_id" id="mem_id"  class="input_box" title="아이디"><div id="id_check"></div></td>
+			<td class="contents"><input type="text" name="mem_id" id="mem_id"  class="input_box" value="아이디"><div id="id_check"></div></td>
 		</tr>
 		<tr>
 			<td class="title"><label>비밀번호 : </label></td>
-			<td class="contents"><input type="password" name="mem_pw" id="password"  class="input_box" title="비밀번호"></td>
+			<td class="contents"><input type="password" name="mem_pw" id="password"  class="input_box" value="비밀번호"></td>
 		</tr>
 		<tr>
 			<td class="title"><label>비밀번호 확인 : </label></td>
-			<td class="contents"><input type="password" name="conf_password"  class="input_box" id="conf_password" title="비밀번호 확인"><div id="pw_check"></div></td>
+			<td class="contents"><input type="password" name="conf_password"  class="input_box" id="conf_password" value="비밀번호 확인"><div id="pw_check"></div></td>
 		</tr>
 		<tr>
 			<td class="title"><label>회사명 : </label></td>
-			<td class="contents"><input type="text" name="company_name" id="company_name"  class="input_box" title="회사명"></td>
+			<td class="contents"><input type="text" name="company_name" id="company_name"  class="input_box" value="회사명"></td>
 		</tr>
 		<tr>
 			<td class="title"><label>대표자명 : </label></td>
-			<td class="contents"><input type="text" name="ceo_name" id="ceo_name"  class="input_box" title="대표자명"></td>
+			<td class="contents"><input type="text" name="ceo_name" id="ceo_name"  class="input_box" value="대표자명"></td>
 		</tr>
 		<tr>
 			<td class="title"><label>직종선택 : </label></td>
 			<td class="contents">
-				<select name="cate_prnt_ko" id="selectBox1" title="직종선택">
+				<select name="cate_prnt_ko" id="selectBox1" value="직종선택">
 					<c:forEach items="${jobCateMap}" var="option">
 						<option class="${option.key}">${option.value}</option>
 					</c:forEach>
 				</select>
-				<select name="cate_child_ko" title="직종선택"  id="cate_child_ko">
+				<select name="cate_child_ko" value="직종선택"  id="cate_child_ko">
 				</select> 
 			</td>
 		</tr>
@@ -98,27 +98,27 @@
 		</tr>
 		<tr>
 			<td class="title"><label>사업자번호 : </label></td>
-			<td class="contents"><input type="text" name="business_num" id="business_num" class="input_box" title="사업자번호"></td>
+			<td class="contents"><input type="text" name="business_num" id="business_num" class="input_box" value="사업자번호"></td>
 		</tr>
 		<tr>
 			<td class="title"><label>사업자등록증 : </label></td>
-			<td class="contents"><input type="file" name="business_file" id="business_file" class="input_box" title="사업자등록증" /></td>
+			<td class="contents"><input type="file" name="business_file" id="business_file" class="input_box" value="사업자등록증" /></td>
 		</tr>
 		<tr>
 			<td class="title"><label>인사담당자 : </label></td>
-			<td class="contents"><input type="text" name="hr_manager" id="hr_manager" class="input_box" title="인사담당자"></td>
+			<td class="contents"><input type="text" name="hr_manager" id="hr_manager" class="input_box" value="인사담당자"></td>
 		</tr>
 		<tr>
 			<td class="title"><label>담당자 메일 : </label></td>
-			<td class="contents"><input type="text" name="manager_email" id="manager_email" title="담당자 메일"></td>
+			<td class="contents"><input type="text" name="manager_email" id="manager_email" value="담당자 메일"></td>
 		</tr>
 		<tr>
 			<td class="title"><label>대표전화 : </label></td>
-			<td class="contents"><input type="text" name="company_telephone" id="company_telephone" class="input_box" title="대표전화"></td>
+			<td class="contents"><input type="text" name="company_telephone" id="company_telephone" class="input_box" value="대표전화"></td>
 		</tr>
 		<tr>
 			<td class="title"><label>사업내용 : </label></td>
-			<td class="contents"><input type="text" name="business_info" id="business_info" class="input_box" title="사업내용"></td>
+			<td class="contents"><input type="text" name="business_info" id="business_info" class="input_box" value="사업내용"></td>
 		</tr>
 		<tr>
 			<td class="title"><label>직원 수 : </label></td>
@@ -155,20 +155,20 @@
     
     
     	<!-- 
-	<label>아이디 : </label><input type="text" name="mem_id" id="mem_id"  class="input_box" title="아이디"><div id="id_check"></div><br><br>
-	<label>비밀번호 : </label><input type="password" name="mem_pw" id="password"  class="input_box" title="비밀번호"><br><br>
-	<label>비밀번호 확인 : </label><input type="password" name="conf_password"  class="input_box" id="conf_password" title="비밀번호 확인"><div id="pw_check"></div><br><br>
-	<label>회사명 : </label><input type="text" name="company_name" id="company_name"  class="input_box" title="회사명"><br><br>
-	<label>대표자명 : </label><input type="text" name="ceo_name" id="ceo_name"  class="input_box" title="대표자명"><br><br>
+	<label>아이디 : </label><input type="text" name="mem_id" id="mem_id"  class="input_box" value="아이디"><div id="id_check"></div><br><br>
+	<label>비밀번호 : </label><input type="password" name="mem_pw" id="password"  class="input_box" value="비밀번호"><br><br>
+	<label>비밀번호 확인 : </label><input type="password" name="conf_password"  class="input_box" id="conf_password" value="비밀번호 확인"><div id="pw_check"></div><br><br>
+	<label>회사명 : </label><input type="text" name="company_name" id="company_name"  class="input_box" value="회사명"><br><br>
+	<label>대표자명 : </label><input type="text" name="ceo_name" id="ceo_name"  class="input_box" value="대표자명"><br><br>
 	
 	<label>직종선택 : </label>
-	<select name="cate_prnt_ko" id="selectBox1" title="직종선택">
+	<select name="cate_prnt_ko" id="selectBox1" value="직종선택">
 		<c:forEach items="${jobCateMap}" var="option">
 			<option class="${option.key}">${option.value}</option>
 		</c:forEach>
 	</select>
 	
-	<select name="cate_child_ko" title="직종선택"  id="cate_child_ko">
+	<select name="cate_child_ko" value="직종선택"  id="cate_child_ko">
 	</select><br><br>
 	
      <input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br><br>
@@ -178,17 +178,17 @@
      <label>영어주소 : </label><input type="text" id="address_en" name="address_en" style="width: 50%;" value="" class="input_box" placeholder="주소en"><br><br>
      <label>영어 상세주소 : </label><input type="text" id="addr_dt_en" name="addr_dt_en" style="width: 20%;" value="" class="input_box" placeholder="상세주소en"><br><br>
 	
-	<label>사업자번호 : </label><input type="text" name="business_num" id="business_num" class="input_box" title="사업자번호"><br><br>
+	<label>사업자번호 : </label><input type="text" name="business_num" id="business_num" class="input_box" value="사업자번호"><br><br>
 	
-	<label>사업자등록증 : </label><input type="file" name="business_file" id="business_file" class="input_box" title="사업자등록증" /><br><br>
+	<label>사업자등록증 : </label><input type="file" name="business_file" id="business_file" class="input_box" value="사업자등록증" /><br><br>
 	
-	<label>인사담당자 : </label><input type="text" name="hr_manager" id="hr_manager" class="input_box" title="인사담당자"><br><br>
+	<label>인사담당자 : </label><input type="text" name="hr_manager" id="hr_manager" class="input_box" value="인사담당자"><br><br>
 	
-	<label>담당자 메일 : </label><input type="text" name="manager_email" id="manager_email" title="담당자 메일"><br><br>
+	<label>담당자 메일 : </label><input type="text" name="manager_email" id="manager_email" value="담당자 메일"><br><br>
 	
-	<label>대표전화 : </label><input type="text" name="company_telephone" id="company_telephone" class="input_box" title="대표전화"><br><br>
+	<label>대표전화 : </label><input type="text" name="company_telephone" id="company_telephone" class="input_box" value="대표전화"><br><br>
 	
-	<label>사업내용 : </label><input type="text" name="business_info" id="business_info" class="input_box" title="사업내용"><br><br>
+	<label>사업내용 : </label><input type="text" name="business_info" id="business_info" class="input_box" value="사업내용"><br><br>
 	
 	<label>직원 수 : </label><input type="text" name="employee_num" id="employee_num" class="input_box" name="직원 수"><br><br>
 	

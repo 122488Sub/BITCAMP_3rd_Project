@@ -101,7 +101,8 @@
 			<p>${rsVO.content}</p>
 			</div><!-- contentText End -->
 			</div>
-	
+			<c:if test="${not empty mem_id && mem_id == rsVO.mem_id}">
+				
 			<div id="commentBox">
 			<div>
 			<label style="font-weight: bold; font-size: 25px">댓글</label>
@@ -118,7 +119,7 @@
 			</form>
 			<br>
 			<br>
-			
+			</c:if>
 			<div id="commentList"></div>
 			<table id="commTable">
 			<c:if test="${not empty c_list }">
@@ -137,7 +138,7 @@
 					</tr>
 				</c:forEach>
 			</c:if>
-			</table class="commDown">
+			</table>
 			
 			</div>
 		</div><!-- contentBox End -->

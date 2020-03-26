@@ -65,7 +65,6 @@ td{height:80px;}
 
 <jsp:include page="../job_map2.jsp"/>
 
-<hr>
 <c:choose>
 	<c:when test="${loginUser.mem_cate eq 'c'}">
 		<p><a href="hireWrite_go.do">Post an Ad</a></p>

@@ -1,6 +1,6 @@
 package com.koreigner.biz.job.company;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;

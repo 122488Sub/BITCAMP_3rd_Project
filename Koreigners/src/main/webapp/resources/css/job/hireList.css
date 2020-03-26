@@ -7,7 +7,6 @@
 		}
 	li {
 		list-style: none;
-		border : 1px solid black;
 		margin:0;
 		padding:0;
 		float:left;
@@ -93,6 +92,7 @@
 		
 		display: table;
 		text-align:center;
+		border-radius: 8px;
 	}
 	.catePrnt p { font-size: 10.3px; font-weight: bold;}
 	.catePrnt_clicked {

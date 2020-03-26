@@ -82,7 +82,7 @@
 <div id="filterBox">
 	<div id="search">
 	<input type="text" id="searchBox" name="searchKeyword">
-	<input type="button" id="searchBtn" onclick="javascript:search()" value="검색">
+	<input type="button" id="searchBtn" onclick="javascript:search()" value="Search">
 	</div>
 	<div id="jobCate_box">
 	  <div id="filter_1">
