@@ -12,6 +12,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.koreigner.biz.job.company.CompanyServiceImpl;
+import com.koreigner.biz.job.company.CompanyVO;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
 
@@ -23,7 +26,8 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private CompanyServiceImpl companyServiceImpl;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		System.out.println("=============== [UserInterceptor 시작]");
@@ -52,7 +56,10 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 			
 			request.setAttribute("mem_id", mem_id);
 			UserVO member = userService.getOneMember(mem_id);
+			CompanyVO companyVO = companyServiceImpl.companyDetailOne(mem_id);
+			
 			request.setAttribute("user", member);
+			request.setAttribute("company", companyVO);
 			
 			String auth_status = userService.getAuthStatus(mem_id);
 			if(auth_status.equals("0")) { //이메일 인증 안함
@@ -72,7 +79,10 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 				
 				if(userJsId.equals(JSESSIONID)) {
 					UserVO member = userService.getOneMember(mem_id);
+					CompanyVO companyVO = companyServiceImpl.companyDetailOne(mem_id);
+					
 					request.setAttribute("user", member);
+					request.setAttribute("company", companyVO);
 					request.setAttribute("mem_id", mem_id);
 					String auth_status = userService.getAuthStatus(mem_id);
 					if(auth_status.equals("0")) { //이메일 인증 안함
@@ -86,10 +96,10 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 					goController = false;
 				}
 				
-			//userToken 유효하지 않을 경우
+			//userToken 유효하지 않을 경우, 쿠키 없는 경우
 			} else {
-				String token_status = userService.validToken(userToken);
-				System.out.println("token_status : " + token_status);
+//				String token_status = userService.validToken(userToken);
+//				System.out.println("token_status : " + token_status);
 				response.sendRedirect("login_go.do");
 				goController = false;
 			}

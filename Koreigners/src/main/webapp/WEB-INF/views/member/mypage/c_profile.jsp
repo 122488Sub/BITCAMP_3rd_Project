@@ -28,7 +28,8 @@
 	.title {width: 12%; height: 70px;}
 	.contents {width: 88%; height: 70px;}
 	#flag {width : 20px; height : 20px; border:0}
-	
+	div ul {list-style: none; margin:0; padding:0;}
+	li.tabs { margin: 0 0 0 0;padding: 0 0 0 0;border:0;float: left; border: 1px soild black;}
 </style>
 </head>
 
@@ -40,7 +41,7 @@
 		<li class="tabs"><a href="myPage_go.do?type=applier">My 입사지원자</a></li>
 	</ul>
 </div>
-기업회원 정보수정 페이지!!!!
+<br><br><br><br><br><br><br><br>
 <div id="regCotent">
 <form action="join_conf.do" name="form" id="regForm" method="post" enctype="multipart/form-data" >
 	<p id="titleText">Registration of Search Firm membership</p>
@@ -53,24 +54,16 @@
 	<br>
 	<table id="regCom">
 		<tr>
-			<td class="title"><label>아이디 : </label></td>
-			<td class="contents"><input type="text" name="mem_id" id="mem_id"  class="input_box" value="${loginUser.mem_id }"><div id="id_check"></div></td>
-		</tr>
-		<tr>
 			<td class="title"><label>비밀번호 : </label></td>
-			<td class="contents"><input type="password" name="mem_pw" id="password"  class="input_box" value="비밀번호"></td>
+			<td class="contents"><input type="password" name="mem_pw" id="password"  class="input_box" value=""></td>
 		</tr>
 		<tr>
 			<td class="title"><label>비밀번호 확인 : </label></td>
-			<td class="contents"><input type="password" name="conf_password"  class="input_box" id="conf_password" value="비밀번호 확인"><div id="pw_check"></div></td>
+			<td class="contents"><input type="password" name="conf_password"  class="input_box" id="conf_password" value=""><div id="pw_check"></div></td>
 		</tr>
 		<tr>
 			<td class="title"><label>회사명 : </label></td>
-			<td class="contents"><input type="text" name="company_name" id="company_name"  class="input_box" value="회사명"></td>
-		</tr>
-		<tr>
-			<td class="title"><label>대표자명 : </label></td>
-			<td class="contents"><input type="text" name="ceo_name" id="ceo_name"  class="input_box" value="대표자명"></td>
+			<td class="contents"><input type="text" name="company_name" id="company_name"  class="input_box" value="${company.company_name}"></td>
 		</tr>
 		<tr>
 			<td class="title"><label>직종선택 : </label></td>
