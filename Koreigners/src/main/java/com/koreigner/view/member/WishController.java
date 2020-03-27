@@ -1,12 +1,11 @@
 package com.koreigner.view.member;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -68,6 +67,18 @@ public class WishController {
 		request.setAttribute("pvo", p);
 		return result;
 	}
+	
+	@RequestMapping(value="togleWish.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String houseWish(HttpServletRequest request, WishVO wishVO, Model model) {
+		System.out.println("houseWish");
+		String result="";
+		
+		result=wishService.togleWish(wishVO);
+		System.out.println(result);
+		return result;
+	}
+	
 	
 	
 }

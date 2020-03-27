@@ -15,4 +15,6 @@ public interface WishService {
 	List<HouseAll_VO> getHouseWishList(WishVO wishVO);
 
 	List<HireVO> getHireWishList(WishVO wishVO);
+
+	String togleWish(WishVO wishVO);
 }

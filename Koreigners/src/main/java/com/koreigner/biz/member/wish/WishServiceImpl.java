@@ -42,6 +42,25 @@ public class WishServiceImpl implements WishService {
 		return wishDAO.myBatis_getHireWishList(wishVO);
 	}
 
+	@Override
+	public String togleWish(WishVO wishVO) {
+		String result = "{\"result\":\"";
+		if(wishDAO.myBatis_isWish(wishVO)) {
+			wishDAO.myBatis_deleteWish(wishVO);
+			result+="Delete";
+		}else {
+			wishDAO.myBatis_insertWish(wishVO);
+			result+="Insert";
+			
+		}
+		result +="\"}";
+		
+		System.out.println(result);
+
+	
+		return result;
+	}
+
 	
 	
 	

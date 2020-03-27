@@ -18,6 +18,7 @@ import com.koreigner.biz.common.page.PagingVO;
 import com.koreigner.biz.house.HouseAll_VO;
 import com.koreigner.biz.house.HouseSearch_VO;
 import com.koreigner.biz.house.House_Service;
+import com.koreigner.biz.member.wish.WishVO;
 
 @Controller
 @SessionAttributes("house") //board 라는 이름의 Model이 있으면 session에 저장
@@ -77,6 +78,7 @@ public class House_Controller {
 		model.addAttribute("monthly",  houseService.getHousePrice(vo.getMonthly_rent())); //데이터 저장
 		if (vo.getMem_email().equals(mem_id)) {
 			model.addAttribute("authentication",  true);
+			model.addAttribute("mem_id",  mem_id);
 		}else {
 			model.addAttribute("authentication",  false);
 		}
@@ -145,6 +147,9 @@ public class House_Controller {
 		houseService.deleteHouse(room_idx);
 		return "redirect:house_main.do";
 	}
+	
+
+	
 }//end class
 
 
