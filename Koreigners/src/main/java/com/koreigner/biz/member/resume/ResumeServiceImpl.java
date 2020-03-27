@@ -23,51 +23,42 @@ public class ResumeServiceImpl implements ResumeService {
 	@Override
 	public void insertResume(Map<String, Object> map, HttpServletRequest request) throws Exception {
 		
-		Iterator<String> resumeKey = map.keySet().iterator();
-		while(resumeKey.hasNext()) {
-			String rkey = resumeKey.next();
-			if(map.get(rkey) instanceof String[]) { //value에 배열이 들어갈 경우
-				String workday = "";
-				if("WORK_TIME_WEEK".equals(map.get(rkey))) {
-					String[] work_time_week = (String[])map.get("WORK_TIME_WEEK");
-					for (int i = 0; i < work_time_week.length; i++) {
-						workday += work_time_week[i] + "/";
-					}
-					map.put("WORK_TIME_WEEK", workday);
-				}
+		String workday = "";
+		if(map.get("WORK_TIME_WEEK") instanceof String[]) {
+			String[] work_time_week = (String[])map.get("WORK_TIME_WEEK");
+			for (int i = 0; i < work_time_week.length; i++) {
+				workday += work_time_week[i] + "/";
 			}
+			
+			System.out.println("workday : " + workday);
+			map.put("WORK_TIME_WEEK", workday);
 		}
 		
 		resumeDAO.insertResume(map);
 		
+
 		
-		Iterator<String> careerkey = map.keySet().iterator();
-		while(careerkey.hasNext()) {
-			String ckey = careerkey.next();
-			if(map.containsKey("JOIN_YEAR")) {
-				if(map.get(ckey) instanceof String[]) {
-					String[] join_year = (String[])map.get("JOIN_YEAR");
-					String[] join_month = (String[])map.get("JOIN_MONTH");
-					String[] resign_year = (String[])map.get("RESIGN_YEAR");
-					String[] resign_month = (String[])map.get("RESIGN_MONTH");
-					String[] region = (String[])map.get("REGION");
-					String[] company = (String[])map.get("COMPANY");
-					String[] task = (String[])map.get("TASK");
-					
-					
-					for(int i=0; i<join_year.length; i++) {
-						map.put("JOIN_YEAR", join_year[i]);
-						map.put("JOIN_MONTH", join_month[i]);
-						map.put("RESIGN_YEAR", resign_year[i]);
-						map.put("RESIGN_MONTH", resign_month[i]);
-						map.put("REGION", region[i]);
-						map.put("COMPANY", company[i]);
-						map.put("TASK", task[i]);
-						resumeDAO.insertCareer(map);
-					}
-				}
+		if(map.get("JOIN_YEAR") instanceof String[]) {
+			String[] join_year = (String[])map.get("JOIN_YEAR");
+			String[] join_month = (String[])map.get("JOIN_MONTH");
+			String[] resign_year = (String[])map.get("RESIGN_YEAR");
+			String[] resign_month = (String[])map.get("RESIGN_MONTH");
+			String[] region = (String[])map.get("REGION");
+			String[] company = (String[])map.get("COMPANY");
+			String[] task = (String[])map.get("TASK");
+			
+			for(int i=0; i<join_year.length; i++) {
+				map.put("JOIN_YEAR", join_year[i]);
+				map.put("JOIN_MONTH", join_month[i]);
+				map.put("RESIGN_YEAR", resign_year[i]);
+				map.put("RESIGN_MONTH", resign_month[i]);
+				map.put("REGION", region[i]);
+				map.put("COMPANY", company[i]);
+				map.put("TASK", task[i]);
 				resumeDAO.insertCareer(map);
 			}
+		} else {
+			resumeDAO.insertCareer(map);
 		}
 		
 		List<Map<String, Object>> list = fileUtils.parseInsertFileInfo(map, request);

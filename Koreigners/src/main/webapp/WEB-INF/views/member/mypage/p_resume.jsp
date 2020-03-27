@@ -149,7 +149,14 @@
                     <label><input type="radio" name="WORK_TIME_ISWEEK" id="work_time_isweek1" value="1" <c:if test="${map.WORK_TIME_ISWEEK eq '1'}">checked</c:if>>Prefer working day of the week(Multiple selections available)</label>
 
                   <div id="view_div">
-                    <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week1" value="매주 월요일">Every Monday</label> &nbsp;<label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week2" value="매주 화요일">Every Tuesday</label> &nbsp;<label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week3" value="매주 수요일">Every Wednesday</label> &nbsp;<label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week4" value="매주 목요일">Every Thursday</label> &nbsp;<label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week5" value="매주 금요일">Every Friday</label> &nbsp;<label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week6" value="매주 토요일">Every Saturday</label> &nbsp;<label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week7" value="매주 일요일">Every Sunday</label> &nbsp;
+                    <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week1" value="매주 월요일(Mon)">Every Monday</label> &nbsp;
+                    <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week2" value="매주 화요일(Tue)">Every Tuesday</label> &nbsp;
+                    <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week3" value="매주 수요일(Wed)">Every Wednesday</label> &nbsp;
+                    <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week4" value="매주 목요일(Thu)">Every Thursday</label> &nbsp;
+                    <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week5" value="매주 금요일(Fri)">Every Friday</label> &nbsp;
+                    <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week6" value="매주 토요일(Sat)">Every Saturday</label> &nbsp;
+                    <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week7" value="매주 일요일(Sun)">Every Sunday</label> &nbsp;
+                    <br><input type="text" value="selected: ${map.WORK_TIME_WEEK }" disabled size="100">
                   </div>
 
                 </td>

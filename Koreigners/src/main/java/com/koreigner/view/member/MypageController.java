@@ -1,6 +1,7 @@
 package com.koreigner.view.member;
 
 import java.io.File;
+
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
@@ -172,7 +173,7 @@ public class MypageController {
 		String save_file = (String)map.get("SAVE_FILE");
 		String ori_file = (String)map.get("ORI_FILE");
 		
-		byte fileByte[] = FileUtils.readFileToByteArray(new File("/C:/MyStudy/Final_Project/BITCAMP_3rd_Project/Koreigners/src/main/webapp/resources/resume/"+save_file));
+		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\MyStudy\\Final_Project\\BITCAMP_3rd_Project\\Koreigners\\src\\main\\webapp\\resources\\resume\\"+save_file));
 		
 		response.setContentType("application/octet-stream");
 		response.setContentLength(fileByte.length);
