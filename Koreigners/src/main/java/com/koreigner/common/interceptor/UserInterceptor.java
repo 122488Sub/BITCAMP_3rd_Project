@@ -96,10 +96,10 @@ public class UserInterceptor extends HandlerInterceptorAdapter {
 					goController = false;
 				}
 				
-			//userToken 유효하지 않을 경우
+			//userToken 유효하지 않을 경우, 쿠키 없는 경우
 			} else {
-				String token_status = userService.validToken(userToken);
-				System.out.println("token_status : " + token_status);
+//				String token_status = userService.validToken(userToken);
+//				System.out.println("token_status : " + token_status);
 				response.sendRedirect("login_go.do");
 				goController = false;
 			}
