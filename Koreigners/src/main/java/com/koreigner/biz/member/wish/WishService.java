@@ -23,4 +23,10 @@ public interface WishService {
 	List<ResaleVO> getResaleWishList(WishVO wishVO);
 
 	List<ResaleImgVO> getResaleImgWishList(WishVO wishVO);
+
+	List<HouseAll_VO> getHouseMyAdsList(WishVO wishVO);
+
+	List<HireVO> getHireMyAdsList(WishVO wishVO);
+
+	List<ResaleVO> getResaleMyAdsList(WishVO wishVO);
 }

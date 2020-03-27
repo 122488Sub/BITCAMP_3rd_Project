@@ -59,18 +59,34 @@ public class WishServiceImpl implements WishService {
 		String result = "{\"result\":\"";
 		if(wishDAO.myBatis_isWish(wishVO)) {
 			wishDAO.myBatis_deleteWish(wishVO);
-			result+="Delete";
+			result+="You have been removed from your Wish List.";
 		}else {
 			wishDAO.myBatis_insertWish(wishVO);
-			result+="Insert";
+			result+="You have been registered on your Wish List.";
 			
 		}
 		result +="\"}";
 		
 		System.out.println(result);
 
+
 	
 		return result;
+	}
+
+	@Override
+	public List<HouseAll_VO> getHouseMyAdsList(WishVO wishVO) {
+		return wishDAO.myBatis_getHouseMyAdsList(wishVO);
+	}
+
+	@Override
+	public List<HireVO> getHireMyAdsList(WishVO wishVO) {
+		return wishDAO.myBatis_getHireMyAdsList(wishVO);
+	}
+
+	@Override
+	public List<ResaleVO> getResaleMyAdsList(WishVO wishVO) {
+		return wishDAO.myBatis_getResaleMyAdsList(wishVO);
 	}
 
 	

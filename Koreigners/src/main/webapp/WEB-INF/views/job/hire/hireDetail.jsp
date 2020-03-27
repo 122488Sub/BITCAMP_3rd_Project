@@ -23,7 +23,7 @@
 	p {margin-bottom: 10px;}
 </style>
 <script type="text/javascript" src="resources/js/hire/hireDetail.js"></script>
-
+<script type="text/javascript" src="resources/js/common/togleWish.js"></script>
 </head>
 <body>
 <div id="detailContents">
@@ -149,7 +149,10 @@
 <hr>
 <br><br><br><br>
 <input type="button" value="Apply for employment">
+<!--  
 <input type="button" onclick="wishList(${hireVO.hire_idx},'${user.mem_id}')" value="Save My WishList">
+-->
+<input type="button" onclick="clickWishList('${user.mem_id}',${hireVO.hire_idx},2)" value="Save My WishList">
 </div>
 </body>
 </html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myads">
+
+	
+	
+	<!-- 집 위시리스트 정보 불러오기 -->
+	<select id="getHouseMyAdsList" parameterType="wishVO" resultType="house_all">
+		SELECT 
+			*
+		FROM(
+			SELECT
+				ROWNUM R_NUM, HOUSE.*
+			FROM (
+		
+					SELECT 
+		    			<include refid="House_Include.house_select" />
+					FROM 
+					   <include refid="House_Include.house_From" />
+					WHERE 
+						<include refid="House_Include.house_Where" />
+					AND
+						BOARD.MEM_EMAIL= #{mem_id}  	
+					ORDER BY 
+						BOARD.ROOM_IDX 
+					) HOUSE
+		 )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end} 
+		 
+	</select>
+	
+	<select id="getHireMyAdsList" parameterType="wishVO" resultType="hireVO">
+		SELECT *
+		FROM (
+		       SELECT ROWNUM R_NUM, HIRE.*
+		        FROM (SELECT *
+		              FROM T_JOB_HIRE
+		              WHERE 
+						MEM_EMAIL= #{mem_id}  	
+		                
+		               ORDER BY HIRE_IDX DESC) HIRE
+		 )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end} 
+	</select>
+	<select id="getResaleMyAdsList" parameterType="wishVO" resultType="rsVO">
+	SELECT *
+		FROM (
+		       SELECT ROWNUM R_NUM, RESALE.*
+		        FROM (SELECT *
+		                FROM T_RESALE_BOARD
+		                WHERE 
+						MEM_ID=#{mem_id} 
+		               ORDER BY RS_IDX DESC) RESALE    
+		           
+		    )
+	  WHERE R_NUM BETWEEN #{begin} AND #{end}
+	  
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

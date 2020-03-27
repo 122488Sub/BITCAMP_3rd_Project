@@ -33,13 +33,13 @@
 	</ul>
 </div>
 
-<input type="button" value="house" onclick="javascript:changeCategory(1,'${mem_id}',1)">
-<input type="button" value="job" onclick="javascript:changeCategory(2,'${mem_id}',1)">
-<input type="button" value="resale" onclick="javascript:changeCategory(3,'${mem_id}',1)">
-<input type="button" value="free" onclick="javascript:changeCategory(4,'${mem_id}',1)">
+<input type="button" value="house" onclick="javascript:changeCategory(1,1,'${mem_id}',1)">
+<input type="button" value="job" onclick="javascript:changeCategory(1,2,'${mem_id}',1)">
+<input type="button" value="resale" onclick="javascript:changeCategory(1,3,'${mem_id}',1)">
+<input type="button" value="free" onclick="javascript:changeCategory(1,4,'${mem_id}',1)">
 
 
-<table id="wishListTable"  border>
+<table id="listTable"  border>
 		<thead id="tHead">			
 			
 		</thead>
