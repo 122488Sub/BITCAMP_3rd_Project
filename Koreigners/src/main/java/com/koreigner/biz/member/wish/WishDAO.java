@@ -47,8 +47,17 @@ public class WishDAO {
 		return hireList;
 	}
 
-	public int myBatis_isWish(WishVO wishVO) {
-		return mybatis.selectOne("wish.isWish", wishVO);
+	public boolean myBatis_isWish(WishVO wishVO) {
+		int count= mybatis.selectOne("wish.isWish", wishVO);
+		System.out.println(count);
+		boolean result=false;
+		if(count!=0) {
+			result=true;
+		}
+		System.out.println("isWish");
+		System.out.println(result);
+		System.out.println("isWish");
+		return result;
 	}
 
 	public void myBatis_insertWish(WishVO wishVO) {
@@ -57,7 +66,7 @@ public class WishDAO {
 	}
 
 	public void myBatis_deleteWish(WishVO wishVO) {
-		mybatis.delete("wish.insertWish", wishVO);
+		mybatis.delete("wish.deleteWish", wishVO);
 		
 		
 	}

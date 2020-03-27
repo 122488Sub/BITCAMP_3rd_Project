@@ -68,9 +68,10 @@ public class WishController {
 		return result;
 	}
 	
-	@RequestMapping(value="house_Wish.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="togleWish.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
 	public String houseWish(HttpServletRequest request, WishVO wishVO, Model model) {
-
+		System.out.println("houseWish");
 		String result="";
 		
 		result=wishService.togleWish(wishVO);
