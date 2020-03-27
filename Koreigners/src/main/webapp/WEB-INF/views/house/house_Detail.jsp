@@ -27,7 +27,7 @@
 </head>
 
 <body>
- 
+ 	<input type="hidden" id="mem_id" value="${mem_id}">
 	<div id="detailContent">
 		<div id="detailHeader">
 			<div id="imgBox">

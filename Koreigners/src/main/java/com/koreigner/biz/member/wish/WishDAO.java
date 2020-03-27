@@ -46,6 +46,21 @@ public class WishDAO {
 		List<HireVO> hireList=mybatis.selectList("wish.getHireWishList", wishVO);
 		return hireList;
 	}
+
+	public int myBatis_isWish(WishVO wishVO) {
+		return mybatis.selectOne("wish.isWish", wishVO);
+	}
+
+	public void myBatis_insertWish(WishVO wishVO) {
+		mybatis.insert("wish.insertWish", wishVO);
+		
+	}
+
+	public void myBatis_deleteWish(WishVO wishVO) {
+		mybatis.delete("wish.insertWish", wishVO);
+		
+		
+	}
 }
 
 

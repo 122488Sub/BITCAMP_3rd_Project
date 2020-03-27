@@ -7,13 +7,19 @@
 	
 	<!-- 위시리스트 정보 불러오기 -->
 	<select id="getWishTotal" parameterType="wishVO" resultType="int">
-		SELECT COUNT(*) FROM T_WISH_LIST  WHERE MEM_ID = #{mem_id} AND BOARD_IDX= #{board_idx}
+		SELECT COUNT(*) <include refid="wish.include.wish_Select" />
 	</select>
 	
 	<!-- 위시리스트 정보 불러오기 -->
 	<select id="getSelectWishList" parameterType="wishVO" resultType="wishVO">
 		SELECT * <include refid="wish.include.wish_Select" />
 	</select>
+	
+	<!-- 위시리스트 정보 불러오기 -->
+	<select id="getSelectWishList" parameterType="wishVO" resultType="wishVO">
+		SELECT COUNT(WISH_IDX) <include refid="wish.include.wish_Select" /> AND B_IDX=#{b_idx} 
+	</select>
+	
 	
 	
 	<!-- 집 위시리스트 정보 불러오기 -->
