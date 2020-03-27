@@ -2,7 +2,6 @@
 function wishList(idx,id){
 		console.log(idx);
 	
-	
 		$.ajax({
 				url : 'hireWishList.do',
 				type : 'post',
