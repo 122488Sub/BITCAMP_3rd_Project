@@ -5,15 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,7 +43,7 @@ public class HireController {
 	
 	//채용 게시판으로 이동
 	@RequestMapping(value="hireList_go.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String hireList(HttpServletRequest request, HttpServletResponse response, JobVO jobVO) {
+	public String hireList(HttpServletRequest request, HttpServletResponse response, JobVO jobVO, Model model) {
 		//잡카테고리 가져오기
 		//HireVO hireVO = new HireVO();
 		
@@ -54,6 +52,9 @@ public class HireController {
 		System.out.println("==================hireList==================");
 		System.out.println("jobVO : " + jobVO);
 		System.out.println("================hireList End================");
+		
+		model.addAttribute("postType", "hire");
+		
 		return "job/hire/hireList.page";
 	}
 
@@ -136,7 +137,7 @@ public class HireController {
 
 	@RequestMapping(value="hireDetail.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView hireDetaile(HttpServletRequest request, 
-									HttpServletResponse response) {
+									HttpServletResponse response, Model model) {
 		
 		String cPage = request.getParameter("cPage");
 		int hire_idx = Integer.parseInt(request.getParameter("hire_idx"));
@@ -154,13 +155,16 @@ public class HireController {
 		mav.addObject("companyVO", companyVO);
 		mav.setViewName("job/hire/hireDetail.page");
 		
+		model.addAttribute("postType", "hire");
+		
 		return mav;
 	}
 	
 	
 	//채용 게시글쓰기로 이동
 	@RequestMapping(value="hireWrite_go.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String hireWrite() {
+	public String hireWrite(Model model) {
+		model.addAttribute("postType", "hire");
 		return "job/hire/hireWrite.page";
 	}
 	
@@ -171,6 +175,7 @@ public class HireController {
 		System.out.println("mem_id : " + mem_id);
 		hireServiceImpl.insertHire(vo, request);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("postType", "hire");
 		mav.setViewName("redirect:hireList_go.do");
 		return mav;
 	}

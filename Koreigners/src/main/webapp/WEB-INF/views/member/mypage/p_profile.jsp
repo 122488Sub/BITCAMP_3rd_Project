@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW24W9sP9njddFNugiBUaJ-AzVfpQb_MY&language=en&libraries=places&callback=initMap" async defer></script>
 <script type="text/javascript" src="resources/js/member/p_profile.js"></script>
+<link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -91,17 +92,17 @@
 					var start = toyear - 5 
 					var end = toyear - 70; 
 	
-					document.write("<select class="input_box" name=birth1 id='birth1'>"); 
+					document.write("<select class='input_box' name=birth1 id='birth1'>"); 
 					document.write("<option value='' selected>year"); 
 					for (i=start;i>=end;i--) document.write("<option>"+i); 
 					document.write("</select>"); 
 					
-					document.write("<select class="input_box" name=birth2 id='birth2'>"); 
+					document.write("<select class='input_box' name=birth2 id='birth2'>"); 
 					document.write("<option value='' selected>month"); 
 					for (i=1;i<=12;i++) document.write("<option>"+i); 
 					document.write("</select>"); 
 	
-					document.write("<select class="input_box" name=birth3 id='birth3'>"); 
+					document.write("<select class='input_box' name=birth3 id='birth3'>"); 
 					document.write("<option value='' selected>day"); 
 					for (i=1;i<=31;i++) document.write("<option>"+i); 
 					document.write("</select>"); 

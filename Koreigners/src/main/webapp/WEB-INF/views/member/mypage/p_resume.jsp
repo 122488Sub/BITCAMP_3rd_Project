@@ -10,8 +10,8 @@
 <script type="text/javascript" src="resources/js/member/resume.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="<c:url value='resources/js/common/common.js'/>" charset="utf-8"></script>
-    <link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -169,7 +169,7 @@
                     <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week5" value="매주 금요일(Fri)">Every Friday</label> &nbsp;
                     <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week6" value="매주 토요일(Sat)">Every Saturday</label> &nbsp;
                     <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week7" value="매주 일요일(Sun)">Every Sunday</label> &nbsp;
-                    <br><input type="text" value="selected: ${map.WORK_TIME_WEEK }" disabled size="100">
+                    <br><p>selected: ${map.WORK_TIME_WEEK }</p>
                   </div>
 
                 </td>
@@ -253,7 +253,7 @@
                     <label><input name="LANG_LEARN" type="radio" value="재학중" <c:if test="${map.LANG_LEARN eq '재학중'}">checked</c:if>>Studying</label>
                     <label><input name="LANG_LEARN" type="radio" value="졸업" <c:if test="${map.LANG_LEARN eq '졸업'}">checked</c:if>>Graduation</label>
                   <div id="div_lang_school_name">
-                    &nbsp; School Name&nbsp;:&nbsp;<input type="text" size="30" maxlength="25" id="lang_school_name" name="LANG_SCH">
+                    &nbsp; School Name&nbsp;:&nbsp;<input type="text" size="30" maxlength="25" id="lang_school_name" name="LANG_SCH" value="${map.LANG_SCH }">
                   </div>
                 </td>
               </tr>

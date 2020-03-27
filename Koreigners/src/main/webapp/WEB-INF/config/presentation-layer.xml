@@ -20,7 +20,14 @@
 		</mvc:argument-resolvers> 
 	</mvc:annotation-driven>
 
-	
+
+
+	<bean id="downloadViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0" />
+ 	</bean>
+
+
+
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="order" value="2" />
 	</bean>
@@ -83,7 +90,6 @@
 			<mvc:mapping path="/togleWish.do"/>
 			<bean class="com.koreigner.common.interceptor.UserInterceptor"/>
 		</mvc:interceptor>
-		
 	</mvc:interceptors>
 	
 	

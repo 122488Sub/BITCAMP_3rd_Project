@@ -32,8 +32,10 @@ public class House_Controller {
 	// /WEB-INF/views/
 	
 	@RequestMapping(value="house_main.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String houseMain_go() {
+	public String houseMain_go(Model model) {
 		//System.out.println("controller/houseMain_go");
+		
+		model.addAttribute("postType", "house");
 		
 		return "house/house_Main.page";
 	}
@@ -56,6 +58,8 @@ public class House_Controller {
 		String mem_id = (String) request.getAttribute("mem_id"); 
 		vo.setMem_email(mem_id);
 		houseService.insertNewHouse(vo);
+		
+		model.addAttribute("postType", "house");
 		
 		return "redirect:house_main.do";
 	}
@@ -83,6 +87,8 @@ public class House_Controller {
 			model.addAttribute("authentication",  false);
 		}
 		
+		model.addAttribute("postType", "house");
+		
 		return "house/house_Detail.page";
 	}
 	
@@ -93,7 +99,7 @@ public class House_Controller {
 	
 	@RequestMapping(value="getHouseListData.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String houseListDate(HouseSearch_VO houseVO,HttpServletRequest request, HttpServletResponse response) {
+	public String houseListDate(HouseSearch_VO houseVO,HttpServletRequest request, HttpServletResponse response, Model model) {
 		
 	
 		// 현재 페이지 구하기
@@ -113,6 +119,9 @@ public class House_Controller {
 		List<HouseAll_VO> list = houseService.getSearchList(houseVO);
 		String result = houseService.getHouseListJson(list, p);
 		request.setAttribute("pvo", p);
+		
+		model.addAttribute("postType", "house");
+		
 		return result;
 	}
 	
@@ -129,15 +138,21 @@ public class House_Controller {
 		HouseAll_VO vo=houseService.getHouse(room_idx);
 		model.addAttribute("house",  vo); //데이터 저장
 		
+		model.addAttribute("postType", "house");
+		
 		return "house/house_Modify.page";
 	}
 	@RequestMapping(value="house_Update.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String houseModify_process(HttpServletRequest request, HouseAll_VO vo, Model model) {
 		if(request.getAttribute("mem_id")==null) {
+			
+			model.addAttribute("postType", "house");
 			return "redirect:house_main.do";
 		}
 		
 		houseService.updateHouse(vo);
+		
+		model.addAttribute("postType", "house");
 		return "redirect:house_main.do";
 	}
 	
@@ -145,6 +160,8 @@ public class House_Controller {
 	@RequestMapping(value="house_Delete.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String houseDelete(HttpServletRequest request, int room_idx, Model model) {
 		houseService.deleteHouse(room_idx);
+		model.addAttribute("postType", "house");
+		
 		return "redirect:house_main.do";
 	}
 	

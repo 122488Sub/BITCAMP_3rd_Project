@@ -16,16 +16,24 @@ function logout(){
 }
 
 
-/*
-$(function(){
+function postAd(obj) {
+	console.log("postType : " + obj);
 	
-	if(sessionStorage.getItem("tokenStr") != null){
-	    $("#menu_wrap").append("<li class='menu'><a href='javascript:logout()'>Log out</a></li>");
-	    $("#menu_wrap").append("<li class='menu'><a href='myPage_go.do?type=profile'>MyPage</a></li>");  
-	} else {
-		$("#menu_wrap").append("<li class='menu'><a href='login_go.do'>Sign in</a></li>");
-	    $("#menu_wrap").append("<li class='menu'><a href='register_go.do'>Register</a></li>"); 
+	if(obj == 'job') {
+		location.href = "";
+	}
+	
+	if(obj == 'house') {
+		location.href = "house_insert.do";
+	}
+	
+	if(obj == 'resale') {
+		location.href = "resale_go.do";
+	}
+	
+	if(obj == 'main') {
+		location.href = "post.do";
 	}
 	
 	
-});*/
+}

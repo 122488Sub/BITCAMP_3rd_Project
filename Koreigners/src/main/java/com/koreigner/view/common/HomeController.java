@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
+import com.koreigner.common.CommandMap;
 
 @Controller
 public class HomeController {
@@ -79,6 +80,9 @@ public class HomeController {
 			System.out.println("================ 아무것도 없는 경우");
 			model.addAttribute("auth_check", "1");
 		}
+		
+		model.addAttribute("postType", "main");
+		
 		return "/common/main.page";
 	}
 	
@@ -91,4 +95,10 @@ public class HomeController {
 			model.addAttribute("auth_check", "1");			
 		}
 	}
+	
+	@RequestMapping(value="post.do")
+	public String postAnAd() {
+		return "/common/postAd.page";
+	}
+
 }

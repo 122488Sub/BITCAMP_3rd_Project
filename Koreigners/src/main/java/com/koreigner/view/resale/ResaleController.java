@@ -61,6 +61,8 @@ public class ResaleController {
 		request.setAttribute("imgList", imgList);
 		request.setAttribute("pvo", p);
 		
+		model.addAttribute("postType", "resale");
+		
 		return "resale/resaleList.page";
 	}
 	
@@ -70,7 +72,7 @@ public class ResaleController {
 						    HttpServletResponse response, 
 						    Model model) {
 		System.out.println("리세일이다");
-		
+		model.addAttribute("postType", "resale");
 		return "resale/resaleWrite.page";
 	}
 	
@@ -105,6 +107,8 @@ public class ResaleController {
 		resaleServiceImpl.writeRs(rsVO);
 		resaleServiceImpl.writeImg(originFileList, saveFileList);
 		
+		model.addAttribute("postType", "resale");
+		
 		return "resale/resaleList.page";
 	}
 	
@@ -131,6 +135,8 @@ public class ResaleController {
 		request.setAttribute("imgList", imgList);
 		request.setAttribute("cPage", cPage);
 		request.setAttribute("c_list", c_list);
+		
+		model.addAttribute("postType", "resale");
 		
 		return "resale/resaleDetail.page";
 	}	

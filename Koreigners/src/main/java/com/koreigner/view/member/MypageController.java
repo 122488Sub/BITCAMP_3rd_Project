@@ -173,11 +173,11 @@ public class MypageController {
 		String save_file = (String)map.get("SAVE_FILE");
 		String ori_file = (String)map.get("ORI_FILE");
 		
-		byte fileByte[] = FileUtils.readFileToByteArray(new File("C:\\MyStudy\\Final_Project\\BITCAMP_3rd_Project\\Koreigners\\src\\main\\webapp\\resources\\resume\\"+save_file));
+		byte[] fileByte = FileUtils.readFileToByteArray(new File("D:\\3rdProject\\BITCAMP_3rd_Project\\Koreigners\\src\\main\\webapp\\resources\\common\\resume\\"+save_file));
 		
 		response.setContentType("application/octet-stream");
 		response.setContentLength(fileByte.length);
-		response.setHeader("Context-Disposition", "attachment; fileName=\"" + URLEncoder.encode(ori_file, "UTF-8")+"\";");
+		response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(ori_file, "UTF-8")+"\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
 		response.getOutputStream().write(fileByte);
 		
