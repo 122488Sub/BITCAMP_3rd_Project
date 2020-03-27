@@ -34,8 +34,8 @@ public class HireVO {
 	private String domitory;                //기숙사 제공 여부
 	private String meals;                   //식사
 	private String work_detail;             //직무 내용
-	private String insurance;         //보험 유무     의료보험/산재보험/고용보험/국민연금보험
-	private List<String> insuranceInfo;         //보험 유무     의료보험/산재보험/고용보험/국민연금보험
+	private String insurance;         		//보험 유무     의료보험/산재보험/고용보험/국민연금보험
+	private List<String> insuranceInfo;     //보험 유무     의료보험/산재보험/고용보험/국민연금보험
 	private String apply_way;               //지원방법(전형방법)
 	private String b_status;                //게시판 상태(활성화/비활성화)
 	private String prepare_doc;             //제출 서류 / 준비물
