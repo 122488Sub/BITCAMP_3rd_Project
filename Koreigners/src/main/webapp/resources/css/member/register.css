@@ -101,3 +101,20 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
+	#regCotent{
+		height: auto;
+		padding-top: 50px;
+	}
+	table#regCom{
+		width: 90%;
+		height: auto;
+		margin-left: 50px;
+		
+	}
+	table#regCom tr {border-bottom: 1px solid black;}
+	#titleText{font-size: 30px; font-weight: 400;}
+	#titleText2{font-size: 17px; font-weight: 500;}
+	.title {width: 12%; height: 70px;}
+	.contents {width: 88%; height: 70px;}
+	#flag {width : 20px; height : 20px; border:0}
+	

@@ -12,36 +12,30 @@
 <script type="text/javascript" src="resources/js/daumAddr.js"></script>
 <script type="text/javascript" src="resources/js/companySignup.js"></script>
 <link href="resources/css/member/register.css" rel="stylesheet" type="text/css">
-<style>
-	#regCotent{
-		height: auto;
-		padding-top: 50px;
-	}
-	table#regCom{
-		width: 100%;
-		height: auto;
-		border-top: 2px solid black;
-	}
-	table#regCom tr {border-bottom: 1px solid black;}
-	#titleText{font-size: 30px; font-weight: 400;}
-	#titleText2{font-size: 17px; font-weight: 500;}
-	.title {width: 12%; height: 70px;}
-	.contents {width: 88%; height: 70px;}
-	#flag {width : 20px; height : 20px; border:0}
-	div ul {list-style: none; margin:0; padding:0;}
-	li.tabs { margin: 0 0 0 0;padding: 0 0 0 0;border:0;float: left; border: 1px soild black;}
-</style>
+<link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-<div>
+<div id="moveBox">
 	<ul>
-		<li class="tabs"><a href="myPage_go.do?type=profile">My 개인정보 수정</a></li>
-		<li class="tabs"><a href="myPage_go.do?type=hire">My 채용 공고</a></li>
-		<li class="tabs"><a href="myPage_go.do?type=applier">My 입사지원자</a></li>
+		<li class="tabs" style="background:#E2E2E2;">
+			<img class="icon" src="resources/img/common/setting.png">&nbsp;
+			<a href="myPage_go.do?type=profile">My Profile</a>
+		</li>
+		<li class="tabs">
+			<img class="icon2" src="resources/img/common/people.png">&nbsp;
+			<a href="myPage_go.do?type=hire">My Recruitment</a>
+		</li>
+		<li class="tabs">
+			<img class="icon" src="resources/img/common/document.png">&nbsp;
+			<a href="myPage_go.do?type=applier">My Applicants</a>
+		</li>
+		
 	</ul>
 </div>
-<br><br><br><br><br><br><br><br>
+<br><br><br><br>
 <div id="regCotent">
 <form action="join_conf.do" name="form" id="regForm" method="post" enctype="multipart/form-data" >
 	<p id="titleText">Registration of Search Firm membership</p>
@@ -79,7 +73,7 @@
 		</tr>
 		<tr>
 			<td class="title"><label>한글주소 : </label></td>
-			<td class="contents"><input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><input type="text" id="address" name="address"  class="input_box" style="width: 50%;" value="" placeholder="주소"></td>
+			<td class="contents"><input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><input type="text" id="address" name="address"  class="input_box" style="width: 50%;" value="${company.address}" placeholder="주소"></td>
 		</tr>
 		<tr>
 			<td class="title"><label>한글 상세주소 : </label></td>
