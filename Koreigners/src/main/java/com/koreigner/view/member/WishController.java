@@ -2,7 +2,6 @@ package com.koreigner.view.member;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +19,6 @@ import com.koreigner.biz.house.House_Service;
 import com.koreigner.biz.job.hire.HireServiceImpl;
 import com.koreigner.biz.member.wish.WishService;
 import com.koreigner.biz.member.wish.WishVO;
-import com.koreigner.biz.resale.ResaleImgVO;
 import com.koreigner.biz.resale.ResaleServiceImpl;
 import com.koreigner.biz.resale.ResaleVO;
 
@@ -29,12 +27,7 @@ public class WishController {
 
 	@Autowired
 	private WishService wishService;
-	@Autowired
-	private House_Service houseService;
-	@Autowired
-	HireServiceImpl hireServiceImpl;
-	@Autowired
-	ResaleServiceImpl resaleServiceImpl;
+	
 	@Autowired
 	PagingService paging;
 	
@@ -80,6 +73,52 @@ public class WishController {
 		
 	}
 	
+	@RequestMapping(value="getMyAdsList.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public HashMap<String, Object>  myAdsListData(WishVO wishVO,HttpServletRequest request, HttpServletResponse response) {
+		
+		//리스트 정보 검색
+		
+		// 현재 페이지 구하기
+		String cPage = request.getParameter("cPage");
+		// 리스트 VO 생성
+	
+	
+		// 페이지 처리
+		PagingVO p =  paging.paging(cPage, wishVO);
+		
+		wishVO.setBegin(p.getBegin());
+		wishVO.setEnd(p.getEnd());
+	
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		switch (wishVO.getBoard_idx()) {
+		case 1://하우스
+			result.put("house",wishService.getHouseMyAdsList(wishVO));
+			break;
+		case 2://일자리
+		//	result.put("hire",wishService.getHireMyAdsList(wishVO));
+			break;
+		case 3://중고
+			List<ResaleVO> resaleList=wishService.getResaleMyAdsList(wishVO);
+			result.put("list",resaleList);
+			break;
+		case 4://자유
+			
+			break;
+		default:
+			break;
+		}
+		result.put("pvo",p);
+		request.setAttribute("pvo", p);
+		return result;
+		
+	}
+	
+	
+	
+	
+	
 	@RequestMapping(value="togleWish.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String houseWish(HttpServletRequest request, WishVO wishVO, Model model) {
@@ -87,7 +126,7 @@ public class WishController {
 		String result="";
 		
 		result=wishService.togleWish(wishVO);
-		System.out.println(result);
+		
 		return result;
 	}
 	

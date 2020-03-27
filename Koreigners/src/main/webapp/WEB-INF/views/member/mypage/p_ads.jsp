@@ -6,6 +6,7 @@
 <title>Insert title here</title>
     <link href="resources/css/header.css" rel="stylesheet" type="text/css">
     <link href="resources/css/style.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="resources/js/member/wishList.js"></script>
     <link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
@@ -31,6 +32,24 @@
 		</li>
 	</ul>
 </div>
-내가 작성한 글보기 페이지!!!!
+
+<input type="button" value="house" onclick="javascript:changeCategory(2,1,'${mem_id}',1)">
+<input type="button" value="job" onclick="javascript:changeCategory(2,2,'${mem_id}',1)">
+<input type="button" value="resale" onclick="javascript:changeCategory(2,3,'${mem_id}',1)">
+<input type="button" value="free" onclick="javascript:changeCategory(2,4,'${mem_id}',1)">
+
+
+<table id="listTable"  border>
+		<thead id="tHead">			
+			
+		</thead>
+		<tbody id="list_box">
+			
+		</tbody>
+		<tfoot id="tfoot">
+			
+		</tfoot>
+	</table>
+</body>
 </body>
 </html>

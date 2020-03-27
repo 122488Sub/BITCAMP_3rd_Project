@@ -2,11 +2,13 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="wish.include">
+<mapper namespace="member.common.include">
 	<sql id="wish_Select">
 		FROM T_WISH_LIST WHERE MEM_ID = #{mem_id} AND BOARD_IDX= #{board_idx}
 	</sql>
-	
+	<sql id="my_where">
+		WHERE MEM_ID = #{mem_id} AND BOARD_IDX= #{board_idx}
+	</sql>
 </mapper>
 
 

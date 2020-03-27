@@ -7,24 +7,24 @@
 	
 	<!-- 위시리스트 정보 불러오기 -->
 	<select id="getWishTotal" parameterType="wishVO" resultType="int">
-		SELECT COUNT(*) <include refid="wish.include.wish_Select" />
+		SELECT COUNT(*) <include refid="member.common.include.wish_Select" />
 	</select>
 	
 	<!-- 위시리스트 정보 불러오기 -->
 	<select id="getSelectWishList" parameterType="wishVO" resultType="wishVO">
-		SELECT * <include refid="wish.include.wish_Select" />
+		SELECT * <include refid="member.common.include.wish_Select" />
 	</select>
 	
 	<!-- 위시리스트 정보 불러오기 -->
 	<select id="isWish" parameterType="wishVO" resultType="int">
-		SELECT COUNT(WISH_IDX) <include refid="wish.include.wish_Select" /> AND B_IDX=#{b_idx} 
+		SELECT COUNT(WISH_IDX) <include refid="member.common.include.wish_Select" /> AND B_IDX=#{b_idx} 
 	</select>
 	
 	<insert id="insertWish">
 		INSERT INTO T_WISH_LIST VALUES(WISH_SQ.nextval, #{mem_id}, #{board_idx},#{b_idx},( SYSDATE + (interval '9' hour) ))
 	</insert>
 	<delete id="deleteWish">
-		DELETE <include refid="wish.include.wish_Select" /> AND B_IDX=#{b_idx} 
+		DELETE <include refid="member.common.include.wish_Select" /> AND B_IDX=#{b_idx} 
 		
 	</delete>
 	
@@ -44,7 +44,7 @@
 					WHERE 
 						<include refid="House_Include.house_Where" />
 					AND
-						BOARD.ROOM_IDX IN (SELECT B_IDX <include refid="wish.include.wish_Select" />) 	
+						BOARD.ROOM_IDX IN (SELECT B_IDX <include refid="member.common.include.wish_Select" />) 	
 					ORDER BY 
 						BOARD.ROOM_IDX 
 					) HOUSE
@@ -60,7 +60,7 @@
 		        FROM (SELECT *
 		              FROM T_JOB_HIRE
 		              WHERE 
-						HIRE_IDX IN ( SELECT B_IDX <include refid="wish.include.wish_Select" /> )
+						HIRE_IDX IN ( SELECT B_IDX <include refid="member.common.include.wish_Select" /> )
 		                
 		               ORDER BY HIRE_IDX DESC) HIRE
 		 )
@@ -73,7 +73,7 @@
 		        FROM (SELECT *
 		                FROM T_RESALE_BOARD
 		                WHERE 
-						RS_IDX IN ( SELECT B_IDX <include refid="wish.include.wish_Select" /> )
+						RS_IDX IN ( SELECT B_IDX <include refid="member.common.include.wish_Select" /> )
 		               ORDER BY RS_IDX DESC) RESALE    
 		           
 		    )
@@ -88,7 +88,7 @@
            			 FROM T_RESALE_IMG 
             		 WHERE ROWID IN (SELECT MAX(ROWID) 
                             		 FROM T_RESALE_IMG 
-                            		 WHERE RS_IDX IN ( SELECT B_IDX <include refid="wish.include.wish_Select" /> )
+                            		 WHERE RS_IDX IN ( SELECT B_IDX <include refid="member.common.include.wish_Select" /> )
                             		  GROUP BY RS_IDX)
                            				 ORDER BY RS_IDX DESC) IMG
                              		)

@@ -36,11 +36,7 @@ public class WishDAO {
 	
 	public List<HouseAll_VO> myBatis_getHouseWishList(WishVO wishVO) {
 		
-		System.out.println(wishVO);
 		List<HouseAll_VO> houseList=mybatis.selectList("wish.getHouseWishList", wishVO);
-		for(HouseAll_VO v : houseList) {
-			System.out.println(v.toRoomBoard());
-		}
 		return houseList;
 	}
 
@@ -81,6 +77,21 @@ public class WishDAO {
 	public List<ResaleImgVO> myBatis_getResaleImgWishList(WishVO wishVO) {
 		List<ResaleImgVO> resaleImgList=mybatis.selectList("wish.getResaleImgWishList", wishVO);
 		return resaleImgList;
+	}
+
+	public List<HouseAll_VO> myBatis_getHouseMyAdsList(WishVO wishVO) {
+		List<HouseAll_VO> houseList=mybatis.selectList("myads.getHouseMyAdsList", wishVO);
+		return houseList;
+	}
+
+	public List<HireVO> myBatis_getHireMyAdsList(WishVO wishVO) {
+		List<HireVO> hireList=mybatis.selectList("myads.getHireMyAdsList", wishVO);
+		return hireList;
+	}
+
+	public List<ResaleVO> myBatis_getResaleMyAdsList(WishVO wishVO) {
+		List<ResaleVO> resaleList=mybatis.selectList("myads.getResaleMyAdsList", wishVO);
+		return resaleList;
 	}
 }
 

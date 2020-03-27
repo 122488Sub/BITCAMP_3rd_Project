@@ -2,17 +2,22 @@ var boardIdx=0;
 var mem_id;
 
 $( function() {
-		$("#wishListTable").hide();
+		$("#listTable").hide();
 	});
 
 
 
-function changeCategory(btnValue,id,cPage) {
+function changeCategory(category,btnValue,id,cPage) {
 	boardIdx=btnValue;
 	mem_id=id;
-	var url='getWishList.do?cPage=' + cPage;
-	
-	$("#wishListTable").show();
+	var url="";
+	if(category==1){
+		url='getWishList.do?cPage=' + cPage;
+	}
+	else{
+		url='getMyAdsList.do?cPage=' + cPage;
+	}
+	$("#listTable").show();
 		var param={
 				'board_idx' : boardIdx,  // '본인 vo변수이름 : 데이터이름'
 				'mem_id' : mem_id	
