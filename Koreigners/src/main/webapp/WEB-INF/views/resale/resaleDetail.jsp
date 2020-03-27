@@ -10,6 +10,7 @@
 <link href="resources/css/resale/resaleDetail.css" rel="stylesheet" type="text/css"></link>
 <link href="resources/css/resale/slide.css" rel="stylesheet" type="text/css"></link>
 <script type="text/javascript" src="resources/js/resale/slide.js" ></script>
+<script type="text/javascript" src="resources/js/common/togleWish.js" ></script>
 <script type="text/javascript">
 	//function reComm(group, step, lev) {
 		
@@ -34,6 +35,7 @@
 				
 				</form>
 				</c:if>
+				<input type="button" id="ddd" value="pick" onclick="clickWishList('${user.mem_id }','${rsVO.rs_idx}',3)">
 		</div>
 		<br>
 		<hr>

@@ -10,16 +10,29 @@
 <script type="text/javascript" src="resources/js/member/resume.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="<c:url value='resources/js/common/common.js'/>" charset="utf-8"></script>
-
+    <link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div>
+<div id="moveBox">
 	<ul>
-		<li class="tabs"><a href="myPage_go.do?type=profile">Profile Setting</a></li>
-		<li class="tabs"><a href="myPage_go.do?type=resume">Resume</a></li>
-		<li class="tabs"><a href="myPage_go.do?type=wishlist">Wishlist</a></li>
-		<li class="tabs"><a href="myPage_go.do?type=ads">My Ads</a></li>
+		<li class="tabs">
+			<img class="icon" src="resources/img/common/setting.png">&nbsp;
+			<a href="myPage_go.do?type=profile">Profile Setting</a>
+		</li>
+		<li class="tabs" style="background:#E2E2E2;">
+			<img class="icon" src="resources/img/common/document.png">&nbsp;
+			<a href="myPage_go.do?type=resume">Resume</a>
+		</li>
+		<li class="tabs">
+			<img class="icon" src="resources/img/common/wishlist.png">&nbsp;
+			<a href="myPage_go.do?type=wishlist">Wishlist</a>
+		</li>
+		<li class="tabs">
+			<img class="icon" src="resources/img/common/advertisment.png">&nbsp;
+			<a href="myPage_go.do?type=ads">My Ads</a>
+		</li>
 	</ul>
 </div>
 

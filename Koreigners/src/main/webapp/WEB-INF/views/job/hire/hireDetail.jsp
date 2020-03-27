@@ -8,27 +8,34 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	#detailContents { float: left; text-align: center; width:100%;}
 	table {
-		width: 100%;
+		 display: table;
+		text-align: center;
+		width: 80%;
+		margin: auto;
 	}
 	tr,td,th {
 		height: 50px;
 	}
+	#explain{width: 80%;margin: auto;display: table;text-align: left;border: 1px solid black; font-weight: 600; padding-top:20px; padding-bottom: 20px;}
+	#titleGuide{font-size:20px; font-weight:800;}
+	p {margin-bottom: 10px;}
 </style>
 <script type="text/javascript" src="resources/js/hire/hireDetail.js"></script>
 
 </head>
 <body>
-
+<div id="detailContents">
 <table>
 	<tr>
 		<th>Post Date</th>
 		<td>${hireVO.regdate}</td>
 	</tr>
 </table>
-
-<h1>Company Information</h1>
 <hr>
+
+<h1>Company Information</h1><br><br>
 <table border>
 	<tr>
 		<th>Company Name</th>
@@ -47,11 +54,9 @@
 		<td colspan="3">${companyVO.address_en}</td>
 	</tr>
 </table>
-<hr>
 <br><br><br>
 
-<h1>Recruitment Information</h1>
-<hr>
+<h1>Recruitment Information</h1><br><br>
 <table border>
 	<tr>
 		<th>Job Title</th>
@@ -134,18 +139,17 @@
 	</tr>
 	<%--  --%>
 </table>
-
-<p>
-	Koreigners User Guide
-	▪ If you wish to apply for the above job posting, please click the [Apply for employment] button below, or send your resume to the e-mail address listed above.
-	▪ If you want to save this post, please click the [Save as My Wish List] button below. You can see the post in my page.
-</p>
-
+<br><br>
+	<p id="titleGuide">Koreigners User Guide</p><br>
+	<div id="explain">
+	<p>▪ If you wish to apply for the above job posting, please click the [Apply for employment] button below,</p> 
+	<p>&nbsp;&nbsp;&nbsp;or send your resume to the e-mail address listed above.</p>
+	<p>▪ If you want to save this post, please click the [Save as My Wish List] button below. You can see the post in my page.</p>
+</div>
 <hr>
 <br><br><br><br>
 <input type="button" value="Apply for employment">
-
-<input type="button" onclick="wishList(${hireVO.hire_idx},'${hireVO.mem_id}')" value="Save My WishList">
-
+<input type="button" onclick="wishList(${hireVO.hire_idx},'${user.mem_id}')" value="Save My WishList">
+</div>
 </body>
 </html>

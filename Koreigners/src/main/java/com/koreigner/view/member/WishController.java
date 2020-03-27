@@ -1,12 +1,15 @@
 package com.koreigner.view.member;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +20,9 @@ import com.koreigner.biz.house.House_Service;
 import com.koreigner.biz.job.hire.HireServiceImpl;
 import com.koreigner.biz.member.wish.WishService;
 import com.koreigner.biz.member.wish.WishVO;
+import com.koreigner.biz.resale.ResaleImgVO;
+import com.koreigner.biz.resale.ResaleServiceImpl;
+import com.koreigner.biz.resale.ResaleVO;
 
 @Controller
 public class WishController {
@@ -28,11 +34,13 @@ public class WishController {
 	@Autowired
 	HireServiceImpl hireServiceImpl;
 	@Autowired
+	ResaleServiceImpl resaleServiceImpl;
+	@Autowired
 	PagingService paging;
 	
 	@RequestMapping(value="getWishList.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String wishListData(WishVO wishVO,HttpServletRequest request, HttpServletResponse response) {
+	public HashMap<String, Object>  wishListData(WishVO wishVO,HttpServletRequest request, HttpServletResponse response) {
 		
 		//리스트 정보 검색
 		
@@ -47,17 +55,18 @@ public class WishController {
 		wishVO.setBegin(p.getBegin());
 		wishVO.setEnd(p.getEnd());
 	
-		String result="" ;
 		
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		switch (wishVO.getBoard_idx()) {
 		case 1://하우스
-			result = houseService.getHouseListJson(wishService.getHouseWishList(wishVO),p);
+			result.put("house",wishService.getHouseWishList(wishVO));
 			break;
 		case 2://일자리
-			result = hireServiceImpl.getHireListJson(wishService.getHireWishList(wishVO), p);
+			result.put("hire",wishService.getHireWishList(wishVO));
 			break;
 		case 3://중고
-			
+			List<ResaleVO> resaleList=wishService.getResaleWishList(wishVO);
+			result.put("list",resaleList);
 			break;
 		case 4://자유
 			
@@ -65,9 +74,23 @@ public class WishController {
 		default:
 			break;
 		}
+		result.put("pvo",p);
 		request.setAttribute("pvo", p);
 		return result;
+		
 	}
+	
+	@RequestMapping(value="togleWish.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String houseWish(HttpServletRequest request, WishVO wishVO, Model model) {
+		System.out.println("houseWish");
+		String result="";
+		
+		result=wishService.togleWish(wishVO);
+		System.out.println(result);
+		return result;
+	}
+	
 	
 	
 }

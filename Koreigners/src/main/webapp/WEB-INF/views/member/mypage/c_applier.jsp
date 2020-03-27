@@ -6,13 +6,25 @@
 <title>Insert title here</title>
     <link href="resources/css/header.css" rel="stylesheet" type="text/css">
     <link href="resources/css/style.css" rel="stylesheet" type="text/css">
+    <link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-<div>
+<div id="moveBox">
 	<ul>
-		<li class="tabs"><a href="myPage_go.do?type=profile">My 개인정보 수정</a></li>
-		<li class="tabs"><a href="myPage_go.do?type=hire">My 채용 공고</a></li>
-		<li class="tabs"><a href="myPage_go.do?type=applier">My 입사지원자</a></li>
+		<li class="tabs">
+			<img class="icon" src="resources/img/common/setting.png">&nbsp;
+			<a href="myPage_go.do?type=profile">My Profile</a>
+		</li>
+		<li class="tabs">
+			<img class="icon2" src="resources/img/common/people.png">&nbsp;
+			<a href="myPage_go.do?type=hire">My Recruitment</a>
+		</li>
+		<li class="tabs" style="background:#E2E2E2;">
+			<img class="icon" src="resources/img/common/document.png">&nbsp;
+			<a href="myPage_go.do?type=applier">My Applicants</a>
+		</li>
+		
 	</ul>
 </div>
 지원자리스트 페이지!!!
