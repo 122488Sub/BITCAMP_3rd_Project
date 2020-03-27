@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.koreigner.biz.common.page.PagingVO;
 import com.koreigner.biz.member.UserVO;
 
 @Service
@@ -74,5 +75,12 @@ public class ResaleServiceImpl implements ResaleService{
 	public void deleteResale(int rs_idx) {
 		resaleDAO.deleteResale(rs_idx);
 		
+	}
+	public String getResaleListJson(List<ResaleVO> resaleList, List<ResaleImgVO> resaleImgList, PagingVO p) {
+		for(ResaleVO l : resaleList)
+			System.out.println(l);
+		for(ResaleImgVO l : resaleImgList)
+			System.out.println(l);
+		return null;
 	}
 }

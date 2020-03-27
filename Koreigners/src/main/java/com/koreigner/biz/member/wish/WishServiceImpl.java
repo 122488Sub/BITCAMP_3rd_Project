@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.koreigner.biz.house.HouseAll_VO;
 import com.koreigner.biz.job.hire.HireVO;
+import com.koreigner.biz.resale.ResaleImgVO;
+import com.koreigner.biz.resale.ResaleVO;
 
 //@Service : @Component 상속바아 만든
 //비즈니스 로직 처리 서비스 영역에 사용
@@ -41,6 +43,16 @@ public class WishServiceImpl implements WishService {
 	public List<HireVO> getHireWishList(WishVO wishVO) {
 		return wishDAO.myBatis_getHireWishList(wishVO);
 	}
+	@Override
+	public List<ResaleVO> getResaleWishList(WishVO wishVO) {
+		// TODO Auto-generated method stub
+		return wishDAO.myBatis_getResaleWishList(wishVO);
+	}
+
+	@Override
+	public List<ResaleImgVO> getResaleImgWishList(WishVO wishVO) {
+		return wishDAO.myBatis_getResaleImgWishList(wishVO);
+	}
 
 	@Override
 	public String togleWish(WishVO wishVO) {
@@ -61,6 +73,7 @@ public class WishServiceImpl implements WishService {
 		return result;
 	}
 
+	
 	
 	
 	

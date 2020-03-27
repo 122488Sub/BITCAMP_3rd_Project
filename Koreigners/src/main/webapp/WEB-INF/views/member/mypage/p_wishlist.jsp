@@ -17,11 +17,12 @@
 		<li class="tabs"><a href="myPage_go.do?type=ads">My Ads</a></li>
 	</ul>
 </div>
-<input type="hidden" id="ID" value="${mem_id }">
-<input type="button" value="house" onclick="javascript:changeCategory(1)">
-<input type="button" value="job" onclick="javascript:changeCategory(2)">
-<input type="button" value="resale" onclick="javascript:changeCategory(3)">
-<input type="button" value="free" onclick="javascript:changeCategory(4)">
+
+<input type="button" value="house" onclick="javascript:changeCategory(1,'${mem_id}',1)">
+<input type="button" value="job" onclick="javascript:changeCategory(2,'${mem_id}',1)">
+<input type="button" value="resale" onclick="javascript:changeCategory(3,'${mem_id}',1)">
+<input type="button" value="free" onclick="javascript:changeCategory(4,'${mem_id}',1)">
+
 
 <table id="wishListTable"  border>
 		<thead id="tHead">			

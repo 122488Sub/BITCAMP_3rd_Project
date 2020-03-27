@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.koreigner.biz.house.HouseAll_VO;
 import com.koreigner.biz.job.hire.HireVO;
+import com.koreigner.biz.resale.ResaleImgVO;
+import com.koreigner.biz.resale.ResaleVO;
 
 @Repository("WishDAO")
 public class WishDAO {
@@ -69,6 +71,16 @@ public class WishDAO {
 		mybatis.delete("wish.deleteWish", wishVO);
 		
 		
+	}
+
+	public List<ResaleVO> myBatis_getResaleWishList(WishVO wishVO) {
+		List<ResaleVO> resaleList=mybatis.selectList("wish.getResaleWishList", wishVO);
+		return resaleList;
+	}
+
+	public List<ResaleImgVO> myBatis_getResaleImgWishList(WishVO wishVO) {
+		List<ResaleImgVO> resaleImgList=mybatis.selectList("wish.getResaleImgWishList", wishVO);
+		return resaleImgList;
 	}
 }
 

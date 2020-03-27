@@ -21,6 +21,7 @@
 <script type="text/javascript" src="resources/js/common/slide.js"></script>
 <script type="text/javascript" src="resources/js/common/post_go.js"></script>
 <script type="text/javascript" src="resources/js/house/houseDetail.js"></script>
+<script type="text/javascript" src="resources/js/common/togleWish.js" ></script>
 <link rel="stylesheet" href="resources/css/house/houseDetail_slide.css">
 <link rel="stylesheet" href="resources/css/house/houseDetail.css">
 
@@ -102,7 +103,8 @@
 							<input type="button" id="" value="Delete" onClick="clickDelete()">
 						</c:when>
 						<c:otherwise>
-							<input type="button" id="" value="♡pick" onclick="clickWishList()">
+							<input type="button" id="" value="♡pick" onclick="clickWishList('${user.mem_id }','${house.room_idx}',1)">
+						
 							<input type="button" id="" value="Send Message">
 						</c:otherwise>
 					</c:choose>

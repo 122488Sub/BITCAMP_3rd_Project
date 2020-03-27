@@ -66,7 +66,36 @@
 		 )
 		 WHERE R_NUM BETWEEN #{begin} AND #{end} 
 	</select>
-	
+	<select id="getResaleWishList" parameterType="wishVO" resultType="rsVO">
+	SELECT *
+		FROM (
+		       SELECT ROWNUM R_NUM, RESALE.*
+		        FROM (SELECT *
+		                FROM T_RESALE_BOARD
+		                WHERE 
+						RS_IDX IN ( SELECT B_IDX <include refid="wish.include.wish_Select" /> )
+		               ORDER BY RS_IDX DESC) RESALE    
+		           
+		    )
+	  WHERE R_NUM BETWEEN #{begin} AND #{end}
+	  
+	</select>
+	<select id="getResaleImgWishList" parameterType="wishVO" resultType="rsImgVO">
+	SELECT *
+ 		 FROM ( 
+ 		 		SELECT ROWNUM R_NUM, IMG.*
+                FROM(SELECT *
+           			 FROM T_RESALE_IMG 
+            		 WHERE ROWID IN (SELECT MAX(ROWID) 
+                            		 FROM T_RESALE_IMG 
+                            		 WHERE RS_IDX IN ( SELECT B_IDX <include refid="wish.include.wish_Select" /> )
+                            		  GROUP BY RS_IDX)
+                           				 ORDER BY RS_IDX DESC) IMG
+                             		)
+                    
+                    
+ 		WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
 </mapper>
 
 
