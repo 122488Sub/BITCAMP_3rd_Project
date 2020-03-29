@@ -3,7 +3,7 @@ package com.koreigner.biz.member.mypage;
 import java.util.Date;
 
 public class c_MyPageVO {
-	private String category;
+	private int category;
 	private String mem_id;
 	private int apply_idx;
 	private int company_idx;
@@ -30,7 +30,7 @@ public class c_MyPageVO {
 	
 	
 	
-	public c_MyPageVO(String category, String mem_id, int apply_idx, int company_idx, int hire_idx, int resume_idx,
+	public c_MyPageVO(int category, String mem_id, int apply_idx, int company_idx, int hire_idx, int resume_idx,
 			Date regdate) {
 		super();
 		this.category = category;
@@ -46,10 +46,10 @@ public class c_MyPageVO {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public String getCategory() {
+	public int getCategory() {
 		return category;
 	}
-	public void setCategory(String category) {
+	public void setCategory(int category) {
 		this.category = category;
 	}
 	public String getMem_id() {

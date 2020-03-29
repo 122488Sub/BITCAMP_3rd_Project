@@ -11,9 +11,9 @@
 		FROM (
 		       SELECT ROWNUM R_NUM, HIRE.*
 		        FROM (SELECT *
-		              FROM T_JOB_HIRE
+		              FROM T_JOB_HIRE 
 		              WHERE 
-						MEM_EMAIL= #{mem_id}  	
+						MEM_ID= #{mem_id}  	
 		                
 		               ORDER BY HIRE_IDX DESC) HIRE
 		 )
@@ -25,17 +25,21 @@
 	       SELECT ROWNUM R_NUM, RESUME.*
 	        FROM (  SELECT * 
 	                FROM T_MEMBER_RESUME 
-	                WHERE RESUME_IDX IN (   SELECT RESUME_IDX
-	                                        FROM T_MEMBER_APPLY
-	                                        WHERE COMPANY_IDX=(  SELECT COMPANY_IDX 
-                                                           		 FROM T_COMPANY 
-                                                            	 WHERE MEM_ID=#{mem_id} 
-                                                            )
+	                WHERE RESUME_IDX IN (   SELECT 
+	                						<include refid="member.common.include.select_RESUME_IDX" />
 	                                    )
 	            ) RESUME    
 	    )
 	WHERE R_NUM BETWEEN #{begin} AND #{end}
 	  
+	</select>
+	
+	<select id="getResumeApplyTotal" parameterType="c_MyPageVO" resultType="int">
+	SELECT COUNT <include refid="member.common.include.select_RESUME_IDX" />
+	</select>
+	
+	<select id="getHireMyAdsTotal" parameterType="c_MyPageVO" resultType="int">
+	SELECT COUNT(HIRE_IDX) FROM T_JOB_HIRE WHERE MEM_ID= #{mem_id}  	
 	</select>
 </mapper>
 

@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.koreigner.biz.job.hire.HireVO;
+
 //@Service : @Component 상속바아 만든
 //비즈니스 로직 처리 서비스 영역에 사용
 @Service("c_MyPageService")
@@ -15,8 +17,9 @@ public class c_MyPageServiceImpl implements c_MyPageService {
 	private c_MyPageDAO cDAO;
 
 	@Override
-	public Map<String, Object> getHireMyAdsList(c_MyPageVO cVO) {
+	public List<HireVO>  getHireMyAdsList(c_MyPageVO cVO) {
 		// TODO Auto-generated method stub
+		
 		return cDAO.myBatis_getHireMyAdsList(cVO);
 	}
 

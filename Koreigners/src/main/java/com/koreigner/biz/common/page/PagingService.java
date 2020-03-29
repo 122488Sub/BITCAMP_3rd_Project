@@ -138,9 +138,14 @@ public class PagingService {
 		PagingVO p = new PagingVO();
 		//1. 전체 페이지의 수를 구하기
 		//  System.out.println("paging p houseVO : " + houseVO);
+		int total=0;
+		if(cVO.getCategory()==1 ) {
+			total = cService.getHireTotal(cVO);
+		}
 		
-		int total = cService.getResumeTotal(cVO);
-		
+		else if(cVO.getCategory()==2) {
+			total = cService.getResumeTotal(cVO);
+		}
 	  System.out.println("total : " + total);
 		p.setTotalRecord(total);
 		p.setTotalPage();

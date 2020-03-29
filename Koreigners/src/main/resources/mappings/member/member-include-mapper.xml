@@ -9,6 +9,15 @@
 	<sql id="my_where">
 		WHERE MEM_ID = #{mem_id} AND BOARD_IDX= #{board_idx}
 	</sql>
+	
+	<sql id="select_RESUME_IDX" >
+		(RESUME_IDX)
+        FROM T_MEMBER_APPLY
+        WHERE COMPANY_IDX=(  SELECT COMPANY_IDX 
+                          		 FROM T_COMPANY 
+                           	 WHERE MEM_ID=#{mem_id} 
+                           )
+	</sql>
 </mapper>
 
 

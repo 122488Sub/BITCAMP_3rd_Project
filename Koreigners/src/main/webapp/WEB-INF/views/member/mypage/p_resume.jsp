@@ -15,6 +15,7 @@
 </head>
 <body>
 
+<c:if test="${mvo.mem_cate eq 'p'}">
 <div id="moveBox">
 	<ul>
 		<li class="tabs">
@@ -35,6 +36,7 @@
 		</li>
 	</ul>
 </div>
+</c:if>
 
           <form id="form1" name="form1" method="post" encType="multipart/form-data">
           <input type="hidden" name="MEM_ID" value="${mvo.mem_id }">
