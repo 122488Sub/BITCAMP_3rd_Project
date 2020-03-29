@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="c_MyPage">
+
+	
+
+	<select id="getHireMyAdsList" parameterType="p_MyPageVO" resultType="hireVO">
+		SELECT *
+		FROM (
+		       SELECT ROWNUM R_NUM, HIRE.*
+		        FROM (SELECT *
+		              FROM T_JOB_HIRE
+		              WHERE 
+						MEM_EMAIL= #{mem_id}  	
+		                
+		               ORDER BY HIRE_IDX DESC) HIRE
+		 )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end} 
+	</select>
+	<select id="getResumeApplyList" parameterType="c_MyPageVO" resultType="hashmap">
+	SELECT *
+	FROM (
+	       SELECT ROWNUM R_NUM, RESUME.*
+	        FROM (  SELECT * 
+	                FROM T_MEMBER_RESUME 
+	                WHERE RESUME_IDX IN (   SELECT RESUME_IDX
+	                                        FROM T_MEMBER_APPLY
+	                                        WHERE COMPANY_IDX=(  SELECT COMPANY_IDX 
+                                                           		 FROM T_COMPANY 
+                                                            	 WHERE MEM_ID=#{mem_id} 
+                                                            )
+	                                    )
+	            ) RESUME    
+	    )
+	WHERE R_NUM BETWEEN #{begin} AND #{end}
+	  
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
