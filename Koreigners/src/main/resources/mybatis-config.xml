@@ -16,7 +16,7 @@
 		<typeAlias alias="rsVO" type="com.koreigner.biz.resale.ResaleVO"/>
 		<typeAlias alias="rsImgVO" type="com.koreigner.biz.resale.ResaleImgVO"/>
 		<typeAlias alias="rsCommVO" type="com.koreigner.biz.resale.ResaleCommVO"/>
-		<typeAlias alias="wishVO" type="com.koreigner.biz.member.wish.WishVO"/>
+		<typeAlias alias="p_MyPageVO" type="com.koreigner.biz.member.mypage.p_MyPageVO"/>
 	</typeAliases>
   
   <!-- SQL 작성파일인 매퍼 파일 위치 지정 -->

@@ -7,7 +7,7 @@
 	
 	
 	<!-- 집 위시리스트 정보 불러오기 -->
-	<select id="getHouseMyAdsList" parameterType="wishVO" resultType="house_all">
+	<select id="getHouseMyAdsList" parameterType="p_MyPageVO" resultType="house_all">
 		SELECT 
 			*
 		FROM(
@@ -31,7 +31,7 @@
 		 
 	</select>
 	
-	<select id="getHireMyAdsList" parameterType="wishVO" resultType="hireVO">
+	<select id="getHireMyAdsList" parameterType="p_MyPageVO" resultType="hireVO">
 		SELECT *
 		FROM (
 		       SELECT ROWNUM R_NUM, HIRE.*
@@ -44,7 +44,7 @@
 		 )
 		 WHERE R_NUM BETWEEN #{begin} AND #{end} 
 	</select>
-	<select id="getResaleMyAdsList" parameterType="wishVO" resultType="rsVO">
+	<select id="getResaleMyAdsList" parameterType="p_MyPageVO" resultType="rsVO">
 	SELECT *
 		FROM (
 		       SELECT ROWNUM R_NUM, RESALE.*

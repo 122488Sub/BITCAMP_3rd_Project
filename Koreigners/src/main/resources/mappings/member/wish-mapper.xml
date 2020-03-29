@@ -6,17 +6,17 @@
 
 	
 	<!-- 위시리스트 정보 불러오기 -->
-	<select id="getWishTotal" parameterType="wishVO" resultType="int">
+	<select id="getWishTotal" parameterType="p_MyPageVO" resultType="int">
 		SELECT COUNT(*) <include refid="member.common.include.wish_Select" />
 	</select>
 	
 	<!-- 위시리스트 정보 불러오기 -->
-	<select id="getSelectWishList" parameterType="wishVO" resultType="wishVO">
+	<select id="getSelectWishList" parameterType="p_MyPageVO" resultType="p_MyPageVO">
 		SELECT * <include refid="member.common.include.wish_Select" />
 	</select>
 	
 	<!-- 위시리스트 정보 불러오기 -->
-	<select id="isWish" parameterType="wishVO" resultType="int">
+	<select id="isWish" parameterType="p_MyPageVO" resultType="int">
 		SELECT COUNT(WISH_IDX) <include refid="member.common.include.wish_Select" /> AND B_IDX=#{b_idx} 
 	</select>
 	
@@ -29,7 +29,7 @@
 	</delete>
 	
 	<!-- 집 위시리스트 정보 불러오기 -->
-	<select id="getHouseWishList" parameterType="wishVO" resultType="house_all">
+	<select id="getHouseWishList" parameterType="p_MyPageVO" resultType="house_all">
 		SELECT 
 			*
 		FROM(
@@ -53,7 +53,7 @@
 		 
 	</select>
 	
-	<select id="getHireWishList" parameterType="wishVO" resultType="hireVO">
+	<select id="getHireWishList" parameterType="p_MyPageVO" resultType="hireVO">
 		SELECT *
 		FROM (
 		       SELECT ROWNUM R_NUM, HIRE.*
@@ -66,7 +66,7 @@
 		 )
 		 WHERE R_NUM BETWEEN #{begin} AND #{end} 
 	</select>
-	<select id="getResaleWishList" parameterType="wishVO" resultType="rsVO">
+	<select id="getResaleWishList" parameterType="p_MyPageVO" resultType="rsVO">
 	SELECT *
 		FROM (
 		       SELECT ROWNUM R_NUM, RESALE.*
@@ -80,7 +80,7 @@
 	  WHERE R_NUM BETWEEN #{begin} AND #{end}
 	  
 	</select>
-	<select id="getResaleImgWishList" parameterType="wishVO" resultType="rsImgVO">
+	<select id="getResaleImgWishList" parameterType="p_MyPageVO" resultType="rsImgVO">
 	SELECT *
  		 FROM ( 
  		 		SELECT ROWNUM R_NUM, IMG.*

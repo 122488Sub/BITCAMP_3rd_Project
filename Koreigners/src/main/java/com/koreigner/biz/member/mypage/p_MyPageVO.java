@@ -1,8 +1,8 @@
-package com.koreigner.biz.member.wish;
+package com.koreigner.biz.member.mypage;
 
 import java.util.Date;
 
-public class WishVO {
+public class p_MyPageVO {
 	private int wish_idx;
 	private String mem_id;
 	private int board_idx;
@@ -54,10 +54,10 @@ public class WishVO {
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	public WishVO() {
+	public p_MyPageVO() {
 	
 	}
-	public WishVO(int wish_idx, String mem_id, int board_idx, int b_idx, Date regdate) {
+	public p_MyPageVO(int wish_idx, String mem_id, int board_idx, int b_idx, Date regdate) {
 		super();
 		this.wish_idx = wish_idx;
 		this.mem_id = mem_id;

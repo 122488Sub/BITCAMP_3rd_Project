@@ -18,7 +18,7 @@ import com.koreigner.biz.common.page.PagingVO;
 import com.koreigner.biz.house.HouseAll_VO;
 import com.koreigner.biz.house.HouseSearch_VO;
 import com.koreigner.biz.house.House_Service;
-import com.koreigner.biz.member.wish.WishVO;
+import com.koreigner.biz.member.mypage.p_MyPageVO;
 
 @Controller
 @SessionAttributes("house") //board 라는 이름의 Model이 있으면 session에 저장

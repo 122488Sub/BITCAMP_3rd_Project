@@ -1,4 +1,4 @@
-package com.koreigner.biz.member.wish;
+package com.koreigner.biz.member.mypage;
 
 import java.util.List;
 
@@ -12,50 +12,50 @@ import com.koreigner.biz.resale.ResaleVO;
 
 //@Service : @Component 상속바아 만든
 //비즈니스 로직 처리 서비스 영역에 사용
-@Service("wishService")
-public class WishServiceImpl implements WishService {
+@Service("p_MyPageService")
+public class p_MyPageServiceImpl implements p_MyPageService {
 	@Autowired //타입이 일치하는 객체(인스턴스) 주입
 	//private BoardDAO boardDAO;
 	//private Korea_Address_DAOSpring testDAO;
-	private WishDAO wishDAO;
+	private p_MyPageDAO wishDAO;
 	
-	public WishServiceImpl() {
+	public p_MyPageServiceImpl() {
 		System.out.println(">> WishServiceImpl() 실행");
 	}
 
 	@Override
-	public List<WishVO> getWishList(WishVO vo) {
+	public List<p_MyPageVO> getWishList(p_MyPageVO vo) {
 		return wishDAO.myBatis_getWishList(vo);
 	}
 
 	@Override
-	public int getWishTotal(WishVO vo) {
+	public int getWishTotal(p_MyPageVO vo) {
 		return wishDAO.myBatis_getWishTotal(vo);
 	}
 
 	//집 위시리스트 반환
 	@Override
-	public List<HouseAll_VO> getHouseWishList(WishVO wishVO) {
+	public List<HouseAll_VO> getHouseWishList(p_MyPageVO wishVO) {
 		return wishDAO.myBatis_getHouseWishList(wishVO);
 	}
 
 	@Override
-	public List<HireVO> getHireWishList(WishVO wishVO) {
+	public List<HireVO> getHireWishList(p_MyPageVO wishVO) {
 		return wishDAO.myBatis_getHireWishList(wishVO);
 	}
 	@Override
-	public List<ResaleVO> getResaleWishList(WishVO wishVO) {
+	public List<ResaleVO> getResaleWishList(p_MyPageVO wishVO) {
 		// TODO Auto-generated method stub
 		return wishDAO.myBatis_getResaleWishList(wishVO);
 	}
 
 	@Override
-	public List<ResaleImgVO> getResaleImgWishList(WishVO wishVO) {
+	public List<ResaleImgVO> getResaleImgWishList(p_MyPageVO wishVO) {
 		return wishDAO.myBatis_getResaleImgWishList(wishVO);
 	}
 
 	@Override
-	public String togleWish(WishVO wishVO) {
+	public String togleWish(p_MyPageVO wishVO) {
 		String result = "{\"result\":\"";
 		if(wishDAO.myBatis_isWish(wishVO)) {
 			wishDAO.myBatis_deleteWish(wishVO);
@@ -75,17 +75,17 @@ public class WishServiceImpl implements WishService {
 	}
 
 	@Override
-	public List<HouseAll_VO> getHouseMyAdsList(WishVO wishVO) {
+	public List<HouseAll_VO> getHouseMyAdsList(p_MyPageVO wishVO) {
 		return wishDAO.myBatis_getHouseMyAdsList(wishVO);
 	}
 
 	@Override
-	public List<HireVO> getHireMyAdsList(WishVO wishVO) {
+	public List<HireVO> getHireMyAdsList(p_MyPageVO wishVO) {
 		return wishDAO.myBatis_getHireMyAdsList(wishVO);
 	}
 
 	@Override
-	public List<ResaleVO> getResaleMyAdsList(WishVO wishVO) {
+	public List<ResaleVO> getResaleMyAdsList(p_MyPageVO wishVO) {
 		return wishDAO.myBatis_getResaleMyAdsList(wishVO);
 	}
 

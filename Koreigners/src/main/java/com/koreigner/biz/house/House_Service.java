@@ -3,7 +3,7 @@ package com.koreigner.biz.house;
 import java.util.List;
 
 import com.koreigner.biz.common.page.PagingVO;
-import com.koreigner.biz.member.wish.WishVO;
+import com.koreigner.biz.member.mypage.p_MyPageVO;
 
 public interface House_Service {
 	//CRUD 기능 구현 메소드 정의

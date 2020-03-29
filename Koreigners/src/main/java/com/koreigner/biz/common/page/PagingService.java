@@ -7,8 +7,8 @@ import com.koreigner.biz.house.HouseSearch_VO;
 import com.koreigner.biz.house.House_Service;
 import com.koreigner.biz.job.hire.HireServiceImpl;
 import com.koreigner.biz.job.jobservice.JobVO;
-import com.koreigner.biz.member.wish.WishService;
-import com.koreigner.biz.member.wish.WishVO;
+import com.koreigner.biz.member.mypage.p_MyPageService;
+import com.koreigner.biz.member.mypage.p_MyPageVO;
 import com.koreigner.biz.resale.ResaleService;
 
 @Service
@@ -24,7 +24,7 @@ public class PagingService {
 	ResaleService resaleService;
 	
 	@Autowired
-	WishService wishService;
+	p_MyPageService wishService;
 	
 	public PagingVO paging(String cPage, JobVO jobVO) {
 	// 페이지 처리를 위한  Paging 객체 생성해서 값 설정
@@ -94,7 +94,7 @@ public class PagingService {
 		
 		return p;
 	}
-	public PagingVO paging(String cPage, WishVO wishVO) {
+	public PagingVO paging(String cPage, p_MyPageVO wishVO) {
 		// 페이지 처리를 위한  Paging 객체 생성해서 값 설정
 		PagingVO p = new PagingVO();
 		//1. 전체 페이지의 수를 구하기

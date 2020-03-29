@@ -17,23 +17,23 @@ import com.koreigner.biz.common.page.PagingService;
 import com.koreigner.biz.common.page.PagingVO;
 import com.koreigner.biz.house.House_Service;
 import com.koreigner.biz.job.hire.HireServiceImpl;
-import com.koreigner.biz.member.wish.WishService;
-import com.koreigner.biz.member.wish.WishVO;
+import com.koreigner.biz.member.mypage.p_MyPageService;
+import com.koreigner.biz.member.mypage.p_MyPageVO;
 import com.koreigner.biz.resale.ResaleServiceImpl;
 import com.koreigner.biz.resale.ResaleVO;
 
 @Controller
-public class WishController {
+public class c_MyPageController {
 
 	@Autowired
-	private WishService wishService;
+	private p_MyPageService wishService;
 	
 	@Autowired
 	PagingService paging;
 	
-	@RequestMapping(value="getWishList.do", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="getCompanyHireList.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public HashMap<String, Object>  wishListData(WishVO wishVO,HttpServletRequest request, HttpServletResponse response) {
+	public HashMap<String, Object>  wishListData(p_MyPageVO wishVO,HttpServletRequest request, HttpServletResponse response) {
 		
 		//리스트 정보 검색
 		
@@ -50,32 +50,18 @@ public class WishController {
 	
 		
 		HashMap<String, Object> result = new HashMap<String, Object>();
-		switch (wishVO.getBoard_idx()) {
-		case 1://하우스
-			result.put("house",wishService.getHouseWishList(wishVO));
-			break;
-		case 2://일자리
-			result.put("hire",wishService.getHireWishList(wishVO));
-			break;
-		case 3://중고
-			List<ResaleVO> resaleList=wishService.getResaleWishList(wishVO);
-			result.put("list",resaleList);
-			break;
-		case 4://자유
-			
-			break;
-		default:
-			break;
-		}
+		
+		result.put("house",wishService.getHouseWishList(wishVO));
+		
 		result.put("pvo",p);
 		request.setAttribute("pvo", p);
 		return result;
 		
 	}
 	
-	@RequestMapping(value="getMyAdsList.do", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="getCompanyApply.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public HashMap<String, Object>  myAdsListData(WishVO wishVO,HttpServletRequest request, HttpServletResponse response) {
+	public HashMap<String, Object>  myAdsListData(p_MyPageVO wishVO,HttpServletRequest request, HttpServletResponse response) {
 		
 		//리스트 정보 검색
 		
@@ -121,7 +107,7 @@ public class WishController {
 	
 	@RequestMapping(value="togleWish.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String houseWish(HttpServletRequest request, WishVO wishVO, Model model) {
+	public String houseWish(HttpServletRequest request, p_MyPageVO wishVO, Model model) {
 		System.out.println("houseWish");
 		String result="";
 		
