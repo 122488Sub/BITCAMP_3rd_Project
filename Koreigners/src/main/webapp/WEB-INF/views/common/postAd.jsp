@@ -8,6 +8,7 @@
     <title>Document</title>
     <style type="text/css">
     	#default {height: 775px;}
+    	p {font-size: 25px;}
     </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
@@ -15,6 +16,7 @@
 </script>
 </head>
 <body>
+<div></div>
 	<div>
 		<c:if test="${user.mem_cate eq 'c' }">
 			<a href="hireWrite_go.do">Job</a>
@@ -26,11 +28,15 @@
 			<a href="login_go.do">Job</a>
 		</c:if>
 	</div>
-	
+	<br><br><br><br>
+	<div>
+		<a href="hireWrite_go.do">Hire</a>
+	</div>
+	<br>
 	<div>
 		<a href="house_insert.do">House</a>
 	</div>
-	
+	<br>
 	<div>
 		<a href="resale_go.do">Resale</a>
 	</div>

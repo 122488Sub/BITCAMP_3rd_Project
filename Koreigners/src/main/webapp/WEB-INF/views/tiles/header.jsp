@@ -23,6 +23,7 @@
                     </c:if>
 	       </ul>
 	   </ul>
+	    
 	   <div id="header_bottom">
 	      <a href="javascript:postAd('${postType}', '${mem_cate }')">
 	       <div id="post_btn">
