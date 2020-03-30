@@ -1,0 +1,31 @@
+
+.btn59acff{
+  background-color: #59acff;
+  border: none;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'BenchNine', Arial, sans-serif;
+  font-size: 1em;
+  font-size: px;
+  line-height: 1em;
+  margin: 27px 0px 27px 20px;
+  outline: none;
+  padding: 12px 35px 10px;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 40px 80px/80px 40px;
+}
+
+.btn59acff:hover {
+  background-color: #92faed;
+}
+.btn59acff:hover::before,
+.btn59acff:hover::after{
+  height: 30%;
+  width: 80%;
+}
+.wishlist-box-main {
+	padding:0;	
+}

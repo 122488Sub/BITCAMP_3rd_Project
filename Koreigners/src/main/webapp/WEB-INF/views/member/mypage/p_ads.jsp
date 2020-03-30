@@ -17,7 +17,9 @@
 	<link rel="stylesheet" href="bootstrap/css/responsive.css">
 	<!-- Custom CSS -->
 	<link rel="stylesheet" href="bootstrap/css/custom.css">
+	
 	<link href="resources/css/common/page.css" rel="stylesheet" type="text/css">
+	<link href="resources/css/common/button.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -42,10 +44,10 @@
 	</ul>
 </div>
 
-<input type="button" value="house" onclick="javascript:changeCategory(2,1,'${mem_id}',1)">
-<input type="button" value="job" onclick="javascript:changeCategory(2,2,'${mem_id}',1)">
-<input type="button" value="resale" onclick="javascript:changeCategory(2,3,'${mem_id}',1)">
-<input type="button" value="free" onclick="javascript:changeCategory(2,4,'${mem_id}',1)">
+<input type="button" class="btn59acff" value="house" onclick="javascript:changeCategory(2,1,'${mem_id}',1)">
+<input type="button" class="btn59acff" value="job" onclick="javascript:changeCategory(2,2,'${mem_id}',1)">
+<input type="button" class="btn59acff" value="resale" onclick="javascript:changeCategory(2,3,'${mem_id}',1)">
+<input type="button" class="btn59acff" value="free" onclick="javascript:changeCategory(2,4,'${mem_id}',1)">
 
 	<div class="wishlist-box-main">
 		<div class="container">
