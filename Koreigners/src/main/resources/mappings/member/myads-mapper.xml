@@ -53,7 +53,13 @@
 		        FROM (SELECT *
 		              FROM T_JOB_HIRE
 		              WHERE 
-						HIRE_IDX IN (SELECT HIRE_IDX FROM T_MEMBER_APPLY WHERE MEM_ID=#{mem_id})  	
+						HIRE_IDX IN (SELECT HIRE_IDX 
+									 FROM T_MEMBER_APPLY 
+									 WHERE RESUME_IDX IN ( SELECT RESUME_IDX 
+									 						FROM T_MEMBER_RESUME 
+									 						WHERE MEM_ID=#{mem_id} 
+									 					 ) 
+									  )  	
 		                
 		               ORDER BY HIRE_IDX DESC) HIRE
 		 )

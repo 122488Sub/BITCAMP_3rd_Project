@@ -86,7 +86,11 @@ public class p_MyPageServiceImpl implements p_MyPageService {
 
 	@Override
 	public List<HireVO> getHireMyApplyList(p_MyPageVO wishVO) {
-		return pDAO.myBatis_getHireMyApplyList(wishVO);
+		List<HireVO> list=pDAO.myBatis_getHireMyApplyList(wishVO);
+		System.out.println(">>");
+		for(HireVO v : list)
+			System.out.println(v);
+		return list;
 	}
 	
 	@Override
