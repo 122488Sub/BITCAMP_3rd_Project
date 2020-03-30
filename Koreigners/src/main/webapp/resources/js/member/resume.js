@@ -184,23 +184,32 @@ $(function() {
 		fn_addCareer();
 	});
 	
-	$("a[name='delete']").on("click", function(e){ //삭제 버튼
+	$("a[name='deleteCareer']").on("click", function(e){ //커리어삭제 버튼
 		e.preventDefault();
 		fn_deleteCareer($(this));
 	});
 
-	$("a[name='file']").on("click", function(e){ //파일 이름 
+	$("a[name='file']").on("click", function(e){ //파일 다운로드
 		e.preventDefault(); 
 		fn_downloadFile($(this)); 
-		
+	});
+
+	$("a[name^='delete']").on("click", function(e){ //파일삭제 버튼
+		e.preventDefault();
+		fn_deleteFile($(this)); 
 	});
 	
-	 
+	$("#addFile").on("click", function(e){ //파일 추가 버튼
+		e.preventDefault();
+		fn_addFile();
+	});
+	
+	
 });
 
 
 
-function fn_addCareer(){
+function fn_addCareer(){ //커리어 추가
 	var str = "<tr>";
 	str += "<th width='15%' class='number'>Career</th>";
 	str += "<td width='85%' class='txLeft'>Joining/Leaving : ";
@@ -215,29 +224,20 @@ function fn_addCareer(){
 	
 	$("#career").append(str);
 	
-	$("a[name='delete']").on("click", function(e){ //삭제 버튼
+	$("a[name='delete']").on("click", function(e){ //커리어삭제 버튼
 		e.preventDefault();
 		fn_deleteCareer($(this));
 	});
 }
 
-//function fn_addCareer() {
-//	$("#career").clone().appendTo($("#addCareer"));
-//	
-//	$("a[name='delete]").on("click", function(e) {
-//		e.preventDefault();
-//		fn_deleteCareer($(this));
-//	});
-//}
-//
 
-function fn_deleteCareer(obj){
+function fn_deleteCareer(obj){ //커리어 삭제
 	obj.parent().parent().remove();
 }
 
 
 
-function fn_downloadFile(obj){ 
+function fn_downloadFile(obj){ //파일 다운로드
 	var idx = obj.parent().find("#IDX").val(); 
 	var comSubmit = new ComSubmit(); 
 	comSubmit.setUrl("downloadFile.do");
@@ -246,12 +246,19 @@ function fn_downloadFile(obj){
 	
 }
 
-function insertResume(frm) {
+
+
+function fn_deleteFile(obj){ //파일 삭제
+	obj.parent().remove(); 
+	
+}
+
+function insertResume(frm) { //이력서 입력
 	frm.action = "insertResume.do";
 	frm.submit();
 }
 
-function updateResume(frm) {
+function updateResume(frm) { //이력서 수정
 	frm.action = "updateResume.do";
 	frm.submit();
 }
