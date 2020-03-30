@@ -23,14 +23,21 @@
                     </c:if>
 	       </ul>
 	   </ul>
+	    
 	   <div id="header_bottom">
-	      <a href="javascript:postAd('${postType}')">
-	       <div id="post_btn">
-	           <div id="btn_txt">
-	               Post an ad
-	           </div>
-	       </div>
-	       </a>            
+		   <c:choose>
+				<c:when test="${not empty mem_id}">
+					<a href="javascript:postAd('${postType}')">
+				       <div id="post_btn">
+				           <div id="btn_txt">
+				               Post an ad
+				           </div>
+				       </div>
+				     </a>
+				</c:when>
+				<c:otherwise>
+				</c:otherwise>
+			</c:choose>
 	   </div>
 	</div>
 </section>
