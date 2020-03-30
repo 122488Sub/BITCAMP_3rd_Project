@@ -34,7 +34,7 @@ function getData(category, id, cPage) {
 			}else if(category==2){
 				setCApplier(data.cResume);
 			}
-			
+			setTfoot(pvo);
 			
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
@@ -65,7 +65,7 @@ function setCHireHead() {
 }
 function setCHireData(cHire) {
 	console.log(cHire);
-	return  "<tr onclick='javascript:goHireDetailPage(" + cHire.hire_idx
+	return  "<tr class='trTag' onclick='javascript:goHireDetailPage(" + cHire.hire_idx
 			+ ")' style='cursor: pointer;'>" + "<td>" + cHire.title
 			+ "</td>" + "<td>" + cHire["work_type"] + "</td>" + "<td>"
 			+ cHire["cate_prnt_ko"] + "</td>" + "<td>" + cHire["cate_child_ko"]
@@ -99,7 +99,7 @@ function setCApplierHead() {
 }
 function setCApplierData(cResume) {
 	console.log(cResume);
-	return  "<tr onclick='javascript:goResumeDetailPage(" +'"'+ cResume.MEM_ID+'"'
+	return  "<tr class='trTag' onclick='javascript:goResumeDetailPage(" +'"'+ cResume.MEM_ID+'"'
 			+ ")' style='cursor: pointer;'>" + "<td>" + cResume.MEM_ID
 			+ "</td>" + "<td>" + cResume["MEM_NAME"] + "</td>" + "<td>"
 			+cResume["WISH_SI"] +","+cResume["WISH_DO"] + "</td>" + "<td>" + cResume["JOB_CATE"]
@@ -116,34 +116,35 @@ function goResumeDetailPage(resume_m_id) {
 
 
 
-function setTfoot(pvo) {
+function setTfoot(pvo){
+	console.log(pvo.beginPage);
+	console.log(pvo.pagePerBlock);
+	console.log(pvo.endPage);
+	console.log(pvo.totalPage);
 	var tfoot = "";
-	tfoot += '<tr><td><ol class="paging">'
-
-	if (pvo.beginPage < pvo.pagePerBlock) {
-		tfoot += '<li class="disable">이전으로</li>';
-	} else {
-		tfoot += '<li><a href="javascript:changeCategory(' + boardIdx + ","
-				+ mem_id + "," + (pvo.beginPage - pvo.pagePerBlock)
-				+ '")>이전으로</a></li>';
+	tfoot += '<div id="pagingBox"><div id="olPaging"><ol class="paging">';
+		
+	if(pvo.beginPage < pvo.pagePerBlock){
+		tfoot += '<li class="disable" id="pointer">이전으로</li>';
+	} else{ 
+		tfoot += '<li id="pointer"><a href="javascript:changeCategory('+category+","+ boardIdx+","+mem_id+"," + (pvo.beginPage - pvo.pagePerBlock) + '")>이전으로</a></li>';
 	}
-	for (var k = pvo.beginPage; k <= pvo.endPage; k++) {
-		if (k == pvo.nowPage) {
-			tfoot += '<li class="now">' + k + '</li>';
-		} else if (k != pvo.nowPage) {
-			tfoot += '<li><a href="javascript:changeCategory(' + boardIdx
-					+ ",'" + mem_id + "'," + k + ')">' + k + '</a></li>';
+	for(var k=pvo.beginPage; k<=pvo.endPage; k++) {
+		if(k == pvo.nowPage) {
+			tfoot += '<li class="now">'+ k +'</li>';
 		}
+		else if (k != pvo.nowPage) {
+			tfoot += '<li><a href="javascript:changeCategory('+category+","+boardIdx+",'"+mem_id+"',"+ k +')">'+ k +'</a></li>';
+		}
+		console.log("k: "+k);
 	}
-	if (pvo.endPage >= pvo.totalPage) {
-		tfoot += '<li class="disable">다음으로</li>';
+	if(pvo.endPage >= pvo.totalPage) {
+		tfoot+= '<li class="disable" id="pointer">다음으로</li>';
 	} else {
-		tfoot += '<li><a href="javascript:changeCategory(' + boardIdx + ","
-				+ mem_id + "," + (pvo.beginPage + pvo.pagePerBlock)
-				+ ')">다음으로</a></li>';
+		tfoot += '<li id="pointer"><a href="javascript:changeCategory('+category+","+boardIdx+","+mem_id+","+ (pvo.beginPage + pvo.pagePerBlock)+')">다음으로</a></li>';
 	}
-
+	
 	tfoot += '</ol></td></tr>'
 	$("#tfoot").html(tfoot);
-
+	
 }

@@ -24,6 +24,12 @@
 	    if(  $(".chk_do_parent").is(":checked") ) {
 	    	do_List.push(do_en);
 	    }else{
+	    	var tmp= Number($(".CD_"+do_en).attr('id').split('CD')[1]);
+	    	$("#CD"+tmp).css( {'fill':color[tmp]} ); 
+	    	console.log('z: '+tmp);
+	    	console.log('do_en: '+do_en);
+	    	console.log('attr: '+$(".CD_"+do_en).attr('id'));
+	    	console.log($(".CD_"+do_en).attr('id').split('CD')[1]);
 	    	do_List.splice(do_List.indexOf(do_en), 1);
 	    }
 	    
@@ -52,6 +58,8 @@
 	    	si_List.push(chk.value);
 	    	
 	    }else{
+	    	var tmp= Number($(".CD_"+do_en).attr('id').split('CD')[1]);
+	    	$("#CD"+tmp).css( {'fill':color[tmp]} ); 
 	    	si_List.splice(si_List.indexOf(chk.value), 1);
 	    }
 	    
@@ -91,7 +99,7 @@
 					console.log(">>>>>>>>>>>pvo  :" + pvo); 
 					
 					$.each(list, function(index, obj){
-						dataTag += "<tr onclick='javascript:goHouseDetailPage("+this.room_idx+")' style='cursor: pointer;'>";
+						dataTag += "<tr class='trTag' onclick='javascript:goHouseDetailPage("+this.room_idx+")' style='cursor: pointer;'>";
 						dataTag += "<td>" + this.room_idx+ "</td>";
 						dataTag += "<td>" + this["subject"] + "</td>";
 						dataTag += "<td>" + this["room_type"] + "</td>";
@@ -105,12 +113,12 @@
 					$("#list_box").html(dataTag);
 					
 					var tfoot = "";
-					tfoot += '<tr><td><ol class="paging">'
+					tfoot += '<div id="pagingBox"><div id="olPaging"><ol class="paging">';
 						
 					if(pvo.beginPage < pvo.pagePerBlock){
-						tfoot += '<li class="disable">이전으로</li>';
+						tfoot += '<li class="disable" id="pointer">이전으로</li>';
 					} else{
-						tfoot += '<li><a href="javascript:getListCPage(' + pvo.beginPage - pvo.pagePerBlock + '}")>이전으로</a></li>';
+						tfoot += '<li id="pointer"><a href="javascript:getListCPage(' + pvo.beginPage - pvo.pagePerBlock + '}")>이전으로</a></li>';
 					}
 					for(var k=pvo.beginPage; k<=pvo.endPage; k++) {
 						if(k == pvo.nowPage) {
@@ -121,9 +129,9 @@
 						}
 					}
 					if(pvo.endPage >= pvo.totalPage) {
-						tfoot+= '<li class="disable">다음으로</li>';
+						tfoot+= '<li class="disable" id="pointer">다음으로</li>';
 					} else {
-						tfoot += '<li><a href="javascript:getListCPage(${pvo.beginPage + pvo.pagePerBlock})">다음으로</a></li>';
+						tfoot += '<li id="pointer"><a href="javascript:getListCPage(${pvo.beginPage + pvo.pagePerBlock})">다음으로</a></li>';
 					}
 					
 					tfoot += '</ol></td></tr>'
@@ -179,7 +187,7 @@
 				
 				$.each(list, function(index, obj){
 					
-					dataTag += "<tr onclick='javascript:goHouseDetailPage("+this.room_idx+")' style='cursor: pointer;'>";
+					dataTag += "<tr class='trTag' onclick='javascript:goHouseDetailPage("+this.room_idx+")' style='cursor: pointer;'>";
 					dataTag += "<td>" + this.room_idx+ "</td>";
 					dataTag += "<td>" + this["subject"] + "</td>";
 					dataTag += "<td>" + this["room_type"] + "</td>";
@@ -192,25 +200,25 @@
 				$("#list_box").html(dataTag);
 				
 				var tfoot = "";
-				tfoot += '<tr><td colspan="5"><ol class="paging">'
+				tfoot += '<div id="pagingBox"><div id="olPaging"><ol class="paging">';
 					
 				if(pvo.beginPage < pvo.pagePerBlock){
-					tfoot += '<li class="disable">이전으로</li>';
+					tfoot += '<li class="disable" id="pointer">이전으로</li>';
 				} else{
-					tfoot += '<li><a href="javascript:getListCPage(' + pvo.beginPage - pvo.pagePerBlock + '}")>이전으로</a></li>';
+					tfoot += '<li id="pointer"><a href="javascript:getListCPage(' + pvo.beginPage - pvo.pagePerBlock + '}")>이전으로</a></li>';
 				}
 				for(var k=pvo.beginPage; k<=pvo.endPage; k++) {
 					if(k == pvo.nowPage) {
-						tfoot += '<li class="now">' + k + '</li>';
+						tfoot += '<li class="now">'+ k +'</li>';
 					}
 					else if (k != pvo.nowPage) {
 						tfoot += '<li><a href="javascript:getListCPage('+ k +')">'+ k +'</a></li>';
 					}
 				}
 				if(pvo.endPage >= pvo.totalPage) {
-					tfoot+= '<li class="disable">다음으로</li>';
+					tfoot+= '<li class="disable" id="pointer">다음으로</li>';
 				} else {
-					tfoot += '<li><a href="javascript:getListCPage(${pvo.beginPage + pvo.pagePerBlock})">다음으로</a></li>';
+					tfoot += '<li id="pointer"><a href="javascript:getListCPage(${pvo.beginPage + pvo.pagePerBlock})">다음으로</a></li>';
 				}
 				
 				tfoot += '</ol></td></tr>'

@@ -389,7 +389,7 @@
 	              </tr>
 	            </tbody>
 	      </table>    
-           
+	<c:if test="${mvo.mem_cate eq 'p'}">
           <p align="center">
             <a href="" target="_self" class="button white small">Cancel</a>
             &nbsp; &nbsp;
@@ -402,7 +402,7 @@
 	            </c:when>
             </c:choose>
           </p>
-
+	</c:if>
           </form>
           
           <form id="commonForm" name="commonForm"></form>
