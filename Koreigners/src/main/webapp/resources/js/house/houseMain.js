@@ -3,10 +3,15 @@
 	let build_type_List=[0,1,2];
 	let room_type_List=[0,1,2];
 	let stayNum=1; 
-	
+	let sortSelect=1;
 	$( function() {
-		getData();
+		getData(1);
 		$(".tbody_dosi").html("<h2>&nbsp;&nbsp;← Please select an region</h2>");
+		
+		$("#sortSelect").change(function(){
+			sortSelect= $("#sortSelect  option:selected").val();
+			getData();
+		 });
 	});
 	//여기까지 페이징로딩후 자동시작//
 	
@@ -77,7 +82,8 @@
 				'monthly_rentMax':monthlyMax,
 				'build_typeList':build_type_List,
 				'room_typeList':room_type_List,
-				'stayNum':stayNum
+				'stayNum':stayNum,
+				'sortSelect':sortSelect
 		}
 		 $(".th_selectDoSi").html("Select)"+ (si_List.length + do_List.length -2) );
 		//----------------------------------------
@@ -167,7 +173,8 @@
 				'monthly_rentMax':monthlyMax,
 				'build_typeList':build_type_List,
 				'room_typeList':room_type_List,
-				'stayNum':stayNum
+				'stayNum':stayNum,
+				'sortSelect':sortSelect
 		}
 		 jQuery.ajaxSettings.traditional = true;
 		$.ajax({

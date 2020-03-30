@@ -1,44 +1,117 @@
+#container {
+	width: 1020px;
+	margin: 0 auto;
+	color: black;
+}
 
-	#container {
-		width: 1020px;
-		margin: 0 auto;
-		color: black;
-	}
+h1{
+	font-size: 22px;
+}
+
+h1, h3, p {
+	text-align: center;
+}
+hr{
+	margin: 5px auto;
+}
+
+
+table, th, td {
+	border: 1px solid black;
+	margin: 10px auto;
+}
+table {
+	border-collapse: collapse;
+	margin: 0 auto;
+	width: 100%;
+	margin-bottom: 40px;
+}
+td {
+	text-align: left;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+#mapDisp {
+	width: 100%;
+	height: 250px;
+	margin: 0 auto;
+	margin-bottom: 5px;
+}
+
+.td_div {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+th {
+	background-color: #1a80e6;
+	width: 100px;
+}
+
+.td_option {
+	width: 18%;
+}
+
+.borderRight-none {
+	border-right: none;
+}
+
+.borderLeft-none {
+	border-left: none;
+}
+#houseInfo{
 	
-	h1, h3, p { text-align: center; }
-	table { border-collapse: collapse;
-			margin: 0 auto;
-			width:100%;
-	 }
-	table, th, td {
-		border: 1px solid black;
-		margin: 10px auto;
-	}
-	td {
-		text-align: left;
-		padding-left: 15px;
-		padding-right: 15px;
-	}
-	#mapDisp{
-		
-		width: 100%;
-		height: 250px;
-		margin: 0 auto;
-		margin-bottom: 5px;
-	}
-	.td_div {
-		margin-top: 5px;
-		margin-bottom: 5px;
-	}
-	th { background-color: orange; width:100px; }
+}
+input, select{
+	border: solid 2px #7bbdff; border-radius: 8px;
+}
+#houseInfo td input[type=text]{
+	width:150px;
+	height:25px;
+	padding-left: 15px;
+	font-size: 16px;
+}
+#houseInfo td input[type=number]{
+	width:50px;
+	height:25px;
+	text-align: center;
+	font-size: 16px;
+}
+#houseInfo td select{
+	width: 120px;
+	height:30px;
+	padding-left:15px;
+	font-size: 16px;
+}
 
-	.td_option{
-		width:18%;
-	}
-	.borderRight-none{
-		border-right: none;
-	}
-	.borderLeft-none{
-		border-left: none;
-	}
+#transactionInfo td{
+	height: 40px;
+}
+
+#transactionInfo td input[type=text]{
+	width:150px;
+	height:20px;
+	padding-left: 15px;
+	font-size: 16px;
+}
+#imageInfo td,#facilitiesInfo td{
+	height: 43px;
+}
+
+#file{
+	border: none;
+	border-radius: 0px;
+}
+
+input[type=button]{
+	height: 30px;
+	font-weight: bold;
+	font-size:16px;
+}
+
+#insertButton{
+	width:250px;
+	font-size:20px;
+	height:40px;
 }

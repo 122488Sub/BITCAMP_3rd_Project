@@ -22,7 +22,7 @@ FROM(
 				<include refid="House_Include.house_Where" />
 				<include refid="House_Include.house_Filter" />
 	       	ORDER BY 
-				BOARD.ROOM_IDX 
+				<include refid="House_Include.house_OrderBy" />
 				) HOUSE
 	)
  WHERE R_NUM BETWEEN #{begin} AND #{end} 

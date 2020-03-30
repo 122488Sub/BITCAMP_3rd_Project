@@ -377,7 +377,20 @@
 	
 	
 	
-	
+<sql id="house_OrderBy">
+	<choose>
+		<when test="sortSelect==1">
+			BOARD.ROOM_IDX DESC 
+		</when>
+		<when test="sortSelect==2">
+			INFO.DEPOSIT DESC 
+		</when>
+		<when test="sortSelect==3">
+			INFO.MONTHLY_RENT DESC 
+		</when>
+		
+	</choose>
+</sql>
 	
 	
 </mapper>

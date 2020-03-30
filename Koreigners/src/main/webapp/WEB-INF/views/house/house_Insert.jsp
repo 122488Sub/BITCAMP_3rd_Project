@@ -26,7 +26,7 @@
 	<form action="" id="form" name="form" method="post" enctype="multipart/form-data">
 	<jsp:include page="house_formData.jsp"></jsp:include>
 	<div class="td_div">
-		<input type="button" value="새글 등록" onclick="insertForm();">
+		<input type="button" id="insertButton" value="Register a New Post" onclick="insertForm();">
 	</div>
 	</form>
 	<p><a href="house_main.do ">글 목록 가기</a></p>

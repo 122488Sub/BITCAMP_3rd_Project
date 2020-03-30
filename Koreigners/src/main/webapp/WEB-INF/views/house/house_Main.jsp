@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,15 +20,14 @@
 </head>
 
 <body>
+
 <div id="houseMain_content">
 	<!-- 지도부분 -->
 	<jsp:include page="../common/republic_korea.jsp">
 		<jsp:param value="house" name="category"/>
 	</jsp:include>
 	<div id="listHeader">
-		<div id="insertDiv">
-			<h1 id="insertH1"><a href="house_insert.do">insert</a></h1>
-		</div>
+		
 		<div id="sortDiv">
 			<select id="sortSelect" class=""> 
 				<option value="1" selected>Recently updated</option> 
@@ -36,6 +35,11 @@
 				<option value="3">Lowest Monthly rent</option> 
 			</select>
 		</div>
+	  <c:if test="${user.mem_id!=null }">
+		<div id="insertDiv">
+			<a href="house_insert.do">New Post</a>
+		</div>
+	  </c:if>
 	</div>
 	
 	 <div class="wishlist-box-main">

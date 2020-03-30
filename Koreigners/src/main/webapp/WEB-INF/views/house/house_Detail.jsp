@@ -97,17 +97,13 @@
 				<br>
 				<br>
 				<div>
-					<c:choose>
-						<c:when test="${authentication }">
-							<input type="button" id="" value="Modify" onClick="clickModify()">
-							<input type="button" id="" value="Delete" onClick="clickDelete()">
-						</c:when>
-						<c:otherwise>
-							<input type="button" id="" value="♡pick" onclick="clickWishList('${user.mem_id }','${house.room_idx}',1)">
-						
-							<input type="button" id="" value="Send Message">
-						</c:otherwise>
-					</c:choose>
+					<c:if test="${user.mem_id!=null }">
+						<input type="button" id="" value="♡pick" onclick="clickWishList('${user.mem_id }','${house.room_idx}',1)">
+					</c:if>
+					<c:if test="${authentication }">
+						<input type="button" id="" value="Modify" onClick="clickModify()">
+						<input type="button" id="" value="Delete" onClick="clickDelete()">
+					</c:if>
 				
 				
 				</div>

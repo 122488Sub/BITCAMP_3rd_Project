@@ -4,12 +4,12 @@
 <hr>
 
 <input type="hidden" name="mem_email" value="${mem_id }">
-<table>
+<table id="houseInfo">
 	<tr>
 		<th>TITLE</th>
 		<td colspan="3">
 			<div class="td_div">
-				<input type="text" name="subject" size="30">
+				<input type="text" name="subject" size="30" style="width: 90%;">
 			</div>
 		</td>
 	</tr>
@@ -28,8 +28,8 @@
 			<div class="td_div">
 				<input type="radio" value="0" name="room_type"> Studio <input
 					type="radio" value="1" name="room_type" style="margin-left: 15px">
-				Two BedRoom <input type="radio" value="2" name="room_type"
-					style="margin-left: 15px"> Three+ BedRoom
+				Two <input type="radio" value="2" name="room_type"
+					style="margin-left: 15px"> Three+
 			</div>
 		</td>
 	</tr>
@@ -57,7 +57,7 @@
 		<td style="width: 40%">
 			<div class="td_div">
 				<label style="width: 70%">Square Meter: </label> <input
-					type="number" id="" name="room_area" style="width: 30%;" step="1"
+					type="number" id="" name="room_area" step="1"
 					min="1" value='1'>
 			</div>
 		</td>
@@ -65,9 +65,9 @@
 		<td style="width: 40%">
 			<div class="td_div">
 				<label style="width: 20%">Buliding: </label> <input type="number"
-					id="" name="bulid_layers" style="width: 30%;" step="1" min="1"
+					id="" name="bulid_layers"  step="1" min="1"
 					value='1'> <label style="width: 20%; margin-left: 10px;">Floor:
-				</label> <input type="number" id="" name="floor_layers" style="width: 30%;"
+				</label> <input type="number" id="" name="floor_layers" 
 					step="1" min="-3" value='1'>
 			</div>
 			<div class="td_div"></div>
@@ -125,7 +125,7 @@
 <!-- ------------------------------------------------------------------------------------------------------------------- -->
 <h1>Transaction Information</h1>
 <hr>
-<table>
+<table id="transactionInfo">
 	<colgroup>
 		<col>
 		<col width="195px">
@@ -174,7 +174,7 @@
 <!-- ------------------------------------------------------------------------------------------------------------------- -->
 <h1>Facilities information</h1>
 <hr>
-<table>
+<table id="facilitiesInfo">
 	<tr>
 		<th>Cooling and Heating</th>
 		<td class="td_option"><input type="checkbox" class="chk_option"
@@ -228,9 +228,9 @@
 
 <h1>Room Image</h1>
 <hr>
-<table>
+<table id="imageInfo">
 	<tr>
-		<th>업로드</th>
+		<th>Image Upload</th>
 		<td>
 			<div class="td_div">
 				<input type="file" id="file" name="file" multiple>

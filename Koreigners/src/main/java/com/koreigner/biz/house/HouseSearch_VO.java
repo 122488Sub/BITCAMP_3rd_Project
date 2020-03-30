@@ -25,12 +25,27 @@ public class HouseSearch_VO {
 	int depositMin=0,depositMax=50000;
 	int monthly_rentMin=0,monthly_rentMax=50000;
 	
-
+	//정렬 필터
+	int sortSelect=1;
 
 	int begin;
 	int end;
 	
 	
+	public int getSortSelect() {
+		return sortSelect;
+	}
+
+
+
+
+	public void setSortSelect(int sortSelect) {
+		this.sortSelect = sortSelect;
+	}
+
+
+
+
 	void changeDoSiFilter(int tmp) {
 		this.dosiFilter += tmp;
 	}
@@ -234,6 +249,19 @@ public class HouseSearch_VO {
 
 	public void setStayNum(int stayNum) {
 		this.stayNum = stayNum;
+	}
+
+
+
+
+	@Override
+	public String toString() {
+		return "HouseSearch_VO [dosiFilter=" + dosiFilter + ", buildFilter=" + buildFilter + ", roomFilter="
+				+ roomFilter + ", do_enList=" + do_enList + ", si_enList=" + si_enList + ", build_typeList="
+				+ build_typeList + ", room_typeList=" + room_typeList + ", stayNum=" + stayNum + ", depositMin="
+				+ depositMin + ", depositMax=" + depositMax + ", monthly_rentMin=" + monthly_rentMin
+				+ ", monthly_rentMax=" + monthly_rentMax + ", sortSelect=" + sortSelect + ", begin=" + begin + ", end="
+				+ end + "]";
 	}
 	
 	
