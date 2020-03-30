@@ -26,6 +26,7 @@ import com.koreigner.biz.job.hire.HireServiceImpl;
 import com.koreigner.biz.job.hire.HireVO;
 import com.koreigner.biz.job.jobservice.JobService;
 import com.koreigner.biz.job.jobservice.JobVO;
+import com.koreigner.biz.member.UserVO;
 
 @Controller
 public class HireController {
@@ -52,6 +53,9 @@ public class HireController {
 		System.out.println("==================hireList==================");
 		System.out.println("jobVO : " + jobVO);
 		System.out.println("================hireList End================");
+		
+		UserVO vo = (UserVO)request.getAttribute("user");
+		checkMem_cate(vo, model);
 		
 		model.addAttribute("postType", "hire");
 		
@@ -155,6 +159,8 @@ public class HireController {
 		mav.addObject("companyVO", companyVO);
 		mav.setViewName("job/hire/hireDetail.page");
 		
+		UserVO vo = (UserVO)request.getAttribute("user");
+		checkMem_cate(vo, model);
 		model.addAttribute("postType", "hire");
 		
 		return mav;
@@ -163,18 +169,24 @@ public class HireController {
 	
 	//채용 게시글쓰기로 이동
 	@RequestMapping(value="hireWrite_go.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String hireWrite(Model model) {
+	public String hireWrite(HttpServletRequest request, Model model) {
+		
+		UserVO vo = (UserVO)request.getAttribute("user");
+		checkMem_cate(vo, model);
 		model.addAttribute("postType", "hire");
+		
 		return "job/hire/hireWrite.page";
 	}
 	
 	//채용 글쓰기 완료버튼
 	@RequestMapping(value="hirePost.do", method={RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView hirePost(HireVO vo, HttpServletRequest request) {
+	public ModelAndView hirePost(HireVO vo, HttpServletRequest request, Model model) {
 		String mem_id = (String)request.getAttribute("mem_id");
 		System.out.println("mem_id : " + mem_id);
 		hireServiceImpl.insertHire(vo, request);
 		ModelAndView mav = new ModelAndView();
+		UserVO uvo = (UserVO)request.getAttribute("user");
+		checkMem_cate(uvo, model);
 		mav.addObject("postType", "hire");
 		mav.setViewName("redirect:hireList_go.do");
 		return mav;
@@ -247,5 +259,15 @@ public class HireController {
 	}
 	
 	
+	
+	private void checkMem_cate(UserVO vo, Model model) {
+		if(vo != null) {
+			String mem_cate = vo.getMem_cate();
+			System.out.println("hireController에서 mem_cate : " + mem_cate);
+			model.addAttribute("mem_cate", mem_cate);
+		} else {
+			model.addAttribute("mem_cate", null);
+		}
+	}
 	
 }

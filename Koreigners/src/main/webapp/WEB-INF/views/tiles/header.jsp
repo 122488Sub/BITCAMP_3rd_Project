@@ -24,7 +24,7 @@
 	       </ul>
 	   </ul>
 	   <div id="header_bottom">
-	      <a href="javascript:postAd('${postType}')">
+	      <a href="javascript:postAd('${postType}', '${mem_cate }')">
 	       <div id="post_btn">
 	           <div id="btn_txt">
 	               Post an ad
