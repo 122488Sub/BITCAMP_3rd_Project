@@ -39,3 +39,6 @@ no-repeat 1px 50%;}
 
 /* 테이블 td 왼쪽 정렬 */
 .tdLeft tbody td,table th.text_left,table td.text_left,table td.fleft {text-align:left;}
+
+/* font color */
+.red { color:#B22222; }

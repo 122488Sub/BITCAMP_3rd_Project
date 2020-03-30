@@ -16,22 +16,28 @@ function logout(){
 }
 
 
-function postAd(obj) {
-	console.log("postType : " + obj);
+function postAd(postType, mem_cate) {
+	console.log("postType : " + postType);
 	
-	if(obj == 'job') {
-		location.href = "";
+	if(postType == 'hire') {
+		if(mem_cate == 'c') {
+			location.href = "hireWrite_go.do";			
+		} else if(mem_cate == 'p') {
+			location.href = "myPage_go.do?type=resume";
+		} else {
+			location.href = "login_go.do";
+		}
 	}
-	
-	if(obj == 'house') {
+		
+	if(postType == 'house') {
 		location.href = "house_insert.do";
 	}
 	
-	if(obj == 'resale') {
+	if(postType == 'resale') {
 		location.href = "resale_go.do";
 	}
 	
-	if(obj == 'main') {
+	if(postType == 'main') {
 		location.href = "post.do";
 	}
 	

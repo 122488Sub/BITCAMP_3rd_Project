@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -116,6 +118,7 @@
 					<script type="text/javascript">
 					new sojaeji('sido1', 'gugun1');
 					</script>
+				<br>selected: <span class="red">${map.WISH_DO } / ${map.WISH_SI }</span>
                 </td>
               </tr>				
               <tr>
@@ -128,7 +131,8 @@
 				  </select>
 				
 				  <select name="JOB_CATE_CHILD" title="직종선택"  id="cate_child_en">
-				  </select><br><br>
+				  </select>
+				 <br>selected:  <span class="red">${map.JOB_CATE } / ${map.JOB_CATE_CHILD }</span>
                 </td>
               </tr>
               
@@ -171,7 +175,7 @@
                     <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week5" value="매주 금요일(Fri)">Every Friday</label> &nbsp;
                     <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week6" value="매주 토요일(Sat)">Every Saturday</label> &nbsp;
                     <label><input type="checkbox" name="WORK_TIME_WEEK" id="work_time_week7" value="매주 일요일(Sun)">Every Sunday</label> &nbsp;
-                    <br><p>selected: ${map.WORK_TIME_WEEK }</p>
+                    <br>selected: <span class="red">${map.WORK_TIME_WEEK }</span>
                   </div>
 
                 </td>
@@ -196,11 +200,11 @@
               <tr>
                 <th>Introduce yourself.</th>
                 <td class="txLeft">
-                	<c:if test="${not empty map }">
-                		${map.INTRODUCE }
-                	</c:if>
-                	<c:if test="${empty map }">
+                	<c:if test="${empty map.INTRODUCE }">
                 		<textarea name="INTRODUCE" id="introduce" cols="100" rows="5"></textarea>
+                	</c:if>
+                	<c:if test="${not empty map.INTRODUCE }">
+                		<textarea name="INTRODUCE" id="introduce" cols="100" rows="5" >${map.INTRODUCE }</textarea>
                 	</c:if>
                 </td>
               </tr>
@@ -292,7 +296,7 @@
 	                  Assigned task :
 	                  <input type="text" size="40" name="TASK" value="${list.TASK }">
 	                </td>
-	                <td><a href="#this" class="btn" id="delete" name="delete">Delete</a></td>                
+	                <td><a href="#this" class="btn" id="delete" name="deleteCareer">Delete</a></td>                
 	             </tr>
 	            </c:forEach>
             </tbody>
@@ -371,27 +375,28 @@
 	   <table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0" summary="">
 	            <h4><strong>05</strong>Other Items</h4>
 	            <tbody>
-	                <c:forEach var="row" items="${fileList }">
-	            	  <tr>
-		            	 <th width="15%">file</th>
-		            	 <td width="85%" class="txLeft">
-		            	  	<input type="hidden" id="IDX" value="${row.IDX }">
-		            	  	<a href="#this" name="file">${row.ORI_FILE }</a>(${row.FILE_SIZE }kb)
-		            	 </td>
-	            	  </tr>
-	                </c:forEach>
-	              <tr>
-	                <th width="15%">The attached file</th>
-	                <td width="85%" class="txLeft">
-	                	
-	                  <input type="file" name="ori_file" id="file"> &nbsp; 
-	                </td>
-	              </tr>
+			      <tr> 
+					<th width="15%">The attached file</th> 
+					<td width="85%" class="txLeft"> 
+						<div id="file"> 
+							<c:forEach var="row" items="${fileList }" varStatus="var"> 
+								<p> 
+									<input type="hidden" id="IDX" name="IDX_${var.index }" value="${row.IDX }">
+									<a href="#this" name="file">${row.ORI_FILE } (${row.FILE_SIZE }kb)</a>
+									<input type="file" id="file_${var.index }" name="file_${var.index }"> 
+									<a href="#this" class="Button white small" id="delete_${var.index }" name="delete_${var.index }">Delete</a> 
+								</p> 
+							</c:forEach> 
+						</div> 
+					</td> 
+				</tr>
 	            </tbody>
+	            <a href="#this" class="Button white small" id="addFile">Add File</a>
 	      </table>    
 	<c:if test="${mvo.mem_cate eq 'p'}">
           <p align="center">
-            <a href="" target="_self" class="button white small">Cancel</a>
+          	<input type="hidden" name="RESUME_IDX" value="${map.RESUME_IDX }">
+            <a href="" target="_self" class="Button white small">Cancel</a>
             &nbsp; &nbsp;
             <c:choose>
 	            <c:when test="${not empty map }">
@@ -408,4 +413,22 @@
           <form id="commonForm" name="commonForm"></form>
 
 </body>
+<script>
+var gfv_count = '${fn:length(list)+1}';
+
+function fn_addFile(){ //파일 추가
+	
+	var str = "<p>"+ 
+			  "<input type='file' id='file_" +(gfv_count)+"' name='file_"+(gfv_count)+"'>"+ 
+			  "<a href='#this' class='Button white small' id='delete_" +(gfv_count)+"' name='delete_"+(gfv_count)+"'>Delete</a></p>";	
+	$("#file").append(str); 
+	
+	$('#delete_' + (gfv_count++)).on("click", function(e){ //삭제 버튼 
+		e.preventDefault(); 
+		fn_deleteFile($(this)); 
+	}); 
+	
+}
+
+</script>
 </html>

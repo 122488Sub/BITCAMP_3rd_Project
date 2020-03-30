@@ -89,7 +89,9 @@
 	
 	<!-- 이력서 경력 가져오기 -->
 	<select id="selectCareerList" parameterType="hashmap" resultType="hashmap">
-		SELECT * FROM T_RESUME_CAREER WHERE RESUME_IDX = #{RESUME_IDX} AND DEL_GB = 'N'
+		SELECT * FROM T_RESUME_CAREER 
+		 WHERE RESUME_IDX = #{RESUME_IDX} 
+		   AND DEL_GB = 'N'
 	</select>
 	
 	<!-- 이력서 파일정보 가져오기 -->
@@ -103,10 +105,75 @@
 	<update id="updateResume" parameterType="hashmap">
 		UPDATE T_MEMBER_RESUME
 		<set>
-			<if test=""></if>
+			<if test='MEM_NAME != null and !MEM_NAME.equals("")'>MEM_NAME = #{MEM_NAME},</if>
+			<if test='WISH_DO != null and WISH_DO.equals("")'>WISH_DO = #{WISH_DO},</if>
+			<if test='WISH_SI != null and !WISH_SI.equals("")'>WISH_SI = #{WISH_SI},</if>
+			<if test='JOB_CATE != null and !JOB_CATE.equals("")'>JOB_CATE = #{JOB_CATE},</if>
+			<if test='JOB_CATE_CHILD != null and !JOB_CATE_CHILD.equals("")'>JOB_CATE_CHILD = #{JOB_CATE_CHILD},</if>
+			<if test='REQ_SALARY_MIN != null and !REQ_SALARY_MIN.equals("")'>REQ_SALARY_MIN = #{REQ_SALARY_MIN},</if>
+			<if test='REQ_SALARY_MAX != null and !REQ_SALARY_MAX.equals("")'>REQ_SALARY_MAX = #{REQ_SALARY_MAX},</if>
+			<if test='SALARY_TYPE != null and !SALARY_TYPE.equals("")'>SALARY_TYPE = #{SALARY_TYPE},</if>
+			<if test='WORK_TIME != null and !WORK_TIME.equals("")'>WORK_TIME = #{WORK_TIME},</if>
+			<if test='DORMITORY != null and !DORMITORY.equals("")'>DORMITORY = #{DORMITORY},</if>
+			<if test='INTRODUCE != null and !INTRODUCE.equals("")'>INTRODUCE = #{INTRODUCE},</if>
+			<if test='GRADUATE_SCH != null and !GRADUATE_SCH.equals("")'>GRADUATE_SCH = #{GRADUATE_SCH},</if>
+			<if test='DEP != null and !DEP.equals("")'>DEP = #{DEP},</if>
+			<if test='LANG_LEARN != null and !LANG_LEARN.equals("")'>LANG_LEARN = #{LANG_LEARN},</if>
+			<if test='FINAL_A_M != null and !FINAL_A_M.equals("")'>FINAL_A_M = #{FINAL_A_M},</if>
+			<if test='FINAL_A_Y != null and !FINAL_A_Y.equals("")'>FINAL_A_Y = #{FINAL_A_Y},</if>
+			<if test='FINAL_G_M != null and !FINAL_G_M.equals("")'>FINAL_G_M = #{FINAL_G_M},</if>
+			<if test='FINAL_G_Y != null and !FINAL_G_Y.equals("")'>FINAL_G_Y = #{FINAL_G_Y},</if>
+			<if test='FINAL_REGION != null and !FINAL_REGION.equals("")'>FINAL_REGION = #{FINAL_REGION},</if>
+			<if test='FINAL_SCH != null and FINAL_SCH.equals("")'>FINAL_SCH = #{FINAL_SCH},</if>
+			<if test='FINAL_MAJOR != null and !FINAL_MAJOR.equals("")'>FINAL_MAJOR = #{FINAL_MAJOR},</if>
+			<if test='KO_SPK_ABIL != null and !KO_SPK_ABIL.equals("")'>KO_SPK_ABIL = #{KO_SPK_ABIL},</if>
+			<if test='KO_DOC_ABIL != null and !KO_DOC_ABIL.equals("")'>KO_DOC_ABIL = #{KO_DOC_ABIL},</if>
+			<if test='CH_SPK_ABIL != null and !CH_SPK_ABIL.equals("")'>CH_SPK_ABIL = #{CH_SPK_ABIL},</if>
+			<if test='CH_DOC_ABIL != null and !CH_DOC_ABIL.equals("")'>CH_DOC_ABIL = #{CH_DOC_ABIL},</if>
+			<if test='EN_SPK_ABIL != null and !EN_SPK_ABIL.equals("")'>EN_SPK_ABIL = #{EN_SPK_ABIL},</if>
+			<if test='EN_DOC_ABIL != null and !EN_DOC_ABIL.equals("")'>EN_DOC_ABIL = #{EN_DOC_ABIL},</if>
+			<if test='VT_SPK_ABIL != null and !VT_SPK_ABIL.equals("")'>VT_SPK_ABIL = #{VT_SPK_ABIL},</if>
+			<if test='VT_DOC_ABIL != null and !VT_DOC_ABIL.equals("")'>VT_DOC_ABIL = #{VT_DOC_ABIL},</if>
+			<if test='OTHER_LANG != null and !OTHER_LANG.equals("")'>OTHER_LANG = #{OTHER_LANG},</if>
+			<if test='WORK_TIME_START != null and !WORK_TIME_START.equals("")'>WORK_TIME_START = #{WORK_TIME_START},</if>
+			<if test='WORK_TIME_END != null and !WORK_TIME_END.equals("")'>WORK_TIME_END = #{WORK_TIME_END},</if>
+			<if test='WORK_TIME_ISWEEK != null and !WORK_TIME_ISWEEK.equals("")'>WORK_TIME_ISWEEK = #{WORK_TIME_ISWEEK},</if>
+			<if test='WORK_TIME_WEEK != null and !WORK_TIME_WEEK.equals("")'>WORK_TIME_WEEK = #{WORK_TIME_WEEK},</if>
+			<if test='LANG_SCH != null and !LANG_SCH.equals("")'>LANG_SCH = #{LANG_SCH},</if>
 		</set>
+		 WHERE RESUME_IDX = #{RESUME_IDX} 
 	</update>
 	
+	<!-- 파일 수정 -->
+	<update id="deleteFileList" parameterType="hashmap">
+		UPDATE T_RESUME_FILE
+		   SET DEL_GB = 'Y'
+		 WHERE RESUME_IDX = #{RESUME_IDX}	
+	</update>
+	
+	<update id="updateFile" parameterType="hashmap">
+		UPDATE T_RESUME_FILE
+		   SET DEL_GB = 'N'
+		 WHERE IDX = #{IDX}
+	</update>
+	
+	<!-- 커리어 수정 -->
+	<delete id="deleteCareer" parameterType="hashmap">
+		DELETE FROM T_RESUME_CAREER
+		 WHERE RESUME_IDX = #{RESUME_IDX}
+	</delete>
+	
+<!-- 	<update id="updateCareer" parameterType="hashmap">
+		UPDATE T_RESUME_CAREER
+		   SET JOIN_YEAR = #{JOIN_YEAR},
+			   JOIN_MONTH = #{JOIN_MONTH},
+			   RESIGN_YEAR = #{RESIGN_YEAR},
+			   RESIGN_MONTH = #{RESIGN_MONTH},
+			   REGION = #{REGION},
+			   COMPANY = #{COMPANY},
+			   TASK = #{TASK}
+		 WHERE RESUME_IDX = #{RESUME_IDX} 
+	</update> -->
 </mapper>
 
 
