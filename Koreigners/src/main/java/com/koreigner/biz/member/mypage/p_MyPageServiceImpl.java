@@ -56,20 +56,15 @@ public class p_MyPageServiceImpl implements p_MyPageService {
 
 	@Override
 	public String togleWish(p_MyPageVO wishVO) {
-		String result = "{\"result\":\"";
+		String result = "";
 		if(pDAO.myBatis_isWish(wishVO)) {
 			pDAO.myBatis_deleteWish(wishVO);
-			result+="You have been removed from your Wish List.";
+			result="You have been removed from your Wish List.";
 		}else {
 			pDAO.myBatis_insertWish(wishVO);
-			result+="You have been registered on your Wish List.";
+			result="You have been registered on your Wish List.";
 			
 		}
-		result +="\"}";
-		
-		System.out.println(result);
-
-
 	
 		return result;
 	}
@@ -102,6 +97,11 @@ public class p_MyPageServiceImpl implements p_MyPageService {
 	public int getAdsTotal(p_MyPageVO pVO) {
 		// TODO Auto-generated method stub
 		return pDAO.myBatis_getAdsTotal(pVO);
+	}
+
+	@Override
+	public boolean isWish(p_MyPageVO pVO) {
+		return pDAO.myBatis_isWish(pVO);
 	}
 
 	

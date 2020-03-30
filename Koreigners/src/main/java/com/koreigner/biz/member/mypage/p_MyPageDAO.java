@@ -47,8 +47,9 @@ public class p_MyPageDAO {
 
 	public boolean myBatis_isWish(p_MyPageVO wishVO) {
 		int count= mybatis.selectOne("wish.isWish", wishVO);
+		
 		boolean result=false;
-		if(count!=0) {
+		if(count>0) {
 			result=true;
 		}
 		return result;

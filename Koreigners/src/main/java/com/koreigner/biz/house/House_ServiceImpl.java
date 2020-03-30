@@ -23,7 +23,7 @@ public class House_ServiceImpl implements House_Service {
 	private House_DAOMyBatis testDAO;
 	
 	public House_ServiceImpl() {
-		System.out.println(">> Room_ServiceImpl() 실행");
+		System.out.println(">> House_ServiceImpl() 실행");
 	}
 
 	
@@ -71,10 +71,7 @@ public class House_ServiceImpl implements House_Service {
 	
 	@Override
 	public String getHouseListJson(List<HouseAll_VO> list, PagingVO p) {
-		System.out.println(p);
-		for(HouseAll_VO v: list) {
-		System.out.println(v);
-		}
+		
 		
 		String room_type = "", build_type = "";
 		

@@ -2,15 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	if( (boolean)request.getAttribute("authentication")){
-		System.out.println("qq");
-	}else{
-		System.out.println("aa");
-	}
 
-
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +20,7 @@
 </head>
 
 <body>
+
  	<input type="hidden" id="mem_id" value="${mem_id}">
 	<div id="detailContent">
 		<div id="detailHeader">
@@ -98,7 +91,14 @@
 				<br>
 				<div>
 					<c:if test="${user.mem_id!=null }">
-						<input type="button" id="" value="♡pick" onclick="clickWishList('${user.mem_id }','${house.room_idx}',1)">
+						<c:choose>
+						<c:when test="${isWish}">
+							<input type="button" id="wishBtn" value="♥pick"  onclick="clickWishBtn('${user.mem_id }','${house.room_idx}',1)">
+						</c:when>
+						<c:otherwise>
+							<input type="button" id="wishBtn" value="♡pick"  onclick="clickWishBtn('${user.mem_id }','${house.room_idx}',1)">
+						</c:otherwise>
+						</c:choose>
 					</c:if>
 					<c:if test="${authentication }">
 						<input type="button" id="" value="Modify" onClick="clickModify()">

@@ -14,8 +14,12 @@ public class p_MyPageVO {
 	private int end;
 	
 	
-	
-	
+	public p_MyPageVO(String mem_id, int board_idx, int b_idx) {
+		super();
+		this.mem_id = mem_id;
+		this.board_idx = board_idx;
+		this.b_idx = b_idx;
+	}
 	public int getCategory() {
 		return category;
 	}

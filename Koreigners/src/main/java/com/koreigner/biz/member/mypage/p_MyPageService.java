@@ -33,5 +33,7 @@ public interface p_MyPageService {
 
 	int getAdsTotal(p_MyPageVO pVO);
 
+	boolean isWish(p_MyPageVO pVO);
+
 	
 }

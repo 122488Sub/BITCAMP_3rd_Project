@@ -7,11 +7,12 @@ function clickWishList(mem_id, b_idx,board_idx){
 			'mem_id':mem_id,
 			'board_idx':Number(board_idx)
 	}
+	var returnValue;
 		console.log(param);
 	 jQuery.ajaxSettings.traditional = true;
 		 $.ajax({
 				type : "get",
-			 	url : "togleWish.do",  
+				url : "togleWish.do",  
 				dataType : "json",
 				async: false,
 				data: param,
@@ -24,6 +25,11 @@ function clickWishList(mem_id, b_idx,board_idx){
 					alert(result);
 					
 					
+					if(result=="You have been removed from your Wish List."){
+						returnValue=2;
+					}else{
+						returnValue=1;
+					}
 					
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
@@ -33,6 +39,7 @@ function clickWishList(mem_id, b_idx,board_idx){
 						+ "errorThrown : " + errorThrown);
 				}
 				
-			});			
+			});		
+		 return returnValue;
 	
 }

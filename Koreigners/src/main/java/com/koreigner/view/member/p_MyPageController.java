@@ -2,6 +2,7 @@ package com.koreigner.view.member;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -120,13 +121,14 @@ public class p_MyPageController {
 	
 	@RequestMapping(value="togleWish.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String houseWish(HttpServletRequest request, p_MyPageVO wishVO, Model model) {
+	public Map<String,Object> houseWish(HttpServletRequest request, p_MyPageVO wishVO, Model model) {
 		System.out.println("houseWish");
-		String result="";
 		
-		result=wishService.togleWish(wishVO);
 		
-		return result;
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("result", wishService.togleWish(wishVO));
+		
+		return map;
 	}
 	
 	
