@@ -17,7 +17,7 @@ public class p_MyPageServiceImpl implements p_MyPageService {
 	@Autowired //타입이 일치하는 객체(인스턴스) 주입
 	//private BoardDAO boardDAO;
 	//private Korea_Address_DAOSpring testDAO;
-	private p_MyPageDAO wishDAO;
+	private p_MyPageDAO pDAO;
 	
 	public p_MyPageServiceImpl() {
 		System.out.println(">> WishServiceImpl() 실행");
@@ -25,43 +25,43 @@ public class p_MyPageServiceImpl implements p_MyPageService {
 
 	@Override
 	public List<p_MyPageVO> getWishList(p_MyPageVO vo) {
-		return wishDAO.myBatis_getWishList(vo);
+		return pDAO.myBatis_getWishList(vo);
 	}
 
 	@Override
 	public int getWishTotal(p_MyPageVO vo) {
-		return wishDAO.myBatis_getWishTotal(vo);
+		return pDAO.myBatis_getWishTotal(vo);
 	}
 
 	//집 위시리스트 반환
 	@Override
 	public List<HouseAll_VO> getHouseWishList(p_MyPageVO wishVO) {
-		return wishDAO.myBatis_getHouseWishList(wishVO);
+		return pDAO.myBatis_getHouseWishList(wishVO);
 	}
 
 	@Override
 	public List<HireVO> getHireWishList(p_MyPageVO wishVO) {
-		return wishDAO.myBatis_getHireWishList(wishVO);
+		return pDAO.myBatis_getHireWishList(wishVO);
 	}
 	@Override
 	public List<ResaleVO> getResaleWishList(p_MyPageVO wishVO) {
 		// TODO Auto-generated method stub
-		return wishDAO.myBatis_getResaleWishList(wishVO);
+		return pDAO.myBatis_getResaleWishList(wishVO);
 	}
 
 	@Override
 	public List<ResaleImgVO> getResaleImgWishList(p_MyPageVO wishVO) {
-		return wishDAO.myBatis_getResaleImgWishList(wishVO);
+		return pDAO.myBatis_getResaleImgWishList(wishVO);
 	}
 
 	@Override
 	public String togleWish(p_MyPageVO wishVO) {
 		String result = "{\"result\":\"";
-		if(wishDAO.myBatis_isWish(wishVO)) {
-			wishDAO.myBatis_deleteWish(wishVO);
+		if(pDAO.myBatis_isWish(wishVO)) {
+			pDAO.myBatis_deleteWish(wishVO);
 			result+="You have been removed from your Wish List.";
 		}else {
-			wishDAO.myBatis_insertWish(wishVO);
+			pDAO.myBatis_insertWish(wishVO);
 			result+="You have been registered on your Wish List.";
 			
 		}
@@ -76,18 +76,31 @@ public class p_MyPageServiceImpl implements p_MyPageService {
 
 	@Override
 	public List<HouseAll_VO> getHouseMyAdsList(p_MyPageVO wishVO) {
-		return wishDAO.myBatis_getHouseMyAdsList(wishVO);
+		return pDAO.myBatis_getHouseMyAdsList(wishVO);
+	}
+
+	@Override  //사용안함
+	public List<HireVO> getHireMyAdsList(p_MyPageVO wishVO) {
+		return pDAO.myBatis_getHireMyAdsList(wishVO);
 	}
 
 	@Override
-	public List<HireVO> getHireMyAdsList(p_MyPageVO wishVO) {
-		return wishDAO.myBatis_getHireMyAdsList(wishVO);
+	public List<HireVO> getHireMyApplyList(p_MyPageVO wishVO) {
+		return pDAO.myBatis_getHireMyApplyList(wishVO);
 	}
-
+	
 	@Override
 	public List<ResaleVO> getResaleMyAdsList(p_MyPageVO wishVO) {
-		return wishDAO.myBatis_getResaleMyAdsList(wishVO);
+		return pDAO.myBatis_getResaleMyAdsList(wishVO);
 	}
+
+	@Override
+	public int getAdsTotal(p_MyPageVO pVO) {
+		// TODO Auto-generated method stub
+		return pDAO.myBatis_getAdsTotal(pVO);
+	}
+
+	
 
 	
 	

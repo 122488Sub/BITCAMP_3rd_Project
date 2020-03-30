@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreigner.biz.common.page.PagingService;
 import com.koreigner.biz.common.page.PagingVO;
-import com.koreigner.biz.house.House_Service;
-import com.koreigner.biz.job.hire.HireServiceImpl;
 import com.koreigner.biz.member.mypage.p_MyPageService;
 import com.koreigner.biz.member.mypage.p_MyPageVO;
-import com.koreigner.biz.resale.ResaleServiceImpl;
 import com.koreigner.biz.resale.ResaleVO;
 
 @Controller
@@ -69,6 +66,7 @@ public class p_MyPageController {
 		}
 		result.put("pvo",p);
 		request.setAttribute("pvo", p);
+		System.out.println(p);
 		return result;
 		
 	}
@@ -76,7 +74,7 @@ public class p_MyPageController {
 	@RequestMapping(value="getMyAdsList.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public HashMap<String, Object>  myAdsListData(p_MyPageVO wishVO,HttpServletRequest request, HttpServletResponse response) {
-		
+		System.out.println(wishVO);
 		//리스트 정보 검색
 		
 		// 현재 페이지 구하기
@@ -97,7 +95,7 @@ public class p_MyPageController {
 			result.put("house",wishService.getHouseMyAdsList(wishVO));
 			break;
 		case 2://일자리
-		//	result.put("hire",wishService.getHireMyAdsList(wishVO));
+			result.put("hire",wishService.getHireMyApplyList(wishVO));
 			break;
 		case 3://중고
 			List<ResaleVO> resaleList=wishService.getResaleMyAdsList(wishVO);
@@ -111,6 +109,7 @@ public class p_MyPageController {
 		}
 		result.put("pvo",p);
 		request.setAttribute("pvo", p);
+		System.out.println(p);
 		return result;
 		
 	}

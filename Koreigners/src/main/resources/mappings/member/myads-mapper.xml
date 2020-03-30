@@ -44,6 +44,23 @@
 		 )
 		 WHERE R_NUM BETWEEN #{begin} AND #{end} 
 	</select>
+	
+	
+	<select id="getHireMyApplyList" parameterType="p_MyPageVO" resultType="hireVO">
+		SELECT *
+		FROM (
+		       SELECT ROWNUM R_NUM, HIRE.*
+		        FROM (SELECT *
+		              FROM T_JOB_HIRE
+		              WHERE 
+						HIRE_IDX IN (SELECT HIRE_IDX FROM T_MEMBER_APPLY WHERE MEM_ID=#{mem_id})  	
+		                
+		               ORDER BY HIRE_IDX DESC) HIRE
+		 )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end} 
+	</select>
+	
+	
 	<select id="getResaleMyAdsList" parameterType="p_MyPageVO" resultType="rsVO">
 	SELECT *
 		FROM (
@@ -57,6 +74,26 @@
 		    )
 	  WHERE R_NUM BETWEEN #{begin} AND #{end}
 	  
+	</select>
+	
+	
+	<select id="getAdsTotal" parameterType="p_MyPageVO" resultType="int">
+	
+	<choose>
+		<when test="board_idx == 1">
+			SELECT COUNT(ROOM_IDX) FROM T_ROOM_BOARD WHERE MEM_EMAIL= #{mem_id} 
+		</when>
+		<when test="board_idx == 2">
+			SELECT COUNT(APPLY_IDX) FROM T_MEMBER_APPLY WHERE  RESUME_IDX IN ( SELECT RESUME_IDX FROM T_MEMBER_RESUME WHERE MEM_ID=#{mem_id}  )  
+		</when>
+		<when test="board_idx == 3">
+			SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE MEM_ID= #{mem_id} 
+		</when>
+		<when test="board_idx == 4">
+		
+		</when>
+	</choose>
+	
 	</select>
 </mapper>
 

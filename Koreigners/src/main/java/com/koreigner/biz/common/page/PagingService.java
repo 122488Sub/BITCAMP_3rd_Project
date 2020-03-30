@@ -26,7 +26,7 @@ public class PagingService {
 	ResaleService resaleService;
 	
 	@Autowired
-	p_MyPageService wishService;
+	p_MyPageService pService;
 	
 	@Autowired
 	c_MyPageService cService;
@@ -100,14 +100,18 @@ public class PagingService {
 		
 		return p;
 	}
-	public PagingVO paging(String cPage, p_MyPageVO wishVO) {
+	public PagingVO paging(String cPage, p_MyPageVO pVO) {
 		// 페이지 처리를 위한  Paging 객체 생성해서 값 설정
 		PagingVO p = new PagingVO();
 		//1. 전체 페이지의 수를 구하기
 		//  System.out.println("paging p houseVO : " + houseVO);
+		System.out.println(pVO);
 		
-		int total = wishService.getWishTotal(wishVO);
-		
+		int total =0;
+		if(pVO.getCategory()==1)
+			total=pService.getWishTotal(pVO);
+		else if(pVO.getCategory()==2)
+			total=pService.getAdsTotal(pVO);
 	  System.out.println("total : " + total);
 		p.setTotalRecord(total);
 		p.setTotalPage();
