@@ -47,14 +47,10 @@ public class p_MyPageDAO {
 
 	public boolean myBatis_isWish(p_MyPageVO wishVO) {
 		int count= mybatis.selectOne("wish.isWish", wishVO);
-		System.out.println(count);
 		boolean result=false;
 		if(count!=0) {
 			result=true;
 		}
-		System.out.println("isWish");
-		System.out.println(result);
-		System.out.println("isWish");
 		return result;
 	}
 
@@ -87,9 +83,14 @@ public class p_MyPageDAO {
 		List<HouseAll_VO> houseList=mybatis.selectList("myads.getHouseMyAdsList", wishVO);
 		return houseList;
 	}
-
-	public List<HireVO> myBatis_getHireMyAdsList(p_MyPageVO wishVO) {
+ 
+	public List<HireVO> myBatis_getHireMyAdsList(p_MyPageVO wishVO) {  //사용안함
 		List<HireVO> hireList=mybatis.selectList("myads.getHireMyAdsList", wishVO);
+		return hireList;
+	}
+	
+	public List<HireVO> myBatis_getHireMyApplyList(p_MyPageVO wishVO) {
+		List<HireVO> hireList=mybatis.selectList("myads.getHireMyApplyList", wishVO);
 		return hireList;
 	}
 
@@ -97,6 +98,13 @@ public class p_MyPageDAO {
 		List<ResaleVO> resaleList=mybatis.selectList("myads.getResaleMyAdsList", wishVO);
 		return resaleList;
 	}
+
+	public int myBatis_getAdsTotal(p_MyPageVO pVO) {
+		
+		return  mybatis.selectOne("myads.getAdsTotal", pVO);
+	}
+
+	
 	
 	//------------------------------------------------------------------------------------------------
 	

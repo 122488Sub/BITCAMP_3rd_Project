@@ -26,7 +26,12 @@ public interface p_MyPageService {
 
 	List<HouseAll_VO> getHouseMyAdsList(p_MyPageVO wishVO);
 
-	List<HireVO> getHireMyAdsList(p_MyPageVO wishVO);
+	List<HireVO> getHireMyAdsList(p_MyPageVO wishVO); //사용안함
+	List<HireVO> getHireMyApplyList(p_MyPageVO wishVO);
 
 	List<ResaleVO> getResaleMyAdsList(p_MyPageVO wishVO);
+
+	int getAdsTotal(p_MyPageVO pVO);
+
+	
 }

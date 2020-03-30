@@ -1,5 +1,6 @@
 var boardIdx=0;
 var mem_id;
+var category=0;
 
 $( function() {
 		$("#listTable").hide();
@@ -7,9 +8,10 @@ $( function() {
 
 
 
-function changeCategory(category,btnValue,id,cPage) {
+function changeCategory(cate,btnValue,id,cPage) {
 	boardIdx=btnValue;
 	mem_id=id;
+	category=cate;
 	var url="";
 	if(category==1){
 		url='getWishList.do?cPage=' + cPage;
@@ -20,7 +22,8 @@ function changeCategory(category,btnValue,id,cPage) {
 	$("#listTable").show();
 		var param={
 				'board_idx' : boardIdx,  // '본인 vo변수이름 : 데이터이름'
-				'mem_id' : mem_id	
+				'mem_id' : mem_id,
+				'category':category
 		}
 		//----------------------------------------
 		 jQuery.ajaxSettings.traditional = true;
@@ -191,26 +194,31 @@ else{
 }
 
 function setTfoot(pvo){
+	console.log(pvo.beginPage);
+	console.log(pvo.pagePerBlock);
+	console.log(pvo.endPage);
+	console.log(pvo.totalPage);
 	var tfoot = "";
 	tfoot += '<tr><td><ol class="paging">'
 		
 	if(pvo.beginPage < pvo.pagePerBlock){
 		tfoot += '<li class="disable">이전으로</li>';
 	} else{ 
-		tfoot += '<li><a href="javascript:changeCategory('+ boardIdx+","+mem_id+"," + (pvo.beginPage - pvo.pagePerBlock) + '")>이전으로</a></li>';
+		tfoot += '<li><a href="javascript:changeCategory('+category+","+ boardIdx+","+mem_id+"," + (pvo.beginPage - pvo.pagePerBlock) + '")>이전으로</a></li>';
 	}
 	for(var k=pvo.beginPage; k<=pvo.endPage; k++) {
 		if(k == pvo.nowPage) {
 			tfoot += '<li class="now">'+ k +'</li>';
 		}
 		else if (k != pvo.nowPage) {
-			tfoot += '<li><a href="javascript:changeCategory('+boardIdx+",'"+mem_id+"',"+ k +')">'+ k +'</a></li>';
+			tfoot += '<li><a href="javascript:changeCategory('+category+","+boardIdx+",'"+mem_id+"',"+ k +')">'+ k +'</a></li>';
 		}
+		console.log("k: "+k);
 	}
 	if(pvo.endPage >= pvo.totalPage) {
 		tfoot+= '<li class="disable">다음으로</li>';
 	} else {
-		tfoot += '<li><a href="javascript:changeCategory('+boardIdx+","+mem_id+","+ (pvo.beginPage + pvo.pagePerBlock)+')">다음으로</a></li>';
+		tfoot += '<li><a href="javascript:changeCategory('+category+","+boardIdx+","+mem_id+","+ (pvo.beginPage + pvo.pagePerBlock)+')">다음으로</a></li>';
 	}
 	
 	tfoot += '</ol></td></tr>'

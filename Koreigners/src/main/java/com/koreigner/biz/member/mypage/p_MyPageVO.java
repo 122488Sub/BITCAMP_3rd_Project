@@ -3,6 +3,7 @@ package com.koreigner.biz.member.mypage;
 import java.util.Date;
 
 public class p_MyPageVO {
+	private int category;
 	private int wish_idx;
 	private String mem_id;
 	private int board_idx;
@@ -12,6 +13,15 @@ public class p_MyPageVO {
 	private int begin;
 	private int end;
 	
+	
+	
+	
+	public int getCategory() {
+		return category;
+	}
+	public void setCategory(int category) {
+		this.category = category;
+	}
 	public int getBegin() {
 		return begin;
 	}
@@ -67,9 +77,10 @@ public class p_MyPageVO {
 	}
 	@Override
 	public String toString() {
-		return "wishVO [wish_idx=" + wish_idx + ", mem_id=" + mem_id + ", board_idx=" + board_idx + ", b_idx=" + b_idx
-				+ ", regdate=" + regdate + "]";
+		return "p_MyPageVO [category=" + category + ", wish_idx=" + wish_idx + ", mem_id=" + mem_id + ", board_idx="
+				+ board_idx + ", b_idx=" + b_idx + ", regdate=" + regdate + ", begin=" + begin + ", end=" + end + "]";
 	}
+	
 	
 	
 	

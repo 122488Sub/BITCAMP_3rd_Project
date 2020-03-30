@@ -121,7 +121,7 @@ public class House_Controller {
 		request.setAttribute("pvo", p);
 		
 		model.addAttribute("postType", "house");
-		
+		System.out.println(p);
 		return result;
 	}
 	
