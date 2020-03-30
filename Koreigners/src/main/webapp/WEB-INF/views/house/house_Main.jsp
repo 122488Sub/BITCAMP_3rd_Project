@@ -7,9 +7,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<!-- Site CSS -->
+<link rel="stylesheet" href="bootstrap/css/style.css">
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="bootstrap/css/responsive.css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="bootstrap/css/custom.css">
+
 <script type="text/javascript" src="resources/js/house/houseMain.js"></script>
 <link rel="stylesheet" href="resources/css/house/houseMain.css"> 
-
+<link href="resources/css/common/page.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -31,7 +38,12 @@
 		</div>
 	</div>
 	
-	<table id="houseListTable" border>
+	 <div class="wishlist-box-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="table-main table-responsive">
+	<table id="houseListTable" class="table">
 		<thead>			
 			<tr>
 				<th>idx</th>
@@ -50,12 +62,13 @@
 				<td>--</td>
 				<td>--</td>
 				<td>--</td>
-			<tr>
+			</tr>
 		</tbody>
-		<tfoot id="tfoot">
-			
-		</tfoot>
+
 	</table>
+	<div id="tfoot"></div>
+	</div></div></div></div></div>
+	
 </div>
 
 </body>

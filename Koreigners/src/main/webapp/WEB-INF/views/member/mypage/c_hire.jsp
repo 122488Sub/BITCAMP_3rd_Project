@@ -8,6 +8,18 @@
     <link href="resources/css/style.css" rel="stylesheet" type="text/css">
     <link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+	<link href="resources/css/common/page.css" rel="stylesheet" type="text/css">
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<!-- Site CSS -->
+	<link rel="stylesheet" href="bootstrap/css/style.css">
+	<!-- Responsive CSS -->
+	<link rel="stylesheet" href="bootstrap/css/responsive.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="bootstrap/css/custom.css">
+	
+	
 	<script type="text/javascript" src="resources/js/member/c_mypage/c_hire.js"></script>
 	<script type="text/javascript" src="resources/js/member/c_mypage/c_MyPage.js"></script>
 	<script>
@@ -35,17 +47,25 @@
 		
 	</ul>
 </div>
-채용공고리스트 페이지!!!
-<table id="listTable"  border>
-		<thead id="tHead">			
-			
-		</thead>
-		<tbody id="list_box">
-			
-		</tbody>
-		<tfoot id="tfoot">
-			
-		</tfoot>
-	</table>
+<div class="wishlist-box-main">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="table-main table-responsive">
+						<table id="listTable" class="table">
+							<thead id="tHead">
+
+							</thead>
+							<tbody id="list_box">
+
+							</tbody>
+
+						</table>
+						<div id="tfoot"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

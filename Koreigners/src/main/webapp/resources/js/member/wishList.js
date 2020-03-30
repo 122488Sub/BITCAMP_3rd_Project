@@ -90,7 +90,7 @@ function setHouseHead(){
 }
 function setHouseData(houseData){
 	console.log(houseData);
-	return "<tr onclick='javascript:goHouseDetailPage("+houseData.room_idx+")' style='cursor: pointer;'>"
+	return "<tr class='trTag' onclick='javascript:goHouseDetailPage("+houseData.room_idx+")' style='cursor: pointer;'>"
 		+"<td>" + houseData.room_idx+ "</td>"
 		+"<td>" + houseData["subject"] + "</td>"
 		+ "<td>" + houseData["room_type"] + "</td>"
@@ -129,7 +129,7 @@ function setJobHead(){
 function setJobData(hireData,pvo){
 	console.log(hireData);
 	var dataText="";
-	dataText += "<tr>";
+	dataText += "<tr class='trTag'>";
 	dataText += "<td class='thumbnail-img'><p>" +hireData["company_name"] + "</p></td>";
 	dataText += "<td class='name-pr'>" + hireData["do_en"] + "</td>";
 	dataText += "<td class='price-pr'><a href='javascript:getJobDetail(" + hireData["hire_idx"] +  ' ,'  + pvo.nowPage +")'><p>" + hireData["title"] + "</p></a></td>";
@@ -175,7 +175,7 @@ function setResaleData(resaleData){
 	console.log(resaleData);
 	console.log("zz");
 	var dataText="";
-	dataText += "<tr>";
+	dataText += "<tr class='trTag'>";
 if(resaleData.file_ori_name ==null){
 	dataText +=	'<td><div><img class="imgFileList" src="resources/img/resale/default-placeholder.jpg"></div></td>';
 }
@@ -199,12 +199,12 @@ function setTfoot(pvo){
 	console.log(pvo.endPage);
 	console.log(pvo.totalPage);
 	var tfoot = "";
-	tfoot += '<tr><td><ol class="paging">'
+	tfoot += '<div id="pagingBox"><div id="olPaging"><ol class="paging">';
 		
 	if(pvo.beginPage < pvo.pagePerBlock){
-		tfoot += '<li class="disable">이전으로</li>';
+		tfoot += '<li class="disable" id="pointer">이전으로</li>';
 	} else{ 
-		tfoot += '<li><a href="javascript:changeCategory('+category+","+ boardIdx+","+mem_id+"," + (pvo.beginPage - pvo.pagePerBlock) + '")>이전으로</a></li>';
+		tfoot += '<li id="pointer"><a href="javascript:changeCategory('+category+","+ boardIdx+","+mem_id+"," + (pvo.beginPage - pvo.pagePerBlock) + '")>이전으로</a></li>';
 	}
 	for(var k=pvo.beginPage; k<=pvo.endPage; k++) {
 		if(k == pvo.nowPage) {
@@ -216,9 +216,9 @@ function setTfoot(pvo){
 		console.log("k: "+k);
 	}
 	if(pvo.endPage >= pvo.totalPage) {
-		tfoot+= '<li class="disable">다음으로</li>';
+		tfoot+= '<li class="disable" id="pointer">다음으로</li>';
 	} else {
-		tfoot += '<li><a href="javascript:changeCategory('+category+","+boardIdx+","+mem_id+","+ (pvo.beginPage + pvo.pagePerBlock)+')">다음으로</a></li>';
+		tfoot += '<li id="pointer"><a href="javascript:changeCategory('+category+","+boardIdx+","+mem_id+","+ (pvo.beginPage + pvo.pagePerBlock)+')">다음으로</a></li>';
 	}
 	
 	tfoot += '</ol></td></tr>'

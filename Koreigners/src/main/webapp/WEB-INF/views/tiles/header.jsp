@@ -25,19 +25,13 @@
 	   </ul>
 	    
 	   <div id="header_bottom">
-		   <c:choose>
-				<c:when test="${not empty mem_id}">
-					<a href="javascript:postAd('${postType}')">
-				       <div id="post_btn">
-				           <div id="btn_txt">
-				               Post an ad
-				           </div>
-				       </div>
-				     </a>
-				</c:when>
-				<c:otherwise>
-				</c:otherwise>
-			</c:choose>
+	      <a href="javascript:postAd('${postType}', '${mem_cate }')">
+	       <div id="post_btn">
+	           <div id="btn_txt">
+	               Post an ad
+	           </div>
+	       </div>
+	       </a>            
 	   </div>
 	</div>
 </section>

@@ -22,6 +22,7 @@
 	#titleGuide{font-size:20px; font-weight:800;}
 	p {margin-bottom: 10px;}
 </style>
+<link href="resources/css/member/resume.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="resources/js/hire/hireDetail.js"></script>
 <script type="text/javascript" src="resources/js/common/togleWish.js"></script>
 </head>
@@ -35,107 +36,111 @@
 </table>
 <hr>
 
-<h1>Company Information</h1><br><br>
-<table border>
+
+<table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0">
+<caption>
+Company Information
+</caption>
 	<tr>
 		<th>Company Name</th>
-		<td>${companyVO.company_name}</td>
-		<th>CEO</th>
-		<td>${companyVO.ceo_name}</td>
+		<td width="30%" class="txLeft">${companyVO.company_name}</td>
+		<th width="10%">CEO</th>
+		<td width="30%" class="txLeft">${companyVO.ceo_name}</td>
 	</tr>
 	<tr>
 		<th>Business Type</th>
-		<td>${companyVO.cate_prnt_en} > ${companyVO.cate_child_en}</td>
-		<th>Company Size(No. of employees)</th>
-		<td>${companyVO.employee_num}</td>
+		<td width="30%" class="txLeft">${companyVO.cate_prnt_en} > ${companyVO.cate_child_en}</td>
+		<th width="15%">Company Size<br>(No. of employees)</th>
+		<td width="30%" class="txLeft">${companyVO.employee_num}</td>
 	</tr>
 	<tr>
 		<th>Address</th>
-		<td colspan="3">${companyVO.address_en}</td>
+		<td colspan="3" width="30%" class="txLeft">${companyVO.address_en}</td>
 	</tr>
 </table>
-<br><br><br>
 
-<h1>Recruitment Information</h1><br><br>
-<table border>
+<table class="data_t recruit_re" width="100%" border="0" cellspacing="0" cellpadding="0">
+<caption>
+Recruitment Information
+</caption>
 	<tr>
 		<th>Job Title</th>
-		<td colspan="3">${hireVO.title}</td>
+		<td colspan="3" width="30%">${hireVO.title}</td>
 	</tr>
 	
 	<tr>
 		<th>Job type</th>
-		<td colspan="3">${hireVO.cate_prnt_en}  ${hireVO.cate_child_en}</td>
+		<td colspan="3" width="30%">${hireVO.cate_prnt_en}  ${hireVO.cate_child_en}</td>
 	</tr>
 	<tr>
 		<th>Location</th>
 		<c:choose>
 		<c:when test="${empty hireVO.gu_gun_eup_eng}">
-			<td colspan="3">N/A</td>
+			<td colspan="3" width="30%">N/A</td>
 		</c:when>
 		<c:otherwise>
-		<td colspan="3">${hireVO.do_en}, ${hireVO.gu_gun_eup_eng}</td>
+		<td colspan="3" width="30%">${hireVO.do_en}, ${hireVO.gu_gun_eup_eng}</td>
 		</c:otherwise>
 		</c:choose>
 	</tr>
 	<tr>
 		<th>Working Hours</th>
-		<td colspan="3">${hireVO.work_time}</td>
+		<td colspan="3" width="30%">${hireVO.work_time}</td>
 	</tr>
 	<tr>
 		<th>Salary</th>
-		<td colspan="3">${hireVO.payment_codition}
+		<td colspan="3" width="30%">${hireVO.payment_codition}
 			${hireVO.salary_min} - ${hireVO.salary_max}
 			[${hireVO.payment_detail}]
 		</td>
 	</tr>
 	<tr>
 		<th>No. of open position</th>
-		<td>${hireVO.hire_number}</td>
+		<td width="30%" class="txLeft">${hireVO.hire_number}</td>
 	
 		<th>preferred age</th>
-		<td>${hireVO.hire_age_min} - ${hireVO.hire_age_max}</td>
+		<td width="30%" class="txLeft">${hireVO.hire_age_min} - ${hireVO.hire_age_max}</td>
 	</tr>
 	<tr>
 		<th>Education</th>
-		<td>${hireVO.education}</td>
+		<td width="30%" class="txLeft">${hireVO.education}</td>
 		
 		<th>Major</th>
-		<td>${hireVO.major}</td>
+		<td width="30%" class="txLeft">${hireVO.major}</td>
 	</tr>
 	<tr>
 		<th>Work Experience</th>
-		<td colspan="3">${hireVO.experience}</td>
+		<td colspan="3" width="30%" class="txLeft">${hireVO.experience}</td>
 	</tr>
 	<tr>
 		<th>Foreign language</th>
-		<td>${hireVO.foreign_language}</td>
+		<td width="30%" class="txLeft">${hireVO.foreign_language}</td>
 		
 		<th>Other preferential skills</th>
-		<td>${hireVO.prefer_skills}</td>
+		<td width="30%" class="txLeft">${hireVO.prefer_skills}</td>
 	</tr>
 	<tr>
 		<th>Dormitory</th>
-		<td>${hireVO.domitory}</td>
+		<td width="30%" class="txLeft">${hireVO.domitory}</td>
 		
 		<th>Meals</th>
-		<td>${hireVO.meals}</td>
+		<td width="30%" class="txLeft">${hireVO.meals}</td>
 	</tr>
 	<tr>
 		<th>4 major insurance</th>
-		<td colspan="3">${hireVO.insurance}</td>
+		<td colspan="3" width="30%" class="txLeft">${hireVO.insurance}</td>
 	</tr>
 	<tr>
 		<th>Other information</th>
-		<td colspan="3">${hireVO.work_detail}</td>
+		<td colspan="3" width="30%" class="txLeft">${hireVO.work_detail}</td>
 	</tr>
 	<tr>
 		<th>How to apply</th>
-		<td>${hireVO.apply_way}</td>
+		<td width="30%" class="txLeft">${hireVO.apply_way}</td>
 		
 		<th>Required documents/
 			preparation materials</th>
-		<td>${hireVO.prepare_doc}</td>
+		<td width="30%" class="txLeft">${hireVO.prepare_doc}</td>
 	</tr>
 	<%--  --%>
 </table>

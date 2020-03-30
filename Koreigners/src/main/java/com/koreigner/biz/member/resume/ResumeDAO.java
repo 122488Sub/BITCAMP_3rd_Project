@@ -56,5 +56,23 @@ public class ResumeDAO {
 		mybatis.update("resume.updateResume", map);
 	}
 
+	//파일 수정
+	public void deleteFileList(Map<String, Object> map) throws Exception{
+		mybatis.update("resume.deleteFileList", map);
+	}
+
+	public void updateFile(Map<String, Object> map) throws Exception{
+		mybatis.update("resume.updateFile", map);
+	}
+
+	//커리어 수정
+//	public void updateCareer(Map<String, Object> map) throws Exception{
+//		mybatis.update("resume.updateCareer", map);
+//	}
+
+	public void deleteCareer(Map<String, Object> map) {
+		mybatis.delete("resume.deleteCareer", map);
+	}
+
 	
 }

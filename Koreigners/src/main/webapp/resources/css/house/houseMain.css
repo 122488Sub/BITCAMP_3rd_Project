@@ -30,3 +30,26 @@
 #option_panel {
 	
 }
+.wishlist-box-main {
+	
+	padding:20px 0;	
+}
+table{
+	border-collapse: collapse;
+	
+}
+.trTag td {
+    border-bottom: 1px solid #808080;
+}
+.table td, .table th {
+    padding: .75rem;
+}
+td {
+    height: 80px;
+}
+
+.table-main table td {
+    vertical-align: middle;
+    font-size: 18px;
+    font-weight: 600;
+}

@@ -87,6 +87,7 @@
 			<mvc:mapping path="/myPage_go.do"/>
 			<mvc:mapping path="/hireWrite_go.do"/>
 			<mvc:mapping path="/house_insert.do"/>
+			<mvc:mapping path="/resale_go.do"/>
 			<mvc:mapping path="/togleWish.do"/>
 			<bean class="com.koreigner.common.interceptor.UserInterceptor"/>
 		</mvc:interceptor>
