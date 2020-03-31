@@ -9,6 +9,7 @@
 		<typeAlias alias="house_all" type="com.koreigner.biz.house.HouseAll_VO"/>
 		<typeAlias alias="house_search" type="com.koreigner.biz.house.HouseSearch_VO"/>
 		<typeAlias alias="infoBoard" type="com.koreigner.biz.inform.InfoBoardVO"/>
+		<typeAlias alias="informVO" type="com.koreigner.biz.inform.InformVO"/>
 		<typeAlias alias="companyVO" type="com.koreigner.biz.job.company.CompanyVO"/>
 		<typeAlias alias="hireVO" type="com.koreigner.biz.job.hire.HireVO"/>
 		<typeAlias alias="jobVO" type="com.koreigner.biz.job.jobservice.JobVO"/>
@@ -20,7 +21,7 @@
 		<typeAlias alias="c_MyPageVO" type="com.koreigner.biz.member.mypage.c_MyPageVO"/>
 	</typeAliases>
   
-  <!-- SQL 작성파일인 매퍼 파일 위치 지정 -->
+  <!-- SQL ?묒꽦?뚯씪??留ㅽ띁 ?뚯씪 ?꾩튂 吏??-->
   <mappers>
 <!-- common mapper -->
      <mapper resource="mappings/common/korea_address-mapper.xml"/>
@@ -40,6 +41,7 @@
    	 
 <!-- info mapper -->
   	 <mapper resource="mappings/infoBoard-mapper.xml"/>
+  	 <mapper resource="mappings/inform/inform-mapper.xml"/>
   	 
 <!-- member mapper -->  	 
   	 <mapper resource="mappings/member/user-mapper.xml"/>

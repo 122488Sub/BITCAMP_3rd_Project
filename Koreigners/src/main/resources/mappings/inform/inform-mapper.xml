@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inform">
+	<select id="getSelectSearchList" parameterType="informVO" resultType="hashmap">
+	SELECT 
+		INFO_IDX, INFO_TITLE ,INFO_HIT , INFO_INS_DT, 
+		INFO_MEM_ID, INFO_UPD_DT, INFO_CATEGORY, INFO_LIKECNT 
+	FROM T_INFORM_TABLE
+	
+	<if test="searchCondition!=null and !searchCondition.equals('')">
+	WHERE
+		<if test="searchCondition == 'INFO_TITLE' ">
+			INFO_TITLE LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+		<if test="searchCondition == 'INFO_CONTENT' ">
+			INFO_CONTENT LIKE '%'|| #{searchKeyword} ||'%'
+		</if>
+	</if>
+	ORDER BY INFO_IDX DESC
+	</select>
+	
+	<select id="getInform" parameterType="informVO" resultType="hashmap">
+	SELECT 
+		INFO_IDX, INFO_TITLE,DBMS_LOB.SUBSTR(INFO_CONTENT, 3000, 1) as INFO_CONTENT
+		,INFO_HIT ,INFO_INS_DT ,INFO_MEM_ID,INFO_UPD_DT,INFO_CATEGORY,INFO_FILENAME,INFO_FILENAME_ORI,INFO_IP,INFO_BOARD_IDX,INFO_LIKECNT 
+	FROM T_INFORM_TABLE
+	
+	WHERE
+		INFO_IDX=#{info_idx}
+		
+	</select>
+	<select id="informSearchTotalCount" parameterType="informVO" resultType="int">
+	SELECT 
+		COUNT(INFO_IDX)
+	FROM T_INFORM_TABLE
+		<if test="searchCondition!=null and !searchCondition.equals('')">
+		WHERE
+			<if test="searchCondition == 'INFO_TITLE' ">
+				INFO_TITLE LIKE '%'|| #{searchKeyword} ||'%'
+			</if>
+			<if test="searchCondition == 'INFO_CONTENT' ">
+				INFO_CONTENT LIKE '%'|| #{searchKeyword} ||'%'
+			</if>
+		</if>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
