@@ -35,7 +35,7 @@
 				<option value="3">Lowest Monthly rent</option> 
 			</select>
 		</div>
-	  <c:if test="${user.mem_id!=null }">
+	  <c:if test="${user.mem_id!=null && user.mem_cate eq 'p'}">
 		<div id="insertDiv">
 			<a href="house_insert.do">New Post</a>
 		</div>

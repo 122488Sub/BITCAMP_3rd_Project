@@ -90,22 +90,20 @@
 				<br>
 				<br>
 				<div>
-					<c:if test="${user.mem_id!=null }">
+					<c:if test="${user.mem_id!=null && user.mem_cate eq 'p'}">
 						<c:choose>
-						<c:when test="${isWish}">
-							<input type="button" id="wishBtn" value="♥pick"  onclick="clickWishBtn('${user.mem_id }','${house.room_idx}',1)">
-						</c:when>
-						<c:otherwise>
-							<input type="button" id="wishBtn" value="♡pick"  onclick="clickWishBtn('${user.mem_id }','${house.room_idx}',1)">
-						</c:otherwise>
+							<c:when test="${isWish}">
+								<input type="button" id="wishBtn" value="♥pick"  onclick="clickWishBtn('${user.mem_id }','${house.room_idx}',1)">
+							</c:when>
+							<c:otherwise>
+								<input type="button" id="wishBtn" value="♡pick"  onclick="clickWishBtn('${user.mem_id }','${house.room_idx}',1)">
+							</c:otherwise>
 						</c:choose>
+						<c:if test="${authentication }">
+							<input type="button" id="" value="Modify" onClick="clickModify()">
+							<input type="button" id="" value="Delete" onClick="clickDelete()">
+						</c:if>
 					</c:if>
-					<c:if test="${authentication }">
-						<input type="button" id="" value="Modify" onClick="clickModify()">
-						<input type="button" id="" value="Delete" onClick="clickDelete()">
-					</c:if>
-				
-				
 				</div>
 			</div>
 		</div>
