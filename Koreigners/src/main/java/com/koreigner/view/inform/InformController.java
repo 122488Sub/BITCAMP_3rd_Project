@@ -3,8 +3,7 @@ package com.koreigner.view.inform;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -99,40 +97,106 @@ public class InformController {
 		System.out.println(p);
 		return result;
 	}
-	
+	//C:\Users\sub\Documents\Git\BITCAMP_3rd_Project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Koreigners\resources\data\boardImg
+	//C:\Users\sub\Documents\Git\BITCAMP_3rd_Project\Koreigners\src\main\webapp\resources\img\inform
+	/*
 	//임시(사진 업로드)
 		@RequestMapping(value="uploadSummernoteImageFile.do")
 		@ResponseBody
 		public String uploadSummernoteImageFile(MultipartHttpServletRequest uploadImg, HttpServletRequest request) throws IllegalStateException, IOException {
+			System.out.println(Paths.get("resources/img/inform/"));
 			System.out.println("?!?!?!");
 			MultiValueMap<String, MultipartFile> multi = uploadImg.getMultiFileMap();
-			String path = this.getClass().getResource("").getPath();
-			path = path.substring(1, path.indexOf(".metadata")) +  "Koreigners/src/main/webapp/resources/img/inform";
-			
+		
 			List<MultipartFile> list = multi.get("file");
 			MultipartFile multiFile = list.get(0);
 			
 			String fileName = multiFile.getOriginalFilename();
 			UUID uuid = UUID.randomUUID();
 			String randomName = uuid.toString() + "_" + fileName;
-			/*
+			
 			ServletContext sc = uploadImg.getServletContext();
 			String imgPath = "";
-			String folderName = "";
+			//String folderName = "";
 			
-			String boardType = request.getParameter("boardType");
-			if (boardType == null || boardType == "") {
-				imgPath = sc.getRealPath("resources/data/boardImg");
-				folderName = "boardImg/";
-			} else if (boardType.equals("lectureInfo")){
-				imgPath = sc.getRealPath("resources/data/lecture/lectureInfoImg");
-				folderName = "lecture/lectureInfoImg/";
-			}*/
+			imgPath = sc.getRealPath("/");
+			//folderName = "boardImg/";
 			
-			multiFile.transferTo(new File(path + "/" + randomName));
-			
-			return "resources/img/inform/" + URLEncoder.encode(randomName, "UTF-8");
+			//System.out.println(imgPath);
+			//System.out.println(imgPath.substring(1, imgPath.indexOf(".metadata")) + "Koreigners\\src\\main\\webapp\\resources\\img\\inform");
+			//String imgPath = request.getSession().getServletContext().getRealPath("/");
+			//String imgPath = this.getClass().getResource("").getPath();
+			//System.out.println(imgPath);
+			imgPath = imgPath.substring(0, imgPath.indexOf(".metadata")) + "Koreigners\\src\\main\\webapp\\resources\\img\\inform";
+			System.out.println(imgPath);
+			System.out.println("tqssq");
+			multiFile.transferTo(new File(imgPath + "/" + randomName));
+			// "../../../../../..//src/main/webapp/resources/img/inform/"
+			String tmp=imgPath.replaceAll("\\\\", "/")+ "/" + URLEncoder.encode(randomName, "UTF-8");
+			System.out.println(tmp);
+			return tmp;
+		}*/
+
+/*
+	@RequestMapping(value="uploadSummernoteImageFile.do")
+	@ResponseBody
+	public String uploadSummernoteImageFile(MultipartHttpServletRequest uploadImg, HttpServletRequest request) throws IllegalStateException, IOException {
+		System.out.println("?!?!?!");
+		MultiValueMap<String, MultipartFile> multi = uploadImg.getMultiFileMap();
+		
+		List<MultipartFile> list = multi.get("file");
+		MultipartFile multiFile = list.get(0);
+		
+		String fileName = multiFile.getOriginalFilename();
+		UUID uuid = UUID.randomUUID();
+		String randomName = uuid.toString() + "_" + fileName;
+		
+		ServletContext sc = uploadImg.getServletContext();
+		String imgPath = "";
+		String folderName = "";
+		String boardType = request.getParameter("boardType");
+		if (boardType == null || boardType == "") {
+			imgPath = sc.getRealPath("resources/data/boardImg");
+			folderName = "boardImg/";
+		} else if (boardType.equals("lectureInfo")){
+			imgPath = sc.getRealPath("resources/data/lecture/lectureInfoImg");
+			folderName = "lecture/lectureInfoImg/";
 		}
-
-
+		System.out.println(imgPath);
+		multiFile.transferTo(new File(imgPath + "/" + randomName));
+		
+		return "resources/data/"+folderName + URLEncoder.encode(randomName, "UTF-8");
+	}
+*/
+	@RequestMapping(value="uploadSummernoteImageFile.do")
+	@ResponseBody
+	public String uploadSummernoteImageFile(MultipartHttpServletRequest uploadImg, HttpServletRequest request) throws IllegalStateException, IOException {
+		System.out.println("?!?!?!");
+		MultiValueMap<String, MultipartFile> multi = uploadImg.getMultiFileMap();
+		
+		List<MultipartFile> list = multi.get("file");
+		MultipartFile multiFile = list.get(0);
+		
+		String fileName = multiFile.getOriginalFilename();
+		UUID uuid = UUID.randomUUID();
+		String randomName = uuid.toString() + "_" + fileName;
+		
+		//ServletContext sc = uploadImg.getServletContext();
+		String imgPath =  request.getSession().getServletContext().getRealPath("/resources/img/inform");
+		String folderName = "inform/";
+	
+		//imgPath = sc.getRealPath("resources/img/inform");
+			
+	
+		System.out.println(imgPath);
+		multiFile.transferTo(new File(imgPath + "/" + randomName));
+		/*
+		imgPath = imgPath.substring(0, imgPath.indexOf(".metadata")) + "Koreigners\\src\\main\\webapp\\resources\\img\\inform";
+		System.out.println(imgPath);
+		multiFile.transferTo(new File(imgPath + "/" + randomName));
+		
+		*/
+		
+		return "resources/img/"+folderName + URLEncoder.encode(randomName, "UTF-8");
+	}
 }
