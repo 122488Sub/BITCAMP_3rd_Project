@@ -61,6 +61,12 @@ public class c_MyPageDAO {
 		 return result;
 	}
 
+	public int myBatis_updateApplyDel(c_MyPageVO cVO) {
+		int result=mybatis.update("c_MyPage.updateApplyDel", cVO);
+		return result;
+		
+	}
+
 	
 
 	

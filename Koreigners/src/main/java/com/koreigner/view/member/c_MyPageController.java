@@ -119,5 +119,24 @@ public class c_MyPageController {
 		return map;
 	}
 	
-	
+	@RequestMapping(value="checkResume.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map<String,Object> checkResume(HttpServletRequest request, c_MyPageVO cVO, Model model) {
+		System.out.println("checkResume");
+		
+		Map<String,Object> map=new HashMap<String, Object>();
+		map=cService.checkResume(cVO);
+		
+		return map;
+	}
+	@RequestMapping(value="checkApply.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map<String,Object> checkApply(HttpServletRequest request, c_MyPageVO cVO, Model model) {
+		System.out.println("checkApply");
+		
+		Map<String,Object> map=new HashMap<String, Object>();
+		map=cService.checkApply(cVO);
+		
+		return map;
+	}
 }

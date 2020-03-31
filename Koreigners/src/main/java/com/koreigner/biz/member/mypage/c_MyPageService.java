@@ -18,4 +18,8 @@ public interface c_MyPageService {
 
 	Map<String,Object> togleApply(c_MyPageVO cVO);
 
+	Map<String, Object> checkResume(c_MyPageVO cVO);
+
+	Map<String, Object> checkApply(c_MyPageVO cVO);
+
 }

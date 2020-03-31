@@ -27,6 +27,7 @@
 <script type="text/javascript" src="resources/js/hire/hireDetail.js"></script>
 <script type="text/javascript" src="resources/js/hire/applyEmployment.js"></script>
 <script type="text/javascript" src="resources/js/common/togleWish.js"></script>
+<script type="text/javascript" src="resources/js/common/post_go.js"></script>
 </head>
 <body>
 <div id="detailContents">

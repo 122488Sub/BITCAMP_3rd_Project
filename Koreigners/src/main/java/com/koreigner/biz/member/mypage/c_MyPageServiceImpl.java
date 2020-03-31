@@ -46,24 +46,45 @@ public class c_MyPageServiceImpl implements c_MyPageService {
 	public Map<String, Object> togleApply(c_MyPageVO cVO) {
 		Map<String, Object> resultMap= new HashMap<String, Object>();
 
+		if(cVO.getCategory()==2) {
+			
+			if(cDAO.myBatis_updateApplyDel(cVO)>0) {
+				resultMap.put("result","Your registration cancellation is complete.");
+			}else {
+				resultMap.put("result","ERROR");
+			}
+		}else {
+			
+			if(cDAO.myBatis_insertApply(cVO)>0) {
+				resultMap.put("result","Your resume registration has been completed successfully.");
+			}else {
+				resultMap.put("result","ERROR");
+			}
+		}
+		
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> checkResume(c_MyPageVO cVO) {
+		Map<String, Object> resultMap= new HashMap<String, Object>();
+
 		int resume_idx=cDAO.mybatis_isResume(cVO);
 
 		if(resume_idx<1) {
-			resultMap.put("result","없어!");
+			resultMap.put("isResume",false);
+		}else {
+			resultMap.put("isResume",true);
+			resultMap.put("resume_idx", resume_idx);
 		}
-		else {
-			cVO.setResume_idx(resume_idx);
-			System.out.println(cVO);
-			if(cDAO.myBatis_isApply(cVO)) {
-				//cDAO.myBatis_update_(cVO);
-				resultMap.put("result","이미 신청했어");
-			}else {
-				
-				if(cDAO.myBatis_insertApply(cVO)>0) {
-					resultMap.put("result","신청할께");
-				}
-			}
-		}
+		
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, Object> checkApply(c_MyPageVO cVO) {
+		Map<String, Object> resultMap= new HashMap<String, Object>();
+		resultMap.put("isApply",cDAO.myBatis_isApply(cVO));
 		return resultMap;
 	}
 	

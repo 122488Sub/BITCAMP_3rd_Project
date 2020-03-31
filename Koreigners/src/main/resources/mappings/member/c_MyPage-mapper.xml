@@ -75,6 +75,9 @@
 	INSERT INTO T_MEMBER_APPLY(APPLY_IDX,COMPANY_IDX,HIRE_IDX,RESUME_IDX ) VALUES(APPLY_SQ.NEXTVAL,#{company_idx},#{hire_idx},#{resume_idx}) 
 	</insert>
 	
+	<update id="updateApplyDel" parameterType="c_MyPageVO">
+	UPDATE T_MEMBER_APPLY SET STATE=2 WHERE HIRE_IDX=#{hire_idx} AND RESUME_IDX=#{resume_idx} 
+	</update>
 </mapper>
 
 
