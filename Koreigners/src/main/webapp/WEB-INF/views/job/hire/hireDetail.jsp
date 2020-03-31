@@ -23,8 +23,11 @@
 	p {margin-bottom: 10px;}
 </style>
 <link href="resources/css/member/resume.css" rel="stylesheet" type="text/css">
+<link href="resources/css/common/button.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="resources/js/hire/hireDetail.js"></script>
+<script type="text/javascript" src="resources/js/hire/applyEmployment.js"></script>
 <script type="text/javascript" src="resources/js/common/togleWish.js"></script>
+<script type="text/javascript" src="resources/js/common/post_go.js"></script>
 </head>
 <body>
 <div id="detailContents">
@@ -153,11 +156,11 @@ Recruitment Information
 </div>
 <hr>
 <br><br><br><br>
-<input type="button" value="Apply for employment">
+<input type="button" class="btn59acff" onclick="clickApplyEmployment('${user.mem_id}',${hireVO.company_idx},${hireVO.hire_idx})" value="Apply for employment">
 <!--  
 <input type="button" onclick="wishList(${hireVO.hire_idx},'${user.mem_id}')" value="Save My WishList">
 -->
-<input type="button" onclick="clickWishList('${user.mem_id}',${hireVO.hire_idx},2)" value="Save My WishList">
+<input type="button" class="btn59acff"  onclick="clickWishList('${user.mem_id}',${hireVO.hire_idx},2)" value="Save My WishList">
 </div>
 </body>
 </html>

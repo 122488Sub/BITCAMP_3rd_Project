@@ -23,14 +23,36 @@
 	SELECT *
 	FROM (
 	       SELECT ROWNUM R_NUM, RESUME.*
-	        FROM (  SELECT * 
-	                FROM T_MEMBER_RESUME 
-	                WHERE RESUME_IDX IN (   SELECT 
-	                						<include refid="member.common.include.select_RESUME_IDX" />
-	                                    )
+	        FROM (  SELECT  H.TITLE,R.RESUME_IDX,R.MEM_ID,R.MEM_NAME,R.WISH_DO,R.WISH_SI,R.JOB_CATE,R.JOB_CATE_CHILD,
+                            A.APPLY_IDX,A.COMPANY_IDX,A.HIRE_IDX,A.REGDATE,A.STATE
+	                FROM T_MEMBER_RESUME R,
+                     (   SELECT RESUME_IDX, APPLY_IDX,COMPANY_IDX,HIRE_IDX,REGDATE,STATE
+                            FROM T_MEMBER_APPLY
+                            WHERE HIRE_IDX IN(  SELECT HIRE_IDX
+                                                FROM T_JOB_HIRE
+                                                WHERE COMPANY_IDX=(SELECT COMPANY_IDX 
+                                                         FROM T_COMPANY 
+                                                     WHERE MEM_ID=#{mem_id}
+                                                   )
+                                             )
+                            AND STATE=1 
+	                     )A,
+                         (   SELECT TITLE,HIRE_IDX
+                            FROM T_JOB_HIRE
+                            WHERE HIRE_IDX IN(  SELECT HIRE_IDX
+                                                FROM T_JOB_HIRE
+                                                WHERE COMPANY_IDX=(SELECT COMPANY_IDX 
+                                                         FROM T_COMPANY 
+                                                     WHERE MEM_ID=#{mem_id}
+                                                   )
+                                             )
+	                     )H
+                         
+	                WHERE R.RESUME_IDX =A.RESUME_IDX
+                    AND A.HIRE_IDX = H.HIRE_IDX
 	            ) RESUME    
 	    )
-	WHERE R_NUM BETWEEN #{begin} AND #{end}
+	WHERE R_NUM BETWEEN #{begin} AND #{end} 
 	  
 	</select>
 	
@@ -41,6 +63,21 @@
 	<select id="getHireMyAdsTotal" parameterType="c_MyPageVO" resultType="int">
 	SELECT COUNT(HIRE_IDX) FROM T_JOB_HIRE WHERE MEM_ID= #{mem_id}  	
 	</select>
+	
+	<select id="isResume" parameterType="c_MyPageVO" resultType="int">
+	SELECT NVL(RESUME_IDX,0) FROM T_MEMBER_RESUME WHERE MEM_ID = #{mem_id} 
+	</select>
+	<select id="isApply" parameterType="c_MyPageVO" resultType="int">
+	SELECT COUNT(APPLY_IDX) FROM T_MEMBER_APPLY WHERE RESUME_IDX = #{resume_idx} AND HIRE_IDX=#{hire_idx} AND STATE=1
+	</select>
+	
+	<insert id="insertApply" parameterType="c_MyPageVO">
+	INSERT INTO T_MEMBER_APPLY(APPLY_IDX,COMPANY_IDX,HIRE_IDX,RESUME_IDX ) VALUES(APPLY_SQ.NEXTVAL,#{company_idx},#{hire_idx},#{resume_idx}) 
+	</insert>
+	
+	<update id="updateApplyDel" parameterType="c_MyPageVO">
+	UPDATE T_MEMBER_APPLY SET STATE=2 WHERE HIRE_IDX=#{hire_idx} AND RESUME_IDX=#{resume_idx} 
+	</update>
 </mapper>
 
 

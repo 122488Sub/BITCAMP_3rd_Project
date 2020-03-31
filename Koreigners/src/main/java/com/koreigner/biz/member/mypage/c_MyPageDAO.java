@@ -39,6 +39,34 @@ public class c_MyPageDAO {
 		return  mybatis.selectOne("c_MyPage.getHireMyAdsTotal",cVO);
 	}
 
+	public int mybatis_isResume(c_MyPageVO cVO) {
+		Integer resume_Idx=mybatis.selectOne("c_MyPage.isResume",cVO);
+		if(resume_Idx==null)
+			resume_Idx=0;
+		return  resume_Idx;
+	}
+
+	public boolean myBatis_isApply(c_MyPageVO cVO) {
+		int count= mybatis.selectOne("c_MyPage.isApply", cVO);
+		
+		boolean result=false;
+		if(count>0) {
+			result=true;
+		}
+		return result;
+	}
+
+	public int myBatis_insertApply(c_MyPageVO cVO) {
+		 int result=mybatis.insert("c_MyPage.insertApply", cVO); 
+		 return result;
+	}
+
+	public int myBatis_updateApplyDel(c_MyPageVO cVO) {
+		int result=mybatis.update("c_MyPage.updateApplyDel", cVO);
+		return result;
+		
+	}
+
 	
 
 	

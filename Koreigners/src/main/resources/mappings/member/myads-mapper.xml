@@ -59,6 +59,7 @@
 									 						FROM T_MEMBER_RESUME 
 									 						WHERE MEM_ID=#{mem_id} 
 									 					 ) 
+									 AND STATE=1
 									  )  	
 		                
 		               ORDER BY HIRE_IDX DESC) HIRE

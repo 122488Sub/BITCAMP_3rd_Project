@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,6 +18,7 @@ import com.koreigner.biz.common.page.PagingService;
 import com.koreigner.biz.common.page.PagingVO;
 import com.koreigner.biz.member.mypage.c_MyPageService;
 import com.koreigner.biz.member.mypage.c_MyPageVO;
+import com.koreigner.biz.member.mypage.p_MyPageVO;
 import com.koreigner.biz.member.resume.ResumeService;
 
 @Controller
@@ -105,7 +107,36 @@ public class c_MyPageController {
 		
 	}
 	
+	@RequestMapping(value="togleApply.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map<String,Object> togleApply(HttpServletRequest request, c_MyPageVO cVO, Model model) {
+		System.out.println("togleApply");
+		
+		
+		Map<String,Object> map=new HashMap<String, Object>();
+		map=cService.togleApply(cVO);
+		
+		return map;
+	}
 	
-	
-	
+	@RequestMapping(value="checkResume.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map<String,Object> checkResume(HttpServletRequest request, c_MyPageVO cVO, Model model) {
+		System.out.println("checkResume");
+		
+		Map<String,Object> map=new HashMap<String, Object>();
+		map=cService.checkResume(cVO);
+		
+		return map;
+	}
+	@RequestMapping(value="checkApply.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map<String,Object> checkApply(HttpServletRequest request, c_MyPageVO cVO, Model model) {
+		System.out.println("checkApply");
+		
+		Map<String,Object> map=new HashMap<String, Object>();
+		map=cService.checkApply(cVO);
+		
+		return map;
+	}
 }

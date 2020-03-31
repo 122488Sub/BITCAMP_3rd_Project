@@ -16,7 +16,7 @@
         WHERE COMPANY_IDX=(  SELECT COMPANY_IDX 
                           		 FROM T_COMPANY 
                            	 WHERE MEM_ID=#{mem_id} 
-                           )
+                           )AND STATE=1 
 	</sql>
 </mapper>
 

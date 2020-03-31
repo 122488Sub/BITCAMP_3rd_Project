@@ -100,7 +100,7 @@ function setCApplierHead() {
 function setCApplierData(cResume) {
 	console.log(cResume);
 	return  "<tr class='trTag' onclick='javascript:goResumeDetailPage(" +'"'+ cResume.MEM_ID+'"'
-			+ ")' style='cursor: pointer;'>" + "<td>" + cResume.MEM_ID
+			+ ")' style='cursor: pointer;'>" + "<td>" + cResume.TITLE
 			+ "</td>" + "<td>" + cResume["MEM_NAME"] + "</td>" + "<td>"
 			+cResume["WISH_SI"] +","+cResume["WISH_DO"] + "</td>" + "<td>" + cResume["JOB_CATE"]
 			+ "</td>" + "<td>" + cResume["JOB_CATE_CHILD"] +"</td>" + "<td>"
