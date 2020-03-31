@@ -24,7 +24,7 @@ import com.koreigner.biz.resale.ResaleVO;
 public class p_MyPageController {
 
 	@Autowired
-	private p_MyPageService wishService;
+	private p_MyPageService pService;
 	
 	@Autowired
 	PagingService paging;
@@ -50,13 +50,13 @@ public class p_MyPageController {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		switch (wishVO.getBoard_idx()) {
 		case 1://하우스
-			result.put("house",wishService.getHouseWishList(wishVO));
+			result.put("house",pService.getHouseWishList(wishVO));
 			break;
 		case 2://일자리
-			result.put("hire",wishService.getHireWishList(wishVO));
+			result.put("hire",pService.getHireWishList(wishVO));
 			break;
 		case 3://중고
-			List<ResaleVO> resaleList=wishService.getResaleWishList(wishVO);
+			List<ResaleVO> resaleList=pService.getResaleWishList(wishVO);
 			result.put("list",resaleList);
 			break;
 		case 4://자유
@@ -93,13 +93,13 @@ public class p_MyPageController {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		switch (wishVO.getBoard_idx()) {
 		case 1://하우스
-			result.put("house",wishService.getHouseMyAdsList(wishVO));
+			result.put("house",pService.getHouseMyAdsList(wishVO));
 			break;
 		case 2://일자리
-			result.put("hire",wishService.getHireMyApplyList(wishVO));
+			result.put("hire",pService.getHireMyApplyList(wishVO));
 			break;
 		case 3://중고
-			List<ResaleVO> resaleList=wishService.getResaleMyAdsList(wishVO);
+			List<ResaleVO> resaleList=pService.getResaleMyAdsList(wishVO);
 			result.put("list",resaleList);
 			break;
 		case 4://자유
@@ -121,15 +121,17 @@ public class p_MyPageController {
 	
 	@RequestMapping(value="togleWish.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public Map<String,Object> houseWish(HttpServletRequest request, p_MyPageVO wishVO, Model model) {
-		System.out.println("houseWish");
+	public Map<String,Object> togleWish(HttpServletRequest request, p_MyPageVO pVO, Model model) {
+		System.out.println("togleWish");
 		
 		
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("result", wishService.togleWish(wishVO));
+		map.put("result", pService.togleWish(pVO));
 		
 		return map;
 	}
+	
+	
 	
 	
 	

@@ -12,6 +12,7 @@ public class HireVO {
 	private int hire_age_min;               //희망 직원 나이 최소
 	private int hire_age_max;               //희망 직원 나이 최대
 	private int hit;                        //조회수
+	private int company_idx;				//회사 고유 번호
 	private String mem_id;                  //회사 계정 아이디
 	private String company_name;            //회사 이름
 	private String work_type;               //근무 형태   정규직 / 아르바이트 / 시간제 등등
@@ -51,6 +52,18 @@ public class HireVO {
 	
 	
 	
+	public int getCompany_idx() {
+		return company_idx;
+	}
+
+
+
+	public void setCompany_idx(int company_idx) {
+		this.company_idx = company_idx;
+	}
+
+
+
 	public String getCompany_name() {
 		return company_name;
 	}

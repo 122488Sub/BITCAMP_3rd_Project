@@ -15,4 +15,7 @@ public interface c_MyPageService {
 
 	int getResumeTotal(c_MyPageVO cVO);
 	int getHireTotal(c_MyPageVO cVO);
+
+	Map<String,Object> togleApply(c_MyPageVO cVO);
+
 }

@@ -1,5 +1,6 @@
 package com.koreigner.biz.member.mypage;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,31 @@ public class c_MyPageServiceImpl implements c_MyPageService {
 	public int getHireTotal(c_MyPageVO cVO) {
 		// TODO Auto-generated method stub
 		return cDAO.mybatis_getHireTotal(cVO);
+	}
+
+	@Override
+	public Map<String, Object> togleApply(c_MyPageVO cVO) {
+		Map<String, Object> resultMap= new HashMap<String, Object>();
+
+		int resume_idx=cDAO.mybatis_isResume(cVO);
+
+		if(resume_idx<1) {
+			resultMap.put("result","없어!");
+		}
+		else {
+			cVO.setResume_idx(resume_idx);
+			System.out.println(cVO);
+			if(cDAO.myBatis_isApply(cVO)) {
+				//cDAO.myBatis_update_(cVO);
+				resultMap.put("result","이미 신청했어");
+			}else {
+				
+				if(cDAO.myBatis_insertApply(cVO)>0) {
+					resultMap.put("result","신청할께");
+				}
+			}
+		}
+		return resultMap;
 	}
 	
 	
