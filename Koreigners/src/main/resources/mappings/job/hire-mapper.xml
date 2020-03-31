@@ -125,7 +125,7 @@
                         PAYMENT_CODITION, PAYMENT_DETAIL, PREFER_SKILLS, PREPARE_DOC , 
                         REGDATE, SALARY_MAX, SALARY_MIN ,
                         TITLE, 
-                        WORK_DETAIL, WORK_TIME, WORK_TYPE
+                        WORK_DETAIL, WORK_TIME, WORK_TYPE,COMPANY_IDX
                       )
 	    VALUES (
 	            #{address} ,#{address_en}, #{addr_dt_en}, #{addr_dt_kor}, #{apply_way}, 
@@ -140,7 +140,7 @@
 	            #{payment_codition}, #{payment_detail}, #{prefer_skills}, #{prepare_doc}, 
 	            sysdate, #{salary_max}, #{salary_min},
 	            #{title}, 
-	            #{work_detail}, #{work_time}, #{work_type}
+	            #{work_detail}, #{work_time}, #{work_type},(SELECT COMPANY_IDX FROM T_COMPANY WHERE MEM_ID=#{mem_id})
 	            )
 	</insert>
 	
