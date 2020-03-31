@@ -68,9 +68,9 @@ public class MypageController {
 		} else { 
 
 			if(type.equals("profile")) {
-				mv = new ModelAndView("member/mypage/p_profile.page");
+				mv = new ModelAndView("member/mypage/p_profile_bootstrap.page");
 			} else if(type.equals("resume")) {
-				mv = new ModelAndView("member/mypage/p_resume.page");
+				mv = new ModelAndView("member/mypage/p_resume_bootstrap.page");
 
 				System.out.println("//mypage이동 컨트롤러에서 mem_id : " + mem_id);
 				Map<String, Object> map = resumeService.selectResume(mem_id);
@@ -115,12 +115,12 @@ public class MypageController {
 		userService.updateMember(vo);
 		
 		if(mem_cate.equals("c")) {
-			return "member/mypage/c_profile.page";
+			return "myPage_go.do?type=profile";
 			
 		} else if(mem_cate.equals("p")) {
 			UserVO mvo = userService.getOneMember(vo.getMem_id());
 			model.addAttribute("mvo", mvo);
-			return "member/mypage/p_profile.page";
+			return "myPage_go.do?type=profile";
 			
 		} else {
 			return "common/main.page";
