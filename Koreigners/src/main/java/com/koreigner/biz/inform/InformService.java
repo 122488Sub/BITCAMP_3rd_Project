@@ -15,5 +15,7 @@ public interface InformService {
 	List<InfoBoardVO> getInfoBoardList(InfoBoardVO vo);*/
 
 	List<Map<String, Object>> getSelectSearchList(InformVO informVO);
+
+	boolean nioFileCopy(String inFileName, String outFileName);
 	
 }

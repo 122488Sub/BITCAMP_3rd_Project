@@ -1,5 +1,11 @@
 package com.koreigner.biz.inform;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +33,46 @@ public class InformServiceImpl implements InformService {
 		return informDAO.dao_getSelectSearchList(informVO);
 	}
 	
-	
-	
+	@Override
+	public boolean nioFileCopy(String inFileName, String outFileName) {
+        Path source = Paths.get(inFileName);
+        Path target = Paths.get(outFileName);
+        
+        // 사전체크
+        if (source == null) {
+            throw new IllegalArgumentException("source must be specified");
+        }
+        if (target == null) {
+            throw new IllegalArgumentException("target must be specified");
+        }
+        
+        // 소스파일이 실제로 존재하는지 체크
+        if (!Files.exists(source, new LinkOption[] {})) {
+            throw new IllegalArgumentException("Source file doesn't exist: " + source.toString());
+        }
+ 
+        /* // 소스경로와 복사후 경로가 일치하면 리턴 (일단 주석처리)
+        if (source == target) {
+            return;
+        }
+        */
+        
+        try {
+            Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);   // 파일복사
+            
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+        
+        if(Files.exists(target, new LinkOption[]{})){        // 파일이 정상적으로 생성이 되었다면
+            // System.out.println("File Copied");
+            return true;                                     // true 리턴
+        } else {
+            System.out.println("File Copy Failed");
+            return false;                                    // 실패시 false
+        }
+    }
 	
 }
