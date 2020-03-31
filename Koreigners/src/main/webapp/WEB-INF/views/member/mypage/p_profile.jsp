@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW24W9sP9njddFNugiBUaJ-AzVfpQb_MY&language=en&libraries=places&callback=initMap" async defer></script>
 <script type="text/javascript" src="resources/js/member/p_profile.js"></script>
-<link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css">
+<!-- <link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css"> -->
 </head>
 <body>
 
@@ -38,7 +38,7 @@
 			<td class="title"><label for="id">ID(Email)</label></td>
 			<td class="contents">
 				<input class="input_box" name="mem_id" value="${mvo.mem_id }" contenteditable="false" disabled="disabled">
-				<input type="hidden" id="mem_id" class="input_box" name="mem_id" value="${mvo.mem_id }">
+				<input type="hidden" id="mem_id" name="mem_id" value="${mvo.mem_id }">
 			</td>
 		</tr>
 		<tr>
