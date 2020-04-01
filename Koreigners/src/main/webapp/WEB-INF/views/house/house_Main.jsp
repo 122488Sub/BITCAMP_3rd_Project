@@ -21,11 +21,13 @@
 
 <body>
 
-<div id="houseMain_content">
+<div id="houseMain_content" >
+	<div style="width:1200px; margin: 0 auto;">
 	<!-- 지도부분 -->
 	<jsp:include page="../common/republic_korea.jsp">
 		<jsp:param value="house" name="category"/>
 	</jsp:include>
+	</div>
 	<div id="listHeader">
 		
 		<div id="sortDiv">

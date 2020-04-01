@@ -5,7 +5,7 @@ import java.sql.Date;
 public class ResaleCommVO {
  int rs_idx, c_idx, groups, step, lev;
  String mem_id, mem_pw, mem_name, content, ip;
- Date write_date, regdate;
+ String write_date, regdate;
  
  
  	public ResaleCommVO() {}
@@ -111,22 +111,22 @@ public class ResaleCommVO {
 	}
 	
 	
-	public Date getWrite_date() {
+	public String getWrite_date() {
 		return write_date;
 	}
 	
 	
-	public void setWrite_date(Date write_date) {
+	public void setWrite_date(String write_date) {
 		this.write_date = write_date;
 	}
 	
 	
-	public Date getRegdate() {
+	public String getRegdate() {
 		return regdate;
 	}
 	
 	
-	public void setRegdate(Date regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
 	

@@ -19,11 +19,19 @@
 <link href="resources/css/common/page.css" rel="stylesheet" type="text/css">
 <link href="resources/css/common/button.css" rel="stylesheet" type="text/css">
 
-<link href="resources/css/common/page.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="resources/js/common/buttonColorChange.js"></script>
+<script type="text/javascript" src="resources/js/inform/infoList.js"></script>
 </head>
 
 <body>
-
+	<div style="text-align: center">
+		<input type="button" id="btn1" class="btn59acff" value="All" onclick="javascript:getData('All',1)">
+		<input type="button" id="btn2" class="btn59acff" value="Information" onclick="javascript:getData('Information',1)">
+		<input type="button" id="btn3" class="btn59acff" value="Food" onclick="javascript:getData('Food',1)">
+		<input type="button" id="btn4" class="btn59acff" value="Travel" onclick="javascript:getData('Travel',1)">
+		<input type="button" id="btn5" class="btn59acff" value="Etc" onclick="javascript:getData('Etc',1)">
+	</div>
+	
 	<div class="wishlist-box-main">
 	<a href="InfoInsert_go.do">New Post</a>
 		<div class="container">
@@ -45,101 +53,7 @@
 			</div>
 		</div>
 	</div>
-<script type="text/javascript">
-
-$( function() {
-	getData(1,"");
-});
-
-function getData(cPage,searchKey) {
 	
-	var url = 'getInformListData.do?cPage=' + cPage;
-	
-	console.log(url);
-	var param = {
-		
-	}
-
-	jQuery.ajaxSettings.traditional = true;
-	$.ajax({
-		type : "get",
-		url : url,
-		dataType : "json",
-		async : false,
-		data : param,
-		success : function(data) {
-
-			var data = data;
-			console.log(">>>>>>>>>>>data :" + data);
-			
-			var pvo = data.pvo;
-			console.log(">>>>>>>>>>>data.pvo  :" + pvo);
-			
-			var informList = data.inform;
-			console.log(">>>>>>>>>>>data :" + informList);
-			
-			
-			$("#tHead").html(
-					"<tr>" + "<th>Idx</th>" + "<th>Category</th>" + "<th>Title</th>"
-					+ "<th>PostDate</th>" + "<th>Hit</th>"+ "</tr>"
-
-			);
-			
-			
-			var dataTag = "";
-			$.each(informList, function(index, obj) {
-				console.log(this);	
-				dataTag += "<tr class='trTag' onclick='javascript:goInformDetailPage(" 
-							+ this.INFO_IDX
-							+ ")' style='cursor: pointer;'>" + "<td>" + this.INFO_IDX
-							+ "</td>" + "<td>" + this["INFO_CATEGORY"] + "</td>" + "<td>"
-							+ this["INFO_TITLE"] + "</td>" + "<td>" + this["INFO_INS_DT"]
-							+ "</td>" + "<td>" + this["INFO_HIT"] +"</td>" + "</tr>";
-			});
-			
-			$("#list_box").html(dataTag);
-			
-			var tfoot = "";
-			tfoot += '<div id="pagingBox"><div id="olPaging"><ol class="paging">';
-				
-			if(pvo.beginPage < pvo.pagePerBlock){
-				tfoot += '<li class="disable" id="pointer">이전으로</li>';
-			} else{ 
-				tfoot += '<li id="pointer"><a href="javascript:changeCategory('+category+","+ boardIdx+","+mem_id+"," + (pvo.beginPage - pvo.pagePerBlock) + '")>이전으로</a></li>';
-			}
-			for(var k=pvo.beginPage; k<=pvo.endPage; k++) {
-				if(k == pvo.nowPage) {
-					tfoot += '<li class="now">'+ k +'</li>';
-				}
-				else if (k != pvo.nowPage) {
-					tfoot += '<li><a href="javascript:changeCategory('+category+","+boardIdx+",'"+mem_id+"',"+ k +')">'+ k +'</a></li>';
-				}
-				console.log("k: "+k);
-			}
-			if(pvo.endPage >= pvo.totalPage) {
-				tfoot+= '<li class="disable" id="pointer">다음으로</li>';
-			} else {
-				tfoot += '<li id="pointer"><a href="javascript:changeCategory('+category+","+boardIdx+","+mem_id+","+ (pvo.beginPage + pvo.pagePerBlock)+')">다음으로</a></li>';
-			}
-			
-			tfoot += '</ol></td></tr>'
-			$("#tfoot").html(tfoot);
-		},
-		error : function(jqXHR, textStatus, errorThrown) {
-			alert("실패 : \n" + "jqXHR.readyState : " + jqXHR.readyState + "\n"
-					+ "textStatus : " + textStatus + "\n" + "errorThrown : "
-					+ errorThrown);
-		}
-
-	});
-	
-
-}
-function goInformDetailPage(info_idx) {
-	console.log("?????????");
-	window.open("about:blank").location.href="InformDetail_go.do?info_idx=" + info_idx;
-} 
-</script>
 
 </body>
 </html>

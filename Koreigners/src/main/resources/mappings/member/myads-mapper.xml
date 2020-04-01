@@ -24,7 +24,7 @@
 					AND
 						BOARD.MEM_EMAIL= #{mem_id}  	
 					ORDER BY 
-						BOARD.ROOM_IDX 
+						BOARD.ROOM_IDX DESC
 					) HOUSE
 		 )
 		 WHERE R_NUM BETWEEN #{begin} AND #{end} 
@@ -83,21 +83,45 @@
 	  
 	</select>
 	
+	<select id="getInformMyAdsList" parameterType="p_MyPageVO" resultType="informVO">
+	SELECT 
+		*
+	FROM(
+		SELECT
+			ROWNUM R_NUM, INFO.*
+		FROM (	
+			SELECT 
+				* 
+			FROM T_INFORM_TABLE
+			WHERE
+				INFO_MEM_ID=#{mem_id} 
+				AND
+				INFO_STATE=1
+			
+			ORDER BY INFO_IDX DESC
+					) INFO
+			)
+	 WHERE R_NUM BETWEEN #{begin} AND #{end} 
+	</select>
+	
+	
+	
+	
 	
 	<select id="getAdsTotal" parameterType="p_MyPageVO" resultType="int">
 	
 	<choose>
 		<when test="board_idx == 1">
-			SELECT COUNT(ROOM_IDX) FROM T_ROOM_BOARD WHERE MEM_EMAIL= #{mem_id} 
+			SELECT COUNT(ROOM_IDX) FROM T_ROOM_BOARD WHERE MEM_EMAIL= #{mem_id} AND STATE=1
 		</when>
 		<when test="board_idx == 2">
-			SELECT COUNT(APPLY_IDX) FROM T_MEMBER_APPLY WHERE  RESUME_IDX IN ( SELECT RESUME_IDX FROM T_MEMBER_RESUME WHERE MEM_ID=#{mem_id}  )  
+			SELECT COUNT(APPLY_IDX) FROM T_MEMBER_APPLY WHERE  RESUME_IDX IN ( SELECT RESUME_IDX FROM T_MEMBER_RESUME WHERE MEM_ID=#{mem_id}  ) AND STATE=1 
 		</when>
 		<when test="board_idx == 3">
 			SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE MEM_ID= #{mem_id} 
 		</when>
 		<when test="board_idx == 4">
-		
+			SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_MEM_ID=#{mem_id} AND INFO_STATE=1
 		</when>
 	</choose>
 	

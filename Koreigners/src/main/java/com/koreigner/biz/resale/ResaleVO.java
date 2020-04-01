@@ -18,7 +18,7 @@ public class ResaleVO {
 		String mem_id, mem_pw, mem_name, subject, address, work_loc_si, fileStr,
 		       work_loc_do, rs_cate_prnt, category_child, content, file_ori_name, ip,condition, hash_tag;
 		List<MultipartFile> filename;
-		Date regdate;
+		String regdate;
 		
 		public ResaleVO() {}
 
@@ -234,12 +234,12 @@ public class ResaleVO {
 		}
 
 
-		public Date getRegdate() {
+		public String getRegdate() {
 			return regdate;
 		}
 
 
-		public void setRegdate(Date regdate) {
+		public void setRegdate(String regdate) {
 			this.regdate = regdate;
 		}
 

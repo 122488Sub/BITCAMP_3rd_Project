@@ -82,7 +82,7 @@ public class InformController {
 	@RequestMapping(value="getInformListData.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public Map<String,Object> getInformListData(InformVO informVO,HttpServletRequest request, HttpServletResponse response, Model model) {
-		
+		System.out.println(informVO);
 	
 		// 현재 페이지 구하기
 		String cPage = request.getParameter("cPage");

@@ -60,7 +60,7 @@ public class p_MyPageController {
 			result.put("list",resaleList);
 			break;
 		case 4://자유
-			
+			result.put("inform", pService.getInformWishList(wishVO));
 			break;
 		default:
 			break;
@@ -103,7 +103,7 @@ public class p_MyPageController {
 			result.put("list",resaleList);
 			break;
 		case 4://자유
-			
+			result.put("inform", pService.getInformMyAdsList(wishVO));
 			break;
 		default:
 			break;

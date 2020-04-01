@@ -3,12 +3,16 @@ var mem_id;
 var category=0;
 
 $( function() {
-		$("#listTable").hide();
-	});
+	$("#listTable").hide();
+});
 
 
 
 function changeCategory(cate,btnValue,id,cPage) {
+	//buttonColorChange(버튼번호, 버튼수량) 
+	//common/buttonColorChange.js
+	buttonColorChange(btnValue,4);
+	
 	boardIdx=btnValue;
 	mem_id=id;
 	category=cate;
@@ -49,7 +53,9 @@ function changeCategory(cate,btnValue,id,cPage) {
 					}else if(boardIdx==3){
 						setResale(data.list);
 					}
-					
+					else if(boardIdx==4){
+						setInform(data.inform);
+					}
 					
 					setTfoot(pvo);
 					
@@ -90,10 +96,17 @@ function setHouseHead(){
 }
 function setHouseData(houseData){
 	console.log(houseData);
+	var room_type;
+	if( houseData["room_type"]==0)
+		room_type="Villa";
+	else if( houseData["room_type"]==1)
+		room_type="Goshiwon";
+	else if( houseData["room_type"]==2)
+		room_type="Semi-Officetel";
 	return "<tr class='trTag' onclick='javascript:goHouseDetailPage("+houseData.room_idx+")' style='cursor: pointer;'>"
 		+"<td>" + houseData.room_idx+ "</td>"
 		+"<td>" + houseData["subject"] + "</td>"
-		+ "<td>" + houseData["room_type"] + "</td>"
+		+ "<td>" +room_type + "</td>"
 		+ "<td>" + houseData["address"] + "</td>"
 		+ "<td>" + houseData["deposit"]+"/" +houseData["monthly_rent"] + "</td>"
 		+ "<td>" + houseData["room_reporting_date"] + "</td>"
@@ -192,6 +205,37 @@ else{
 	return dataText;
 	
 }
+
+
+function setInform(list){		 
+	setInformHead();
+	var dataTag = "";
+	$.each(list, function(index, obj){
+		dataTag += setInformData(this);
+	});	
+	$("#list_box").html(dataTag);
+}
+
+function setInformHead(){
+	$("#tHead").html(
+			"<tr>" + "<th>Idx</th>" + "<th>Category</th>" + "<th>Title</th>"
+			+ "<th>PostDate</th>" + "<th>Hit</th>"+ "</tr>"
+
+	);
+}
+function setInformData(inform){
+	return "<tr class='trTag' onclick='javascript:goInformDetailPage(" 
+			+ inform.info_idx
+			+ ")' style='cursor: pointer;'>" + "<td>" + inform.info_idx
+			+ "</td>" + "<td>" + inform["info_category"] + "</td>" + "<td>"
+			+ inform["info_title"] + "</td>" + "<td>" + inform["info_ins_dt"]
+			+ "</td>" + "<td>" + inform["info_hit"] +"</td>" + "</tr>";
+}
+
+function goInformDetailPage(info_idx) {
+	window.open("about:blank").location.href="InformDetail_go.do?info_idx=" + info_idx;
+} 
+
 
 function setTfoot(pvo){
 	console.log(pvo.beginPage);

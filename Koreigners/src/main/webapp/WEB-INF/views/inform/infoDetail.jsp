@@ -7,34 +7,13 @@
 <meta charset="UTF-8">
 <title>summer note</title>
 
-
-
 <link href="resources/css/common/button.css" rel="stylesheet" type="text/css">
 <link href="resources/css/inform/infoDetail.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="resources/js/common/post_go.js"></script>
 <script type="text/javascript" src="resources/js/common/togleWish.js" ></script>
+<script type="text/javascript" src="resources/js/inform/infoDetail.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script>
-//천단위 이상의 숫자에 콤마( , )를 삽입하는 함수
-function clickInformModify() {
-	post_goto('InfoModify_go.do', {'info_idx':getParam("info_idx")},false);
-}
 
-
-function clickInformDelete() {
-	var jbResult = prompt( 'If you want to delete this post, please enter "Delete".', '' );
-	if(jbResult=='Delete'){
-		post_goto('InfoDelete.do', {'info_idx':getParam("info_idx")},false);
-	}
-	else if(jbResult!=null){
-		alert("You entered it incorrectly");
-	}
-}
-
-</script>
-<style>
-	
-</style>
 </head>
 <body>
 

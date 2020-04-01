@@ -16,14 +16,12 @@
 			FROM T_INFORM_TABLE
 			WHERE
 				INFO_STATE=1
-			<if test="searchCondition!=null and !searchCondition.equals('')">
-				<if test="searchCondition == 'INFO_TITLE' ">
-					AND INFO_TITLE LIKE '%'|| #{searchKeyword} ||'%'
+			
+				<if test="info_category != 'All' ">
+					AND INFO_CATEGORY=#{info_category}
 				</if>
-				<if test="searchCondition == 'INFO_CONTENT' ">
-					AND INFO_CONTENT LIKE '%'|| #{searchKeyword} ||'%'
-				</if>
-			</if>
+				
+			
 			ORDER BY INFO_IDX DESC
 					) INFO
 			)
@@ -46,14 +44,10 @@
 	FROM T_INFORM_TABLE
 		WHERE
 			INFO_STATE=1
-		<if test="searchCondition!=null and !searchCondition.equals('')">
-			<if test="searchCondition == 'INFO_TITLE' ">
-				AND INFO_TITLE LIKE '%'|| #{searchKeyword} ||'%'
-			</if>
-			<if test="searchCondition == 'INFO_CONTENT' ">
-				AND INFO_CONTENT LIKE '%'|| #{searchKeyword} ||'%'
-			</if>
+		<if test="info_category != 'All' ">
+			AND INFO_CATEGORY=#{info_category}
 		</if>
+				
 	</select>
 
 	

@@ -46,7 +46,7 @@ public class HireVO {
 	private String cate_prnt_en;            //직무 카테고리 대분류 영어 
 	private String cate_child_en;           //직무 카테고리 소분류 영어
 	private String ip;                      //아이피
-	private Date regdate; 					//작성 일자
+	private String regdate; 					//작성 일자
 	
 	public HireVO() {}
 	
@@ -310,10 +310,10 @@ public class HireVO {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
-	public Date getRegdate() {
+	public String getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(Date regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
 

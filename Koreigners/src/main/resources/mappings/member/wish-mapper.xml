@@ -96,6 +96,29 @@
                     
  		WHERE R_NUM BETWEEN #{begin} AND #{end}
 	</select>
+	
+	<select id="getInformWishList" parameterType="p_MyPageVO" resultType="informVO">
+	SELECT 
+			*
+		FROM(
+			SELECT
+				ROWNUM R_NUM, INFORM.*
+			FROM (
+		
+					SELECT 
+		    			*
+					FROM 
+					   T_INFORM_TABLE
+					WHERE 
+						INFO_STATE=1
+					AND
+						INFO_IDX IN (SELECT B_IDX <include refid="member.common.include.wish_Select" />) 	
+					ORDER BY 
+						INFO_IDX DESC
+					) INFORM
+		 )
+		 WHERE R_NUM BETWEEN #{begin} AND #{end} 
+	</select>
 </mapper>
 
 
