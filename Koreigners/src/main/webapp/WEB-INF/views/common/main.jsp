@@ -20,7 +20,7 @@
 	});
 
 </script>
-<link href="main.css" rel="stylesheet" type="text/css">
+<!-- <link href="main.css" rel="stylesheet" type="text/css"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="resources/css/main/main.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -59,7 +59,7 @@
                 </figure>
                 
                 <figure>
-                   <img src="/">
+                   <!-- <img src="/"> -->
                    <figcaption class="title">Cinderel1231231231la</figcaption>
                    <p class="price">2500$</p>
                    <p class="address">wowodo1@gmail.com</p>
