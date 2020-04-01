@@ -62,6 +62,7 @@ body {
     width: 80%;
     height: auto;
     color: black;
+    text-align: left;
     display: inline-block;
     background-color: white;
 }
