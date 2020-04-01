@@ -189,17 +189,24 @@ public class InformController {
 		model.addAttribute("postType", "inform");
 		
 		if(request.getAttribute("mem_id")==null) {
-			System.out.println("1111");
 			return "redirect:InfoList_go.do";
 		}
 		if( ! ((String)request.getAttribute("mem_id")).equals(informVO.getInfo_mem_id())) {
-			System.out.println("2222");
 			System.out.println(request.getAttribute("mem_id"));
 			System.out.println(informVO.getInfo_mem_id());
 			return "redirect:InfoList_go.do";
 		}
 		System.out.println(informVO);
 		informService.updateInform(informVO);
+		
+		return "redirect:InfoList_go.do";
+	}
+	
+
+	@RequestMapping(value="InfoDelete.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String InfoDelete(HttpServletRequest request, int info_idx, Model model) {
+		informService.deleteInform(info_idx);
+		model.addAttribute("postType", "inform");
 		
 		return "redirect:InfoList_go.do";
 	}

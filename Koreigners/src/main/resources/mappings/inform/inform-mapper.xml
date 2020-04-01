@@ -88,6 +88,16 @@
 	WHERE
 		INFO_IDX = #{info_idx} 
 	</update>
+	
+	<update id="deleteInform" parameterType="int">
+	UPDATE
+		T_INFORM_TABLE
+	SET
+		INFO_STATE = 2
+	WHERE
+		INFO_IDX = #{info_idx} 
+	
+	</update>
 </mapper>
 
 

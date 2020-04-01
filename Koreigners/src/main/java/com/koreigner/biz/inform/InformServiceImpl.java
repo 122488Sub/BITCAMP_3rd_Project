@@ -107,6 +107,11 @@ public class InformServiceImpl implements InformService {
 		return informDAO.dao_increaseHit(info_idx);
 	}
 
+	@Override
+	public int deleteInform(int info_idx) {
+		return informDAO.dao_deleteInform(info_idx);
+	}
+
 	
 	
 	

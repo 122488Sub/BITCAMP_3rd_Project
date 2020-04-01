@@ -54,6 +54,11 @@ public class InformDAO {
 		return mybatis.update("inform.increaseHit", info_idx);
 	}
 
+	public int dao_deleteInform(int info_idx) {
+		
+		return mybatis.update("inform.deleteInform", info_idx);
+	}
+
 	
 }
 

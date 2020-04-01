@@ -23,11 +23,12 @@ function clickInformModify() {
 
 function clickInformDelete() {
 	var jbResult = prompt( 'If you want to delete this post, please enter "Delete".', '' );
-	if(jbResult=='Delete')
-		return;
-		//post_goto('house_Delete.do', {'info_idx':getParam("info_idx")},false);
-	else 
-		return;
+	if(jbResult=='Delete'){
+		post_goto('InfoDelete.do', {'info_idx':getParam("info_idx")},false);
+	}
+	else if(jbResult!=null){
+		alert("You entered it incorrectly");
+	}
 }
 
 </script>
@@ -36,8 +37,8 @@ function clickInformDelete() {
 </style>
 </head>
 <body>
+
 	<div id="informDetail">
-		
 		<c:if test="${user.mem_id!=null && user.mem_cate eq 'p'}">
 		<div style="height:100px;">
 			<c:if test="${user.mem_id eq inform.info_mem_id }">

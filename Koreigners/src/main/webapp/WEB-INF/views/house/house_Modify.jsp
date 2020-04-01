@@ -110,6 +110,7 @@
 	<div id="container">
 	
 	<form action="" id="form" name="form" method="post" enctype="multipart/form-data">
+	<input type='hidden' name="mem_email" value="${house.mem_email }">
 	<input type='hidden' name="room_idx" value="${house.room_idx }">
 	<jsp:include page="house_formData.jsp"></jsp:include>
 	
