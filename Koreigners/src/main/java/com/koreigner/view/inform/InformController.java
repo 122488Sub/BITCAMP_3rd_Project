@@ -50,24 +50,27 @@ public class InformController {
 		
 		return conditionMap;
 	}
+	@RequestMapping(value="InformDetail_go.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String informDetail_go(Model model, int info_idx) {
+		System.out.println("controller/informDetail_go");
+		System.out.println(info_idx);
+		InformVO informVO= informService.getInform(info_idx);
+		
+		model.addAttribute("inform",  informVO); //데이터 저장
+		model.addAttribute("postType", "inform");
+		
+		return "inform/infoDetail.page";
+	}
 	
-
 	@RequestMapping(value="InfoList_go.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String infoList_go(Model model) {
-		//System.out.println("controller/houseMain_go");
+		
 		
 		model.addAttribute("postType", "inform");
 		
 		return "inform/infoList.page";
 	}
-	@RequestMapping(value="InfoInsert_go.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public String InfoInsert_go(Model model) {
-		//System.out.println("controller/houseMain_go");
-		
-		model.addAttribute("postType", "inform");
-		
-		return "inform/infoInsert.page";
-	}
+	
 	@RequestMapping(value="getInformListData.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public Map<String,Object> getInformListData(InformVO informVO,HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -80,10 +83,10 @@ public class InformController {
 		System.out.println("==================getInformListData==================");
 		// 페이지 처리
 		PagingVO p =  paging.paging(cPage, informVO);
-		
+		System.out.println("------------------------------------------------------");
 		informVO.setBegin(p.getBegin());
 		informVO.setEnd(p.getEnd());
-
+		System.out.println("=====================================================");
 		Map<String,Object> result=new HashMap<String, Object>();
 		result.put("inform",informService.getSelectSearchList(informVO));
 		
@@ -92,11 +95,15 @@ public class InformController {
 		//List<HouseAll_VO> list = informService.getSearchList(houseVO);
 		//String result = informService.getHouseListJson(list, p);
 		request.setAttribute("pvo", p);
-		
+		result.put("pvo",p);
 		model.addAttribute("postType", "inform");
 		System.out.println(p);
 		return result;
 	}
+	
+	
+	
+	
 	
 	@RequestMapping(value="uploadSummernoteImageFile.do")
 	@ResponseBody
@@ -116,12 +123,35 @@ public class InformController {
 		System.out.println(imgPath);
 		multiFile.transferTo(new File(imgPath + "/" + randomName));
 		
+		
 		String imgPath2 = imgPath.substring(0, imgPath.indexOf(".metadata")) + "Koreigners\\src\\main\\webapp\\resources\\img\\inform\\"+mem_id;
 		System.out.println(imgPath2);
+
+		//inFileName: 원본 경로포함 이름 / outFileName:목적위치 경로포함 파일이름
+		//informService.nioFileCopy(inFileName, outFileName)
 		informService.nioFileCopy((imgPath + "\\" + randomName), (imgPath2 + "\\" + randomName));
 		
 		
 		
 		return "resources/img/inform/"+mem_id+"/" + URLEncoder.encode(randomName, "UTF-8");
+	}
+	
+	@RequestMapping(value="InfoInsert_go.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public String InfoInsert_go(Model model) {
+		//System.out.println("controller/houseMain_go");
+		
+		model.addAttribute("postType", "inform");
+		
+		return "inform/infoInsert.page";
+	}
+	
+	@RequestMapping(value="InfoInsert_process.do", method={RequestMethod.GET, RequestMethod.POST})
+	
+	public String InfoInsert_process(InformVO informVO,HttpServletRequest request, HttpServletResponse response, Model model) {
+		System.out.println("infoInsert_process");
+		informVO.setInfo_mem_id((String)request.getAttribute("mem_id"));
+		System.out.println(informVO);
+		informService.insertInform(informVO);
+		return "redirect:InfoList_go.do";
 	}
 }

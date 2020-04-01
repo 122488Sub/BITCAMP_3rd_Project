@@ -26,6 +26,7 @@
 <!-- 폰트 -->
 <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Do+Hyeon|Noto+Serif+KR:400,700|Jua|Gamja+Flower|&display=swap" rel="stylesheet">
 <script>
+	
 	$(document).ready(function() {
 		$('#summernote').summernote({
 			  height: 300,                 // 에디터 높이
@@ -72,21 +73,64 @@
 	$(document).ready(function() {
 	 
 	    $("#article-reset").on("click", function () {
-	      $('textarea[name="content"]').summernote("code", "");
+	      $('textarea[name="info_content"]').summernote("code", "");
 	    });
 	    $('#article-save').on("click", function () {
-	      var markupStr = $('textarea[name="content"]').summernote('code'); //textarea의 내용 HTML코드로 추출
-	      var params = $("#boardInsert").serialize();
+	    	
+	      if(checkInform()){
+		      var markupStr = $('textarea[name="info_content"]').summernote('code'); //textarea의 내용 HTML코드로 추출
+		      var params = $("#boardInsert").serialize();
+		      
+		      
+		      $("#boardInsert").attr('action',"InfoInsert_process.do").submit();
+	      }
 	    });
 	  });
+	function checkInform(){
+		if($('input[name=info_title]').val()==''){
+			 alert("Plese Checked [Title]");
+			 $('input[name=info_title]').focus();
+			 return false;
+		}
+		if($("#info_category  option:selected").val()=='-----'){
+			 alert("Plese Checked [Category]");
+			 $('#info_category').focus();
+			 return false;
+		}
+		return true;
+	}
 </script>
 </head>
 <body>
 	
 	<form method="post" id="boardInsert">
-		<span>제목 : </span><input type="text" name="title" style="border-radius: 5px">
-		<br><br>
-		<textarea id="summernote" name="content"></textarea>
+		<table>
+			<tr>
+				<th>
+					<span>TITLE </span>
+				</th>
+				<td>
+					<input type="text" name="info_title" style="border-radius: 5px">
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<span>Category </span>
+				</th>
+				<td>
+	
+					<select id="info_category" name="info_category" class="">
+					    <option value="-----">-----</option>
+						<option value="Information">Information</option>
+						<option value="Food">Food</option>
+						<option value="Travel">Travel</option>
+						<option value="etc">etc</option>
+					</select>
+				</td>
+			</tr>
+			
+		</table>
+		<textarea id="summernote" name="info_content"></textarea>
 	</form>
 	<button id="article-save">저장하기</button>
 	<button id="article-reset">초기화</button>

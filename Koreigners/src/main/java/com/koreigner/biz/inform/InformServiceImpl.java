@@ -1,5 +1,6 @@
 package com.koreigner.biz.inform;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -34,20 +35,36 @@ public class InformServiceImpl implements InformService {
 	}
 	
 	@Override
+	public int insertInform(InformVO informVO) {
+		return informDAO.dao_insertInform(informVO);
+	}
+	
+	@Override
+	public InformVO getInform(int info_idx) {
+		
+		return informDAO.dao_getInform(info_idx);
+	}
+
+	
+	@Override
 	public boolean nioFileCopy(String inFileName, String outFileName) {
         Path source = Paths.get(inFileName);
         Path target = Paths.get(outFileName);
         
+		
         // 사전체크
         if (source == null) {
+        
             throw new IllegalArgumentException("source must be specified");
         }
         if (target == null) {
+        	
             throw new IllegalArgumentException("target must be specified");
         }
         
         // 소스파일이 실제로 존재하는지 체크
         if (!Files.exists(source, new LinkOption[] {})) {
+        
             throw new IllegalArgumentException("Source file doesn't exist: " + source.toString());
         }
  
@@ -56,11 +73,15 @@ public class InformServiceImpl implements InformService {
             return;
         }
         */
-        
+        if (!new File(outFileName).isDirectory()) {
+			new File(outFileName).mkdirs();
+		}
         try {
+       
             Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);   // 파일복사
             
         } catch (IOException e) {
+      
             // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
@@ -74,5 +95,8 @@ public class InformServiceImpl implements InformService {
             return false;                                    // 실패시 false
         }
     }
+
+	
+	
 	
 }

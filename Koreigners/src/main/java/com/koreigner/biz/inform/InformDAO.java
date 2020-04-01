@@ -32,6 +32,18 @@ public class InformDAO {
 		return count;
 	}
 
+	public int dao_insertInform(InformVO informVO) {
+		System.out.println("dao");
+		System.out.println(informVO);
+		return mybatis.insert("inform.insertInform", informVO);
+	}
+
+	public InformVO dao_getInform(int info_idx) {
+		InformVO vo = mybatis.selectOne("inform.getInform",info_idx);
+		System.out.println(vo);
+		return vo;
+	}
+
 	
 }
 

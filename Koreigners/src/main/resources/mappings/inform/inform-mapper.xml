@@ -5,26 +5,35 @@
 <mapper namespace="inform">
 	<select id="getSelectSearchList" parameterType="informVO" resultType="hashmap">
 	SELECT 
-		INFO_IDX, INFO_TITLE ,INFO_HIT , INFO_INS_DT, 
-		INFO_MEM_ID, INFO_UPD_DT, INFO_CATEGORY, INFO_LIKECNT 
-	FROM T_INFORM_TABLE
-	
-	<if test="searchCondition!=null and !searchCondition.equals('')">
-	WHERE
-		<if test="searchCondition == 'INFO_TITLE' ">
-			INFO_TITLE LIKE '%'|| #{searchKeyword} ||'%'
-		</if>
-		<if test="searchCondition == 'INFO_CONTENT' ">
-			INFO_CONTENT LIKE '%'|| #{searchKeyword} ||'%'
-		</if>
-	</if>
-	ORDER BY INFO_IDX DESC
+		*
+	FROM(
+		SELECT
+			ROWNUM R_NUM, INFO.*
+		FROM (	
+			SELECT 
+				INFO_IDX, INFO_TITLE ,INFO_HIT , TO_CHAR(INFO_INS_DT,'YYYY-MM-DD') as INFO_INS_DT, 
+				INFO_MEM_ID,  TO_CHAR(INFO_UPD_DT,'YYYY-MM-DD') as INFO_UPD_DT, INFO_CATEGORY 
+			FROM T_INFORM_TABLE
+			
+			<if test="searchCondition!=null and !searchCondition.equals('')">
+			WHERE
+				<if test="searchCondition == 'INFO_TITLE' ">
+					INFO_TITLE LIKE '%'|| #{searchKeyword} ||'%'
+				</if>
+				<if test="searchCondition == 'INFO_CONTENT' ">
+					INFO_CONTENT LIKE '%'|| #{searchKeyword} ||'%'
+				</if>
+			</if>
+			ORDER BY INFO_IDX DESC
+					) INFO
+			)
+	 WHERE R_NUM BETWEEN #{begin} AND #{end} 
 	</select>
 	
-	<select id="getInform" parameterType="informVO" resultType="hashmap">
+	<select id="getInform" parameterType="int" resultType="informVO">
 	SELECT 
 		INFO_IDX, INFO_TITLE,DBMS_LOB.SUBSTR(INFO_CONTENT, 3000, 1) as INFO_CONTENT
-		,INFO_HIT ,INFO_INS_DT ,INFO_MEM_ID,INFO_UPD_DT,INFO_CATEGORY,INFO_FILENAME,INFO_FILENAME_ORI,INFO_IP,INFO_BOARD_IDX,INFO_LIKECNT 
+		,INFO_HIT ,INFO_INS_DT ,INFO_MEM_ID,INFO_UPD_DT,INFO_CATEGORY,INFO_IP,INFO_BOARD_IDX 
 	FROM T_INFORM_TABLE
 	
 	WHERE
@@ -45,6 +54,19 @@
 			</if>
 		</if>
 	</select>
+
+	
+	<insert id="insertInform" parameterType="informVO">
+	INSERT INTO 
+		T_INFORM_TABLE (
+						  INFO_IDX, INFO_TITLE, INFO_CONTENT,
+						  INFO_MEM_ID, INFO_CATEGORY, INFO_IP
+					   )
+		VALUES 		   (
+						  INFORM_SQ.NEXTVAL, #{info_title}, #{info_content},
+						  #{info_mem_id},#{info_category},   (SELECT SYS_CONTEXT ('USERENV', 'IP_ADDRESS') FROM DUAL) 
+					   )
+	</insert>
 </mapper>
 
 

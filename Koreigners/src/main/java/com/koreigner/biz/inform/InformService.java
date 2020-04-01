@@ -17,5 +17,9 @@ public interface InformService {
 	List<Map<String, Object>> getSelectSearchList(InformVO informVO);
 
 	boolean nioFileCopy(String inFileName, String outFileName);
+
+	int insertInform(InformVO informVO);
+
+	InformVO getInform(int info_idx);
 	
 }

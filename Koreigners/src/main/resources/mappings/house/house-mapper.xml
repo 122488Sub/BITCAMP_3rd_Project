@@ -69,7 +69,7 @@ FROM(
 		        GU_GUN_EUP_ENG, ADDRESS, ADDRESS_DETAIL, ROOM_REPORTING_DATE) 
 		    VALUES 
 		        (ROOM_SQ.NEXTVAL,#{mem_email},#{subject}, #{do_en},  
-		        #{gu_gun_eup_eng},#{address},#{address_detail},SYSDATE);
+		        #{gu_gun_eup_eng},#{address},#{address_detail},( SYSDATE + (interval '9' hour) ));
 		  <foreach collection="img_nameList" item="fileName" index="index">
 		  INSERT
 		    INTO 
@@ -131,7 +131,7 @@ FROM(
 				T_ROOM_BOARD
 			SET 
 				STATE = 2, 
-				ROOM_MODIFY_DATE=SYSDATE  
+				ROOM_MODIFY_DATE=( SYSDATE + (interval '9' hour) )  
 			WHERE
 			    ROOM_IDX = #{room_idx} ;
               
@@ -157,7 +157,7 @@ FROM(
 		        	 WHERE 
 		        	 	ROOM_IDX=#{room_idx} 
 		        	),
-		        	SYSDATE, (SELECT SYS_CONTEXT ('USERENV', 'IP_ADDRESS') FROM DUAL)  
+		        	( SYSDATE + (interval '9' hour) ), (SELECT SYS_CONTEXT ('USERENV', 'IP_ADDRESS') FROM DUAL)  
 		        
 		        );
 		          
