@@ -212,19 +212,24 @@ $(function() {
 function fn_addCareer(){ //커리어 추가
 	var str = "<tr>";
 	str += "<th width='15%' class='number'>Career</th>";
-	str += "<td width='85%' class='txLeft'>Joining/Leaving : ";
-	str += "<input type='text' size='4' name='JOIN_YEAR' value='' class='only-num'>Year ";
-	str += "<input type='text' size='2' name='JOIN_MONTH' value='' class='only-num'>Month ~ ";
-	str += "<input type='text' size='4' name='RESIGN_YEAR' value='' class='only-num'>Year ";
-	str += "<input type='text' size='2' name='RESIGN_MONTH' value='' class='only-num'>Month<br>";
-	str += "Region : <input type='text' size='20' name='REGION' value=''> &nbsp;&nbsp;&nbsp;&nbsp;";
-	str += "Name of company : <input type='text' size='40' name='COMPANY' value=''> &nbsp;&nbsp;&nbsp;&nbsp;<br>";
-	str += "Assigned task : <input type='text' size='40' name='TASK' value=''></td>";
-	str += "<td><a href='#this' class='btn' id='delete' name='delete'>Delete</a></td></tr>";
+	str += "<td width='85%' class='txLeft'><div class='mb-3'>";
+	str += "<label for='join/leave'>Joining / Leaving</label>&nbsp; &nbsp;&nbsp; &nbsp;";
+	str += "<input type='text' size='6' name='JOIN_YEAR' class='only-num' style='border-radius:.25em; border:1px solid #ced4da; padding:.20rem .75rem' value=''>&nbsp; &nbsp;Year&nbsp; &nbsp;";
+	str += "<input type='text' size='4' name='JOIN_MONTH' class='only-num' style='border-radius:.25em; border:1px solid #ced4da; padding:.20rem .75rem' value=''>&nbsp; &nbsp;Month&nbsp; &nbsp;&nbsp; &nbsp; ~ &nbsp; &nbsp;&nbsp; &nbsp;";
+	str += "<input type='text' size='6' name='RESIGN_YEAR' class='only-num' style='border-radius:.25em; border:1px solid #ced4da;  padding:.20rem .75rem' value=''>&nbsp; &nbsp;Year&nbsp; &nbsp;";
+	str += "<input type='text' size='4' name='RESIGN_MONTH' class='only-num' style='border-radius:.25em; border:1px solid #ced4da; padding:.20rem .75rem' value=''>&nbsp; &nbsp;Month<br></div>";
+	str += "<div class='row'>";
+	str += "<div class='col-md-3 mb-3'><label for='region'>Region</label>";
+	str += "<div class='input-group'><input type='text' class='form-control' name='REGION' value=''></div></div>";
+	str += "<div class='col-md-5 mb-3'><label for='company'>Name of company</label>";
+	str += "<div class='input-group'><input type='text' class='form-control' name='COMPANY' value=''></div></div>";
+	str += "<div class='col-md-4 mb-3'><label for='task'>Assigned task</label>";
+	str += "<div class='input-group'><input type='text' class='form-control' name='TASK' value=''></div></div>";
+	str += "</div><td><a href='#this' class='btn' id='delete' name='deleteCareer'>Delete</a></td></tr>";
 	
 	$("#career").append(str);
 	
-	$("a[name='delete']").on("click", function(e){ //커리어삭제 버튼
+	$("a[name='deleteCareer']").on("click", function(e){ //커리어삭제 버튼
 		e.preventDefault();
 		fn_deleteCareer($(this));
 	});
