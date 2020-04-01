@@ -94,7 +94,6 @@
     <form action="updateMember.do" method="post">
     <div class="cart-box-main">
         <div class="container">
-        <div style="float:none; margin:0 auto;">
         	<div class="row">
 		            <div class="col-sm-6 col-lg-6 mb-3">
                             <div class="shipping-method-box">
@@ -202,12 +201,11 @@
 	                </div>
 	                </div>
 	                </div>
-	                </div>
 						    <input type="hidden" class="input_box" name=mem_cate value="${mvo.mem_cate }">
 							<button type="submit" class="btn hvr-hover">Save</button>
 	        </div>
 	    </div>
-	   	</form>
+   	</form>
     <!-- End Cart -->
     
     

@@ -101,7 +101,8 @@
    
 
     <!-- Start Cart  -->
-    <form action="updateMember.do" method="post">
+    <form id="form1" name="form1" method="post" encType="multipart/form-data">
+    <input type="hidden" name="MEM_ID" value="${mvo.mem_id }">
     <div class="cart-box-main">
         <div class="container">
            <!--  <div class="row"> -->
@@ -621,22 +622,23 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script src="<c:url value='resources/js/common/common.js'/>" charset="utf-8"></script>
 	<script>
-	var gfv_count = '${fn:length(list)+1}';
-	
-	function fn_addFile(){ //파일 추가
 		
-		var str = "<p>"+ 
-				  "<input type='file' id='file_" +(gfv_count)+"' name='file_"+(gfv_count)+"'>"+ 
-				  "<a href='#this' id='delete_" +(gfv_count)+"' name='delete_"+(gfv_count)+"'>Delete</a></p>";	
-		$("#file").append(str); 
+		var gfv_count = '${fn:length(list)+1}';
 		
-		$('#delete_' + (gfv_count++)).on("click", function(e){ //삭제 버튼 
-			e.preventDefault(); 
-			fn_deleteFile($(this)); 
-		}); 
+		function fn_addFile(){ //파일 추가
+			
+			var str = "<p>"+ 
+					  "<input type='file' id='file_" +(gfv_count)+"' name='file_"+(gfv_count)+"'>"+ 
+					  "<a href='#this' id='delete_" +(gfv_count)+"' name='delete_"+(gfv_count)+"'>Delete</a></p>";	
+			$("#file").append(str); 
+			
+			$('#delete_' + (gfv_count++)).on("click", function(e){ //삭제 버튼 
+				e.preventDefault(); 
+				fn_deleteFile($(this)); 
+			}); 
+			
+		}
 		
-	}
-	
 	</script>
 </body>
 
