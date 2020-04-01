@@ -15,9 +15,9 @@ public class InformVO {
 	private String info_title;
 	private String info_content;
 	private int info_hit;
-	private Date info_ins_dt;
+	private String info_ins_dt;
 	private String info_mem_id;
-	private Date info_upd_dt;
+	private String info_upd_dt;
 	
 	private String info_category;//게시판 내 분류(카테고리)
 	
@@ -40,8 +40,8 @@ public class InformVO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public InformVO(int info_idx, String info_title, String info_content, int info_hit, Date info_ins_dt,
-			String info_mem_id, Date info_upd_dt, String info_category, String info_ip, String info_board_idx,
+	public InformVO(int info_idx, String info_title, String info_content, int info_hit, String info_ins_dt,
+			String info_mem_id, String info_upd_dt, String info_category, String info_ip, String info_board_idx,
 			String searchCondition, String searchKeyword, int begin, int end) {
 		super();
 		this.info_idx = info_idx;
@@ -92,11 +92,11 @@ public class InformVO {
 		this.info_hit = info_hit;
 	}
 
-	public Date getInfo_ins_dt() {
+	public String getInfo_ins_dt() {
 		return info_ins_dt;
 	}
 
-	public void setInfo_ins_dt(Date info_ins_dt) {
+	public void setInfo_ins_dt(String info_ins_dt) {
 		this.info_ins_dt = info_ins_dt;
 	}
 
@@ -108,11 +108,11 @@ public class InformVO {
 		this.info_mem_id = info_mem_id;
 	}
 
-	public Date getInfo_upd_dt() {
+	public String getInfo_upd_dt() {
 		return info_upd_dt;
 	}
 
-	public void setInfo_upd_dt(Date info_upd_dt) {
+	public void setInfo_upd_dt(String info_upd_dt) {
 		this.info_upd_dt = info_upd_dt;
 	}
 

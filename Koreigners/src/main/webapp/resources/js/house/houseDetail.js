@@ -16,13 +16,3 @@ function clickDelete() {
 }
 
 
-function clickWishBtn(mem_id, b_idx,board_idx){
-	var result=clickWishList(mem_id, b_idx,board_idx);
-	console.log(result);
-	if(result==1){
-		$('#wishBtn').val('♥pick');
-	}else{
-		$('#wishBtn').val('♡pick');
-	
-	}
-}

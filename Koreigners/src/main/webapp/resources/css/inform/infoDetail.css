@@ -1,0 +1,43 @@
+#informDetail {
+	width: 85%;
+	margin: 40px auto;
+}
+
+.titleSpan {
+	font-size: 25px;
+	font-weight: 600;
+}
+
+.subSpan {
+	font-size: 20px;
+	line-height: 30px;
+}
+
+.rightSpan, .rightButton {
+	float: right;
+	margin-right: 20px;
+}
+
+hr {
+	margin: 20px auto;
+	height: 3px;
+	border: 0px;
+	background-color: black;
+}
+
+#informContent {
+	width: 95%;
+	margin: 0 auto;
+}
+
+#subDiv {
+	margin-top: 10px;
+}
+
+#informContent p {
+	font-size: 1.3em;
+}
+
+#informContent img, #informContent p {
+	margin-bottom: 15px;
+}

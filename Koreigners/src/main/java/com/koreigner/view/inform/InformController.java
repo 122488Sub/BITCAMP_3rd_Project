@@ -29,6 +29,8 @@ import com.koreigner.biz.common.page.PagingService;
 import com.koreigner.biz.common.page.PagingVO;
 import com.koreigner.biz.inform.InformService;
 import com.koreigner.biz.inform.InformVO;
+import com.koreigner.biz.member.mypage.p_MyPageService;
+import com.koreigner.biz.member.mypage.p_MyPageVO;
 
 
 
@@ -40,6 +42,9 @@ public class InformController {
 	private InformService informService;
 	@Autowired
 	PagingService paging;
+	@Autowired
+	private p_MyPageService pService;
+	
 	@ModelAttribute("ccconditionMap")
 	public Map<String, String> searchConditionMap() {
 		//key: 제목, value: TITLE
@@ -51,12 +56,13 @@ public class InformController {
 		return conditionMap;
 	}
 	@RequestMapping(value="InformDetail_go.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public String informDetail_go(Model model, int info_idx) {
+	public String informDetail_go(HttpServletRequest request,Model model, int info_idx) {
 		System.out.println("controller/informDetail_go");
 		System.out.println(info_idx);
 		InformVO informVO= informService.getInform(info_idx);
 		
 		model.addAttribute("inform",  informVO); //데이터 저장
+		model.addAttribute("isWish",  pService.isWish(new p_MyPageVO((String) request.getAttribute("mem_id"),4,informVO.getInfo_idx())));
 		model.addAttribute("postType", "inform");
 		
 		return "inform/infoDetail.page";

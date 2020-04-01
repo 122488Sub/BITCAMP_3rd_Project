@@ -1,3 +1,14 @@
+function clickWishBtn(mem_id, b_idx,board_idx){
+	var result=clickWishList(mem_id, b_idx,board_idx);
+	console.log(result);
+	if(result==1){
+		$('#wishBtn').val('♥pick');
+	}else{
+		$('#wishBtn').val('♡pick');
+	
+	}
+}
+
 function clickWishList(mem_id, b_idx,board_idx){
 	//mem_id 로그인한 아이디
 	//b_idx  로그인한 게시글번호
