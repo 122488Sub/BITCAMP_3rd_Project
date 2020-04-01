@@ -96,6 +96,17 @@ public class InformServiceImpl implements InformService {
         }
     }
 
+	@Override
+	public int updateInform(InformVO informVO) {
+		System.out.println(informVO);
+		return informDAO.dao_updateInform(informVO);
+	}
+
+	@Override
+	public int increaseHit(int info_idx) {
+		return informDAO.dao_increaseHit(info_idx);
+	}
+
 	
 	
 	

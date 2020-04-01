@@ -21,5 +21,9 @@ public interface InformService {
 	int insertInform(InformVO informVO);
 
 	InformVO getInform(int info_idx);
+
+	int updateInform(InformVO informVO);
+
+	int increaseHit(int info_idx);
 	
 }

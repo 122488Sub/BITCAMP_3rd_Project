@@ -44,6 +44,16 @@ public class InformDAO {
 		return vo;
 	}
 
+	public int dao_updateInform(InformVO informVO) {
+	
+		return mybatis.update("inform.updateInform", informVO) ;
+	}
+
+	public int dao_increaseHit(int info_idx) {
+	
+		return mybatis.update("inform.increaseHit", info_idx);
+	}
+
 	
 }
 

@@ -14,14 +14,14 @@
 				INFO_IDX, INFO_TITLE ,INFO_HIT , TO_CHAR(INFO_INS_DT,'YYYY-MM-DD') as INFO_INS_DT, 
 				INFO_MEM_ID,  TO_CHAR(INFO_UPD_DT,'YYYY-MM-DD') as INFO_UPD_DT, INFO_CATEGORY 
 			FROM T_INFORM_TABLE
-			
-			<if test="searchCondition!=null and !searchCondition.equals('')">
 			WHERE
+				INFO_STATE=1
+			<if test="searchCondition!=null and !searchCondition.equals('')">
 				<if test="searchCondition == 'INFO_TITLE' ">
-					INFO_TITLE LIKE '%'|| #{searchKeyword} ||'%'
+					AND INFO_TITLE LIKE '%'|| #{searchKeyword} ||'%'
 				</if>
 				<if test="searchCondition == 'INFO_CONTENT' ">
-					INFO_CONTENT LIKE '%'|| #{searchKeyword} ||'%'
+					AND INFO_CONTENT LIKE '%'|| #{searchKeyword} ||'%'
 				</if>
 			</if>
 			ORDER BY INFO_IDX DESC
@@ -44,13 +44,14 @@
 	SELECT 
 		COUNT(INFO_IDX)
 	FROM T_INFORM_TABLE
-		<if test="searchCondition!=null and !searchCondition.equals('')">
 		WHERE
+			INFO_STATE=1
+		<if test="searchCondition!=null and !searchCondition.equals('')">
 			<if test="searchCondition == 'INFO_TITLE' ">
-				INFO_TITLE LIKE '%'|| #{searchKeyword} ||'%'
+				AND INFO_TITLE LIKE '%'|| #{searchKeyword} ||'%'
 			</if>
 			<if test="searchCondition == 'INFO_CONTENT' ">
-				INFO_CONTENT LIKE '%'|| #{searchKeyword} ||'%'
+				AND INFO_CONTENT LIKE '%'|| #{searchKeyword} ||'%'
 			</if>
 		</if>
 	</select>
@@ -67,6 +68,26 @@
 						  #{info_mem_id},#{info_category},   (SELECT SYS_CONTEXT ('USERENV', 'IP_ADDRESS') FROM DUAL) 
 					   )
 	</insert>
+	
+	<update id="updateInform" parameterType="informVO">
+	UPDATE
+		T_INFORM_TABLE
+	SET
+		INFO_TITLE = #{info_title},
+		INFO_CONTENT= #{info_content},
+		INFO_CATEGORY= #{info_category},
+		INFO_UPD_DT= (SYSDATE+ (INTERVAL '9' HOUR ))
+	WHERE
+		INFO_IDX = #{info_idx} 
+	</update>
+	<update id="increaseHit" parameterType="int">
+	UPDATE
+		T_INFORM_TABLE
+	SET
+		INFO_HIT = INFO_HIT+1
+	WHERE
+		INFO_IDX = #{info_idx} 
+	</update>
 </mapper>
 
 

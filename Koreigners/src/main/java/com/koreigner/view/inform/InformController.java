@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.koreigner.biz.common.page.PagingService;
 import com.koreigner.biz.common.page.PagingVO;
+import com.koreigner.biz.house.HouseAll_VO;
 import com.koreigner.biz.inform.InformService;
 import com.koreigner.biz.inform.InformVO;
 import com.koreigner.biz.member.mypage.p_MyPageService;
@@ -59,6 +60,7 @@ public class InformController {
 	public String informDetail_go(HttpServletRequest request,Model model, int info_idx) {
 		System.out.println("controller/informDetail_go");
 		System.out.println(info_idx);
+		informService.increaseHit(info_idx);
 		InformVO informVO= informService.getInform(info_idx);
 		
 		model.addAttribute("inform",  informVO); //데이터 저장
@@ -152,12 +154,53 @@ public class InformController {
 	}
 	
 	@RequestMapping(value="InfoInsert_process.do", method={RequestMethod.GET, RequestMethod.POST})
-	
 	public String InfoInsert_process(InformVO informVO,HttpServletRequest request, HttpServletResponse response, Model model) {
 		System.out.println("infoInsert_process");
 		informVO.setInfo_mem_id((String)request.getAttribute("mem_id"));
 		System.out.println(informVO);
 		informService.insertInform(informVO);
+		return "redirect:InfoList_go.do";
+	}
+	
+	@RequestMapping(value="InfoModify_go.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String InfoModify_go(HttpServletRequest request, int info_idx, Model model) {
+		System.out.println("InfoModify_go.do");
+		model.addAttribute("postType", "inform");
+		
+		if(request.getAttribute("mem_id")==null) {
+			return "redirect:InfoList_go.do";
+		}
+		
+		InformVO informVO= informService.getInform(info_idx);
+		if( ! ((String)request.getAttribute("mem_id")).equals(informVO.getInfo_mem_id())) {
+			
+			return "redirect:InfoList_go.do";
+		}
+		
+		model.addAttribute("inform",  informVO); //데이터 저장
+		
+		return "inform/infoModify.page";
+	}
+	
+	@RequestMapping(value="InfoModify_process.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String InfoModify_process(HttpServletRequest request, InformVO informVO, Model model) {
+		System.out.println("InfoModify_process.do");
+		
+		model.addAttribute("postType", "inform");
+		
+		if(request.getAttribute("mem_id")==null) {
+			System.out.println("1111");
+			return "redirect:InfoList_go.do";
+		}
+		if( ! ((String)request.getAttribute("mem_id")).equals(informVO.getInfo_mem_id())) {
+			System.out.println("2222");
+			System.out.println(request.getAttribute("mem_id"));
+			System.out.println(informVO.getInfo_mem_id());
+			return "redirect:InfoList_go.do";
+		}
+		System.out.println(informVO);
+		informService.updateInform(informVO);
+		
 		return "redirect:InfoList_go.do";
 	}
 }
