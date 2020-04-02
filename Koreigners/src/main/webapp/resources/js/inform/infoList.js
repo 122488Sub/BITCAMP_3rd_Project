@@ -148,12 +148,12 @@ else if(inform.INFO_CATEGORY=="Etc")
 	gridHtml+=          '</div>';
 //---------------------------------------------------------------------------------------------------------------
 if(inform.INFO_FILE_NAME!=null && inform.INFO_FILE_NAME!='' && typeof inform.INFO_FILE_NAME!='undefined'){
-	gridHtml+=			'<img src="'+inform.INFO_FILE_NAME+'" style="height:350px" class="img-fluid" alt="Image">';
+	gridHtml+=			'<img src="'+inform.INFO_FILE_NAME+'" style="height:250px" class="img-fluid" alt="Image">';
 
 	
 }
 else if(inform.INFO_FILE_NAME==null || inform.INFO_FILE_NAME=='' || typeof inform.INFO_FILE_NAME == "undefined" ){
-	gridHtml+=	   		'<img src="resources/img/common/document.png" style="height:350px" class="img-fluid" alt="Image">';
+	gridHtml+=	   		'<img src="resources/img/common/document.png" style="height:250px" class="img-fluid" alt="Image">';
 
 }
 //---------------------------------------------------------------------------------------------------------------
