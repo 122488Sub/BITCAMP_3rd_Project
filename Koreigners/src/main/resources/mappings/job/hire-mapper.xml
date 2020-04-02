@@ -138,7 +138,7 @@
 	            #{insurance}, #{ip},
 	            #{major}, #{meals}, #{mem_id},
 	            #{payment_codition}, #{payment_detail}, #{prefer_skills}, #{prepare_doc}, 
-	            sysdate, #{salary_max}, #{salary_min},
+	            (SYSDATE+ (INTERVAL '9' HOUR )), #{salary_max}, #{salary_min},
 	            #{title}, 
 	            #{work_detail}, #{work_time}, #{work_type},(SELECT COMPANY_IDX FROM T_COMPANY WHERE MEM_ID=#{mem_id})
 	            )

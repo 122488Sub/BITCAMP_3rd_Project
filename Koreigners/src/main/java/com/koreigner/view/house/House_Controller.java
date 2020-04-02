@@ -88,8 +88,8 @@ public class House_Controller {
 		}else {
 			model.addAttribute("authentication",  false);
 		}
-	
-		model.addAttribute("isWish",  pService.isWish(new p_MyPageVO(mem_id,1,vo.getRoom_idx())));
+		if(mem_id!=null)
+			model.addAttribute("isWish",  pService.isWish(new p_MyPageVO(mem_id,1,vo.getRoom_idx())));
 		model.addAttribute("postType", "house");
 		
 		return "house/house_Detail.page";
