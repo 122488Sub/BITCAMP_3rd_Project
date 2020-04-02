@@ -36,6 +36,9 @@
 	            	//항상 업로드된 파일의 url이 있어야 한다.
 	            	console.log(data);
 					$(editor).summernote('insertImage', data);
+					if(i==0){
+						$('#info_file_name').val(data);
+					}
 				}
 			});
 		}

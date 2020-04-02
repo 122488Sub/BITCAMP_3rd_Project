@@ -32,6 +32,7 @@
 <body>
 	
 	<form method="post" id="boardInsert">
+	<input type="hidden" id="info_file_name" name="info_file_name" value="">
 		<table>
 			<tr>
 				<th>
@@ -52,7 +53,7 @@
 						<option value="Information">Information</option>
 						<option value="Food">Food</option>
 						<option value="Travel">Travel</option>
-						<option value="etc">etc</option>
+						<option value="Etc">etc</option>
 					</select>
 				</td>
 			</tr>

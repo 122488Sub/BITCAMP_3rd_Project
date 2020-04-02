@@ -35,6 +35,9 @@
 	            	//항상 업로드된 파일의 url이 있어야 한다.
 	            	console.log(data);
 					$(editor).summernote('insertImage', data);
+					if(i==0){
+						$('#info_file_name').val(data);
+					}
 				}
 			});
 		}
@@ -52,6 +55,9 @@
 		      var markupStr = $('textarea[name="info_content"]').summernote('code'); //textarea의 내용 HTML코드로 추출
 		      var params = $("#boardInsert").serialize();
 		      
+		      if(markupStr.indexOf($('#info_file_name').val())==-1 ){
+		    	  $('#info_file_name').val('');
+		      }
 		      
 		      $("#boardInsert").attr('action',"InfoModify_process.do").submit();
 	      }
@@ -71,5 +77,6 @@
 			 $('#info_category').focus();
 			 return false;
 		}
+		
 		return true;
 	}

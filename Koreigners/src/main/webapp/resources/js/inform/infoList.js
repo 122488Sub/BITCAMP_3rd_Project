@@ -45,8 +45,10 @@ function getData(cate,cPage) {
 			console.log(">>>>>>>>>>>data.pvo  :" + pvo);
 			
 			var informList = data.inform;
-			console.log(">>>>>>>>>>>data :" + informList);
+			console.log(">>>>>>>>>>>data.inform :" + informList);
 			
+			//좌측 카테고리탭에서 작성글 수 표시
+			setSmallCategory(data.categoryCount[0]);
 			
 			$("#tHead").html(
 					"<tr>" + "<th>Idx</th>" + "<th>Category</th>" + "<th>Title</th>"
@@ -55,7 +57,9 @@ function getData(cate,cPage) {
 			);
 			
 			
+			
 			var dataTag = "";
+			var gridHtml='<div class="row">';
 			$.each(informList, function(index, obj) {
 				console.log(this);	
 				dataTag += "<tr class='trTag' onclick='javascript:goInformDetailPage(" 
@@ -64,9 +68,15 @@ function getData(cate,cPage) {
 							+ "</td>" + "<td>" + this["INFO_CATEGORY"] + "</td>" + "<td>"
 							+ this["INFO_TITLE"] + "</td>" + "<td>" + this["INFO_INS_DT"]
 							+ "</td>" + "<td>" + this["INFO_HIT"] +"</td>" + "</tr>";
+				
+				gridHtml += setGridList(this,index);
 			});
-			
+			 
 			$("#list_box").html(dataTag);
+			
+			gridHtml+='</div>';
+			$("#grid-view").html(gridHtml);
+			
 			
 			var tfoot = "";
 			tfoot += '<div id="pagingBox"><div id="olPaging"><ol class="paging">';
@@ -107,3 +117,62 @@ function getData(cate,cPage) {
 function goInformDetailPage(info_idx) {
 	window.open("about:blank").location.href="InformDetail_go.do?info_idx=" + info_idx;
 } 
+
+
+
+function setGridList(inform,index){
+	var gridHtml="";
+	gridHtml+='<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">'
+			    +'<div class="products-single fix">'
+			    +    '<div class="box-img-hover">'
+			    +        '<div class="type-lb">';
+if(inform.INFO_CATEGORY=="Information")
+	gridHtml+=		    	 '<p class="sale">Information</p>';
+else if(inform.INFO_CATEGORY=="Food")
+	gridHtml+=		    	 '<p class="sale">Food</p>';
+else if(inform.INFO_CATEGORY=="Travel")
+	gridHtml+=		    	 '<p class="new">Travel</p>';
+else if(inform.INFO_CATEGORY=="Etc")
+	gridHtml+=		    	 '<p class="new">Etc</p>';
+
+	gridHtml+=          '</div>';
+//---------------------------------------------------------------------------------------------------------------
+if(inform.INFO_FILE_NAME!=null && inform.INFO_FILE_NAME!='' && typeof inform.INFO_FILE_NAME!='undefined'){
+	gridHtml+=			'<img src="'+inform.INFO_FILE_NAME+'" style="height:350px" class="img-fluid" alt="Image">';
+
+	
+}
+else if(inform.INFO_FILE_NAME==null || inform.INFO_FILE_NAME=='' || typeof inform.INFO_FILE_NAME == "undefined" ){
+	gridHtml+=	   		'<img src="resources/img/common/document.png" style="height:350px" class="img-fluid" alt="Image">';
+
+}
+//---------------------------------------------------------------------------------------------------------------
+	gridHtml+=       	'<div class="mask-icon">'
+                +			'<ul>'
+                +    			'<li><a href="javascript:goInformDetailPage('+ inform.INFO_IDX+')" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>'
+                +    			'<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>'
+                +			'</ul>'
+                +			'<a class="cart" href="javascript:goInformDetailPage('+ inform.INFO_IDX+')">'+inform.INFO_MEM_ID+'</a>'
+                +		'</div>'
+                +	'</div>'
+                +	'<div class="why-text">'
+                +		'<h4>'+inform.INFO_TITLE+'</h4>'
+                +		'<h5>' +inform.INFO_INS_DT+'</h5>'
+                +	'</div>'
+            +	'</div>'
+            +'</div>';
+	return gridHtml;
+	
+}
+
+function setSmallCategory(count){
+	
+	$("#smallCategoryAll").text('( '+count.INFORM_ALL+' )');
+	$("#smallCategoryInformation").text('( '+count.INFORMATION+' )');
+	$("#smallCategoryFood").text('( '+count.FOOD+')');
+	$("#smallCategoryTravel").text('( '+count.TRAVEL+' )');
+	$("#smallCategoryEtc").text('( '+count.ETC+' )');
+	
+	
+
+}

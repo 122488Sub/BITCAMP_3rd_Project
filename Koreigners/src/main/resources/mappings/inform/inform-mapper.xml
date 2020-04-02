@@ -12,7 +12,7 @@
 		FROM (	
 			SELECT 
 				INFO_IDX, INFO_TITLE ,INFO_HIT , TO_CHAR(INFO_INS_DT,'YYYY-MM-DD') as INFO_INS_DT, 
-				INFO_MEM_ID,  TO_CHAR(INFO_UPD_DT,'YYYY-MM-DD') as INFO_UPD_DT, INFO_CATEGORY 
+				INFO_MEM_ID,  TO_CHAR(INFO_UPD_DT,'YYYY-MM-DD') as INFO_UPD_DT, INFO_CATEGORY ,INFO_FILE_NAME
 			FROM T_INFORM_TABLE
 			WHERE
 				INFO_STATE=1
@@ -32,6 +32,7 @@
 	SELECT 
 		INFO_IDX, INFO_TITLE,DBMS_LOB.SUBSTR(INFO_CONTENT, 3000, 1) as INFO_CONTENT
 		,INFO_HIT ,INFO_INS_DT ,INFO_MEM_ID,INFO_UPD_DT,INFO_CATEGORY,INFO_IP,INFO_BOARD_IDX 
+		,INFO_FILE_NAME
 	FROM T_INFORM_TABLE
 	
 	WHERE
@@ -51,15 +52,33 @@
 	</select>
 
 	
+	<select id="getInformCategoryCount" resultType="hashmap">
+	SELECT DISTINCT
+		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1) AS INFORM_ALL,
+		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 AND INFO_CATEGORY='Information') AS INFORMATION,
+		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 AND INFO_CATEGORY='Food') AS FOOD,
+		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 AND INFO_CATEGORY='Travel') AS TRAVEL,
+		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 AND INFO_CATEGORY='Etc') AS ETC
+	FROM T_INFORM_TABLE 
+	</select>
+
+	
 	<insert id="insertInform" parameterType="informVO">
 	INSERT INTO 
 		T_INFORM_TABLE (
 						  INFO_IDX, INFO_TITLE, INFO_CONTENT,
 						  INFO_MEM_ID, INFO_CATEGORY, INFO_IP
+						  <if test='info_file_name!=null and !info_file_name.equals("")'>				  
+						  ,INFO_FILE_NAME 
+						  </if>	
 					   )
 		VALUES 		   (
 						  INFORM_SQ.NEXTVAL, #{info_title}, #{info_content},
-						  #{info_mem_id},#{info_category},   (SELECT SYS_CONTEXT ('USERENV', 'IP_ADDRESS') FROM DUAL) 
+						  #{info_mem_id},#{info_category},   (SELECT SYS_CONTEXT ('USERENV', 'IP_ADDRESS') FROM DUAL)
+						  <if test='info_file_name!=null and !info_file_name.equals("")'>
+						  ,#{info_file_name}
+						  </if>
+						   
 					   )
 	</insert>
 	
@@ -70,7 +89,15 @@
 		INFO_TITLE = #{info_title},
 		INFO_CONTENT= #{info_content},
 		INFO_CATEGORY= #{info_category},
-		INFO_UPD_DT= (SYSDATE+ (INTERVAL '9' HOUR ))
+		INFO_UPD_DT= (SYSDATE+ (INTERVAL '9' HOUR )),
+		<choose>
+		<when test='info_file_name!=null and !info_file_name.equals("")'>	  
+		INFO_FILE_NAME=#{info_file_name}
+		</when>
+		<otherwise>
+		INFO_FILE_NAME='' 
+		</otherwise>
+		</choose>
 	WHERE
 		INFO_IDX = #{info_idx} 
 	</update>

@@ -59,6 +59,11 @@ public class InformDAO {
 		return mybatis.update("inform.deleteInform", info_idx);
 	}
 
+	public List<Map<String, Object>> dao_getInformCategoryCount() {
+	
+		return mybatis.selectList("inform.getInformCategoryCount");
+	}
+
 	
 }
 

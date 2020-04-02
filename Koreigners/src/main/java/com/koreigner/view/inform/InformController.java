@@ -3,13 +3,11 @@ package com.koreigner.view.inform;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,7 +25,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.koreigner.biz.common.page.PagingService;
 import com.koreigner.biz.common.page.PagingVO;
-import com.koreigner.biz.house.HouseAll_VO;
 import com.koreigner.biz.inform.InformService;
 import com.koreigner.biz.inform.InformVO;
 import com.koreigner.biz.member.mypage.p_MyPageService;
@@ -100,10 +97,16 @@ public class InformController {
 		Map<String,Object> result=new HashMap<String, Object>();
 		result.put("inform",informService.getSelectSearchList(informVO));
 		
+		//각 카테고리별 글 수 조회
+		result.put("categoryCount", informService.getInformCategoryCount());
+				//model.addAttribute("categoryCount", informService.getInformCategoryCount());
+		
+		
 		System.out.println("==================getInformListData END==================");
 		//리스트 정보 검색
-		//List<HouseAll_VO> list = informService.getSearchList(houseVO);
-		//String result = informService.getHouseListJson(list, p);
+		
+		
+		
 		request.setAttribute("pvo", p);
 		result.put("pvo",p);
 		model.addAttribute("postType", "inform");

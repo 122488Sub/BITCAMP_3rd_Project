@@ -101,7 +101,7 @@
 	</div> -->
 	
 	
-	
+	<a href="InfoInsert_go.do">New Post</a>
 	<!-- Start Shop Page  -->
     <div class="shop-box-inner">
         <div class="container">
@@ -119,11 +119,11 @@
                                 <h3>Categories</h3>
                             </div>
                             <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
-                                <a href="javascript:getData('All',1)" class="list-group-item list-group-item-action"> All  <small class="text-muted">(150) </small></a>
-                                <a href="javascript:getData('Information',1)" class="list-group-item list-group-item-action"> Information <small class="text-muted">(11)</small></a>
-                                <a href="javascript:getData('Food',1)" class="list-group-item list-group-item-action"> Food <small class="text-muted">(22)</small></a>
-                                <a href="javascript:getData('Travel',1)" class="list-group-item list-group-item-action"> Travel <small class="text-muted">(22)</small></a>
-                                <a href="javascript:getData('Etc',1)" class="list-group-item list-group-item-action"> etc <small class="text-muted">(22)</small></a>
+                                <a href="javascript:getData('All',1)" class="list-group-item list-group-item-action"> All  <small id="smallCategoryAll" class="text-muted">() </small></a>
+                                <a href="javascript:getData('Information',1)" class="list-group-item list-group-item-action"> Information <small id="smallCategoryInformation" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Food',1)" class="list-group-item list-group-item-action"> Food <small id="smallCategoryFood" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Travel',1)" class="list-group-item list-group-item-action"> Travel <small id="smallCategoryTravel" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Etc',1)" class="list-group-item list-group-item-action"> etc <small id="smallCategoryEtc" class="text-muted">()</small></a>
                             </div>
                         </div>
                         <div class="title-left"></div>
@@ -155,7 +155,7 @@
                                                     <div class="type-lb">
                                                         <p class="sale">Sale</p>
                                                     </div>
-                                                    <img src="bootstrap/images/img-pro-01.jpg" class="img-fluid" alt="Image">
+                                                    <img src="bootstrap/images/img-pro-01.jpg" width="" class="img-fluid" alt="Image">
                                                     <div class="mask-icon">
                                                         <ul>
                                                             <li><a href="#" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>

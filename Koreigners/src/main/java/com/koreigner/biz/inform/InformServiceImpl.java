@@ -112,6 +112,12 @@ public class InformServiceImpl implements InformService {
 		return informDAO.dao_deleteInform(info_idx);
 	}
 
+	@Override
+	public List<Map<String, Object>> getInformCategoryCount() {
+		
+		return informDAO.dao_getInformCategoryCount();
+	}
+
 	
 	
 	

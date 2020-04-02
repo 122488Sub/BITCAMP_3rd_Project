@@ -27,5 +27,7 @@ public interface InformService {
 	int increaseHit(int info_idx);
 
 	int deleteInform(int info_idx);
+
+	List<Map<String, Object>> getInformCategoryCount();
 	
 }

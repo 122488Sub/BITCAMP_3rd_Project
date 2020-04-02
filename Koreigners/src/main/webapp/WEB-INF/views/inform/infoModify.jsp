@@ -34,6 +34,7 @@
 		<input type="hidden" name="info_mem_id" value="${inform.info_mem_id }">
 		<input type="hidden" id="info_select_category" value="${inform.info_category }">
 		<input type="hidden" name="info_idx" value="${inform.info_idx }">
+		<input type="hidden" id="info_file_name" name="info_file_name" value="${inform.info_file_name }">
 		<table>
 			<tr>
 				<th>
@@ -54,7 +55,7 @@
 						<option value="Information">Information</option>
 						<option value="Food">Food</option>
 						<option value="Travel">Travel</option>
-						<option value="etc">etc</option>
+						<option value="Etc">Etc</option>
 					</select>
 				</td>
 			</tr>
