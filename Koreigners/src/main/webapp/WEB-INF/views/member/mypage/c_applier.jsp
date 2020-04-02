@@ -31,6 +31,7 @@
 
 
 <body>
+
 <input type="hidden" id="mem_id" value="${mem_id}">
 <div id="moveBox">
 	<ul>
@@ -49,7 +50,10 @@
 		
 	</ul>
 </div>
-
+	<select id="hireSelect">
+		<option selected="selected" value="0">All</option>
+	
+	</select>
 	<div class="wishlist-box-main">
 		<div class="container">
 			<div class="row">

@@ -11,7 +11,8 @@ function getData(category, id, cPage) {
 	console.log(url);
 	var param = {
 		'mem_id' : mem_id,
-		'category':category
+		'category':category,
+		'hire_idx':hire_idx
 	}
 
 	jQuery.ajaxSettings.traditional = true;
@@ -82,11 +83,17 @@ function goHireDetailPage(hire_idx) {
 function setCApplier(list) {
 	setCApplierHead();
 	var dataTag = "";
+	
 	$.each(list, function(index, obj) {
+		if(chkSelectAppend==0){
+		   var option = $("<option value="+this["HIRE_IDX"]+">"+textLengthOverCut(this["TITLE"],10,"...")+"</option>");
+		   $('#hireSelect').append(option);
+		}
 		dataTag += setCApplierData(this);
 		console.log(this);
 	});
 	$("#list_box").html(dataTag);
+	chkSelectAppend=1;
 }
 function setCApplierHead() {
 
@@ -147,4 +154,16 @@ function setTfoot(pvo){
 	tfoot += '</ol></td></tr>'
 	$("#tfoot").html(tfoot);
 	
+}
+function textLengthOverCut(txt, len, lastTxt) {
+    if (len == "" || len == null) { // 기본값
+        len = 20;
+    }
+    if (lastTxt == "" || lastTxt == null) { // 기본값
+        lastTxt = "...";
+    }
+    if (txt.length > len) {
+        txt = txt.substr(0, len) + lastTxt;
+    }
+    return txt;
 }
