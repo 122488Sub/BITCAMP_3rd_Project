@@ -198,9 +198,9 @@
 			        	</div>
 			        	<div class="mb-0">
 			        	<br><br><br>
-	                       	<label for="dormitory">Dormitory</label>
+	                       	<label for="dormitory" style="font-weight: 700">Dormitory</label>
 	                           	<div class="custom-control custom-radio">
-	                           		<input name="domitory" type="radio" id="domitory0" class="custom-control-input" value="기숙사 제공 함" <c:if test="${company.domitory eq '기숙사 제공 함'}">checked</c:if>>
+	                           		<input name='domitory' type='radio' id='domitory0' class='custom-control-input' value='기숙사 제공 함' <c:if test='${company.domitory eq "기숙사 제공 함"}'>checked</c:if>>
 	                           		<label class="custom-control-label" for="domitory0">기숙사 제공 함</label>
 	                            </div>
 	                            <div class="custom-control custom-radio">
@@ -220,7 +220,7 @@
 			        	</div>
 			        	<div class="mb-0">
 			        	<br><br>
-	                       	<label for="salary">Meals</label>
+	                       	<label for="salary" style="font-weight: 700">Meals</label>
                            	<div class="custom-control custom-radio">
                            		<input name="meals" type="radio" id="meals0" class="custom-control-input" value="제공안함"  <c:if test="${company.meals eq '제공안함'}">checked</c:if>>
                            		<label class="custom-control-label" for="meals0">제공 안함</label>
