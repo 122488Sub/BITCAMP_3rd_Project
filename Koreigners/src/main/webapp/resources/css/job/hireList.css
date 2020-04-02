@@ -1,218 +1,227 @@
 @charset "UTF-8";
 
-	
-	 ul {
-			margin:0;
-			padding:0;
-		}
-	li {
-		list-style: none;
-		margin:0;
-		padding:0;
-		float:left;
-	}
-	
-	#filterBox {
-		position:absolute;
-		width: 900px;
-		height: 300px;
-		margin-left: 720px;
-		margin-top: 250px;
-	}
-	
-	#jobCate_box{
-		
-		width: 900px;
-		height: 300px;
-	
-	}
-	#search {
-		float:left;
-		height:50px;
-	}
-	#searchBox {
-		height: 30px;
-	}
-	#searchBtn {
-		width: 50px;
-		height: 34px;
-	}
-	#jUl {
-		float: left;
-		margin-bottom: 10px;
-	}
-	.menuName {
-		text-align: center;
-	
-		width: 85px;
-		height: 55px;
-	}
-	li.btnBox {
-		width: 520px;
-	}
-	
-	.job_base {
-		
-		border: 2px solid black;
-		width : 95px;
-		height: 50px;
-		float: left;
-		margin-left: 5px;
-		margin-bottom: 5px;
-		font-size: 6px;
-		font-weight: bold;
-		display: table;
-		text-align:center;
-	}
-	.pDiv {
-		position: static;
-		top:50%;
-		display: table-cell;
-		vertical-align: middle;
-	}
-	.job_clicked {
-		
-		border: 2px solid red;
-		width : 95px;
-		height: 50px;
-		background-color : lightcoral;
-	}
-	
-	
-	.catePrnt {
-		
-		border: 2px solid black;
-		width : 95px;
-		height: 50px;
-		float: left;
-		margin-left: 5px;
-		margin-bottom: 5px;
-		font-size: 6px;
-		font-weight: bold;
-		
-		display: table;
-		text-align:center;
-		border-radius: 8px;
-	}
-	.catePrnt p { font-size: 10.3px; font-weight: bold;}
-	.catePrnt_clicked {
-		
-		border: 2px solid red;
-		width : 95px;
-		height: 50px;
-		background-color : lightcoral;
-	}
-	
-	.payCondition {
-		
-		border: 2px solid black;
-		width : 95px;
-		height: 50px;
-		float: left;
-		margin-left: 5px;
-		margin-bottom: 5px;
-		font-size: 8px;
-		font-weight: bold;
-		
-		display: table;
-		text-align:center;
-	}
-	.payCondition p { font-size: 13px; }
-	.pay_clicked {
-		
-		border: 2px solid red;
-		width : 95px;
-		height: 50px;
-		background-color : lightcoral;
-	}
-	
-	p {
-		width: 100%;
-		height: 6px;
-		margin-bottom:10px;
-	}
-	.short {
-		margin-bottom:3px;
-	}
-	.short2 {
-		margin-bottom:5px;
-		
-	}
-	
-	#filter_1 {
-		width : 620px;
-		height : 120px;
-	}
-	
-	#filter_2 {
-		width : 620px;
-		height : 120px;
-	}
-	.pagingTr {
-		width: 100%;
-	}
-	.pagingTd {
-		width: inherit;
-	}
-	#pagingBox {
-	
-		margin-left: auto;
-		margin-right: auto;
-		width: 100%;
-		height: 200px;
+ul {
+	margin: 0;
+	padding: 0;
+}
 
-		float: left;
-	}
-	#olPaging {
-		margin-left: auto;
-		margin-right: auto;
-		width: 30%;
-		height: 100px;
-		text-align:center;
-	}
-	ol {
-		margin-left: auto;
-		margin-right: auto;
-		
-		padding:0;
-		width: 540px;
-		height: 80px;
-	}
-	
-	
-	
-	.paging li {
-		list-style: none;
-		float: left;
-		margin-right: 8px;
+li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
 
-	}
-	.paging li a {
+#filterBox {
+	position: absolute;
+	width: 900px;
+	height: 300px;
+	margin-left: 580px;
+	margin-top: 270px;
+}
 
-		text-decoration: none;
-		display: inline-block;
-		padding: 3px 7px;
-		border: 1px solid lightgray;
-		font-weight: bold;
-		color: black;
-		border-radius: 5px;
-	}
-	.paging .disable {
-		border: 1px solid Gray;
-		padding: 3px 7px;
-		color: silver;
-	}
-	.paging .now {
-		border: 1px solid lightgray;
-		border-radius: 5px;
-		padding: 3px 7px;
-		background-color: Gray;
-		color: white;
-	}
-	.paging li a:hover {
-		background-color: Gray;
-		color: white;
-	}
-	#pointer {
-		border: 0px;
-	}
+#jobCate_box {
+	width: 900px;
+	height: 300px;
+}
+
+#search {
+	float: left;
+	height: 50px;
+}
+
+#searchBox {
+	height: 30px;
+}
+
+#searchBtn {
+	width: 50px;
+	height: 34px;
+}
+
+#jUl {
+	float: left;
+	margin-bottom: 10px;
+}
+
+.menuName {
+	text-align: center;
+	width: 85px;
+	height: 55px;
+}
+
+li.btnBox {
+	width: 520px;
+}
+
+.job_base {
+	border: 2px solid black;
+	width: 95px;
+	height: 50px;
+	float: left;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	font-size: 6px;
+	font-weight: bold;
+	display: table;
+	text-align: center;
+}
+
+.pDiv {
+	position: static;
+	top: 50%;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.job_clicked {
+	border: 2px solid red;
+	width: 95px;
+	height: 50px;
+	background-color: lightcoral;
+}
+
+.catePrnt {
+	border: 2px solid black;
+	width: 95px;
+	height: 50px;
+	float: left;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	font-size: 6px;
+	font-weight: bold;
+	display: table;
+	text-align: center;
+	border-radius: 8px;
+}
+
+.catePrnt p {
+	font-size: 10.3px;
+	font-weight: bold;
+}
+
+.catePrnt_clicked {
+	border: 2px solid red;
+	width: 95px;
+	height: 50px;
+	background-color: lightcoral;
+}
+
+.payCondition {
+	border: 2px solid black;
+	width: 95px;
+	height: 50px;
+	float: left;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	font-size: 8px;
+	font-weight: bold;
+	display: table;
+	text-align: center;
+}
+
+.payCondition p {
+	font-size: 13px;
+}
+
+.pay_clicked {
+	border: 2px solid red;
+	width: 95px;
+	height: 50px;
+	background-color: lightcoral;
+}
+
+p {
+	width: 100%;
+	height: 6px;
+	margin-bottom: 10px;
+}
+
+.short {
+	margin-bottom: 3px;
+}
+
+.short2 {
+	margin-bottom: 5px;
+}
+
+#filter_1 {
+	width: 620px;
+	height: 120px;
+}
+
+#filter_2 {
+	width: 620px;
+	height: 120px;
+}
+
+.pagingTr {
+	width: 100%;
+}
+
+.pagingTd {
+	width: inherit;
+}
+
+#pagingBox {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	height: 200px;
+	float: left;
+}
+
+#olPaging {
+	margin-left: auto;
+	margin-right: auto;
+	width: 30%;
+	height: 100px;
+	text-align: center;
+}
+
+ol {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0;
+	width: 540px;
+	height: 80px;
+}
+
+.paging li {
+	list-style: none;
+	float: left;
+	margin-right: 8px;
+}
+
+.paging li a {
+	text-decoration: none;
+	display: inline-block;
+	padding: 3px 7px;
+	border: 1px solid lightgray;
+	font-weight: bold;
+	color: black;
+	border-radius: 5px;
+}
+
+.paging .disable {
+	border: 1px solid Gray;
+	padding: 3px 7px;
+	color: silver;
+}
+
+.paging .now {
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	padding: 3px 7px;
+	background-color: Gray;
+	color: white;
+}
+
+.paging li a:hover {
+	background-color: Gray;
+	color: white;
+}
+
+#pointer {
+	border: 0px;
+}

@@ -36,12 +36,12 @@
    		}
 	svg{
 		position:absolute;
-		width: 8%; 
-		height: 50%; 
+		width: 150px; 
+		height: 500px; 
 		background:white; 
 		overflow:visible;
 		margin-top: 80px;
-		left: 21%;
+		left: 19%;
 	}
 	.table_dosi {
 		
@@ -50,7 +50,7 @@
 		height:56%;
 		border-collapse: collapse;
 		border: 2px solid #000;
-		margin-left: 300px;
+		margin-left: 230px;
 		border-radius: 5px;
 	}
 	.table_dosi thead {
@@ -66,8 +66,8 @@
 		position: absolute;
 		border: 5px solid #0F4C81;
 		border-radius: 10px;
-		width:25%;
-		height:55%;
+		width:450px;
+		height:580px;
 		margin-left: 100px;
 		margin-top: 60px;
 	}
