@@ -46,7 +46,8 @@ function getData(cate,cPage) {
 			
 			var informList = data.inform;
 			console.log(">>>>>>>>>>>data.inform :" + informList);
-			
+			var informWish = data.informWish;
+			console.log(">>>>>>>>>>>data.informWish :" + informWish);
 			//좌측 카테고리탭에서 작성글 수 표시
 			setSmallCategory(data.categoryCount[0]);
 			
@@ -55,11 +56,17 @@ function getData(cate,cPage) {
 					+ "<th>PostDate</th>" + "<th>Hit</th>"+ "</tr>"
 
 			);
+			var wishList = new Array();
 			
-			
+			$.each(informWish, function(index, obj) {
+				console.log(this);
+				wishList.push(this.INFO_IDX);
+				
+			});
 			
 			var dataTag = "";
 			var gridHtml='<div class="row">';
+			var wishBool=0;
 			$.each(informList, function(index, obj) {
 				console.log(this);	
 				dataTag += "<tr class='trTag' onclick='javascript:goInformDetailPage(" 
@@ -68,8 +75,11 @@ function getData(cate,cPage) {
 							+ "</td>" + "<td>" + this["INFO_CATEGORY"] + "</td>" + "<td>"
 							+ this["INFO_TITLE"] + "</td>" + "<td>" + this["INFO_INS_DT"]
 							+ "</td>" + "<td>" + this["INFO_HIT"] +"</td>" + "</tr>";
-				
-				gridHtml += setGridList(this,index);
+				if(wishList.indexOf(this.INFO_IDX)!== -1) 
+					wishBool=1;
+				else
+					wishBool=-1;
+				gridHtml += setGridList(this,index,wishBool);
 			});
 			 
 			$("#list_box").html(dataTag);
@@ -120,7 +130,7 @@ function goInformDetailPage(info_idx) {
 
 
 
-function setGridList(inform,index){
+function setGridList(inform,index,wishBool){
 	var gridHtml="";
 	gridHtml+='<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">'
 			    +'<div class="products-single fix">'
@@ -149,9 +159,13 @@ else if(inform.INFO_FILE_NAME==null || inform.INFO_FILE_NAME=='' || typeof infor
 //---------------------------------------------------------------------------------------------------------------
 	gridHtml+=       	'<div class="mask-icon">'
                 +			'<ul>'
-                +    			'<li><a href="javascript:goInformDetailPage('+ inform.INFO_IDX+')" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>'
-                +    			'<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>'
-                +			'</ul>'
+                +    			'<li><a href="javascript:goInformDetailPage('+ inform.INFO_IDX+')" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>';
+if(wishBool==1){	
+	gridHtml+=     				'<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>';
+}else{
+	gridHtml+=     				'<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>';
+}   
+    gridHtml+=  			'</ul>'
                 +			'<a class="cart" href="javascript:goInformDetailPage('+ inform.INFO_IDX+')">'+inform.INFO_MEM_ID+'</a>'
                 +		'</div>'
                 +	'</div>'

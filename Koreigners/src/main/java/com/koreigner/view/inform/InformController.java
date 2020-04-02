@@ -101,6 +101,9 @@ public class InformController {
 		result.put("categoryCount", informService.getInformCategoryCount());
 				//model.addAttribute("categoryCount", informService.getInformCategoryCount());
 		
+		String mem_id = (String) request.getAttribute("mem_id");
+		if(mem_id!=null)
+			result.put("informWish", informService.informWish(mem_id) );
 		
 		System.out.println("==================getInformListData END==================");
 		//리스트 정보 검색

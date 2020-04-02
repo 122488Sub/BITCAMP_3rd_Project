@@ -118,6 +118,12 @@ public class InformServiceImpl implements InformService {
 		return informDAO.dao_getInformCategoryCount();
 	}
 
+	@Override
+	public List<Map<String, Object>> informWish(String mem_id) {
+	
+		return informDAO.dao_informWish(mem_id);
+	}
+
 	
 	
 	

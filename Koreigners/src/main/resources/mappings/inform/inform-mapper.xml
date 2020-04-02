@@ -119,6 +119,20 @@
 		INFO_IDX = #{info_idx} 
 	
 	</update>
+	
+	
+	<select id="informWish" resultType="hashmap">
+	SELECT 
+  		INFO_IDX
+	FROM 
+	   T_INFORM_TABLE
+	WHERE 
+		INFO_STATE=1
+	AND
+		INFO_IDX IN (SELECT B_IDX FROM T_WISH_LIST WHERE MEM_ID = #{mem_id} AND BOARD_IDX= 4) 	
+	ORDER BY 
+		INFO_IDX DESC
+	</select>
 </mapper>
 
 
