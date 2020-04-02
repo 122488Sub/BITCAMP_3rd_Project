@@ -8,30 +8,50 @@
 <meta charset="UTF-8">
 <title>Login</title>
 <link href="resources/css/member/login.css" rel="stylesheet" type="text/css">
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="bootstrap/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="bootstrap/css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="bootstrap/css/custom.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/member/login.js"></script>
+
 
 <script>
 $(function(){
 	
 	var logout_check = ${logout_check};
 	if(logout_check == 1) {
-		$("#notice").append("<h1>You have successfully signed out. Hope to see you again soon!</h1>");
-		$("#notice").append("<hr><hr>");	
+		$("#notice").text("You have successfully signed out. Hope to see you again soon!");
 	}
 	
 	var pw_reset = ${pw_reset};
 	if(pw_reset == 1) {
-		$("#notice").append("<h1>If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.</h1>");
-		$("#notice").append("<hr><hr>");
+		$("#notice").text("If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.");
 	}
 	
 
 });
 </script>
 <body>
+
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 id="notice"></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+    
 	<div id="login_container">
-		<div id="notice"></div>
 		<h1>Login Page</h1>
 		<div class="login">
 		  <form class="form" id="loginForm" method="post">
