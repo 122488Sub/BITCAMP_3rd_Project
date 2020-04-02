@@ -9,15 +9,38 @@
 <title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-<link href="resources/css/resale/resaleList.css" rel="stylesheet" type="text/css"></link>
+<link href="resources/css/resale/resaleSearch.css" rel="stylesheet" type="text/css"></link>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<!-- Site CSS -->
+<link rel="stylesheet" href="bootstrap/css/style.css">
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="bootstrap/css/responsive.css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="bootstrap/css/custom.css">
+
 <script>
 	function search_go(frm) {
 		frm.action = "resaleSearch.do";
 		frm.submit();
 }
 </script>
-<link href="resources/css/resale/resaleSearch.css" rel="stylesheet" type="text/css"></link>
-	<h3 style="text-align: center">Resale Shop</h3>
+<body>
+
+	<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Resale Shop</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
+	<!-- Start Search -->
 	<div class="selectbox_div">
 		<form method="post" id="searchForm">
 			<select id="ex_select" name="idx" class="selectbox">
@@ -30,70 +53,72 @@
 					width="40px" height="40px" onclick="search_go(this.form)">
 		</form>
 	</div>
-	<div id="img_content">
-		<div id="listBox">
-		    <c:choose>
-				<c:when test="${not empty mem_id}">
-					<div id="write">
-						<input type="button" id="writeBtn" value="글쓰기" onclick="javascript:location.href='resale_go.do'">
-					</div>
-				</c:when>
-				<c:otherwise>
-					<p></p>
-				</c:otherwise>
-			</c:choose>
-			<c:if test="${not empty list }">
-			<c:forEach var="vo" items="${list}">
-<%--			  <a href="ResaleController?type=detail&"> --%>
-			  <a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}">
-				<div id="onePostBox">
-					<div id="imgBox">
-						<c:choose>
-					    <c:when test="${vo.file_ori_name == null}">
-					    	<img id="imgFileList" src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg">
-					    </c:when>
-					    <c:otherwise>
-							<img id="imgFileList" src="${pageContext.request.contextPath}/resources/img/resale/${vo.getFile_ori_name()}">
-					    	<%-- <img id="imgFileList" src="images/resale/${imgList.get(voCnt.index).rs_file_name}">--%>
-					    </c:otherwise>
-					    </c:choose>
-					</div>
-					<br>
-					<div id="infoBox">
-						<div id="listSubject">${vo.subject}</div>
-						<div id="infoChildBox">
-						<table id="infoTable">
-							<tr>
-								<td id="priceBox"><span id="listPrice">${vo.price }</span>&nbsp;<span id="won">원</span></td>
-								<td id="listDate">${vo.regdate }</td>
-							</tr>
-						</table>
-						</div>
-					</div>
-			  		  
-						<div id="addrBox">&nbsp;<img src ="img/pin.png" width="15px" height="15px">
-						<c:choose>
-						<c:when test="${not empty address}">
-						<c:set var="addr" value="${fn:split(vo.address,' ')}" />
-						  <c:forEach var="addrs" items="${addr}" varStatus="g">
-					
-					   	   <c:if test="${g.count == 1}">${addrs}</c:if>
-					       <c:if test="${g.count == 2}">&nbsp;${addrs}</c:if>
-						 </c:forEach> 
-						 </c:when>
-						 <c:otherwise>
-						  주소 없음
-						 </c:otherwise>
-						 </c:choose>
-						</div>
-					  
-				</div>
-		      </a>
-			</c:forEach>
-		   </c:if>
-		</div>
-		<div id="pagingBox">
-			<div id="olPaging">
+	<!-- End Search -->
+	
+	<!-- Start Gallery  -->
+    <div class="products-box">
+        <div class="container">
+            <div class="row">
+			
+				<c:if test="${not empty list }">
+				<c:forEach var="vo" items="${list}">
+				
+	                <div class="col-lg-3 col-md-6">
+	                    <div class="products-single fix">
+	                        <!-- 이미지 -->
+	                        <div class="box-img-hover">
+	                           <c:choose>
+							   <c:when test="${vo.file_ori_name == null}">
+							   <img src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg" class="img-fluid">
+		                            <div class="mask-icon">
+		                                <ul>
+		                                    <li><a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+		                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+		                                </ul>
+		                            </div>
+							    </c:when>
+							    <c:otherwise>
+									<img src="${pageContext.request.contextPath}/resources/img/resale/${vo.getFile_ori_name()}" class="img-fluid">
+							    	<div class="mask-icon">
+		                                <ul>
+		                                    <li><a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+		                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+		                                </ul>
+		                            </div>
+							    </c:otherwise>
+							    </c:choose>
+		                        <!-- 설명 -->
+		                        <div>${vo.subject}</div>
+	                        	<div>${vo.price }원</div><span>${vo.regdate }</span>
+	                        	<div id="addrBox">&nbsp;<img src ="img/pin.png" width="15px" height="15px">
+								<c:choose>
+									<c:when test="${not empty address}">
+										<c:set var="addr" value="${fn:split(vo.address,' ')}" />
+										  <c:forEach var="addrs" items="${addr}" varStatus="g">
+									   	   <c:if test="${g.count == 1}">${addrs}</c:if>
+									       <c:if test="${g.count == 2}">&nbsp;${addrs}</c:if>
+										 </c:forEach> 
+									</c:when>
+									<c:otherwise>
+									  주소 없음
+									</c:otherwise>
+								 </c:choose>
+								</div>
+	                        </div>
+	                    </div>
+	                </div>
+	                
+				</c:forEach>
+				</c:if>
+            
+            </div>
+        </div>
+    </div>
+    <!-- End Gallery  -->
+	
+	
+    <div id="pagingBox">
+		<div id="olPaging">
 			<ol class="paging">
 				<%--이전으로에 대한 사용여부 처리--%>
 				<c:choose>
@@ -108,22 +133,22 @@
 						</li>
 					</c:otherwise>
 				</c:choose>
-					<c:forEach var="k" begin="${pvo.beginPage}" end="${pvo.endPage}">
-						<c:choose>
-							<c:when test="${k == pvo.nowPage}">
-								<li class="now">${k }</li>
-							</c:when>
-							<c:otherwise>
-								<li>
-									<a href="resaleList.do&cPage=${k}">${k}</a>
-								</li>	
-							</c:otherwise>
-						
-						</c:choose>
-					</c:forEach>
-					
-					<%--다음으로에 대한 사용여부 처리--%>
+				<c:forEach var="k" begin="${pvo.beginPage}" end="${pvo.endPage}">
 					<c:choose>
+						<c:when test="${k == pvo.nowPage}">
+							<li class="now">${k }</li>
+						</c:when>
+						<c:otherwise>
+							<li>
+								<a href="resaleList.do&cPage=${k}">${k}</a>
+							</li>	
+						</c:otherwise>
+					
+					</c:choose>
+				</c:forEach>
+					
+				<%--다음으로에 대한 사용여부 처리--%>
+				<c:choose>
 					<%--사용불가(disable) : 첫번째 블록인 경우--%>
 					<c:when test="${pvo.endPage >= pvo.totalPage}">
 						<li id="pointer" class="disable">&gt;</li>
@@ -135,7 +160,24 @@
 						</li>
 					</c:otherwise>
 				</c:choose>
-				</ol>
-			</div>
+			</ol>
 		</div>
 	</div>
+    
+    <!-- ALL JS FILES -->
+    <script src="bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="bootstrap/js/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- ALL PLUGINS -->
+    <script src="bootstrap/js/jquery.superslides.min.js"></script>
+    <script src="bootstrap/js/bootstrap-select.js"></script>
+    <script src="bootstrap/js/inewsticker.js"></script>
+    <script src="bootstrap/js/bootsnav.js."></script>
+    <script src="bootstrap/js/images-loded.min.js"></script>
+    <script src="bootstrap/js/isotope.min.js"></script>
+    <script src="bootstrap/js/owl.carousel.min.js"></script>
+    <script src="bootstrap/js/baguetteBox.min.js"></script>
+    <script src="bootstrap/js/form-validator.min.js"></script>
+    <script src="bootstrap/js/contact-form-script.js"></script>
+    <script src="bootstrap/js/custom.js"></script>
+</body>

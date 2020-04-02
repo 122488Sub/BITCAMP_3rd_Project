@@ -19,7 +19,16 @@
 </head>
 <body>
 
-	<div class="all-title-box"></div>
+	<br><br><br>
+	<div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 id="notice">Welcome to KOREIGNERS!</h2>
+                </div>
+            </div>
+        </div>
+    </div>
 	
 	<div id="container">
 		<h1>Create Account</h1>

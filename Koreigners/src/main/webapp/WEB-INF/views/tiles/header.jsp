@@ -5,7 +5,7 @@
 <section id="section1">
 	<div id="wrap">    
 	   <ul id="header">
-	       <a href="main.do"><li id="logo"> <p>Koreigner</p></li></a>
+	       <a href="main.do"><li id="logo"> <p>KOREIGNER</p></li></a>
 	       <ul id="menu_wrap">  
 	           <li class="menu"><a href="main.do">Home</a></li>
                     <li class="menu"><a href="hireList_go.do">Job</a></li>
