@@ -19,6 +19,7 @@
 <link href="resources/css/common/page.css" rel="stylesheet" type="text/css">
 <link href="resources/css/common/button.css" rel="stylesheet" type="text/css">
 
+<script type="text/javascript" src="resources/js/common/togleWish.js" ></script>
 <script type="text/javascript" src="resources/js/common/buttonColorChange.js"></script>
 <script type="text/javascript" src="resources/js/inform/infoList.js"></script>
 </head>
@@ -100,7 +101,7 @@
 		</div>
 	</div> -->
 	
-	
+	<input type="hidden" id="mem_id" value="${user.mem_id}">
 	<a href="InfoInsert_go.do">New Post</a>
 	<!-- Start Shop Page  -->
     <div class="shop-box-inner">

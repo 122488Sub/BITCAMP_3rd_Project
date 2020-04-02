@@ -126,8 +126,11 @@ public class p_MyPageController {
 		
 		
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("result", pService.togleWish(pVO));
-		
+		if(pVO.getMem_id()==null) {
+			
+		}else {
+			map.put("result", pService.togleWish(pVO));
+		}
 		return map;
 	}
 	

@@ -161,9 +161,9 @@ else if(inform.INFO_FILE_NAME==null || inform.INFO_FILE_NAME=='' || typeof infor
                 +			'<ul>'
                 +    			'<li><a href="javascript:goInformDetailPage('+ inform.INFO_IDX+')" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>';
 if(wishBool==1){	
-	gridHtml+=     				'<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>';
+	gridHtml+=     				'<li><a href="javascript:clickWishInform('+"'"+$('#mem_id').val()+"'"+','+inform.INFO_IDX+',4)" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i id="wish_'+inform.INFO_IDX+'" class="fas fa-heart"></i></a></li>';
 }else{
-	gridHtml+=     				'<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>';
+	gridHtml+=     				'<li><a href="javascript:clickWishInform('+"'"+$('#mem_id').val()+"'"+','+inform.INFO_IDX+',4)" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i id="wish_'+inform.INFO_IDX+'"class="far fa-heart"></i></a></li>';
 }   
     gridHtml+=  			'</ul>'
                 +			'<a class="cart" href="javascript:goInformDetailPage('+ inform.INFO_IDX+')">'+inform.INFO_MEM_ID+'</a>'
@@ -176,7 +176,7 @@ if(wishBool==1){
             +	'</div>'
             +'</div>';
 	return gridHtml;
-	
+
 }
 
 function setSmallCategory(count){
