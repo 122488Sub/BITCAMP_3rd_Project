@@ -19,17 +19,17 @@
 <link href="resources/css/resale/resaleSearch.css" rel="stylesheet" type="text/css"></link>
 	<h3 style="text-align: center">Resale Shop</h3>
 	<div class="selectbox_div">
-			<form method="post" id="searchForm">
-				<select id="ex_select" name="idx" class="selectbox">
-					<option value="0">제목</option>
-					<option value="1">내용</option>
-					<option value="2">제목+내용</option>
-				</select>
-				<input type="text" id="searchBar" name="keyword">
-				<input class=select_search type="image" src="${pageContext.request.contextPath}/resources/img/resale/search.png" 
-						width="40px" height="40px" onclick="search_go(this.form)">
-			</form>
-		</div>
+		<form method="post" id="searchForm">
+			<select id="ex_select" name="idx" class="selectbox">
+				<option value="0">제목</option>
+				<option value="1">내용</option>
+				<option value="2">제목+내용</option>
+			</select>
+			<input type="text" id="searchBar" name="keyword">
+			<input class=select_search type="image" src="${pageContext.request.contextPath}/resources/img/resale/search.png" 
+					width="40px" height="40px" onclick="search_go(this.form)">
+		</form>
+	</div>
 	<div id="img_content">
 		<div id="listBox">
 		    <c:choose>

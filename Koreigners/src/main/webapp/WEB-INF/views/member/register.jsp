@@ -5,14 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>가입</title>
-<link href="resources/css/header.css" rel="stylesheet" type="text/css">
-<link href="resources/css/style.css" rel="stylesheet" type="text/css">
 <link href="resources/css/member/register.css" rel="stylesheet" type="text/css">
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="bootstrap/css/style.css">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="bootstrap/css/responsive.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="bootstrap/css/custom.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/member/register.js"></script>
 </head>
 <body>
 
+	<div class="all-title-box"></div>
+	
 	<div id="container">
 		<h1>Create Account</h1>
 		<hr>

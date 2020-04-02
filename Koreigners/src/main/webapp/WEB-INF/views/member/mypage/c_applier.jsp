@@ -80,11 +80,14 @@
     </div>
     <!-- End All Title Box -->
 
-	<select id="hireSelect">
-		<option selected="selected" value="0">All</option>
-	</select>
+	
 	<div class="wishlist-box-main">
 		<div class="container">
+			<div class="mb-2">
+				<select id="hireSelect" class="col-md-2 form-control">
+					<option selected="selected" value="0">All</option>
+				</select>
+			</div>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="table-main table-responsive">
