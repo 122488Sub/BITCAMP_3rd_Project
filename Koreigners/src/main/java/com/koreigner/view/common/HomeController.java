@@ -84,7 +84,7 @@ public class HomeController {
 		
 		model.addAttribute("postType", "main");
 		
-		return "/common/main.page";
+		return "/common/main_test.page";
 	}
 	
 	

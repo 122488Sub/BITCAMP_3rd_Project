@@ -20,7 +20,18 @@
 </head>
 
 <body>
-
+<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>House</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
 <div id="houseMain_content" >
 	<div style="width:1200px; margin: 0 auto;">
 	<!-- 지도부분 -->

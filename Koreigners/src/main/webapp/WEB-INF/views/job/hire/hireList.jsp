@@ -62,7 +62,18 @@ td{height:80px;}
 </head>
 
 <body onload="loadPage()">
-
+<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>HIRE</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
 <jsp:include page="../job_map2.jsp"/>
 
 <c:choose>
@@ -99,6 +110,9 @@ td{height:80px;}
 	</tfoot>
 </table>
 Start Wishlist  -->
+
+	
+    
     <div class="wishlist-box-main">
         <div class="container">
             <div class="row">

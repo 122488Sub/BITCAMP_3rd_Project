@@ -33,7 +33,18 @@
 	#flag {width : 20px; height : 20px; border:0}
 </style>
 <body>
-
+<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Hire Posting</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
 <br><br><br><br>
 
 <form action="hirePost.do" method="post">

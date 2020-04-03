@@ -29,7 +29,18 @@
 <script type="text/javascript" src="resources/js/inform/infoModify.js"></script>
 </head>
 <body>
-	
+	<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Modifying the post</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
 	<form method="post" id="boardInsert">
 		<input type="hidden" name="info_mem_id" value="${inform.info_mem_id }">
 		<input type="hidden" id="info_select_category" value="${inform.info_category }">

@@ -106,7 +106,7 @@
     <div class="cart-box-main">
         <div class="container">
            <!--  <div class="row"> -->
-       	    	<div class="col-xs-12 col-sm-12 col-md-8 mb-3" style="float:none; margin:0 auto;">
+       	    	<div class="col-xs-12 col-sm-12 col-md-8" style="float:none; margin:0 auto;">
        	            <div class="checkout-address">
                         <div class="title-left">
                             <h3>Personal Information</h3>

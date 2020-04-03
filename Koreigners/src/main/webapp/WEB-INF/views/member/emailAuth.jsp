@@ -17,7 +17,18 @@
 </style>
 </head>
 <body>
- 
+ <br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
 	<div id="container">
 		<h3>Just one more step for registration! Please activate your account via the link in the email we just sent to you</h3>
 		<h3>등록 단계 하나만 더! 방금 보낸 이메일의 링크를 통해 계정을 활성화하십시오</h3>

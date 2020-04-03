@@ -43,7 +43,7 @@
     <!-- End All Title Box -->
 
 	<!-- Start Search -->
-	<div class="selectbox_div">
+	<%-- <div class="selectbox_div">
 		<form method="post" id="searchForm">
 			<select id="ex_select" name="idx" class="selectbox">
 				<option value="0">제목</option>
@@ -54,7 +54,7 @@
 			<input class=select_search type="image" src="${pageContext.request.contextPath}/resources/img/resale/search.png" 
 					width="40px" height="40px" onclick="search_go(this.form)">
 		</form>
-	</div>
+	</div> --%>
 	<!-- End Search -->
 	
 	<div id="listBox">
@@ -67,63 +67,142 @@
 	</c:choose>
 	</div>
 	
+	
+	<div class="shop-box-inner">
+        <div class="container">
+            <div class="row">
+				<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
+                    <div class="product-categori">
+                        <div class="search-product">
+                            <form>
+                                <input class="form-control" placeholder="Search here..." type="text">
+                                <button onclick="javascript:search_go(this.form)"> <i class="fa fa-search"></i> </button>
+                            </form>
+                        </div>
+                        <div class="filter-sidebar-left">
+                            <div class="title-left">
+                                <h3>Categories</h3>
+                            </div>
+                            <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
+                                <a href="javascript:getData('All',1)" class="list-group-item list-group-item-action"> All  <small id="smallCategoryAll" class="text-muted">() </small></a>
+                                <a href="javascript:getData('Information',1)" class="list-group-item list-group-item-action"> Information <small id="smallCategoryInformation" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Food',1)" class="list-group-item list-group-item-action"> Food <small id="smallCategoryFood" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Travel',1)" class="list-group-item list-group-item-action"> Travel <small id="smallCategoryTravel" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Etc',1)" class="list-group-item list-group-item-action"> etc <small id="smallCategoryEtc" class="text-muted">()</small></a>
+                            </div>
+                        </div>
+                        <div class="title-left"></div>
+	                        <div style="text-align:center">
+	                        	<button type="button" class="btn hvr-hover col-md-12" onclick="location.href='InfoInsert_go.do'">New Post</button>
+	                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-sm-12 col-xs-12 shop-content-right">
+                    <div class="right-product-box">
+                        <div class="product-item-filter row">
+                            <div class="col-12 col-sm-8 text-center text-sm-left"></div>
+                            <div class="col-12 col-sm-4 text-center text-sm-right">
+                                <ul class="nav nav-tabs ml-auto">
+                                    <li>
+                                        <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i class="fa fa-th"></i> </a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#list-view" data-toggle="tab"> <i class="fa fa-list-ul"></i> </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="product-categorie-box">
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+					            <div class="row">
+									<c:if test="${not empty list }">
+									<c:forEach var="vo" items="${list}">
+						                <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
+						                    <div class="products-single fix">
+						                        <!-- 이미지 -->
+						                        <div class="box-img-hover">
+						                           <c:choose>
+												   <c:when test="${vo.file_ori_name == null}">
+												   <img src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg" class="img-fluid">
+							                            <div class="mask-icon">
+							                                <ul>
+							                                    <li><a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+							                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+							                                </ul>
+							                            </div>
+												    </c:when>
+												    <c:otherwise>
+														<img src="${pageContext.request.contextPath}/resources/img/resale/${vo.getFile_ori_name()}" class="img-fluid">
+												    	<div class="mask-icon">
+							                                <ul>
+							                                    <li><a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
+							                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+							                                </ul>
+							                            </div>
+												    </c:otherwise>
+												    </c:choose>
+						                        </div>
+						                        <!-- 설명 -->
+						                        <div>${vo.subject}</div>
+					                        	<div>${vo.price }원</div><span>${vo.regdate }</span>
+					                        	<div id="addrBox">&nbsp;<img src ="img/pin.png" width="15px" height="15px">
+												<c:choose>
+													<c:when test="${not empty address}">
+														<c:set var="addr" value="${fn:split(vo.address,' ')}" />
+														  <c:forEach var="addrs" items="${addr}" varStatus="g">
+													   	   <c:if test="${g.count == 1}">${addrs}</c:if>
+													       <c:if test="${g.count == 2}">&nbsp;${addrs}</c:if>
+														 </c:forEach> 
+													</c:when>
+													<c:otherwise>
+													  주소 없음
+													</c:otherwise>
+												 </c:choose>
+												</div>
+						                    </div>
+						                </div>
+									</c:forEach>
+									</c:if>
+					            </div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="list-view">
+                                    <div class="list-view-box">
+                                        <div class="wishlist-box-main">
+											<div class="container">
+												<div class="row">
+													<div class="col-md-12 col-lg-12">
+														<div class="table-main table-responsive">
+															<table class="table" id="infoList">
+																<thead id="tHead">
+									
+																</thead>
+																<tbody id="list_box">
+									
+																</tbody>
+															</table>
+															<div id="tfoot"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<!-- Start Gallery  -->
     <div class="products-box">
         <div class="container">
-            <div class="row">
-			
-				<c:if test="${not empty list }">
-				<c:forEach var="vo" items="${list}">
 				
-	                <div class="col-lg-3 col-md-6">
-	                    <div class="products-single fix">
-	                        <!-- 이미지 -->
-	                        <div class="box-img-hover">
-	                           <c:choose>
-							   <c:when test="${vo.file_ori_name == null}">
-							   <img src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg" class="img-fluid">
-		                            <div class="mask-icon">
-		                                <ul>
-		                                    <li><a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-		                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-		                                </ul>
-		                            </div>
-							    </c:when>
-							    <c:otherwise>
-									<img src="${pageContext.request.contextPath}/resources/img/resale/${vo.getFile_ori_name()}" class="img-fluid">
-							    	<div class="mask-icon">
-		                                <ul>
-		                                    <li><a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-		                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-		                                </ul>
-		                            </div>
-							    </c:otherwise>
-							    </c:choose>
-		                        <!-- 설명 -->
-		                        <div>${vo.subject}</div>
-	                        	<div>${vo.price }원</div><span>${vo.regdate }</span>
-	                        	<div id="addrBox">&nbsp;<img src ="img/pin.png" width="15px" height="15px">
-								<c:choose>
-									<c:when test="${not empty address}">
-										<c:set var="addr" value="${fn:split(vo.address,' ')}" />
-										  <c:forEach var="addrs" items="${addr}" varStatus="g">
-									   	   <c:if test="${g.count == 1}">${addrs}</c:if>
-									       <c:if test="${g.count == 2}">&nbsp;${addrs}</c:if>
-										 </c:forEach> 
-									</c:when>
-									<c:otherwise>
-									  주소 없음
-									</c:otherwise>
-								 </c:choose>
-								</div>
-	                        </div>
-	                    </div>
-	                </div>
+
 	                
-				</c:forEach>
-				</c:if>
-            
-            </div>
         </div>
     </div>
     <!-- End Gallery  -->

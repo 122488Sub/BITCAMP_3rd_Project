@@ -32,9 +32,19 @@
 </head>
 <body>
 
+<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Reset/Change Your password</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
 	<div id="container">
-		<h1>Reset/Change Your Password</h1>
-		<hr><hr>
 		<form action="resetPw.do" method="post">
 			<div>
 				New Password :	<input type="password" id="newPw" name="mem_pw">

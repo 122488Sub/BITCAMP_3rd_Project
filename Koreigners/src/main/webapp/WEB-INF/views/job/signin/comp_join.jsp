@@ -35,6 +35,19 @@
 
 <body>
 
+<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Company Registration</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+
 <div id="regCotent">
 <form action="join_conf.do" name="form" id="regForm" method="post" enctype="multipart/form-data" >
 	<p id="titleText">Registration of Search Firm membership</p>
