@@ -105,7 +105,6 @@
     <input type="hidden" name="MEM_ID" value="${mvo.mem_id }">
     <div class="cart-box-main">
         <div class="container">
-           <!--  <div class="row"> -->
        	    	<div class="col-xs-12 col-sm-12 col-md-8" style="float:none; margin:0 auto;">
        	            <div class="checkout-address">
                         <div class="title-left">
@@ -588,7 +587,6 @@
 				          </p>
 					</c:if>
 			    </div>
-	       <!--  </div> -->
 	    </div>
 	   	</form>
     <!-- End Cart -->

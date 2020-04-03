@@ -161,17 +161,16 @@
 	
 	<div style="text-align:center">
 		<p>▪ If you wish to apply for the above job posting, please click the [Apply for employment] button below,</p> 
-		<p>&nbsp;&nbsp;&nbsp;or send your resume to the e-mail address listed above.</p>
+		<p>or send your resume to the e-mail address listed above.</p>
 		<p>▪ If you want to save this post, please click the [Save as My Wish List] button below. You can see the post in my page.</p>
 	</div>
 	<hr>
-	<br><br><br><br>
+	<br><br>
 	
-	<input type="button" class="btn59acff" onclick="clickApplyEmployment('${user.mem_id}',${hireVO.company_idx},${hireVO.hire_idx})" value="Apply for employment">
-	<!--  
-	<input type="button" onclick="wishList(${hireVO.hire_idx},'${user.mem_id}')" value="Save My WishList">
-	-->
-	<input type="button" class="btn59acff"  onclick="clickWishList('${user.mem_id}',${hireVO.hire_idx},2)" value="Save My WishList">
+	<div style="height:100px;float:none; margin:0 auto; text-align:center">
+		<button class="btn hvr-hover" style="margin:0 10px" onclick="javascript:clickApplyEmployment('${user.mem_id}',${hireVO.company_idx},${hireVO.hire_idx})">Apply for employment</button>
+		<button class="btn hvr-hover" style="margin:0 10px" onclick="javascript:clickWishList('${user.mem_id}',${hireVO.hire_idx},2)">Save My WishList</button>
+	</div>
 
 </body>
 </html>
