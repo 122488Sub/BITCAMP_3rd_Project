@@ -38,7 +38,7 @@
 </table>
 <hr>
 
-	<!-- Start recruitment -->
+	<!-- Start recruitment Detail -->
 	<div class="cart-box-main">
 		<div class="container">
 			<div class="col-md-10 col-sm-12 col-xs-12" style="float:none; margin:0 auto;">
@@ -154,6 +154,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- End recruitment Detail -->
 
 	<br><br>
 	<p align="center" style="font-size:2em">Koreigners User Guide</p>
@@ -161,17 +162,16 @@
 	
 	<div style="text-align:center">
 		<p>▪ If you wish to apply for the above job posting, please click the [Apply for employment] button below,</p> 
-		<p>&nbsp;&nbsp;&nbsp;or send your resume to the e-mail address listed above.</p>
+		<p>or send your resume to the e-mail address listed above.</p>
 		<p>▪ If you want to save this post, please click the [Save as My Wish List] button below. You can see the post in my page.</p>
 	</div>
 	<hr>
-	<br><br><br><br>
+	<br><br>
 	
-	<input type="button" class="btn59acff" onclick="clickApplyEmployment('${user.mem_id}',${hireVO.company_idx},${hireVO.hire_idx})" value="Apply for employment">
-	<!--  
-	<input type="button" onclick="wishList(${hireVO.hire_idx},'${user.mem_id}')" value="Save My WishList">
-	-->
-	<input type="button" class="btn59acff"  onclick="clickWishList('${user.mem_id}',${hireVO.hire_idx},2)" value="Save My WishList">
+	<div style="height:100px;float:none; margin:0 auto; text-align:center">
+		<button class="btn hvr-hover" style="margin:0 10px" onclick="javascript:clickApplyEmployment('${user.mem_id}',${hireVO.company_idx},${hireVO.hire_idx})">Apply for employment</button>
+		<button class="btn hvr-hover" style="margin:0 10px" onclick="javascript:clickWishList('${user.mem_id}',${hireVO.hire_idx},2)">Save My WishList</button>
+	</div>
 
 </body>
 </html>

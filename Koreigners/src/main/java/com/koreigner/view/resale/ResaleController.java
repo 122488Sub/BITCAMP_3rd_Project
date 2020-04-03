@@ -73,7 +73,7 @@ public class ResaleController {
 						    Model model) {
 		System.out.println("리세일이다");
 		model.addAttribute("postType", "resale");
-		return "resale/resaleWrite.page";
+		return "resale/resaleWrite_test.page";
 	}
 	
 	@RequestMapping(value="resalePost.do", method= {RequestMethod.GET, RequestMethod.POST})

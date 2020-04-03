@@ -4,25 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link href="resources/css/header.css" rel="stylesheet" type="text/css">
-    <link href="resources/css/style.css" rel="stylesheet" type="text/css">
-<link href="resources/css/job/regCompany.css" rel="stylesheet" type="text/css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/js/daumAddr.js"></script>
-<script type="text/javascript" src="resources/js/companySignup.js"></script>
-<link href="resources/css/member/register.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="resources/js/hire/hireWrite.js"></script>
+
 <link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-
-	<!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <!-- Site CSS -->
-    <link rel="stylesheet" href="bootstrap/css/style.css">
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="bootstrap/css/responsive.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="bootstrap/css/custom.css">
 
 </head>
 

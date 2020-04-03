@@ -10,28 +10,11 @@
 <title>Insert title here</title>
 
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<link href="resources/css/job/hireWrite.css" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/js/hire/hireWrite.js"></script>
 <script type="text/javascript" src="resources/js/daumAddr.js"></script>
-<link href="resources/css/member/register.css" rel="stylesheet" type="text/css">
 
 </head>
-<style>
-	select.input_box {height: 40px; color: black;}
-	input.input_box {width:50%}
-	table#regCom{
-		width: 100%;
-		height: auto;
-		border-top: 2px solid black;
-	}
-	table#regCom tr {border-bottom: 1px solid black;}
-	#titleText{font-size: 30px; font-weight: 400;}
-	#titleText2{font-size: 17px; font-weight: 500;}
-	.title {width: 14%; height: 70px;}
-	.contents {width: 86%; height: 70px;}
-	#flag {width : 20px; height : 20px; border:0}
-</style>
 <body>
 <br><br><br>
 	<!-- Start All Title Box -->
@@ -39,345 +22,268 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Hire Posting</h2>
+                    <h2>Post of Search Firm membership</h2>
                 </div>
             </div>
         </div>
     </div>
     <!-- End All Title Box -->
-<br><br><br><br>
-
-<form action="hirePost.do" method="post">
-<p id="titleText">채용 공고 등록</p>
-<p id="titleText">Post of Search Firm membership</p>
-	<br><br><br><br>
-	
-	<p id="titleText2">
-		<img id="flag" src="resources/common/flag.png">
-		채용 공고 정보 입력
-	</p>
-	<br>
-<table id="regCom">
-		<tr>
-			<td class="title">	<label>근무 형태 : </label></td>
-			<td class="contents"><input type="radio" name="work_type" id="work_type" value="정규직">정규직
-				<input type="radio" name="work_type" value="계약직">계약직
-				<input type="radio" name="work_type" value="아르바이트">아르바이트
-			</td>
-		</tr>
-		<tr>
-		<td class="title"><label>제목 : </label></td>
-		<td class="contents">
-			<input type="text" class="input_box" name="title" id="title" title="title"></td>
-		</tr>
-		<tr>
-		<td class="title"><label>채용직종 : </label></td>
-		<td class="contents">
-			<select class="input_box" name="cate_prnt_ko" id="selectBox1" title="직종선택">
-				<c:forEach items="${jobWriteCate}" var="option">
-					<option class="${option.key}">${option.value}</option>
-				</c:forEach>
-			</select>
-			<select class="input_box" name="cate_child_ko" title="직종선택"  id="cate_child_ko">
-			</select>
-		</td>
-		</tr>
-		<tr>
-			<td class="title"><label>근무지역</label></td>
-			<td class="contents">
-			</td>
-		</tr>
-		<tr>
-			<td class="title"><label>한글주소 : </label></td>
-			<td class="contents">
-				<input type="text" id="address" class="input_box" name="address" style="width: 30%;" value="" placeholder="주소">
-				<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기">
-	   		</td>
-		</tr>
-		<tr>
-			<td class="title"> <label>한글 상세주소 : </label></td>
-			<td class="contents"><input type="text" id="addr_dt_kor" class="input_box" name="addr_dt_kor" style="width: 15%;" value="" placeholder="상세주소">
-	    	</td>
-		</tr>
-		<tr>
-			<td class="title"><label>영어주소 : </label></td>
-			<td class="contents"><input type="text" id="address_en" class="input_box" name="address_en" style="width: 30%;" value="" placeholder="주소en">
-	    	</td>
-		</tr>
-		<tr>
-			<td class="title"><label>영어 상세주소 : </label></td>
-			<td class="contents"><input type="text" id="addr_dt_en" class="input_box" name="addr_dt_en" style="width: 15%;" value="" placeholder="상세주소en">
-			</td>
-		</tr>
-		<tr>
-			<td class="title"> <label>근무시간 : </label></td>
-			<td class="contents"><input type="text" id="work_time" class="input_box" name="work_time" style="width: 15%;" placeholder="근무시간">
-			</td>
-		</tr>
-		<tr>
-			<td class="title"><label>임금조건 : </label></td>
-			<td class="contents">
-				<input type="radio" name="payment_codition" id="hour" value="hour">시급
-				<input type="radio" name="payment_codition" id="day" value="day">일당
-				<input type="radio" name="payment_codition" id="month" value="month">월급
-				<input type="radio" name="payment_codition" id="year" value="year">연봉
-				<input type="radio" name="payment_codition" id="companyLaw" value="companyLaw">회사내규
-			</td>
-		</tr>
-		<tr>
-		<td class="title"></td>
-			<td class="contents">
-				<input type="text" class="input_box" name="salary_min" id="salary_min" placeholder="임금 최저" style="width: 15%;"> -
-				<input type="text" class="input_box" name="salary_max" id="salary_max" placeholder="임금 최고" style="width: 15%;">
-			</td>
-		</tr>
-		<tr>
-			<td class="title"><label>임금상세조건 : </label></td>
-			<td class="contents"><input type="text" class="input_box" name="payment_detail" id="payment_detail" style="width: 30%;"  placeholder="자세한 사항 입력( 예)면접 후 재조정 가능 )">
-			</td>
-		</tr>
-		<tr>
-		<td class="title"><label>채용인원 : </label></td>
-		<td class="contents"><input type="text" id="hire_number" class="input_box" name="hire_number" style="width: 15%;" placeholder="채용인원"></td>
-		</tr>
-		<tr>
-			<td class="title"><label>채용연령 : </label>
-		</td>
-		<td class="contents">
-			<input type="text" id="hire_age_min" class="input_box" name="hire_age_min" style="width: 15%;" placeholder="채용 최소 연령"> - 
-	    	<input type="text" id="hire_age_max" class="input_box" name="hire_age_max" style="width: 15%;" placeholder="채용 최고 연령">
-   	 	</td>
-		</tr>
-		<tr>
-			<td class="title"><label>학력 : </label></td>
-			<td class="contents"><input type="text" id="education" class="input_box" name="education" style="width: 30%;" placeholder="학력"></td>
-		</tr>
-		<tr>
-			<td class="title"><label>전공 : </label></td>
-			<td class="contents"><input type="text" id="major" class="input_box" name="major" style="width: 30%;" placeholder="전공"><br><br></td>
-		</tr>
-		<tr>
-			<td class="title"><label>경력 : </label></td>
-			<td class="contents"><input type="text" id="experience" class="input_box" name="experience" style="width: 30%;" placeholder="경력"></td>
-		</tr>
-		<tr>
-			<td class="title"><label>외국어 : </label></td>
-			<td class="contents"><input type="text" id="foreign_language" class="input_box" name="foreign_language" style="width: 30%;" placeholder="외국어"></td>
-		</tr>
-		<tr>
-			<td class="title"><label>기타우대능력 : </label></td>
-			<td class="contents"><input type="text" id="prefer_skills" class="input_box" name="prefer_skills" style="width: 30%;" placeholder="기타우대능력"></td>
-		</tr>
-		<tr>
-			<td class="title"><label>기숙사제공유무 : </label></td>
-			<td class="contents">
-				<input type="radio" name="domitory" id="domitory" value="기숙사 제공 함">기숙사 제공 함
-				<input type="radio" name="domitory" value="기숙사 제공 하지 않음">기숙사 제공 하지 않음
-				<input type="radio" name="domitory" value="회사 내규에 따름(협의)">회사 내규에 따름(협의)
-			</td>
-		</tr>
-		<tr>
-		<td class="title"><label>식사 : </label></td>
-		<td class="contents">
-			<input type="radio" name="meals" id="meals" name="식사"  value="제공안함">제공안함
-			<input type="radio" name="meals" value="중식제공">중식제공
-			<input type="radio" name="meals" value="2식제공">2식제공
-			<input type="radio" name="meals" value="3식제공">3식제공
-			<input type="radio" name="meals" value="회사 내규에 따름(협의)">회사 내규에 따름(협의)
-		</td>
-		</tr>
-		<tr>
-		<td class="title"><label>4대보험 : </label></td>
-		<td class="contents">
-			<input type="checkbox" name="insuranceInfo" value="의료보험">의료보험
-			<input type="checkbox" name="insuranceInfo" value="산재보험">산재보험
-			<input type="checkbox" name="insuranceInfo" value="고용보험">고용보험
-			<input type="checkbox" name="insuranceInfo" value="국민연금보험">국민연금보험
-		</td>
-		</tr>
-		<tr>
-		<td class="title"><label>직무내용 : </label></td>
-		<td class="contents">
-			<textarea id="work_detail"class="input_box" name="work_detail" placeholder="직무내용" cols="50" rows="50" ></textarea>
-			<!-- <input type="text" id="work_detail" class="input_box" name="work_detail" style="width: 10%;" placeholder="직무내용"> -->
-		</td>
-		</tr>
-		<tr>
-		<td class="title"><label>지원방법(전형방법) : </label></td>
-		<td class="contents"><input type="text" id="apply_way" class="input_box" name="apply_way" style="width: 60%;" placeholder="지원방법(전형방법)"></td>
-		</tr>
-		<tr>
-		<td class="title"><label>제출서류/준비물 : </label></td>
-		<td class="contents"><input type="text" id="prepare_doc" class="input_box" name="prepare_doc" style="width: 60%;" placeholder="제출서류/준비물 "></td>
-		</tr>
-		<tr>
-		<td class="title"></td>
-		<td class="contents"></td>
-		</tr>
-</table>
-
-<input type="submit" value="채용공고등록">
-<!-- 근무지역 hidden -->	
-	<input type="hidden" id="do_kor" class="input_box" name="do_kor" style="width: 10%;" value="" placeholder="상세주소">
-    <input type="hidden" id="gu_gun_eup_kor" class="input_box" name="gu_gun_eup_kor" style="width: 10%;" value="" placeholder="상세주소">
-    <input type="hidden" id="do_en" class="input_box" name="do_en" style="width: 10%;" value="" placeholder="상세주소">
-    <input type="hidden" id="gu_gun_eup_en" class="input_box" name="gu_gun_eup_eng" style="width: 10%;" value="" placeholder="상세주소">
-
-
-<br><br><br><br><br><br><br>
-
-
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------- -->
-
-<%--  
-<!-- 근무형태 work_type -->
-	<label>근무 형태 : </label>
-	<input type="radio" name="work_type" id="work_type" value="정규직">정규직
-	<input type="radio" name="work_type" value="계약직">계약직
-	<input type="radio" name="work_type" value="아르바이트">아르바이트
-	<br><br>
-
-<!-- 제목 title -->	
-	<label>제목 : </label>
-	<input type="text" class="input_box" name="title" id="title" title="title">
-	<br><br>
-		
-<!-- 채용직종 cate_prnt_ko -->	
-	<label>채용직종 : </label>
-	<select class="input_box" name="cate_prnt_ko" id="selectBox1" title="직종선택">
-		<c:forEach items="${jobWriteCate}" var="option">
-			<option class="${option.key}">${option.value}</option>
-		</c:forEach>
-	</select>
-	
-	<select class="input_box" name="cate_child_ko" title="직종선택"  id="cate_child_ko">
-	</select><br><br>
-	
-	<!-- 근무지역 address -->		
-	<label>근무지역 : </label>
-	<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><br><br>
-    <label>한글주소 : </label><input type="text" id="address" class="input_box" name="address" style="width: 10%;" value="" placeholder="주소"><br><br>
-    <label>한글 상세주소 : </label><input type="text" id="addr_dt_kor" class="input_box" name="addr_dt_kor" style="width: 10%;" value="" placeholder="상세주소"><br><br>
     
-    <label>영어주소 : </label><input type="text" id="address_en" class="input_box" name="address_en" style="width: 10%;" value="" placeholder="주소en"><br><br>
-    <label>영어 상세주소 : </label><input type="text" id="addr_dt_en" class="input_box" name="addr_dt_en" style="width: 10%;" value="" placeholder="상세주소en"><br><br>
-<!-- 근무지역 hidden -->	
-	<input type="hidden" id="do_kor" class="input_box" name="do_kor" style="width: 10%;" value="" placeholder="상세주소">
-    <input type="hidden" id="gu_gun_eup_kor" class="input_box" name="gu_gun_eup_kor" style="width: 10%;" value="" placeholder="상세주소">
-    <input type="hidden" id="do_en" class="input_box" name="do_en" style="width: 10%;" value="" placeholder="상세주소">
-    <input type="hidden" id="gu_gun_eup_en" class="input_box" name="gu_gun_eup_eng" style="width: 10%;" value="" placeholder="상세주소">
-   
-<!-- 근무시간 work_time -->    
-    <label>근무시간 : </label><input type="text" id="work_time" class="input_box" name="work_time" style="width: 10%;" placeholder="근무시간"><br><br>
-
-<!-- 임금조건 payment_codition --> 
-	<label>임금조건 : </label>
-	<input type="radio" name="payment_codition" id="hour" value="hour">시급
-	<input type="radio" name="payment_codition" id="day" value="day">일당
-	<input type="radio" name="payment_codition" id="month" value="month">월급
-	<input type="radio" name="payment_codition" id="year" value="year">연봉
-	<input type="radio" name="payment_codition" id="companyLaw" value="companyLaw">회사내규
-	<br><br>
-<!-- 임금조건 salary_min salary_max --> 
-	<input type="text" class="input_box" name="salary_min" id="salary_min" placeholder="임금 최저"> -
-	<input type="text" class="input_box" name="salary_max" id="salary_max" placeholder="임금 최고">
-	<br><br>
-	<label>임금상세조건 : </label>
-	<input type="text" class="input_box" name="payment_detail" id="payment_detail" placeholder="자세한 사항 입력( 예)면접 후 재조정 가능 )">
-	<br><br><br>
-
-<!-- 채용인원 hire_number -->	
-	<label>채용인원 : </label><input type="text" id="hire_number" class="input_box" name="hire_number" style="width: 10%;" placeholder="채용인원"><br><br>
-    <br><br>
- 
-<!-- 채용연령 hire_age_min, hire_age_max -->	    
-    <label>채용연령 : </label>
-    <input type="text" id="hire_age_min" class="input_box" name="hire_age_min" style="width: 10%;" placeholder="채용 최소 연령"> - 
-    <input type="text" id="hire_age_max" class="input_box" name="hire_age_max" style="width: 10%;" placeholder="채용 최고 연령"><br><br>
-	<br><br>
-	
-<!-- 학력  education -->		
-	<label>학력 : </label>
-	<input type="text" id="education" class="input_box" name="education" style="width: 10%;" placeholder="학력"><br><br>
-	
-<!-- 전공  major -->		
-	<label>전공 : </label>
-	<input type="text" id="major" class="input_box" name="major" style="width: 10%;" placeholder="전공"><br><br>
-
-<!-- 경력  experience -->			
-	<label>경력 : </label>
-	<input type="text" id="experience" class="input_box" name="experience" style="width: 10%;" placeholder="경력"><br><br>
-
-<!-- 외국어  foreign_language -->		
-	<label>외국어 : </label>
-	<input type="text" id="foreign_language" class="input_box" name="foreign_language" style="width: 10%;" placeholder="외국어"><br><br>
-
-<!-- 기타우대능력  prefer_skills -->		
-	<label>기타우대능력 : </label>
-	<input type="text" id="prefer_skills" class="input_box" name="prefer_skills" style="width: 10%;" placeholder="기타우대능력"><br><br>
-	
-	<br><br>
-	
-<!-- 기숙사제공유무  domitory -->		
-	<label>기숙사제공유무 : </label><input type="radio" name="domitory" id="domitory" value="기숙사 제공 함">기숙사 제공 함
-	<input type="radio" name="domitory" value="기숙사 제공 하지 않음">기숙사 제공 하지 않음
-	<input type="radio" name="domitory" value="회사 내규에 따름(협의)">회사 내규에 따름(협의)
-	<br><br>
-	
-<!-- 식사  meals -->	
-	<label>식사 : </label><input type="radio" name="meals" id="meals" class="input_box" name="식사"  value="제공안함">제공안함
-	<input type="radio" name="meals" value="중식제공">중식제공
-	<input type="radio" name="meals" value="2식제공">2식제공
-	<input type="radio" name="meals" value="3식제공">3식제공
-	<input type="radio" name="meals" value="회사 내규에 따름(협의)">회사 내규에 따름(협의)
-	<br><br>
- 
-
-<!-- 4대보험  insurance -->		
-	<label>4대보험 : </label>
-	<input type="checkbox" class="input_box" name="insuranceInfo" value="의료보험">의료보험
-	<input type="checkbox" class="input_box" name="insuranceInfo" value="산재보험">산재보험
-	<input type="checkbox" class="input_box" name="insuranceInfo" value="고용보험">고용보험
-	<input type="checkbox" class="input_box" name="insuranceInfo" value="국민연금보험">국민연금보험
-	<br><br>
-
-<!-- 직무내용  work_detail -->		
-	<label>직무내용 : </label>
-	<input type="text" id="work_detail" class="input_box" name="work_detail" style="width: 10%;" placeholder="직무내용"><br><br>
-	
-<!-- 지원방법(전형방법)  apply_way -->		
-	<label>지원방법(전형방법) : </label>
-	<input type="text" id="apply_way" class="input_box" name="apply_way" style="width: 10%;" placeholder="지원방법(전형방법)"><br><br>
-
-<!-- 제출서류/준비물  prepare_doc -->		
-	<label>제출서류/준비물 : </label>
-	<input type="text" id="prepare_doc" class="input_box" name="prepare_doc" style="width: 10%;" placeholder="제출서류/준비물 "><br><br>
-     	
-	<br><br><br><br><br><br><br><br><br><br><br><br>
-	
-	 --%>
-	
-	
-	<!-- 
-	<h2>Company Information</h2>
-	<label>회사명 : </label><input type="text" class="input_box" name="company_name" id="company_name" title="회사명"><br><br>
-	<label>대표자명 : </label><input type="text" class="input_box" name="ceo_name" id="ceo_name" title="대표자명"><br><br>
-	<label>직종선택 : </label>
-	<select class="input_box" name="cate_prnt_ko" id="selectBox1" title="직종선택">
-		<c:forEach items="${jobCateMap}" var="option">
-			<option class="${option.key}">${option.value}</option>
-		</c:forEach>
-	</select>
-	<label>직원 수 : </label><input type="text" class="input_box" name="employee_num" id="employee_num" class="input_box" name="직원 수"><br><br>
-	
-	<h2>Contact information</h2>
-	<label>인사담당자 : </label><input type="text" class="input_box" name="hr_manager" id="hr_manager" title="인사담당자"><br><br>
-	
-	<label>담당자 메일 : </label><input type="text" class="input_box" name="manager_email" id="manager_email" title="담당자 메일"><br><br>
-	<label>대표전화 : </label><input type="text" class="input_box" name="company_telephone" id="company_telephone" title="대표전화"><br><br>
-	 -->
+    
+    <!-- Start Recruitment -->
+	<form action="hirePost.do" method="post">
+	<div class="cart-box-main">
+		<div class="container">
+			<div class="col-md-8 col-sm-10 col-xs-12" style="float:none; margin:0 auto">
+				<div class="title-left">
+	            	<h3>채용 공고 등록</h3>
+	            </div>
+	            	<input type="text" name="title" class="col-md-12 form-control" placeholder="제목">
+				<hr class="mb-4">
+				<div class="col-md-12 mb-3">
+					<label class="font-weight-bold">근무 형태</label>
+						<div class="custom-control cumstom-radio">
+							<input type="radio" name="work_type" id="work_type0" class="custom-control-input" value="정규직">
+							<label class="custom-control-label" for="work_type0">정규직</label>
+						</div>
+						<div class="custom-control cumstom-radio">
+							<input type="radio" name="work_type" id="work_type1" class="custom-control-input" value="계약직">
+							<label class="custom-control-label" for="work_type1">계약직</label>
+						</div>
+						<div class="custom-control cumstom-radio">
+							<input type="radio" name="work_type" id="work_type2" class="custom-control-input" value="아르바이트">
+							<label class="custom-control-label" for="work_type2">아르바이트</label>
+						</div>
+				</div>
+				<hr>
+				<div class="col-md-12 mb-3">
+					<label>채용 직종</label>
+					<div class="row">
+						<div class="col-md-6">
+							<select name="cate_prnt_ko" id="selectBox1" class="custom-select-box form-control">
+								<c:forEach items="${jobWriteCate}" var="option">
+									<option class="${option.key}">${option.value}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-md-6">	
+							<select name="cate_child_ko" id="cate_child_ko" class="custom-select-box form-control">
+							</select>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="col-md-12 mb-3">
+					<label>근무 시간</label>
+					<input type="text" id="work_time" class="form-control" name="work_time" placeholder="숫자만 입력해 주세요">
+				</div>
+				<hr>
+				<div class="col-md-12 mb-3">
+					<label>임금 조건</label>
+					<div class="row">
+						<div class="col-md-6">
+								<div class="custom-control cumstom-radio">
+									<input type="radio" name="payment_codition" id="hour" class="custom-control-input" value="hour">
+									<label class="custom-control-label" for="hour">시급</label>
+								</div>
+								<div class="custom-control cumstom-radio">
+									<input type="radio" name="payment_codition" id="day" class="custom-control-input" value="day">
+									<label class="custom-control-label" for="day">일당</label>
+								</div>
+								<div class="custom-control cumstom-radio">
+									<input type="radio" name="payment_codition" id="month" class="custom-control-input" value="month">
+									<label class="custom-control-label" for="month">월급</label>
+								</div>
+								<div class="custom-control cumstom-radio">
+									<input type="radio" name="payment_codition" id="year" class="custom-control-input" value="year">
+									<label class="custom-control-label" for="year">연봉</label>
+								</div>
+								<div class="custom-control cumstom-radio">
+									<input type="radio" name="payment_codition" id="companyLaw" class="custom-control-input" value="companyLaw">
+									<label class="custom-control-label" for="companyLaw">회사 내규에 따름</label>
+								</div>
+						</div>
+						<div class="col-md-6">
+							<div class="row mb-4">
+								<div class="col-md-5">
+									<input type="text" class="form-control" name="salary_min" placeholder="임금 최저">
+								</div>
+								<div>-</div>
+								<div class="col-md-5">
+									<input type="text" class="form-control" name="salary_max" placeholder="임금 최고">
+								</div>
+							</div>
+						<div class="col-md-12">
+							<div class="row">
+								<label>임금 상세 조건</label>
+								<input type="text" class="form-control" name="payment_detail" placeholder="자세한 사항 입력( 예)면접 후 재조정 가능 )">
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="col-md-12 mb-3">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="col-md-5" style="padding:0px">
+								<label>채용 인원</label>
+								<input type="text" class="form-control" name="hire_number">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label>채용 연령</label>
+							<div class="row">
+								<div class="col-md-5">
+									<input type="text" class="form-control" name="hire_age_min" placeholder="최소">
+								</div>
+								<div>-</div>
+								<div class="col-md-5">
+									<input type="text" class="form-control" name="hire_age_max" placeholder="최고 ">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 mb-3">
+					<div class="row">
+						<div class="col-md-6">
+							<label>학력</label>
+							<input type="text" class="form-control" name="education">
+						</div>
+						<div class="col-md-6">
+							<label>전공</label>
+							<input type="text" class="form-control" name="major">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 mb-3">
+					<label>경력</label>
+					<input type="text" class="form-control" name="experience">
+				</div>
+				<div class="col-md-12 mb-3">
+					<label>외국어</label>
+					<input type="text" class="form-control" name="foreign_language">
+				</div>
+				<div class="col-md-12 mb-3">
+					<label>기타 우대 능력</label>
+					<input type="text" class="form-control" name="prefer_skills">
+				</div>
+				<div class="col-md-12 mb-3">
+					<label>기숙사 제공 유무</label>
+						<div class="custom-control cumstom-radio">
+							<input type="radio" name="domitory" id="domitory0" class="custom-control-input" value="기숙사 제공 함">
+							<label class="custom-control-label" for="domitory0">기숙사 제공 함</label>
+						</div>
+						<div class="custom-control cumstom-radio">
+							<input type="radio" name="domitory" id="domitory1" class="custom-control-input" value="기숙사 제공 하지 않음">
+							<label class="custom-control-label" for="domitory1">기숙사 제공 하지 않음</label>
+						</div>
+						<div class="custom-control cumstom-radio">
+							<input type="radio" name="domitory" id="domitory2" class="custom-control-input" value="회사 내규에 따름(협의)">
+							<label class="custom-control-label" for="domitory2">회사 내규에 따름(협의)</label>
+						</div>
+				</div>
+				<div class="col-md-12 mb-3">
+					<label>식사 제공 여부</label>
+						<div class="custom-control cumstom-radio">
+							<input type="radio" name="meals" id="meals0" class="custom-control-input" value="제공안함">
+							<label class="custom-control-label" for="meals0">제공 안함</label>
+						</div>
+						<div class="custom-control cumstom-radio">
+							<input type="radio" name="meals" id="meals1" class="custom-control-input" value="중식제공">
+							<label class="custom-control-label" for="meals1">중식 제공</label>
+						</div>
+						<div class="custom-control cumstom-radio">
+							<input type="radio" name="meals" id="meals2" class="custom-control-input" value="2식제공">
+							<label class="custom-control-label" for="meals2">2식 제공</label>
+						</div>
+						<div class="custom-control cumstom-radio">
+							<input type="radio" name="meals" id="meals3" class="custom-control-input" value="3식제공">
+							<label class="custom-control-label" for="meals3">3식제공</label>
+						</div>
+						<div class="custom-control cumstom-radio">
+							<input type="radio" name="meals" id="meals4" class="custom-control-input" value="회사 내규에 따름(협의)">
+							<label class="custom-control-label" for="meals4">회사 내규에 따름(협의)</label>
+						</div>
+				</div>
+				<div class="col-md-12 mb-3">
+					<label>4대 보험</label>
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" name="insuranceInfo" id="insuranceInfo0" class="custom-control-input" value="의료보험">
+							<label class="custom-control-label" for="insuranceInfo0">의료보험</label>
+						</div>
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" name="insuranceInfo" id="insuranceInfo1" class="custom-control-input" value="산재보험">
+							<label class="custom-control-label" for="insuranceInfo1">산재보험</label>
+						</div>
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" name="insuranceInfo" id="insuranceInfo2" class="custom-control-input" value="고용보험">
+							<label class="custom-control-label" for="insuranceInfo2">고용보험</label>
+						</div>
+						<div class="custom-control custom-checkbox">
+							<input type="checkbox" name="insuranceInfo" id="insuranceInfo3" class="custom-control-input" value="국민연금보험">
+							<label class="custom-control-label" for="insuranceInfo3">국민연금보험</label>
+						</div>
+				</div>
+				<div class="col-md-12 mb-3">
+					<label>직무 내용</label>
+					<textarea name="work_detail" class="form-control col-md-12" id="introduce"></textarea>
+				</div>
+				<div class="col-md-12 mb-3">
+					<label>지원 방법(전형 방법)</label>
+					<input type="text" class="form-control" name="apply_way">
+				</div>
+				<div class="col-md-12 mb-3">
+					<label>제출 서류 / 준비물</label>
+					<input type="text" class="form-control" name="prepare_doc">
+				</div>
+				<div class="col-md-12 mb-3">
+					<div class="title-left">
+		            	<h3>근무 지역</h3>
+		            </div>
+		            <div class="bg-light">
+			            <div class="col-md-10">
+				            <div class="mb-1">
+					            <label>한글 주소</label>
+					            <div class="row">
+					            	<div class="col-md-9">
+							            <input type="text" id="address" class="form-control" name="address" value="">
+					            	</div>
+					            	<div class="col-md-3">
+										<input type="button"onclick="sample6_execDaumPostcode()" value="주소 찾기">
+					            	</div>
+					            </div>
+				            </div>
+			            </div>
+			            <div class="col-md-10">
+				            <div class="mb-1">
+				            	<label>한글 상세 주소</label>
+				            	<input type="text" id="addr_dt_kor" class="form-control" name="addr_dt_kor" value="">
+				            </div>
+				            <div class="mb-1">
+				            	<label>영문 주소</label>
+				            	<input type="text" id="address_en" class="form-control" name="address_en" value="">
+				            </div>
+				            <div class="mb-1">
+				            	<label>영문 상세 주소</label>
+				            	<input type="text" id="addr_dt_en" class="form-control" name="addr_dt_en" value="">
+				            </div>
+			            </div>
+		            </div>
+				</div>
+			</div>
+		</div>
+	</div>    
+    <!-- End Recruitment -->
+    
+    <div style="height:100px;float:none; margin:0 auto; text-align:center">
+		<button type="submit" class="btn hvr-hover">채용공고등록</button>
+		<input type="hidden" id="do_kor" class="input_box" name="do_kor" style="width: 10%;" value="" placeholder="상세주소">
+	    <input type="hidden" id="gu_gun_eup_kor" class="input_box" name="gu_gun_eup_kor" style="width: 10%;" value="" placeholder="상세주소">
+	    <input type="hidden" id="do_en" class="input_box" name="do_en" style="width: 10%;" value="" placeholder="상세주소">
+	    <input type="hidden" id="gu_gun_eup_en" class="input_box" name="gu_gun_eup_eng" style="width: 10%;" value="" placeholder="상세주소">
+	</div>
 	
 </form>
 	
