@@ -182,18 +182,7 @@
             </div>
         </div>
     </div>
-	<!-- Start Gallery  -->
-    <div class="products-box">
-        <div class="container">
-				
-
-	                
-        </div>
-    </div>
-    <!-- End Gallery  -->
-	
-	
-    <div id="pagingBox">
+       <div id="pagingBox">
 		<div id="olPaging">
 			<ol class="paging">
 				<%--이전으로에 대한 사용여부 처리--%>
@@ -216,7 +205,7 @@
 						</c:when>
 						<c:otherwise>
 							<li>
-								<a href="resaleList.do&cPage=${k}">${k}</a>
+								<a href="resaleList.do?cPage=${k}" id="pointer">${k}</a>
 							</li>	
 						</c:otherwise>
 					
@@ -232,13 +221,25 @@
 					<c:otherwise>
 						<li id="pointer">
 												<!-- 다음으로 클릭 할 시 현재 블록의 시작 페이지에서 1을 더한 값 -->
-						<a href="resaleList.do&cPage=${pvo.endPage + 1}" id="pointer">&gt;</a>
+						<a href="resaleList.do?cPage=${pvo.endPage + 1}" id="pointer">&gt;</a>
 						</li>
 					</c:otherwise>
 				</c:choose>
 			</ol>
 		</div>
 	</div>
+	<!-- Start Gallery  -->
+    <div class="products-box">
+        <div class="container">
+				
+
+	                
+        </div>
+    </div>
+    <!-- End Gallery  -->
+	
+	
+ 
     
     <!-- ALL JS FILES -->
     <script src="bootstrap/js/jquery-3.2.1.min.js"></script>
