@@ -138,12 +138,8 @@
 					                        	<div>${vo.price }원</div><span>${vo.regdate }</span>
 					                        	<div id="addrBox">&nbsp;<img src ="img/pin.png" width="15px" height="15px">
 												<c:choose>
-													<c:when test="${not empty address}">
-														<c:set var="addr" value="${fn:split(vo.address,' ')}" />
-														  <c:forEach var="addrs" items="${addr}" varStatus="g">
-													   	   <c:if test="${g.count == 1}">${addrs}</c:if>
-													       <c:if test="${g.count == 2}">&nbsp;${addrs}</c:if>
-														 </c:forEach> 
+													<c:when test="${not empty vo.address}">
+														${vo.address }
 													</c:when>
 													<c:otherwise>
 													  주소 없음

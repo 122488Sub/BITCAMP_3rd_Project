@@ -93,9 +93,10 @@ div#cateBox2>ul {
 
 li {
 	/*display: inline;*/
+	
 }
 
-li:hover {
+li:hover, .cate1:hover {
 	background-color: lightgray;
 }
 
@@ -103,12 +104,18 @@ button.cate1, button.cate2 {
 	border: 0;
 	background-color: #ffffff;
 	cursor: pointer;
+	width: 100%;
 }
 
 
 input[type=text]{
 	height: 35px;
     font-size: 1.2em;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 /*
 	#cateText {

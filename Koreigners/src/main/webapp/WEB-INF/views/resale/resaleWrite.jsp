@@ -244,7 +244,7 @@
 			<hr color="#3e64ff;">
 			<br>
 			
-			<br> <label>가격 : &nbsp;</label> <input type="text" name="price"
+			<br> <label>가격 : &nbsp;</label> <input type="number" name="price"
 				placeholder="숫자만 입력하세요" title="가격"> <label>&nbsp; 원</label>
 			<br>
 			<br>
