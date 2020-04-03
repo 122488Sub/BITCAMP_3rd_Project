@@ -83,6 +83,19 @@ function sendData(){
 	}
 </script>
 <body>
+
+<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Modifying the post</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
 	<div id="rsWriteContent">
 	<h2>기본 정보</h2>
 	<hr color="#3e64ff;">

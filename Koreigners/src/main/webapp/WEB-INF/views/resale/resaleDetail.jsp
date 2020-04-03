@@ -17,6 +17,20 @@
 	//}
 </script>
 <body>
+
+<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Resale</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+    
 	<div id="detailBox">
 		<div id="cate">
 		<p style="font-weight: bold">카테고리 &nbsp;: &nbsp;${rsVO.rs_cate_prnt}&nbsp;&gt;&nbsp;${rsVO.category_child}</p>

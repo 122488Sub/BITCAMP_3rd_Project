@@ -30,6 +30,19 @@
 
 </head>
 <body>
+
+<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Post an Info</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
 	
 	<form method="post" id="boardInsert">
 	<input type="hidden" id="info_file_name" name="info_file_name" value="">

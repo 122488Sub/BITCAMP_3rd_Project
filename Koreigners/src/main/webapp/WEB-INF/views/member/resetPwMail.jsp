@@ -14,7 +14,18 @@
 </style>
 </head>
 <body>
-   
+   <br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
 	<div id="container">
 		<h1>Forgot Password??</h1>
 		<hr><hr>
