@@ -19,6 +19,8 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" href="bootstrap/css/custom.css">
 
+<link href="resources/css/common/page.css" rel="stylesheet" type="text/css">
+
 <script>
 	function search_go(frm) {
 		frm.action = "resaleSearch.do";
@@ -26,7 +28,7 @@
 }
 </script>
 <body>
-
+	
 	<br><br><br>
 	<!-- Start All Title Box -->
     <div class="all-title-box">
@@ -55,7 +57,6 @@
 	</div> --%>
 	<!-- End Search -->
 	
-	
 	<div class="shop-box-inner">
         <div class="container">
             <div class="row">
@@ -81,7 +82,7 @@
                         </div>
                         <div class="title-left"></div>
 	                        <div style="text-align:center">
-	                        	<button type="button" class="btn hvr-hover col-md-12" onclick="">New Post</button>
+	                        	<button type="button" class="btn hvr-hover col-md-12" onclick="javascript:location.href='resale_go.do'">New Post</button>
 	                        </div>
                     </div>
                 </div>
@@ -122,7 +123,7 @@
 							                            </div>
 												    </c:when>
 												    <c:otherwise>
-														<img src="${pageContext.request.contextPath}/resources/img/resale/${vo.getFile_ori_name()}" class="img-fluid">
+														<img style="height:300px" src="${pageContext.request.contextPath}/resources/img/resale/${vo. getMem_id()}/${vo.getFile_ori_name()}" class="img-fluid">
 												    	<div class="mask-icon">
 							                                <ul>
 							                                    <li><a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
@@ -137,12 +138,8 @@
 					                        	<div>${vo.price }원</div><span>${vo.regdate }</span>
 					                        	<div id="addrBox">&nbsp;<img src ="img/pin.png" width="15px" height="15px">
 												<c:choose>
-													<c:when test="${not empty address}">
-														<c:set var="addr" value="${fn:split(vo.address,' ')}" />
-														  <c:forEach var="addrs" items="${addr}" varStatus="g">
-													   	   <c:if test="${g.count == 1}">${addrs}</c:if>
-													       <c:if test="${g.count == 2}">&nbsp;${addrs}</c:if>
-														 </c:forEach> 
+													<c:when test="${not empty vo.address}">
+														${vo.address }
 													</c:when>
 													<c:otherwise>
 													  주소 없음
@@ -185,18 +182,7 @@
             </div>
         </div>
     </div>
-	<!-- Start Gallery  -->
-    <div class="products-box">
-        <div class="container">
-				
-
-	                
-        </div>
-    </div>
-    <!-- End Gallery  -->
-	
-	
-    <div id="pagingBox">
+       <div id="pagingBox">
 		<div id="olPaging">
 			<ol class="paging">
 				<%--이전으로에 대한 사용여부 처리--%>
@@ -219,7 +205,7 @@
 						</c:when>
 						<c:otherwise>
 							<li>
-								<a href="resaleList.do&cPage=${k}">${k}</a>
+								<a href="resaleList.do?cPage=${k}" id="pointer">${k}</a>
 							</li>	
 						</c:otherwise>
 					
@@ -235,13 +221,25 @@
 					<c:otherwise>
 						<li id="pointer">
 												<!-- 다음으로 클릭 할 시 현재 블록의 시작 페이지에서 1을 더한 값 -->
-						<a href="resaleList.do&cPage=${pvo.endPage + 1}" id="pointer">&gt;</a>
+						<a href="resaleList.do?cPage=${pvo.endPage + 1}" id="pointer">&gt;</a>
 						</li>
 					</c:otherwise>
 				</c:choose>
 			</ol>
 		</div>
 	</div>
+	<!-- Start Gallery  -->
+    <div class="products-box">
+        <div class="container">
+				
+
+	                
+        </div>
+    </div>
+    <!-- End Gallery  -->
+	
+	
+ 
     
     <!-- ALL JS FILES -->
     <script src="bootstrap/js/jquery-3.2.1.min.js"></script>
