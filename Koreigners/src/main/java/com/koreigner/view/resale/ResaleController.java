@@ -109,7 +109,7 @@ public class ResaleController {
 		
 		model.addAttribute("postType", "resale");
 		
-		return "resale/resaleList.page";
+		return "redirect:resale/resaleList.do";
 	}
 	
 	@RequestMapping(value="resaleDetail.do", method= {RequestMethod.GET, RequestMethod.POST})

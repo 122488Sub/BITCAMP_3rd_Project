@@ -55,6 +55,7 @@
 		<hr>
 		<br>
 		</div>
+			
 			<table id="infoTable">
 				<tr>
 					<td rowspan="6" id="imgBox">
@@ -66,7 +67,7 @@
 						     </c:when>
 						     <c:otherwise>
 							     <c:forEach items="${imgList}" var="img" >
-							        <li><img id="imgFile" src="${pageContext.request.contextPath}/resources/img/resale/${img.rs_file_name}"></li>
+							        <li><img id="imgFile" src="${pageContext.request.contextPath}/resources/img/resale/${rsVO.mem_id}/${img.rs_file_name}"></li>
 							     </c:forEach>
 						     </c:otherwise>
 					     </c:choose>

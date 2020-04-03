@@ -57,17 +57,6 @@
 	</div> --%>
 	<!-- End Search -->
 	
-	<div id="listBox">
-	<c:choose>
-				<c:when test="${not empty mem_id}">
-					<div id="write">
-						<input type="button" id="writeBtn" value="글쓰기" onclick="javascript:location.href='resale_go.do'">
-					</div>
-				</c:when>
-	</c:choose>
-	</div>
-	
-	
 	<div class="shop-box-inner">
         <div class="container">
             <div class="row">
@@ -93,7 +82,7 @@
                         </div>
                         <div class="title-left"></div>
 	                        <div style="text-align:center">
-	                        	<button type="button" class="btn hvr-hover col-md-12" onclick="location.href='InfoInsert_go.do'">New Post</button>
+	                        	<button type="button" class="btn hvr-hover col-md-12" onclick="javascript:location.href='resale_go.do'">New Post</button>
 	                        </div>
                     </div>
                 </div>
@@ -134,7 +123,7 @@
 							                            </div>
 												    </c:when>
 												    <c:otherwise>
-														<img src="${pageContext.request.contextPath}/resources/img/resale/${vo.getFile_ori_name()}" class="img-fluid">
+														<img style="height:300px" src="${pageContext.request.contextPath}/resources/img/resale/${vo. getMem_id()}/${vo.getFile_ori_name()}" class="img-fluid">
 												    	<div class="mask-icon">
 							                                <ul>
 							                                    <li><a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
