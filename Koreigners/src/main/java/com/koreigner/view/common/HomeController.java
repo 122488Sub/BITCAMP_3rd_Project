@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.koreigner.biz.common.HomeService;
-import com.koreigner.biz.common.page.PagingVO;
-import com.koreigner.biz.inform.InformVO;
+import com.koreigner.biz.inform.InformService;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
+import com.koreigner.biz.resale.ResaleService;
 
 @Controller
 public class HomeController {
@@ -30,6 +30,11 @@ public class HomeController {
 	@Autowired
 	private HomeService homeService;
 	
+	@Autowired
+	private InformService informService;
+	
+	@Autowired
+	private ResaleService resaleService;
 	
 	@RequestMapping(value="main.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String main_go(HttpServletRequest request, Model model) {
@@ -178,7 +183,11 @@ public class HomeController {
 		System.out.println("getRecentPosts.do");
 		Map<String,Object> result=new HashMap<String, Object>();
 		result.put("recentPosts", homeService.getRecentPosts());
-		
+		String mem_id = (String) request.getAttribute("mem_id");
+		if(mem_id!=null) {
+			result.put("informWish", informService.informWish(mem_id) );
+			result.put("resaleWish", resaleService.resaleWish(mem_id));
+		}
 		return result;
 	}
 }

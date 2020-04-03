@@ -20,7 +20,8 @@
 <link rel="stylesheet" href="bootstrap/css/custom.css">
 
 <link href="resources/css/common/page.css" rel="stylesheet" type="text/css">
-
+<script type="text/javascript" src="resources/js/common/togleWish.js" ></script>
+<script type="text/javascript" src="resources/js/resale/resaleList.js" ></script>
 <script>
 	function search_go(frm) {
 		frm.action = "resaleSearch.do";
@@ -28,7 +29,7 @@
 }
 </script>
 <body>
-	
+	<input type="hidden" id="mem_id" value="${user.mem_id}">
 	<br><br><br>
 	<!-- Start All Title Box -->
     <div class="all-title-box">
@@ -118,7 +119,7 @@
 							                            <div class="mask-icon">
 							                                <ul>
 							                                    <li><a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-							                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+							                                    <li><a href="javascript:clickWishGrid('${user.mem_id}',${vo.rs_idx},3)" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i id="rsWish_${vo.rs_idx }" class="far fa-heart"></i></a></li>
 							                                </ul>
 							                            </div>
 												    </c:when>
@@ -127,7 +128,8 @@
 												    	<div class="mask-icon">
 							                                <ul>
 							                                    <li><a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-							                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+							                                    <li><a href="javascript:clickWishGrid('${user.mem_id}',${vo.rs_idx},3)" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i id="rsWish_${vo.rs_idx }" class="far fa-heart"></i></a></li>
+							                                    
 							                                </ul>
 							                            </div>
 												    </c:otherwise>

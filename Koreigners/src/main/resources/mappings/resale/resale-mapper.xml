@@ -107,6 +107,16 @@
 			}
 	</delete>
 	
+	<select id="resaleWish" resultType="hashmap">
+	SELECT 
+  		RS_IDX
+	FROM 
+	   T_RESALE_BOARD
+	WHERE 
+		RS_IDX IN (SELECT B_IDX FROM T_WISH_LIST WHERE MEM_ID = #{mem_id} AND BOARD_IDX= 3) 	
+	ORDER BY 
+		RS_IDX DESC
+	</select>
 </mapper>
 
 

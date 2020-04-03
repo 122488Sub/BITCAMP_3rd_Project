@@ -83,4 +83,8 @@ public class ResaleServiceImpl implements ResaleService{
 			System.out.println(l);
 		return null;
 	}
+	@Override
+	public List<Map<String, Object>> resaleWish(String mem_id) {
+		return resaleDAO.dao_resaleWish(mem_id);
+	}
 }

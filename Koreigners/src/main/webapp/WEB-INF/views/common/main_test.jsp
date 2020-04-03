@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="${contextPath}/css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="${contextPath}/css/custom.css">
+    <script type="text/javascript" src="resources/js/common/togleWish.js" ></script>
 	<script type="text/javascript" src="resources/js/common/homeMain.js" ></script>
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -110,7 +111,7 @@
             </div>
 
 <!-- 최근글 리스트 부분 -->
-
+			<input type="hidden" id="mem_id" value="${user.mem_id}">
             <div id="recentList" class="row special-list">
 	
 

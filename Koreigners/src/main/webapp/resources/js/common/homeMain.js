@@ -60,6 +60,14 @@ function sortRecent(data){
 	return setValue;
 }
 function setRecentInform(inform){
+	console.log(inform.INFO_IDX);
+	var wishBool=0;
+	if(informWishList.indexOf(inform.INFO_IDX)!== -1) 
+		wishBool=1;
+	else
+		wishBool=-1;
+	
+	
 	var setValue="";
 	setValue+= 	'<div class="col-lg-3 col-md-6 special-grid best-seller">'
 	setValue+=		'<div class="products-single fix">'
@@ -75,8 +83,13 @@ else if(inform.INFO_FILE_NAME==null || inform.INFO_FILE_NAME=='' || typeof infor
 }
 	setValue+=				'<div class="mask-icon">'
 	setValue+=			 	   '<ul>'
-	setValue+=				        '<li><a href="javascript:goInformDetailPage('+ inform.INFO_IDX+')" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>'
-	setValue+=        				'<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>'
+	setValue+=				        '<li><a href="javascript:goInformDetailPage('+ inform.INFO_IDX+')" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>';
+if(wishBool==1){		
+	setValue+=        				'<li><a href="javascript:clickWishGrid('+"'"+$('#mem_id').val()+"'"+','+inform.INFO_IDX+',4)" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i id="wish_'+inform.INFO_IDX+'" class="fas fa-heart"></i></a></li>';
+}
+else{
+	setValue+=        				'<li><a href="javascript:clickWishGrid('+"'"+$('#mem_id').val()+"'"+','+inform.INFO_IDX+',4)" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i id="wish_'+inform.INFO_IDX+'" class="far fa-heart"></i></a></li>';
+}	
 	setValue+=				    '</ul>'
 	setValue+=				'</div>'
 	setValue+=			'</div>'
@@ -90,6 +103,13 @@ else if(inform.INFO_FILE_NAME==null || inform.INFO_FILE_NAME=='' || typeof infor
 }
 
 function setRecentResale(resale){
+	console.log(resale.RS_IDX);
+	var wishBool=0;
+	if(resaleWishList.indexOf(resale.RS_IDX)!== -1) 
+		wishBool=1;
+	else
+		wishBool=-1;
+	
 	var setValue="";
 	setValue+= 	'<div class="col-lg-3 col-md-6 special-grid top-featured">'
 	setValue+=		'<div class="products-single fix">'
@@ -106,7 +126,12 @@ else if(resale.RS_FILENAME==null || resale.RS_FILENAME=='' || typeof resale.RS_F
 	setValue+=				'<div class="mask-icon">'
 	setValue+=			 	   '<ul>'
 	setValue+=				        '<li><a href="resaleDetail.do?rs_idx='+resale.RS_IDX+'&cPage=1" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>'
-	setValue+=        				'<li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>'
+if(wishBool==1){		
+	setValue+=        				'<li><a href="javascript:clickWishGrid('+"'"+$('#mem_id').val()+"'"+','+resale.RS_IDX+',3)" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i id="rsWish_'+resale.RS_IDX+'" class="fas fa-heart"></i></a></li>';
+}
+else{
+	setValue+=        				'<li><a href="javascript:clickWishGrid('+"'"+$('#mem_id').val()+"'"+','+resale.RS_IDX+',3)" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i id="rsWish_'+resale.RS_IDX+'" class="far fa-heart"></i></a></li>';
+}
 	setValue+=				    '</ul>'
 	setValue+=				'</div>'
 	setValue+=			'</div>'
@@ -119,7 +144,8 @@ else if(resale.RS_FILENAME==null || resale.RS_FILENAME=='' || typeof resale.RS_F
 	return setValue;
 }
 
-
+var informWishList = new Array();
+var resaleWishList = new Array();
 
 function getRecentPosts() {
 	
@@ -139,6 +165,20 @@ function getRecentPosts() {
 			
 			var recentPosts = data.recentPosts;
 			console.log(">>>>>>>>>>>data.recentPosts :" + recentPosts);
+			
+			var informWish = data.informWish;
+			var resaleWish = data.resaleWish;
+			
+			$.each(informWish, function(index, obj) {
+				console.log(this);
+				informWishList.push(this.INFO_IDX);
+				
+			});
+			$.each(resaleWish, function(index, obj) {
+				console.log(this);
+				resaleWishList.push(this.RS_IDX);
+			});
+			
 			$('#recentList').html(sortRecent(recentPosts));
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
