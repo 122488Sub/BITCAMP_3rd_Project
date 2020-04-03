@@ -185,7 +185,7 @@ public class PagingService {
 		//1. 전체 페이지의 수를 구하기
 	//  System.out.println("paging p houseVO : " + houseVO);
 		int total = resaleService.resaleTotal();
-		
+		p.setNumPerPage(9);
 	//  System.out.println("total : " + total);
 		p.setTotalRecord(total);
 		p.setTotalPage();
@@ -217,10 +217,10 @@ public class PagingService {
 		//1. 전체 페이지의 수를 구하기
 
 		int total = informService.informSearchTotal(informVO);
-	
+		
 		p.setTotalRecord(total);
 		p.setTotalPage();
-
+		p.setNumPerPage(9);
 	
 		// null 아니면 의 뜻은 (처음 방문이 아니면 뜻과 같음)
 		if (cPage != null) {
