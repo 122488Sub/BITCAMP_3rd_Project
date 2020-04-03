@@ -38,7 +38,7 @@
 </table>
 <hr>
 
-	<!-- Start recruitment -->
+	<!-- Start recruitment Detail -->
 	<div class="cart-box-main">
 		<div class="container">
 			<div class="col-md-10 col-sm-12 col-xs-12" style="float:none; margin:0 auto;">
@@ -154,6 +154,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- End recruitment Detail -->
 
 	<br><br>
 	<p align="center" style="font-size:2em">Koreigners User Guide</p>

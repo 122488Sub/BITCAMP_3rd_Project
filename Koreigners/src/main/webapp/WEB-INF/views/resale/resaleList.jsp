@@ -81,7 +81,7 @@
                         </div>
                         <div class="title-left"></div>
 	                        <div style="text-align:center">
-	                        	<button type="button" class="btn hvr-hover col-md-12" onclick="location.href='InfoInsert_go.do'">New Post</button>
+	                        	<button type="button" class="btn hvr-hover col-md-12" onclick="">New Post</button>
 	                        </div>
                     </div>
                 </div>
