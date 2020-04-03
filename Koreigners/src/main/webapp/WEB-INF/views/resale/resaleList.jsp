@@ -123,7 +123,7 @@
 							                            </div>
 												    </c:when>
 												    <c:otherwise>
-														<img style="height:300px" src="${pageContext.request.contextPath}/resources/img/resale/${vo. getMem_id()}/${vo.getFile_ori_name()}" class="img-fluid">
+														<img style="height:300px" src="${pageContext.request.contextPath}/resources/img/resale/${vo.getMem_id()}/${vo.getFile_ori_name()}" class="img-fluid">
 												    	<div class="mask-icon">
 							                                <ul>
 							                                    <li><a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>

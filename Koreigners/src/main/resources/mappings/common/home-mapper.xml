@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="home">
+	<select id="getRecentPosts" resultType="hashmap">
+		SELECT I.*,R.*
+		FROM   (
+		        SELECT *
+		        FROM 
+		            (SELECT 
+		                 INFO_IDX, TO_CHAR(INFO_INS_DT,'YYYY-MM-DD HH24:MI:SS') AS INFO_INS_DT ,INFO_CATEGORY,INFO_STATE,INFO_TITLE,INFO_MEM_ID,INFO_FILE_NAME,
+		                 ROW_NUMBER() OVER(ORDER BY INFO_IDX DESC) INUM
+		             FROM T_INFORM_TABLE
+		             WHERE INFO_STATE=1
+		        )
+		        WHERE INUM BETWEEN 1 AND 2
+		    )I,
+		    (
+		        SELECT *
+		        FROM 
+		            (SELECT 
+		                 RS_IDX, TO_CHAR(REGDATE,'YYYY-MM-DD HH24:MI:SS') AS RS_REGDATE,PRICE AS RS_PRICE,FILENAME AS RS_FILENAME,SUBJECT AS RS_SUBJECT,
+		                 MEM_ID AS RS_MEM_ID,
+		                 ROW_NUMBER() OVER(ORDER BY RS_IDX DESC) RNUM
+		             FROM T_RESALE_BOARD
+		        )
+		        WHERE RNUM BETWEEN 1 AND 2
+		    )R
+		 WHERE INUM=RNUM
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

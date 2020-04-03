@@ -1,28 +1,36 @@
 package com.koreigner.view.common;
 
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.koreigner.biz.common.HomeService;
+import com.koreigner.biz.common.page.PagingVO;
+import com.koreigner.biz.inform.InformVO;
 import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
-import com.koreigner.common.CommandMap;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
 	private UserService userService;
-
+	
+	@Autowired
+	private HomeService homeService;
+	
+	
 	@RequestMapping(value="main.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String main_go(HttpServletRequest request, Model model) {
 		System.out.println("main.do");
@@ -83,6 +91,9 @@ public class HomeController {
 		}
 		
 		model.addAttribute("postType", "main");
+		
+	
+		
 		
 		return "/common/main_test.page";
 	}
@@ -156,5 +167,18 @@ public class HomeController {
 				
 		return "/common/postAd.page";
 	}
-
+	
+	
+	
+	
+	
+	@RequestMapping(value="getRecentPosts.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map<String,Object> getInformListData(HttpServletRequest request, HttpServletResponse response, Model model) {
+		System.out.println("getRecentPosts.do");
+		Map<String,Object> result=new HashMap<String, Object>();
+		result.put("recentPosts", homeService.getRecentPosts());
+		
+		return result;
+	}
 }
