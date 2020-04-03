@@ -84,7 +84,7 @@ function getData(cate,cPage) {
 			 
 			$("#list_box").html(dataTag);
 			
-			gridHtml+='</div>';
+			gridHtml+='</div><div class="tfoot" ></div>';
 			$("#grid-view").html(gridHtml);
 			
 			
@@ -92,7 +92,7 @@ function getData(cate,cPage) {
 			tfoot += '<div id="pagingBox"><div id="olPaging"><ol class="paging">';
 				
 			if(pvo.beginPage < pvo.pagePerBlock){
-				tfoot += '<li class="disable" id="pointer">이전으로</li>';
+				tfoot += '<li class="disable" id="pointer">Prev</li>';
 			} else{ 
 				tfoot += '<li id="pointer"><a href="javascript:getData('+category+"," + (pvo.beginPage - pvo.pagePerBlock) + '")>이전으로</a></li>';
 			}
@@ -106,13 +106,13 @@ function getData(cate,cPage) {
 				console.log("k: "+k);
 			}
 			if(pvo.endPage >= pvo.totalPage) {
-				tfoot+= '<li class="disable" id="pointer">다음으로</li>';
+				tfoot+= '<li class="disable" id="pointer">Next</li>';
 			} else {
 				tfoot += '<li id="pointer"><a href="javascript:getData('+category+","+(pvo.beginPage + pvo.pagePerBlock)+')">다음으로</a></li>';
 			}
 			
 			tfoot += '</ol></td></tr>'
-			$("#tfoot").html(tfoot);
+			$(".tfoot").html(tfoot);
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			alert("실패 : \n" + "jqXHR.readyState : " + jqXHR.readyState + "\n"

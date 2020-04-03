@@ -19,6 +19,8 @@
 <!-- Custom CSS -->
 <link rel="stylesheet" href="bootstrap/css/custom.css">
 
+<link href="resources/css/common/page.css" rel="stylesheet" type="text/css">
+
 <script>
 	function search_go(frm) {
 		frm.action = "resaleSearch.do";
@@ -26,7 +28,7 @@
 }
 </script>
 <body>
-
+	
 	<br><br><br>
 	<!-- Start All Title Box -->
     <div class="all-title-box">
@@ -54,6 +56,16 @@
 		</form>
 	</div>
 	<!-- End Search -->
+	
+	<div id="listBox">
+	<c:choose>
+				<c:when test="${not empty mem_id}">
+					<div id="write">
+						<input type="button" id="writeBtn" value="글쓰기" onclick="javascript:location.href='resale_go.do'">
+					</div>
+				</c:when>
+	</c:choose>
+	</div>
 	
 	<!-- Start Gallery  -->
     <div class="products-box">

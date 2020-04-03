@@ -51,7 +51,7 @@ public class JobService {
 	
 	public List<String> getFileList(List<MultipartFile> imgFile, HttpServletRequest request){
 		System.out.println("JobService 이다-------------");
-		String path = "/C:/MyStudy/Final_Project/BITCAMP_3rd_Project/Koreigners/src/main/webapp/resources/img/resale/"; 
+		//String path = "/C:/MyStudy/Final_Project/BITCAMP_3rd_Project/Koreigners/src/main/webapp/resources/img/resale/"; 
 		//String path = "/C:/MyStudy/Final_Project/BITCAMP_3rd_Project/Koreigners/src/main/webapp/WEB-INF/views/job/upload/"; 
 		//String path = request.getSession().getServletContext().getRealPath("/");  
 	    //String attach_path = "resources\\upload\\resale";

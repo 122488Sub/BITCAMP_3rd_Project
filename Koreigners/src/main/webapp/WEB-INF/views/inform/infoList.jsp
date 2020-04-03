@@ -366,7 +366,7 @@
 																</tbody>
 									
 															</table>
-															<div id="tfoot"></div>
+															<div class="tfoot"></div>
 														</div>
 													</div>
 												</div>
