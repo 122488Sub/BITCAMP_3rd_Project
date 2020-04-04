@@ -140,7 +140,7 @@ public class ResaleController {
 		
 		model.addAttribute("postType", "resale");
 		
-		return "resale/resaleDetail.page";
+		return "resale/resaleDetail_test.page";
 	}	
 	
 	@RequestMapping(value="commWrite.do", method= {RequestMethod.GET, RequestMethod.POST})
@@ -192,7 +192,7 @@ public class ResaleController {
 		request.setAttribute("rs_idx", rs_idx);
 		request.setAttribute("cPage", cPage);
 		System.out.println("rsVO editResale : " + rsVO);
-		return "resale/resaleEdit.page";
+		return "resale/resaleEdit_test.page";
 	}
 	
 	@RequestMapping(value="deleteResale.do", method= {RequestMethod.GET, RequestMethod.POST})

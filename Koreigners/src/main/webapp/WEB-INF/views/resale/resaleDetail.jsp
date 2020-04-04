@@ -11,14 +11,9 @@
 <link href="resources/css/resale/slide.css" rel="stylesheet" type="text/css"></link>
 <script type="text/javascript" src="resources/js/resale/slide.js" ></script>
 <script type="text/javascript" src="resources/js/common/togleWish.js" ></script>
-<script type="text/javascript">
-	//function reComm(group, step, lev) {
-		
-	//}
-</script>
 <body>
 
-<br><br><br>
+	<br><br><br>
 	<!-- Start All Title Box -->
     <div class="all-title-box">
         <div class="container">
@@ -31,23 +26,29 @@
     </div>
     <!-- End All Title Box -->
     
+    <div class="cart-box-main">
+    	<div class="container">
+    		<div class="col-md-8 col-sm-10 col-xs-12" style="float:none; margin:0 auto">
+    		</div>    		
+    	</div>
+    </div>
 	<div id="detailBox">
 		<div id="cate">
 		<p style="font-weight: bold">카테고리 &nbsp;: &nbsp;${rsVO.rs_cate_prnt}&nbsp;&gt;&nbsp;${rsVO.category_child}</p>
 		<div id="detailBtn">
 		
 				<c:if test="${not empty mem_id && mem_id == rsVO.mem_id}">
-				<form action="editResale.do" method="post">
-				<input type="hidden" name="cPage" value="${cPage}">
-				<input type="hidden" name="rs_idx" value="${rsVO.rs_idx}">
-				<input type="submit" id="editBtn" value="수정">
-				</form>
-				<form action="deleteResale.do" method="post">
-				<input type="hidden" name="cPage" value="${cPage}">
-				<input type="hidden" name="rs_idx" value="${rsVO.rs_idx}">
-				<input type="submit" id="deleteBtn" value="삭제">
-				
-				</form>
+					<form action="editResale.do" method="post">
+						<input type="hidden" name="cPage" value="${cPage}">
+						<input type="hidden" name="rs_idx" value="${rsVO.rs_idx}">
+						<input type="submit" id="editBtn" value="수정">
+					</form>
+					
+					<form action="deleteResale.do" method="post">
+						<input type="hidden" name="cPage" value="${cPage}">
+						<input type="hidden" name="rs_idx" value="${rsVO.rs_idx}">
+						<input type="submit" id="deleteBtn" value="삭제">
+					</form>
 				</c:if>
 				<input type="button" id="ddd" value="pick" onclick="clickWishList('${user.mem_id }','${rsVO.rs_idx}',3)">
 		</div>

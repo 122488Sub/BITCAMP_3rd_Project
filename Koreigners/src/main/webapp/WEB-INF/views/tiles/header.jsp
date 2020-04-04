@@ -11,7 +11,7 @@
                 <li class="menu"><a href="hireList_go.do">Job</a></li>
                 <li class="menu"><a href="house_main.do">House</a></li>
                 <li class="menu"><a href="resaleList.do">Resale</a></li>
-                <li class="menu"><a href="getInfoBoardList.do">Information</a></li>
+                <li class="menu"><a href="InfoList_go.do">Information</a></li>
                 <li class="menu"><a href="#"></a></li>
                 <c:if test="${empty user}">
                 	<li class="menu"><a href="login_go.do">Sign in</a></li>

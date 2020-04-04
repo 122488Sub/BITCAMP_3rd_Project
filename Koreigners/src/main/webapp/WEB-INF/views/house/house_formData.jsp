@@ -4,7 +4,7 @@
 <hr>
 
 <input type="hidden" name="mem_email" value="${mem_id }">
-<table id="houseInfo">
+<table id="houseInfo" class="table">
 	<tr>
 		<th>TITLE</th>
 		<td colspan="3">

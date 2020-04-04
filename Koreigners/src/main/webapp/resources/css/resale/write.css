@@ -1,137 +1,101 @@
 @charset "UTF-8";
 
-
-
-label{
-	font-size: 1.3em;
-}
-
-div#rsWriteContent {
-	text-align: left;
-	width: 100%;
-	height: 100%;
-	padding-left: 20px;
-	padding-right: 20px;
-}
-
-#cateMain {
-	width: 100%;
-	height: 200px;
-}
-
-.cateBox {
-	width: 150px;
-	height: 150px;
-}
-
-#pac-input {
-	float: left;
-}
-
-#addrBox {
-	
-}
-
-#btn {
-	margin-left: 700px;
-	margin-bottom: 100px;
-}
-
-#cateBox1, #cateBox2{
-	float: left;
-	margin-left: 20px;
-}
-
-
-#cateLabel {
-	float: left;
-}
-.categoryBox{
-	
-	margin-bottom: 25px;
-}
-
-#contentBox {
-	width: 500px;
-	height: 400px;
-	vertical-align: top;
-	resize: none;
-	
-}
-
-.cateBox::after, .cateBox::before, .categoryBox::after, .categoryBox::before
-	{
-	content: "";
-	display: block;
-	clear: both;
-}
-
-img {
-	width: 200px;
-	height: 200px;
-}
-
-img {
-	width: 200px;
-	height: 200px;
-}
-
-div#cateBox1>ul, div#cateBox2>ul {
-	margin: 0;
-	padding: 0;
-	width: 150px;
-	height: 150px;
-	list-style: none;
-	overflow: scroll;
-	overflow-x: hidden;
-	border: 1px solid black;
-}
-
-div#cateBox2>ul {
-	width: 150px;
-}
-
-li {
-	/*display: inline;*/
-	
-}
-
-li:hover, .cate1:hover {
-	background-color: lightgray;
-}
-
-button.cate1, button.cate2 {
-	border: 0;
-	background-color: #ffffff;
-	cursor: pointer;
-	width: 100%;
-}
-
-
-input[type=text]{
-	height: 35px;
-    font-size: 1.2em;
-}
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-/*
-	#cateText {
-	
-		position: absolute;
-		margin-top: 160px;
+	div#rsWriteContent {
+		text-align: left;
+		width: 100%;
+		height: 100%;
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 	
-	#cateResult1 {
-		position: absolute;
-		margin-top: 160px;
-		margin-left: 100px;
+	#cateMain {
+		width: 100%;
+		height: 200px;
 	}
 	
-	#cateResult2 {
-		position: absolute;
-		margin-top: 117px;
-		margin-left: 230px;
-	}*/
+	.cateBox {
+		width: 150px;
+		height: 150px;
+	}
+	
+	#cateBox1, #cateBox2{
+		float: left;
+		margin: 0 30px;
+	}
+		
+	#cateLabel {
+		float: left;
+	}
+	
+	.categoryBox{
+		margin-bottom: 25px;
+	}
+	
+	#contentBox {
+		height: 400px;
+		vertical-align: top;
+		resize: none;
+		overflow: scroll;
+		overflow-x: hidden;
+	}
+	
+	.cateBox::after, .cateBox::before, .categoryBox::after, .categoryBox::before
+		{
+		content: "";
+		display: block;
+		clear: both;
+	}
+	
+	img {
+		width: 162px;
+		height: 150px;
+		margin-right: 10px;
+		margin-bottom: 10px;
+	}
+	
+	div#cateBox1>ul, div#cateBox2>ul {
+		margin: 0;
+		padding: 0;
+		width: 200px;
+		height: 150px;
+		list-style: none;
+		overflow: scroll;
+		overflow-x: hidden;
+		border: 1px solid #ced4da;
+		border-radius: .25rem;
+	}
+	
+	div#cateBox2>ul {
+		width: 200px;
+	}
+	
+	cate1:hover {
+		background-color: lightgray;
+	}
+	
+	button.cate1, button.cate2 {
+		border: 0;
+		background-color: #ffffff;
+		cursor: pointer;
+		width: 100%;
+	}
+		
+	input[type="number"]::-webkit-outer-spin-button,
+	input[type="number"]::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
+	    margin: 0;
+	}
+
+	.cateText {
+		font-size: 1.2em;
+		font-weight: 500;
+		color: firebrick;
+	}
+	
+	#mapDisp {
+		width: 100%;
+		height: 250px;
+		margin: 0 auto;
+		margin-bottom: 5px;
+	}
+	

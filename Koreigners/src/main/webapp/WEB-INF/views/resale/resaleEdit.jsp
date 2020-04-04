@@ -244,7 +244,6 @@ function sendData(){
 		</form>
 	</div>
 	
-	<script type="text/javascript" src="./map/googleJS.js" ></script> 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDW24W9sP9njddFNugiBUaJ-AzVfpQb_MY&libraries=places&callback=initMap"
      async defer></script>
 	

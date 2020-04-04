@@ -100,6 +100,14 @@
 		   		+roadAddr.replace(/ /gi,"%20"));
 	}
 </script>
+<style>
+#mapDisp {
+	width: 100%;
+	height: 250px;
+	margin: 0 auto;
+	margin-bottom: 5px;
+}
+</style>
 </head>
 <body>
 
@@ -123,7 +131,7 @@
 	    			<div class="title-left">
 	    				<h3>Post Your Items</h3>
 	    			</div>
-	    				<input type="text" title="제목" name="subject" class="col-md-12 form-control" placeholder="Enter the subtitle.">
+	    				<input type="text" title="제목" name="subject" class="col-md-12 form-control" placeholder="Enter the subtitle." value="${rsVO.subject}">
 	    			<hr class="mb-4">
 	    			<!-- cateMain Start -->
 						<div id="cateMain">
@@ -171,12 +179,12 @@
 				    			<label>Price</label>
 							</div>
 							<div class="col-md-9">
-				    			<input type="number" name="price" class="form-control" placeholder="Enter the price. Number Only!">
+				    			<input type="number" name="price" class="form-control" placeholder="Enter the price. Number Only!" value="${rsVO.price}">
 							</div>
 						</div>
 	    			<hr class="mb-4">
 	    				<label>Content</label>
-						<textarea id="contentBox" name="content" class="form-control"></textarea>
+						<textarea id="contentBox" name="content" class="form-control">${rsVO.content}</textarea>
 	    			<hr class="mb-4">
 			    	<!-- imgBox Start -->
 					<div id="imgBox">
@@ -220,7 +228,7 @@
 				    			<label>Hashtag</label>
 							</div>
 							<div class="col-md-9">
-				    			<input type="text" name="hash_tag" class="form-control" placeholder="Maximum 5 Hashtags are available.">
+				    			<input type="text" name="hash_tag" class="form-control" placeholder="Maximum 5 Hashtags are available." value="${rsVO.hash_tag}">
 							</div>
 						</div>
 	    		</div>
@@ -230,7 +238,7 @@
 			<input type="hidden" id="hiddenCate1" name="rs_cate_prnt" title="카테고리"> 
 			<input type="hidden" id="hiddenCate2" name="category_child" title="하위 카테고리">
 			<div style="text-align:center; margin-bottom:50px; margin-right:10px">			
-				<button class="btn hvr-hover" onclick="sendData()">Upload</button>
+				<button class="btn hvr-hover" onclick="#">Update</button>
 				<button type="reset" class="btn hvr-hover">reset</button>
 			</div>
 		
