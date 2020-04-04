@@ -1,9 +1,9 @@
 package com.koreigner.biz.member.mypage;
 
 import java.util.List;
-import java.util.Map;
 
 import com.koreigner.biz.house.HouseAll_VO;
+import com.koreigner.biz.inform.InformVO;
 import com.koreigner.biz.job.hire.HireVO;
 import com.koreigner.biz.resale.ResaleImgVO;
 import com.koreigner.biz.resale.ResaleVO;
@@ -35,6 +35,10 @@ public interface p_MyPageService {
 	int getAdsTotal(p_MyPageVO pVO);
 
 	boolean isWish(p_MyPageVO pVO);
+
+	List<InformVO> getInformWishList(p_MyPageVO wishVO);
+
+	List<InformVO> getInformMyAdsList(p_MyPageVO wishVO);
 
 	
 }

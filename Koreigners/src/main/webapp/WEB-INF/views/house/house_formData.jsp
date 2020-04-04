@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<h1>House Info</h1>
+<h1 >House Info</h1>
 <hr>
 
 <input type="hidden" name="mem_email" value="${mem_id }">
@@ -37,13 +37,13 @@
 		<th>Loctation</th>
 		<td colspan="3">
 			<div class="td_div">
-				<label style="width: 30%">RoadAddress:</label> <input type="text"
+				<label>RoadAddress:</label> <input type="text"
 					id="roadAddr" name="address" readonly="readonly"
 					style="width: 60%; margin-left: 5px;"> <input type="button"
 					value="Search" onclick="goPopup();" style="width: 10%">
 			</div>
 			<div class="td_div">
-				<label style="width: 30%">DetailAddress:</label> <input type="text"
+				<label>DetailAddress:</label> <input type="text"
 					id="addrDetail" name="address_detail" readonly="readonly"
 					style="width: 71%;">
 			</div> <input type="hidden" id="siNm" name="do_en" title="주소" value="">
@@ -56,7 +56,7 @@
 		<th>Area</th>
 		<td style="width: 40%">
 			<div class="td_div">
-				<label style="width: 70%">Square Meter: </label> <input
+				<label>Square Meter: </label> <input
 					type="number" id="" name="room_area" step="1"
 					min="1" value='1'>
 			</div>
@@ -64,9 +64,9 @@
 		<th>Floor</th>
 		<td style="width: 40%">
 			<div class="td_div">
-				<label style="width: 20%">Buliding: </label> <input type="number"
+				<label>Buliding: </label> <input type="number"
 					id="" name="bulid_layers"  step="1" min="1"
-					value='1'> <label style="width: 20%; margin-left: 10px;">Floor:
+					value='1'> <label style="margin-left: 30px;">Floor:
 				</label> <input type="number" id="" name="floor_layers" 
 					step="1" min="-3" value='1'>
 			</div>

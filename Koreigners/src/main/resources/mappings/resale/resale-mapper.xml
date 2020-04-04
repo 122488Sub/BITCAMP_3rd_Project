@@ -72,8 +72,8 @@
 	
 	<!-- 중고게시판 작성 텍스트 insert -->
 	<insert id="writeRs" parameterType="rsVO">
-		INSERT INTO T_RESALE_BOARD (RS_IDX, BOARD_IDX, MEM_ID, MEM_PW, MEM_NAME, SUBJECT, ADDRESS, RS_CATE_PRNT, CATEGORY_CHILD, CONTENT, FILENAME, FILE_ORI_NAME, IP,  HASH_TAG, REGDATE, B_STATUS, HIT)
-		  	               VALUES(RS_SEQ.NEXTVAL, 3,  #{mem_id}, #{mem_pw}, #{mem_name}, #{subject}, #{address},  #{rs_cate_prnt}, #{category_child}, #{content}, #{fileStr}, #{file_ori_name}, #{ip}, #{hash_tag}, SYSDATE, #{b_status}, #{hit})
+		INSERT INTO T_RESALE_BOARD (RS_IDX, BOARD_IDX, MEM_ID, MEM_PW, MEM_NAME, SUBJECT, ADDRESS, RS_CATE_PRNT, CATEGORY_CHILD, CONTENT, FILENAME, FILE_ORI_NAME, IP,  HASH_TAG, REGDATE, B_STATUS, HIT, PRICE)
+		  	               VALUES(RS_SEQ.NEXTVAL, 3,  #{mem_id}, #{mem_pw}, #{mem_name}, #{subject}, #{address},  #{rs_cate_prnt}, #{category_child}, #{content}, #{fileStr}, #{file_ori_name}, #{ip}, #{hash_tag}, (SYSDATE+ (INTERVAL '9' HOUR )), #{b_status}, #{hit}, #{price})
 	</insert>
 	
 	<!-- 중고게시판 작성 이미지 파일명 insert -->
@@ -83,7 +83,7 @@
 	</insert>
 		<insert id="insertComm" parameterType="rsCommVO">
 		INSERT INTO T_RESALE_COMM(RS_IDX, C_IDX, MEM_ID, MEM_PW, MEM_NAME, CONTENT,  IP, GROUPS, REGDATE, STEP, LEV)
-		VALUES(#{rs_idx}, C_IDX_SEQ.NEXTVAL, #{mem_id}, #{mem_pw}, #{mem_name}, #{content}, #{ip}, RS_COMM_GROUPS.NEXTVAL, SYSDATE, 0, 0)
+		VALUES(#{rs_idx}, C_IDX_SEQ.NEXTVAL, #{mem_id}, #{mem_pw}, #{mem_name}, #{content}, #{ip}, RS_COMM_GROUPS.NEXTVAL, (SYSDATE+ (INTERVAL '9' HOUR )), 0, 0)
 	</insert>
 	
 	
@@ -107,6 +107,16 @@
 			}
 	</delete>
 	
+	<select id="resaleWish" resultType="hashmap">
+	SELECT 
+  		RS_IDX
+	FROM 
+	   T_RESALE_BOARD
+	WHERE 
+		RS_IDX IN (SELECT B_IDX FROM T_WISH_LIST WHERE MEM_ID = #{mem_id} AND BOARD_IDX= 3) 	
+	ORDER BY 
+		RS_IDX DESC
+	</select>
 </mapper>
 
 

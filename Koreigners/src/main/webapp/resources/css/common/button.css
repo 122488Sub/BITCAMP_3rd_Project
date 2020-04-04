@@ -29,3 +29,22 @@
 .wishlist-box-main {
 	padding:0;	
 }
+
+.btn92faed{
+	background-color: #92faed;
+	 border: none;
+  color: #000000;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'BenchNine', Arial, sans-serif;
+  font-size: 1em;
+  font-size: px;
+  line-height: 1em;
+  margin: 27px 0px 27px 20px;
+  outline: none;
+  padding: 12px 35px 10px;
+  position: relative;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 40px 80px/80px 40px;
+}

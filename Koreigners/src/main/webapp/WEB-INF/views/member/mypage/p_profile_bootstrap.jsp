@@ -108,14 +108,14 @@
 	                            <div class="mb-3">
 	                                <label for="username">Nickname *</label>
 	                                <div class="input-group">
-	                                    <input type="text" class="form-control" name="mem_name" placeholder="${mvo.mem_name }">
+	                                    <input type="text" class="form-control" name="mem_name" value="${mvo.mem_name }">
 	                                    <span id="getMemberNick"></span>
 	                                </div>
 	                            </div>
 	                            <div class="mb-3">
 	                                <label for="phone">Phone Number *</label>
 	                                <div class="input-group">
-	                                    <input type="text" class="form-control" name="mem_phone" placeholder="${mvo.mem_phone }">
+	                                    <input type="text" class="form-control" name="mem_phone" value="${mvo.mem_phone }">
 	                                </div>
 	                            </div>
                             <div class="title-left">
@@ -201,9 +201,9 @@
 	                </div>
 	                </div>
 	                </div>
+	        </div><br><br>
 						    <input type="hidden" class="input_box" name=mem_cate value="${mvo.mem_cate }">
-							<button type="submit" class="btn hvr-hover">Save</button>
-	        </div>
+							<p align="center"><button type="submit" class="btn hvr-hover">Save</button></p>
 	    </div>
    	</form>
     <!-- End Cart -->

@@ -25,5 +25,11 @@ public interface InformService {
 	int updateInform(InformVO informVO);
 
 	int increaseHit(int info_idx);
+
+	int deleteInform(int info_idx);
+
+	List<Map<String, Object>> getInformCategoryCount();
+
+	List<Map<String, Object>> informWish(String mem_id);
 	
 }

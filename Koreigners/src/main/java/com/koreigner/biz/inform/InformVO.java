@@ -23,6 +23,8 @@ public class InformVO {
 	
 	private String info_ip;
 	private String info_board_idx;//전체 게시판 분류
+	
+	private String info_file_name;
 	//좋아요 추가해야함
 	
 	//검색조건용 필드 추가
@@ -172,14 +174,23 @@ public class InformVO {
 		this.end = end;
 	}
 
+	public String getInfo_file_name() {
+		return info_file_name;
+	}
+
+	public void setInfo_file_name(String info_file_name) {
+		this.info_file_name = info_file_name;
+	}
+
 	@Override
 	public String toString() {
 		return "InformVO [info_idx=" + info_idx + ", info_title=" + info_title + ", info_content=" + info_content
 				+ ", info_hit=" + info_hit + ", info_ins_dt=" + info_ins_dt + ", info_mem_id=" + info_mem_id
 				+ ", info_upd_dt=" + info_upd_dt + ", info_category=" + info_category + ", info_ip=" + info_ip
-				+ ", info_board_idx=" + info_board_idx + ", searchCondition=" + searchCondition + ", searchKeyword="
-				+ searchKeyword + ", begin=" + begin + ", end=" + end + "]";
+				+ ", info_board_idx=" + info_board_idx + ", info_file_name=" + info_file_name + ", searchCondition="
+				+ searchCondition + ", searchKeyword=" + searchKeyword + ", begin=" + begin + ", end=" + end + "]";
 	}
+
 	
 	
 	

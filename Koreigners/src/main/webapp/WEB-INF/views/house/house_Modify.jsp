@@ -107,9 +107,23 @@
 </head>
 <body>
 	
+	<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Modifying the post</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
+	
 	<div id="container">
 	
 	<form action="" id="form" name="form" method="post" enctype="multipart/form-data">
+	<input type='hidden' name="mem_email" value="${house.mem_email }">
 	<input type='hidden' name="room_idx" value="${house.room_idx }">
 	<jsp:include page="house_formData.jsp"></jsp:include>
 	

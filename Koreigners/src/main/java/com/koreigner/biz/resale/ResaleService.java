@@ -17,4 +17,6 @@ public interface ResaleService {
 	void insertComm(ResaleCommVO commVO);
 	List<ResaleCommVO> resaleCommList(int rs_idx);
 	void deleteResale(int rs_idx);
+	
+	List<Map<String, Object>> resaleWish(String mem_id);
 }

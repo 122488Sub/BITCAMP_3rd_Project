@@ -20,7 +20,18 @@
 </head>
 
 <body>
-
+<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>HOUSE</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
  	<input type="hidden" id="mem_id" value="${mem_id}">
 	<div id="detailContent">
 		<div id="detailHeader">

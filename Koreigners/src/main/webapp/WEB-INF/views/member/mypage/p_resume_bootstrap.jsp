@@ -105,8 +105,7 @@
     <input type="hidden" name="MEM_ID" value="${mvo.mem_id }">
     <div class="cart-box-main">
         <div class="container">
-           <!--  <div class="row"> -->
-       	    	<div class="col-xs-12 col-sm-12 col-md-8 mb-3" style="float:none; margin:0 auto;">
+       	    	<div class="col-xs-12 col-sm-12 col-md-8" style="float:none; margin:0 auto;">
        	            <div class="checkout-address">
                         <div class="title-left">
                             <h3>Personal Information</h3>
@@ -134,36 +133,36 @@
 	                            	<input type="text" class="form-control" value="${mvo.mem_gender }" disabled>	
                             	</c:if>
 				                <c:if test="${empty mvo.mem_gender }">
-				                	Please fill your profile first.
+				                	<input type="text" class="form-control" value="Please fill your profile first." disabled>
 				                </c:if> 
 	                        </div>
 	                        <div class="col-md-4 mb-3">
                             	<label for="birthday">Birthday</label>
-	                         	<c:if test="${not empty mvo.mem_birth }">
+	                         	<c:if test="${not empty mvo.mem_birth}">
 	                            	<input type="text" class="form-control" value="${mvo.mem_birth }" disabled>	
 	                            	</c:if>
-				                <c:if test="${empty mvo.mem_birth }">
-				                	Please fill your profile first.
+				                <c:if test="${empty mvo.mem_birth}">
+				                	<input type="text" class="form-control" value="Please fill your profile first." disabled>
 				                </c:if>    
 							</div>
 	                        <div class="col-md-5 mb-3">
 	                            <label for="phone">Cell Phone</label>
-                                <c:if test="${not empty mvo.mem_phone }">
+                                <c:if test="${not empty mvo.mem_phone}">
                             		<input type="text" class="form-control" value="${mvo.mem_phone }" disabled>	
                             	</c:if>
-				                <c:if test="${empty mvo.mem_phone }">
-				                	Please fill your profile first.
+				                <c:if test="${empty mvo.mem_phone}">
+				                	<input type="text" class="form-control" value="Please fill your profile first." disabled>
 				                </c:if>
 	                        </div>
                     	</div>
                         <div class="mb-3">
                             <label for="residence">Residence area</label>
                             <div class="input-group">
-                                <c:if test="${not empty mvo.mem_address }">
+                                <c:if test="${not empty mvo.mem_address && !mvo.mem_address eq ' '}">
                             		<input type="text" class="form-control" value="${mvo.mem_address }" disabled>	
                             	</c:if>
-				                <c:if test="${empty mvo.mem_address }">
-				                	Please fill your profile first.
+				                <c:if test="${empty mvo.mem_address || mvo.mem_address eq ' '}">
+				                	<input type="text" class="form-control" value="Please fill your profile first." disabled>
 				                </c:if>
                             </div>
                         </div>
@@ -172,28 +171,35 @@
                     	<div class="title-left">
                         	<h3>Required Fields</h3>
                        	</div>
-                        <div class="mb-3">
 	                        <label for="working-area">Desired working area</label><br>
-	                        <select class="wide w-100 col-md-6" name="WISH_DO" id="sido1"></select>
-							<select class="wide w-100 col-md-6" name="WISH_SI" id="gugun1"></select>
+                       	<div class="row">
+                        <div class="col-md-6 mb-2">
+	                        <select class="custom-select-box form-control" name="WISH_DO" id="sido1"></select>
+						</div>
+						<div class="col-md-6 mb-2">
+							<select class="custom-select-box form-control" name="WISH_SI" id="gugun1"></select>
 						
 							<script type="text/javascript">
 								new sojaeji('sido1', 'gugun1');
 							</script>
-							<br>selected: <span class="red">${map.WISH_DO } / ${map.WISH_SI }</span>
                      	</div>
+                     	</div>
+							<br>selected:&nbsp;&nbsp; <span class="red">${map.WISH_DO } / ${map.WISH_SI }</span>
 	                    <hr class="mb-1">
-	                    <div class="mb-3">
                         	<label for="professional-field">Professional Field</label><br>
-                            <select class="wide w-100 col-md-6" name="JOB_CATE" id="selectBox1" title="직종선택">
+	                    <div class="row">
+	                    <div class="col-md-6 mb-2">
+                            <select class="custom-select-box form-control" name="JOB_CATE" id="selectBox1" title="직종선택">
 							    <c:forEach items="${mpCateMap}" var="option">
 								  <option class="${option.key}">${option.value}</option>
 								</c:forEach>
 							</select>
-						
-							<select class="wide w-100 col-md-6" name="JOB_CATE_CHILD" title="직종선택"  id="cate_child_en"></select>
-							<br>selected:  <span class="red">${map.JOB_CATE } / ${map.JOB_CATE_CHILD }</span>
+                     	</div>						
+	                    <div class="col-md-6 mb-2">
+							<select class="custom-select-box form-control" name="JOB_CATE_CHILD" title="직종선택"  id="cate_child_en"></select>
                      	</div>
+                     	</div>
+							<br>selected:&nbsp;&nbsp; <span class="red">${map.JOB_CATE } / ${map.JOB_CATE_CHILD }</span>
                         <hr class="mb-1">
                         <div class="mb-3">
                         	<label for="salary">Requested salary</label>
@@ -572,16 +578,15 @@
 				            &nbsp; &nbsp;
 				            <c:choose>
 					            <c:when test="${not empty map }">
-					            	<input type="button" class="btn hvr-hover" onclick="javascript:updateResume(this.form)" value="Update">
+					            	<button class="btn hvr-hover" onclick="javascript:updateResume(this.form)">Update</button>
 					            </c:when>
 					            <c:when test="${empty map }">
-					            	<input type="button" class="btn hvr-hover" onclick="javascript:insertResume(this.form)" value="Registration">
+					            	<button class="btn hvr-hover" onclick="javascript:insertResume(this.form)">Registration</button>
 					            </c:when>
 				            </c:choose>
 				          </p>
 					</c:if>
 			    </div>
-	       <!--  </div> -->
 	    </div>
 	   	</form>
     <!-- End Cart -->

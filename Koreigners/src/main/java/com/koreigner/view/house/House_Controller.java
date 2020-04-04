@@ -88,8 +88,8 @@ public class House_Controller {
 		}else {
 			model.addAttribute("authentication",  false);
 		}
-	
-		model.addAttribute("isWish",  pService.isWish(new p_MyPageVO(mem_id,1,vo.getRoom_idx())));
+		if(mem_id!=null)
+			model.addAttribute("isWish",  pService.isWish(new p_MyPageVO(mem_id,1,vo.getRoom_idx())));
 		model.addAttribute("postType", "house");
 		
 		return "house/house_Detail.page";
@@ -135,23 +135,29 @@ public class House_Controller {
 		
 	@RequestMapping(value="house_Modify.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String houseModify(HttpServletRequest request, int room_idx, Model model) {
+		model.addAttribute("postType", "house");
 		if(request.getAttribute("mem_id")==null) {
 			return "redirect:house_main.do";
 		}
 		HouseAll_VO vo=houseService.getHouse(room_idx);
-		model.addAttribute("house",  vo); //데이터 저장
+		if( ! ((String)request.getAttribute("mem_id")).equals(vo.getMem_email())) {
+			return "redirect:house_main.do";
+		}
 		
-		model.addAttribute("postType", "house");
+		model.addAttribute("house",  vo); //데이터 저장
 		
 		return "house/house_Modify.page";
 	}
 	@RequestMapping(value="house_Update.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String houseModify_process(HttpServletRequest request, HouseAll_VO vo, Model model) {
+		model.addAttribute("postType", "house");
 		if(request.getAttribute("mem_id")==null) {
-			
-			model.addAttribute("postType", "house");
 			return "redirect:house_main.do";
 		}
+		if( ! ((String)request.getAttribute("mem_id")).equals(vo.getMem_email())) {
+			return "redirect:house_main.do";
+		}
+		
 		
 		houseService.updateHouse(vo);
 		

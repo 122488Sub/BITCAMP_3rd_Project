@@ -107,6 +107,23 @@ public class InformServiceImpl implements InformService {
 		return informDAO.dao_increaseHit(info_idx);
 	}
 
+	@Override
+	public int deleteInform(int info_idx) {
+		return informDAO.dao_deleteInform(info_idx);
+	}
+
+	@Override
+	public List<Map<String, Object>> getInformCategoryCount() {
+		
+		return informDAO.dao_getInformCategoryCount();
+	}
+
+	@Override
+	public List<Map<String, Object>> informWish(String mem_id) {
+	
+		return informDAO.dao_informWish(mem_id);
+	}
+
 	
 	
 	

@@ -60,7 +60,7 @@ public class p_MyPageController {
 			result.put("list",resaleList);
 			break;
 		case 4://자유
-			
+			result.put("inform", pService.getInformWishList(wishVO));
 			break;
 		default:
 			break;
@@ -103,7 +103,7 @@ public class p_MyPageController {
 			result.put("list",resaleList);
 			break;
 		case 4://자유
-			
+			result.put("inform", pService.getInformMyAdsList(wishVO));
 			break;
 		default:
 			break;
@@ -126,8 +126,11 @@ public class p_MyPageController {
 		
 		
 		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("result", pService.togleWish(pVO));
-		
+		if(pVO.getMem_id()==null) {
+			
+		}else {
+			map.put("result", pService.togleWish(pVO));
+		}
 		return map;
 	}
 	

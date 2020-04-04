@@ -46,6 +46,7 @@
 
 #map {
 	float: left;
+	margin-right: 20px;
 }
 
 #option_panel {
@@ -77,3 +78,7 @@ td {
 	font-size: 18px;
 	font-weight: 600;
 }
+
+svg:not(:root) {
+	overflow: visible;
+	}

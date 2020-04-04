@@ -3,13 +3,11 @@ package com.koreigner.view.inform;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,7 +25,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.koreigner.biz.common.page.PagingService;
 import com.koreigner.biz.common.page.PagingVO;
-import com.koreigner.biz.house.HouseAll_VO;
 import com.koreigner.biz.inform.InformService;
 import com.koreigner.biz.inform.InformVO;
 import com.koreigner.biz.member.mypage.p_MyPageService;
@@ -64,7 +61,9 @@ public class InformController {
 		InformVO informVO= informService.getInform(info_idx);
 		
 		model.addAttribute("inform",  informVO); //데이터 저장
-		model.addAttribute("isWish",  pService.isWish(new p_MyPageVO((String) request.getAttribute("mem_id"),4,informVO.getInfo_idx())));
+		String mem_id = (String) request.getAttribute("mem_id");
+		if(mem_id!=null)
+			model.addAttribute("isWish",  pService.isWish(new p_MyPageVO(mem_id,4,informVO.getInfo_idx())));
 		model.addAttribute("postType", "inform");
 		
 		return "inform/infoDetail.page";
@@ -82,7 +81,7 @@ public class InformController {
 	@RequestMapping(value="getInformListData.do", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public Map<String,Object> getInformListData(InformVO informVO,HttpServletRequest request, HttpServletResponse response, Model model) {
-		
+		System.out.println(informVO);
 	
 		// 현재 페이지 구하기
 		String cPage = request.getParameter("cPage");
@@ -98,10 +97,19 @@ public class InformController {
 		Map<String,Object> result=new HashMap<String, Object>();
 		result.put("inform",informService.getSelectSearchList(informVO));
 		
+		//각 카테고리별 글 수 조회
+		result.put("categoryCount", informService.getInformCategoryCount());
+				//model.addAttribute("categoryCount", informService.getInformCategoryCount());
+		
+		String mem_id = (String) request.getAttribute("mem_id");
+		if(mem_id!=null)
+			result.put("informWish", informService.informWish(mem_id) );
+		
 		System.out.println("==================getInformListData END==================");
 		//리스트 정보 검색
-		//List<HouseAll_VO> list = informService.getSearchList(houseVO);
-		//String result = informService.getHouseListJson(list, p);
+		
+		
+		
 		request.setAttribute("pvo", p);
 		result.put("pvo",p);
 		model.addAttribute("postType", "inform");
@@ -189,17 +197,24 @@ public class InformController {
 		model.addAttribute("postType", "inform");
 		
 		if(request.getAttribute("mem_id")==null) {
-			System.out.println("1111");
 			return "redirect:InfoList_go.do";
 		}
 		if( ! ((String)request.getAttribute("mem_id")).equals(informVO.getInfo_mem_id())) {
-			System.out.println("2222");
 			System.out.println(request.getAttribute("mem_id"));
 			System.out.println(informVO.getInfo_mem_id());
 			return "redirect:InfoList_go.do";
 		}
 		System.out.println(informVO);
 		informService.updateInform(informVO);
+		
+		return "redirect:InfoList_go.do";
+	}
+	
+
+	@RequestMapping(value="InfoDelete.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String InfoDelete(HttpServletRequest request, int info_idx, Model model) {
+		informService.deleteInform(info_idx);
+		model.addAttribute("postType", "inform");
 		
 		return "redirect:InfoList_go.do";
 	}

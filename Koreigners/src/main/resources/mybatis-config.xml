@@ -25,6 +25,7 @@
   <mappers>
 <!-- common mapper -->
      <mapper resource="mappings/common/korea_address-mapper.xml"/>
+     <mapper resource="mappings/common/home-mapper.xml"/>
      
 <!-- job mapper -->
      <mapper resource="mappings/job/company-mapper.xml"/>

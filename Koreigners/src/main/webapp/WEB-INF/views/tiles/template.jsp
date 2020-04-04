@@ -9,6 +9,15 @@
 <title>Insert title here</title>
 <link href="resources/css/header.css" rel="stylesheet" type="text/css">
 <link href="resources/css/style.css" rel="stylesheet" type="text/css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<!-- Site CSS -->
+<link rel="stylesheet" href="bootstrap/css/style.css">
+<!-- Responsive CSS -->
+<link rel="stylesheet" href="bootstrap/css/responsive.css">
+<!-- Custom CSS -->
+<link rel="stylesheet" href="bootstrap/css/custom.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/nav.js"></script>
 </head>
@@ -24,5 +33,8 @@
 		
 	    <tiles:insertAttribute name="footer" />  
 	</div>
+   
+   
+	
 </body>
 </html>

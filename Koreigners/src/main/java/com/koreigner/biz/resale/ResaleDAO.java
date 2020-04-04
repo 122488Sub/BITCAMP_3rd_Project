@@ -82,4 +82,8 @@ public class ResaleDAO {
 		mybatis.delete("deleteResale", rs_idx);
 		
 	}
+
+	public List<Map<String, Object>> dao_resaleWish(String mem_id) {
+		return mybatis.selectList("resaleDAO.resaleWish",mem_id);
+	}
 }

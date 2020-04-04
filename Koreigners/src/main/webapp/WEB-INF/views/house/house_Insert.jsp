@@ -20,16 +20,30 @@
 
 </head>
 <body>
-	
+	<br><br><br>
+	<!-- Start All Title Box -->
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>House Posting</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End All Title Box -->
 	<div id="container">
 	
 	<form action="" id="form" name="form" method="post" enctype="multipart/form-data">
+	<br><br>
 	<jsp:include page="house_formData.jsp"></jsp:include>
-	<div class="td_div">
+	<div class="td_div" style="text-align: center;">
 		<input type="button" id="insertButton" value="Register a New Post" onclick="insertForm();">
 	</div>
 	</form>
-	<p><a href="house_main.do ">글 목록 가기</a></p>
+	<br>
+	<p><a href="house_main.do " style="font-weight: 700;">Prev</a></p>
+	<br><br><br>
 </div>
 
 </body>

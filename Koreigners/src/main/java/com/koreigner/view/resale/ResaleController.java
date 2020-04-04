@@ -1,7 +1,6 @@
 package com.koreigner.view.resale;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,22 +13,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.koreigner.biz.common.page.PagingService;
 import com.koreigner.biz.common.page.PagingVO;
 import com.koreigner.biz.job.jobservice.JobService;
-import com.koreigner.biz.member.UserService;
 import com.koreigner.biz.member.UserVO;
 import com.koreigner.biz.resale.ResaleCommVO;
-import com.koreigner.biz.resale.ResaleDAO;
 import com.koreigner.biz.resale.ResaleImgVO;
+import com.koreigner.biz.resale.ResaleService;
 import com.koreigner.biz.resale.ResaleServiceImpl;
 import com.koreigner.biz.resale.ResaleVO;
 
 @Controller
 public class ResaleController {
 
+	@Autowired
+	ResaleService resaleService;
+	
 	@Autowired
 	ResaleServiceImpl resaleServiceImpl;
 	@Autowired
@@ -73,7 +75,7 @@ public class ResaleController {
 						    Model model) {
 		System.out.println("리세일이다");
 		model.addAttribute("postType", "resale");
-		return "resale/resaleWrite.page";
+		return "resale/resaleWrite_test.page";
 	}
 	
 	@RequestMapping(value="resalePost.do", method= {RequestMethod.GET, RequestMethod.POST})
@@ -109,7 +111,7 @@ public class ResaleController {
 		
 		model.addAttribute("postType", "resale");
 		
-		return "resale/resaleList.page";
+		return "redirect:resaleList.do";
 	}
 	
 	@RequestMapping(value="resaleDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
@@ -209,4 +211,16 @@ public class ResaleController {
 		return mav;
 	}
 	
+	@RequestMapping(value="getResaleWish.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map<String,Object> getResaleWish(HttpServletRequest request, HttpServletResponse response, Model model) {
+		System.out.println("getRecentPosts.do");
+		Map<String,Object> result=new HashMap<String, Object>();
+
+		String mem_id = (String) request.getAttribute("mem_id");
+		if(mem_id!=null) {
+			result.put("resaleWish", resaleService.resaleWish(mem_id));
+		}
+		return result;
+	}
 }

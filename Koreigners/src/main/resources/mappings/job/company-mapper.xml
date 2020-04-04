@@ -96,7 +96,7 @@
 	
 	           INSERT INTO T_MEMBER(MEM_IDX, MEM_ID, MEM_PW, MEM_NAME, MEM_CATE, MEM_PHONE, MEM_REG_IP, MEM_REG_DT)
 		  	
-		  	   VALUES(MEM_SQ.NEXTVAL, #{mem_id}, #{mem_pw}, #{company_name}, 'c', #{company_telephone}, #{ip}, SYSDATE);
+		  	   VALUES(MEM_SQ.NEXTVAL, #{mem_id}, #{mem_pw}, #{company_name}, 'c', #{company_telephone}, #{ip}, (SYSDATE+ (INTERVAL '9' HOUR )));
 	                
 	           
 	           INSERT INTO T_COMPANY(ADDRESS, ADDRESS_EN, ADDR_DT_EN, ADDR_DT_KOR, 
@@ -116,7 +116,7 @@
 					   #{domitory},#{do_en},#{do_kor},
 					   #{employee_num},#{gu_gun_eup_eng},#{gu_gun_eup_kor},
 					   #{hr_manager},#{ip},
-					   #{manager_email},#{meals},#{mem_id},SYSDATE
+					   #{manager_email},#{meals},#{mem_id},(SYSDATE+ (INTERVAL '9' HOUR ))
 					   );
 	     		end
 			}

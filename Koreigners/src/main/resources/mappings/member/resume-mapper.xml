@@ -34,7 +34,7 @@
 			
 			VALUES
 				( 
-					#{RESUME_IDX}, #{MEM_ID}, #{MEM_NAME}, SYSDATE, #{WISH_DO},	#{WISH_SI}, 
+					#{RESUME_IDX}, #{MEM_ID}, #{MEM_NAME}, (SYSDATE+ (INTERVAL '9' HOUR )), #{WISH_DO},	#{WISH_SI}, 
 					#{JOB_CATE}, #{JOB_CATE_CHILD}, #{REQ_SALARY_MIN}, #{REQ_SALARY_MAX}, #{SALARY_TYPE},
 					#{WORK_TIME}, #{WORK_TIME_ISWEEK}, 
 					#{WORK_TIME_START, jdbcType=VARCHAR},	

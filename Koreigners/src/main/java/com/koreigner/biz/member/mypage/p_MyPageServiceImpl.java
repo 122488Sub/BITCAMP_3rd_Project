@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.koreigner.biz.house.HouseAll_VO;
+import com.koreigner.biz.inform.InformVO;
 import com.koreigner.biz.job.hire.HireVO;
 import com.koreigner.biz.resale.ResaleImgVO;
 import com.koreigner.biz.resale.ResaleVO;
@@ -102,6 +103,18 @@ public class p_MyPageServiceImpl implements p_MyPageService {
 	@Override
 	public boolean isWish(p_MyPageVO pVO) {
 		return pDAO.myBatis_isWish(pVO);
+	}
+
+	@Override
+	public List<InformVO> getInformWishList(p_MyPageVO wishVO) {
+	
+		return pDAO.myBatis_getInformWishList(wishVO);
+	}
+
+	@Override
+	public List<InformVO> getInformMyAdsList(p_MyPageVO wishVO) {
+		
+		return pDAO.myBatis_getInformMyAdsList(wishVO);
 	}
 
 	

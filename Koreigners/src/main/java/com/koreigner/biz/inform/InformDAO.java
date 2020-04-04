@@ -19,10 +19,7 @@ public class InformDAO {
 	}
 
 	public List<Map<String, Object>> dao_getSelectSearchList(InformVO informVO) {
-		System.out.println("AAAA");
-		System.out.println(informVO);
 		List<Map<String, Object>> tmp=mybatis.selectList("inform.getSelectSearchList",informVO);
-		System.out.println("BBBB");
 		return tmp;
 	}
 
@@ -52,6 +49,20 @@ public class InformDAO {
 	public int dao_increaseHit(int info_idx) {
 	
 		return mybatis.update("inform.increaseHit", info_idx);
+	}
+
+	public int dao_deleteInform(int info_idx) {
+		
+		return mybatis.update("inform.deleteInform", info_idx);
+	}
+
+	public List<Map<String, Object>> dao_getInformCategoryCount() {
+	
+		return mybatis.selectList("inform.getInformCategoryCount");
+	}
+
+	public List<Map<String, Object>> dao_informWish(String mem_id) {
+		return mybatis.selectList("inform.informWish",mem_id);
 	}
 
 	

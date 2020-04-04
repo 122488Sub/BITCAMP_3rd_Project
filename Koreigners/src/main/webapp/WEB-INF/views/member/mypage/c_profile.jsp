@@ -4,25 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link href="resources/css/header.css" rel="stylesheet" type="text/css">
-    <link href="resources/css/style.css" rel="stylesheet" type="text/css">
-<link href="resources/css/job/regCompany.css" rel="stylesheet" type="text/css">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/js/daumAddr.js"></script>
-<script type="text/javascript" src="resources/js/companySignup.js"></script>
-<link href="resources/css/member/register.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="resources/js/hire/hireWrite.js"></script>
+
 <link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-
-	<!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <!-- Site CSS -->
-    <link rel="stylesheet" href="bootstrap/css/style.css">
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="bootstrap/css/responsive.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="bootstrap/css/custom.css">
 
 </head>
 
@@ -82,130 +70,178 @@
 		    <div class="row">
 		      <div class="col-sm-6 col-lg-6 mb-3">
 		        <div class="shipping-method-box">
-		        	<div class="title-left">
-		        		<h3>비밀번호 변경</h3>
+		        	<div class="mb-4">
+			        	<div class="title-left">
+			        		<h3>비밀번호 변경</h3>
+			        	</div>
+			        	<div class="row">
+				        	<div class="col-md-12 mb-3">
+		                        <label for="current-password">현재 비밀번호 </label>
+		                        <input type="password" class="form-control" id="curPw">
+		                        <span id="getMemberPw"></span>
+		                    </div>
+			        	</div>
+			        	<div class="row">
+			        		<div class="col-md-12 mb-3">
+					        	<label>새 비밀번호</label>
+					        	<input type="password" class="form-control" id="newPw" name="mem_pw">
+			        		</div>
+			        	</div>
+			        	<div class="row">
+			        		<div class="col-md-12 mb-3">
+			        			<label>새 비밀번호 확인</label>
+			        			<input type="password" class="form-control" id="rePw">
+	                        	<span id="checkPw"></span>
+			        		</div>
+			        	</div>
+		        	</div>
+		        	<div class="mb-4">
+	                    <div class="title-left">
+			        		<h3>기본정보</h3>
+			        	</div>
+			        	<div class="row">
+			        		<div class="col-md-6 mb-3">
+					        	<label>회사명</label>
+					        	<input type="text" name="company_name" id="company_name" class="form-control" value="${company.company_name}">
+			        		</div>
+			        		<div class="col-md-6 mb-3">
+			        			<label>사업자번호</label>
+			        			<input type="text" name="business_num" id="business_num" class="form-control" value="${company.business_num }">
+			        		</div>
+			        	</div>
+			        	<div class="mb-3">
+		        			<label>사업자등록증</label>
+		        			<input type="file" name="business_file" id="business_file" class="form-control" value="${company.business_file }">
+			        	</div>
+			        	<div class="mb-4">
+		        			<label>대표전화</label>
+		        			<input type="text" name="company_telephone" id="company_telephone" class="form-control" value="${company.company_telephone }">
+			        	</div>
 		        	</div>
 		        	<div class="mb-3">
-                        <label for="current-password">현재 비밀번호 </label>
-                        <input type="password" class="form-control" id="curPw">
-                        <span id="getMemberPw"></span>
-                    </div>
-                    <div class="mb-3">
-                        <label for="new-password">새 비밀번호 </label>
-                        <input type="password" class="form-control" id="newPw" name="mem_pw">
-                    </div>
-                    <div class="mb-3">
-                        <label for="re-enter-password">새 비밀번호 확인 </label>
-                        <input type="password" class="form-control" id="rePw">
-                        <span id="checkPw"></span>
-                    </div>
-                    <div class="title-left">
-		        		<h3>기본정보</h3>
-		        	</div>
-		        	<div class="row">
-		        		<div class="col-md-6 mb-3">
-				        	<label>회사명</label>
-				        	<input type="text" name="company_name" id="company_name" class="form-control" value="${company.company_name}">
-		        		</div>
-		        		<div class="col-md-6 mb-3">
-		        			<label>사업자번호</label>
-		        			<input type="text" name="business_num" id="business_num" class="form-control" value="${company.business_num }">
-		        		</div>
-		        	</div>
-		        	<div class="mb-3">
-	        			<label>사업자등록증</label>
-	        			<input type="file" name="business_file" id="business_file" class="form-control" value="${company.business_file }">
-		        	</div>
-		        	<div class="mb-3">
-	        			<label>대표전화</label>
-	        			<input type="text" name="company_telephone" id="company_telephone" class="form-control" value="${company.company_telephone }">
+			        	<div class="title-left">
+			        		<h3>주소</h3>
+			        	</div>
+			        	<div class='mb-3'>
+				        	<input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기">
+			        	</div>
+			        	<div class='mb-3'>
+				        	<input type="text" id="address" name="address" class="form-control" value="${company.address}" placeholder="한글 주소">
+			        	</div>
+			        	<div class='mb-3'>
+				        	<input type="text" id="addr_dt_kor" name="addr_dt_kor" class="form-control" value="${company.addr_dt_kor }" placeholder="한글 상세 주소">
+				        </div>
+				        <div class='mb-3'>
+				        	<input type="text" id="address_en" name="address_en" class="form-control" value="${company.address_en }" placeholder="영문 주소">
+				        </div>
+				        <div class='mb-4'>
+				        	<input type="text" id="addr_dt_en" name="addr_dt_en" class="form-control" value="${company.addr_dt_en }" placeholder="영문 상세 주소">
+			        	</div>
 		        	</div>
 		        </div>
 		      </div>
 		      <div class="col-sm-6 col-lg-6 mb-3">
 			      <div class="shipping-method-box">
+			      	<div class="mb-4">
+			      	<div class="title-left">
+		        		<h3>세부 사항</h3>
+		        	</div>
+		        		<label for="professional-field">직무 영역</label><br>
+	                <div class="row">
+	                    <div class="col-md-6 mb-2">
+                            <select class="custom-select-box form-control" name="cate_prnt_ko" id="selectBox1" title="직종선택">
+							    <c:forEach items="${jobCateMap}" var="option">
+								  <option class="${option.key}">${option.value}</option>
+								</c:forEach>
+							</select>
+                     	</div>						
+	                    <div class="col-md-6 mb-3">
+							<select class="custom-select-box form-control" name="cate_child_ko" title="직종선택"  id="cate_child_ko"></select>
+                     	</div>
+                    </div>
+                    <div class="row">
+		        		<div class="col-md-4 mb-3">
+				        	<label>인사담당자</label>
+				        	<input type="text" name="hr_manager" class="form-control" value="${company.hr_manager}">
+		        		</div>
+		        		<div class="col-md-8 mb-3">
+		        			<label>담당자 이메일</label>
+		        			<input type="text" name="manager_email" class="form-control" value="${company.manager_email }">
+		        		</div>
+		        	</div>
+		        	<div class="row">
+		        		<div class="col-md-10 mb-3">
+				        	<label>사업내용</label>
+				        	<input type="text" name="business_info" class="form-control" value="${company.business_info}">
+		        		</div>
+		        		<div class="col-md-2 mb-3">
+		        			<label>직원수</label>
+		        			<input type="text" name="employee_num" class="form-control" value="${company.employee_num }">
+		        		</div>
+		        	</div>
+			      	</div>
+		        	<div class="mb-1">
+			            <div class="title-left">
+			        		<h3>기숙사 제공 여부</h3>
+			        	</div>
+			        	<div class="mb-0">
+			        	<br><br><br>
+	                       	<label for="dormitory" style="font-weight: 700">Dormitory</label>
+	                           	<div class="custom-control custom-radio">
+	                           		<input name='domitory' type='radio' id='domitory0' class='custom-control-input' value='기숙사 제공 함' <c:if test='${company.domitory eq "기숙사 제공 함"}'>checked</c:if>>
+	                           		<label class="custom-control-label" for="domitory0">기숙사 제공 함</label>
+	                            </div>
+	                            <div class="custom-control custom-radio">
+				                    <input name="domitory" type="radio" id="domitory1" class="custom-control-input" value="기숙사 제공 하지 않음" <c:if test="${company.domitory eq '기숙사 제공 하지 않음'}">checked</c:if>>
+				                    <label class="custom-control-label" for="domitory1">기숙사 제공 하지 않음</label>
+		                    	</div>
+		                    	<div class="custom-control custom-radio">
+				                    <input name="domitory" type="radio" id="domitory2" class="custom-control-input" value="회사 내규에 따름(협의)" <c:if test="${company.domitory eq '회사 내규에 따름(협의)'}">checked</c:if>>
+				                    <label class="custom-control-label" for="domitory2">회사 내규에 따름(협의)</label>
+		                    	</div>
+		                 <br><br><br>
+			             </div>
+		        	</div>
+		        	<div class="mb-1">
+			            <div class="title-left">
+			        		<h3>식사 제공 여부</h3>
+			        	</div>
+			        	<div class="mb-0">
+			        	<br><br>
+	                       	<label for="salary" style="font-weight: 700">Meals</label>
+                           	<div class="custom-control custom-radio">
+                           		<input name="meals" type="radio" id="meals0" class="custom-control-input" value="제공안함"  <c:if test="${company.meals eq '제공안함'}">checked</c:if>>
+                           		<label class="custom-control-label" for="meals0">제공 안함</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+			                    <input name="meals" type="radio" id="meals1" class="custom-control-input" value="중식제공" <c:if test="${company.meals eq '중식제공'}">checked</c:if>>
+			                    <label class="custom-control-label" for="meals1">중식 제공</label>
+	                    	</div>
+	                    	<div class="custom-control custom-radio">
+			                    <input name="meals" type="radio" id="meals2" class="custom-control-input" value="2식제공" <c:if test="${company.meals eq '2식제공'}">checked</c:if>>
+			                    <label class="custom-control-label" for="meals2">2식 제공</label>
+	                    	</div>
+	                    	<div class="custom-control custom-radio">
+			                    <input name="meals" type="radio" id="meals3" class="custom-control-input" value="3식제공" <c:if test="${company.meals eq '3식제공'}">checked</c:if>>
+			                    <label class="custom-control-label" for="meals3">3식 제공</label>
+	                    	</div>
+	                    	<div class="custom-control custom-radio">
+			                    <input name="meals" type="radio" id="meals4" class="custom-control-input" value="회사 내규에 따름(협의)" <c:if test="${company.meals eq '회사 내규에 따름(협의)'}">checked</c:if>>
+			                    <label class="custom-control-label" for="meals4">회사 내규에 따름(협의)</label>
+	                    	</div>
+		                 <br><br>
+			             </div>
+		        	</div>
 			      </div>
 		      </div>
 		    </div>
 		  </div>
+		  <p align="center">
+			<button type="submit" class="btn hvr-hover">수정</button>
+		  </p>
 		
-		<table id="regCom">
-			
-			<tr>
-				<td class="title"><label>직종선택 : </label></td>
-				<td class="contents">
-					<select name="cate_prnt_ko" id="selectBox1" value="직종선택">
-						<c:forEach items="${jobCateMap}" var="option">
-							<option class="${option.key}">${option.value}</option>
-						</c:forEach>
-					</select>
-					<select name="cate_child_ko" value="직종선택"  id="cate_child_ko">
-					</select> 
-				</td>
-			</tr>
-			<tr>
-				<td class="title"><label>한글주소 : </label></td>
-				<td class="contents"><input type="button" onclick="sample6_execDaumPostcode()" value="주소 찾기"><input type="text" id="address" name="address"  class="input_box" style="width: 50%;" value="${company.address}" placeholder="주소"></td>
-			</tr>
-			<tr>
-				<td class="title"><label>한글 상세주소 : </label></td>
-				<td class="contents"><input type="text" id="addr_dt_kor" name="addr_dt_kor" class="input_box" class="input_box" style="width: 20%;" value="" placeholder="상세주소"></td>
-			</tr>
-			<tr>
-				<td class="title"><label>영어주소 : </label></td>
-				<td class="contents"><input type="text" id="address_en" name="address_en" style="width: 50%;" value="" class="input_box" placeholder="주소en"></td>
-			</tr>
-			<tr>
-				<td class="title"><label>영어 상세주소 : </label></td>
-				<td class="contents">
-					<input type="text" id="addr_dt_en" name="addr_dt_en" style="width: 20%;" value="" class="input_box" placeholder="상세주소en">
-				</td>
-			</tr>
-			
-			<tr>
-				<td class="title"><label>인사담당자 : </label></td>
-				<td class="contents"><input type="text" name="hr_manager" id="hr_manager" class="input_box" value="인사담당자"></td>
-			</tr>
-			<tr>
-				<td class="title"><label>담당자 메일 : </label></td>
-				<td class="contents"><input type="text" name="manager_email" id="manager_email" value="담당자 메일"></td>
-			</tr>
-			<tr>
-				<td class="title"><label>대표전화 : </label></td>
-				<td class="contents"><input type="text" name="company_telephone" id="company_telephone" class="input_box" value="대표전화"></td>
-			</tr>
-			<tr>
-				<td class="title"><label>사업내용 : </label></td>
-				<td class="contents"><input type="text" name="business_info" id="business_info" class="input_box" value="사업내용"></td>
-			</tr>
-			<tr>
-				<td class="title"><label>직원 수 : </label></td>
-				<td class="contents"><input type="text" name="employee_num" id="employee_num" class="input_box" name="직원 수" value="직원수"></td>
-			</tr>
-			<tr>
-				<td class="title"><label>기숙사제공유무 : </label></td>
-				<td class="contents"><input type="radio" name="domitory" id="domitory" value="기숙사 제공 함">기숙사 제공 함
-					<input type="radio" name="domitory" value="기숙사 제공 하지 않음">기숙사 제공 하지 않음
-					<input type="radio" name="domitory" value="회사 내규에 따름(협의)">회사 내규에 따름(협의)
-			    </td>
-			</tr>
-			<tr>
-				<td class="title"><label>식사 : </label></td>
-				<td class="contents">
-					<input type="radio" name="meals" id="meals" name="식사"  value="제공안함">제공안함
-					<input type="radio" name="meals" value="중식제공">중식제공
-					<input type="radio" name="meals" value="2식제공">2식제공
-					<input type="radio" name="meals" value="3식제공">3식제공
-					<input type="radio" name="meals" value="회사 내규에 따름(협의)">회사 내규에 따름(협의)
-				</td>
-			</tr>
-			<tr>
-				<td class="title"></td>
-				<td class="contents"></td>
-			</tr>
-		</table>
+		
 	
-		<input type="submit" value="회원가입">
 		<input type="hidden" id="do_kor" name="do_kor" style="width: 10%;" value="" placeholder="상세주소">
 	    <input type="hidden" id="gu_gun_eup_kor" name="gu_gun_eup_kor" style="width: 10%;" value="" placeholder="상세주소">
 	    <input type="hidden" id="do_en" name="do_en" style="width: 10%;" value="" placeholder="상세주소">

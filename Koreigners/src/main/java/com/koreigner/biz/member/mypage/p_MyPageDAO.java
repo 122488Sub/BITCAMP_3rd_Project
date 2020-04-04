@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.koreigner.biz.house.HouseAll_VO;
+import com.koreigner.biz.inform.InformVO;
 import com.koreigner.biz.job.hire.HireVO;
 import com.koreigner.biz.resale.ResaleImgVO;
 import com.koreigner.biz.resale.ResaleVO;
@@ -75,6 +76,11 @@ public class p_MyPageDAO {
 		List<ResaleImgVO> resaleImgList=mybatis.selectList("wish.getResaleImgWishList", wishVO);
 		return resaleImgList;
 	}
+	
+	public List<InformVO> myBatis_getInformWishList(p_MyPageVO wishVO) {
+		
+		return mybatis.selectList("wish.getInformWishList",wishVO);
+	}
 
 	//------------------------------------------------------------------------------------------------
 	//------------------------------------------------------------------------------------------------
@@ -104,6 +110,13 @@ public class p_MyPageDAO {
 		
 		return  mybatis.selectOne("myads.getAdsTotal", pVO);
 	}
+
+	public List<InformVO> myBatis_getInformMyAdsList(p_MyPageVO wishVO) {
+		
+		return mybatis.selectList("myads.getInformMyAdsList", wishVO);
+	}
+
+	
 
 	
 	

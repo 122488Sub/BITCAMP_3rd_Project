@@ -138,7 +138,7 @@
 	            #{insurance}, #{ip},
 	            #{major}, #{meals}, #{mem_id},
 	            #{payment_codition}, #{payment_detail}, #{prefer_skills}, #{prepare_doc}, 
-	            sysdate, #{salary_max}, #{salary_min},
+	            (SYSDATE+ (INTERVAL '9' HOUR )), #{salary_max}, #{salary_min},
 	            #{title}, 
 	            #{work_detail}, #{work_time}, #{work_type},(SELECT COMPANY_IDX FROM T_COMPANY WHERE MEM_ID=#{mem_id})
 	            )
@@ -146,7 +146,7 @@
 	
 	<insert id="wishInsert" parameterType="hireVO">
 		INSERT INTO T_WISH_LIST(WISH_IDX, MEM_ID, B_IDX, BOARD_IDX, REGDATE)
-		  VALUES (WISH_SQ.NEXTVAL, #{mem_id}, #{hire_idx}, 2, SYSDATE)
+		  VALUES (WISH_SQ.NEXTVAL, #{mem_id}, #{hire_idx}, 2, (SYSDATE+ (INTERVAL '9' HOUR )))
 	</insert>
 	
 <!-- CompanyVO insert End -->	

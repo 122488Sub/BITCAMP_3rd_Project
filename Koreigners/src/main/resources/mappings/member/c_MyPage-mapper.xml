@@ -24,7 +24,7 @@
 	FROM (
 	       SELECT ROWNUM R_NUM, RESUME.*
 	        FROM (  SELECT  H.TITLE,R.RESUME_IDX,R.MEM_ID,R.MEM_NAME,R.WISH_DO,R.WISH_SI,R.JOB_CATE,R.JOB_CATE_CHILD,
-                            A.APPLY_IDX,A.COMPANY_IDX,A.HIRE_IDX,A.REGDATE,A.STATE
+                            A.APPLY_IDX,A.COMPANY_IDX,A.HIRE_IDX,TO_CHAR(A.REGDATE,'YYYY-MM-DD') as REGDATE, A.STATE
 	                FROM T_MEMBER_RESUME R,
                      (   SELECT RESUME_IDX, APPLY_IDX,COMPANY_IDX,HIRE_IDX,REGDATE,STATE
                             FROM T_MEMBER_APPLY
@@ -45,6 +45,9 @@
                                                          FROM T_COMPANY 
                                                      WHERE MEM_ID=#{mem_id}
                                                    )
+                                                   <if test="hire_idx != 0">
+                                                     	AND HIRE_IDX=#{hire_idx} 
+                                                     </if>
                                              )
 	                     )H
                          
