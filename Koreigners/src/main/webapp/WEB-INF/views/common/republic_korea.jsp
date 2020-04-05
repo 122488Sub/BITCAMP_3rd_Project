@@ -17,7 +17,6 @@
     margin: 10px auto;
 	}
 	#map{
-		margin-left: 100px;
 		height: 100%; 
 		float: left;
 		width:360px;

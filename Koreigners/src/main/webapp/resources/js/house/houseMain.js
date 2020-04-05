@@ -12,11 +12,34 @@
 			sortSelect= $("#sortSelect  option:selected").val();
 			getData();
 		 });
+		checkSize();
+		$(window).resize(function (){
+		  // width값을 가져오기
+		  checkSize();
+		});
 	});
 	//여기까지 페이징로딩후 자동시작//
 	
-	
-
+	function checkSize(){
+		var width_size = window.innerWidth;
+		  console.log(width_size);
+		  // 800 이하인지 if문으로 확인
+		  if (width_size <= 1300) {
+			  changeMinSizeUtilities();
+		  }else{
+			  changeMaxSizeUtilities();
+		  }
+	}
+	function changeMinSizeUtilities(){
+		
+		$("#map").css('float','none');
+		$("#responDiv").css('height','900px');
+		
+	}
+	function changeMaxSizeUtilities(){
+		$("#map").css('float','left');
+		$("#responDiv").css('height','450px');
+	}
 	
 	//도-All체크 선택시 //
 	function chkParent() { 	

@@ -55,7 +55,7 @@
 			<div><label> Bulid Type</label></div>
 		 	<div class="btnDiv buildBtn no-drag btnOneLine">Villa</div>
 		 	<div class="btnDiv buildBtn no-drag btnOneLine">Goshiwon</div>
-		 	<div class="btnDiv buildBtn no-drag btnOneLine">Semi-Office</div>
+		 	<div class="btnDiv buildBtn no-drag btnOneLine">Office</div>
 		</div>
 		<div class="roomContent typeContent">
 			<div><label>Room Type</label></div>
