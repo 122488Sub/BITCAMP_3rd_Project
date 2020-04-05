@@ -1,0 +1,154 @@
+.featured-categories {
+    background-color: #fff;
+    padding-top: 15px;
+    padding-bottom: 60px;
+    text-align: center;
+}
+.container--full-width {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+}
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1280px;
+    min-width: 320px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+.container:after, .container:before{
+    display: table;
+    line-height: 0;
+    content: "";
+}
+.featured-categories__header {
+    margin: 0 auto 45px;
+}
+}
+.featured-categories__header-title {
+    margin: 0 0 10px;
+    font-size: 28px;
+    font-family: FilsonProBold,ProximaNova-Bold,Arial,Helvetica,sans-serif;
+}
+.featured-categories__item-description, .featured-categories__subheader {
+    font-family: ProximaNova-Light,Arial,Helvetica,sans-serif;
+    font-size: 16px;
+}
+.featured-categories__scroller {
+    -webkit-overflow-scrolling: auto;
+    overflow-x: hidden;
+}
+}
+.featured-categories__items {
+    padding: 0;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+
+
+.featured-categories__item {
+    float: left;
+    position: relative;
+    width: 50%;
+    margin: 0;
+    box-sizing: border-box;
+}
+.featured-categories__item {
+    width: 300px;
+    margin: 0 15px 0 0;
+}
+.featured-categories__item-link:active, .featured-categories__item-link:focus, .featured-categories__item-link:visited {
+    color: #fff;
+}
+
+.featured-categories__item-link {
+    display: block;
+    border: none;
+    padding: 0;
+    margin: 3%;
+    width: 94%;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+}
+.featured-categories__item-link {
+    display: block;
+    border: none;
+    border-top-color: initial;
+    border-top-style: none;
+    border-top-width: initial;
+    border-right-color: initial;
+    border-right-style: none;
+    border-right-width: initial;
+    border-bottom-color: initial;
+    border-bottom-style: none;
+    border-bottom-width: initial;
+    border-left-color: initial;
+    border-left-style: none;
+    border-left-width: initial;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    padding: 0;
+    margin: 3%;
+    width: 94%;
+    color: #fff;
+    text-decoration: none;
+    text-decoration-line: none;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+    position: relative;
+    overflow: hidden;
+}
+.featured-categories__item-description {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    text-align: left;
+    padding: 10px;
+    box-sizing: border-box;
+    background: -webkit-linear-gradient(bottom,rgba(0,0,0,.7) 0,rgba(0,0,0,.4) 38%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top,rgba(0,0,0,.7) 0,rgba(0,0,0,.4) 38%,rgba(0,0,0,0) 100%);
+    border-bottom: 0 solid #000;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+.featured-categories__item-description-title {
+    font-size: 22px;
+    font-family: FilsonProBold,ProximaNova-Bold,Arial,Helvetica,sans-serif;
+    line-height: 1em;
+    padding: 0;
+    margin: 0 0 2px;
+}
+.featured-categories__item-description-title {
+    font-size: 34px;
+}
+.featured-categories__item-description--cars .featured-categories__item-description-total-ads {
+    color: #00a2cd;
+}
+.featured-categories__item-description-total-ads {
+    padding: 0;
+    margin: 4px 0 0;
+    color: #4ad540;
+    font-weight: 600;
+}
+.featured-categories__item-link img {
+    display: block;
+    border: 0;
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+.featured-categories__item-description--jobs .featured-categories__item-description-total-ads {
+    color: #ee4055;
+}

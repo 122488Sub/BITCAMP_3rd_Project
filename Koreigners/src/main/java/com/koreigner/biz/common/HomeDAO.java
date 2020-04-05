@@ -14,8 +14,11 @@ public class HomeDAO {
 	private SqlSessionTemplate mybatis;
 	
 	public List<Map<String, Object>> dao_getRecentPosts() {
-		// TODO Auto-generated method stub
-		return mybatis.selectList("getRecentPosts");
+		return mybatis.selectList("home.getRecentPosts");
+	}
+
+	public List<Map<String, Object>> dao_getCountPosts() {
+		return mybatis.selectList("home.getCountPosts");
 	}
 
 }

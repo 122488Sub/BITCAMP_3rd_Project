@@ -7,4 +7,6 @@ public interface HomeService {
 
 	List<Map<String, Object>> getRecentPosts();
 
+	List<Map<String, Object>> getCountPosts();
+
 }

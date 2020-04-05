@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="${contextPath}/css/responsive.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="${contextPath}/css/custom.css">
+    <link rel="stylesheet" href="resources/css/main/mainCategory.css">
     <script type="text/javascript" src="resources/js/common/togleWish.js" ></script>
 	<script type="text/javascript" src="resources/js/common/homeMain.js" ></script>
     <!--[if lt IE 9]>
@@ -120,7 +121,57 @@
         </div>
     </div>
     <!-- End Products  -->
-
+	<!-- 메인화면 카테고리 시작 -->
+	<div class="container--full-width featured-categories">
+	    <div class="container">
+	        <div class="clearfix title-all text-center">
+	            <h1>Featured Categories</h1>
+	            <p>Browse through some of our most popular categories</p>
+	        </div>
+	        <div class="featured-categories__scroller">
+	            <div class="clearfix featured-categories__items">
+	               <div class="featured-categories__item">
+	                        <a href="hireList_go.do" class="featured-categories__item-link">
+	                            <div class="featured-categories__item-description featured-categories__item-description--cars">
+	                                <h4 style="color:white; font-weight: 600;" class="featured-categories__item-description-title">Job</h4>
+	                                <p class="featured-categories__item-description-total-ads">${mainCount[0].CNT_HIRE }&nbsp;ads</p>
+	                            </div>
+	                            <img src="https://ssl-gumtree.classistatic.com/cached/img/au/homepage/pic-featured-category-18320.jpg" alt="Job">
+	                        </a>
+	                    </div>
+	                <div class="featured-categories__item">
+	                        <a href="house_main.do" class="featured-categories__item-link">
+	                            <div class="featured-categories__item-description ">
+	                                <h4 style="color:white; font-weight: 600;" class="featured-categories__item-description-title">House</h4>
+	                                <p class="featured-categories__item-description-total-ads">${mainCount[0].CNT_HOUSE }&nbsp;ads</p>
+	                            </div>
+	                            <img src="https://ssl-gumtree.classistatic.com/cached/img/au/homepage/pic-featured-category-18397.jpg" alt="House">
+	                        </a>
+	                    </div>
+	                <div class="featured-categories__item">
+	                        <a href="resaleList.do" class="featured-categories__item-link">
+	                            <div class="featured-categories__item-description featured-categories__item-description--jobs">
+	                                <h4 style="color:white; font-weight: 600;" class="featured-categories__item-description-title">Resale</h4>
+	                                <p class="featured-categories__item-description-total-ads">${mainCount[0].CNT_RESALE}&nbsp;ads</p>
+	                            </div>
+	                            <img src="https://ssl-gumtree.classistatic.com/cached/img/au/homepage/pic-featured-category-9302.jpg" alt="Resale">
+	                        </a>
+	                    </div>
+	                <div class="featured-categories__item">
+	                        <a href="InfoList_go.do" class="featured-categories__item-link">
+	                            <div class="featured-categories__item-description ">
+	                                <h4 style="color:white; font-weight: 600;" class="featured-categories__item-description-title">Information</h4>
+	                                <p class="featured-categories__item-description-total-ads">${mainCount[0].CNT_INFORM}&nbsp;ads</p>
+	                            </div>
+	                            <img src="https://ssl-gumtree.classistatic.com/cached/img/au/homepage/pic-featured-category-1000000.jpg" alt="Information">
+	                        </a>
+	                    </div>
+	                </div>
+	        </div>
+	
+	    </div>
+	</div>
+	<!-- 메인화면 카테고리 끝 -->
     <!-- Start Blog  -->
     <div class="latest-blog">
         <div class="container">

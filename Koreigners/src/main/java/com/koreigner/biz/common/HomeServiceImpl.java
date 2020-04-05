@@ -13,8 +13,12 @@ public class HomeServiceImpl implements HomeService{
 
 	@Override
 	public List<Map<String, Object>> getRecentPosts() {
-		// TODO Auto-generated method stub
 		return homeDAO.dao_getRecentPosts();
+	}
+
+	@Override
+	public List<Map<String, Object>> getCountPosts() {
+		return homeDAO.dao_getCountPosts();
 	}
 	
 }

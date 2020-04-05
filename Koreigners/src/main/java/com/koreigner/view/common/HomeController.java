@@ -97,7 +97,7 @@ public class HomeController {
 		
 		model.addAttribute("postType", "main");
 		
-	
+	    model.addAttribute("mainCount",homeService.getCountPosts());
 		
 		
 		return "/common/main_test.page";
