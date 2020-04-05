@@ -16,7 +16,7 @@
 	//여기까지 페이징로딩후 자동시작//
 	
 	
-	
+
 	
 	//도-All체크 선택시 //
 	function chkParent() { 	
@@ -71,6 +71,9 @@
 	    getData();
 	}; 
 	
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 	
 	function getData() {
 		var param={
@@ -110,7 +113,7 @@
 						dataTag += "<td>" + this["subject"] + "</td>";
 						dataTag += "<td>" + this["room_type"] + "</td>";
 						dataTag += "<td>" + this["address"] + "</td>";
-						dataTag += "<td>" + this["deposit"]+"/" +this["monthly_rent"] + "</td>";
+						dataTag += "<td>" + numberWithCommas(this["deposit"])+" / " +numberWithCommas(this["monthly_rent"]) + "</td>";
 						dataTag += "<td>" + this["room_reporting_date"] + "</td>";
 						dataTag += "</tr>";
 					});	
@@ -199,7 +202,7 @@
 					dataTag += "<td>" + this["subject"] + "</td>";
 					dataTag += "<td>" + this["room_type"] + "</td>";
 					dataTag += "<td>" + this["address"] + "</td>";
-					dataTag += "<td>" + this["deposit"]+"/" +this["monthly_rent"] + "</td>";
+					dataTag += "<td>" + numberWithCommas(this["deposit"])+"  /  " + numberWithCommas(this["monthly_rent"]) + "</td>";
 					dataTag += "<td>" + this["room_reporting_date"] + "</td>";
 					dataTag += "</tr>";
 				

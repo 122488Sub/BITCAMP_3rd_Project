@@ -70,7 +70,7 @@
 						<th>Title</th>
 						<th>RoomType</th>
 						<th>Location</th>
-						<th>Deposit/Monthly</th>
+						<th>($)Deposit/Monthly</th>
 						<th>Post Date</th>
 					</tr>
 				</thead>

@@ -190,52 +190,6 @@
             </div>
         </div>
     </div>
-       <div id="pagingBox">
-		<div id="olPaging">
-			<ol class="paging">
-				<%--이전으로에 대한 사용여부 처리--%>
-				<c:choose>
-					<%--사용불가(disable) : 첫번째 블록인 경우--%>
-					<c:when test="${pvo.beginPage == 1}">
-						<li id="pointer" class="disable">&lt;</li>
-					</c:when>
-					<c:otherwise>
-						<li id="pointer">
-						<!-- 이전으로 클릭 할 시 현재 블록의 시작 페이지에서 1을 뺀 값 -->
-						<a href="resaleList.do&cPage=${pvo.beginPage - 1}" id="pointer">&lt;</a>
-						</li>
-					</c:otherwise>
-				</c:choose>
-				<c:forEach var="k" begin="${pvo.beginPage}" end="${pvo.endPage}">
-					<c:choose>
-						<c:when test="${k == pvo.nowPage}">
-							<li class="now">${k }</li>
-						</c:when>
-						<c:otherwise>
-							<li>
-								<a href="resaleList.do?cPage=${k}" id="pointer">${k}</a>
-							</li>	
-						</c:otherwise>
-					
-					</c:choose>
-				</c:forEach>
-					
-				<%--다음으로에 대한 사용여부 처리--%>
-				<c:choose>
-					<%--사용불가(disable) : 첫번째 블록인 경우--%>
-					<c:when test="${pvo.endPage >= pvo.totalPage}">
-						<li id="pointer" class="disable">&gt;</li>
-					</c:when>
-					<c:otherwise>
-						<li id="pointer">
-												<!-- 다음으로 클릭 할 시 현재 블록의 시작 페이지에서 1을 더한 값 -->
-						<a href="resaleList.do?cPage=${pvo.endPage + 1}" id="pointer">&gt;</a>
-						</li>
-					</c:otherwise>
-				</c:choose>
-			</ol>
-		</div>
-	</div>
 	<!-- Start Gallery  -->
     <div class="products-box">
         <div class="container">
