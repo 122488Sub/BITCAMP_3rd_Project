@@ -113,9 +113,9 @@ public class InformServiceImpl implements InformService {
 	}
 
 	@Override
-	public List<Map<String, Object>> getInformCategoryCount() {
+	public List<Map<String, Object>> getInformCategoryCount(InformVO informVO) {
 		
-		return informDAO.dao_getInformCategoryCount();
+		return informDAO.dao_getInformCategoryCount(informVO);
 	}
 
 	@Override

@@ -19,7 +19,19 @@ public class ResaleVO {
 		       work_loc_do, rs_cate_prnt, category_child, content, file_ori_name, ip,condition, hash_tag;
 		List<MultipartFile> filename;
 		String regdate;
+		private String searchKeyword;
 		
+		
+		public String getSearchKeyword() {
+			return searchKeyword;
+		}
+
+
+		public void setSearchKeyword(String searchKeyword) {
+			this.searchKeyword = searchKeyword;
+		}
+
+
 		public ResaleVO() {}
 
 

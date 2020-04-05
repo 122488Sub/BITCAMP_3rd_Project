@@ -43,6 +43,7 @@
 <!-- info mapper -->
   	 <mapper resource="mappings/infoBoard-mapper.xml"/>
   	 <mapper resource="mappings/inform/inform-mapper.xml"/>
+  	 <mapper resource="mappings/inform/inform-include-mapper.xml"/>
   	 
 <!-- member mapper -->  	 
   	 <mapper resource="mappings/member/user-mapper.xml"/>

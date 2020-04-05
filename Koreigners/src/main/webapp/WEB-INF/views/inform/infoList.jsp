@@ -44,11 +44,11 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item"><a class="nav-link" href="javascript:getData('All',1)">All</a></li>
-                        <li class="nav-item"><a class="nav-link" href="javascript:getData('Information',1)">Information</a></li>
-                        <li class="nav-item"><a class="nav-link" href="javascript:getData('Food',1)">Food</a></li>
-                        <li class="nav-item"><a class="nav-link" href="javascript:getData('Travel',1)">Travel</a></li>
-                        <li class="nav-item"><a class="nav-link" href="javascript:getData('Etc',1)">etc</a></li>
+                        <li class="nav-item"><a class="nav-link" href="javascript:getData('All','',1)">All</a></li>
+                        <li class="nav-item"><a class="nav-link" href="javascript:getData('Information','',1)">Information</a></li>
+                        <li class="nav-item"><a class="nav-link" href="javascript:getData('Food','',1)">Food</a></li>
+                        <li class="nav-item"><a class="nav-link" href="javascript:getData('Travel','',1)">Travel</a></li>
+                        <li class="nav-item"><a class="nav-link" href="javascript:getData('Etc','',1)">etc</a></li>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -109,10 +109,10 @@
 				<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                     <div class="product-categori">
                         <div class="search-product">
-                            <form action="#">
-                                <input class="form-control" placeholder="Search here..." type="text">
-                                <button type="submit"> <i class="fa fa-search"></i> </button>
-                            </form>
+                            <div id="searchDiv">
+                                <input id="searchText" class="form-control" placeholder="Search here..." type="text">
+                                <button id="searchButton" type="button" onclick="javascript:getData('All',1)"> <i class="fa fa-search"></i> </button>
+                            </div>
                         </div>
                         <div class="filter-sidebar-left">
                             <div class="title-left">

@@ -24,9 +24,13 @@ function getData(cate,cPage) {
 	
 	var url = 'getInformListData.do?cPage=' + cPage;
 	var category=cate;
+	var searchKeyword=$('#searchText').val();
 	console.log(url);
+	console.log('category: '+category);
+	console.log('search: '+searchKeyword);
 	var param = {
-		'info_category':category
+		'info_category':category,
+		'searchKeyword':searchKeyword
 	}
 
 	jQuery.ajaxSettings.traditional = true;
@@ -87,6 +91,9 @@ function getData(cate,cPage) {
 			gridHtml+='</div><div class="tfoot" ></div>';
 			$("#grid-view").html(gridHtml);
 			
+			$("#searchButton").removeAttr("onclick");
+			$("#searchButton").attr("onclick","getData('"+category+"',1)");
+			
 			
 			var tfoot = "";
 			tfoot += '<div id="pagingBox"><div id="olPaging"><ol class="paging">';
@@ -121,9 +128,9 @@ function getData(cate,cPage) {
 		}
 
 	});
-	
-
 }
+
+
 function goInformDetailPage(info_idx) {
 	window.open("about:blank").location.href="InformDetail_go.do?info_idx=" + info_idx;
 } 
