@@ -17,7 +17,7 @@
 		<div>
 		<label for="staySelect">Itinerary &ensp;</label>
 		</div>
-				<select id="staySelect" name="stay_num_min" class=""> 
+				<select id="staySelect" name="stay_num_min" class="form-control"> 
 					<option value="1" selected>1 month</option> 
 					<option value="2">2 months</option> 
 						<option value="3">3 months</option> 

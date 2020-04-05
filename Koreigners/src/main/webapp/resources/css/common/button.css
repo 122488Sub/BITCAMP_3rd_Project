@@ -1,6 +1,6 @@
 
 .btn59acff{
-  background-color: #59acff;
+  background-color: #29807d;
   border: none;
   color: #000000;
   cursor: pointer;
@@ -19,7 +19,7 @@
 }
 
 .btn59acff:hover {
-  background-color: #92faed;
+  background-color: #f6931f;
 }
 .btn59acff:hover::before,
 .btn59acff:hover::after{
@@ -31,9 +31,9 @@
 }
 
 .btn92faed{
-	background-color: #92faed;
+	background-color: #f6931f;
 	 border: none;
-  color: #000000;
+  color: black;
   cursor: pointer;
   display: inline-block;
   font-family: 'BenchNine', Arial, sans-serif;

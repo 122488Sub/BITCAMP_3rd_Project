@@ -17,7 +17,7 @@
     margin: 10px auto;
 	}
 	#map{
-		
+		margin-left: 100px;
 		height: 100%; 
 		float: left;
 		width:360px;
@@ -48,7 +48,6 @@
     display: block;
     width: 555px;
     border-collapse: collapse;
-    border: 2px solid #000;
 	}
 	.table_dosi thead {
 	 	display: block;
@@ -122,7 +121,7 @@
 			
 	</div>
 	<div id="option_panel">
-		<table class='table_dosi'>
+		<table class='table_dosi form-control'>
 			<thead>
 				<tr>
 					<th colspan = '6' class='th_selectDoSi'></th>
@@ -213,7 +212,7 @@ function getDoSiData(do_kor,do_en,idx) {
 						dispHtml += "<tr>";
 					}
 					dispHtml += "<td>"
-					dispHtml += "		<input type='checkbox' id='si_"+this.gu_gun_eup_eng+"'"
+					dispHtml += "		<input type='checkbox' class='custom-checkbox' id='si_"+this.gu_gun_eup_eng+"'"
 											+"class='chk_do_child' value='"+this.gu_gun_eup_eng+"'"
 											+"onClick='javascript:chkChild(this)'";
 					if(si_List.indexOf(this.gu_gun_eup_eng)!= -1){

@@ -35,6 +35,9 @@
     
     <div class="cart-box-main">
     	<div class="container">
+    		<div class="title-left mb-5">
+    			<h2 class="font-weight-bold">Please select the region</h2>
+    		</div>
 			<div style="width:1200px; margin: 0 auto;">
 				<!-- 지도부분 Start -->
 				<jsp:include page="../common/republic_korea.jsp">
@@ -52,9 +55,9 @@
 					</select>
 				</div>
 			  <c:if test="${user.mem_id!=null && user.mem_cate eq 'p'}">
-				<div id="insertDiv">
-					<a href="house_insert.do">New Post</a>
-				</div>
+				  <div id="insertDiv">
+					<a href="house_insert.do" class="btn hvr-hover" style="color:white">New Post</a>
+				  </div>
 			  </c:if>
 			</div>
 			

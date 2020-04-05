@@ -6,7 +6,7 @@
 	let sortSelect=1;
 	$( function() {
 		getData(1);
-		$(".tbody_dosi").html("<h2>&nbsp;&nbsp;← Please select an region</h2>");
+		$(".tbody_dosi").html("");
 		
 		$("#sortSelect").change(function(){
 			sortSelect= $("#sortSelect  option:selected").val();

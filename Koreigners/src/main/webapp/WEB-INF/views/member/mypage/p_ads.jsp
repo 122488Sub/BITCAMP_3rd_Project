@@ -75,28 +75,30 @@
     </div>
     <!-- End All Title Box -->
 	<input type="hidden" id="mem_id" value="${mem_id}">
-	<div style="text-align: center">
-		<input type="button" id="btn1" class="btn59acff" value="house" onclick="javascript:changeCategory(2,1,'${mem_id}',1)">
-		<input type="button" id="btn2" class="btn59acff" value="job" onclick="javascript:changeCategory(2,2,'${mem_id}',1)">
-		<input type="button" id="btn3" class="btn59acff" value="resale" onclick="javascript:changeCategory(2,3,'${mem_id}',1)">
-		<input type="button" id="btn4" class="btn59acff" value="information" onclick="javascript:changeCategory(2,4,'${mem_id}',1)">
-	</div>
 
-	<div class="wishlist-box-main">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="table-main table-responsive">
-						<table id="listTable" class="table">
-							<thead id="tHead">
-
-							</thead>
-							<tbody id="list_box">
-
-							</tbody>
-
-						</table>
-						<div id="tfoot"></div>
+	<div class="cart-box-main">
+		<div class="mb-3" style="text-align: center">
+			<input type="button" id="btn1" class="btn59acff" value="house" onclick="javascript:changeCategory(2,1,'${mem_id}',1)">
+			<input type="button" id="btn2" class="btn59acff" value="job" onclick="javascript:changeCategory(2,2,'${mem_id}',1)">
+			<input type="button" id="btn3" class="btn59acff" value="resale" onclick="javascript:changeCategory(2,3,'${mem_id}',1)">
+			<input type="button" id="btn4" class="btn59acff" value="information" onclick="javascript:changeCategory(2,4,'${mem_id}',1)">
+		</div>
+		<div class="wishlist-box-main">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="table-main table-responsive">
+							<table id="listTable" class="table">
+								<thead id="tHead">
+	
+								</thead>
+								<tbody id="list_box">
+	
+								</tbody>
+	
+							</table>
+							<div id="tfoot"></div>
+						</div>
 					</div>
 				</div>
 			</div>

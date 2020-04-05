@@ -65,7 +65,7 @@ $( function() {
 //=====================================================================
 function chkBuildAndRoomType(chk){
 	//alert($(chk).css( "background-color" ));
-	if($(chk).css( "background-color" )=="rgb(40, 207, 209)"){
+	if($(chk).css( "background-color" )=="rgb(246, 147, 31)"){
 		$(chk).css( "background-color","#FFFFFF");
 		
 		if(chk.innerHTML=='Villa')					 build_type_List[0]= -1;
@@ -78,7 +78,7 @@ function chkBuildAndRoomType(chk){
 		
 	}
 	else{
-		$(chk).css( "background-color","#28cfd1");
+		$(chk).css( "background-color","#f6931f");
 		
 		if(chk.innerHTML=='Villa')					 build_type_List[0]= 0;
 		else if(chk.innerHTML=='Goshiwon')  		 build_type_List[1]= 1;

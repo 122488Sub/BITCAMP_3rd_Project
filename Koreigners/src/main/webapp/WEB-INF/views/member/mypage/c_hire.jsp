@@ -76,26 +76,29 @@
         </div>
     </div>
     <!-- End All Title Box -->
-<div class="wishlist-box-main">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="table-main table-responsive">
-						<table id="listTable" class="table">
-							<thead id="tHead">
-
-							</thead>
-							<tbody id="list_box">
-
-							</tbody>
-
-						</table>
-						<div id="tfoot"></div>
+    
+    <div class="cart-box-main">
+		<div class="wishlist-box-main">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="table-main table-responsive">
+							<table id="listTable" class="table">
+								<thead id="tHead">
+	
+								</thead>
+								<tbody id="list_box">
+	
+								</tbody>
+	
+							</table>
+							<div id="tfoot"></div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+    </div>
 	
 	<!-- ALL JS FILES -->
     <script src="bootstrap/js/jquery-3.2.1.min.js"></script>
