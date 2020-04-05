@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.koreigner.biz.common.page.PagingService;
 import com.koreigner.biz.common.page.PagingVO;
+import com.koreigner.biz.inform.InformVO;
 import com.koreigner.biz.job.jobservice.JobService;
 import com.koreigner.biz.member.UserVO;
 import com.koreigner.biz.resale.ResaleCommVO;
@@ -67,6 +68,46 @@ public class ResaleController {
 		
 		return "resale/resaleList.page";
 	}
+	
+	@RequestMapping(value="getResaleListData.do", method={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public Map<String,Object> getResaleListData(ResaleVO resaleVO,HttpServletRequest request, HttpServletResponse response, Model model) {
+		System.out.println(resaleVO);
+	
+		// 현재 페이지 구하기
+		String cPage = request.getParameter("cPage");
+		// 리스트 VO 생성
+	
+		System.out.println("==================getResaleListData==================");
+		// 페이지 처리
+		PagingVO p =  paging.paging(cPage,resaleVO);
+		System.out.println("------------------------------------------------------");
+		resaleVO.setBegin(p.getBegin());
+		resaleVO.setEnd(p.getEnd());
+		System.out.println("=====================================================");
+		Map<String,Object> result=new HashMap<String, Object>();
+		result.put("resale",resaleService.getSelectSearchList(resaleVO));
+		
+		//각 카테고리별 글 수 조회
+		System.out.println("조회:"+resaleVO);
+		result.put("categoryCount", resaleService.getResaleCategoryCount(resaleVO));
+				//model.addAttribute("categoryCount", informService.getInformCategoryCount());
+		
+		System.out.println("==================getResaleListData END==================");
+		//리스트 정보 검색
+		
+		request.setAttribute("pvo", p);
+		result.put("pvo",p);
+		model.addAttribute("postType", "inform");
+		System.out.println(p);
+		return result;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value="resale_go.do", method= {RequestMethod.GET, RequestMethod.POST})

@@ -19,4 +19,7 @@ public interface ResaleService {
 	void deleteResale(int rs_idx);
 	
 	List<Map<String, Object>> resaleWish(String mem_id);
+	int resaleSearchTotal(ResaleVO resaleVO);
+	List<Map<String, Object>> getSelectSearchList(ResaleVO resaleVO);
+	List<Map<String, Object>> getResaleCategoryCount(ResaleVO resaleVO);
 }

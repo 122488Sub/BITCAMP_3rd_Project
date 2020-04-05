@@ -86,4 +86,17 @@ public class ResaleDAO {
 	public List<Map<String, Object>> dao_resaleWish(String mem_id) {
 		return mybatis.selectList("resaleDAO.resaleWish",mem_id);
 	}
+
+	public int dao_resaleSearchTotal(ResaleVO resaleVO) {
+		
+		return mybatis.selectOne("resaleDAO.resaleSearchTotal",resaleVO);
+	}
+
+	public List<Map<String, Object>> dao_getSelectSearchList(ResaleVO resaleVO) {
+		return mybatis.selectList("resaleDAO.getSelectSearchList",resaleVO);
+	}
+
+	public List<Map<String, Object>> dao_getResaleCategoryCount(ResaleVO resaleVO) {
+		return mybatis.selectList("resaleDAO.getResaleCategoryCount",resaleVO);
+	}
 }

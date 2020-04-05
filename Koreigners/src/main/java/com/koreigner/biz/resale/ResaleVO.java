@@ -20,8 +20,29 @@ public class ResaleVO {
 		List<MultipartFile> filename;
 		String regdate;
 		private String searchKeyword;
+		private int begin;
+		private int end;
 		
-		
+		public int getBegin() {
+			return begin;
+		}
+
+
+		public void setBegin(int begin) {
+			this.begin = begin;
+		}
+
+
+		public int getEnd() {
+			return end;
+		}
+
+
+		public void setEnd(int end) {
+			this.end = end;
+		}
+
+
 		public String getSearchKeyword() {
 			return searchKeyword;
 		}
@@ -263,9 +284,11 @@ public class ResaleVO {
 					+ ", subject=" + subject + ", address=" + address + ", work_loc_si=" + work_loc_si + ", fileStr="
 					+ fileStr + ", work_loc_do=" + work_loc_do + ", rs_cate_prnt=" + rs_cate_prnt + ", category_child="
 					+ category_child + ", content=" + content + ", file_ori_name=" + file_ori_name + ", ip=" + ip
-					+ ", condition=" + condition + ", hash_tag=" + hash_tag + ", filename=" + filename + ", REGDATE="
-					+ regdate + "]";
+					+ ", condition=" + condition + ", hash_tag=" + hash_tag + ", filename=" + filename + ", regdate="
+					+ regdate + ", searchKeyword=" + searchKeyword + ", begin=" + begin + ", end=" + end + "]";
 		}
+
+
 
 
 		

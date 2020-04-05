@@ -63,22 +63,28 @@
             <div class="row">
 				<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                     <div class="product-categori">
-                        <div class="search-product">
-                            <form>
-                                <input class="form-control" placeholder="Search here..." type="text">
-                                <button onclick="javascript:search_go(this.form)"> <i class="fa fa-search"></i> </button>
-                            </form>
-                        </div>
+                        <form action="" class="search-product" onsubmit="return false">
+                            <div id="searchDiv">
+                                <input id="searchText" class="form-control" placeholder="Search here..." type="text">
+                                <button id="searchButton" type="submit" onclick="javascript:getData('All',1)"> <i class="fa fa-search"></i> </button>
+                            </div>
+                        </form>
                         <div class="filter-sidebar-left">
                             <div class="title-left">
                                 <h3>Categories</h3>
                             </div>
                             <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
                                 <a href="javascript:getData('All',1)" class="list-group-item list-group-item-action"> All  <small id="smallCategoryAll" class="text-muted">() </small></a>
-                                <a href="javascript:getData('Information',1)" class="list-group-item list-group-item-action"> Information <small id="smallCategoryInformation" class="text-muted">()</small></a>
-                                <a href="javascript:getData('Food',1)" class="list-group-item list-group-item-action"> Food <small id="smallCategoryFood" class="text-muted">()</small></a>
-                                <a href="javascript:getData('Travel',1)" class="list-group-item list-group-item-action"> Travel <small id="smallCategoryTravel" class="text-muted">()</small></a>
-                                <a href="javascript:getData('Etc',1)" class="list-group-item list-group-item-action"> etc <small id="smallCategoryEtc" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Fashion Goods',1)" class="list-group-item list-group-item-action"> Fashion Goods <small id="smallCategoryFashion" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Women Clothes',1)" class="list-group-item list-group-item-action"> Women Clothes <small id="smallCategoryWomen" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Men Clothes',1)" class="list-group-item list-group-item-action"> Men Clothes <small id="smallCategoryMen" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Household Appliances',1)" class="list-group-item list-group-item-action"> Household Appliances <small id="smallCategoryHousehold" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Book/Ticket/Hobbies',1)" class="list-group-item list-group-item-action"> Book/Ticket/Hobbies <small id="smallCategoryBook" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Kids/Pregnant/Delivery',1)" class="list-group-item list-group-item-action"> Kids/Pregnant/Delivery  <small id="smallCategoryKid" class="text-muted">() </small></a>
+                                <a href="javascript:getData('Star Goods',1)" class="list-group-item list-group-item-action"> Star Goods <small id="smallCategoryStar" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Sports/leisure',1)" class="list-group-item list-group-item-action"> Sports/leisure <small id="smallCategorySports" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Beauty/Cosmetic',1)" class="list-group-item list-group-item-action"> Beauty/Cosmetic <small id="smallCategoryBeauty" class="text-muted">()</small></a>
+                                <a href="javascript:getData('Vehicles',1)" class="list-group-item list-group-item-action"> Vehicles <small id="smallCategoryVehicles" class="text-muted">()</small></a>
                             </div>
                         </div>
                         <div class="title-left"></div>

@@ -117,6 +117,51 @@
 	ORDER BY 
 		RS_IDX DESC
 	</select>
+	
+	
+	<select id="resaleSearchTotal" parameterType="rsVO" resultType="int">
+	SELECT 
+		COUNT(RS_IDX)
+	FROM T_RESALE_BOARD
+		WHERE
+			1=1 
+		<if test="rs_cate_prnt != 'All' ">
+			AND RS_CATE_PRNT=#{rs_cate_prnt} 
+		</if>
+		 <include refid="resale_include.search" />
+	</select>
+	<select id="getSelectSearchList" parameterType="rsVO" resultType="hashmap">
+		SELECT *
+		FROM (
+		       SELECT ROWNUM R_NUM, RESALE.*
+		        FROM (SELECT *
+		                FROM T_RESALE_BOARD
+		                WHERE
+							1=1 
+						<if test="rs_cate_prnt != 'All' ">
+							AND RS_CATE_PRNT=#{rs_cate_prnt} 
+						</if>
+						 <include refid="resale_include.search" />
+		                
+		               ORDER BY RS_IDX DESC) RESALE    
+		    )
+	  WHERE R_NUM BETWEEN #{begin} AND #{end}
+	</select>
+	<select id="getResaleCategoryCount" parameterType="rsVO" resultType="hashmap">
+	SELECT DISTINCT
+		(SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE 1=1 <include refid="resale_include.search" />) AS RESALE_ALL,
+		(SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE 1=1 AND RS_CATE_PRNT='Fashion Goods' <include refid="resale_include.search" />) AS RESALE_FASHION,
+		(SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE 1=1 AND RS_CATE_PRNT='Women Clothes' <include refid="resale_include.search" />) AS RESALE_WOMEN,
+		(SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE 1=1 AND RS_CATE_PRNT='Men Clothes' <include refid="resale_include.search" />) AS RESALE_MEN,
+		(SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE 1=1 AND RS_CATE_PRNT='Household Appliances' <include refid="resale_include.search" />) AS RESALE_HOUSEHOLD,
+		(SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE 1=1 AND RS_CATE_PRNT='Book/Ticket/Hobbies' <include refid="resale_include.search" />) AS RESALE_BOOK,
+		(SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE 1=1 AND RS_CATE_PRNT='Kids/Pregnant/Delivery' <include refid="resale_include.search" />) AS RESALE_KIDS,
+		(SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE 1=1 AND RS_CATE_PRNT='Star Goods' <include refid="resale_include.search" />) AS RESALE_STAR,
+		(SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE 1=1 AND RS_CATE_PRNT='Sports/leisure' <include refid="resale_include.search" />) AS RESALE_SPORTS,
+		(SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE 1=1 AND RS_CATE_PRNT='Beauty/Cosmetic' <include refid="resale_include.search" />) AS RESALE_BEAUTY,
+		(SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE 1=1 AND RS_CATE_PRNT='Vehicles' <include refid="resale_include.search" />) AS RESALE_VEHICLES
+	FROM T_RESALE_BOARD 
+	</select>
 </mapper>
 
 
