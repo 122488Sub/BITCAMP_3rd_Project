@@ -137,6 +137,21 @@ public class MypageController {
 		return userCnt;
 	}
 	
+	// 기업회원 직무 카테고리
+	@ModelAttribute("jobWriteCate")
+	public Map<String, String> searchJobCateKorMap() {
+		List<CompanyVO> list = companyServiceImpl.getCateList();
+		//카테고리 대분류 문자 map에 저장
+		Map<String, String> jobCateMap = new HashMap<>();
+		
+		int i = 1;
+		for(CompanyVO vo : list) {
+			jobCateMap.put(Integer.toString(i), vo.getCate_prnt_ko());
+			i++;
+		}
+		return jobCateMap;
+		
+	}
 	
 	// 이력서 직무 카테고리
 	@ModelAttribute("mpCateMap")

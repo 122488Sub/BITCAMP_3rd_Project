@@ -48,7 +48,7 @@ public class CompanyController {
 		
 		//return "WEB-INF/views/job/comp_join.jsp";
 		//       /WEB-INF/views
-		return "job/signin/comp_join.page"; //.page suffix는 header와 footer를 함께 view 
+		return "job/signin/comp_join_test.page"; //.page suffix는 header와 footer를 함께 view 
 	}
 	
 	@RequestMapping(value="join_conf.do", method = {RequestMethod.GET, RequestMethod.POST})

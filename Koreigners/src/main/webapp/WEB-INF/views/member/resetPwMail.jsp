@@ -7,9 +7,18 @@
     <link href="resources/css/header.css" rel="stylesheet" type="text/css">
     <link href="resources/css/style.css" rel="stylesheet" type="text/css">
 <style>
-#container {
-		width: 700px;
+	.center {
+		float: none;
 		margin: 0 auto;
+	}
+	
+	.signIn {
+		width: 50%;
+		height: 40px;
+		color: white;
+		background-color: #0B3B39;
+		border: 1px solid #0B3B39;
+		border-radius: .25em;
 	}
 </style>
 </head>
@@ -26,19 +35,32 @@
         </div>
     </div>
     <!-- End All Title Box -->
-	<div id="container">
-		<h1>Forgot Password??</h1>
-		<hr><hr>
-		<form action="resetPwMail.do" method="post">
-			<div>
-				<h3>Please enter your registered Email to create new password</h3>
-				Email :	<input type="text" name="email">
+    
+    <form action="resetPwMail.do" method="post">
+	<div class="cart-box-main">
+		<div class="container">
+			<div class="col-xs-12 col-sm-12 col-md-10 col-lg-8 center" style="text-align:center">
+				<div class="mb-3">
+					<div class="title-left">
+	                    <h1 style="font-size:2em; font-weight:700">Forgot Password?</h1>
+	                </div>
+	                <div class="col-md-10 center">
+		                <h3>Please enter your registered Email to create new password</h3>
+	                </div>
+				</div>
+				<div class="mb-6">
+					<div class="col-md-10 center">
+						<input type="text" name="email" class="form-control mb-2" placeholder="Email address">			
+					</div>
+				</div>
+				<div class="mb-3">
+					<input type="submit" value="send reset instructions" class="signIn">
+				</div>			
+				<hr>
 			</div>
-			<div>
-				<input type="submit" value="send reset instructions">
-			</div>
-		</form>
+		</div>
 	</div>
-
+	</form>
+	
 </body>
 </html>

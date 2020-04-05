@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -150,7 +151,7 @@
 	                <div class="row">
 	                    <div class="col-md-6 mb-2">
                             <select class="custom-select-box form-control" name="cate_prnt_ko" id="selectBox1" title="직종선택">
-							    <c:forEach items="${jobCateMap}" var="option">
+							    <c:forEach items="${jobWriteCate}" var="option">
 								  <option class="${option.key}">${option.value}</option>
 								</c:forEach>
 							</select>
@@ -185,7 +186,7 @@
 			        		<h3>기숙사 제공 여부</h3>
 			        	</div>
 			        	<div class="mb-0">
-			        	<br><br><br>
+			        	<br><br>
 	                       	<label for="dormitory" style="font-weight: 700">Dormitory</label>
 	                           	<div class="custom-control custom-radio">
 	                           		<input name='domitory' type='radio' id='domitory0' class='custom-control-input' value='기숙사 제공 함' <c:if test='${company.domitory eq "기숙사 제공 함"}'>checked</c:if>>
@@ -210,23 +211,28 @@
 			        	<br><br>
 	                       	<label for="salary" style="font-weight: 700">Meals</label>
                            	<div class="custom-control custom-radio">
-                           		<input name="meals" type="radio" id="meals0" class="custom-control-input" value="제공안함"  <c:if test="${company.meals eq '제공안함'}">checked</c:if>>
+                           		<input name="meals" type="radio" id="meals0" class="custom-control-input" value="제공안함" 
+                           		<c:if test='${company.meals eq "제공안함"}'>checked</c:if>>
                            		<label class="custom-control-label" for="meals0">제공 안함</label>
                             </div>
                             <div class="custom-control custom-radio">
-			                    <input name="meals" type="radio" id="meals1" class="custom-control-input" value="중식제공" <c:if test="${company.meals eq '중식제공'}">checked</c:if>>
+			                    <input name="meals" type="radio" id="meals1" class="custom-control-input" value="중식제공"
+			                     <c:if test='${company.meals eq "중식제공"}'>checked</c:if>>
 			                    <label class="custom-control-label" for="meals1">중식 제공</label>
 	                    	</div>
 	                    	<div class="custom-control custom-radio">
-			                    <input name="meals" type="radio" id="meals2" class="custom-control-input" value="2식제공" <c:if test="${company.meals eq '2식제공'}">checked</c:if>>
+			                    <input name="meals" type="radio" id="meals2" class="custom-control-input" value="2식제공"
+			                     <c:if test='${company.meals eq "2식제공"}'>checked</c:if>>
 			                    <label class="custom-control-label" for="meals2">2식 제공</label>
 	                    	</div>
 	                    	<div class="custom-control custom-radio">
-			                    <input name="meals" type="radio" id="meals3" class="custom-control-input" value="3식제공" <c:if test="${company.meals eq '3식제공'}">checked</c:if>>
+			                    <input name="meals" type="radio" id="meals3" class="custom-control-input" value="3식제공"
+			                     <c:if test='${company.meals eq "3식제공"}'>checked</c:if>>
 			                    <label class="custom-control-label" for="meals3">3식 제공</label>
 	                    	</div>
 	                    	<div class="custom-control custom-radio">
-			                    <input name="meals" type="radio" id="meals4" class="custom-control-input" value="회사 내규에 따름(협의)" <c:if test="${company.meals eq '회사 내규에 따름(협의)'}">checked</c:if>>
+			                    <input name="meals" type="radio" id="meals4" class="custom-control-input" value="회사 내규에 따름(협의)" 
+			                    <c:if test='${company.meals eq "회사 내규에 따름(협의)"}'>checked</c:if>>
 			                    <label class="custom-control-label" for="meals4">회사 내규에 따름(협의)</label>
 	                    	</div>
 		                 <br><br>

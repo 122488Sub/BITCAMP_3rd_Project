@@ -8,29 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Site Metas -->
-    <title>ThewayShop - Ecommerce Bootstrap 4 HTML Template</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Site Icons -->
-    <link rel="shortcut icon" href="bootstrap/images/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="bootstrap/images/apple-touch-icon.png">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <!-- Site CSS -->
-    <link rel="stylesheet" href="bootstrap/css/style.css">
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="bootstrap/css/responsive.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="bootstrap/css/custom.css">
-    
+       
     <link href="resources/css/member/mypageCompany.css" rel="stylesheet" type="text/css">
     
     <link href="resources/css/member/resume.css" rel="stylesheet" type="text/css">
