@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.koreigner.biz.common.page.PagingService;
 import com.koreigner.biz.common.page.PagingVO;
-import com.koreigner.biz.inform.InformVO;
 import com.koreigner.biz.job.jobservice.JobService;
 import com.koreigner.biz.member.UserVO;
 import com.koreigner.biz.resale.ResaleCommVO;
@@ -44,7 +43,7 @@ public class ResaleController {
 	public String resaleList(HttpServletRequest request, 
 		     				 HttpServletResponse response, 
 		     				 Model model) {
-		
+		/*
 		String cPage = request.getParameter("cPage");
 		// 페이지 처리
 		PagingVO p =  paging.paging(cPage);
@@ -65,6 +64,8 @@ public class ResaleController {
 		request.setAttribute("pvo", p);
 		
 		model.addAttribute("postType", "resale");
+		*/
+		
 		
 		return "resale/resaleList.page";
 	}
@@ -162,6 +163,9 @@ public class ResaleController {
 		System.out.println("resaleDetail.do 다");
 		int cPage = Integer.parseInt(request.getParameter("cPage"));
 		int rs_idx = Integer.parseInt(request.getParameter("rs_idx"));
+		
+		//조회수 증가
+		resaleService.updateRsHit(rs_idx);
 		
 		ResaleVO rsVO = resaleServiceImpl.getRsDetail(rs_idx);
 		System.out.println("resaleDetail list : " + rsVO.toString());

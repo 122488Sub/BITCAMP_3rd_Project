@@ -100,4 +100,9 @@ public class ResaleServiceImpl implements ResaleService{
 	public List<Map<String, Object>> getResaleCategoryCount(ResaleVO resaleVO) {
 		return resaleDAO.dao_getResaleCategoryCount(resaleVO);
 	}
+	@Override
+	public int updateRsHit(int rs_idx) {
+		
+		return resaleDAO.dao_updateRsHit(rs_idx);
+	}
 }

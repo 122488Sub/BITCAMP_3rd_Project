@@ -99,4 +99,8 @@ public class ResaleDAO {
 	public List<Map<String, Object>> dao_getResaleCategoryCount(ResaleVO resaleVO) {
 		return mybatis.selectList("resaleDAO.getResaleCategoryCount",resaleVO);
 	}
+
+	public int dao_updateRsHit(int rs_idx) {
+		return mybatis.update("resaleDAO.updateRsHit",rs_idx);
+	}
 }

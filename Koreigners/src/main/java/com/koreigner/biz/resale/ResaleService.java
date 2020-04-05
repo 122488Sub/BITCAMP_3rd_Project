@@ -22,4 +22,5 @@ public interface ResaleService {
 	int resaleSearchTotal(ResaleVO resaleVO);
 	List<Map<String, Object>> getSelectSearchList(ResaleVO resaleVO);
 	List<Map<String, Object>> getResaleCategoryCount(ResaleVO resaleVO);
+	int updateRsHit(int rs_idx);
 }
