@@ -98,9 +98,10 @@ public class InformController {
 		result.put("inform",informService.getSelectSearchList(informVO));
 		
 		//각 카테고리별 글 수 조회
-		result.put("categoryCount", informService.getInformCategoryCount());
+		System.out.println(informVO);
+		result.put("categoryCount", informService.getInformCategoryCount(informVO));
 				//model.addAttribute("categoryCount", informService.getInformCategoryCount());
-		
+		System.out.println("?");
 		String mem_id = (String) request.getAttribute("mem_id");
 		if(mem_id!=null)
 			result.put("informWish", informService.informWish(mem_id) );

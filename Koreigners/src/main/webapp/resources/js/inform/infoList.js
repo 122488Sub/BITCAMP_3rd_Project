@@ -24,9 +24,13 @@ function getData(cate,cPage) {
 	
 	var url = 'getInformListData.do?cPage=' + cPage;
 	var category=cate;
+	var searchKeyword=$('#searchText').val();
 	console.log(url);
+	console.log('category: '+category);
+	console.log('search: '+searchKeyword);
 	var param = {
-		'info_category':category
+		'info_category':category,
+		'searchKeyword':searchKeyword
 	}
 
 	jQuery.ajaxSettings.traditional = true;
@@ -87,6 +91,9 @@ function getData(cate,cPage) {
 			gridHtml+='</div><div class="tfoot" ></div>';
 			$("#grid-view").html(gridHtml);
 			
+			$("#searchButton").removeAttr("onclick");
+			$("#searchButton").attr("onclick","getData('"+category+"',1)");
+			
 			
 			var tfoot = "";
 			tfoot += '<div id="pagingBox"><div id="olPaging"><ol class="paging">';
@@ -94,21 +101,21 @@ function getData(cate,cPage) {
 			if(pvo.beginPage < pvo.pagePerBlock){
 				tfoot += '<li class="disable" id="pointer">Prev</li>';
 			} else{ 
-				tfoot += '<li id="pointer"><a href="javascript:getData('+category+"," + (pvo.beginPage - pvo.pagePerBlock) + '")>이전으로</a></li>';
+				tfoot += '<li id="pointer"><a href="javascript:getData('+"'"+category+"',"+ (pvo.beginPage - pvo.pagePerBlock) + '")>이전으로</a></li>';
 			}
 			for(var k=pvo.beginPage; k<=pvo.endPage; k++) {
 				if(k == pvo.nowPage) {
 					tfoot += '<li class="now">'+ k +'</li>';
 				}
 				else if (k != pvo.nowPage) {
-					tfoot += '<li><a href="javascript:getData('+category+","+ k +')">'+ k +'</a></li>';
+					tfoot += '<li><a href="javascript:getData('+"'"+category+"',"+ k +')">'+ k +'</a></li>';
 				}
 				console.log("k: "+k);
 			}
 			if(pvo.endPage >= pvo.totalPage) {
 				tfoot+= '<li class="disable" id="pointer">Next</li>';
 			} else {
-				tfoot += '<li id="pointer"><a href="javascript:getData('+category+","+(pvo.beginPage + pvo.pagePerBlock)+')">다음으로</a></li>';
+				tfoot += '<li id="pointer"><a href="javascript:getData('+"'"+category+"',"+(pvo.beginPage + pvo.pagePerBlock)+')">다음으로</a></li>';
 			}
 			
 			tfoot += '</ol></td></tr>'
@@ -121,9 +128,9 @@ function getData(cate,cPage) {
 		}
 
 	});
-	
-
 }
+
+
 function goInformDetailPage(info_idx) {
 	window.open("about:blank").location.href="InformDetail_go.do?info_idx=" + info_idx;
 } 

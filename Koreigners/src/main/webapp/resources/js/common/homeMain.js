@@ -117,11 +117,11 @@ function setRecentResale(resale){
 	setValue+=				'<div class="type-lb">'
 	setValue+=	    			'<p class="new">'+ 'Resale' +'</p>'
 	setValue+=				'</div>';
-if(resale.RS_FILENAME!=null && resale.RS_FILENAME!='' && typeof resale.RS_FILENAME!='undefined'){		
-	setValue+=				'<img src="resources/img/resale/'+resale.RS_MEM_ID+'/'+resale.RS_FILENAME+'" style="height:300px" class="img-fluid" alt="Image">';
-}
-else if(resale.RS_FILENAME==null || resale.RS_FILENAME=='' || typeof resale.RS_FILENAME == "undefined" ){
+if(resale.RS_FILENAME=='businessImg_'){		
 	setValue+=				'<img src="resources/img/resale/default-placeholder.jpg" style="height:300px" class="img-fluid" alt="Image">';
+}
+else {
+	setValue+=				'<img src="resources/img/resale/'+resale.RS_MEM_ID+'/'+resale.RS_FILENAME+'" style="height:300px" class="img-fluid" alt="Image">';
 }
 	setValue+=				'<div class="mask-icon">'
 	setValue+=			 	   '<ul>'

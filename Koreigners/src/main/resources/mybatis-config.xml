@@ -33,7 +33,8 @@
      <mapper resource="mappings/job/jobservice-mapper.xml"/>
      
 <!-- resale mapper -->
-   	 <mapper resource="mappings/resale/resale-mapper.xml"/>	
+   	 <mapper resource="mappings/resale/resale-mapper.xml"/>
+   	 <mapper resource="mappings/resale/resale-include-mapper.xml"/>		
    	 
    	 
 <!-- house mapper -->
@@ -43,6 +44,7 @@
 <!-- info mapper -->
   	 <mapper resource="mappings/infoBoard-mapper.xml"/>
   	 <mapper resource="mappings/inform/inform-mapper.xml"/>
+  	 <mapper resource="mappings/inform/inform-include-mapper.xml"/>
   	 
 <!-- member mapper -->  	 
   	 <mapper resource="mappings/member/user-mapper.xml"/>

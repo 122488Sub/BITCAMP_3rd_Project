@@ -99,12 +99,12 @@
             <div class="row">
 				<div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                     <div class="product-categori">
-                        <div class="search-product">
-                            <form action="#">
-                                <input class="form-control" placeholder="Search here..." type="text">
-                                <button type="submit"> <i class="fa fa-search"></i> </button>
-                            </form>
-                        </div>
+                         <form action="" class="search-product" onsubmit="return false">
+                            <div id="searchDiv">
+                                <input id="searchText" class="form-control" placeholder="Search here..." type="text">
+                                <button id="searchButton" type="submit" onclick="javascript:getData('All',1)"> <i class="fa fa-search"></i> </button>
+                            </div>
+                        </form>
                         <div class="filter-sidebar-left">
                             <div class="title-left">
                                 <h3>Categories</h3>

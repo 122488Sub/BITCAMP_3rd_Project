@@ -20,7 +20,7 @@
 				<if test="info_category != 'All' ">
 					AND INFO_CATEGORY=#{info_category}
 				</if>
-				
+				<include refid="inform_include.search" />
 			
 			ORDER BY INFO_IDX DESC
 					) INFO
@@ -46,19 +46,20 @@
 		WHERE
 			INFO_STATE=1
 		<if test="info_category != 'All' ">
-			AND INFO_CATEGORY=#{info_category}
+			AND INFO_CATEGORY=#{info_category} 
 		</if>
+		<include refid="inform_include.search" />
 				
 	</select>
 
 	
-	<select id="getInformCategoryCount" resultType="hashmap">
+	<select id="getInformCategoryCount" parameterType="informVO" resultType="hashmap">
 	SELECT DISTINCT
-		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1) AS INFORM_ALL,
-		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 AND INFO_CATEGORY='Information') AS INFORMATION,
-		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 AND INFO_CATEGORY='Food') AS FOOD,
-		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 AND INFO_CATEGORY='Travel') AS TRAVEL,
-		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 AND INFO_CATEGORY='Etc') AS ETC
+		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 <include refid="inform_include.search" />) AS INFORM_ALL,
+		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 AND INFO_CATEGORY='Information' <include refid="inform_include.search" />) AS INFORMATION,
+		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 AND INFO_CATEGORY='Food' <include refid="inform_include.search" />) AS FOOD,
+		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 AND INFO_CATEGORY='Travel' <include refid="inform_include.search" />) AS TRAVEL,
+		(SELECT COUNT(INFO_IDX) FROM T_INFORM_TABLE WHERE INFO_STATE=1 AND INFO_CATEGORY='Etc' <include refid="inform_include.search" />) AS ETC
 	FROM T_INFORM_TABLE 
 	</select>
 

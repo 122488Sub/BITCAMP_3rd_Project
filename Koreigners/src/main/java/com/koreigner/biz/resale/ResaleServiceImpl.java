@@ -87,4 +87,17 @@ public class ResaleServiceImpl implements ResaleService{
 	public List<Map<String, Object>> resaleWish(String mem_id) {
 		return resaleDAO.dao_resaleWish(mem_id);
 	}
+	@Override
+	public int resaleSearchTotal(ResaleVO resaleVO) {
+		
+		return resaleDAO.dao_resaleSearchTotal(resaleVO);
+	}
+	@Override
+	public List<Map<String, Object>> getSelectSearchList(ResaleVO resaleVO) {
+		return resaleDAO.dao_getSelectSearchList(resaleVO);
+	}
+	@Override
+	public List<Map<String, Object>> getResaleCategoryCount(ResaleVO resaleVO) {
+		return resaleDAO.dao_getResaleCategoryCount(resaleVO);
+	}
 }
