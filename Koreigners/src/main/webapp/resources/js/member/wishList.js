@@ -176,7 +176,8 @@ function setResaleHead(){
 	
 	$("#tHead").html(
             '<tr>'
-            +'<th id="imgbox">Product image</th>'
+            +'<th id="imgbox">Preview Image</th>'
+            +'<th id="">Category</th>'
             +'<th id="subject">Title</th>'
             +'<th id="listPrice">Price</th>'
             +'<th id="addr">Location</th>'
@@ -189,14 +190,15 @@ function setResaleData(resaleData){
 	console.log("zz");
 	var dataText="";
 	dataText += "<tr class='trTag'>";
-if(resaleData.file_ori_name ==null){
-	dataText +=	'<td><div><img class="imgFileList" src="resources/img/resale/default-placeholder.jpg"></div></td>';
+if(resaleData.file_ori_name =='businessImg_'){
+	dataText +=	'<td><div><img class="imgFileList" style="width:200px; height:100px;" src="resources/img/resale/default-placeholder.jpg"></div></td>';
 }
 
 else{
 	console.log(resaleData.file_ori_name);
-	dataText +=	'<td><div><img class="imgFileList" style="width:200px; height:100px;" src="resources/img/resale/'+resaleData.file_ori_name+'"></div></td>';
+	dataText +=	'<td><div><img class="imgFileList" style="width:200px; height:100px;" src="resources/img/resale/'+resaleData.mem_id+'/'+resaleData.file_ori_name+'"></div></td>';
 }
+	dataText += "<td class='listSubject'><p>" +resaleData["rs_cate_prnt"] + "</p></td>";
 	dataText += "<td class='listSubject'><p>" +resaleData["subject"] + "</p></td>";
 	dataText += "<td class='listPrice'><p>" + resaleData["price"] + "</p></td>";
 	dataText += "<td class='addr'><p>"+ resaleData["address"] + "</p></td>";
@@ -218,18 +220,27 @@ function setInform(list){
 
 function setInformHead(){
 	$("#tHead").html(
-			"<tr>" + "<th>Idx</th>" + "<th>Category</th>" + "<th>Title</th>"
-			+ "<th>PostDate</th>" + "<th>Hit</th>"+ "</tr>"
-
+			"<tr>" + "<th style='width:20%;' id='imgbox'>Preview Image</th>" + "<th style='width:20%;'>Category</th>" + "<th style='width:30%;'>Title</th>"
+			+ "<th style='width:20%;'>PostDate</th>" + "<th style='width:10%;'>Hit</th>"+ "</tr>"
+			 
 	);
 }
 function setInformData(inform){
-	return "<tr class='trTag' onclick='javascript:goInformDetailPage(" 
-			+ inform.info_idx
-			+ ")' style='cursor: pointer;'>" + "<td>" + inform.info_idx
-			+ "</td>" + "<td>" + inform["info_category"] + "</td>" + "<td>"
-			+ inform["info_title"] + "</td>" + "<td>" + inform["info_ins_dt"]
-			+ "</td>" + "<td>" + inform["info_hit"] +"</td>" + "</tr>";
+	var dataText="";
+	dataText="<tr class='trTag' onclick='javascript:goInformDetailPage("+ inform.info_idx+ ")' style='cursor: pointer;'>" 
+	
+	if(inform.info_file_name!=null && inform.info_file_name!='' && typeof inform.info_file_name!='undefined'){
+		dataText+='<td><div><img class="imgFileList" src="'+inform.info_file_name+'" style="width:200px; height:100px;" alt="Image"></div></td>';
+	}
+	else if(inform.info_file_name==null || inform.info_file_name=='' || typeof inform.info_file_name == "undefined" ){
+		dataText+='<td><div><img class="imgFileList" src="resources/img/common/document.png" style="width:200px; height:100px;" alt="Image"></div></td>';
+	}
+	
+	dataText+= "<td>" + inform["info_category"] + "</td>" + "<td>"
+	+ inform["info_title"] + "</td>" + "<td>" + inform["info_ins_dt"]
+	+ "</td>" + "<td>" + inform["info_hit"] +"</td>" + "</tr>";
+	
+	return dataText;
 }
 
 function goInformDetailPage(info_idx) {
