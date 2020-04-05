@@ -162,6 +162,16 @@
 		(SELECT COUNT(RS_IDX) FROM T_RESALE_BOARD WHERE 1=1 AND RS_CATE_PRNT='Vehicles' <include refid="resale_include.search" />) AS RESALE_VEHICLES
 	FROM T_RESALE_BOARD 
 	</select>
+	
+	<update id="updateRsHit" parameterType="int">
+	UPDATE 
+		T_RESALE_BOARD 
+	SET 
+		HIT = HIT+1 
+	WHERE 
+		RS_IDX = #{rs_idx} 
+	
+	</update>
 </mapper>
 
 

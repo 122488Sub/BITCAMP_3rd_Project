@@ -1,0 +1,29 @@
+
+#mapDisp{
+	
+		height: 550px;
+		margin: 0 auto;
+		margin-top: 5px;
+		margin-bottom: 5px;
+	}
+@media (min-width: 576px){
+	#mapDisp{
+	    max-width: 540px;
+	}
+}
+@media (min-width: 768px){
+	#mapDisp{
+	    max-width: 720px;
+	}
+}	
+@media (min-width: 992px){
+	#mapDisp {
+	    max-width: 960px;
+	}
+}
+#utilTable{
+	border-spacing: 10px;
+	margin: 0 auto;
+    width: 100%;
+	text-align: center;
+}

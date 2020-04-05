@@ -70,16 +70,16 @@
 					<c:if test="${user.mem_id!=null && user.mem_cate eq 'p'}">
 					<div style="height:100px;">
 						<c:if test="${user.mem_id eq inform.info_mem_id }">
-							<button id="" class="btn hvr-hover" value="Modify" onClick="clickInformModify()">Modify</button>
-							<button id="" class="btn hvr-hover" value="Delete" onClick="clickInformDelete()">Delete</button>
+							<button id="" style="width:80px; margin-bottom:5px; font-weight:700; padding:10px 20px;" class="btn hvr-hover" value="Modify" onClick="clickInformModify()">Modify</button>
+							<button id="" style="width:80px; margin-bottom:5px; font-weight:700; padding:10px 20px;" class="btn hvr-hover" value="Delete" onClick="clickInformDelete()">Delete</button>
 								
 						</c:if>
 						<c:choose>
 							<c:when test="${isWish}">
-								<input type="button" id="wishBtn" class="btn hvr-hover" value="♥Add to Wishlist" onclick="clickWishBtn('${user.mem_id }','${inform.info_idx}',4)">
+								<button id="wishBtn" class="btn hvr-hover" style="margin-bottom:5px; background-color:firebrick; font-weight:700; padding:10px 20px;" onclick="javascript:clickWishGrid('${user.mem_id }','${inform.info_idx}',1)"><i id="wish_${inform.info_idx}" class="fas fa-heart"></i>Add to wishlist</button>
 							</c:when>
 							<c:otherwise>
-								<input type="button" id="wishBtn" class="btn hvr-hover" value="♡Add to Wishlist" onclick="clickWishBtn('${user.mem_id }','${inform.info_idx}',4)"> 
+								<button id="wishBtn" class="btn hvr-hover" style="margin-bottom:5px; background-color:#0B3B39; font-weight:700; padding:10px 20px;" onclick="javascript:clickWishGrid('${user.mem_id }','${inform.info_idx}',1)"><i id="wish_${inform.info_idx}" class="far fa-heart"></i>Add to wishlist</button>
 							</c:otherwise>
 						</c:choose>
 						<br> <br>
