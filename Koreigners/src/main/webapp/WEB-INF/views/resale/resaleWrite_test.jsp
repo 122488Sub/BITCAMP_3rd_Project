@@ -96,7 +96,7 @@
 	//영문주소 팝업창 end =============================================================================================
 		
 	function printMap(roadAddr){
-		$("#mapDisp").load("/biz/resources/html/googleMap.jsp?location="
+		$("#mapDisp").load("resources/html/googleMap.jsp?location="
 		   		+roadAddr.replace(/ /gi,"%20"));
 	}
 </script>
