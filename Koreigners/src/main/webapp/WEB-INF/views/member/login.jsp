@@ -7,19 +7,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
-<link href="resources/css/member/login.css" rel="stylesheet" type="text/css">
-	<!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <!-- Site CSS -->
-    <link rel="stylesheet" href="bootstrap/css/style.css">
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="bootstrap/css/responsive.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="bootstrap/css/custom.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="resources/js/member/login.js"></script>
 
+<style>
+	.center {
+		float: none;
+		margin: 0 auto;
+	}
+	
+	.signIn {
+		width: 100%;
+		height: 40px;
+		color: white;
+		background-color: #0B3B39;
+		border: 1px solid #0B3B39;
+		border-radius: .25em;
+	}
+</style>
 
 <script>
 $(function(){
@@ -52,68 +56,71 @@ $(function(){
     </div>
     <!-- End All Title Box -->
     
-	<div id="login_container">
-		<h1>Login Page</h1>
-		<div class="login">
-		  <form class="form" id="loginForm" method="post">
-			<ul>
-				<li class="logLi">
-					<span class="returnText">
-						<input type="radio" name="mem_cate" value="p" required>Person
-						<input type="radio" name="mem_cate" value="c" required>Company
-					</span>
-				</li>
-				<li class="logLi">
-					<span>
-						<input type="email" id="mem_id" name="mem_id" class="input_box" placeholder="Email address" 
-																			data-val-required="Please enter your email address." 
-																			data-val-email="Please enter a valid email address.">
-					</span>
-					<p id="idCheck"></p>
-				</li>
-				<li class="logLi">
-					<span>
-						<input type="password" id="mem_pw" name="mem_pw" class="input_box" placeholder="Password" 
-																			data-val-required="Please enter your password."> 
-					</span>
-					<p id="pwCheck"></p> 
-				</li>
-				<li class="logLi">
-					<label class="returnText">
-						<input type="checkbox" id="autoLogin" name="autoLogin" value="1" checked /> Remember Me
-					</label>
-					<span class="returnText">
+    <form class="form" id="loginForm" method="post">
+	<div class="cart-box-main">
+		<div class="container">
+			<div class="col-xs-12 col-sm-12 col-md-10 col-lg-4 center" style="text-align:center">
+				<div class="mb-3">
+					<div class="title-left">
+	                    <h1 style="font-size:2em; font-weight:700">Login</h1>
+	                </div>
+	                <div class="col-md-10 center">
+		                <div class="row">
+		                	<div class="col-md-6">
+		                		<div class="custom-control custom-radio">
+									<input type="radio" class="custom-control-input" id="login0" name="mem_cate" value="p" required>
+									<label class="custom-control-label" for="login0">Person</label>
+		                		</div>
+		                	</div>
+		                	<div class="col-md-6">
+		                		<div class="custom-control custom-radio">
+									<input type="radio" class="custom-control-input" id="login1" name="mem_cate" value="c" required>
+									<label class="custom-control-label" for="login1">Company</label>
+		                		</div>
+		                	</div>
+		                </div>
+	                </div>
+				</div>
+				<div class="mb-3">
+					<div class="col-md-10 center">
+						<input type="email" id="mem_id" name="mem_id" class="form-control mb-2" placeholder="Email address">
+						<input type="password" id="mem_pw" name="mem_pw" class="form-control" placeholder="Password">						
+					</div>
+				</div>
+				<div class="col-md-6 mb-3 center">
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" id="autoLogin" name="autoLogin" class="custom-control-input" value="1" checked>
+						<label class="custom-control-label" for="autoLogin">Remember Me</label>
+					</div>
+				</div>
+				<div class="mb-3">
+					<input type="button" value="Sign In" class="signIn" onclick="javascript:loginBt()">
+				</div>			
+				<hr>
+				<div class="center">
+					<div class="mb-3">
 						<a class="p_href" href="resetPwMail_go.do">Forgot your password?</a>
-					</span>
-				</li>
-				<li class="logLi">
-					<span>
-						<input type="button" class="button" value="Sign In" onclick="javascript:loginBt()">
-					</span>
-					
-				</li>
-			</ul>
-		</form>
-	 </div>
-	 
-		  <p class="returnText">
-			<span>
-				"Don't have an account? "
-				<a class="a_href" href="register_go.do">Register now</a>
-			</span>
-	 	 </p>
-	 	 <br>
+					</div>
+					<p class="font-weight-bold">Don't have an account?</p>
+					<a class="font-weight-bold" style="color:firebrick; font-size:1.2em" href="register_go.do"><u>Register now</u></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	</form>
 	
-	
-	<div  id="login_url">		
+	<a href="resetPwSuccessTEST.do">resetPwSuccess</a>
+	<a href="emailAuthTEST.do">emailAuth</a>
+	<a href="emailAuthSuccessTEST.do">emailAuthSuccess</a>
+	<%-- <div  id="login_url">		
 		<div>
 			<a href="${naver_url }"><img width="230px" src="resources/img/member/naver_login_button_en_green.png" alt="Naver Login" /></a>
 		</div>
 		<div class="google_url">
 			<a href="${google_url }"><img width="237px " src="resources/img/member/google_login_button_en.png" alt="Google Login" /></a>
 		</div>
+	</div> --%>
 	<!-- <img width="237px " src="https://lh3.googleusercontent.com/a-/AAuE7mAi-BWk0T7fwtp4tqzdqN78sltbKgYUjUSn4Bsr7Q" alt="Google Login" />  -->
-	</div>
 	<!-- 
 	<div>
 		<a href="
@@ -126,6 +133,8 @@ $(function(){
 				response_type=code&
 				client_id=827596090618-mqtpscfc7k5b7lombqamaps3h9vmv698.apps.googleusercontent.com">로그인</a>
 	</div>  -->
-</div>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="resources/js/member/login.js"></script>
 </body>
 </html>

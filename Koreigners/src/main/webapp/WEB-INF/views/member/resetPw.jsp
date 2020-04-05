@@ -7,9 +7,18 @@
     <link href="resources/css/header.css" rel="stylesheet" type="text/css">
     <link href="resources/css/style.css" rel="stylesheet" type="text/css">
 <style>
-#container {
-		width: 700px;
+	.center {
+		float: none;
 		margin: 0 auto;
+	}
+	
+	.signIn {
+		width: 30%;
+		height: 40px;
+		color: white;
+		background-color: #0B3B39;
+		border: 1px solid #0B3B39;
+		border-radius: .25em;
 	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -44,23 +53,37 @@
         </div>
     </div>
     <!-- End All Title Box -->
-	<div id="container">
-		<form action="resetPw.do" method="post">
-			<div>
-				New Password :	<input type="password" id="newPw" name="mem_pw">
+    
+    <form action="resetPw.do" method="post">
+	<div class="cart-box-main">
+		<div class="container">
+			<div class="col-xs-12 col-sm-12 col-md-10 col-lg-8 center" style="text-align:center">
+				<div class="mb-3">
+					<div class="title-left">
+	                    <h1 style="font-size:2em; font-weight:700">Reset your Password</h1>
+	                </div>
+				</div>
+				<div style="margin-bottom:50px">
+					<div class="col-md-8 center">
+						<input type="password" id="newPw" name="mem_pw" class="form-control mb-2" placeholder="New Password">			
+					</div>
+					<div class="col-md-8 center">
+						<input type="password" id="rePw" name="re_mem_pw" class="form-control mb-2" placeholder="Re-enter New Password">			
+						
+						<span id="checkPw"></span>
+					</div>
+				</div>
+				<div class="mb-3 center">
+					<input type="hidden" name="mem_id" value="${mem_id }">
+					<input type="hidden" name="mem_cate" value="${mem_cate }">
+					<input type="hidden" name="resetPwType" value="forgot">
+					<input type="submit" value="reset password" class="signIn">
+				</div>			
+				<hr>
 			</div>
-			<div>
-				Re-enter New Password :	<input type="password" id="rePw" name="re_mem_pw">
-				<span id="checkPw"></span>
-			</div>
-			<div>
-				<input type="hidden" name="mem_id" value="${mem_id }">
-				<input type="hidden" name="mem_cate" value="${mem_cate }">
-				<input type="hidden" name="resetPwType" value="forgot">
-				<input type="submit" value="reset password">
-			</div>
-		</form>
+		</div>
 	</div>
+	</form>
 
 </body>
 </html>
