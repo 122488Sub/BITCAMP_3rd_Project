@@ -2,10 +2,16 @@ function clickWishBtn(mem_id, b_idx,board_idx){
 	var result=clickWishList(mem_id, b_idx,board_idx);
 	console.log(result);
 	if(result==1){
-		$('#wishBtn').val('♥pick');
+		/*$('#wishBtn').val('♥Add to pick');*/
+		var x = document.getElementById('wishBtn');
+		x.style.backgroundColor = 'firebrick';
+		x.value = '♥Add to Wishlist';
+		
 	}else{
-		$('#wishBtn').val('♡pick');
-	
+		/*$('#wishBtn').val('♡Add to pick');*/
+		var x = document.getElementById('wishBtn');
+		x.style.backgroundColor = '#0B3B39';
+		x.value = '♡Add to Wishlist';
 	}
 }
 function clickWishGrid(mem_id, b_idx,board_idx){

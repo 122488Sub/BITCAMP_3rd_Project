@@ -14,14 +14,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <!-- <script type="text/javascript" src="resources/js/hire/map_hire.js"></script> -->
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="${contextPath}/bootstrap/css/bootstrap.min.css">
-<!-- Site CSS -->
-<link rel="stylesheet" href="${contextPath}/bootstrap/css/style.css">
-<!-- Responsive CSS -->
-<link rel="stylesheet" href="${contextPath}/bootstrap/css/responsive.css">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="${contextPath}/bootstrap/css/custom.css">
 <link rel="stylesheet" type="text/css" href="resources/css/republic_korea.css">
 <link rel="stylesheet" type="text/css" href="resources/css/job/hireList.css">
 <script type="text/javascript" src="resources/js/hire/moment.js"></script>
@@ -162,21 +154,5 @@ Start Wishlist  -->
         </div>
     </div>
     <!-- End Wishlist -->
-     <!-- ALL JS FILES -->
-    <script src="${contextPath}/bootstrap/js/jquery-3.2.1.min.js"></script>
-    <script src="${contextPath}/bootstrap/js/popper.min.js"></script>
-    <script src="${contextPath}/bootstrap/js/bootstrap.min.js"></script>
-    <!-- ALL PLUGINS -->
-    <script src="${contextPath}/bootstrap/js/jquery.superslides.min.js"></script>
-    <script src="${contextPath}/bootstrap/js/bootstrap-select.js"></script>
-    <script src="${contextPath}/bootstrap/js/inewsticker.js"></script>
-    <script src="${contextPath}/bootstrap/js/bootsnav.js."></script>
-    <script src="${contextPath}/bootstrap/js/images-loded.min.js"></script>
-    <script src="${contextPath}/bootstrap/js/isotope.min.js"></script>
-    <script src="${contextPath}/bootstrap/js/owl.carousel.min.js"></script>
-    <script src="${contextPath}/bootstrap/js/baguetteBox.min.js"></script>
-    <script src="${contextPath}/bootstrap/js/form-validator.min.js"></script>
-    <script src="${contextPath}/bootstrap/js/contact-form-script.js"></script>
-    <script src="${contextPath}/bootstrap/js/custom.js"></script>
 </body>
 </html>

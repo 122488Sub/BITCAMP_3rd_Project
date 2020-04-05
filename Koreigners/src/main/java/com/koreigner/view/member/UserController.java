@@ -287,17 +287,4 @@ public class UserController {
 		return "/member/emailAuthSuccess.page";
 	}
 
-	@RequestMapping(value="resetPwSuccessTEST.do")
-	public String test1() {
-		return "/member/resetPwSuccess.page";
-	}
-	@RequestMapping(value="emailAuthTEST.do")
-	public String test2() {
-		return "/member/emailAuth.page";
-	}
-	@RequestMapping(value="emailAuthSuccessTEST.do")
-	public String test3() {
-		return "/member/emailAuthSuccess.page";
-	}
-	
 }

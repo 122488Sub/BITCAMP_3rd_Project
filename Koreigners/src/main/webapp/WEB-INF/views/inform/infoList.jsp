@@ -7,15 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-<!-- Site CSS -->
-<link rel="stylesheet" href="bootstrap/css/style.css">
-<!-- Responsive CSS -->
-<link rel="stylesheet" href="bootstrap/css/responsive.css">
-<!-- Custom CSS -->
-<link rel="stylesheet" href="bootstrap/css/custom.css">
-
 <link href="resources/css/common/page.css" rel="stylesheet" type="text/css">
 <link href="resources/css/common/button.css" rel="stylesheet" type="text/css">
 

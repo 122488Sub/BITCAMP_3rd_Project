@@ -92,7 +92,7 @@ public class House_Controller {
 			model.addAttribute("isWish",  pService.isWish(new p_MyPageVO(mem_id,1,vo.getRoom_idx())));
 		model.addAttribute("postType", "house");
 		
-		return "house/house_Detail.page";
+		return "house/house_Detail_test.page";
 	}
 	
 	//------------------------------------------------------------------------------------------------

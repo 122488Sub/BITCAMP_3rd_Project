@@ -109,9 +109,6 @@ $(function(){
 	</div>
 	</form>
 	
-	<a href="resetPwSuccessTEST.do">resetPwSuccess</a>
-	<a href="emailAuthTEST.do">emailAuth</a>
-	<a href="emailAuthSuccessTEST.do">emailAuthSuccess</a>
 	<%-- <div  id="login_url">		
 		<div>
 			<a href="${naver_url }"><img width="230px" src="resources/img/member/naver_login_button_en_green.png" alt="Naver Login" /></a>

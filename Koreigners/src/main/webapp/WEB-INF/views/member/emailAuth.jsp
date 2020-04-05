@@ -5,15 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <link href="resources/css/header.css" rel="stylesheet" type="text/css">
-    <link href="resources/css/style.css" rel="stylesheet" type="text/css">
 <style>
-	#container {
-		border: 5px solid lightblue;
-		width: 500px; height: 350px;
+	.center {
+		float: none;
 		margin: 0 auto;
-		text-align: center;
-	}	
+	}
 </style>
 </head>
 <body>
@@ -29,10 +25,23 @@
         </div>
     </div>
     <!-- End All Title Box -->
-	<div id="container">
-		<h3>Just one more step for registration! Please activate your account via the link in the email we just sent to you</h3>
-		<h3>등록 단계 하나만 더! 방금 보낸 이메일의 링크를 통해 계정을 활성화하십시오</h3>
-	</div>
+    
+    <div class="cart-box-main">
+    	<div class="container">
+    		<div class="col-md-10 col-sm-12 col-xs-12 center">
+    			<div class="my-4">
+	    			<div class="title-left">
+	                    <h1 style="font-size:2em; font-weight:700">Just one more step for registration!</h1>
+	                </div>
+    			</div>
+    			<div class="col-md-12">
+					<h3 class="font-weight-bold">Please activate your account via the link in the email we just sent to you</h3>
+					<h4 class="text-black-50">등록 단계 하나만 더! 방금 보낸 이메일의 링크를 통해 계정을 활성화하십시오</h4>
+    			</div>
+			</div>
+    	</div>
+    </div>
+    <br><br><br><br><br><br>
 
 </body>
 </html>
