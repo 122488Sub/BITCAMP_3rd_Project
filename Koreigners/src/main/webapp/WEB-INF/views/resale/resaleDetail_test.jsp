@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-xl-5 col-lg-5 col-md-6">
         <c:choose>
-		     <c:when test="${empty imgList }">
+		     <c:when test="${rsVO.file_ori_name == 'businessImg_' }">
 		     		<li><img id="imgFile" src=""></li>
 		     		<div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">

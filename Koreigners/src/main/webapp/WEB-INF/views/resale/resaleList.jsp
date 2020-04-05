@@ -114,8 +114,8 @@
 						                        <!-- 이미지 -->
 						                        <div class="box-img-hover">
 						                           <c:choose>
-												   <c:when test="${vo.file_ori_name == null}">
-												   <img src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg" class="img-fluid">
+												   <c:when test="${vo.file_ori_name == 'businessImg_'}">
+												   <img style="height:300px" src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg" class="img-fluid">
 							                            <div class="mask-icon">
 							                                <ul>
 							                                    <li><a href="resaleDetail.do?rs_idx=${vo.rs_idx}&cPage=${pvo.getNowPage()}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>

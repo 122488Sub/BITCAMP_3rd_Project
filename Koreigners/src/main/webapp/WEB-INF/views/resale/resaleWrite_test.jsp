@@ -16,19 +16,41 @@
 <script type="text/javascript">
 	function sendData() {
 		var firstForm = document.forms[0];
-		console.log("firstForm : " + firstForm);
-		console.log("firstForm.elements.length : " + firstForm.elements.length);
-		for (var i = 0; i < firstForm.elements.length; i++) {
-			if (firstForm.elements[i].value.trim() == "") {
-				console.log("firstForm.elements[i].outerText : "
-						+ firstForm.elements[i].outerText);
-				console.log("firstForm.elements[i] : " + i);
-				alert(firstForm.elements[i].title + "을 입력하세요");
-				firstForm.elements[i].focus();
-				return;
-			}
+		
+		if($('input[name=subject]').val()==''){
+			 alert("Plese Checked [Title]");
+			 $('input[name=subject]').focus();
+			 return false;
 		}
+		
+		if($('input[name=rs_cate_prnt]').val()==''){
+			 alert("Plese Checked [Category]");
+			 $('input[name=subject]').focus();
+			 return false;
+		}
+		if($('input[name=category_child]').val()==''){
+			 alert("Plese Checked [Category]");
+			 $('input[name=subject]').focus();
+			 return false;
+		}
+		if($('input[name=price]').val()==''){
+			 alert("Plese Checked [Price]");
+			 $('input[name=price]').focus();
+			 return false;
+		}  
+		if($('#contentBox').val()==''){
+			 alert("Plese Checked [Content]");
+			 $('input[name=content]').focus();
+			 return false;
+		}
+		if($('input[name=address]').val()==''){
+			 alert("Plese Checked [Address]");
+			 $('input[name=address]').focus();
+			 return false;
+		}
+		
 		firstForm.submit();
+		
 	}
 	
 	$(function() {
@@ -123,7 +145,7 @@
 	    			<div class="title-left">
 	    				<h3>Post Your Items</h3>
 	    			</div>
-	    				<input type="text" title="제목" name="subject" class="col-md-12 form-control" placeholder="Enter the subtitle.">
+	    				<input type="text" title="제목" name="subject" class="col-md-12 form-control" placeholder="Enter the subtitle." title="Title">
 	    			<hr class="mb-4">
 	    			<!-- cateMain Start -->
 						<div id="cateMain">
@@ -171,7 +193,7 @@
 				    			<label>Price</label>
 							</div>
 							<div class="col-md-9">
-				    			<input type="number" name="price" class="form-control" placeholder="Enter the price. Number Only!">
+				    			<input type="number" name="price" class="form-control" placeholder="Enter the price. Number Only!" title="Price">
 							</div>
 						</div>
 	    			<hr class="mb-4">
@@ -207,7 +229,7 @@
 										<input type="text" id="roadAddr" name="address" class="form-control" readonly="readonly"> 
 									</div>
 									<div class="col-md-2">
-										<input type="button" value="Search" onclick="goPopup();">
+										<input type="button" value="Search" onclick="goPopup();" >
 									</div>
 								</div>
 								
@@ -220,7 +242,7 @@
 				    			<label>Hashtag</label>
 							</div>
 							<div class="col-md-9">
-				    			<input type="text" name="hash_tag" class="form-control" placeholder="Maximum 5 Hashtags are available.">
+				    			<input type="text" name="hash_tag" class="form-control" placeholder="Maximum 5 Hashtags are available." title="HashTag">
 							</div>
 						</div>
 	    		</div>
@@ -230,7 +252,7 @@
 			<input type="hidden" id="hiddenCate1" name="rs_cate_prnt" title="카테고리"> 
 			<input type="hidden" id="hiddenCate2" name="category_child" title="하위 카테고리">
 			<div style="text-align:center; margin-bottom:50px; margin-right:10px">			
-				<button class="btn hvr-hover" onclick="sendData()">Upload</button>
+				<input type= "button" class="btn hvr-hover" onclick="sendData()" value="Upload">
 				<button type="reset" class="btn hvr-hover">reset</button>
 			</div>
 		
