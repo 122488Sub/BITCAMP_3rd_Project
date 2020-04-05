@@ -168,76 +168,7 @@
 	    </div>
 	</div>
 	<!-- 메인화면 카테고리 끝 -->
-    <!-- Start Blog  -->
-    <div class="latest-blog">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="title-all text-center">
-                        <h1>latest blog</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 col-lg-4 col-xl-4">
-                    <div class="blog-box">
-                        <div class="blog-img">
-                            <img class="img-fluid" src="${contextPath}/images/blog-img.jpg" alt="" />
-                        </div>
-                        <div class="blog-content">
-                            <div class="title-blog">
-                                <h3>Fusce in augue non nisi fringilla</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
-                            </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-4">
-                    <div class="blog-box">
-                        <div class="blog-img">
-                            <img class="img-fluid" src="${contextPath}/images/blog-img-01.jpg" alt="" />
-                        </div>
-                        <div class="blog-content">
-                            <div class="title-blog">
-                                <h3>Fusce in augue non nisi fringilla</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
-                            </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4 col-xl-4">
-                    <div class="blog-box">
-                        <div class="blog-img">
-                            <img class="img-fluid" src="${contextPath}/images/blog-img-02.jpg" alt="" />
-                        </div>
-                        <div class="blog-content">
-                            <div class="title-blog">
-                                <h3>Fusce in augue non nisi fringilla</h3>
-                                <p>Nulla ut urna egestas, porta libero id, suscipit orci. Quisque in lectus sit amet urna dignissim feugiat. Mauris molestie egestas pharetra. Ut finibus cursus nunc sed mollis. Praesent laoreet lacinia elit id lobortis.</p>
-                            </div>
-                            <ul class="option-blog">
-                                <li><a href="#"><i class="far fa-heart"></i></a></li>
-                                <li><a href="#"><i class="fas fa-eye"></i></a></li>
-                                <li><a href="#"><i class="far fa-comments"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Blog  -->
+   
 
 
     <!-- Start Instagram Feed  -->
@@ -245,7 +176,7 @@
         <div class="main-instagram owl-carousel owl-theme">
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="${contextPath}/images/instagram-img-01.jpg" alt="" />
+                    <img src="${contextPath}/images/Korea-Travel-1.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -253,7 +184,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="${contextPath}/images/instagram-img-02.jpg" alt="" />
+                    <img src="${contextPath}/images/Korea-Travel-2.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -261,7 +192,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="${contextPath}/images/instagram-img-03.jpg" alt="" />
+                    <img src="${contextPath}/images/Korea-Travel-3.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -269,7 +200,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="${contextPath}/images/instagram-img-04.jpg" alt="" />
+                    <img src="${contextPath}/images/Korea-Travel-4.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -277,7 +208,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="${contextPath}/images/instagram-img-05.jpg" alt="" />
+                    <img src="${contextPath}/images/Korea-Travel-5.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -285,7 +216,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="${contextPath}/images/instagram-img-06.jpg" alt="" />
+                    <img src="${contextPath}/images/Korea-Travel-6.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -293,7 +224,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="${contextPath}/images/instagram-img-07.jpg" alt="" />
+                    <img src="${contextPath}/images/Korea-Travel-7.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -301,7 +232,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="${contextPath}/images/instagram-img-08.jpg" alt="" />
+                    <img src="${contextPath}/images/Korea-Travel-8.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -309,7 +240,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="${contextPath}/images/instagram-img-09.jpg" alt="" />
+                    <img src="${contextPath}/images/Korea-Travel-9.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
@@ -317,7 +248,7 @@
             </div>
             <div class="item">
                 <div class="ins-inner-box">
-                    <img src="${contextPath}/images/instagram-img-05.jpg" alt="" />
+                    <img src="${contextPath}/images/Korea-Travel-10.jpg" alt="" />
                     <div class="hov-in">
                         <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
