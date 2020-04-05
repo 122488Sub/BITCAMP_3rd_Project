@@ -33,11 +33,12 @@
         	</div>
             <div class="row">
                 <div class="col-xl-5 col-lg-5 col-md-6">
-                    <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+        <c:choose>
+		     <c:when test="${empty imgList }">
+		     		<li><img id="imgFile" src=""></li>
+		     		<div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active"> <img class="d-block w-100" src="${contextPath}/images/big-img-01.jpg" alt="First slide"> </div>
-                            <div class="carousel-item"> <img class="d-block w-100" src="${contextPath}/images/big-img-02.jpg" alt="Second slide"> </div>
-                            <div class="carousel-item"> <img class="d-block w-100" src="${contextPath}/images/big-img-03.jpg" alt="Third slide"> </div>
+                            <div class="carousel-item active"> <img class="d-block w-100" style="height: 500px;" src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg" alt="First slide"> </div>
                         </div>
                         <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"> 
 						<i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -49,16 +50,54 @@
 					</a>
                         <ol class="carousel-indicators">
                             <li data-target="#carousel-example-1" data-slide-to="0" class="active">
-                                <img class="d-block w-100 img-fluid" src="${contextPath}/images/smp-img-01.jpg" alt="" />
-                            </li>
-                            <li data-target="#carousel-example-1" data-slide-to="1">
-                                <img class="d-block w-100 img-fluid" src="${contextPath}/images/smp-img-02.jpg" alt="" />
-                            </li>
-                            <li data-target="#carousel-example-1" data-slide-to="2">
-                                <img class="d-block w-100 img-fluid" src="${contextPath}/images/smp-img-03.jpg" alt="" />
+                                <img class="d-block w-100 img-fluid" style="height: 150px;" src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg" alt="" />
                             </li>
                         </ol>
                     </div>
+		     </c:when>
+		     <c:otherwise>
+		     		<div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+                        <div class="carousel-inner" role="listbox">
+                    	<c:forEach items="${imgList}" varStatus="status" var="img" >
+                    		<c:if test="${status.index ==0}">
+                    			<div class="carousel-item active"> <img class="d-block w-100" style="height: 500px;" src="${pageContext.request.contextPath}/resources/img/resale/${rsVO.mem_id}/${img.rs_file_name}" alt="slide${status.index+1}"> </div>
+			        		</c:if>
+			        		<c:if test="${status.index !=0}">
+			        			<div class="carousel-item"> <img class="d-block w-100" style="height: 500px;" src="${pageContext.request.contextPath}/resources/img/resale/${rsVO.mem_id}/${img.rs_file_name}" alt="slide${status.index+1}"> </div>
+			        		</c:if>
+			     		</c:forEach>
+                        </div>
+                        <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"> 
+						<i class="fa fa-angle-left" aria-hidden="true"></i>
+						<span class="sr-only">Previous</span> 
+					</a>
+                        <a class="carousel-control-next" href="#carousel-example-1" role="button" data-slide="next"> 
+						<i class="fa fa-angle-right" aria-hidden="true"></i> 
+						<span class="sr-only">Next</span> 
+					</a>
+                        <ol class="carousel-indicators">
+                        <c:forEach items="${imgList}" varStatus="status" var="img" >
+                        <c:if test="${status.index ==0}">
+                            <li data-target="#carousel-example-1" data-slide-to="${status.index}" class="active">
+                                <img class="d-block w-100 img-fluid" style="height: 150px;" src="${pageContext.request.contextPath}/resources/img/resale/${rsVO.mem_id}/${img.rs_file_name}" alt="" />
+                            </li>
+                        </c:if>
+                        <c:if test="${status.index !=0}">
+                            <li data-target="#carousel-example-1" data-slide-to="${status.index}">
+                                <img class="d-block w-100 img-fluid" style="height: 150px;" src="${pageContext.request.contextPath}/resources/img/resale/${rsVO.mem_id}/${img.rs_file_name}" alt="" />
+                            </li>
+                        </c:if>
+                        </c:forEach>
+                        </ol>
+                    </div>
+		     	
+			    
+		     </c:otherwise>
+	     </c:choose>         	
+                
+                    
+                    
+                    
                 </div>
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <div class="single-product-details">
