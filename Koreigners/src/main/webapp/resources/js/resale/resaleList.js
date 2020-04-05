@@ -6,7 +6,9 @@ $( function() {
 });
 
 
-
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 
 function getData(cate,cPage) {
@@ -143,7 +145,7 @@ else {
                 +	'<div class="why-text">'
                 +		'<h4>'+resale.SUBJECT+'</h4>';
 if(resale.PRICE!=null)                
-	gridHtml+=          '<h5>' +resale.PRICE+' won'+'</h5>';
+	gridHtml+=          '<h5>' + numberWithCommas(resale.PRICE)+' won'+'</h5>';
 
     gridHtml+=    	'</div>'
             +	'</div>'

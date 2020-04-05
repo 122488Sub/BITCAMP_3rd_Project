@@ -5,7 +5,14 @@
 
 <script type="text/javascript" src="resources/js/resale/slide.js" ></script>
 <script type="text/javascript" src="resources/js/common/togleWish.js" ></script>
-
+<script>
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+$( function() {
+	$('#price').html( numberWithCommas(${rsVO.price}));
+});
+</script>
 <body>
 
     <br><br><br>
@@ -105,14 +112,20 @@
 	                        <h2>${rsVO.subject}</h2>
                     	</div>
                     	<div class="mb-2">
-	                        <h5>${rsVO.price}</h5>
+	                        <h5 id="price">${rsVO.price}</h5>
                     	</div>
                         <p class="mb-1">seller : ${rsVO.mem_name}</p>
                         <p class="mb-1">category : ${rsVO.rs_cate_prnt}&nbsp;&gt;&nbsp;${rsVO.category_child}</p>
                         <p class="mb-1">hit : ${rsVO.hit}</p>
 						<h4>Hash tag</h4>
-						<p>${rsVO.hash_tag}</p>
-
+				<c:choose>
+					<c:when test="${not empty rsVO.hash_tag }">
+						<p>&nbsp;-${rsVO.hash_tag}</p>
+					</c:when>
+					<c:otherwise>
+						<p>&nbsp;-none</p>
+					</c:otherwise>
+				</c:choose>
 						<div class="add-to-btn">
 							<div class="add-comp col-md-12">
 								<div class="row">
