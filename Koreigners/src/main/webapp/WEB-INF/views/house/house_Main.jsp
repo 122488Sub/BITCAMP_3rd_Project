@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 
 <script type="text/javascript" src="resources/js/house/houseMain.js"></script>
-<link rel="stylesheet" href="resources/css/house/houseMain.css"> 
+<script type="text/javascript" src="resources/js/house/houseMainRespon.js"></script> 
+<link rel="stylesheet" href="resources/css/house/houseMain.css">
 <link href="resources/css/common/page.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -31,7 +32,7 @@
     		<div class="title-left mb-5">
     			<h2 class="font-weight-bold">Please select the region</h2>
     		</div>
-			<div id="responDiv"style="width:1200px; margin: 0 auto;">
+			<div id="responDiv"style="width:100%; margin: 0 auto;">
 				<!-- 지도부분 Start -->
 				<jsp:include page="../common/republic_korea.jsp">
 					<jsp:param value="house" name="category"/>
