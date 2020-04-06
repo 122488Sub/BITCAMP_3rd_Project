@@ -18,6 +18,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/job/hireList.css">
 <script type="text/javascript" src="resources/js/hire/moment.js"></script>
 <script type="text/javascript" src="resources/js/hire/hireList.js"></script>
+<script type="text/javascript" src="resources/js/hire/hireListRespon.js"></script>
 
 <style>
 .wishlist-box-main {
@@ -78,7 +79,7 @@ td{height:80px;}
     			<h2 class="font-weight-bold">Please select the region</h2>
     		</div>
     		
-    		<div style="width:1200px; margin: 0 auto;">
+    		<div id="responDiv" style="width:100%; margin: 0 auto;">
 				<jsp:include page="../job_map2.jsp"/>
     		</div>
     		<br>
