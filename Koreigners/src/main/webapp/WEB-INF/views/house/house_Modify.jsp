@@ -11,7 +11,7 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<link rel="stylesheet" href="resources/css/house/houseFormData.css">    
+<!--  <link rel="stylesheet" href="resources/css/house/houseFormData.css">-->    
 <!-- jQuery 기본 js파일-->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
 <!--  jQuery UI 라이브러리 js파일 -->
@@ -104,6 +104,26 @@
 		}	
 	});
 </script>
+<style>
+	.inputBox {
+		padding: .375rem .75rem;
+		line-height: 1.5;
+		font-size: 1rem;
+		color: #495057;
+		background-color: white;
+		border: 1px solid #ced4da;
+		border-radius: .25rem;
+	}
+	
+	#mapDisp {
+		width: 100%;
+		height: 250px;
+		margin: 0 auto;
+		margin-bottom: 5px;
+		border: 1px solid #ced4da;
+		border-radius: .25rem;
+	}
+</style>
 </head>
 <body>
 	
@@ -123,12 +143,14 @@
 	<div id="container">
 	
 	<form action="" id="form" name="form" method="post" enctype="multipart/form-data">
+	<br><br>
 	<input type='hidden' name="mem_email" value="${house.mem_email }">
 	<input type='hidden' name="room_idx" value="${house.room_idx }">
 	<jsp:include page="house_formData.jsp"></jsp:include>
 	
-	<div class="td_div">
-		<input type="button" value="글 수정 등록" onclick="updateForm();">
+	<div class="td_div" style="text-align: center;">
+		<button class="btn hvr-hover" onclick="updateForm()">Complete post edit</button>
+		<!--  <input type="button" value="글 수정 등록" onclick="updateForm();">-->
 	</div>
 	</form>
 	<p><a href="house_main.do">글 목록 가기</a></p>
