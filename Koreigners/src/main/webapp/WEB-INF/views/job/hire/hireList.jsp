@@ -48,6 +48,10 @@ td{height:80px;}
 #pay{font-weight: bold; color:white; text-align: center; width:40px;height:20px;background-color: aqua;border-radius: 5px; padding-bottom: 12px; margin-bottom: 6px; overflow:visible;}
 .salaryCondtion {display:flex; text-align: center;}
 .trTag td {border-bottom: 1px solid #808080;}
+.wishlist-box-main {
+	padding: 20px 0;
+}
+
 </style>
 <script>
 </script>
@@ -66,93 +70,80 @@ td{height:80px;}
         </div>
     </div>
     <!-- End All Title Box -->
-<jsp:include page="../job_map2.jsp"/>
-
-<c:choose>
-	<c:when test="${user.mem_cate eq 'c'}">
-		<p><a href="hireWrite_go.do">Post an Ad</a></p>
-	</c:when>
-	<c:otherwise>
-		<p></p>
-	</c:otherwise>
-</c:choose>
-
- <!-- 
-<table border>
-	<thead>
-		<tr>
-			<th>Company Name</th>
-			<th>Location</th>
-			<th>Title</th>
-			<th>Salary</th>
-			<th>Post Date</th>
-		</tr>
-	</thead>
-	<tbody id="list_box">
-		<tr>
-			<td>Name</td>
-			<td>Location</td>
-			<td>Title</td>
-			<td>Salary</td>
-			<td>Post Date</td>
-		<tr>
-	</tbody>
-	<tfoot id="tfoot">
-		
-	</tfoot>
-</table>
-Start Wishlist  -->
-
-	
     
-    <div class="wishlist-box-main">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="table-main table-responsive">
-                        <table class="table" id="hireList">
-                            <thead>
-                                <tr>
-                                    <th id="compName">Company Name</th>
-                                    <th id="location">Location</th>
-                                    <th id="title">Title</th>
-                                    <th id="salary">Salary</th>
-                                    <th id="post_date">Post Date</th>
-                                </tr>
-                            </thead>
-                            <tbody id="list_box">
-                                <tr>
-                                    <td class="thumbnail-img">
-                                         <p>회사이름</p>
-                                    </td>
-                                    <td class="name-pr">
-                                        <a href="#">
-									location6
-										</a>
-                                    </td>
-                                    <td class="price-pr">
-                                        <p>타이틀</p>
-                                    </td>
-                                    <td class="quantity-box" id="salryTd">
-                                    <div class="salaryCondtion">
-                                        <span id="pay">M</span>
-                                        		시간
-                                    </div>
-                                    </td>
-                                    <td class="add-pr">
-                                        	포스팅날짜
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div id="tfoot">
-		
-						</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    
+    <div class="cart-box-main">
+    	<div class="container">
+    		<div class="title-left mb-5">
+    			<h2 class="font-weight-bold">Please select the region</h2>
+    		</div>
+    		
+    		<div style="width:1200px; margin: 0 auto;">
+				<jsp:include page="../job_map2.jsp"/>
+    		</div>
+    		<br>
+    		<div class="text-right" style="margin-top:80px">
+			<c:choose>
+				<c:when test="${user.mem_cate eq 'c'}">
+					<div style="margin-right:85px"><a href="hireWrite_go.do" class="btn hvr-hover" style="color:white">Post an Ad</a></div>
+				</c:when>
+				<c:otherwise>
+					<div></div>
+				</c:otherwise>
+			</c:choose>
+    		</div>
+    		
+		    <div class="wishlist-box-main">
+		        <div class="container">
+		            <div class="row">
+		                <div class="col-lg-12">
+		                    <div class="table-main table-responsive">
+		                        <table class="table" id="hireList">
+		                            <thead>
+		                                <tr>
+		                                    <th id="compName">Company Name</th>
+		                                    <th id="location">Location</th>
+		                                    <th id="title">Title</th>
+		                                    <th id="salary">Salary</th>
+		                                    <th id="post_date">Post Date</th>
+		                                </tr>
+		                            </thead>
+		                            <tbody id="list_box">
+		                                <tr>
+		                                    <td class="thumbnail-img">
+		                                         <p>회사이름</p>
+		                                    </td>
+		                                    <td class="name-pr">
+		                                        <a href="#">
+											location6
+												</a>
+		                                    </td>
+		                                    <td class="price-pr">
+		                                        <p>타이틀</p>
+		                                    </td>
+		                                    <td class="quantity-box" id="salryTd">
+		                                    <div class="salaryCondtion">
+		                                        <span id="pay">M</span>
+		                                        		시간
+		                                    </div>
+		                                    </td>
+		                                    <td class="add-pr">
+		                                        	포스팅날짜
+		                                    </td>
+		                                </tr>
+		                            </tbody>
+		                        </table>
+		                        <div id="tfoot">
+				
+								</div>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+    		
+    	</div>
     </div>
-    <!-- End Wishlist -->
+
 </body>
 </html>

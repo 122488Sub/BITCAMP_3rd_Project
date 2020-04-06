@@ -12,46 +12,39 @@
 </head>
 <style>
 	#content{
-	width: 90%;
-	height: 600px;
-    margin: 10px auto;
-   
+		width: 100%;
+		height: 450px;
+	    margin: 10px auto;
 	}
 	#map{
-		
+		margin: 0 100px;
 		height: 100%; 
 		float: left;
-		width:25%;
+		width: 360px;
    		box-sizing: border-box;
    		overflow: hidden;
 	}
 	#option_panel{
-		
 		float: left;
-		height: 50%; 
-		width:60%;
+		height: 100%;
    		box-sizing: border-box;
-		margin-top: 50px;
-		
-   		}
+	}
+	#map::after,#option_panel::after{
+	   content: "";
+	   display: block;
+	   clear: both;
+	}
 	svg{
 		position:absolute;
 		width: 150px; 
-		height: 500px; 
-		background:white; 
+		height: 100%; 
+		background:transparent !important;
 		overflow:visible;
-		margin-top: 80px;
-		left: 19%;
 	}
 	.table_dosi {
-		
-		display: block;
-		width: 74%;
-		height:56%;
-		border-collapse: collapse;
-		border: 2px solid #000;
-		margin-left: 230px;
-		border-radius: 5px;
+	    display: block;
+	    width: 600px;
+	    border-collapse: collapse;
 	}
 	.table_dosi thead {
 	 	display: block;
@@ -64,14 +57,13 @@
 	}
 	#mapBg {
 		position: absolute;
-		border: 5px solid #0F4C81;
+		border: 5px solid #edf2f2;
 		border-radius: 10px;
-		width:450px;
-		height:580px;
-		margin-left: 100px;
-		margin-top: 60px;
+		width:500px;
+		height:500px;
+		background-color: #edf2f2;
 	}
-	#map {width :300px;overflow:visible;}
+
 	.table_dosi th {height:25px;  width:555px; }
 	.table_dosi td {}
 	.table_dosi td:nth-of-type(odd) { width: 5px; }
@@ -79,132 +71,7 @@
 	.th_selectDoSi{ text-align: left; padding-left :10px;   }
 </style>
 <body>
-<div id="filterBox">
-	<div id="search">
-	<input type="text" id="searchBox" name="searchKeyword">
-	<input type="button" id="searchBtn" onclick="javascript:search()" value="Search">
-	</div>
-	<div id="jobCate_box">
-	  <div id="filter_1">
-		<ul id="jUl">
-			<li class="menuName">
-			<p>Job</p>
-			<p>Category</p>
-			</li>
-			<li class="btnBox">
-				<div class="catePrnt" id="Office Job">
-				<div class="pDiv">
-				<p>Office Job</p>
-				</div>
-				</div>
-				<div class="catePrnt" id="RESEARCH">
-					<div class="pDiv">
-					<p>RESEARCH</p>
-					</div>
-				</div>
-				<div class="catePrnt" id="EDUCATION/WELFARE">
-					<div class="pDiv">
-					<p>EDUCATION</p>
-					<p>WELFARE</p>
-					</div>		</div>
-				<div class="catePrnt" id="HEALTH/MEDICAL TREATMENT">
-					<div class="pDiv">
-					<p class="short2">HEALTH</p>
-					<p class="short2">&</p>
-					<p class="short">MEDICAL</p>
-					<p>TREATMENT</p>
-					</div>
-				</div>
-				<div class="catePrnt" id="FOREIGN LANGUAGE/DESIGN">
-					<div class="pDiv">
-						<p class="short">FOREIGN</p>
-						<p class="short2">LANGUAGE</p>
-						<p class="short2">&</p>
-						<p>DESIGN</p>
-					</div>
-				</div>
-				<div class="catePrnt" id="SERVICE INDUSTRY EMPLOYMENT">
-					<div class="pDiv">
-						<p class="short">SERVICE</p>
-						<p class="short">INDUSTRY</p>
-						<p class="short">EMPLOYMENT</p>
-					</div>
-				</div>
-				<div class="catePrnt" id="SALES/TRANSPORTATION">
-					<div class="pDiv">
-						<p>SALES</p>
-						<p>TRANSPORTATION</p>
-					</div>
-				</div>
-				<div class="catePrnt" id="CONSTRUCTION">
-					<div class="pDiv">
-					<p>CONSTRUCTION</p>
-					</div>
-				</div>
-				<div class="catePrnt" id="MANUFACTURING INDUSTRY">
-					<div class="pDiv">
-					<p class="short">MANUFACTURING</p>
-					<p>INDUSTR</p>
-					</div>
-				</div>
-				<div class="catePrnt" id="AGRICULTURE AND FORESTRY/FISHERY">
-					<div class="pDiv">
-					<p class="short2">AGRICULTURE</p>
-					<p class="short2">&</p>
-					<p class="short">FORESTRY</p>
-					<p>FISHERY</p>
-					</div>
-				</div>	
-			</li>
-		</ul>
-		</div>
-		<div id="filter_2">
-		<ul id="jUl">
-			<li class="menuName">
-			<p>Detail</p>
-			<p>Category</p>
-			</li>
-			<li class="btnBox" id="childCate">
-			</li>
-		</ul>
-		</div>
-		<div id="filter_3">
-		<ul id="jUl">
-			<li class="menuName">
-			<p>Pay</p>
-			<p>Condition</p>
-			</li>
-			<li class="btnBox" id="payment">
-				<div class="payCondition" id="hour">
-				<div class="pDiv">
-				<p>Hour</p>
-				</div>
-				</div>
-				<div class="payCondition" id="day">
-				<div class="pDiv">
-				<p>Day</p>
-				</div>
-				</div>
-				<div class="payCondition" id="month">
-				<div class="pDiv">
-				<p>Month</p>
-				</div>
-				</div>
-				<div class="payCondition" id="year">
-				<div class="pDiv">
-				<p>Year</p>
-				</div>
-				</div>
-				<div class="payCondition" id="negotiable">
-				<div class="pDiv">
-				<p>Negotiable</p>
-				</div>
-				</div>
-			</li>
-		</ul>
-		</div>
-	</div>
-</div>
+
 
 <div id="mapBg">
 			
@@ -212,7 +79,7 @@
 <div id='content'>
 	<div id='map'>
 		
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 350 350 350" style="overflow:visible">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 350 350 350" style="overflow:visible; height:500px">
 			<defs>
 			    <filter id="dropshadow">
 			        <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
@@ -265,15 +132,142 @@
 			
 	</div>
 	
-	 <div id="option_panel">
-		<table class='table_dosi'>
+	 <div id="option_panel" style="width:600px; height:450px">
+		<table class='table_dosi form-control'>
 			<tbody class='tbody_dosi'>
 				<!-- $(".tbody_dosi").html(); 로 내용추가 -->
 			</tbody>
 		</table>
+		<div id="filterBox">
+			<div id="search" class="my-4">
+				<input type="text" id="searchBox" name="searchKeyword" style="width:500px; border-radius:.25rem;">
+				<input type="button" id="searchBtn" onclick="javascript:search()" value="Search">
+			</div>
+			<div id="jobCate_box">
+			  <div id="filter_1">
+				<ul id="jUl">
+					<li class="menuName">
+					<p>Job</p>
+					<p>Category</p>
+					</li>
+					<li class="btnBox">
+						<div class="catePrnt" id="Office Job">
+						<div class="pDiv">
+						<p>Office Job</p>
+						</div>
+						</div>
+						<div class="catePrnt" id="RESEARCH">
+							<div class="pDiv">
+							<p>RESEARCH</p>
+							</div>
+						</div>
+						<div class="catePrnt" id="EDUCATION/WELFARE">
+							<div class="pDiv">
+							<p>EDUCATION</p>
+							<p>WELFARE</p>
+							</div>		</div>
+						<div class="catePrnt" id="HEALTH/MEDICAL TREATMENT">
+							<div class="pDiv">
+							<p class="short2">HEALTH</p>
+							<p class="short2">&</p>
+							<p class="short">MEDICAL</p>
+							<p>TREATMENT</p>
+							</div>
+						</div>
+						<div class="catePrnt" id="FOREIGN LANGUAGE/DESIGN">
+							<div class="pDiv">
+								<p class="short">FOREIGN</p>
+								<p class="short2">LANGUAGE</p>
+								<p class="short2">&</p>
+								<p>DESIGN</p>
+							</div>
+						</div>
+						<div class="catePrnt" id="SERVICE INDUSTRY EMPLOYMENT">
+							<div class="pDiv">
+								<p class="short">SERVICE</p>
+								<p class="short">INDUSTRY</p>
+								<p class="short">EMPLOYMENT</p>
+							</div>
+						</div>
+						<div class="catePrnt" id="SALES/TRANSPORTATION">
+							<div class="pDiv">
+								<p>SALES</p>
+								<p>TRANSPORTATION</p>
+							</div>
+						</div>
+						<div class="catePrnt" id="CONSTRUCTION">
+							<div class="pDiv">
+							<p>CONSTRUCTION</p>
+							</div>
+						</div>
+						<div class="catePrnt" id="MANUFACTURING INDUSTRY">
+							<div class="pDiv">
+							<p class="short">MANUFACTURING</p>
+							<p>INDUSTR</p>
+							</div>
+						</div>
+						<div class="catePrnt" id="AGRICULTURE AND FORESTRY/FISHERY">
+							<div class="pDiv">
+							<p class="short2">AGRICULTURE</p>
+							<p class="short2">&</p>
+							<p class="short">FORESTRY</p>
+							<p>FISHERY</p>
+							</div>
+						</div>	
+					</li>
+				</ul>
+				</div>
+				<div id="filter_2">
+				<ul id="jUl">
+					<li class="menuName">
+					<p>Detail</p>
+					<p>Category</p>
+					</li>
+					<li class="btnBox" id="childCate">
+					</li>
+				</ul>
+				</div>
+				<div id="filter_3">
+				<ul id="jUl">
+					<li class="menuName">
+					<p>Pay</p>
+					<p>Condition</p>
+					</li>
+					<li class="btnBox" id="payment">
+						<div class="payCondition" id="hour">
+						<div class="pDiv">
+						<p>Hour</p>
+						</div>
+						</div>
+						<div class="payCondition" id="day">
+						<div class="pDiv">
+						<p>Day</p>
+						</div>
+						</div>
+						<div class="payCondition" id="month">
+						<div class="pDiv">
+						<p>Month</p>
+						</div>
+						</div>
+						<div class="payCondition" id="year">
+						<div class="pDiv">
+						<p>Year</p>
+						</div>
+						</div>
+						<div class="payCondition" id="negotiable">
+						<div class="pDiv">
+						<p>Negotiable</p>
+						</div>
+						</div>
+					</li>
+				</ul>
+				</div>
+			</div>
+		</div>
 	</div> 
 </div>
-<script >
+
+<script>
 var color=[	"",
 	"#0169D1",
 	"#0A70D7",
@@ -439,5 +433,7 @@ function chkChild(chk) {
     getJson();
 } 
 </script>
+
+
 </body>
 </html>

@@ -17,19 +17,18 @@
     margin: 10px auto;
 	}
 	#map{
+		margin: 0 100px;
 		height: 100%; 
 		float: left;
-		width:360px;
+		width: 360px;
    		box-sizing: border-box;
    		overflow: hidden;
-   		padding-right: 120px;
 	}
 	#option_panel{
    		float : left;
-		width : 100 %;
 		height: 100%; 
 		box-sizing : border-box;
-   		}
+   	}
    		
    	#map::after,#option_panel::after{
 	   content: "";
@@ -120,6 +119,7 @@
 			
 	</div>
 	<div id="option_panel">
+	
 		<table class='table_dosi form-control'>
 			<thead>
 				<tr>
@@ -130,8 +130,8 @@
 				<!-- $(".tbody_dosi").html(); 로 내용추가 -->
 			</tbody>
 		</table>
+		
 		<div class='div_option'>
-	
 		<c:choose>
 			<c:when test="${param.category == 'house'  }">
 				<jsp:include page="/resources/html/houseOption.jsp"/>
@@ -139,10 +139,9 @@
 			<c:otherwise>
 				
 			</c:otherwise>
-		
 		</c:choose>
-			
 		</div>
+		
 	</div>
 </div>
 <script >
@@ -230,7 +229,7 @@ function getDoSiData(do_kor,do_en,idx) {
 			}
 			
 			
-			$("#CD"+idx).css( {'fill':'blue'} ); 
+			$("#CD"+idx).css( {'fill':'#f0b773'} ); 
 			
 			$(".tbody_dosi").html(dispHtml);
 			

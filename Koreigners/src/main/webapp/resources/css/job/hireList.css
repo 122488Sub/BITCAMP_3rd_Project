@@ -13,11 +13,8 @@ li {
 }
 
 #filterBox {
-	position: absolute;
-	width: 900px;
+	width: 100%;
 	height: 300px;
-	margin-left: 580px;
-	margin-top: 270px;
 }
 
 #jobCate_box {
@@ -35,8 +32,10 @@ li {
 }
 
 #searchBtn {
-	width: 50px;
-	height: 34px;
+	width: 80px; 
+	border-radius:.25rem; 
+	background-color:#0B3B39; 
+	color:white;
 }
 
 #jUl {
