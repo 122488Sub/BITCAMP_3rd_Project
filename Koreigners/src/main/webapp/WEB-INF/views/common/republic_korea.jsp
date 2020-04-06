@@ -35,6 +35,7 @@
 	   display: block;
 	   clear: both;
 	}
+	
 	svg{
 		width: 150px; 
 		height: 100% ; 
@@ -63,6 +64,7 @@
 	.th_selectDoSi{ text-align: left; padding-left :10px;   }
 </style>
 <body>
+
 
 <div id='content'>
 	<div id='map'>

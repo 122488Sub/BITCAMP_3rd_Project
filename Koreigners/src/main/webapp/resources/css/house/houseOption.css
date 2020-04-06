@@ -105,11 +105,11 @@ optgroup {
     font-weight: 600;
     text-align: center;
     color: black;
-    background-color: #f6931f;
+    background-color: #fabf7a;
     height: 46px;
     margin-right: 5px;
     margin-top:5px;
-    border: 1px solid #f6931f;
+    border: 2px solid #f6931f;
     border-radius: .25rem;
     cursor:pointer;
 }

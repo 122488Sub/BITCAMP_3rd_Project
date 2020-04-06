@@ -7,33 +7,9 @@
 <!-- Basic -->
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Site Metas -->
-    <title>Freshshop - Ecommerce Bootstrap 4 HTML Template</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="${contextPath}/css/bootstrap.min.css">
-    <!-- Site CSS -->
-    <link rel="stylesheet" href="${contextPath}/css/style.css">
-    <!-- Responsive CSS -->
-    <link rel="stylesheet" href="${contextPath}/css/responsive.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="${contextPath}/css/custom.css">
     <link rel="stylesheet" href="resources/css/main/mainCategory.css">
     <script type="text/javascript" src="resources/js/common/togleWish.js" ></script>
 	<script type="text/javascript" src="resources/js/common/homeMain.js" ></script>
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.${contextPath}/js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 </head>
 
@@ -41,7 +17,7 @@
 
 	<br><br>
     <!-- Start Slider -->
-    <div id="slides-shop" class="cover-slides" style="position: relative;overflow: hidden;width: 100%;height: 400px;">
+    <div id="slides-shop" class="cover-slides" style="position: relative;overflow: hidden;width: 100%;height: 600px;">
         <ul class="slides-container">
             <li class="text-center">
                 <img src="${contextPath}/images/Gwanghwamoon.jpg" alt="">
@@ -132,7 +108,7 @@
 	                                <h4 style="color:white; font-weight: 600;" class="featured-categories__item-description-title">Job</h4>
 	                                <p class="featured-categories__item-description-total-ads">${mainCount[0].CNT_HIRE }&nbsp;ads</p>
 	                            </div>
-	                            <img src="https://ssl-gumtree.classistatic.com/cached/img/au/homepage/pic-featured-category-18320.jpg" alt="Job">
+	                            <img src="resources/img/main/job.jpg" alt="Job">
 	                        </a>
 	                    </div>
 	                <div class="featured-categories__item">
@@ -141,7 +117,7 @@
 	                                <h4 style="color:white; font-weight: 600;" class="featured-categories__item-description-title">House</h4>
 	                                <p class="featured-categories__item-description-total-ads">${mainCount[0].CNT_HOUSE }&nbsp;ads</p>
 	                            </div>
-	                            <img src="https://ssl-gumtree.classistatic.com/cached/img/au/homepage/pic-featured-category-18397.jpg" alt="House">
+	                            <img src="resources/img/main/house.jpg" alt="House">
 	                        </a>
 	                    </div>
 	                <div class="featured-categories__item">
@@ -150,7 +126,7 @@
 	                                <h4 style="color:white; font-weight: 600;" class="featured-categories__item-description-title">Resale</h4>
 	                                <p class="featured-categories__item-description-total-ads">${mainCount[0].CNT_RESALE}&nbsp;ads</p>
 	                            </div>
-	                            <img src="https://ssl-gumtree.classistatic.com/cached/img/au/homepage/pic-featured-category-9302.jpg" alt="Resale">
+	                            <img src="resources/img/main/resale.jpg" alt="Resale">
 	                        </a>
 	                    </div>
 	                <div class="featured-categories__item">
@@ -159,7 +135,7 @@
 	                                <h4 style="color:white; font-weight: 600;" class="featured-categories__item-description-title">Information</h4>
 	                                <p class="featured-categories__item-description-total-ads">${mainCount[0].CNT_INFORM}&nbsp;ads</p>
 	                            </div>
-	                            <img src="https://ssl-gumtree.classistatic.com/cached/img/au/homepage/pic-featured-category-1000000.jpg" alt="Information">
+	                            <img src="resources/img/main/information.jpg" alt="Information">
 	                        </a>
 	                    </div>
 	                </div>

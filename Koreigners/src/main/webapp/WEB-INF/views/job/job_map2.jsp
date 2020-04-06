@@ -73,9 +73,7 @@
 <body>
 
 
-<div id="mapBg">
-			
-		</div>
+<div id="mapBg"></div>
 <div id='content'>
 	<div id='map'>
 		

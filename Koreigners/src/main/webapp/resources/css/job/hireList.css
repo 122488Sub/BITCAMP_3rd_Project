@@ -74,10 +74,10 @@ li.btnBox {
 }
 
 .job_clicked {
-	border: 2px solid red;
+	border: 2px solid #f6931f;
 	width: 95px;
 	height: 50px;
-	background-color: lightcoral;
+	background-color: #fabf7a;
 }
 
 .catePrnt {
@@ -100,10 +100,10 @@ li.btnBox {
 }
 
 .catePrnt_clicked {
-	border: 2px solid red;
+	border: 2px solid #f6931f;
 	width: 95px;
 	height: 50px;
-	background-color: lightcoral;
+	background-color: #fabf7a;
 }
 
 .payCondition {
@@ -124,10 +124,10 @@ li.btnBox {
 }
 
 .pay_clicked {
-	border: 2px solid red;
+	border: 2px solid #f6931f;
 	width: 95px;
 	height: 50px;
-	background-color: lightcoral;
+	background-color: #fabf7a;
 }
 
 p {
