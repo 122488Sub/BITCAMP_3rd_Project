@@ -203,7 +203,9 @@
 												</c:otherwise>
 											</c:choose>
 											<c:if test="${authentication }">
+											<br>
 											<input type="button" id="" style="width:80px; margin-bottom:5px; font-weight:700; padding:10px 20px;" value="Modify"  class="btn hvr-hover" onClick="clickModify()">
+											
 											<input type="button" id="" style="width:80px; margin-bottom:5px; font-weight:700; padding:10px 20px;" value="Delete"  class="btn hvr-hover" onClick="clickDelete()">
 											</c:if>
 										</div>
