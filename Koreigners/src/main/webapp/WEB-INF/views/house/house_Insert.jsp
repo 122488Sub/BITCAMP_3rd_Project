@@ -57,7 +57,7 @@
 	<br><br>
 	<jsp:include page="house_formData.jsp"></jsp:include>
 	<div class="td_div" style="text-align: center;">
-		<button class="btn hvr-hover" onclick="insertForm()">Register a New Post</button>
+		<input type="button" class="btn hvr-hover" value="Register a New Post" onclick="insertForm()">
 		<!-- <input type="button" id="insertButton" value="Register a New Post" onclick="insertForm();"> -->
 	</div>
 	</form>
