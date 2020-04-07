@@ -20,6 +20,8 @@ import com.koreigner.biz.common.page.PagingService;
 import com.koreigner.biz.common.page.PagingVO;
 import com.koreigner.biz.job.jobservice.JobService;
 import com.koreigner.biz.member.UserVO;
+import com.koreigner.biz.member.mypage.p_MyPageService;
+import com.koreigner.biz.member.mypage.p_MyPageVO;
 import com.koreigner.biz.resale.ResaleCommVO;
 import com.koreigner.biz.resale.ResaleImgVO;
 import com.koreigner.biz.resale.ResaleService;
@@ -38,6 +40,8 @@ public class ResaleController {
 	JobService jobService;
 	@Autowired
 	PagingService paging;
+	@Autowired
+	private p_MyPageService pService;
 	
 	@RequestMapping(value="resaleList.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public String resaleList(HttpServletRequest request, 
@@ -178,6 +182,12 @@ public class ResaleController {
 		
 		System.out.println("resaleDetail c_list : " + c_list);
 		System.out.println("resaleDetail.do 다3");
+		String mem_id = (String) request.getAttribute("mem_id");
+		if(mem_id!=null) {
+			model.addAttribute("isWish",  pService.isWish(new p_MyPageVO(mem_id,3,rs_idx)));
+		}
+		
+		
 		request.setAttribute("rsVO", rsVO);
 		request.setAttribute("imgList", imgList);
 		request.setAttribute("cPage", cPage);

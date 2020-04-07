@@ -76,10 +76,10 @@
 						</c:if>
 						<c:choose>
 							<c:when test="${isWish}">
-								<button id="wishBtn" class="btn hvr-hover" style="margin-bottom:5px; background-color:firebrick; font-weight:700; padding:10px 20px;" onclick="javascript:clickWishGrid('${user.mem_id }','${inform.info_idx}',1)"><i id="wish_${inform.info_idx}" class="fas fa-heart"></i>Add to wishlist</button>
+								<button id="wishBtn" class="btn hvr-hover" style="margin-bottom:5px; background-color:firebrick; font-weight:700; padding:10px 20px;" onclick="javascript:clickWishGrid('${user.mem_id }','${inform.info_idx}',4)"><i id="wish_${inform.info_idx}" class="fas fa-heart"></i>Add to wishlist</button>
 							</c:when>
 							<c:otherwise>
-								<button id="wishBtn" class="btn hvr-hover" style="margin-bottom:5px; background-color:#0B3B39; font-weight:700; padding:10px 20px;" onclick="javascript:clickWishGrid('${user.mem_id }','${inform.info_idx}',1)"><i id="wish_${inform.info_idx}" class="far fa-heart"></i>Add to wishlist</button>
+								<button id="wishBtn" class="btn hvr-hover" style="margin-bottom:5px; background-color:#0B3B39; font-weight:700; padding:10px 20px;" onclick="javascript:clickWishGrid('${user.mem_id }','${inform.info_idx}',4)"><i id="wish_${inform.info_idx}" class="far fa-heart"></i>Add to wishlist</button>
 							</c:otherwise>
 						</c:choose>
 						<br> <br>

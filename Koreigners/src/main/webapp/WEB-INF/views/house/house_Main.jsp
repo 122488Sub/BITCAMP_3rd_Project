@@ -33,11 +33,13 @@
     			<h2 class="font-weight-bold">Please select the region</h2>
     		</div>
 			<div id="responDiv"style="width:100%; margin: 0 auto;">
+				<div id="mapBg"style="width:910px; margin: 0 auto;">
 				<!-- 지도부분 Start -->
 				<jsp:include page="../common/republic_korea.jsp">
 					<jsp:param value="house" name="category"/>
 				</jsp:include>
 				<!-- 지도부분 End -->
+				</div>
 			</div>
 			
 			<div id="listHeader">

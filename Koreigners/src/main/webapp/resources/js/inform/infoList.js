@@ -173,7 +173,6 @@ if(wishBool==1){
 	gridHtml+=     				'<li><a href="javascript:clickWishGrid('+"'"+$('#mem_id').val()+"'"+','+inform.INFO_IDX+',4)" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i id="wish_'+inform.INFO_IDX+'"class="far fa-heart"></i></a></li>';
 }   
     gridHtml+=  			'</ul>'
-                +			'<a class="cart" href="javascript:goInformDetailPage('+ inform.INFO_IDX+')">'+inform.INFO_MEM_ID+'</a>'
                 +		'</div>'
                 +	'</div>'
                 +	'<div class="why-text">'

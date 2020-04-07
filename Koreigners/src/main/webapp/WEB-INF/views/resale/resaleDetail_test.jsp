@@ -130,7 +130,14 @@ $( function() {
 							<div class="add-comp col-md-12">
 								<div class="row">
 									<div class="col-md-4">
-										<button class="btn hvr-hover" style="font-weight:700; padding:10px 20px;" onclick="javascript:clickWishList('${user.mem_id }','${rsVO.rs_idx}',3)"><i class="fas fa-heart"></i>Add to wishlist</button>
+									<c:choose>
+									<c:when test="${isWish}">
+										<button id="wishBtn" class="btn hvr-hover" style="margin-bottom:5px; background-color:firebrick;" onclick="javascript:clickWishGrid('${user.mem_id }','${rsVO.rs_idx}',3)"><i id="rsWish_${rsVO.rs_idx}" class="fas fa-heart"></i>Add to wishlist</button>
+									</c:when>
+									<c:otherwise>
+										<button id="wishBtn" class="btn hvr-hover" style="margin-bottom:5px; background-color:#0B3B39;" onclick="javascript:clickWishGrid('${user.mem_id }','${rsVO.rs_idx}',3)"><i id="rsWish_${rsVO.rs_idx}" class="far fa-heart"></i>Add to wishlist</button>
+									</c:otherwise>
+									</c:choose>
 									</div>
 									<div class="col-md-8">
 										<c:if test="${not empty mem_id && mem_id == rsVO.mem_id}">
