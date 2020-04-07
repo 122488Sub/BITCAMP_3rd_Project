@@ -149,7 +149,7 @@
 	<jsp:include page="house_formData.jsp"></jsp:include>
 	
 	<div class="td_div" style="text-align: center;">
-		<button class="btn hvr-hover" onclick="updateForm()">Complete post edit</button>
+		<input type="button" class="btn hvr-hover" onclick="updateForm()" value="Complete post edit">
 		<!--  <input type="button" value="글 수정 등록" onclick="updateForm();">-->
 	</div>
 	</form>
