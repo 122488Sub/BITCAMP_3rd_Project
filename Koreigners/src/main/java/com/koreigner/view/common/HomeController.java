@@ -84,6 +84,7 @@ public class HomeController {
 					UserVO member = userService.getOneMember(mem_id);
 					request.setAttribute("user", member);
 					String auth_status = userService.getAuthStatus(mem_id);
+					System.out.println("auth_status : " + auth_status);
 					checkEmail(auth_status, model);
 				}
 			} else if(userToken != null && !userToken.equals("") && !userService.validToken(userToken).equals("Pass")){

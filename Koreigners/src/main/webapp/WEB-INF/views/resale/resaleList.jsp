@@ -102,9 +102,6 @@
                                     <li>
                                         <a class="nav-link active" href="#grid-view" data-toggle="tab"> <i class="fa fa-th"></i> </a>
                                     </li>
-                                    <li>
-                                        <a class="nav-link" href="#list-view" data-toggle="tab"> <i class="fa fa-list-ul"></i> </a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -159,29 +156,6 @@
 									</c:forEach>
 									</c:if>
 					            </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane fade" id="list-view">
-                                    <div class="list-view-box">
-                                        <div class="wishlist-box-main">
-											<div class="container">
-												<div class="row">
-													<div class="col-md-12 col-lg-12">
-														<div class="table-main table-responsive">
-															<table class="table" id="infoList">
-																<thead id="tHead">
-									
-																</thead>
-																<tbody id="list_box">
-									
-																</tbody>
-															</table>
-															<div id="tfoot"></div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

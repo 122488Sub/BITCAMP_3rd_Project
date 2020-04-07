@@ -59,7 +59,7 @@
 		/*position: absolute;*/
 		/* border: 5px solid #edf2f2; */
 		border-radius: 10px;
-		/*width:500px;*/
+		width:960px;
 		height:520px;
 		margin: 0px auto;
     	width: 960px;
