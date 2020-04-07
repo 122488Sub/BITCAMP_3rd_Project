@@ -20,6 +20,11 @@
 		float: none;
 		margin: 0 auto;
 	}
+	.img-size {
+	    width: auto; height: 400px;
+	    max-width: 400px;
+	    margin: 0 auto;
+	}
 </style>
 </head>
 
@@ -52,7 +57,7 @@
 					     		<li><img id="imgFile" src=""></li>
 					     		<div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
 			                        <div class="carousel-inner" role="listbox">
-			                            <div class="carousel-item active"> <img class="d-block w-100" style="height: 400px;" src="resources/img/common/default-placeholder.jpg" alt="First slide"> </div>
+			                            <div class="carousel-item active"> <img class="d-block img-size" src="resources/img/common/default-placeholder.jpg" alt="First slide"> </div>
 			                        </div>
 			                        <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"> 
 									<i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -74,10 +79,10 @@
 			                        <div class="carousel-inner" role="listbox">
 			                    	<c:forEach items="${house.img_nameList}" varStatus="status" var="img" >
 			                    		<c:if test="${status.index ==0}">
-			                    			<div class="carousel-item active"> <img class="d-block w-100" style="height: 400px;" src="resources/img/house/upload/${house.mem_email}/${img}" alt="slide${status.index+1}"> </div>
+			                    			<div class="carousel-item active"> <img class="d-block img-size" src="resources/img/house/upload/${house.mem_email}/${img}" alt="slide${status.index+1}"> </div>
 						        		</c:if>
 						        		<c:if test="${status.index !=0}">
-						        			<div class="carousel-item"> <img class="d-block w-100" style="height: 400px;" src="resources/img/house/upload/${house.mem_email}/${img}" alt="slide${status.index+1}"> </div>
+						        			<div class="carousel-item"> <img class="d-block img-size" src="resources/img/house/upload/${house.mem_email}/${img}" alt="slide${status.index+1}"> </div>
 						        		</c:if>
 						     		</c:forEach>
 			                        </div>

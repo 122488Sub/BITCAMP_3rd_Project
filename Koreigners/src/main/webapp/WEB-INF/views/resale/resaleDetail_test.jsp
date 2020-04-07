@@ -13,6 +13,19 @@ $( function() {
 	$('#price').html( numberWithCommas(${rsVO.price}));
 });
 </script>
+<style>
+	.img-size {
+	    width: auto; height: 400px;
+	    max-width: 400px;
+	    margin: 0 auto;
+	}
+	
+	.img-size-small {
+	    width: auto; height: 100px;
+	    max-width: 100px;
+	    margin: 0 auto;
+	}
+</style>
 <body>
 
     <br><br><br>
@@ -45,7 +58,7 @@ $( function() {
 		     		<li><img id="imgFile" src=""></li>
 		     		<div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active"> <img class="d-block" style="height: 500px; margin:0 auto;" src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg" alt="First slide"> </div>
+                            <div class="carousel-item active"> <img class="d-block img-size" src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg" alt="First slide"> </div>
                         </div>
                         <a class="carousel-control-prev" href="#carousel-example-1" role="button" data-slide="prev"> 
 						<i class="fa fa-angle-left" aria-hidden="true"></i>
@@ -57,7 +70,7 @@ $( function() {
 					</a>
                         <ol class="carousel-indicators">
                             <li data-target="#carousel-example-1" data-slide-to="0" class="active">
-                                <img class="d-block w-100 img-fluid" style="height: 100%; margin:0 auto;" src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg" alt="" />
+                                <img class="d-block img-size-small img-fluid" src="${pageContext.request.contextPath}/resources/img/resale/default-placeholder.jpg" alt="" />
                             </li>
                         </ol>
                     </div>
@@ -67,10 +80,10 @@ $( function() {
                         <div class="carousel-inner" role="listbox">
                     	<c:forEach items="${imgList}" varStatus="status" var="img" >
                     		<c:if test="${status.index ==0}">
-                    			<div class="carousel-item active"> <img class="d-block" style="height: 500px; margin:0 auto;" src="${pageContext.request.contextPath}/resources/img/resale/${rsVO.mem_id}/${img.rs_file_name}" alt="slide${status.index+1}"> </div>
+                    			<div class="carousel-item active"> <img class="d-block img-size" src="${pageContext.request.contextPath}/resources/img/resale/${rsVO.mem_id}/${img.rs_file_name}" alt="slide${status.index+1}"> </div>
 			        		</c:if>
 			        		<c:if test="${status.index !=0}">
-			        			<div class="carousel-item"> <img class="d-block" style="height: 500px; margin:0 auto;" src="${pageContext.request.contextPath}/resources/img/resale/${rsVO.mem_id}/${img.rs_file_name}" alt="slide${status.index+1}"> </div>
+			        			<div class="carousel-item"> <img class="d-block img-size" src="${pageContext.request.contextPath}/resources/img/resale/${rsVO.mem_id}/${img.rs_file_name}" alt="slide${status.index+1}"> </div>
 			        		</c:if>
 			     		</c:forEach>
                         </div>

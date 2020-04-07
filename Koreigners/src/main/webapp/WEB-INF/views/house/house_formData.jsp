@@ -36,7 +36,7 @@
 				</td>
 			</tr>
 			<tr>
-				<th>Loctation</th>
+				<th>Location</th>
 				<td colspan="3">
 					<div class="td_div">
 						<label>RoadAddress:</label> 
@@ -63,7 +63,7 @@
 				<th>Floor</th>
 				<td style="width: 40%">
 					<div class="td_div">
-						<label>Buliding: </label> 
+						<label>Building: </label> 
 						<input type="number" id="" class="inputBox" style="width:20%" name="bulid_layers"  step="1" min="1" value='1'> 
 						<label style="margin-left: 30px;">Floor: </label> 
 						<input type="number" id="" class="inputBox" style="width:20%" name="floor_layers" step="1" min="-3" value='1'>
@@ -216,12 +216,12 @@
 			
 				</tr>
 				<tr>
-					<th>Ohter</th>
+					<th>Other</th>
 					<td class="td_option">
 						<input type="checkbox" class="chk_option" name="internet" value="1"> Internet
 					</td>
 					<td class="td_option">
-						<input type="checkbox" class="chk_option" name="wifi" value="1"> Wifi
+						<input type="checkbox" class="chk_option" name="wifi" value="1"> Wi-fi
 					</td>
 					<td class="td_option">
 						<input type="checkbox" class="chk_option" name="elevator" value="1"> Elevator
