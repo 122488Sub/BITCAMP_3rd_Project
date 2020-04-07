@@ -10,7 +10,30 @@ let searchKeyword = "";        // 검색 단어
 function loadPage(){
 	getJson();
 }
-
+function setSelectDoSi(){
+	var selectDosi="";
+	$.each(dosiCheck, function(index, obj){
+		selectDosi+= "["+this.Do;
+		var tmpLength=this.Si.length;
+		console.log(tmpLength);
+		$.each(this.Si, function(index, obj){
+			if(index==0) selectDosi+=" : ";
+			selectDosi+=this;
+			if(index!=tmpLength-1)selectDosi+="/";
+		});
+		selectDosi+="] ";
+	});
+	
+	var selectDosiHtml="";
+	if(si_List.length + do_List.length -2 !=0){
+		selectDosiHtml=(si_List.length + do_List.length -2)+" ) - " +selectDosi;
+	}
+	if(selectDosiHtml.length>=60){
+		selectDosiHtml = selectDosiHtml.substr(0, 60) + "...";
+	}
+	$("#th_selectDoSi").html(selectDosiHtml);
+	
+}
 
 
 //페이징
@@ -78,6 +101,7 @@ function loadPage(){
 //	});
 //}
 function getListCPage(cPage){
+	setSelectDoSi();
 	$.ajax({
 		url : 'hireJsonFilter.do?cPage=' + cPage,
 		type : 'post',
@@ -254,7 +278,7 @@ $(function(){
 
 //json 데이터 가져오기
 function getJson(){
-	
+	setSelectDoSi();
 	jQuery.ajaxSettings.traditional = true;
 	$.ajax({
 		url : 'hireJsonFilter.do',

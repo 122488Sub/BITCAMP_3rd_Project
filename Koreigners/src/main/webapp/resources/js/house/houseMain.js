@@ -25,14 +25,14 @@
 	    
 	    if(  $(".chk_do_parent").is(":checked") ) {
 	    	do_List.push(do_en);
+	    	dosiCheck.push({Do: do_en, Si:[]});
 	    }else{
 	    	var tmp= Number($(".CD_"+do_en).attr('id').split('CD')[1]);
 	    	$("#CD"+tmp).css( {'fill':color[tmp]} ); 
-	    	console.log('z: '+tmp);
-	    	console.log('do_en: '+do_en);
-	    	console.log('attr: '+$(".CD_"+do_en).attr('id'));
-	    	console.log($(".CD_"+do_en).attr('id').split('CD')[1]);
 	    	do_List.splice(do_List.indexOf(do_en), 1);
+	    	
+	    	dosiCheck.splice(dosiCheck.findIndex(function(item) {return item.Do === do_en}),1);
+	    	
 	    }
 	    
 	    $(".chk_do_child").each(function(i){   //jQuery로 for문 돌면서 check 된값 배열에 담는다
@@ -58,12 +58,24 @@
 	    		do_List.splice(do_List.indexOf(do_en), 1);
 	    	}
 	    	si_List.push(chk.value);
-	    	console.log("siList:" + si_List);
+	    	
+	    	
+	    	$.each(dosiCheck, function(index, obj){
+	    		if(this.Do==do_en){
+	    			this.Si.push(chk.value);
+	    		}
+	    	});
 	    	
 	    }else{
 	    	var tmp= Number($(".CD_"+do_en).attr('id').split('CD')[1]);
 	    	$("#CD"+tmp).css( {'fill':color[tmp]} ); 
 	    	si_List.splice(si_List.indexOf(chk.value), 1);
+	    	
+	    	$.each(dosiCheck, function(index, obj){
+	    		if(this.Do==do_en){
+	    			this.Si.splice(this.Si.indexOf(chk.value), 1);
+	    		}
+	    	});
 	    }
 	    
 	    getData();
@@ -72,7 +84,30 @@
 	function numberWithCommas(x) {
 	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
-	
+	function setSelectDoSi(){
+		var selectDosi="";
+		$.each(dosiCheck, function(index, obj){
+			selectDosi+= "["+this.Do;
+			var tmpLength=this.Si.length;
+			console.log(tmpLength);
+			$.each(this.Si, function(index, obj){
+				if(index==0) selectDosi+=" : ";
+				selectDosi+=this;
+				if(index!=tmpLength-1)selectDosi+="/";
+			});
+			selectDosi+="] ";
+		});
+		
+		var selectDosiHtml="";
+		if(si_List.length + do_List.length -2 !=0){
+			selectDosiHtml=(si_List.length + do_List.length -2)+" ) - " +selectDosi;
+		}
+		if(selectDosiHtml.length>=60){
+			selectDosiHtml = selectDosiHtml.substr(0, 60) + "...";
+		}
+		$("#th_selectDoSi").html(selectDosiHtml);
+		
+	}
 	function getData() {
 		var param={
 				'do_enList' : do_List,  // '본인 vo변수이름 : 데이터이름'
@@ -86,7 +121,8 @@
 				'stayNum':stayNum,
 				'sortSelect':sortSelect
 		}
-		 $(".th_selectDoSi").html("Select)"+ (si_List.length + do_List.length -2) );
+		setSelectDoSi();
+		
 		//----------------------------------------
 		 jQuery.ajaxSettings.traditional = true;
 		 $.ajax({
@@ -148,7 +184,7 @@
 					
 					
 					
-					$(".th_selectDoSi").html("");
+					//$(".th_selectDoSi").html("");
 					
 					
 					
@@ -177,6 +213,7 @@
 				'stayNum':stayNum,
 				'sortSelect':sortSelect
 		}
+		setSelectDoSi();
 		 jQuery.ajaxSettings.traditional = true;
 		$.ajax({
 			url : 'getHouseListData.do?cPage=' + cPage,

@@ -137,6 +137,11 @@
 		
 		 <div id="option_panel" style="width:600px;">
 			<table class='table_dosi form-control'>
+				<thead>
+					<tr>
+						<th colspan = '6' id='th_selectDoSi' class='th_selectDoSi'></th>
+					</tr>
+				</thead>
 				<tbody class='tbody_dosi'>
 					<!-- $(".tbody_dosi").html(); 로 내용추가 -->
 				</tbody>
@@ -292,6 +297,7 @@ var color=[	"",
 	"#0B80F5"
 ];
 //vo에서 도와 시의 내용을 가질 List<String> 변수를 각각 만들것
+var dosiCheck=[];
 var do_List=new Array();
 var allDoList=new Array();
 var si_List=new Array();
@@ -309,8 +315,7 @@ function getDoSiData(do_kor,do_en,idx) {
 		allDoList.push(do_en);	
 	}
 	
-	console.log("allDoList : " + allDoList);
-	
+	dosiCheck.push({Do: do_en, Si:[]});
 	$.ajax({
 		type : "get",
 		url : "getKoreaAddressList.do",
@@ -398,10 +403,13 @@ function chkParent() {
     
     if(  $(".chk_do_parent").is(":checked") ) {
     	do_List.push(do_en);
+    	dosiCheck.push({Do: do_en, Si:[]});
+
     }else{
     	var tmp= Number($(".CD_"+do_en).attr('id').split('CD')[1]);
     	$("#CD"+tmp).css( {'fill':color[tmp]} ); 
     	do_List.splice(do_List.indexOf(do_en), 1);
+    	dosiCheck.splice(dosiCheck.findIndex(function(item) {return item.Do === do_en}),1);
     }
     
     $(".chk_do_child").each(function(i){   //jQuery로 for문 돌면서 check 된값 배열에 담는다
@@ -427,12 +435,23 @@ function chkChild(chk) {
     		do_List.splice(do_List.indexOf(do_en), 1);
     	}
     	si_List.push(chk.value);
-    	console.log("siList:" + si_List);
+    	
+    	$.each(dosiCheck, function(index, obj){
+    		if(this.Do==do_en){
+    			this.Si.push(chk.value);
+    		}
+    	});
     	
     }else{
     	var tmp= Number($(".CD_"+do_en).attr('id').split('CD')[1]);
     	$("#CD"+tmp).css( {'fill':color[tmp]} ); 
     	si_List.splice(si_List.indexOf(chk.value), 1);
+    	
+    	$.each(dosiCheck, function(index, obj){
+    		if(this.Do==do_en){
+    			this.Si.splice(this.Si.indexOf(chk.value), 1);
+    		}
+    	});
     }
     
     getJson();

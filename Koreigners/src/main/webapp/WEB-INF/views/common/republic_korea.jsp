@@ -99,23 +99,23 @@
 				<a href="javascript:getDoSiData('제주특별자치도','Jeju-do',17)"><path id="CD17" class="OUTLINE CD_Jeju-do" d =" M 150 950 l 5 2 3 2 5 3 6 2 3 5 -1 4 0 0 1 0 0 0 1 1 2 1 -2 1 3 0 -1 7 -2 1 -3 7 -4 4 -3 5 -3 5 -5 4 -5 0 -3 1 0 0 0 0 0 0 -1 1 -2 1 0 1 -3 1 -8 2 -4 0 0 0 -2 0 -3 2 -6 3 -7 0 -8 1 -7 1 -7 -1 -8 0 -7 0 -6 1 -3 5 -6 -1 -3 -4 -4 -3 -5 -2 -2 -4 -2 -8 2 -7 3 -4 1 0 1 0 3 -3 4 -3 3 -5 3 -4 4 -2 6 -4 4 -2 5 -1 6 -1 7 -3 4 -2 4 -1 5 -1 -1 1 4 -1 7 -1 6 -2 3 -3 1 1 0 0 1 0 0 1 0 0 1 0 2 -1 2 0 1 0 0 0 1 0 6 -1 z " /></a>
 			</g>
 			<g filter="url(#dropshadow)">
-				<text id="LCD1" class="TEXT" x="156" y="214">서울특별시</text>
-				<text id="LCD2" class="TEXT" x="503" y="695">부산광역시</text>
-				<text id="LCD3" class="TEXT" x="418" y="567">대구광역시</text>
-				<text id="LCD4" class="TEXT" x="67" y="177">인천광역시</text>
-				<text id="LCD5" class="TEXT" x="127" y="707">광주광역시</text>
-				<text id="LCD6" class="TEXT" x="221" y="463">대전광역시</text>
-				<text id="LCD7" class="TEXT" x="531" y="622">울산광역시</text>
-				<text id="LCD8" class="TEXT" x="199" y="418">세종특별자치시</text>
-				<text id="LCD9" class="TEXT" x="216" y="245">경기도</text>
-				<text id="LCD10" class="TEXT" x="370" y="179">강원도</text>
-				<text id="LCD11" class="TEXT" x="294" y="381">충청북도</text>
-				<text id="LCD12" class="TEXT" x="105" y="449">충청남도</text>
-				<text id="LCD13" class="TEXT" x="179" y="592">전라북도</text>
-				<text id="LCD14" class="TEXT" x="138" y="764">전라남도</text>
-				<text id="LCD15" class="TEXT" x="447" y="460">경상북도</text>
-				<text id="LCD16" class="TEXT" x="367" y="672">경상남도</text>
-				<text id="LCD17" class="TEXT" x="76" y="986">제주특별자치도</text>
+				<text id="LCD1" class="TEXT" x="156" y="214">Seoul</text>
+				<text id="LCD2" class="TEXT" x="503" y="695">Busan</text>
+				<text id="LCD3" class="TEXT" x="418" y="567">Daegu</text>
+				<text id="LCD4" class="TEXT" x="67" y="177">Incheon</text>
+				<text id="LCD5" class="TEXT" x="127" y="707">Gwangju</text>
+				<text id="LCD6" class="TEXT" x="221" y="463">Daejeon</text>
+				<text id="LCD7" class="TEXT" x="531" y="622">Ulsan</text>
+				<text id="LCD8" class="TEXT" x="199" y="418">Sejong-si</text>
+				<text id="LCD9" class="TEXT" x="216" y="245">Gyeonggi-do</text>
+				<text id="LCD10" class="TEXT" x="370" y="179">Gangwon-do</text>
+				<text id="LCD11" class="TEXT" x="294" y="381">Chungcheongbuk-do</text>
+				<text id="LCD12" class="TEXT" x="105" y="449">Chungcheongnam-do</text>
+				<text id="LCD13" class="TEXT" x="179" y="592">Jeollabuk-do</text>
+				<text id="LCD14" class="TEXT" x="138" y="764">Jeollanam-do</text>
+				<text id="LCD15" class="TEXT" x="447" y="460">Gyeongsangbuk-do</text>
+				<text id="LCD16" class="TEXT" x="367" y="672">Gyeongsangnam-do</text>
+				<text id="LCD17" class="TEXT" x="76" y="986">Jeju-do</text>
 			</g>
 			</svg>
 			
@@ -125,7 +125,7 @@
 		<table class='table_dosi form-control'>
 			<thead>
 				<tr>
-					<th colspan = '6' class='th_selectDoSi'></th>
+					<th colspan = '6' id='th_selectDoSi' class='th_selectDoSi'></th>
 				</tr>
 			</thead>
 			<tbody class='tbody_dosi'>
@@ -166,6 +166,7 @@ var color=[	"",
 			"#AFC2D5",
 			"#0B80F5"
 		];
+var dosiCheck=[];
 //vo에서 도와 시의 내용을 가질 List<String> 변수를 각각 만들것
 var do_List=new Array();
 var allDoList=new Array();
@@ -183,8 +184,15 @@ function getDoSiData(do_kor,do_en,idx) {
 		console.log("allDoList 추가 전 : " + allDoList);
 		allDoList.push(do_en);	
 	}
-	
+	//console.log("do_en))" +do_en);
+	//$("#th_selectDoSi").html(do_en);
 	console.log("allDoList : " + allDoList);
+	dosiCheck.push({Do: do_en, Si:[]});
+	console.log("dosiCheck: "+dosiCheck);
+	$.each(dosiCheck, function(index, obj){
+		console.log(this);
+		
+	});
 	
 	$.ajax({
 		type : "get",
@@ -212,7 +220,7 @@ function getDoSiData(do_kor,do_en,idx) {
 						dispHtml += "<tr>";
 					}
 					dispHtml += "<td>"
-					dispHtml += "		<input type='checkbox' class='custom-checkbox' id='si_"+this.gu_gun_eup_eng+"'"
+					dispHtml += "		<input type='checkbox' class='chk_do_child custom-checkbox' id='si_"+this.gu_gun_eup_eng+"'"
 											+"class='chk_do_child' value='"+this.gu_gun_eup_eng+"'"
 											+"onClick='javascript:chkChild(this)'";
 					if(si_List.indexOf(this.gu_gun_eup_eng)!= -1){
@@ -236,6 +244,8 @@ function getDoSiData(do_kor,do_en,idx) {
 			$(".tbody_dosi").html(dispHtml);
 			
 			$("#chk_do_parent").prop("checked", true);
+			
+			
 			
 			
 			if(do_List.indexOf(do_en)== -1){
