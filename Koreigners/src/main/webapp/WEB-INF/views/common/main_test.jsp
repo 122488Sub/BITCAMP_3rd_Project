@@ -10,6 +10,15 @@
     <link rel="stylesheet" href="resources/css/main/mainCategory.css">
     <script type="text/javascript" src="resources/js/common/togleWish.js" ></script>
 	<script type="text/javascript" src="resources/js/common/homeMain.js" ></script>
+	<script>
+	$(function(){
+		var auth_check = ${auth_check};
+		if(auth_check == 0) {
+			alert("Please verify your e-mail for unlimited access to our website.");
+		}
+	});
+
+</script>
 
 </head>
 

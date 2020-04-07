@@ -84,15 +84,17 @@ public class HomeController {
 					UserVO member = userService.getOneMember(mem_id);
 					request.setAttribute("user", member);
 					String auth_status = userService.getAuthStatus(mem_id);
+					System.out.println("auth_status : " + auth_status);
 					checkEmail(auth_status, model);
 				}
 			} else if(userToken != null && !userToken.equals("") && !userService.validToken(userToken).equals("Pass")){
 				System.out.println("==============userToken이 있으면서 토큰 유효기간이 만료된 경우");
 				String token_status = userService.validToken(userToken);
 				System.out.println("token_status : " + token_status);
+			} else {
+				System.out.println("================ 아무것도 없는 경우");
+				model.addAttribute("auth_check", "1");				
 			}
-			System.out.println("================ 아무것도 없는 경우");
-			model.addAttribute("auth_check", "1");
 		}
 		
 		model.addAttribute("postType", "main");
