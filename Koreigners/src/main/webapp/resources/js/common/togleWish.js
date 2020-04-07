@@ -25,34 +25,28 @@ function clickWishGrid(mem_id, b_idx,board_idx){
 	var result=clickWishList(mem_id, b_idx,board_idx);
 	console.log(result);
 	if(result==1){
-		if(board_idx==4 ){
+		if(board_idx==4 || board_idx==1 ){
 			$('#wish_'+b_idx).removeClass('far');
 			$('#wish_'+b_idx).addClass('fas');
+			$('#wishBtn').css('backgroundColor','firebrick');
 		}
 		else if(board_idx==3){
 			$('#rsWish_'+b_idx).removeClass('far');
 			$('#rsWish_'+b_idx).addClass('fas');
-		}
-		else if(board_idx==1){
-			$('#wish_'+b_idx).removeClass('far');
-			$('#wish_'+b_idx).addClass('fas');
 			$('#wishBtn').css('backgroundColor','firebrick');
-			
 		}
 	}else{
-		if(board_idx==4){
-			$('#wish_'+b_idx).removeClass('fas');
-			$('#wish_'+b_idx).addClass('far');
-		}
-		else if(board_idx==3){
-			$('#rsWish_'+b_idx).removeClass('fas');
-			$('#rsWish_'+b_idx).addClass('far');
-		}
-		else if(board_idx==1){
+		if(board_idx==4 || board_idx==1 ){
 			$('#wish_'+b_idx).removeClass('fas');
 			$('#wish_'+b_idx).addClass('far');
 			$('#wishBtn').css('backgroundColor','#0B3B39');
 		}
+		else if(board_idx==3){
+			$('#rsWish_'+b_idx).removeClass('fas');
+			$('#rsWish_'+b_idx).addClass('far');
+			$('#wishBtn').css('backgroundColor','#0B3B39');
+		}
+	
 	}
 	
 }

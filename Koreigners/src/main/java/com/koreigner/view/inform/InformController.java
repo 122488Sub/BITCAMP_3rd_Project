@@ -62,8 +62,10 @@ public class InformController {
 		
 		model.addAttribute("inform",  informVO); //데이터 저장
 		String mem_id = (String) request.getAttribute("mem_id");
-		if(mem_id!=null)
+		if(mem_id!=null) {
 			model.addAttribute("isWish",  pService.isWish(new p_MyPageVO(mem_id,4,informVO.getInfo_idx())));
+		}
+		
 		model.addAttribute("postType", "inform");
 		
 		return "inform/infoDetail.page";

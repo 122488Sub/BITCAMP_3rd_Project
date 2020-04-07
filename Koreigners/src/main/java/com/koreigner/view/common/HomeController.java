@@ -90,9 +90,10 @@ public class HomeController {
 				System.out.println("==============userToken이 있으면서 토큰 유효기간이 만료된 경우");
 				String token_status = userService.validToken(userToken);
 				System.out.println("token_status : " + token_status);
+			}else {
+				System.out.println("================ 아무것도 없는 경우");
+				model.addAttribute("auth_check", "1");
 			}
-			System.out.println("================ 아무것도 없는 경우");
-			model.addAttribute("auth_check", "1");
 		}
 		
 		model.addAttribute("postType", "main");
@@ -105,7 +106,7 @@ public class HomeController {
 	
 	
 	private void checkEmail(String auth_status, Model model) {
-
+		
 		if(auth_status != null && auth_status.equals("0")) { //이메일 인증을 완료하지 못한 경우
 			model.addAttribute("auth_check", "0");
 		} else { //이메일 인증 환료 또는 비회원 메인페이지 이동
