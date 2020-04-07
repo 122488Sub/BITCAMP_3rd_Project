@@ -186,13 +186,9 @@ function getDoSiData(do_kor,do_en,idx) {
 	}
 	//console.log("do_en))" +do_en);
 	//$("#th_selectDoSi").html(do_en);
-	console.log("allDoList : " + allDoList);
+	
 	dosiCheck.push({Do: do_en, Si:[]});
-	console.log("dosiCheck: "+dosiCheck);
-	$.each(dosiCheck, function(index, obj){
-		console.log(this);
-		
-	});
+	
 	
 	$.ajax({
 		type : "get",
