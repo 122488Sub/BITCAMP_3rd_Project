@@ -325,6 +325,6 @@ function inputNumberRemoveComma(str) {
 				
 		}
 		
-		
+		return true;
 	}
 		

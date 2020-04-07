@@ -96,9 +96,14 @@ function sample6_execDaumPostcode() {
             }
             
             var addr_enSplit = addr_en.split(",");
-            
-            sido_en = addr_enSplit[3];
-            sigugun_en = addr_enSplit[2];
+            var splitLen=addr_enSplit.length;
+            console.log("addr_en: "+ addr_en );
+            sido_en = addr_enSplit[splitLen-2].trim();
+            if(addr_en.indexOf('-si,')!= -1 && addr_en.indexOf('-gu,')!= -1){
+            	sigugun_en = (addr_enSplit[splitLen-4]+","+addr_enSplit[splitLen-3]).trim();
+            }else{
+            	sigugun_en = addr_enSplit[splitLen-3].trim();
+            }
             console.log("sido_en : " + sido_en);
             console.log("sido_ko : " + sido_ko);
             console.log("sigugun_en : " + sigugun_en);
@@ -113,7 +118,8 @@ function sample6_execDaumPostcode() {
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById("addr_dt_kor").value="";
             document.getElementById("addr_dt_kor").focus();
-            document
+            
+            console.log($("#do_en").val());
         }
     }).open();
 }

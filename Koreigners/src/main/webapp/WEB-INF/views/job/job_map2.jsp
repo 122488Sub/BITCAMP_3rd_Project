@@ -427,6 +427,7 @@ function chkChild(chk) {
     		do_List.splice(do_List.indexOf(do_en), 1);
     	}
     	si_List.push(chk.value);
+    	console.log("siList:" + si_List);
     	
     }else{
     	var tmp= Number($(".CD_"+do_en).attr('id').split('CD')[1]);
