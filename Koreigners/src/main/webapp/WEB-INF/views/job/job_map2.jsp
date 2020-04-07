@@ -61,6 +61,8 @@
 		border-radius: 10px;
 		/*width:500px;*/
 		height:520px;
+		margin: 0px auto;
+    	width: 960px;
 		/*background-color: #edf2f2;*/	
 	}
 

@@ -20,33 +20,33 @@ function checkSize() {
 function changeMinSizeUtilities() {
 	
 	$("#map").css('float', 'none');
-	$("#map").css('width','350px');
 	$("#map").css('margin','0 auto');
+	$("#map").css('width','350px');
 	$("#map").css('height','450px');
 	
 	$("#responDiv").css('height', '900px');
 	$("#content").css('height', '900px');
 	
 	$("#option_panel").css('float', 'none');
-	$("#option_panel").css('width','100%');
 	$("#option_panel").css('margin','0 auto');
+	$("#option_panel").css('width','560px');
 	
 	$(".table_dosi").css('margin','0 auto');
 	$("#filterBox").css('margin','0 auto');
 	
 }
 function changeMaxSizeUtilities() {
-	$("#map").css('width','35%');
 	$("#map").css('float', 'left');
-	$("#map").css('height','450px');
 	$("#map").css('margin','0 auto');
+	$("#map").css('width','350px');
+	$("#map").css('height','450px');
 	
 	$("#content").css('height', '450px');
 	$("#responDiv").css('height', '450px');
 	
-	$("#option_panel").css('margin','0 auto');
-	$("#option_panel").css('width','60%');
 	$("#option_panel").css('float', 'left');
+	$("#option_panel").css('margin','0 auto');
+	$("#option_panel").css('width','560px');
 	
 	
 }

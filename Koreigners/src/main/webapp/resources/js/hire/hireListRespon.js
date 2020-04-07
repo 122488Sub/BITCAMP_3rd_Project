@@ -21,10 +21,10 @@ function changeMinSizeUtilities() {
 
 	$("#content").css('height', '1040px');
 	$("#mapBg").css('height', '1040px');
-	$("#map").css('width','50%');
+	//$("#map").css('width','50%');
 	$("#map").css('float','none');
 	$("#map").css('margin','0 auto');
-	$("#option_panel").css('width','80%');
+	//$("#option_panel").css('width','80%');
 	$("#option_panel").css('float','none');
 	$("#option_panel").css('margin','0 auto');
 
@@ -32,10 +32,10 @@ function changeMinSizeUtilities() {
 function changeMaxSizeUtilities() {
 	$("#content").css('height', '520px');
 	$("#mapBg").css('height', '520px');
-	$("#map").css('width','35%');
+	//$("#map").css('width','35%');
 	$("#map").css('float','left');
 	$("#map").css('margin','0 auto');
-	$("#option_panel").css('width','60%');
+	//$("#option_panel").css('width','60%');
 	$("#option_panel").css('float','left');
 	$("#option_panel").css('margin','0 auto');
 }
