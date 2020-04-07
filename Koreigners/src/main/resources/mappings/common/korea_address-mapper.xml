@@ -8,7 +8,7 @@
 		SELECT DISTINCT 
 			DO_EN, GU_GUN_EUP_ENG, REPLACE(SI_GU_GUN_EUP_ENG, '(', '&lt;br/&gt;'||'(' )as SI_GU_GUN_EUP_ENG
 		FROM 
-			T_TEST 
+			T_ADDRESS_DOSI
 		WHERE 
 			DO_KOR=#{do_kor} 
 		ORDER BY 

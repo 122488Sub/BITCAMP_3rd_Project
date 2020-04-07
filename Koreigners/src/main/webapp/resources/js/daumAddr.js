@@ -118,7 +118,8 @@ function sample6_execDaumPostcode() {
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById("addr_dt_kor").value="";
             document.getElementById("addr_dt_kor").focus();
-            document
+            
+            console.log($("#do_en").val());
         }
     }).open();
 }
