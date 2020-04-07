@@ -1,8 +1,7 @@
 function insertForm(){
 	
-	checkForm();
-
-	$("#form").attr('action',"house_insert_process.do").submit();	
-	
+	if(checkForm()){
+		$("#form").attr('action',"house_insert_process.do").submit();	
+	}
 }
 	
