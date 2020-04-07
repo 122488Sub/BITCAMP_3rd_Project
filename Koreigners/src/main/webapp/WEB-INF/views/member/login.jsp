@@ -35,7 +35,7 @@ $(function(){
 	
 	var pw_reset = ${pw_reset};
 	if(pw_reset == 1) {
-		$("#notice").text("If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes.");
+		$("#notice").html("If your email address exists in our database, <br>you will receive a password recovery link at your email address in a few minutes.");
 	}
 	
 
@@ -45,7 +45,7 @@ $(function(){
 
 	<br><br><br>
 	<!-- Start All Title Box -->
-    <div class="all-title-box">
+    <div class="all-title-box text-left">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

@@ -280,7 +280,7 @@ function getJson(){
 			
 			if(list.length == 0) {
 				dataTag += "<tr>";
-				dataTag += "<th colspan='6'>데이터가 없습니다.</th>";
+				dataTag += "<th colspan='6' class='text-center' style='font-size:2em'>No data.</th>";
 				dataTag += "</tr>"
 				
 				$("#list_box").html(dataTag);

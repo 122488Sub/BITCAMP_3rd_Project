@@ -57,13 +57,14 @@
 						<div id="getMemberEmail"></div>
 					</div>
 					<div class="col-md-10 mb-3 center text-left">
-						<label>Nickname</label>
+						<label>Password</label>
 						<input type="password" id="mem_pw" name="mem_pw" class="form-control mb-2" placeholder="At least 6 characters">
 						<div id="password_check"></div>
 					</div>						
 				</div>
 				<div class="mb-3">
 					<input type="submit" class="signIn" value="Create Account">
+					<input type="hidden" name="mem_cate" value="p">
 				</div>			
 				<hr>
 				<div class="center">

@@ -57,7 +57,7 @@
 	}
 	#mapBg {
 		/*position: absolute;*/
-		border: 5px solid #edf2f2;
+		/* border: 5px solid #edf2f2; */
 		border-radius: 10px;
 		/*width:500px;*/
 		height:520px;
@@ -353,7 +353,7 @@ function getDoSiData(do_kor,do_en,idx) {
 				}); 
 			}
 			
-			$("#CD"+idx).css( {'fill':'blue'} ); 
+			$("#CD"+idx).css( {'fill':'#f0b773'} ); 
 			
 			$(".tbody_dosi").html(dispHtml);
 			

@@ -2469,7 +2469,7 @@
  .carousel-indicators{
      position: relative;
      bottom: 0;
-     background: #000000;
+     background: #edf2f2;
 }
  .carousel-indicators li{
      width: 30%;

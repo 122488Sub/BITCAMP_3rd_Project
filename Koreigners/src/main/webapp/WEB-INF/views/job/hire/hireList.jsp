@@ -83,16 +83,13 @@ td{height:80px;}
 				<jsp:include page="../job_map2.jsp"/>
     		</div>
     		<br>
-    		<div class="text-right" style="margin-top:80px">
 			<c:choose>
 				<c:when test="${user.mem_cate eq 'c'}">
-					<div style="margin-right:85px"><a href="hireWrite_go.do" class="btn hvr-hover" style="color:white">Post an Ad</a></div>
+					<div class="text-right" style="margin-right:85px"><a href="hireWrite_go.do" class="btn hvr-hover" style="color:white">Post an Ad</a></div>
 				</c:when>
 				<c:otherwise>
-					<div></div>
 				</c:otherwise>
 			</c:choose>
-    		</div>
     		
 		    <div class="wishlist-box-main">
 		        <div class="container">
@@ -112,15 +109,13 @@ td{height:80px;}
 		                            <tbody id="list_box">
 		                                <tr>
 		                                    <td class="thumbnail-img">
-		                                         <p>회사이름</p>
+		                                         <p>Company Name</p>
 		                                    </td>
 		                                    <td class="name-pr">
-		                                        <a href="#">
-											location6
-												</a>
+		                                        <a href="#">location6</a>
 		                                    </td>
 		                                    <td class="price-pr">
-		                                        <p>타이틀</p>
+		                                        <p>Title</p>
 		                                    </td>
 		                                    <td class="quantity-box" id="salryTd">
 		                                    <div class="salaryCondtion">
@@ -129,7 +124,7 @@ td{height:80px;}
 		                                    </div>
 		                                    </td>
 		                                    <td class="add-pr">
-		                                        	포스팅날짜
+		                                        	Post Date
 		                                    </td>
 		                                </tr>
 		                            </tbody>
