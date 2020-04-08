@@ -53,12 +53,12 @@
 					</div>
 					<div class="col-md-10 mb-3 center text-left">
 						<label>Email(ID)</label>
-						<input type="email" id="mem_id" name="mem_id" class="form-control mb-2" placeholder="email address">
+						<input type="email" id="mem_id" name="mem_id" class="form-control mb-2" placeholder="email address" autocomplete="new password">
 						<div id="getMemberEmail"></div>
 					</div>
 					<div class="col-md-10 mb-3 center text-left">
 						<label>Password</label>
-						<input type="password" id="mem_pw" name="mem_pw" class="form-control mb-2" placeholder="At least 6 characters">
+						<input type="password" id="mem_pw" name="mem_pw" class="form-control mb-2" placeholder="At least 6 characters" autocomplete="new password">
 						<div id="password_check"></div>
 					</div>						
 				</div>

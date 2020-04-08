@@ -97,10 +97,10 @@
 	                        <div class="col-md-6 mb-3">
 	                            <label for="nationality">Nationality</label>
                             	<c:if test="${not empty mvo.mem_nationality }">
-                            	<input type="text" class="form-control" value="${mvo.mem_nationality }" disabled>	
+                            		<input type="text" class="form-control" value="${mvo.mem_nationality }" disabled>	
                             	</c:if>
 				                <c:if test="${empty mvo.mem_nationality }">
-				                	Please fill your profile first.
+				                	<input type="text" class="form-control" value="Please fill your profile first." disabled>	
 				                </c:if>
 	                        </div>
                         </div>
@@ -136,10 +136,10 @@
                         <div class="mb-3">
                             <label for="residence">Residence area</label>
                             <div class="input-group">
-                                <c:if test="${not empty mvo.mem_address && !mvo.mem_address eq ' '}">
+                                <c:if test="${not empty mvo.mem_address }">
                             		<input type="text" class="form-control" value="${mvo.mem_address }" disabled>	
                             	</c:if>
-				                <c:if test="${empty mvo.mem_address || mvo.mem_address eq ' '}">
+				                <c:if test="${empty mvo.mem_address}">
 				                	<input type="text" class="form-control" value="Please fill your profile first." disabled>
 				                </c:if>
                             </div>

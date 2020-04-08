@@ -45,7 +45,7 @@ function clickApplyEmployment(id, company,hire){
 		 if(isResume){
 			checkApply();
 		 }else{
-			 var jbResult = confirm( '이력서가 없는데 작성좀해' );
+			 var jbResult = confirm( 'You have to complete your resume.' );
 			 if(jbResult){
 				 post_goto('myPage_go.do?type=resume', {'':null},false); 
 			 }

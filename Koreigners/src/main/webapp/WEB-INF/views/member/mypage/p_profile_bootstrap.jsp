@@ -73,19 +73,19 @@
                                     <h3>Basic Profile</h3>
                                 </div>
                                 <div class="mb-3">
-	                                <label for="email">ID(Email) *</label>
+	                                <label for="email">ID(Email) </label>
 	                                <input type="email" class="form-control" id="email" value="${mvo.mem_id }" disabled>
 	                                <input type="hidden" id="mem_id" name="mem_id" value="${mvo.mem_id }">
 	                            </div>
 	                            <div class="mb-3">
-	                                <label for="username">Nickname *</label>
+	                                <label for="username">Nickname </label>
 	                                <div class="input-group">
-	                                    <input type="text" class="form-control" name="mem_name" value="${mvo.mem_name }">
+	                                    <input type="text" class="form-control" id="mem_name" name="mem_name" value="${mvo.mem_name }">
 	                                    <span id="getMemberNick"></span>
 	                                </div>
 	                            </div>
 	                            <div class="mb-3">
-	                                <label for="phone">Phone Number *</label>
+	                                <label for="phone">Phone Number </label>
 	                                <div class="input-group">
 	                                    <input type="text" class="form-control" name="mem_phone" value="${mvo.mem_phone }">
 	                                </div>
@@ -94,16 +94,16 @@
                                 <h3>Changing Password</h3>
                             </div>
                             <div class="mb-3">
-                                <label for="current-password">Current Password *</label>
+                                <label for="current-password">Current Password </label>
                                 <input type="password" class="form-control" id="curPw">
                                 <span id="getMemberPw"></span>
                             </div>
                             <div class="mb-3">
-                                <label for="new-password">New Password *</label>
+                                <label for="new-password">New Password </label>
                                 <input type="password" class="form-control" id="newPw" name="mem_pw">
                             </div>
                             <div class="mb-3">
-                                <label for="re-enter-password">Re-enter New Password *</label>
+                                <label for="re-enter-password">Re-enter New Password </label>
                                 <input type="password" class="form-control" id="rePw">
                                 <span id="checkPw"></span>
                             </div>   
@@ -158,12 +158,12 @@
                                 <h3>Address</h3>
                             </div>
                             <div class="mb-3">
-                                <label for="road-address">Road Address *</label>
-                                <input type="text" class="form-control" id="roadAddr" name="address" placeholder="">
+                                <label for="road-address">Road Address </label>
+                                <input type="text" class="form-control" id="roadAddr" name="address" placeholder="${mvo.mem_address }">
                                 <input type="button" value="Search" onclick="goPopup()">
                             </div>
                             <div class="mb-3">
-                                <label for="detail-address">Detail Address *</label>
+                                <label for="detail-address">Detail Address </label>
                                 <input type="text" class="form-control" id="detailAddr" name="address_detail" placeholder="">
                             </div>
                             <div class="title-left">

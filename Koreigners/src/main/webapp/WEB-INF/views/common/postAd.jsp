@@ -55,6 +55,9 @@
 						<c:if test="${user.mem_cate eq 'p' }">
 							<button class="btn hvr-hover button-style" onclick="location.href='myPage_go.do?type=resume'">Job</button>
 						</c:if>
+						<c:if test="${empty user }">
+							<button class="btn hvr-hover button-style" onclick="location.href='myPage_go.do?type=resume'">Job</button>						
+						</c:if>
 					</div>
 					<br>
 					<div>

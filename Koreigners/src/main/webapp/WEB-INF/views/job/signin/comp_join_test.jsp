@@ -48,14 +48,14 @@
 			        	<div class="row">
 				        	<div class="col-md-12 mb-3">
 		                        <label>Email(ID)</label>
-		                        <input type="text" class="form-control" id="mem_id" name="mem_id">
+		                        <input type="text" class="form-control" id="mem_id" name="mem_id" autocomplete="new password">
 		                        <div id="id_check"></div>
 		                    </div>
 			        	</div>
 			        	<div class="row">
 			        		<div class="col-md-12 mb-3">
 					        	<label>새 비밀번호</label>
-					        	<input type="password" class="form-control" id="password" name="mem_pw">
+					        	<input type="password" class="form-control" id="password" name="mem_pw" autocomplete="new password">
 					        	<div id="pw_check"></div>
 			        		</div>
 			        	</div>

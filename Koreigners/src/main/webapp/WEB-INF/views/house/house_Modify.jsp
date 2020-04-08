@@ -153,7 +153,9 @@
 		<!--  <input type="button" value="글 수정 등록" onclick="updateForm();">-->
 	</div>
 	</form>
-	<p><a href="house_main.do">글 목록 가기</a></p>
+	<br>
+	<p style="text-align:center"><a href="house_main.do " style="font-weight: 700;">back to list</a></p>
+	<br><br><br>
 </div>
 
 </body>
