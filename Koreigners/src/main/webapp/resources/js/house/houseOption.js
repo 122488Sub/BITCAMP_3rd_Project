@@ -70,7 +70,7 @@ function chkBuildAndRoomType(chk){
 		
 		if(chk.innerHTML=='Villa')					 build_type_List[0]= -1;
 		else if(chk.innerHTML=='Goshiwon')  		 build_type_List[1]= -1;
-		else if(chk.innerHTML=='Semi-<br>Officetel') build_type_List[2]= -1;
+		else if(chk.innerHTML=='Office') build_type_List[2]= -1;
 		
 		if(chk.innerHTML=='Studio')					 room_type_List[0]= -1;
 		else if(chk.innerHTML=='Two')				 room_type_List[1]= -1;
@@ -82,7 +82,7 @@ function chkBuildAndRoomType(chk){
 		
 		if(chk.innerHTML=='Villa')					 build_type_List[0]= 0;
 		else if(chk.innerHTML=='Goshiwon')  		 build_type_List[1]= 1;
-		else if(chk.innerHTML=='Semi-<br>Officetel') build_type_List[2]= 2;
+		else if(chk.innerHTML=='Office') build_type_List[2]= 2;
 		
 		if(chk.innerHTML=='Studio')					 room_type_List[0]= 0;
 		else if(chk.innerHTML=='Two')				 room_type_List[1]= 1;
