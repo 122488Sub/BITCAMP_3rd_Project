@@ -83,8 +83,8 @@ $(function(){
 				</div>
 				<div class="mb-3">
 					<div class="col-md-10 center">
-						<input type="email" id="mem_id" name="mem_id" class="form-control mb-2" placeholder="Email address">
-						<input type="password" id="mem_pw" name="mem_pw" class="form-control" placeholder="Password">						
+						<input type="email" id="mem_id" name="mem_id" class="form-control mb-2" placeholder="Email address" autocomplete="new password">
+						<input type="password" id="mem_pw" name="mem_pw" class="form-control" placeholder="Password" autocomplete="new password">						
 					</div>
 				</div>
 				<div class="col-md-6 mb-3 center">

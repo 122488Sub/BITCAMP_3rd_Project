@@ -46,14 +46,14 @@
 	<!-- 행정구역 한글 검색 -->
 	<select id="getAddrDoList" parameterType="String" resultType="companyVO">
 		SELECT DISTINCT DO_KOR
-  		  FROM T_TEST
+  		  FROM T_ADDRESS_DOSI
 		 ORDER BY DO_KOR
 	</select>	
 	
 	<!-- 행정구역 한글명으로 시구군 한글 검색 -->
 	<select id="getAddrSiList" parameterType="String" resultType="companyVO">
 		SELECT GU_GUN_EUP_KOR
-		  FROM T_TEST
+		  FROM T_ADDRESS_DOSI
 		   WHERE DO_KOR = #{do_kor}
 		 ORDER BY GU_GUN_EUP_KOR
 	</select>

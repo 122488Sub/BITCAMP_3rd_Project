@@ -383,10 +383,10 @@
 			BOARD.ROOM_IDX DESC 
 		</when>
 		<when test="sortSelect==2">
-			INFO.DEPOSIT DESC 
+			INFO.DEPOSIT ASC
 		</when>
 		<when test="sortSelect==3">
-			INFO.MONTHLY_RENT DESC 
+			INFO.MONTHLY_RENT ASC
 		</when>
 		
 	</choose>

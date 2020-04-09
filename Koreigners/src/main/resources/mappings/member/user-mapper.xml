@@ -92,7 +92,6 @@
 	       <if test='mem_gender != null and !mem_gender.equals("")'>MEM_GENDER = #{mem_gender},</if>
 	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
 	       <if test='mem_address != null and !mem_address.equals("")'>MEM_ADDRESS = #{mem_address},</if>
-	       <if test='mem_nationality != null and !mem_nationality.equals("")'>MEM_NATIONALITY = #{mem_nationality},</if>
 	       <if test='auth_status != null and !auth_status.equals("")'>AUTH_STATUS = #{auth_status},</if>
 	       <if test="mailling_fl != null">MAILLING_FL = #{mailling_fl},</if>
 	       <if test="sms_fl != null">SMS_FL = #{sms_fl},</if>

@@ -224,20 +224,20 @@ function inputNumberRemoveComma(str) {
 	function checkForm(){
 		
 		if($('input[name=subject]').val()==''){
-			 alert("Plese Checked [Title]");
+			 alert("Please Checked [Title]");
 			 $('input[name=subject]').focus();
 			 return false;
 		}
 		
 		
 		if( ! ( $('input:radio[name=build_type]').is(':checked') ) ){
-			 alert("Plese Checked [Buliding Type]");
+			 alert("Please Checked [Buliding Type]");
 			 $('input[name=build_type]').focus();
 			 return false;
 		}
 		
 		if( ! ( $('input:radio[name=room_type]').is(':checked') ) ){
-			alert("Plese Checked [Room Type]");
+			alert("Please Checked [Room Type]");
 			 $('input[name=room_type]').focus();
 			 return false;
 				
@@ -245,7 +245,7 @@ function inputNumberRemoveComma(str) {
 		
 		
 		if( $('input[name=address]').val()==''){
-			alert("Plese Checked [Loctation - Address]");
+			alert("Please Checked [Loctation - Address]");
 			 $('input[name=address]').focus();
 			 return false;
 				
@@ -253,26 +253,26 @@ function inputNumberRemoveComma(str) {
 		
 		
 		if( $('input[name=room_area]').val()=='' || $('input[name=room_area]').val()=='0'){
-			alert("Plese Checked [Area]");
+			alert("Please Checked [Area]");
 			 $('input[name=room_area]').focus();
 			 return false;
 				
 		}
 		
 		if( $('input[name=bulid_layers]').val()=='' || $('input[name=bulid_layers]').val()=='0'){
-			alert("Plese Checked [Buliding Layers]");
+			alert("Please Checked [Buliding Layers]");
 			 $('input[name=bulid_layers]').focus();
 			 return false;
 				
 		}
 		if( $('input[name=floor_layers]').val()=='' || $('input[name=floor_layers]').val()=='0'){
-			alert("Plese Checked [Floor Layers]");
+			alert("Please Checked [Floor Layers]");
 			 $('input[name=floor_layers]').focus();
 			 return false;
 				
 		}
 		if( $('input[name=bulid_layers]').val() < $('input[name=floor_layers]').val()){
-			alert("Plese Checked [Floor]\n [Floor Layers] cannot be higher than [Buliding Layers]");
+			alert("Please Checked [Floor]\n [Floor Layers] cannot be higher than [Buliding Layers]");
 			$('input[name=floor_layers]').focus();
 			return false;
 			
@@ -307,19 +307,19 @@ function inputNumberRemoveComma(str) {
 		
 		
 		if( $('input[name=deposit]').val()=='' || $('input[name=deposit]').val()=='0'){
-			alert("Plese Checked [Deposit]");
+			alert("Please Checked [Deposit]");
 			 $('input[name=deposit]').focus();
 			 return false;
 				
 		}
 		if( $('input[name=monthly_rent]').val()=='' || $('input[name=monthly_rent]').val()=='0'){
-			alert("Plese Checked [Monthly Rent]");
+			alert("Please Checked [Monthly Rent]");
 			 $('input[name=monthly_rent]').focus();
 			 return false;
 				
 		}
 		if( $('input[name=management_expense]').val()==''){
-			alert("Plese Checked [Management Expense]");
+			alert("Please Checked [Management Expense]");
 			 $('input[name=management_expense]').focus();
 			 return false;
 				

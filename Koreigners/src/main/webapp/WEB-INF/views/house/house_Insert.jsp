@@ -62,7 +62,7 @@
 	</div>
 	</form>
 	<br>
-	<p style="text-align:center"><a href="house_main.do " style="font-weight: 700;">Prev</a></p>
+	<p style="text-align:center"><a href="house_main.do " style="font-weight: 700;">back to list</a></p>
 	<br><br><br>
 </div>
 
